@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+<script src="html5.js"></script><!-- this is the javascript allowing html5 to run in older browsers -->
+
+<title>UNHOSTED - Freedom from web 2.0's monopoly platforms</title>
+<link rel="stylesheet" href="css/uncompressed/reset.css" />
+<link rel="stylesheet" href="css/uncompressed/text.css" />
+<link rel="stylesheet" href="css/uncompressed/960.css" />
+<link rel="stylesheet" href="css/uncompressed/960.css" />
+<link rel="stylesheet" href="general.css" />
+<link rel="stylesheet" href="css/uncompressed/layout.css" />
+</head>
+	<body>
+		<div class="preload"></div>
+		<div class="preload2"></div>
+		<header>
+			<div class="container_12">
+				<div id="title" class="grid_6">
+					<h1>Unhosted</h1>
+					<h2>Freedom from web 2.0's monopoly platforms</h2>
+					<p>
+						<strong>Unhosted is an Open Source project aiming to provide users with their own share of online resources</strong>, thus making it perfect for altruistic websites and for bringing public domain applications to the web.
+					</p>
+					<a class="button download" href="https://github.com/michiel-unhosted/unhosted/tree/v0.1" target="_blank">Download the code at gitHub</a>
+					<a class="button manifesto" href="manifesto.html">Read the manifesto</a>
+				</div>
+				<div id="island" class="grid_6"><figure></figure></div>
+			</div>
+		</header>
+
+<table><tr><td align="center"><p><table width="80%"><tr><td><p>
+
+<h2>Manifesto for the unhosted web</h2>
+<h3>UNHOSTED: Freedom from Web2.0&#39;s monopoly platforms. </h3>
+Free/libre and Open Source Software (FLOSS) frees us from having to install proprietary software on our terminals. But installable software is losing ground to hosted software (websites). The server software is often open source (e.g. LAMP), but <strong>the website itself as a software product</strong> is almost always proprietary. There is an obvious reason for this: Even if an Affero license allows us to download the website&#39;s source code, only a commercial company can finance the thousands of servers needed to host a successful website.
+<br><br><br><br>
+<h3>grease layer</h3>
+To make things worse, hosted software has more power over its users than installable software, because it forces you to put your user data on servers owned by the same company that publishes the software. If you want to use Google Docs, you have to reveal your work to a Google-owned server. I left my dayjob and started the UNHOSTED project to try and stop this. We need to break the one-to-one link between the software publisher who writes a website (e.g. Google, Inc) and the &#39;hostage provider&#39; who hosts that website (e.g. <strong>also</strong> Google, Inc). If we create a simple grease layer in the form of an open standard between the hosted software and the servers that host it, then this is decoupled.
+<br><br><br><br>
+<h3>unhosted json</h3>
+As a first step, I&#39;m working on a prototype that I hope to launch in time for Christmas, so that webdevs can play with it over the holidays. A website&#39;s code will need to be very ajaxy first, so that all the servers do is store and serve json data. No server-side processing. Next, we need to switch from transport-layer encryption to client-side payload encryption, because we no longer necessarily trust the server we&#39;re talking to. Then we need a bit of code-signing, to know we can trust everything that is running in our browser, and we&#39;re done. The user will have the same experience (except for a one-off plugin-prompt), but the website is unhosted in the sense that the servers you talk to only see encrypted data and don&#39;t even know which application you are running.
+<br><br><br><br>
+<h3>FLOSS-as-a-Service on top of a commodity infrastructure</h3>
+A hosted website provides two things: processing and storage. An unhosted website only hosts its source code (or even just a bootloader for it). Processing is done in the browser, with ajax against encrypted cloud storage. These storage clouds can be provided by whoever provides your email hosting: your employer, ISP, university, mobile operator, public library, a hobbyist friend who runs a server at home, a hosting company, etc. They become just like mailservers, BGP switches, fibre links and other commodity infrastructure: independent of which application you run on top of them. It can be combined with recent projects like Mozilla&#39;s Open Web Applications for free-speech &quot;app channels&quot;, things like OpenId and OStatus for data liberation, and architectures like tahoe-lafs for the underlying encrypted cloud storage.
+<br><br><br><br>
+<h3>unhosted applications</h3>
+The unhosted infrastructure could form the support for open-source web apps like diaspora, federated social web, vendor relationship management, bitcoin, and hopefully all hosted services we currently use. Websearch will be the most challenging one because of its inherent centralization, but social search variants (propagating friends-of-friends&#39; recommendations) should definitely be possible on an unhosted infrastructure. Once that is achieved, open source software can become as successful in the &#39;Software as a Service&#39; world as it is in &#39;installed&#39; software. It will help keep Google, Facebook and Apple in check, so they compete on merit only. Please leave a public comment on <a href="http://groups.google.com/group/unhosted" targer="_blank">http://groups.google.com/group/unhosted</a> or tweet about us (<a href="http://www.twitter.com/unhosted" target="_blank">@unhosted</a>) if you think this project is worthy of pursuing and/or have any suggestions.
+<br><br><br><br>
+<h3>further reading</h3>We recommend you read Eben Moglen, Tim Wu and Glyn Moody (refs: <a href="http://twitter.com/unhosted" target="_blank">twitter.com/unhosted</a>).
+<br><br>
+<a href="/">[back]</a>
+</p></td></tr></table></p></td></tr></table>
+
+		<div class="clear"></div>
+		<footer>
+		 <div class="container_12">
+				<div id="twitter">
+					<a href="http://twitter.com/unhosted" target="_blank" id="icon">Follow us! @Unhosted on Twitter</a>
+					<h4><a href="http://twitter.com/unhosted" target="_blank" id="twittitle">Follow us on Twitter!
+						<span>@Unhosted</span></a>
+					</h4>
+					
+					<ul id="twitter_update_list"></ul>
+					      <script type="text/javascript" src="http://twitter.com/javascripts/blogger.js"></script>
+					      <script type="text/javascript" src="http://twitter.com/statuses/user_timeline/unhosted.json?callback=twitterCallback2&amp;count=1"></script>
+					
+				</div>
+				<div id="participate">
+					<div class="icon"></div>	
+					<h4>Participate</h4>
+					<p>Unhosted is an <strong>open source</strong> project, and entirely altruistic. <strong>If you want to help, please join</strong> <a href="http://groups.google.com/group/unhosted" target="_blank">the mailing list</a>, and open a thread about what you think should happen next.</p>
+				</div>
+		</footer>
+		
+	</body>
+</html>

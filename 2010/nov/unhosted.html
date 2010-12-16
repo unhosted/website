@@ -1,0 +1,44 @@
+<html><head><title>Manifest for the unhosted web</title><style type="text/css"> 
+      body {
+        font-family: arial, sans, sans-serif;
+        margin: 0;
+      }
+ 
+      iframe {
+        border: 0;
+        frameborder: 0;
+        height: 100%;
+        width: 100%;
+      }
+ 
+      #header, #footer {
+        background: #f0f0f0;
+        padding: 10px 10px;
+      }
+ 
+      #header {
+        border-bottom: 1px #ccc solid;
+      }
+ 
+      #footer {
+        border-top: 1px #ccc solid;
+        border-bottom: 1px #ccc solid;
+        font-size: 13;
+      }
+ 
+      #contents {
+        margin: 6px;
+      }
+ 
+      .dash {
+        padding: 0 6px;
+      }
+    </style></head><body><div id="header">Manifest for the unhosted web</div><div id="contents"><style type="text/css">ol{margin:0;padding:0}p{margin:0}.c2{color:#000000;font-style:italic;font-size:11pt;font-family:Arial}.c1{color:#000000;font-size:14pt;font-family:Arial;font-weight:bold}.c3{color:#000099;font-size:11pt;text-decoration:underline;font-family:Arial}.c4{color:#000000;font-size:11pt;font-family:Arial}.c7{color:#000000;font-size:14pt;font-family:Arial}.c0{line-height:1.15;text-indent:0pt;direction:ltr}.c5{background-color:#ffffff}.c6{background-color:#f3f3f3}</style>
+<br/><p class="c0"><span class="c1">UNHOSTED: Freedom from Web2.0&#39;s monopoly platforms. </span></p><p class="c0"><span class="c4">Free/libre and Open Source Software (FLOSS) frees us from having to install proprietary software on our terminals. But installable software is losing ground to hosted software (websites). The server software is often open source (e.g. LAMP), but </span><span class="c2">the website itself as a software product</span><span class="c4"> is almost always proprietary. There is an obvious reason for this: Even if an Affero license allows us to download the website&#39;s source code, only a commercial company can finance the thousands of servers needed to host a successful website.</span></p><p class="c0"><span class="c4"> </span></p>
+<br/><p class="c0"><span class="c1">grease layer</span></p><p class="c0"><span class="c4">To make things worse, hosted software has more power over its users than installable software, because it forces you to put your user data on servers owned by the same company that publishes the software. If you want to use Google Docs, you have to reveal your work to a Google-owned server. I left my dayjob and started the UNHOSTED project to try and stop this. We need to break the one-to-one link between the software publisher who writes a website (e.g. Google, Inc) and the &#39;hostage provider&#39; who hosts that website (e.g. </span><span class="c2">also</span><span class="c4"> Google, Inc). If we create a simple grease layer in the form of an open standard between the hosted software and the servers that host it, then this is decoupled.</span></p><p class="c0"><span class="c4"> </span></p>
+<br/><p class="c0"><span class="c1">unhosted json</span></p><p class="c0"><span class="c4">As a first step, I&#39;m working on a prototype that I hope to launch in time for Christmas, so that webdevs can play with it over the holidays. A website&#39;s code will need to be very ajaxy first, so that all the servers do is store and serve json data. No server-side processing. Next, we need to switch from transport-layer encryption to client-side payload encryption, because we no longer necessarily trust the server we&#39;re talking to. Then we need a bit of code-signing, to know we can trust everything that is running in our browser, and we&#39;re done. The user will have the same experience (except for a one-off plugin-prompt), but the website is unhosted in the sense that the servers you talk to only see encrypted data and don&#39;t even know which application you are running.</span></p><p class="c0"><span class="c4"> </span></p>
+<br/><p class="c0"><span class="c1">FLOSS-as-a-Service on top of a commodity infrastructure</span></p><p class="c0"><span class="c4">A hosted website provides two things: processing and storage. An unhosted website only hosts its source code (or even just a bootloader for it). Processing is done in the browser, with ajax against encrypted cloud storage. These storage clouds can be provided by whoever provides your email hosting: your employer, ISP, university, mobile operator, public library, a hobbyist friend who runs a server at home, a hosting company, etc. They become just like mailservers, BGP switches, fibre links and other commodity infrastructure: independent of which application you run on top of them. It can be combined with recent projects like Mozilla&#39;s Open Web Applications for free-speech &quot;app channels&quot;, things like OpenId and OStatus for data liberation, and architectures like tahoe-lafs for the underlying encrypted cloud storage.</span></p><p class="c0"><span class="c4"> </span></p>
+<br/><p class="c0"><span class="c1">unhosted applications</span></p><p class="c0"><span class="c4">The unhosted infrastructure could form the support for open-source web apps like diaspora, federated social web, vendor relationship management, bitcoin, and hopefully all hosted services we currently use. Websearch will be the most challenging one because of its inherent centralization, but social search variants (propagating friends-of-friends&#39; recommendations) should definitely be possible on an unhosted infrastructure. Once that is achieved, open source software can become as successful in the &#39;Software as a Service&#39; world as it is in &#39;installed&#39; software. It will help keep Google, Facebook and Apple in check, so they compete on merit only. Please leave a public comment on </span><span class="c3"><a href="http://groups.google.com/group/unhosted">http://groups.google.com/group/unhosted</a></span><span class="c4"> or tweet about us (@unhosted) if you think this project is worthy of pursuing and/or have any suggestions.</span></p><p class="c0"><span class="c4"> </span></p>
+<br/><p class="c0"><span class="c1">further reading</span></p><p class="c0"><span class="c4">We recommend you read Eben Moglen, Tim Wu and Glyn Moody (refs: </span><span class="c3"><a href="http://twitter.com/unhosted">twitter.com/unhosted</a></span><span class="c4">).</span></p></div>
+<br/><div id="footer"></div>
+</body></html>

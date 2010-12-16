@@ -1,0 +1,273 @@
+header,
+section.container_12 {
+	display: block;
+	margin-bottom: 40px;
+	overflow: hidden;
+}
+/* HEADER
+---------------------------------*/
+header {
+	background: #20242a url("./img/headerback.png") repeat-x top;
+	overflow: hidden;
+	padding-top: 120px;
+	position: relative;
+}
+
+	header #island {
+		display: block;
+		position: relative;
+		
+	}
+		header #island figure{
+			background: transparent url('./img/island.png') no-repeat top left;
+			height: 355px;
+			position: absolute;
+			width: 500px;
+			left: -20px;
+			
+		}
+		
+	
+	header a.button {
+		display: inline-block;
+		text-indent: -5000px;
+		overflow: hidden;
+		
+		
+	}
+	
+		header a.button.download {
+			background: transparent url('./img/downbutton.png') no-repeat left top;
+			width: 194px;
+			height: 50px;
+		}
+			header a.button.download:hover{
+				background: transparent url('./img/downbutton_h.png') no-repeat left top;
+				cursor: pointer;
+			}
+			
+		header a.button.manifesto {
+				background: transparent url('./img/manifbutton.png') no-repeat left top;
+				width: 208px;
+				height: 50px;
+				margin-left: 10px;
+			}
+				header a.button.manifesto:hover{
+					background: transparent url('./img/manifbutton_h.png') no-repeat left top;
+					cursor: pointer;
+				}
+		
+		.preload{
+			background: transparent url('./img/downbutton_h.png') no-repeat left top;
+			position: absolute;
+			width: 1px;
+			height: 1px;
+			top: -200px;
+			overflow: hidden;
+		}
+		.preload2{
+			background: transparent url('./img/manifbutton_h.png') no-repeat left top;
+			position: absolute;
+			width: 1px;
+			height: 1px;
+			top: -200px;
+			overflow: hidden;
+		}
+	
+	header #title {
+			padding-top: ;
+			background: url('./img/title.png') no-repeat;
+			padding-top: 158px;
+			padding-right: 38px;
+			width: 420px;
+			min-height:137px;
+			padding-bottom:33px;
+	}
+	
+	header h1, header h2 {
+		display: none;
+		overflow: hidden;
+		
+	}
+
+
+/* HOW DOES IT WORK
+---------------------------------*/
+
+#howitworks{
+	margin-top: 70px;
+	margin-bottom: 30px;
+	display: block;
+	height: 392px;
+	background: transparent url('./img/howorksmodule.png');
+}
+	#howitworks figure{
+		display: none;
+	}
+	
+	#howitworks h3{
+		margin-top: 40px;
+	}
+	#howitworks #explanation{
+		padding-right: 20px;
+	}
+
+/* HACKY HOLYDAYS
+---------------------------------*/
+
+#hackyholidays.container_12{
+	position: relative;
+	overflow: visible;
+	margin-bottom: 40px;
+	display: block;
+}
+
+	#hackyholidays h3.grid_3{
+		margin: none;
+		display: block;
+		text-indent: -5000px;
+		position: relative;
+	}
+		#hackyholidays figure{
+			display: block;
+			height: 229px;
+			width: 259px;
+			position: absolute;
+			background: transparent url('./img/hackytitle.png') no-repeat top left;
+			left: -30px;
+			top: 5px;
+			
+		}
+
+	#hackyholidays .sidebar div{
+		padding: 20px;
+		background: #16191d;
+		-moz-border-radius: 5px;
+		-webkit-border-radius: 5px;
+		margin-bottom: 10px;
+		display: block;
+	}
+	
+	#hackyholidays .sidebar div h5{
+		color: #42c1ea;
+	}
+		#hackyholidays .sidebar div h5 span{
+			//color: white;
+			text-transform: uppercase;
+			font-size: 12px;
+		}
+			
+/* FOOTER
+----------------------------------*/
+
+footer {
+	background: black url('./img/footerback.png') repeat-x top left;
+	overflow: hidden;
+	padding-top: 30px;
+	font-size: 11px;
+	display: block;
+	margin-top: 30px;
+}
+	footer h4{
+		font-size: 16px;
+		font-weight: normal;
+		text-shadow: 8 8 8 #000;
+		color: white;
+	}
+
+	#twitter{
+		float: left;
+		clear: none;
+		width: 530px;
+		margin: 0 10px;
+		padding: 0 10px 0 0;
+		padding-top: 10px;
+		background: transparent url('./img/twitbox.png') top right no-repeat;
+		display:block;
+		height: 150px;
+		position: relative;
+	}
+		#twitter h4{
+			text-align: right;
+			display: block;
+			width: 150px;
+			margin-right: 20px;
+			position: absolute;
+			left: 95px;
+			top: 15px;
+			text-shadow:0px 1px 1px #000000;
+			
+			
+		}
+			#twitter h4 a{
+				font-weight: normal;
+				text-decoration: none;
+				color: white;
+				background: none;
+				}
+				
+			#twitter h4 span{
+				font-size: 12px;
+				display: block;
+				
+			}
+		
+		#twitter #twitter_update_list{
+			display: block;
+			margin-bottom: 10px;
+			height: 100px;
+			text-overflow: ellipsis;
+			overflow: hidden;
+			position: absolute;
+			left: 250px;
+			top: 17px;
+			width: 275px;
+			list-style: none;
+			padding: 0;
+			margin: 0;
+			line-height: 21px;
+			
+		}
+		
+		
+		
+		
+			
+		#twitter #metatweet{
+			display: block;
+			color: #91979f;
+			
+			text-align: left;
+			width: 240px;
+			position: absolute;
+			left: 280px;
+			top: 110px;
+		}
+		
+		#twitter a#icon{
+			display: block;
+			height: 50px;
+			width: 46px;
+			background: transparent url('./img/ticon.png') top center no-repeat;
+			position: absolute;
+			left: 5px;
+			top: 0;
+			text-indent: -5000px;
+		}
+	
+	#participate{
+		color: #a2bbcc;
+		float: left;
+		clear: none;
+		width: 290px;
+		margin: 0 10px;
+		background: transparent url('./img/collabbox.png') top center no-repeat;
+		padding: 15px 10px 0 80px;
+		height: 150px;
+		display: block;
+	}
+		
+			
+		#participate h4{
+			margin-bottom: 5px;		
+			}
