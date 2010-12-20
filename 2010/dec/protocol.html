@@ -38,7 +38,7 @@
 UJ/0.1, or UJ/0.1-over-PubSign, is a protocol in which an unhosted web app that is running in a browser, makes an AJAX call to a storage node, to which the storage nodes responds. The call is made to the root of the domain, with the HTTP POST method. 
 <br><br><br><br>
 <H3>PubSign-compatible command POST content:</H3>
-There are four commands, two of which follow the PubSign convention, which is as follows:
+Although at some point we will probably change to the MagicEnvelope that Salmon uses, version 0.1 uses &quot;PubSign&quot; to <strong>sign</strong> things you <strong>publish</strong>. There are four commands, two of which follow the PubSign convention, which is as follows:
 <ul>
 <li> "protocol": &lt;name of the specific PubSign-compatible protocol>
 <li> "cmd": &lt;whatever it is you want to publish - should adhere to protocol chosen above>
