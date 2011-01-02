@@ -33,18 +33,69 @@
 
 <table><tr><td align="center"><p><table width="80%"><tr><td><p>
 
-<h2>Hacky Holidays</h2>
-<h3>The voting has started!</h3>
-We received the following entries in our Hacky Holidays competition. Please have a look at each of them, and vote on the mailing list on which one you think should win. In alphabetical order, the candidates are:
-<ul>
-<li><a href="HH-NathanRugg.html">Nathan Rugg's Scrapbook app</a>
-<li><a href="HH-Nezerbahn.html">Nezerbahn's NezAIMs app and blogpost</a>
-<li><a href="HH-Open3141.html">Open3141's Notes app</a>
-<li><a href="HH-Piranna.html">Piranna's vCards app and API/protocol improvements</a>
-</ul>
-Please give them a big round of applause already for even having dared to tread the as yet uncharted land of unhosted app development - if you have tried yourself, you know it's not trivial, and these people are true pioneers.
+<h2>Hacky Holidays Entry: Nezerbahn's <a href="HH2010/Nezerbahn.zip">NezAIM app</a> and blogpost</h2>
+
+The original idea was to create a unhosted-powered AJAXy IM on top of
+AOL's AIM. Late in development it was noticed that AOL blocked the perl
+module
+used for communication with their service, leaving to an IM that's DOA.
+Eventually this was dropped and the target became a "local-only" IM
+where clients
+can sign in and talk to one another. This is the version that's mostly
+represented by the live code.
+
 <br><br>
-<a href="/">[back]</a>
+The client wraps around unhosted's get and set methods which it
+maneuvers around its own AJAX requests rather awkwardly. The back-end
+does some
+additional checks such that it drops clients which try to send messages
+without first signing in. The server this was deployed on happens to run
+FreeBSD,
+and it was noticed that the original UH code base will not run there,
+even with php and the relevant mods installed. So, the get and set
+methods were
+implemented in perl instead.
+
+<br><br>
+Dropped features: smooth scrolling on arrival of new messages, better
+JSON parsing, much better app styling, AIM support.
+Implemented: AJAX + DOM "windows", with a slightly modified unhosted
+client-side script to make it work with the pseudo-IM nature of the app.
+
+<br><br>
+Copyrights: Unhosted's multi-licensed. Nez(A)IM is currently GPL.
+Gnome-look icons are GPL'ed as well, a couple used.
+Kudos to unhosted as well as the authors behind the heavy-duty PKC
+scripts running the enc/dec pipeline.
+
+<br><br>
+Whether we win or not, this is definitely a cool project and one to look
+out for.
+Happy New 2011 to the whole unhosted team, with best wishes for getting
+this project off the ground, big time.
+
+<br><br>
+Yours,
+
+<br><br>
+Nezerbahn
+<br><br>
+<H2>(addition:)</H2>
+<br><br>
+Sorry about the delay, we did want to get a blog entry in as well. We
+just put it up at
+
+<br><br>
+<a href="http://nezerbahn.wordpress.com/2011/01/02/2011-is-the-year-of-unhosted/" target="_blank">http://nezerbahn.wordpress.com/2011/01/02/2011-is-the-year-of-unhosted/</a>
+
+<br><br>
+hope it's not too too late to add it, but even if it is we would like to
+help create more noise about unhosted, so that's a start.
+A face-lift and much more content will hopefully follow soon.
+
+
+<br><br>
+<a href="/HackyHolidays.html">[back]</a>
 </p></td></tr></table></p></td></tr></table>
 
 		<div class="clear"></div>
