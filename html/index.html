@@ -24,6 +24,9 @@
 					<p>
 						<strong>Unhosted is a project for strengthening free software against hosted software</strong>. With our protocol, a website is only source code. Dynamic data is encrypted and decentralised, to per-user storage nodes. This benefits <strong>free software</strong>, as well as <strong>scalability</strong>, <strong>robustness</strong>, and <strong>online privacy</strong>.
 					</p>
+					<p>
+						To find out more, check out our <a href="https://github.com/michiel-unhosted/unhosted/" target="_blank">proof-of-concept</a> (not real usable code yet, please contribute if you see errors in it), read our full <a href="manifesto.html">manifesto</a>, and our <a href="https://github.com/michiel-unhosted/unhosted/wiki/" target="_blank">wiki</a>, or ask a question on our <a href="http://groups.google.com/group/unhosted" target="_blank">mailing list</a>.
+					</p>
 					<a class="button download" href="https://github.com/michiel-unhosted/unhosted/tarball/v0.1">Download the code at gitHub</a>
 					<a class="button manifesto" href="manifesto.html">Read the manifesto</a>
 				</div>
@@ -36,27 +39,26 @@
 				<h3>How does unhosted work?</h3>
 				<div id="explanation">
 					<p>
-						A website is a specific web app, <strong>hosted</strong> on a specific server farm. There is a limited number of <strong>big centralized websites</strong>, that we all connect to. This is not how the web was intended to be.
+						A website is a specific web app, <strong>hosted</strong> on a specific server farm. There is a limited number of <strong>big centralized websites</strong>, that we all connect to. Unhosted websites use per-user discoverable resources, and host only the source code centrally.
 					</p>
 					<p>
-						<strong>Unhosted web apps</strong> are not hosted on one specific server farm. They use <a href="http://www.w3.org/TR/cors/" target="_blank">CORS</a> to offload each user's encrypted data to where this specific user has specified in his <a href="http://webfinger.org/" target="_blank">WebFinger</a>. The once-important server farms now become <strong>commodity infrastructure</strong>.
+						<strong>Unhosted web apps</strong> will use one of the discovery mechanisms listed below, to find where the user wants her data to be sent. They use <a href="http://www.w3.org/TR/cors/" target="_blank">CORS</a> to offload each user's encrypted data to where this specific user has specified. The once-important server farms now become <strong>commodity infrastructure</strong>.
 					</p>
 					<p>
-						To find out more, check out our <a href="https://github.com/michiel-unhosted/unhosted/" target="_blank">proof-of-concept</a> (not real usable code yet, please contribute if you see errors in it), read our full <a href="manifesto.html">manifesto</a>, or ask a question on our <a href="http://groups.google.com/group/unhosted" target="_blank">mailing list</a>.
 					</p>
 				</div>
 			</div>
 		</section><!-- end howitworks -->
 		<section id="hackyholidays" class="container_12">
 			<div class="container_12">
-				<figure></figure>
+				
 				<h3 class="grid_3">We need you!</h3>
 				<div class="grid_5">
 					<p>
 						We need people to write unhosted web applications. We already got a few first demo apps out of our <a href="HackyHolidays.html">'Hacky Holidays' competition</a>, but we need more apps, and more complete ones. If you are able to write an unhosted web app, then you will be one of the first people in the world to have done that. If you don't know what unhosted is, read our <a href="manifesto.html">manifesto</a> first. We also have a <a href="https://github.com/michiel-unhosted/unhosted/wiki/" target="_blank">wiki</a>.
 					</p>
 					<p>
-						Get our <a href="https://github.com/michiel-unhosted/unhosted/tarball/v0.1">tarball</a> from github and play around with the 'hello world' examples. There is one Pub/Sub-model example and one messaging-model example. From there, take your inspiration and put a cool app together. If you get stuck with how to do something and want some advice, ask your questions on the <a href="http://groups.google.com/group/unhosted" target="_blank">mailing list</a> and we'll answer them there. The third example is about cryptography and especially for the ubergeeks among us, but you won't need that one to win.
+						Get our <a href="https://github.com/michiel-unhosted/unhosted/tarball/v0.1">tarball</a> from github and play around with the 'hello world' examples. There is one Pub/Sub-model example and one messaging-model example. From there, take your inspiration and put a cool app together. If you get stuck with how to do something and want some advice, ask your questions on the <a href="http://groups.google.com/group/unhosted" target="_blank">mailing list</a> and we'll answer them there. The third example is about cryptography and especially for the ubergeeks among us, a bit experimental.
 					</p>
 					<p>	
 						To make an unhosted web app work, you need to program all functionality client-side, and in a distributed architecture, so a bit of JavaScript skills come in handy, as does experience with scalability design. It's the perfect puzzle challenge for frontend developers, backend developers, sysadmins, and everyone inbetween! :)
@@ -65,27 +67,26 @@
 				<div class="sidebar grid_4">
 					<div>
 						<h5>
-							WebDevs
+							Discovery mechanisms
 							<span>
-								Show your cool apps!
+								user-controlled data routing
 							</span>
 						</h5>
 						<p>
-							<strong>Be the first person to write an unhosted WebApp!</strong> twitter, chat, farmville, poker, forum, webmail, whatever you can hack together with your web development and JavaScript skills. 
+							For now, we only have one discovery mechanism, which is WebFinger-based. But feel free to add your own proposal here.
 						</p>
 						<p>
-						You can use the hello-world examples from the <a href="https://github.com/michiel-unhosted/unhosted/tarball/v0.1">tarball</a> as a starting point. They include a Pub/Sub-model wappblog and a messaging-based wappmail example.
 						</p>
 					</div>
 					<div>
 						<h5>
-							Geeks
+							Modules
 							<span>
-								help with protocol improvements!
+								per-user unhosted resources
 							</span>
 						</h5>
 						<p>
-							<strong>The <a href="protocol.html">UJ/0.1 protocol</a> and the <a href="StarSign.html">StarSign0.1 pki</a> are very basic, and there are many things that can (and probably should) be added to them.</strong> Like support for federation, compatibility with CCN, improvement of security, designing a browser to browser discovery & friending mechanism, etcetera.
+								We made the unhosted protocol modular, so that it can be used for a variety of different resource types. For now there are two modules, which are KeyValue (a very simple NOSQL data storage) and MessageQueues (a protocol for sending RSA-signed messages to other users).
 						</p>
 					</div>
 				</div>
