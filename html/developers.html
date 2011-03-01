@@ -33,24 +33,13 @@
 
 <table><tr><td align="center"><p><table width="80%"><tr><td><p>
 
-<h2>Hacky Holidays Entry: Nathan Rugg's <a href="HH2010/NathanRugg.tar.gz">Scrapbook app</a></h2>
-
-I'd like to enter the Hacky Holidays Competition. My entry is called Scrapbook. 
-It's an HTML5 web app that lets you add images and text together to create an online scrapbook. 
-It has two parts: an editor (located at scrapbook/admin/index.html) and a simple viewer (scrapbook/index.html). 
-I used the webblog demo as a base for integrating it with Unhosted.
+<h2>Join our Revolution</h2>
+<h3>Develop your apps for the unhosted web</h3>
+To make an unhosted web app, you need to download the <a href="https://github.com/DanielG/unhosted.js">unhosted.js</a> JavaScript library, and include it into your web application. It exposes functions to let the user login and access the various unhosted services that this user brings along. Using these unhosted user services for dynamic functionality and persistent storage, you as the software publisher only have to take care of static hosting of your html, css and js files.
 <br><br>
-I've been working on this project for a little over a month (it began as a Christmas present for my wife). 
-This is the first time I've used the &lt;canvas> tag much, so that was my first hurdle.  The biggest issues I
- had to overcome with the canvas tag was lack of layers or decent text processing (you can't calculate the height for some reason). 
-I had to write all of the collision and text wrapping algorithms.  Usually, I could figure out a formula pretty quickly, but sometimes I needed to get some help.
+If you want to get involved in developing the unhosted.js library, you can send your pull requests to its maintainer, <a href="https://github.com/DanielG/">DanielG</a>. If you would like to add discovery mechanisms to the unhosted web, defining new types of unhosted user services, or improving existing ones, then first please open a thread on our <a href="http://groups.google.com/group/unhosted" target="_blank">mailing list</a>, and also track your progress there, and on the wiki.
 <br><br>
-I heard about Unhosted on The H, and I thought that it might work well with my Scrapbook app, so I gave it a try.  I was pleased to find how simple Unhosted was to integrate.  It only took a few hours to get it working well.  But I definitely hit some bumps and roadblocks along the way.  My first problem was that I didn't realize that Unhosted needs referers turned on.  I usually keep them off.  But the main difficulty I'm facing is that processing large amounts of data just takes too long.  Scrapbook works great with Unhosted if you only add small images or text.  Medium sized images will work; however, I had to modify the database scheme.  I had to change the `save` field to longtext instead of just text.  Large images seem to make the browsers want to explode.  Part of the problem is that currently some browsers can export canvas images as JPGs, but not all of them.  So I have to use PNGs when saving, which can be a lot bigger.  I would have liked for Scrapbook to save larger versions of the images, but right now, it only saves thumbnails.  It would also help if Unhosted could set and get asyncronisly and provide a callback that could be triggered on success and on progress change so that I could show a progress bar when saving instead of locking the browser.  I don't know if Unhosted uses web workers, but that could help too.
-<br><br>
-Overall, I really like Unhosted.  Hopefully browsers will continue to speed up and make client-side encryption more practical when dealing with large amounts of data.
-
-<br><br>
-<a href="/HackyHolidays.html">[back]</a>
+<a href="/">[back]</a>
 </p></td></tr></table></p></td></tr></table>
 
 		<div class="clear"></div>
