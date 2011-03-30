@@ -22,18 +22,35 @@
 					<h1>Unhosted</h1>
 					<h2>Freedom from web 2.0's monopoly platforms</h2>
 					<p id="intro">
-						<strong>Unhosted is an open web standard for decentralizing user data.</strong> This fixes a mistake in Web 2.0's architecture, where the data of every user is hosted on the servers of the application publisher. On the unhosted web, data is stored per-user, under the user's control. That's where it belongs.
+						<strong>Unhosted is an open web standard for decentralizing user data.</strong> On the unhosted web, data is stored per-user, under the user's control. That's where it belongs.
 					</p>
 					<p>
 						To find out more, check out our <a href="http://www.myfavouritesandwich.org" target="_blank">demo</a> (log in with your unhosted account, or try 'demo@demo.redlibre.org', password 'demo'). You can also read our full <a href="manifesto.html">manifesto</a>, and our <a href="https://github.com/michiel-unhosted/unhosted/wiki/" target="_blank">wiki</a>, or ask a question on our <a href="http://groups.google.com/group/unhosted" target="_blank">mailing list</a>.
 					</p>
-					<a class="button download" href="developers.html">Developers</a>
-					<a class="button manifesto" href="manifesto.html">Read the manifesto</a>
+					<div id="buttons">
+						<a class="button download" href="developers.html">Developers</a>
+						<a class="button manifesto" href="manifesto.html">Read the manifesto</a>
+					</div>
 				</div>
 				<div id="island" class="grid_6"><figure></figure></div>
 			</div>
 		</header>
-	
+		<div class="clear"></div>
+		<section id="howitworks">
+			<div class="container_12">
+				<div id="explanation" class="grid_4">
+				<h3>How does it work?</h3>
+					<p>
+						In standard websites, user data is stored in the same server as the application. 
+					</p>
+					<p>
+						On unhosted websites, data is taken away from app servers and lives on the data node you login with.
+					</p>
+				</div>
+				<div class="hSeparator"></div>
+			</div>
+		</section>
+		
 		<section id="maincontent" class="container_12">
 			<div class="container_12">
 				<div class="fivereasons grid_7">
@@ -47,9 +64,11 @@
 						<p>
 							The unhosted web architecture moves user data away from app servers. This has many advantages over the web2.0 architecture, both for users and for developers.						</p>
 						<ul>
-							<li id="dataControl"><h6>No server-side spying</h6><p>By letting unhosted web apps apply payload encryption to your data, you prevent your unhosted account provider from infringing on your privacy. </p></li>
-							<li id="freeSoftware"><h6>No dependency on commercial software</h6><p>As data moves away from the application, resource costs move away from the software author.
-							This makes it feasible for non-commercial web apps to compete with commercial ones.</p></li>
+							<li id="dataControl"><h6>More privacy</h6><p>By letting unhosted web apps apply payload encryption to your data, you help prevent your unhosted account provider from infringing on your privacy. </p></li>
+							<li id="freeSoftware"><h6>More focus for the Web Developer</h6><p>The Web Developer can now focus on developing stunning applications without the worries of
+							having to build a world-class infrastructure behind it. This makes it feasible for small scale 
+							web applications to compete with high-profile competitors.
+							</p></li>
 							<li id="decentralization"><h6>Decentralization</h6><p>More robust/resilient architecture, with no Single Point of Failure - especially if combined with 
 							modern in-browser storage techniques.</p></li>
 							<li id="dataFreedom"><h6>Data freedom</h6><p>With your data living outside the app, you can switch back and forth between apps without even 
