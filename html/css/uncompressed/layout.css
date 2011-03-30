@@ -11,6 +11,7 @@ header {
 	overflow: hidden;
 	padding-top: 120px;
 	position: relative;
+	
 }
 
 	header #island {
@@ -89,7 +90,11 @@ header {
 		overflow: hidden;
 		
 	}
-
+	header p#intro{
+		font-size: 16px;
+		line-height: 28px;
+		
+	}
 
 /* HOW DOES IT WORK
 ---------------------------------*/
@@ -112,23 +117,23 @@ header {
 		padding-right: 20px;
 	}
 
-/* HACKY HOLYDAYS
+/* MAIN CONTENT
 ---------------------------------*/
 
-#hackyholidays.container_12{
+#maincontent.container_12{
 	position: relative;
 	overflow: visible;
 	margin-bottom: 40px;
 	display: block;
 }
 
-	#hackyholidays h3.grid_3{
+	#maincontent h3.grid_3{
 		margin: none;
 		display: block;
-		text-indent: -5000px;
+		
 		position: relative;
 	}
-		#hackyholidays figure{
+		#maincontent figure{
 			display: block;
 			height: 229px;
 			width: 259px;
@@ -139,7 +144,7 @@ header {
 			
 		}
 
-	#hackyholidays .sidebar div{
+	#maincontent .sidebar div{
 		padding: 20px;
 		background: #16191d;
 		-moz-border-radius: 5px;
@@ -148,15 +153,63 @@ header {
 		display: block;
 	}
 	
-	#hackyholidays .sidebar div h5{
-		color: #42c1ea;
+	#maincontent div h5{
+		color: white;
+		font-size: 24px;
 	}
-		#hackyholidays .sidebar div h5 span{
-			//color: white;
+	#maincontent .sidebar div h5{
+		color: #42c1ea;
+		font-size: 18px;
+	}
+		#maincontent div h5 span{
+			color: white;
 			text-transform: uppercase;
-			font-size: 12px;
+			font-size: 14px;
 		}
+	
+	#maincontent  ul{ margin-top:40px; margin-left:0;}	
+		#maincontent  ul li{
+			list-style: none;
+			padding-left: 95px;
+			padding-right: 20px;
+			margin-left: 0;
+			margin-bottom: 24px;
+			line-height: 18px;
+
+		}
+			#maincontent  div h6{
+				margin-bottom: 0;
+				color: white;
+				font-size: 12px;
+				text-transform: uppercase;
 			
+			}
+			#maincontent  div li#dataControl{
+				background: transparent url('./img/icons/mask.png')no-repeat 13px 5px;
+			
+			}
+			
+			#maincontent  div li#freeSoftware{
+				background: transparent url('./img/icons/opensource.png')no-repeat 13px 0px;
+			
+			}
+			
+			#maincontent  div li#dataFreedom{
+				background: transparent url('./img/icons/suitcase.png')no-repeat 13px 0px;
+			
+			}
+			
+			#maincontent  div li#decentralization{
+				background: transparent url('./img/icons/cells.png')no-repeat 11px 0px;
+			
+			}
+			
+			#maincontent  div li#scalability{
+				background: transparent url('./img/icons/scalability.png')no-repeat 13px 3px;
+			
+			}
+			
+		
 /* FOOTER
 ----------------------------------*/
 

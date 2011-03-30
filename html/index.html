@@ -21,8 +21,8 @@
 				<div id="title" class="grid_6">
 					<h1>Unhosted</h1>
 					<h2>Freedom from web 2.0's monopoly platforms</h2>
-					<p>
-						<strong>Unhosted is a project for strengthening free software against hosted software</strong>. With our protocol, a website is only source code. Dynamic data is encrypted and decentralised, to per-user storage nodes. This benefits <strong>free software</strong>, as well as <strong>scalability</strong>, <strong>robustness</strong>, and <strong>online privacy</strong>.
+					<p id="intro">
+						<strong>Unhosted is a project aimed to decentralize the web</strong> by separating apps from user data , thus, strengthening free online software development and increasing users' privacy.
 					</p>
 					<p>
 						To find out more, check out our <a href="https://github.com/michiel-unhosted/unhosted/" target="_blank">proof-of-concept</a> (not real usable code yet, please contribute if you see errors in it), read our full <a href="manifesto.html">manifesto</a>, and our <a href="https://github.com/michiel-unhosted/unhosted/wiki/" target="_blank">wiki</a>, or ask a question on our <a href="http://groups.google.com/group/unhosted" target="_blank">mailing list</a>.
@@ -33,68 +33,47 @@
 				<div id="island" class="grid_6"><figure></figure></div>
 			</div>
 		</header>
-		<section id="howitworks" class="container_12">
-			<figure>Illustration: Traditional websites vs. Unhosted websites</figure>
-			<div class="prefix_7 grid_5">
-				<h3>How does unhosted work?</h3>
-				<div id="explanation">
-					<p>
-						A website is a specific web app, <strong>hosted</strong> on a specific server farm. There is a limited number of <strong>big centralized websites</strong>, that we all connect to. Unhosted websites use per-user discoverable resources, and host only the source code centrally.
-					</p>
-					<p>
-						<strong>Unhosted web apps</strong> will use one of the discovery mechanisms listed below, to find where the user wants her data to be sent. They use <a href="http://www.w3.org/TR/cors/" target="_blank">CORS</a> to offload each user's encrypted data to where this specific user has specified. The once-important server farms now become <strong>commodity infrastructure</strong>.
-					</p>
-					<p>
-					</p>
-				</div>
-			</div>
-		</section><!-- end howitworks -->
-		<section id="hackyholidays" class="container_12">
+	
+		<section id="maincontent" class="container_12">
 			<div class="container_12">
-				<h3 class="grid_3">We need you!</h3>
-				<div class="grid_5">
-					<p>
-						We need people to write unhosted web applications. We already got a few first demo apps out of our <a href="HackyHolidays.html">'Hacky Holidays' competition</a>, but we need more apps, and more complete ones. If you are able to write an unhosted web app, then you will be one of the first people in the world to have done that. If you don't know what unhosted is, read our <a href="manifesto.html">manifesto</a> first. We also have a <a href="https://github.com/michiel-unhosted/unhosted/wiki/" target="_blank">wiki</a>.
-					</p>
-					<p>
-						Get our <a href="https://github.com/michiel-unhosted/unhosted/tarball/v0.1">tarball</a> from github and play around with the 'hello world' examples. There is one Pub/Sub-model example and one messaging-model example. From there, take your inspiration and put a cool app together. If you get stuck with how to do something and want some advice, ask your questions on the <a href="http://groups.google.com/group/unhosted" target="_blank">mailing list</a> and we'll answer them there. The third example is about cryptography and especially for the ubergeeks among us, a bit experimental.
-					</p>
-					<p>	
-						To make an unhosted web app work, you need to program all functionality client-side, and in a distributed architecture, so a bit of JavaScript skills come in handy, as does experience with scalability design. It's the perfect puzzle challenge for frontend developers, backend developers, sysadmins, and everyone inbetween! :)
-					</p>
-<p>Talk at <a href="http://swdc-central.com/dyncon2011/">DynCon2011</a>:<br>
-<iframe src="http://player.vimeo.com/video/21109220" width="120" height="90" frameborder="0">
-</iframe>			
-</p>
+				<div class="fivereasons grid_7">
+					<div>
+						<h5>
+							Benefits of being unhosted
+							<span>
+								Five reasons to migrate now
+							</span>
+						</h5>
+						<p>
+							The unhosted web architecture moves user data away from app servers. This has many advantages over the web2.0 architecture, both for users and for developers.						</p>
+						<ul>
+							<li id="dataControl"><h6>No server-side spying</h6><p>By letting unhosted web apps apply payload encryption to your data, you prevent your unhosted account provider from infringing on your privacy. </p></li>
+							<li id="freeSoftware"><h6>No dependency on commercial software</h6><p>As data moves away from the application, resource costs move away from the software author.
+							This makes it feasible for non-commercial web apps to compete with commercial ones.</p></li>
+							<li id="decentralization"><h6>Decentralization</h6><p>More robust/resilient architecture, with no Single Point of Failure - especially if combined with 
+							modern in-browser storage techniques.</p></li>
+							<li id="dataFreedom"><h6>Data freedom</h6><p>With your data living outside the app, you can switch back and forth between apps without even 
+							exporting and importing. Better than data liberation, this is data freedom brought to the web.</p></li>
+							<li id="scalability"><h6>Scalability</h6><p>Developers only pay for seeding the statics until ISPs and browsers cache them, so a very basic http server can scale up to serve a very popular web app for many users.</p></li>
+						</ul>
+						
+						
+					</div>
 				</div>
-				<div class="sidebar grid_4">
-					<div>
-						<h5>
-							Discovery mechanisms
-							<span>
-								user-controlled data routing
-							</span>
-						</h5>
-						<p>
-							For now, we only have one discovery mechanism, which is WebFinger-based. But feel free to add your own proposal here.
-						</p>
-						<p>
-						</p>
-					</div>
-					<div>
-						<h5>
-							Modules
-							<span>
-								per-user unhosted resources
-							</span>
-						</h5>
-						<p>
-								We made the unhosted protocol modular, so that it can be used for a variety of different resource types. For now there are two modules, which are KeyValue (a very simple NOSQL data storage) and MessageQueues (a protocol for sending RSA-signed messages to other users).
-						</p>
-					</div>
+			</div> <!-- end fivereasons -->
+			<div class="sidebar grid_5">
+				<div>
+					<h5>First Unhosted demo now online!</h5>
+					<a href="http://www.myfavouritesandwich.org" target="_blank"><img src="./css/uncompressed/img/news/demo01.png" alt="myfavouritesandwich.org" width="340" height="256"/></a>
 				</div>
 			</div>
-		</section><!-- end hackyholidays -->
+			<div class="sidebar grid_5">
+				<div>
+					<h5>Check out the Unhosted talk at DynCon</h5>
+					<iframe src="http://player.vimeo.com/video/21109220?portrait=0" width="340" height="251" frameborder="0"></iframe>
+				</div>
+			</div>
+		</section><!-- end maincontent -->
 		<div class="clear"></div>
 		<footer>
 		 <div class="container_12">
