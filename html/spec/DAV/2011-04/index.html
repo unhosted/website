@@ -1,0 +1,23 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title>Unhosted WebDAV</title>
+</head>
+<body>
+<H2>Unhosted WebDAV Standard<H2>
+<H3>How to provide unhosted accounts for use in unhosted web apps</H3>
+<p>Given an unhosted web app which calls itself $APP, and wants access to the Unhosted WebDAV resource named $NAMESPACE for a user $USER @ $DOMAIN who is logging in. The unhosted account provider of the user, should:</p>
+<ul>
+<li> add a url $URL into the $USER @ $DOMAIN 's <a href="http://code.google.com/p/webfinger/wiki/WebFingerProtocol">webfinger</a> with rel 'http://unhosted.org/spec/DAV' </p>
+<li> the protocol of the $URL where the unhosted account provider offers unhosted DAV and OAuth2, should have <a href="http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol_Secure">https</a> as its protocol.
+<li> make <a href="http://code.google.com/apis/accounts/docs/OAuth2.html#CS">Auth2-cs</a> available on $URL/oauth2/auth.
+<li> if the user authorized $APP to access $NAMESPACE, make a <a href="http://tools.ietf.org/html/rfc4918">WebDAV</a> server available on $URL/webdav/$USER/$DOMAIN/$NAMESPACE/.
+<li> use <a href="http://en.wikipedia.org/wiki/Basic_access_authentication">http basic auth</a> on the WebDAV server, with as user the one used in WebFinger (but without the preceding 'acct:'), and as password the session token provided previously by OAuth2-cs.
+<li> use <a href="http://www.w3.org/TR/cors/">CORS</a> headers on the WebFinger as well as on the WebDAV. Hint: On the WebFinger, <a href="http://www.w3.org/TR/cors/#access-control-allow-origin-response-hea"> "-Allow-Origin: *"</a> should be enough, while on the WebDAV you should echo the origin provided, as specified in <a href="http://www.w3.org/TR/cors/#resource-requests">5.1.3:"If the resource supports credentials"</a>, and also add <a href="http://www.w3.org/TR/cors/#access-control-allow-credentials-respons">"-Allow-Credentials: true"</a>. Make sure the WebDAV server does not require authentication for the OPTIONS verb, because as specified <a href="http://www.w3.org/TR/cors/#cross-origin-request-with-preflight0">here</a>, the preflight ("OPTIONS") request will exclude the user credentials, that's to say, the http basic auth header in this case.
+<li> as an unhosted account provider, you should add an element with rel 'http://unhosted.org/spec/register' to .well-known/host-meta, containing the url of your user registration page, so unhosted web apps can redirect your users or prospective users directly to your register page from the app's login page. if this it not applicable, still add the element, but make it point to a page that explains the user why they can't register. in all cases, similar to oauth, if your register page receives a redirect_uri in the query string, then redirect the user back there after she completes (or cancels) registration.
+<li> It is up to the application, and beyond the scope of this spec, to implement <a href="http://en.wikipedia.org/wiki/End-to-end_encryption">E2EE</a> on top of this, possibly using the <a href="http://crypto.stanford.edu/sjcl/">Stanford Javascript Crypto Library</a>, possibly in a <a href="http://www.whatwg.org/specs/web-workers/current-work/">WebWorker</a> process.
+</ul>
+</body>
+</html>
