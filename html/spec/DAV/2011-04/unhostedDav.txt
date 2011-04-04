@@ -1,0 +1,48 @@
+The Unhosted WebDAV Standard
+
+Introduction
+WebFinger
+OAuth2-cs
+WebDAV
+Http Basic auth
+End-to-end encryption
+Registration
+
+Introduction
+This document is meant for implementers of an Unhosted WebDAV service. It descibes how an Unhosted WebDAV service should behave. Developers of unhosted web apps should read <this> article instead. End-users who are interested in understanding the concepts behind the unhosted web, are better off reading http://www.unhosted.org/.
+
+In order for your service to comply with the Unhosted WebDAV standard, it needs to implement WebFinger, OAuth2-cs, WebDAV, Http Basic auth, and CORS. All of these technologies should be configured to work together.
+
+Throughout this text, we use several variables, which are written in capitals, and with a $-sign in front of them. They describe the interaction between a user, this user's Unhosted WebDAV service (aka her unhosted account), and an application. The variables are:
+$USERNAME - the local part of the user's global user identifier, that's to say, the part before the '@' sign.
+$USERDOMAIN - the server part of the user's global user identifier, that's to say, the part after the '@' sign.
+$DAVURL - the base URL of the Unhosted WebDAV service.
+$APP - the URL of the application
+$RESOURCE - the string identifying the resource to which the user is granting the application access. By default, $RESOURCE = $APP.
+
+WebFinger
+---------------
+The Unhosted WebDAV service SHOULD implement WebFinger-over-https, preferably with JRD formatting, but XRD formatting is also acceptable. In the WebFinger data for $USER @ $DOMAIN, it should announce an https-based $URL with rel-attribute 'http://unhosted.org/spec/DAV/' . All WebFinger-related resources SHOULD be served over https, and with CORS headers that allow their retrieval from any origin.
+
+OAuth2-cs
+----------------
+Given the $URL announced via WebFinger, the Unhosted WebDAV implementer SHOULD make Auth2-cs available on $URL/oauth2/auth (no need for CORS headers here).
+
+WebDAV
+--------------
+Whenever a user $USER @ $DOMAIN grants an $APP access to a $RESOURCE, the Unhosted WebDAV implementer SHOULD make a WebDAV server available on $URL/webdav/$USER/$DOMAIN/$RESOURCE/, with CORS headers that allow access to whichever $APP sends it valid credentials.
+
+Non-normative hint: For this, it is necessary to allow access through the OPTIONS verb without requiring http Basic auth. It is also necessary to set the -Allow-Credentials header to true, and to echo the Origin specified in the request headers back in the -Allow-Origin header (setting it to '*' works for the OAuth2-cs URL, but not here, because of an extra restriction on CORS that applies when there are credentials involved).
+
+Http basic auth
+-----------------------
+Whenever a user, who is successfully identified as $USER @ $DOMAIN by OAuth2-cs, has successfully granted application $APP access to resource $RESOURCE, the OAuth access token given out SHOULD be a valid http basic auth password for $URL/webdav/$USER/$DOMAIN/$RESOURCE/, when combined with the concatenation of $USER, '@', and $DOMAIN as the http basic auth username.
+
+Registration
+------------------
+In addition to the 'lrdd' entry that is needed in https://$DOMAIN/.well-known/host-meta as part of WebFinger, the implementer of Unhosted WebDAV SHOULD also add a 'register' entry. It should contain a template with two variables: {uri} and {redirect_url}. It SHOULD then also offer a human-readable web page with registration information on the URL that is constructe by filing in the concatenation of 'acct:', $USER, '@', and $DOMAIN for the {uri} variable, and a redirect URL for the {redirect_url} variable. This registration page SHOULD EITHER allow the user to register a new unhosted account identified by $USER @ $DOMAIN, OR provide human-readable information about why this is not being offered (for instance, if the username is taken, or if the server is not currently accepting registrations, or if some out-of-band actions are needed, like 'come to the IT office on the second floor to activate your unhosted account'). Whether registration as a new user is successful or not, upon completion the user-agent SHOULD be redirected back to 
+that redirect_url that was specified.
+
+Conclusion
+----------------
+A reference implementation of this specification is currently visible by visiting the world's first unhosted web app, on http://www.mysecretsandwich.org/. It is up to the application, and beyond the scope of this spec, to implement end-to-end encryption on top of this, possibly using the Stanford Javascript Crypto Library, possibly in a WebWorker process. This text may be changed for clarity - its history is tracked <here>. However, the standard it describes will be frozen on 5 April 2011. After that, the standard will not change for at least 6 months. If at any point after that improvements to this standard are deemed desirable, every attempt will be made to make those changes non-breaking.
