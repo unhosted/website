@@ -49,7 +49,7 @@
 	</p>
 	
 	<h3 id="webFinger">WebFinger</h3>
-	<p>The Unhosted WebDAV service SHOULD implement <a href="http://code.google.com/p/webfinger/wiki/WebFingerProtocol">WebFinger</a> over <a href="http://tools.ietf.org/html/rfc2818">https</a>, preferably with <a href="http://hueniverse.com/2010/05/jrd-the-other-resource-descriptor/">JRD</a> formatting, but <a href="http://www.oasis-open.org/committees/download.php/32686/xrd-1.0-wd01.html">XRD</a> formatting is also acceptable. In the WebFinger data for <strong>$USERNAME @ $USERDOMAIN</strong>, it should announce an https-based <strong>$DAVURL</strong> with <strong>rel</strong>-attribute '<strong>http://unhosted.org/spec/DAV/</strong>' . All WebFinger-related resources SHOULD be served over https, and with <a href="http://www.w3.org/TR/cors/">CORS</a> headers that allow their retrieval from any origin.
+	<p>The Unhosted WebDAV service SHOULD implement <a href="http://code.google.com/p/webfinger/wiki/WebFingerProtocol">WebFinger</a> over <a href="http://tools.ietf.org/html/rfc2818">https</a>, preferably with <a href="http://hueniverse.com/2010/05/jrd-the-other-resource-descriptor/">JRD</a> formatting, but <a href="http://www.oasis-open.org/committees/download.php/32686/xrd-1.0-wd01.html">XRD</a> formatting is also acceptable. In the WebFinger data for <strong>$USERNAME @ $USERDOMAIN</strong>, it should announce an https-based <strong>$DAVURL</strong> with <strong>rel</strong>-attribute '<strong>http://unhosted.org/spec/DAV/2011-04/</strong>' . All WebFinger-related resources SHOULD be served over https, and with <a href="http://www.w3.org/TR/cors/">CORS</a> headers that allow their retrieval from any origin.
 	</p>
 	
 	<h3 id="oAuth">OAuth</h3>
