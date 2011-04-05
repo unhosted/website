@@ -14,16 +14,19 @@ Content-Type: text/plain
 Access-Control-Allow-Origin: http://www.myfavouritesandwich.org
 Access-Control-Allow-Methods: GET
 
-{
- "links": {
-   "lrdd": [
-     { "template":"http://demo.redlibre.org/webfinger/?q={uri}"}
-   ],
-   "register": [
-     { "template":"http://unhosted.redlibre.org/register.html?q={uri}&redirect_url={redirect_url}" }
-   ]
- }
-}
+<?xml version='1.0' encoding='UTF-8'?>
+<XRD xmlns='http://docs.oasis-open.org/ns/xri/xrd-1.0' 
+     xmlns:hm='http://host-meta.net/xrd/1.0'>
+  <hm:Host xmlns='http://host-meta.net/xrd/1.0'>demo.redlibre.org</hm:Host>
+  <Link rel='lrdd' 
+        template='http://demo.redlibre.org/webfinger/?q={uri}'>
+    <Title>Resource Descriptor</Title>
+  </Link>
+  <Link rel='register' 
+        template='http://demo.redlibre.org/register/?q={uri}&redirect_url={redirect_url}'>
+    <Title>Resource Descriptor</Title>
+  </Link>
+</XRD>
 
 
 =========================
