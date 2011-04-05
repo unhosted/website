@@ -36,7 +36,7 @@
 	<p>This document is meant for implementers of an <strong>Unhosted WebDAV service</strong>. It descibes how an Unhosted WebDAV service should behave. <strong>Developers</strong> of unhosted web apps should read <a href="http://www.unhosted.org/developers.html">this page</a> instead. <strong>End-users</strong> who are interested in understanding the concepts behind the unhosted web, are better off reading <a href="http://www.unhosted.org/">http://www.unhosted.org/</a>.
 	</p>
 	<p>
-	In order for your service to comply with the Unhosted WebDAV standard, it needs to implement <strong>WebFinger, OAuth2-cs, WebDAV, Http Basic auth, and CORS</strong>. All of these technologies should be configured to work together in the way that this specification describes using the keywords "SHOULD" and "SHOULD EITHER .. OR".
+	In order for your service to comply with the Unhosted WebDAV standard, it needs to implement <strong>WebFinger, OAuth2-cs, WebDAV, Http Basic auth, and CORS</strong>. All of these technologies should be configured to work together in the way that this specification describes using the keywords "MUST", "SHOULD" and "SHOULD EITHER .. OR", in the meaning specified by <a href="http://tools.ietf.org/html/rfc2119">rcf2119</a>.
 	</p>
 	<p>Throughout this text, we use several variables, which are written in capitals, and with a $-sign in front of them. They describe the interaction between a user, this user's Unhosted WebDAV service (aka her unhosted account), and an application. The variables are:
 	<ul>
@@ -49,16 +49,16 @@
 	</p>
 	
 	<h3 id="webFinger">WebFinger</h3>
-	<p>The Unhosted WebDAV service SHOULD implement <a href="http://code.google.com/p/webfinger/wiki/WebFingerProtocol">WebFinger</a> over <a href="http://tools.ietf.org/html/rfc2818">https</a>, preferably with <a href="http://hueniverse.com/2010/05/jrd-the-other-resource-descriptor/">JRD</a> formatting, but <a href="http://www.oasis-open.org/committees/download.php/32686/xrd-1.0-wd01.html">XRD</a> formatting is also acceptable. In the WebFinger data for <strong>$USERNAME @ $USERDOMAIN</strong>, it should announce an https-based <strong>$DAVURL</strong> with <strong>rel</strong>-attribute '<strong>http://unhosted.org/spec/DAV/2011-04/</strong>' . All WebFinger-related resources SHOULD be served over https, and with <a href="http://www.w3.org/TR/cors/">CORS</a> headers that allow their retrieval from any origin.
+	<p>The Unhosted WebDAV service MUST implement <a href="http://code.google.com/p/webfinger/wiki/WebFingerProtocol">WebFinger</a> over <a href="http://tools.ietf.org/html/rfc2818">https</a>, preferably with <a href="http://hueniverse.com/2010/05/jrd-the-other-resource-descriptor/">JRD</a> formatting, but <a href="http://www.oasis-open.org/committees/download.php/32686/xrd-1.0-wd01.html">XRD</a> formatting is also acceptable. In the WebFinger data for <strong>$USERNAME @ $USERDOMAIN</strong>, it should announce an https-based <strong>$DAVURL</strong> with <strong>rel</strong>-attribute '<strong>http://unhosted.org/spec/DAV/2011-04/</strong>' . All WebFinger-related resources SHOULD be served over https, and with <a href="http://www.w3.org/TR/cors/">CORS</a> headers that allow their retrieval from any origin.
 	</p>
 	
 	<h3 id="oAuth">OAuth</h3>
-	<p>Given the <strong>$DAVURL</strong> announced via WebFinger, the Unhosted WebDAV implementer SHOULD make <a href="http://code.google.com/apis/accounts/docs/OAuth2.html#CS">OAuth2-cs</a> available on <strong>$DAVURL/oauth2/auth</strong> (no need for CORS headers here).
+	<p>Given the <strong>$DAVURL</strong> announced via WebFinger, the Unhosted WebDAV implementer MUST make <a href="http://code.google.com/apis/accounts/docs/OAuth2.html#CS">OAuth2-cs</a> available on <strong>$DAVURL/oauth2/auth</strong> (no need for CORS headers here).
 	</p>
 	
 	<h3 id="webDav">WebDAV</h3>
 	
-	<p>Whenever a user <strong>$USERNAME @ $USERDOMAIN</strong> grants an <strong>$APP</strong> access to a <strong>$RESOURCE</strong>, the Unhosted WebDAV implementer SHOULD make a WebDAV server available on <strong>$DAVURL/webdav/$USERDOMAIN/$USERNAME/$RESOURCE/</strong>, with CORS headers that allow access from whichever <strong>$APP</strong> sends it valid credentials.
+	<p>Whenever a user <strong>$USERNAME @ $USERDOMAIN</strong> grants an <strong>$APP</strong> access to a <strong>$RESOURCE</strong>, the Unhosted WebDAV implementer MUST make a WebDAV server available on <strong>$DAVURL/webdav/$USERDOMAIN/$USERNAME/$RESOURCE/</strong>, with CORS headers that allow access from whichever <strong>$APP</strong> sends it valid credentials.
 	</p>
 	
 	<p>Non-normative hint: For this, it is necessary to exclude the OPTIONS from the http basic auth restrictions. It is also necessary to set the -Allow-Credentials header to true, and to echo the Origin specified in the request headers back in the -Allow-Origin header (setting it to '*' works for the OAuth2-cs URL, but not here, because of an extra restriction on CORS that applies when there are credentials involved). An example of how to configure this in apache's mod_dav can be found <a href="https://github.com/michiel-unhosted/DemoRedlibreOrg">here</a>.
@@ -66,7 +66,7 @@
 	
 	<h3 id="basicAuth">Http basic auth</h3>
 	
-	<p>Whenever a user, who is successfully identified as <strong>$USERNAME @ $USERDOMAIN</strong> by the OAuth2-cs authentication server, and has successfully granted application <strong>$APP</strong> access to resource <strong>$RESOURCE</strong>, the OAuth access token given out to the <strong>$APP</strong> SHOULD be a valid <a href="http://www.ietf.org/rfc/rfc2617.txt">http basic auth</a> password for <strong>$DAVURL/webdav/$USERDOMAIN/$USERNAME/$RESOURCE/</strong>, when combined with the concatenation of <strong>$USERNAME</strong>, '<strong>@</strong>', and <strong>$USERDOMAIN</strong> as the http basic auth username.
+	<p>Whenever a user, who is successfully identified as <strong>$USERNAME @ $USERDOMAIN</strong> by the OAuth2-cs authentication server, and has successfully granted application <strong>$APP</strong> access to resource <strong>$RESOURCE</strong>, the OAuth access token given out to the <strong>$APP</strong> MUST be a valid <a href="http://www.ietf.org/rfc/rfc2617.txt">http basic auth</a> password for <strong>$DAVURL/webdav/$USERDOMAIN/$USERNAME/$RESOURCE/</strong>, when combined with the concatenation of <strong>$USERNAME</strong>, '<strong>@</strong>', and <strong>$USERDOMAIN</strong> as the http basic auth username.
 	</p>
 	
 	<h3 id="registration">Registration</h3>
