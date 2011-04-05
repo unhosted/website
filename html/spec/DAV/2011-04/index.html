@@ -58,7 +58,7 @@
 	
 	<h3 id="webDav">WebDAV</h3>
 	
-	<p>Whenever a user <strong>$USERNAME @ $USERDOMAIN</strong> grants an <strong>$APP</strong> access to a <strong>$RESOURCE</strong>, the Unhosted WebDAV implementer SHOULD make a WebDAV server available on <strong>$DAVURL/webdav/$USERNAME/$USERDOMAIN/$RESOURCE/</strong>, with CORS headers that allow access from whichever <strong>$APP</strong> sends it valid credentials.
+	<p>Whenever a user <strong>$USERNAME @ $USERDOMAIN</strong> grants an <strong>$APP</strong> access to a <strong>$RESOURCE</strong>, the Unhosted WebDAV implementer SHOULD make a WebDAV server available on <strong>$DAVURL/webdav/$USERDOMAIN/$USERNAME/$RESOURCE/</strong>, with CORS headers that allow access from whichever <strong>$APP</strong> sends it valid credentials.
 	</p>
 	
 	<p>Non-normative hint: For this, it is necessary to exclude the OPTIONS from the http basic auth restrictions. It is also necessary to set the -Allow-Credentials header to true, and to echo the Origin specified in the request headers back in the -Allow-Origin header (setting it to '*' works for the OAuth2-cs URL, but not here, because of an extra restriction on CORS that applies when there are credentials involved). An example of how to configure this in apache's mod_dav can be found <a href="https://github.com/michiel-unhosted/DemoRedlibreOrg">here</a>.
@@ -66,7 +66,7 @@
 	
 	<h3 id="basicAuth">Http basic auth</h3>
 	
-	<p>Whenever a user, who is successfully identified as <strong>$USERNAME @ $USERDOMAIN</strong> by the OAuth2-cs authentication server, and has successfully granted application <strong>$APP</strong> access to resource <strong>$RESOURCE</strong>, the OAuth access token given out to the <strong>$APP</strong> SHOULD be a valid <a href="http://www.ietf.org/rfc/rfc2617.txt">http basic auth</a> password for <strong>$DAVURL/webdav/$USERNAME/$USERDOMAIN/$RESOURCE/</strong>, when combined with the concatenation of <strong>$USERNAME</strong>, '<strong>@</strong>', and <strong>$USERDOMAIN</strong> as the http basic auth username.
+	<p>Whenever a user, who is successfully identified as <strong>$USERNAME @ $USERDOMAIN</strong> by the OAuth2-cs authentication server, and has successfully granted application <strong>$APP</strong> access to resource <strong>$RESOURCE</strong>, the OAuth access token given out to the <strong>$APP</strong> SHOULD be a valid <a href="http://www.ietf.org/rfc/rfc2617.txt">http basic auth</a> password for <strong>$DAVURL/webdav/$USERDOMAIN/$USERNAME/$RESOURCE/</strong>, when combined with the concatenation of <strong>$USERNAME</strong>, '<strong>@</strong>', and <strong>$USERDOMAIN</strong> as the http basic auth username.
 	</p>
 	
 	<h3 id="registration">Registration</h3>
