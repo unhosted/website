@@ -48,7 +48,7 @@ Access-Control-Allow-Methods: GET
 <?xml version='1.0'?>
 <XRD xmlns='http://docs.oasis-open.org/ns/xri/xrd-1.0'>
 	<Subject>acct:demo@demo.redlibre.org</Subject>
-	<Link rel='http://unhosted.org/spec/dav/2011-04' href='http://demo.redlibre.org/'/>
+	<Link rel='http://unhosted.org/spec/dav/0.1' href='http://demo.redlibre.org/'/>
 </XRD>
 
 
