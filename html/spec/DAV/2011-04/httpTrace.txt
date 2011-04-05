@@ -45,7 +45,7 @@ Content-Type: text/html
 Access-Control-Allow-Origin: http://www.myfavouritesandwich.org
 Access-Control-Allow-Methods: GET
 
-{"subject":"acct:demo@demo.redlibre.org","links":{"http:\/\/unhosted.org\/spec\/DAV\/2011-04\/":["http:\/\/demo.redlibre.org\/"]}}
+{"subject":"acct:demo@demo.redlibre.org","links":{"http:\/\/unhosted.org\/spec\/dav\/2011-04\/":["http:\/\/demo.redlibre.org\/"]}}
 
 
 ===========================
