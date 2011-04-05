@@ -33,14 +33,14 @@
 	</ul>
 	
 	<h3>Introduction</h3>
-	<p>This document is meant for implementers of an <strong>Unhosted WebDAV service</strong>. It descibes how an Unhosted WebDAV service should behave. Developers of unhosted web apps should read <a href="http://www.unhosted.org/developers.html">this article</a> instead. End-users who are interested in understanding the concepts behind the unhosted web, are better off reading <a href="http://www.unhosted.org/">http://www.unhosted.org/</a>.
+	<p>This document is meant for implementers of an <strong>Unhosted WebDAV service</strong>. It descibes how an Unhosted WebDAV service should behave. <strong>Developers</strong> of unhosted web apps should read <a href="http://www.unhosted.org/developers.html">this page</a> instead. <strong>End-users</strong> who are interested in understanding the concepts behind the unhosted web, are better off reading <a href="http://www.unhosted.org/">http://www.unhosted.org/</a>.
 	</p>
 	<p>
-	In order for your service to comply with the Unhosted WebDAV standard, it needs to implement <strong>WebFinger, OAuth2-cs, WebDAV, Http Basic auth, and CORS</strong>. All of these technologies should be configured to work together.
+	In order for your service to comply with the Unhosted WebDAV standard, it needs to implement <strong>WebFinger, OAuth2-cs, WebDAV, Http Basic auth, and CORS</strong>. All of these technologies should be configured to work together in the way that this specification describes.
 	</p>
 	<p>Throughout this text, we use several variables, which are written in capitals, and with a $-sign in front of them. They describe the interaction between a user, this user's Unhosted WebDAV service (aka her unhosted account), and an application. The variables are:
 	<ul>
-		<li><strong>$USERNAME</strong> - the local part of the user's global user identifier, that's to say, the part before the '@' sign.</li>
+		<li><strong>$USERNAMENAME</strong> - the local part of the user's global user identifier, that's to say, the part before the '@' sign.</li>
 		<li><strong>$USERDOMAIN</strong> - the server part of the user's global user identifier, that's to say, the part after the '@' sign.</li>
 		<li><strong>$DAVURL</strong> - the base URL of the Unhosted WebDAV service.</li>
 		<li><strong>$APP</strong> - the URL of the application</li>
@@ -49,16 +49,16 @@
 	</p>
 	
 	<h3 id="webFinger">WebFinger</h3>
-	<p>The Unhosted WebDAV service SHOULD implement <a href="http://code.google.com/p/webfinger/wiki/WebFingerProtocol">WebFinger</a> over <a href="http://tools.ietf.org/html/rfc2818">https</a>, preferably with <a href="http://hueniverse.com/2010/05/jrd-the-other-resource-descriptor/">JRD</a> formatting, but <a href="http://www.oasis-open.org/committees/download.php/32686/xrd-1.0-wd01.html">XRD</a> formatting is also acceptable. In the WebFinger data for <strong>$USER @ $DOMAIN</strong>, it should announce an https-based <strong>$URL</strong> with <strong>rel</strong>-attribute '<strong>http://unhosted.org/spec/DAV/</strong>' . All WebFinger-related resources SHOULD be served over https, and with <a href="http://www.w3.org/TR/cors/">CORS</a> headers that allow their retrieval from any origin.
+	<p>The Unhosted WebDAV service SHOULD implement <a href="http://code.google.com/p/webfinger/wiki/WebFingerProtocol">WebFinger</a> over <a href="http://tools.ietf.org/html/rfc2818">https</a>, preferably with <a href="http://hueniverse.com/2010/05/jrd-the-other-resource-descriptor/">JRD</a> formatting, but <a href="http://www.oasis-open.org/committees/download.php/32686/xrd-1.0-wd01.html">XRD</a> formatting is also acceptable. In the WebFinger data for <strong>$USERNAME @ $USERDOMAIN</strong>, it should announce an https-based <strong>$DAVURL</strong> with <strong>rel</strong>-attribute '<strong>http://unhosted.org/spec/DAV/</strong>' . All WebFinger-related resources SHOULD be served over https, and with <a href="http://www.w3.org/TR/cors/">CORS</a> headers that allow their retrieval from any origin.
 	</p>
 	
 	<h3 id="oAuth">OAuth2-cs</h3>
-	<p>Given the <strong>$URL</strong> announced via WebFinger, the Unhosted WebDAV implementer SHOULD make <a href="http://code.google.com/apis/accounts/docs/OAuth2.html#CS">OAuth2-cs</a> available on <strong>$URL/oauth2/auth</strong> (no need for CORS headers here).
+	<p>Given the <strong>$DAVURL</strong> announced via WebFinger, the Unhosted WebDAV implementer SHOULD make <a href="http://code.google.com/apis/accounts/docs/OAuth2.html#CS">OAuth2-cs</a> available on <strong>$DAVURL/oauth2/auth</strong> (no need for CORS headers here).
 	</p>
 	
 	<h3 id="webDav">WebDAV</h3>
 	
-	<p>Whenever a user <strong>$USER @ $DOMAIN</strong> grants an <strong>$APP</strong> access to a <strong>$RESOURCE</strong>, the Unhosted WebDAV implementer SHOULD make a WebDAV server available on <strong>$URL/webdav/$USER/$DOMAIN/$RESOURCE/</strong>, with CORS headers that allow access to whichever <strong>$APP</strong> sends it valid credentials.
+	<p>Whenever a user <strong>$USERNAME @ $USERDOMAIN</strong> grants an <strong>$APP</strong> access to a <strong>$RESOURCE</strong>, the Unhosted WebDAV implementer SHOULD make a WebDAV server available on <strong>$DAVURL/webdav/$USERNAME/$USERDOMAIN/$RESOURCE/</strong>, with CORS headers that allow access to whichever <strong>$APP</strong> sends it valid credentials.
 	</p>
 	
 	<p>Non-normative hint: For this, it is necessary to allow access through the OPTIONS verb without requiring http Basic auth. It is also necessary to set the -Allow-Credentials header to true, and to echo the Origin specified in the request headers back in the -Allow-Origin header (setting it to '*' works for the OAuth2-cs URL, but not here, because of an extra restriction on CORS that applies when there are credentials involved).
@@ -66,11 +66,11 @@
 	
 	<h3 id="basicAuth">Http basic auth</h3>
 	
-	<p>Whenever a user, who is successfully identified as <strong>$USER @ $DOMAIN</strong> by the OAuth2-cs authentication server, and has successfully granted application <strong>$APP</strong> access to resource <strong>$RESOURCE</strong>, the OAuth access token given out SHOULD be a valid <a href="http://www.ietf.org/rfc/rfc2617.txt">http basic auth</a> password for <strong>$URL/webdav/$USER/$DOMAIN/$RESOURCE/</strong>, when combined with the concatenation of <strong>$USER</strong>, '<strong>@</strong>', and <strong>$DOMAIN</strong> as the http basic auth username.
+	<p>Whenever a user, who is successfully identified as <strong>$USERNAME @ $USERDOMAIN</strong> by the OAuth2-cs authentication server, and has successfully granted application <strong>$APP</strong> access to resource <strong>$RESOURCE</strong>, the OAuth access token given out SHOULD be a valid <a href="http://www.ietf.org/rfc/rfc2617.txt">http basic auth</a> password for <strong>$DAVURL/webdav/$USERNAME/$USERDOMAIN/$RESOURCE/</strong>, when combined with the concatenation of <strong>$USERNAME</strong>, '<strong>@</strong>', and <strong>$USERDOMAIN</strong> as the http basic auth username.
 	</p>
 	
 	<h3 id="registration">Registration</h3>
-	<p>In addition to the '<a href="http://hueniverse.com/2009/03/the-discovery-protocol-stack/">lrdd</a>' entry that is needed in <strong>https://$DOMAIN/.well-known/host-meta</strong> as part of WebFinger, the implementer of Unhosted WebDAV SHOULD also add a '<strong>register</strong>' entry. It should contain a template with two variables: <strong>{uri}</strong> and <strong>{redirect_url}</strong>. It SHOULD then also offer a human-readable web page with registration information on the URL that is constructe by filling in the concatenation of '<strong>acct:</strong>', <strong>$USER</strong>, '<strong>@</strong>', and <strong>$DOMAIN</strong> for the <strong>{uri}</strong> variable, and a redirect URL for the <strong>{redirect_url}</strong> variable. This registration page SHOULD EITHER allow the user to register a new unhosted account identified by <strong>$USER @ $DOMAIN</strong>, OR provide human-readable information about why this is not being offered (for instance, if the username is taken, or if the server is not currently accepting registrations, or if some out-of-band actions are needed, like "if you are an ACME employee, but haven't received the credentials for your unhosted account yet, then please contact the helpdesk on it@acme.com"). Whether registration as a new user is successful or not, upon completion the user-agent SHOULD be redirected back to the url that was filled in as the <strong>{redirect-url}</strong> in the template.
+	<p>In addition to the '<a href="http://hueniverse.com/2009/03/the-discovery-protocol-stack/">lrdd</a>' entry that is needed in <strong>https://$USERDOMAIN/.well-known/host-meta</strong> as part of WebFinger, the implementer of Unhosted WebDAV SHOULD also add a '<strong>register</strong>' entry. It should contain a template with two variables: <strong>{uri}</strong> and <strong>{redirect_url}</strong>. It SHOULD then also offer a human-readable web page with registration information on the URL that is constructe by filling in the concatenation of '<strong>acct:</strong>', <strong>$USERNAME</strong>, '<strong>@</strong>', and <strong>$USERDOMAIN</strong> for the <strong>{uri}</strong> variable, and a redirect URL for the <strong>{redirect_url}</strong> variable. This registration page SHOULD EITHER allow the user to register a new unhosted account identified by <strong>$USERNAME @ $USERDOMAIN</strong>, OR provide human-readable information about why this is not being offered (for instance, if the username is taken, or if the server is not currently accepting registrations, or if some out-of-band actions are needed, like "if you are an ACME employee, but haven't received the credentials for your unhosted account yet, then please contact the helpdesk on it@acme.com"). Whether registration as a new user is successful or not, upon completion the user-agent SHOULD be redirected back to the url that was filled in as the <strong>{redirect-url}</strong> in the template.
 	</p>
 	
 	<h3 id="conclusion">Conclusion</h3>
