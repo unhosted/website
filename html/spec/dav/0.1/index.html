@@ -23,7 +23,17 @@ href="#webFinger">WebFinger</a></li> <li><a href="#oAuth">OAuth2-cs</a></li>
 auth</a></li> <li><a href="#registration">Registration</a></li> <li><a
 href="#conclusion">Conclusion</a></li> </ul>
 	
-	<h3>Introduction</h3> <p>This document is meant for implementers of an
+	<h3>Introduction</h3> 
+<p>An Unhosted WebDAV service acts as an always-on data storage
+for its users. It does not host any application source code, nor does it execute
+any processing.
+ To make use of an Unhosted WebDAV account, the user visits unhosted web apps 
+that run in a browser, or user-agent. This user-agent discovers the user's
+Unhosted WebDAV service through WebFinger. It then redirects the user to an OAuth
+dialogue, to establish authentication. Finally, it uses WebDAV to read and write the
+data on the Unhosted WebDAV account.
+</p>
+<p>This document is meant for implementers of an
 <strong>Unhosted WebDAV service</strong>. It descibes how an Unhosted WebDAV
 service should behave. <strong>Developers</strong> of unhosted web apps should
 read <a href="http://www.unhosted.org/developers.html">this page</a> instead.
