@@ -45,7 +45,11 @@ Content-Type: text/html
 Access-Control-Allow-Origin: http://www.myfavouritesandwich.org
 Access-Control-Allow-Methods: GET
 
-{"subject":"acct:demo@demo.redlibre.org","links":{"http:\/\/unhosted.org\/spec\/dav\/2011-04\/":["http:\/\/demo.redlibre.org\/"]}}
+<?xml version='1.0'?>
+<XRD xmlns='http://docs.oasis-open.org/ns/xri/xrd-1.0'>
+	<Subject>acct:demo@demo.redlibre.org</Subject>
+	<Link rel='http://unhosted.org/spec/dav/2011-04' href='http://demo.redlibre.org/'/>
+</XRD>
 
 
 ===========================
