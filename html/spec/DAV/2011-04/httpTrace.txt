@@ -1,0 +1,146 @@
+=========================
+== GETTING HOST-META:  ==
+=========================
+
+
+GET /.well-known/host-meta?format=json HTTP/1.1
+Host: demo.redlibre.org
+Referer: http://www.myfavouritesandwich.org/
+Origin: http://www.myfavouritesandwich.org
+
+=========================
+
+HTTP/1.1 200 OK
+Content-Type: text/plain
+Access-Control-Allow-Origin: http://www.myfavouritesandwich.org
+Access-Control-Allow-Methods: GET
+
+{
+ "links": {
+   "lrdd": [
+     { "template":"http://demo.redlibre.org/webfinger/?q={uri}"}
+   ],
+   "register": [
+     { "template":"http://unhosted.redlibre.org/register.html?q={uri}&redirect_url={redirect_url}" }
+   ]
+ }
+}
+
+=========================
+== GETTING WEBFINGER:  ==
+=========================
+
+GET /webfinger/?q=acct:demo@demo.redlibre.org HTTP/1.1
+Host: demo.redlibre.org
+Referer: http://www.myfavouritesandwich.org/
+Origin: http://www.myfavouritesandwich.org
+
+=========================
+
+HTTP/1.1 200 OK
+Content-Type: text/html
+Access-Control-Allow-Origin: http://www.myfavouritesandwich.org
+Access-Control-Allow-Methods: GET
+
+{"subject":"acct:demo@demo.redlibre.org","links":{"http:\/\/unhosted.org\/spec\/DAV\/2011-04\/":["http:\/\/demo.redlibre.org\/"]}}
+
+===========================
+== REDIRECTING TO OAUTH: ==
+===========================
+
+GET /oauth2/auth/?client_id=www.myfavouritesandwich.org&redirect_uri=www.myfavouritesandwich.org&scope=dav&response_type=token&user_name=demo@demo.redlibre.org HTTP/1.1
+Host: demo.redlibre.org
+Referer: http://www.myfavouritesandwich.org/
+
+=========================
+
+HTTP/1.1 200 OK
+
+<html><body>
+<form method="POST" action="?">
+<input type="password" name="pwd">
+<input type="submit">
+</form></body></html>
+
+================================
+== POSTING TO OAUTH DIALOGUE: ==
+================================
+
+POST /oauth2/auth/?client_id=www.myfavouritesandwich.org&redirect_uri=www.myfavouritesandwich.org&scope=dav&response_type=token&user_name=demo@demo.redlibre.org HTTP/1.1
+Host: demo.redlibre.org
+Referer: http://demo.redlibre.org/oauth2/auth/?client_id=www.myfavouritesandwich.org&redirect_uri=www.myfavouritesandwich.org&scope=dav&response_type=token&user_name=demo@demo.redlibre.org
+Origin: http://demo.redlibre.org
+
+pwd=demo
+
+=========================
+
+
+HTTP/1.1 302 Found
+Location: http://www.myfavouritesandwich.org?dav=demo.redlibre.org/webdav/demo/demo.redlibre.org/www.myfavouritesandwich.org&token=45DF035339FE04FB5E
+Vary: Accept-Encoding
+Content-Encoding: gzip
+Content-Length: 61
+
+==============================
+== REDIRECTING BACK TO APP: ==
+==============================
+
+
+GET /?dav=demo.redlibre.org/webdav/demo/demo.redlibre.org/www.myfavouritesandwich.org&token=45DF035339FE04FB5E HTTP/1.1
+Host: www.myfavouritesandwich.org
+Referer: http://demo.redlibre.org/oauth2/auth/?client_id=www.myfavouritesandwich.org&redirect_uri=www.myfavouritesandwich.org&scope=dav&response_type=token&user_name=demo@demo.redlibre.org
+
+HTTP/1.1 200 OK
+
+==============================
+
+[…app…]
+
+===============================
+== GETTING DATA FROM WEBDAV: ==
+===============================
+
+GET /webdav/demo/demo.redlibre.org/www.myfavouritesandwich.org/favSandwich.json HTTP/1.1
+Host: demo.redlibre.org
+Referer: http://www.myfavouritesandwich.org/
+Authorization: Basic ZGVtb0BkZW1vLnJlZGxpYnJlLm9yZzo0NURGMDM1MzM5RkUwNEZCNUU=
+
+==============================
+
+HTTP/1.1 200 OK
+Content-Type: text/plain
+Access-Control-Allow-Origin: http://www.myfavouritesandwich.org
+Access-Control-Allow-Methods: GET, POST, DELETE, OPTIONS, PUT
+Access-Control-Allow-Headers: Content-Type, X-Requested-With, X-HTTP-Method-Override, Accept, Authorization
+Access-Control-Allow-Credentials: true
+Cache-Control: max-age=0
+
+{"ingredients":["cheese","cream"]}
+
+=============================
+== PUTTING DATA TO WEBDAV: ==
+=============================
+
+
+PUT /webdav/demo/demo.redlibre.org/www.myfavouritesandwich.org/favSandwich.json HTTP/1.1
+Host: demo.redlibre.org
+Referer: http://www.myfavouritesandwich.org/
+Content-Length: 35
+Origin: http://www.myfavouritesandwich.org
+Authorization: Basic ZGVtb0BkZW1vLnJlZGxpYnJlLm9yZzo0NURGMDM1MzM5RkUwNEZCNUU=
+
+{"ingredients":["cheese","chives"]}
+
+==============================
+
+HTTP/1.1 204 No Content
+Access-Control-Allow-Origin: http://www.myfavouritesandwich.org
+Access-Control-Allow-Methods: GET, POST, DELETE, OPTIONS, PUT
+Access-Control-Allow-Headers: Content-Type, X-Requested-With, X-HTTP-Method-Override, Accept, Authorization
+Access-Control-Allow-Credentials: true
+Cache-Control: max-age=0
+Content-Length: 0
+
+==============================
+==============================
