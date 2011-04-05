@@ -2,7 +2,6 @@
 == GETTING HOST-META:  ==
 =========================
 
-
 GET /.well-known/host-meta?format=json HTTP/1.1
 Host: demo.redlibre.org
 Referer: http://www.myfavouritesandwich.org/
@@ -26,6 +25,7 @@ Access-Control-Allow-Methods: GET
  }
 }
 
+
 =========================
 == GETTING WEBFINGER:  ==
 =========================
@@ -43,6 +43,7 @@ Access-Control-Allow-Origin: http://www.myfavouritesandwich.org
 Access-Control-Allow-Methods: GET
 
 {"subject":"acct:demo@demo.redlibre.org","links":{"http:\/\/unhosted.org\/spec\/DAV\/2011-04\/":["http:\/\/demo.redlibre.org\/"]}}
+
 
 ===========================
 == REDIRECTING TO OAUTH: ==
@@ -62,6 +63,7 @@ HTTP/1.1 200 OK
 <input type="submit">
 </form></body></html>
 
+
 ================================
 == POSTING TO OAUTH DIALOGUE: ==
 ================================
@@ -75,17 +77,13 @@ pwd=demo
 
 =========================
 
-
 HTTP/1.1 302 Found
 Location: http://www.myfavouritesandwich.org?dav=demo.redlibre.org/webdav/demo/demo.redlibre.org/www.myfavouritesandwich.org&token=45DF035339FE04FB5E
-Vary: Accept-Encoding
-Content-Encoding: gzip
-Content-Length: 61
+
 
 ==============================
 == REDIRECTING BACK TO APP: ==
 ==============================
-
 
 GET /?dav=demo.redlibre.org/webdav/demo/demo.redlibre.org/www.myfavouritesandwich.org&token=45DF035339FE04FB5E HTTP/1.1
 Host: www.myfavouritesandwich.org
@@ -95,7 +93,8 @@ HTTP/1.1 200 OK
 
 ==============================
 
-[…app…]
+[...app...]
+
 
 ===============================
 == GETTING DATA FROM WEBDAV: ==
@@ -118,10 +117,10 @@ Cache-Control: max-age=0
 
 {"ingredients":["cheese","cream"]}
 
+
 =============================
 == PUTTING DATA TO WEBDAV: ==
 =============================
-
 
 PUT /webdav/demo/demo.redlibre.org/www.myfavouritesandwich.org/favSandwich.json HTTP/1.1
 Host: demo.redlibre.org
