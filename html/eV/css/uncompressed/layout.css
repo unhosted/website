@@ -1,0 +1,161 @@
+body{
+ 	background: url('./img/back.png') repeat-x top left #45a3c5;
+ 	color: white;
+ 	font-size: 18px;
+ 	line-height: 22px;
+ 	font-weight: 300;
+ 	font-family: "museo-sans-1","museo-sans-2",sans-serif;
+ 	
+}
+	p{
+		margin: 0 0 22px;
+		line-height: 22px;
+	}
+	a{
+		background: #1a1a1a;
+		color: white;
+		font-weight: 500;
+		text-decoration: none;
+		display:inline-block;
+	}
+		a:hover{
+			color: white;
+			cursor: pointer;
+		}
+	italic{
+		font-style: italic;
+	}
+	h1{
+		font-family: "museo-slab-1","museo-slab-2",serif;
+		font-size:66px;
+		line-height:66px;
+		font-weight: 700;
+		text-align: right;
+	}
+		.agenda h1, .financial h1{
+			margin-top: 100px;
+			font-size: 32px;
+			text-align: left;
+			line-height: 33px;
+		}
+		.agenda ol#germanlist{
+			margin-top: 38px;
+		}
+			.agenda ol#englishlist{
+				margin-top: 72px;
+			}
+		
+		.financial h1{
+			font-size: 48px;
+			line-height: 44px;
+		}		
+			.financial .ger{
+				text-align: right;
+			}
+		.financial #financialschema{
+			background: url('./img/vertline.png') repeat-y transparent center top;
+			clear: both;
+			position: relative;
+			top: -50px;
+		}
+		.financial #financialschema #bigcircle{
+			background: url('./img/bigcircle.png') no-repeat transparent center center;
+			height: 246px;
+			min-height: 246px;
+			text-align: center;
+			font-size: 48px;
+			font-weight: 700;
+			
+			position: relative;
+
+		}
+			.financial #financialschema #bigcircle div {
+				position: relative;
+				top: 107px;
+			}
+			.financial #financialschema #bigcircle div span{
+				font-size: 20px;
+				display: block;
+				font-weight: 300;
+				line-height: 44px;
+			}
+			
+			.financial #financialschema.displaced{
+				position: relative;
+				top: -80px;
+				
+			}
+		.financial ul{
+			list-style: none;
+			position: relative;
+			top: 40px;
+			
+			}
+			.financial ul li{
+				margin-left: 0;
+				background: url('./img/smallcircle.png') center center transparent no-repeat;
+				font-size: 14px;
+				min-height: 180px;
+				display: block;
+				position: relative;
+				}
+				.financial ul li.smaller{
+					background: url('./img/smallercircle.png') center center transparent no-repeat;
+					}	
+				.financial ul li div{
+						margin-top: 70px;
+						
+					}
+				.financial ul li div.grid_2{
+					text-align: center;
+						margin-top: 72px;
+						font-size: 24px;
+						font-weight: 700;	
+					}
+					.financial ul li div.grid_2 span{
+							display: block;
+							font-size: 14px;
+							font-weight: 500;	
+						}
+				
+	.grid_6.content{
+		
+		margin-top: 20px;
+		padding-left: 22px;
+		width: 438px;
+		}
+		
+	.signature{
+		font-size:14px;
+		}
+		.signature span{
+			font-weight: 700;
+		}
+	#german{
+		background: url('./img/u.png') no-repeat left top transparent;
+		margin-top: 50px;
+		padding-top: 128px;
+		position: relative;
+	}
+		.date{
+			font-size: 24px;
+			text-align: right;
+			width: 470px;
+			font-weight: 500;
+			margin-bottom: 22px;
+			line-height: 24px;}
+			.date span{
+				font-weight: 300;
+				display: block;
+			}
+	#english{
+		font-weight: 100;
+		margin-top: 33px;
+		padding-top: 44px;
+		background: url('./img/dots.png') repeat-x top left transparent;
+		margin-bottom: 200px;
+	}
+	
+		#english h1{
+			font-weight: 300;
+		}
