@@ -88,7 +88,8 @@ WebDAV implementer MUST make a WebDAV server available on
 headers that allow access from whichever <strong>$APP</strong> sends it valid
 credentials.  </p>
 	
-	<p>Non-normative hint: For this, it is necessary to exclude the OPTIONS
+	<p>Non-normative hint: For this, it is necessary to 
+exclude (apart from the HEAD and GET verbs) the OPTIONS verb 
 from the http basic auth restrictions. It is also necessary to set the
 -Allow-Credentials header to true, and to echo the Origin specified in the
 request headers back in the -Allow-Origin header (setting it to '*' works for
@@ -107,7 +108,12 @@ successfully granted application <strong>$APP</strong> access to resource
 href="http://www.ietf.org/rfc/rfc2617.txt">http basic auth</a> password for
 <strong>$DAVURL/webdav/$USERDOMAIN/$USERNAME/$RESOURCE/</strong>, when combined
 with the concatenation of <strong>$USERNAME</strong>, '<strong>@</strong>', and
-<strong>$USERDOMAIN</strong> as the http basic auth username.  </p>
+<strong>$USERDOMAIN</strong> as the http basic auth username.  
+Http basic auth MUST be required for all verbs except OPTIONS, HEAD and GET.
+This means all content on the DAV server will be read/write-able for <strong>$USERNAME
+@ $USERDOMAIN</strong>, and world-readable. It is the responsibility of the application to add
+a payload encryption layer on top of this (end-to-end encryption).
+</p>
 	
 	<h3 id="registration">Registration</h3> <p>In addition to the '<a
 href="http://hueniverse.com/2009/03/the-discovery-protocol-stack/">lrdd</a>'
