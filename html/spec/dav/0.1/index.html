@@ -62,13 +62,14 @@ the user is granting the application access. By default, $RESOURCE = $APP.</li>
 	<h3 id="webFinger">WebFinger</h3> <p>The Unhosted WebDAV service MUST
 implement <a
 href="http://code.google.com/p/webfinger/wiki/WebFingerProtocol">WebFinger</a>
-over <a href="http://tools.ietf.org/html/rfc2818">https</a> and with <a
+ and with <a
 href="http://www.oasis-open.org/committees/download.php/32686/xrd-1.0-wd01.html">XRD</a>
 formatting. In the WebFinger data for <strong>$USERNAME @ $USERDOMAIN</strong>,
 it should announce an https-based <strong>$DAVURL</strong> with
 <strong>rel</strong>-attribute
 '<strong>http://unhosted.org/spec/dav/0.1</strong>' . All WebFinger-related
-resources SHOULD be served over https, and with <a
+resources SHOULD be served over 
+<a href="http://tools.ietf.org/html/rfc2818">https</a> and MUST be served with <a
 href="http://www.w3.org/TR/cors/">CORS</a> headers that allow their retrieval
 from any origin.  </p>
 	
