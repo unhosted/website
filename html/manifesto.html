@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="css/uncompressed/960.css" />
 <link rel="stylesheet" href="general.css" />
 <link rel="stylesheet" href="css/uncompressed/layout.css" />
+
 </head>
 	<body>
 		<div class="preload"></div>
@@ -19,50 +20,68 @@
 		<header>
 			<div class="container_12">
 				<div id="title" class="grid_6">
-					<h1>Unhosted</h1>
+					<a href="http://www.unhosted.org">	
+						<h1>Unhosted</h1>
+					</a>
 					<h2>Freedom from web 2.0's monopoly platforms</h2>
-					<p>
-						<strong>Unhosted is a project for strengthening free software against hosted software</strong>. With our protocol, a website is only source code. Dynamic data is encrypted and decentralised, to per-user storage nodes. This benefits <strong>free software</strong>, as well as <strong>scalability</strong>, <strong>robustness</strong>, and <strong>online privacy</strong>.
+					<p id="intro">
+						<strong>Unhosted is an open web standard for decentralizing user data.</strong> On the unhosted web, data is stored per-user, under the user's control. That's where it belongs.
 					</p>
-					<a class="button download" href="https://github.com/michiel-unhosted/unhosted/tarball/v0.1">Download the code at gitHub</a>
-					<a class="button manifesto" href="manifesto.html">Read the manifesto</a>
+					<p>
+						To find out more, check out our <a href="http://www.myfavouritesandwich.org" target="_blank">demo</a> (log in with your unhosted account, or try 'demo@demo.redlibre.org', password 'demo'). You can also read our full <a href="manifesto.html">manifesto</a>, and our <a href="https://github.com/michiel-unhosted/unhosted/wiki/" target="_blank">wiki</a>, or ask a question on our <a href="http://groups.google.com/group/unhosted" target="_blank">mailing list</a>.
+					</p>
+					<div id="buttons">
+						<a class="button download" href="developers.html">Developers</a>
+						<a class="button manifesto" href="manifesto.html">Read the manifesto</a>
+					</div>
 				</div>
 				<div id="island" class="grid_6"><figure></figure></div>
 			</div>
 		</header>
+		<div class="clear"></div>
 
-<table><tr><td align="center"><p><table width="80%"><tr><td><p>
+<section class="container_12" id="manifesto">
 
-<h2>Manifesto for the unhosted web</h2>
-<h3>Freedom from Web2.0&#39;s monopoly platforms.</h3>
-Free/libre and Open Source Software (FLOSS) frees us from having to install proprietary software on our terminals. But installable software is losing ground to hosted software (websites). The server software is often open source (e.g. LAMP), but <strong>the website itself as a software product</strong> is almost always proprietary. There is an obvious reason for this: Even if an Affero license allows us to download the website&#39;s source code, only a commercial company can finance the thousands of servers needed to host a successful website. To make things worse, hosted software has more power over its users than installable software, because it forces you to put your user data on servers owned by the same company that publishes the software. If you want to use Google Docs, you have to reveal your work to a Google-owned server (what Richard Stallman calls &quot;careless computing&quot;).
-<br><br><br><br>
-<h3>Unhosted </h3>
-We quit our jobs and started the UNHOSTED project to try and stop this. We needed to break the one-to-one link between the software publisher who writes a website (e.g. &quot;Google, Inc&quot;) and the &quot;hostage provider&quot; who hosts that website (e.g. <strong>also</strong> &quot;Google, Inc&quot;). Unhosted creates a simple grease layer in the form of an open web standard between the hosted software and the servers that host it, so this is decoupled.
-<br><br><br><br>
-<h3>Proof-of-concept</h3>
-We managed to get a proof-of-concept working, and it is in alpha now. To be unhosted, a website&#39;s code will need to be very ajaxy first, so that all the servers do is store and serve json data. No server-side processing. This is because we need to switch from transport-layer encryption to client-side payload encryption (we no longer necessarily trust the server we&#39;re talking to). From within the app&#39;s source code, that should run entirely in JavaScript and HTML5, json-objects can be stored, retrieved, sent, and received. The user will have the same experience (we even managed to avoid needing a plugin), but the website is unhosted in the sense that the servers you talk to only see encrypted data and don&#39;t even know which application you are running. 
-<br><br><br><br>
-<h3>FLOSS-as-a-Service on top of a commodity infrastructure</h3>
-A hosted website provides two things: processing and storage. An unhosted website only hosts its source code (or even just a bootloader for it). Processing is done in the browser, with ajax against encrypted cloud storage. These unhosted storage nodes can be provided by whoever provides your email hosting: your employer, ISP, university, mobile operator, public library, a hobbyist friend who runs a server at home, a hosting company, etc. They become just like mailservers, BGP switches, fibre links and other commodity infrastructure: independent of which application you run on top of them. And they only get to see encrypted data. We probably don&#39;t need a lot of storage nodes until unhosted apps really start to attract end users. When they do, everything will degrade gracefully, and users will have an incentive to look for a faster and bigger storage node to migrate to. To maximize the control of the user over his data, migration from one storage node to another will be an integral part of the protocol. Unhosted can in the future be combined with recent projects like Mozilla&#39;s Open Web Applications for free-speech &quot;app channels&quot;, and is inspired on architectures like tahoe-LAFS for the underlying encrypted cloud storage. 
-<br><br><br><br>
-<h3>how it works</h3>
-Unhosted consists of two parts: the unhosted storage node (a very simple server that receives json-data over HTTP, stores it, and allows you to retrieve it) and a JavaScript library that allows you to interact with these storage nodes from code that runs within the browser. All data is RSA-encrypted and signed before it is sent, and unencrypted and verified when it is received. We used Tom Wu&#39;s big numbers library for this. Normally it doesn&#39;t make a lot of sense to encrypt user data in the browser using a website's JavaScript, and then send that data to that same website: If the server wanted to see what is inside the encrypted data stream, all it would have to do would be to tinker with the JavaScript. So usually, in-browser encryption is not very useful. But in this case, the host storing the data is different from the host providing the JavaScript. So then it starts making sense. A FLOSS programmer would host her website as purely static content - only the source code. The user logs in with a globally unique identifier (a guid, like an email address) that indicates on which storage node that user's data should be stored. With Cross-Origin Resource Sharing (CORS), the RSA-encrypted JSON-data is sent there, and retrieved from there. Payload-encryption is possible with PGP-encrypted email, but never reached the mainstream so far, probably because it requires extra clicks and actions. With unhosted, we tried to make it &quot;zero-UX&quot;: The user doesn't even notice whether the website he is using is hosted or unhosted, unless you tell him. Just like https is zero-UX in that it requires zero clicks from the end user. The web developer only has to call <strong>unhosted.set()</strong> and <strong>unhosted.get()</strong> from inside her JavaScript code.
-<br><br><br><br>
-<h3>fabric-based pki</h3>
-When we implemented all this, and played with a few example apps, we noticed how cumbersome it is to have to deal with people's public keys all the time. If I want to send a message to a new contact, I need not only his guid, but also his public key. In a normal, hosted situation, where you trust the server that hosts (provides persistance for) a user profile, this is easy, you just ask the server what that user's public key is (spki, for instance with WebFinger). But we don't want to trust unhosted storage nodes if we don't have to. That is why we invented what we call a fabric-based public key infrastructure (pki). We call it fabric based, because unlike CA, FOAF and SPKI, it relies on complete strangers to sign other people's keys. We define a deterministic way to "walk" from a given guid to another one. Every guid signs the public keys of "neighbouring" guids, even if he doesn't know who these people are. It helps to create a fabric of users, where the hosting providers have no power to stage man-in-the-middle attacks. This pki is the most complicated part of unhosted, and is still quite new and in need of some peer review by people who know about this. 
-<br><br><br><br>
-<h3>current state of the project</h3>
-The unhosted web is now live. We published a demo app, which is at http://www.myfavouritesandwich.org/. You can try it out with test user demo@demo.redlibre.org (password: demo). Please copy it and create your own unhosted web app. What is done so far is only the start of a meme. We need more people on board to make this a success!
-<br><br><br><br>
-<h3>unhosted applications</h3>
-The unhosted infrastructure could form the support for open-source web apps like (or compatible with) diaspora, federated social web, vendor relationship management, bitcoin, and hopefully all hosted services we currently use. Web search will be the most challenging one because of its inherent centralization, but social search variants (propagating friends-of-friends&#39; recommendations) should definitely be possible on an unhosted infrastructure. Once that is achieved, open source software can become as successful in the &quot;Software as a Service&quot; world as it is in &quot;installed&quot; software. It will help keep Google, Facebook and Apple in check, so they compete on merit only. If you think this project is worthy of pursuing then please join <a href="http://groups.google.com/group/unhosted" target="_blank">our mailing list</a>, join the #unhosted channel on irc.freenode.net, and mention the &quot;#unhosted&quot; hashtag on <a href="http://www.identi.ca/unhosted" target="_blank">identi.ca/unhosted</a> and <a href="http://www.twitter.com/unhosted" target="_blank">twitter</a>. We need web developers to start using this as a scalable way to design FLOSS web apps. We depend on web developers to create an unhosted web, where all apps are free software, and without commercial companies spying on our data.
-<br><br><br><br>
-<h3>further reading</h3>
-We recommend you read Eben Moglen (he started the &quot;Freedom in the Cloud&quot; movement that we are part of), Tim Wu (about internet monopolies), and Glyn Moody (about history, present and future of the open source movement).
-<br><br>
+	
+	<h2>Manifesto for the unhosted web</h2>
+	
+	<h3>Freedom from Web2.0&#39;s monopoly platforms.</h3>
+	<p>Free/libre and Open Source Software (FLOSS) frees us from having to install proprietary software on our terminals. But installable software is losing ground to hosted software (websites). The server software is often open source (e.g. LAMP), but <strong>the website itself as a software product</strong> is almost always proprietary. There is an obvious reason for this: Even if an Affero license allows us to download the website&#39;s source code, only a commercial company can finance the thousands of servers needed to host a successful website. To make things worse, hosted software has more power over its users than installable software, because it forces you to put your user data on servers owned by the same company that publishes the software. If you want to use Google Docs, you have to reveal your work to a Google-owned server (what Richard Stallman calls &quot;careless computing&quot;).
+	</p>
+	
+	<h3>Unhosted </h3>
+	<p>We quit our jobs and started the UNHOSTED project to try and stop this. We needed to break the one-to-one link between the software publisher who writes a website (e.g. &quot;Google, Inc&quot;) and the &quot;hostage provider&quot; who hosts that website (e.g. <strong>also</strong> &quot;Google, Inc&quot;). Unhosted creates a simple grease layer in the form of an open web standard between the hosted software and the servers that host it, so this is decoupled.
+	</p>
+	
+	<h3>Proof-of-concept</h3>
+	<p>We managed to get a proof-of-concept working, and it is in alpha now. To be unhosted, a website&#39;s code will need to be very ajaxy first, so that all the servers do is store and serve json data. No server-side processing. This is because we need to switch from transport-layer encryption to client-side payload encryption (we no longer necessarily trust the server we&#39;re talking to). From within the app&#39;s source code, that should run entirely in JavaScript and HTML5, json-objects can be stored, retrieved, sent, and received. The user will have the same experience (we even managed to avoid needing a plugin), but the website is unhosted in the sense that the servers you talk to only see encrypted data and don&#39;t even know which application you are running. 
+	</p>
+	
+	<h3>FLOSS-as-a-Service on top of a commodity infrastructure</h3>
+	<p>A hosted website provides two things: processing and storage. An unhosted website only hosts its source code (or even just a bootloader for it). Processing is done in the browser, with ajax against encrypted cloud storage. These unhosted storage nodes can be provided by whoever provides your email hosting: your employer, ISP, university, mobile operator, public library, a hobbyist friend who runs a server at home, a hosting company, etc. They become just like mailservers, BGP switches, fibre links and other commodity infrastructure: independent of which application you run on top of them. And they only get to see encrypted data. We probably don&#39;t need a lot of storage nodes until unhosted apps really start to attract end users. When they do, everything will degrade gracefully, and users will have an incentive to look for a faster and bigger storage node to migrate to. To maximize the control of the user over his data, migration from one storage node to another will be an integral part of the protocol. Unhosted can in the future be combined with recent projects like Mozilla&#39;s Open Web Applications for free-speech &quot;app channels&quot;, and is inspired on architectures like tahoe-LAFS for the underlying encrypted cloud storage. 
+	</p>
+	
+	<h3>how it works</h3>
+	<p>Unhosted consists of two parts: the unhosted storage node (a very simple server that receives json-data over HTTP, stores it, and allows you to retrieve it) and a JavaScript library that allows you to interact with these storage nodes from code that runs within the browser. All data is RSA-encrypted and signed before it is sent, and unencrypted and verified when it is received. We used Tom Wu&#39;s big numbers library for this. Normally it doesn&#39;t make a lot of sense to encrypt user data in the browser using a website's JavaScript, and then send that data to that same website: If the server wanted to see what is inside the encrypted data stream, all it would have to do would be to tinker with the JavaScript. So usually, in-browser encryption is not very useful. But in this case, the host storing the data is different from the host providing the JavaScript. So then it starts making sense. A FLOSS programmer would host her website as purely static content - only the source code. The user logs in with a globally unique identifier (a guid, like an email address) that indicates on which storage node that user's data should be stored. With Cross-Origin Resource Sharing (CORS), the RSA-encrypted JSON-data is sent there, and retrieved from there. Payload-encryption is possible with PGP-encrypted email, but never reached the mainstream so far, probably because it requires extra clicks and actions. With unhosted, we tried to make it &quot;zero-UX&quot;: The user doesn't even notice whether the website he is using is hosted or unhosted, unless you tell him. Just like https is zero-UX in that it requires zero clicks from the end user. The web developer only has to call <strong>unhosted.set()</strong> and <strong>unhosted.get()</strong> from inside her JavaScript code.
+	</p>
+	
+	<h3>fabric-based pki</h3>
+	<p>When we implemented all this, and played with a few example apps, we noticed how cumbersome it is to have to deal with people's public keys all the time. If I want to send a message to a new contact, I need not only his guid, but also his public key. In a normal, hosted situation, where you trust the server that hosts (provides persistance for) a user profile, this is easy, you just ask the server what that user's public key is (spki, for instance with WebFinger). But we don't want to trust unhosted storage nodes if we don't have to. That is why we invented what we call a fabric-based public key infrastructure (pki). We call it fabric based, because unlike CA, FOAF and SPKI, it relies on complete strangers to sign other people's keys. We define a deterministic way to "walk" from a given guid to another one. Every guid signs the public keys of "neighbouring" guids, even if he doesn't know who these people are. It helps to create a fabric of users, where the hosting providers have no power to stage man-in-the-middle attacks. This pki is the most complicated part of unhosted, and is still quite new and in need of some peer review by people who know about this. 
+	</p>
+	
+	<h3>current state of the project</h3>
+	<p>The unhosted web is now live. We published a demo app, which is at <a href="http://www.myfavouritesandwich.org/">http://www.myfavouritesandwich.org/</a>. You can try it out with test user demo@demo.redlibre.org (password: demo). Please copy it and create your own unhosted web app. What is done so far is only the start of a meme. We need more people on board to make this a success!
+	</p>
+	
+	<h3>unhosted applications</h3>
+	<p>The unhosted infrastructure could form the support for open-source web apps like (or compatible with) diaspora, federated social web, vendor relationship management, bitcoin, and hopefully all hosted services we currently use. Web search will be the most challenging one because of its inherent centralization, but social search variants (propagating friends-of-friends&#39; recommendations) should definitely be possible on an unhosted infrastructure. Once that is achieved, open source software can become as successful in the &quot;Software as a Service&quot; world as it is in &quot;installed&quot; software. It will help keep Google, Facebook and Apple in check, so they compete on merit only. If you think this project is worthy of pursuing then please join <a href="http://groups.google.com/group/unhosted" target="_blank">our mailing list</a>, join the #unhosted channel on irc.freenode.net, and mention the &quot;#unhosted&quot; hashtag on <a href="http://www.identi.ca/unhosted" target="_blank">identi.ca/unhosted</a> and <a href="http://www.twitter.com/unhosted" target="_blank">twitter</a>. We need web developers to start using this as a scalable way to design FLOSS web apps. We depend on web developers to create an unhosted web, where all apps are free software, and without commercial companies spying on our data.
+	</p>
+	<h3>further reading</h3>
+	We recommend you read Eben Moglen (he started the &quot;Freedom in the Cloud&quot; movement that we are part of), Tim Wu (about internet monopolies), and Glyn Moody (about history, present and future of the open source movement).
+	<br><br>
 <a href="/">[back]</a>
-</p></td></tr></table></p></td></tr></table>
+</section>
+
 
 		<div class="clear"></div>
 		<footer>
