@@ -1,126 +1,193 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<!doctype html>
 
-<script src="html5.js"></script><!-- this is the javascript allowing html5 to run in older browsers -->
+<!--[if lt IE 7 ]> <html class="ie ie6 no-js" lang="en"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie ie7 no-js" lang="en"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie ie8 no-js" lang="en"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie ie9 no-js" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<!-- the "no-js" class is for Modernizr. -->
 
-<title>UNHOSTED - Freedom from web 2.0's monopoly platforms</title>
-<link rel="stylesheet" href="css/uncompressed/reset.css" />
-<link rel="stylesheet" href="css/uncompressed/text.css" />
-<link rel="stylesheet" href="css/uncompressed/960.css" />
-<link rel="stylesheet" href="css/uncompressed/960.css" />
-<link rel="stylesheet" href="general.css" />
-<link rel="stylesheet" href="css/uncompressed/layout.css" />
+<head id="www-unhosted-org" data-template-set="html5-reset">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta charset="utf-8">
+	
+	<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame -->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	
+	<title>Unhosted - Imagine personal data freedom...</title>
+	
+	<meta name="title" content="Unhosted - Imagine personal data freedom...">
+	<meta name="description" content="Unhosted is an open web standard for decentralizing user data. On the unhosted web, data is stored per-user, under the user's control. 
+	That's where it belongs.">
+	<!-- Google will often use this as its description of your page/site. Make it good. -->
+	
+	<meta name="google-site-verification" content="">
+	<!-- Speaking of Google, don't forget to set your site up: http://google.com/webmasters -->
+	
+	<meta name="author" content="edokoa">
+	<meta name="Copyright" content="Unhosted 2011. Licensed under CC-.">
+
+	<!-- Dublin Core Metadata : http://dublincore.org/ -->
+	<meta name="DC.title" content="Unhosted">
+	<meta name="DC.subject" content="Unhosted is an open web standard for decentralizing user data. On the unhosted web, data is stored per-user, under the user's control. 
+	That's where it belongs.">
+	<meta name="DC.creator" content="edokoa">
+	
+	<!--  Mobile Viewport Fix
+	j.mp/mobileviewport & davidbcalhoun.com/2010/viewport-metatag 
+	device-width : Occupy full width of the screen in its current orientation
+	initial-scale = 1.0 retains dimensions instead of zooming out if page height > device height
+	maximum-scale = 1.0 retains dimensions instead of zooming in if page width < device width
+	-->
+	<!-- Uncomment to use Ñ use thoughtfully!
+	<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
+	-->
+
+	<link rel="shortcut icon" href="_/img/favicon.ico">
+	<!-- This is the traditional favicon.
+		 - size: 16x16 or 32x32
+		 - transparency is OK
+		 - see wikipedia for info on browser support: http://mky.be/favicon/ -->
+		 
+	<link rel="apple-touch-icon" href="_/img/apple-touch-icon.png">
+	<!-- The is the icon for iOS's Web Clip.
+		 - size: 57x57 for older iPhones, 72x72 for iPads, 114x114 for iPhone4's retina display (IMHO, just go ahead and use the biggest one)
+		 - To prevent iOS from applying its styles to the icon name it thusly: apple-touch-icon-precomposed.png
+		 - Transparency is not recommended (iOS will put a black BG behind the icon) -->
+	
+	<!-- CSS: screen, mobile & print are all in the same file -->
+	<link rel="stylesheet" href="_/css/reset.css">
+	<link rel="stylesheet" href="_/css/style.css">
+	
+	<!-- all our JS is at the bottom of the page, except for Modernizr. -->
+	<script src="_/js/modernizr-1.7.min.js"></script>
+	<script type="text/javascript" src="http://use.typekit.com/iek6tvp.js"></script>
+	<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+	<script type="text/javascript">
+	/* <![CDATA[ */
+	    (function() {
+	        var s = document.createElement('script'), t = document.getElementsByTagName('script')[0];
+	        s.type = 'text/javascript';
+	        s.async = true;
+	        s.src = 'http://api.flattr.com/js/0.6/load.js?mode=auto';
+	        t.parentNode.insertBefore(s, t);
+	    })();
+	/* ]]> */
+	</script>
 </head>
-	<body>
-		<div class="preload"></div>
-		<div class="preload2"></div>
-		<header>
-			<div class="container_12">
-				<div id="title" class="grid_6">
-					<h1>Unhosted</h1>
-					<h2>Freedom from web 2.0's monopoly platforms</h2>
-					<p id="intro">
-						<strong>Unhosted is an open web standard for decentralizing user data.</strong> On the unhosted web, data is stored per-user, under the user's control. That's where it belongs.
-					</p>
-					<p>
-						To find out more, check out our <a href="http://www.myfavouritesandwich.org" target="_blank">demo</a> (log in with your unhosted account, or try 'demo@demo.redlibre.org', password 'demo'). You can also read our full <a href="manifesto.html">manifesto</a>, and our <a href="https://github.com/michiel-unhosted/unhosted/wiki/" target="_blank">wiki</a>, or ask a question on our <a href="http://groups.google.com/group/unhosted" target="_blank">mailing list</a>.
-					</p>
-					<div id="buttons">
-						<a class="button download" href="developers.html">Developers</a>
-						<a class="button manifesto" href="manifesto.html">Read the manifesto</a>
-					</div>
-				</div>
-				<div id="island" class="grid_6"><figure></figure></div>
-			</div>
-		</header>
-		<div class="clear"></div>
-		<section id="howitworks">
-			<div class="container_12">
-				<div id="explanation" class="grid_4">
-				<h3>How does it work?</h3>
-					<p>
-						In standard websites, user data is stored in the same server as the application. 
-					</p>
-					<p>
-						On unhosted websites, data is taken away from app servers and lives on the data node you login with.
-					</p>
-					<p>
-						This is done using <a href="http://code.google.com/p/webfinger/wiki/WebFingerProtocol" target="_blank">WebFinger</a>, 
-							<a href="http://tools.ietf.org/html/draft-ietf-oauth-v2-13#section-4.2" target="_blank">OAuth2-cs</a>, 
-							<a href="http://tools.ietf.org/html/rfc4918" target="_blank">WebDAV</a>, 
-							<a href="http://www.w3.org/TR/cors/" target="_blank">CORS</a> and 
-							<a href="http://en.wikipedia.org/wiki/End-to-end_encryption" target="_blank">E2EE</a>.
-					</p>
-				</div>
-				<div class="hSeparator"></div>
-			</div>
-		</section>
+
+<body>
+	<div id="toplight"></div>
+
+<div class="wrapper"><!-- not needed? up to you: http://camendesign.com/code/developpeurs_sans_frontieres -->
+
+	<header>
+		<h1><a href="http://www.unhosted.org">UNHOSTED</a></h1>
+		<div class="tagline">
+			<h2>Imagine personal data freedom...</h2>
+			<p>Unhosted is an <a href="webDAV.html">open web standard</a> for decentralizing user data. On the unhosted web, data is stored per-user, wherever the user decides.<em><strong>That's where it belongs.</strong></em></p>
+		</div>
+		<div id="preload1"></div>
+		<div id="preload2"></div>
+		<div id="downloadholder">
+			<a href="https://github.com/unhosted/unhosted/tarball/master">Download Unhosted SDK alpha</a>
+		</div>
+	</header>
+	
+	<article id="introduction">
 		
-		<section id="maincontent" class="container_12">
-			<div class="container_12">
-				<div class="fivereasons grid_7">
-					<div>
-						<h5>
-							Benefits of being unhosted
-							<span>
-								Five reasons to migrate now
-							</span>
-						</h5>
-						<p>
-							The unhosted web architecture moves user data away from app servers. This has many advantages over the web2.0 architecture, both for users and for developers.						</p>
-						<ul>
-							<li id="dataControl"><h6>More privacy</h6><p>By letting unhosted web apps apply payload encryption to your data, you help prevent your unhosted account provider from infringing on your privacy. </p></li>
-							<li id="freeSoftware"><h6>More focus for the Web Developer</h6><p>The Web Developer can now focus on developing stunning applications without the worries of
-							having to build a world-class infrastructure behind it. This makes it feasible for small scale 
-							web applications to compete with high-profile competitors.
-							</p></li>
-							<li id="decentralization"><h6>Decentralization</h6><p>More robust/resilient architecture, with no Single Point of Failure - especially if combined with 
-							modern in-browser storage techniques.</p></li>
-							<li id="dataFreedom"><h6>Data freedom</h6><p>With your data living outside the app, you can switch back and forth between apps without even 
-							exporting and importing. Better than data liberation, this is data freedom brought to the web.</p></li>
-							<li id="scalability"><h6>Scalability</h6><p>Developers only pay for seeding the statics until ISPs and browsers cache them, so a very basic http server can scale up to serve a very popular web app for many users.</p></li>
-						</ul>
-						
-						
-					</div>
-				</div>
-			</div> <!-- end fivereasons -->
-			<div class="sidebar grid_5">
-				<div>
-					<h5>First Unhosted demo now online!</h5>
-					<a href="http://www.myfavouritesandwich.org" target="_blank"><img src="./css/uncompressed/img/news/demo01.png" alt="myfavouritesandwich.org" width="340" height="256"/></a>
-				</div>
-			</div>
-			<div class="sidebar grid_5">
-				<div>
-					<h5>Check out the Unhosted talk at DynCon</h5>
-					<iframe src="http://player.vimeo.com/video/21109220?portrait=0" width="340" height="251" frameborder="0"></iframe>
-				</div>
-			</div>
-		</section><!-- end maincontent -->
-		<div class="clear"></div>
-		<footer>
-		 <div class="container_12">
-				<div id="twitter">
-					<a href="http://twitter.com/unhosted" target="_blank" id="icon">Follow us! @Unhosted on Twitter</a>
-					<h4>Follow us on <a href="http://identi.ca/unhosted" target="_blank">identi.ca</a> or 
-					<a href="http://twitter.com/unhosted" target="_blank" id="twittitle">twitter</a>
-						<span>@Unhosted</span>
-					</h4>
-					
-					<ul id="twitter_update_list"></ul>
-					      <script type="text/javascript" src="http://twitter.com/javascripts/blogger.js"></script>
-					      <script type="text/javascript" src="http://twitter.com/statuses/user_timeline/unhosted.json?callback=twitterCallback2&amp;count=1"></script>
-					
-				</div>
-				<div id="participate">
-					<div class="icon"></div>	
-					<h4>Participate</h4>
-					<p>Unhosted is an <strong>open source</strong> project, and entirely altruistic. <strong>If you want to help, please join</strong> <a href="http://groups.google.com/group/unhosted" target="_blank">the mailing list</a>, and open a thread about what you think should happen next.</p>
-				</div>
-		</footer>
+		<div class="column" id="evolution">
+			<h3>The web is evolving</h3>
+			<p>
+				In the last few years, the web has slowly changed from just being a source of information to something entirely different.
+			</p>
+			<p>
+				Today, the web is a place where you can share your thoughts, your experiences and your life with other people; a place to keep things that are important to you.
+			</p>
+		</div>
+		<div class="column" id="data">
+			<h3>What happens to your data?</h3>
+			<p>
+				Whenever you post content to the web (images, text, video, music...), it is  kept on the servers of that particular application.
+				
+			</p>
+			<p>
+				This means that your online data is stored in centralized servers belonging to various companies, meaning it's not really yours any more.
+			</p>
+		</div>
+		<div class="column" id="solution">
+			<h3>Bringing data back to the people</h3>
+			<p>
+				What if there were a way, that not only ensures security, freedom and control over your data, but also provides a better experience for both users and developers while resolving some of the other issues of the current web architecture?
+			</p>
+			<p>
+				<strong>This is where Unhosted kicks in...</strong>
+			</p>
+		</div>
 		
-	</body>
+		
+			
+	</article>
+	
+	</div> <!-- END Wrapper -->
+	
+	<footer class="footer">
+		<div class="wrapper">
+			<div class="links">
+				<h3>Community</h3>
+				<ul>
+					<li><a href="http://groups.google.com/group/unhosted" target="_blank">Mailing list</a></li>
+					<li><a href="http://github.com/unhosted/unhosted/" target="_blank">Github</a></li>
+					<li><a href="https://github.com/unhosted/unhosted/wiki/" target="_blank">Wiki</a></li>
+					<li><a href="http://webchat.freenode.net/?channels=unhosted" target="_blank">IRC</a></li>	
+					
+				</ul>
+				
+				<div class="clear"></div>
+			</div>
+			
+			<div class="links">
+				<h3>Articles</h3>
+				<ul>
+					
+					<li><a href="http://blogs.fsfe.org/fellowship-interviews/?p=299" target="_blank">FSFE interview</a></li>
+					<li><a href="http://www.readwriteweb.com/cloud/2010/12/unhosted.php" target="_blank">Read Write Web</a></li>
+					<li><a href="http://www.h-online.com/open/features/Lessons-from-WikiLeaks-decentralize-decentralize-decentralize-1153977.html" target="_blank">The H online</a></li>
+					<li><a href="http://lwn.net/Articles/423902/" target="_blank">Linux Weekly</a></li>
+				</ul>
+				<div class="clear"></div>
+			</div>
+			
+			<div class="links">
+				<h3>Social</h3>
+				<ul>
+					<li><a href="http://identi.ca/unhosted" target="_blank">Identi.ca</a></li>
+					<li><a href="http://www.twitter.com/#!/unhosted" target="_blank">Twitter</a></li>
+				</ul>
+				<div class="clear"></div>
+			</div>
+			
+			<div id="community">
+				<p><strong>Unhosted is a project from and for the community...</strong> We believe that we can achieve a better web together, and you are part of it.
+				</p>
+				
+				<p><strong>Be sure to check this site and join our mailing list</strong> for the latest on Unhosted development, documentation and other news regarding the project. We want to hear your ideas!
+				</p>
+				<div>You make Unhosted!</div>
+				<a class="FlattrButton" style="display:none;" href="http://www.unhosted.org/"></a>
+				<noscript><a href="http://flattr.com/thing/181201/The-Unhosted-Project" target="_blank">
+				<img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0" /></a></noscript>
+			</div>
+			<div class="clear"></div>
+		</div>	
+		<div id="credits">
+			<div class="wrapper">
+				<span>Sdk licensed under <a href="http://www.gnu.org/licenses/agpl.html" target="_blank">AGPL</a>. Website by <a href="http://www.edokoa.com" target="_blank">edokoa</a>, licensed under <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons BY-NC-SA</a></span>
+			</div>
+		</div>
+	</footer>
+
+
+
+</body>
 </html>
