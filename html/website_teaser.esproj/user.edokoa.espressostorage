@@ -5,13 +5,13 @@
 	<key>ESProjectWindowState</key>
 	<dict>
 		<key>ContentSize</key>
-		<string>{700, 953}</string>
+		<string>{1532, 923}</string>
 		<key>ProjectURL</key>
-		<string>file://localhost/Users/edokoa/Documents/Proyectos/unhosted/website_teaser/website_teaser.esproj/</string>
+		<string>file://localhost/Users/edokoa/Dropbox/website_teaser/website_teaser.esproj/</string>
 		<key>StateType</key>
 		<string>ProjectWindow</string>
 		<key>TopLeftPoint</key>
-		<string>{51, 1090}</string>
+		<string>{312, 1094}</string>
 	</dict>
 	<key>com.macrabbit.Espresso.FileManager.DisclosureCollapsed</key>
 	<false/>
@@ -31,31 +31,7 @@
 		<array>
 			<dict>
 				<key>DocumentURL</key>
-				<string>file://localhost/Users/edokoa/Documents/Proyectos/unhosted/website_teaser/webDAV.html</string>
-				<key>StateType</key>
-				<string>DefaultTab</string>
-			</dict>
-			<dict>
-				<key>DocumentURL</key>
-				<string>file://localhost/Users/edokoa/Documents/Proyectos/unhosted/website_teaser/_/css/style.css</string>
-				<key>StateType</key>
-				<string>DefaultTab</string>
-			</dict>
-			<dict>
-				<key>DocumentURL</key>
-				<string>file://localhost/Users/edokoa/Documents/Proyectos/unhosted/website_teaser/_/css/reset.css</string>
-				<key>StateType</key>
-				<string>DefaultTab</string>
-			</dict>
-			<dict>
-				<key>DocumentURL</key>
-				<string>file://localhost/Users/edokoa/Documents/Proyectos/unhosted/website_teaser/_/js/functions.js</string>
-				<key>StateType</key>
-				<string>DefaultTab</string>
-			</dict>
-			<dict>
-				<key>DocumentURL</key>
-				<string>file://localhost/Users/edokoa/Documents/Proyectos/unhosted/website_teaser/index.html</string>
+				<string>file://localhost/Users/edokoa/Dropbox/website_teaser/style.css</string>
 				<key>StateType</key>
 				<string>DefaultTab</string>
 			</dict>
