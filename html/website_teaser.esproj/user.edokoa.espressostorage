@@ -18,10 +18,7 @@
 	<key>com.macrabbit.Espresso.FileManager.FileControllerState</key>
 	<dict>
 		<key>ExpandedURLs</key>
-		<array>
-			<string>file://localhost/Users/edokoa/Documents/Proyectos/unhosted/website_teaser/_/css</string>
-			<string>file://localhost/Users/edokoa/Documents/Proyectos/unhosted/website_teaser/_/js</string>
-		</array>
+		<array/>
 	</dict>
 	<key>com.macrabbit.Espresso.Publisher.DisclosureCollapsed</key>
 	<false/>
