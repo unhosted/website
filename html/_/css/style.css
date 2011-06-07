@@ -27,8 +27,8 @@
  	height: 50px;
  	width: 200px;
  	position: absolute;
- 	top: 235px;
- 	left: 80px;
+ 	top: 340px;
+ 	left: 110px;
  	z-index: -20;
  	
  }
@@ -79,17 +79,19 @@ left: 10px;
 
 #tshirts{
 	position: relative;
-	top: 200px;
+	top: 110px;
 	text-indent: -5000px;
 	z-index: 1000;
 	padding-left: 10px;
+	width: 390px;
+	left: -30px;
 }
 #tshirts #top{
 	display: block;
 	background: url('./img/tshirt.png') no-repeat left top;
 	position: relative;
-	height: 300px;
-	width: 350px;
+	height: 450px;
+	width: 380px;
 
 	
 }
@@ -98,8 +100,8 @@ left: 10px;
 		background: url('./img/arrow.png') no-repeat left top;
 		height: 53px;
 		width: 365px;
-		top: 235px;
-		left: 340px;
+		top: 325px;
+		left: 360px;
 	
 	}
 
