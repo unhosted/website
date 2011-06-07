@@ -31,7 +31,20 @@
     #preload2{
         background: url('./img/download_press.png') top center no-repeat transparent;   
     }
-    
+ //******************
+ // DONATIONS
+ //******************   
+  #donations{
+	  position: relative;
+	  height: 544px; background: url('./img/headerback.png') repeat-x top center red;
+		display: block;
+		position: relative;
+		
+	}
+  
+ //******************
+ // HEADER
+ //******************   
 header{
     display: block;
     position: relative;
