@@ -139,6 +139,8 @@ left: 10px;
 				height: 46px;
 				width: 218px;
 				border: none;
+				display: block;
+				text-indent: -5000px;
 			}
 	#gauge{
 		display: block;
