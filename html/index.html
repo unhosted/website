@@ -8,6 +8,20 @@
 <!-- the "no-js" class is for Modernizr. -->
 
 <head id="www-unhosted-org" data-template-set="html5-reset">
+<script>
+
+//set donations progress here:
+var k = 6;
+var i = 586;
+var days = 30;
+
+function load() {
+	document.getElementById("raised").innerHTML = ""+k+"."+i+"&euro;";
+	document.getElementById("bar").style.width = "" + (10 + 6.19 * k + 0.00619 * i) + "px";
+	document.getElementById("daysleft").innerHTML = "" + days + " days left!";
+	document.getElementById("daysleft").style.background = "url(_/css/img/days/" + days + ".png)";
+}
+</script>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<meta charset="utf-8">
 	
@@ -74,7 +88,7 @@
 	</script>
 </head>
 
-<body>
+<body onload="load();">
 <div id="donations">
 	<div class="wrapper">
 		<div id="logolight"></div>
@@ -89,7 +103,7 @@
 			<div id="gauge">
 				<div id='counter'>
 					<h5>We raised</h5>
-					<div id='raised'>6.130&euro;</div>
+					<div id='raised'>6.586&euro;</div>
 					<span>out of 42.000&euro;</span>
 				</div>
 				<div id="meter">
