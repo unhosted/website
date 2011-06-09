@@ -20,7 +20,13 @@ function load() {
 	var total = michiel+paypal+flattr;
 	var k = Math.floor(total/1000);
 	var i = Math.floor(total-k*1000);
-	document.getElementById("raised").innerHTML = ""+k+"."+i+"&euro;";
+	if(i<10) {
+		document.getElementById("raised").innerHTML = ""+k+".00"+i+"&euro;";
+	} else if(i<100) {
+		document.getElementById("raised").innerHTML = ""+k+".0"+i+"&euro;";
+	} else {
+		document.getElementById("raised").innerHTML = ""+k+"."+i+"&euro;";
+	}
 	document.getElementById("bar").style.width = "" + (10 + 6.19 * k + 0.00619 * i) + "px";
 	document.getElementById("daysleft").innerHTML = "" + days + " days left!";
 	document.getElementById("daysleft").style.background = "url(_/css/img/days/" + days + ".png)";
