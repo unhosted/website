@@ -9,6 +9,18 @@
 
 <head id="www-unhosted-org" data-template-set="html5-reset">
 <script>
+//functions
+function gup( name )
+{
+  name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+  var regexS = "[\\?&]"+name+"=([^&#]*)";
+  var regex = new RegExp( regexS );
+  var results = regex.exec( window.location.href );
+  if( results == null )
+    return "";
+  else
+    return results[1];
+}
 
 //set donations progress here:
 var days = 29;
@@ -17,6 +29,15 @@ var paypal = 953.30;
 var flattr = 84.75;
 
 function load() {
+
+	if(gup("show") == "thanks") {
+		document.getElementById("thanks").style.display="block";
+		
+	} else {
+		document.getElementById("campaign").style.display="block";
+		document.getElementById("arrow").style.display="block";
+	}
+	
 	var total = michiel+paypal+flattr;
 	var k = Math.floor(total/1000);
 	var i = Math.floor(total-k*1000);
@@ -30,6 +51,9 @@ function load() {
 	document.getElementById("bar").style.width = "" + (10 + 6.19 * k + 0.00619 * i) + "px";
 	document.getElementById("daysleft").innerHTML = "" + days + " days left!";
 	document.getElementById("daysleft").style.background = "url(_/css/img/days/" + days + ".png)";
+	
+	
+	
 }
 </script>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -102,40 +126,60 @@ function load() {
 <div id="donations">
 	<div class="wrapper">
 		<div id="logolight"></div>
-		<h1><a href="http://www.unhosted.org">UNHOSTED</a></h1>
-		
-		<div id="campaign">
-			<h2>Help the Unhosted Web Become a Reality!</h2>
-			<p>We are raising <strong>42,000 euros</strong> to realise our dream of the unhosted web. With this money, we will be able to pay for <strong>one full-time developer until March 2013.</strong>
-			</p>
-			<p>All donations welcome. Even if it's just one euro, <strong>we will include you on our 'Thank you' page for the entire duration of the project.</strong>
-			</p>
-			<div id="gauge">
-				<div id='counter'>
-					<h5>We raised</h5>
-					<div id='raised'>6.586&euro;</div>
-					<span>out of 42.000&euro;</span>
+		<h1><a href="http://www.unhosted.org">UNHOSTED</a></h1>		
+		<div name="campaign" id="campaign" style="display:none">
+				<h2>Help the Unhosted Web Become a Reality!</h2>
+				<p>We are raising <strong>42,000 euros</strong> to realise our dream of the unhosted web. With this money, we will be able to pay for <strong>one full-time developer until March 2013.</strong>
+				</p>
+				<p>All donations welcome. Even if it's just one euro, <strong>we will include you on our 'Thank you' page for the entire duration of the project.</strong>
+				</p>
+				<div id="gauge">
+					<div id='counter'>
+						<h5>We raised</h5>
+						<div id='raised'>6.586&euro;</div>
+						<span>out of 42.000&euro;</span>
+					</div>
+					<div id="meter">
+						<h5>Current donation status</h5>
+						<div id="bar"></div>
+					</div>
 				</div>
-				<div id="meter">
-					<h5>Current donation status</h5>
-					<div id="bar"></div>
-				</div>
+				<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+				<input type="hidden" name="cmd" value="_s-xclick">
+				<input type="hidden" name="hosted_button_id" value="5JX4Z9AZLJMJY">
+				<input type="image"  border="0" name="submit" alt=" ">
+				<img alt="" border="0" src="https://www.paypalobjects.com/de_DE/i/scr/pixel.gif" width="1" height="1">
+				</form>
+				
 			</div>
-			<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
-			<input type="hidden" name="cmd" value="_s-xclick">
-			<input type="hidden" name="hosted_button_id" value="5JX4Z9AZLJMJY">
-			<input type="image"  border="0" name="submit" alt=" ">
-			<img alt="" border="0" src="https://www.paypalobjects.com/de_DE/i/scr/pixel.gif" width="1" height="1">
-			</form>
+			<div id="thanks" style="display:none">
+							<h2>Thank you for you kind donation!</h2>
+							<p><strong>Thanks to people like you, the unhosted web is one step closer to becoming a reality.</strong> Your donation will be included next time we update the donations meter.
+							</p>
+							<p><strong>We'll be in touch soon to ask you how you want to appear on the 'Thanks to...' page.</strong>  We also  give out 100 exclusive 'Unhosted Crowd Angel' T-shirts At the end of the T-shirts campaign.
+							</p>
 			
-		</div>
-		<div id="tshirts">
-			<div id="arrow"></div>
-			<div id="top"></div>
-			<div id="daysleft">30 days left!</div>
+							<span>You make Unhosted!</span>	
+								<div id="preload3"></div>
+								<div id="preload4"></div>
+							    <a href="http://twitter.com/share?text=I just helped making the web a better place by donating to @unhosted! http://www.unhosted.org"
+							      class="twitter-share-button"
+							       target="_blank"
+							       >Tweet</a>
+								
+					</div>
+			<div id="tshirts">
+				<div id="arrow" style="display: none;"></div>
+				<div id="top"></div>
+				<div id="daysleft">30 days left!</div>
+				
+			</div>
+		
+
+		
+	</div>	
+		
 			
-		</div>
-	</div>
 </div>
 
 	<div id="toplight"></div>

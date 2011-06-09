@@ -105,7 +105,7 @@ left: 10px;
 	
 	}
 
-	#campaign{
+	#campaign, #thanks{
 		color: #a1aab0;
 		display: block;
 		width: 540px;
@@ -113,11 +113,11 @@ left: 10px;
 		float: right;
 		margin-right: 10px;
 		}
-		#campaign strong{
+		#campaign strong,  #thanks strong{
 			color: #eaeaea;
 			font-weight: bold;
 		}
-		#campaign h2{
+		#campaign h2,  #thanks h2{
 			color: #b9e768;
 			font-size: 22px;
 			text-shadow: 0px 2px 1px #09151e;
@@ -125,7 +125,36 @@ left: 10px;
 			padding-bottom: 10px;
 						
 		}
-	
+		
+		#thanks h2{
+			color: #f7c231;
+			font-size: 30px;
+			padding-bottom: 15px;
+			text-shadow: 0px 2px 3px #142a37;
+			
+			
+		}
+		
+		#thanks span{
+			font-size: 22px;
+						color: white;
+			display: block;
+			padding-top: 30px;
+		}
+		
+		#thanks .twitter-share-button {
+			display:block; width:168px;height:46px; background:url('./img/tweetthis.png') no-repeat left top;
+			text-indent: -9999px;
+			margin-top:40px;
+			position: relative;
+			top: -75px;
+			float: right}
+		#thanks .twitter-share-button:hover {
+			background:url('./img/tweetthis_hover.png') no-repeat left top;	
+		}
+			#thanks .twitter-share-button:active {
+				background:url('./img/tweetthis_active.png') no-repeat left top;	
+			}
 	#campaign form{
 		display: block;
 		clear: both;
@@ -147,8 +176,8 @@ left: 10px;
 		width: 540px;
 		height: 105px;
 		background: url('./img/gauge.png') no-repeat left top;
-		margin-top: 40px;
-		margin-bottom: 10px;
+		margin-top: 33px;
+		margin-bottom: 17px;
 		}
 	#gauge #counter{
 		display: block;
@@ -186,7 +215,7 @@ left: 10px;
 /*
 //  HEADER STYLES
 */
-#preload1, #preload2{
+#preload1, #preload2, #preload3, #preload4{
 	height: 1px;
 	width: 1px;
 	position: absolute;
@@ -197,6 +226,13 @@ left: 10px;
 }
 	#preload2{
 		background: url('./img/download_press.png') top center no-repeat transparent;	
+	}
+	
+	#preload3{
+		background: url('./img/twitthis_hover.png') top center no-repeat transparent;	
+	}
+	#preload4{
+		background: url('./img/twitthis_active.png') top center no-repeat transparent;	
 	}
 	
 header{
