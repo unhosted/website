@@ -22,7 +22,7 @@
  //  DONATIONS STYLES
  */ 
  #daysleft{
- 	background: url('./img/days/30.png');
+ 	background: url('./img/days/backsoon.png');
  	display: block;
  	height: 50px;
  	width: 210px;
@@ -165,6 +165,14 @@ left: 10px;
 	}
 			#campaign form input[type=image]{
 				background: url('./img/paypal.png') no-repeat left top;
+				height: 46px;
+				width: 218px;
+				border: none;
+				display: block;
+				text-indent: -5000px;
+			}
+			#campaign form div{
+				background: url('./img/paypal_disabled.png') no-repeat left top;
 				height: 46px;
 				width: 218px;
 				border: none;

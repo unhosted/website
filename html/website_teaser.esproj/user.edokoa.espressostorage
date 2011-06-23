@@ -11,7 +11,7 @@
 		<key>StateType</key>
 		<string>ProjectWindow</string>
 		<key>TopLeftPoint</key>
-		<string>{938, 1004}</string>
+		<string>{10, 1107}</string>
 	</dict>
 	<key>com.macrabbit.Espresso.FileManager.DisclosureCollapsed</key>
 	<false/>
@@ -20,11 +20,30 @@
 		<key>ExpandedURLs</key>
 		<array>
 			<string>file://localhost/Users/edokoa/Dropbox/website_teaser/_/css</string>
+			<string>file://localhost/Users/edokoa/Dropbox/website_teaser/donate</string>
 		</array>
 	</dict>
 	<key>com.macrabbit.Espresso.Publisher.DisclosureCollapsed</key>
 	<false/>
+	<key>com.macrabbit.Espresso.Workspace.Tabs</key>
+	<dict>
+		<key>Tabs</key>
+		<array>
+			<dict>
+				<key>DocumentURL</key>
+				<string>file://localhost/Users/edokoa/Dropbox/website_teaser/index.html</string>
+				<key>StateType</key>
+				<string>DefaultTab</string>
+			</dict>
+			<dict>
+				<key>DocumentURL</key>
+				<string>file://localhost/Users/edokoa/Dropbox/website_teaser/_/css/style.css</string>
+				<key>StateType</key>
+				<string>DefaultTab</string>
+			</dict>
+		</array>
+	</dict>
 	<key>com.macrabbit.Espresso.WorkspaceTabs.DisclosureCollapsed</key>
-	<true/>
+	<false/>
 </dict>
 </plist>
