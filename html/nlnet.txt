@@ -72,6 +72,6 @@ If we manage to make our product attractive, then telling people about it will b
 
 Possibly, follow-ups on the project.
 ------------------------------------
-After the submission of version 1.0 to a standards body of choice, the project will run another six months, until March 2013. This is not included in the current plan, and finance will be sought for that part separately. That time will be used mainly to ensure a smooth transition of version 1.0 of our standard from us to the standards body in question.
+After the submission of version 1.0 to a standards body of choice, the project will run another six months, until March 2013. This is not included in the current plan, and finance for that part will be sought through continued crowd funding. That time will be used mainly to ensure a smooth transition of version 1.0 of our standard from us to the standards body in question.
 
 Even though the project (as a dev community) will not cease to exist, there will no longer be a need for a full-time employee. By this point, evangelism to web devs should have reached the point where it is self-perpetuating, and accepting unhosted accounts should be standard practice for user-friendly web apps. Implementation instructions will have become common knowledge among web devs, and the standard will be supported by several code bases on both Storage Provider side and Relying Party side. The project will live on as a part of all these different SP and RP implementations.
