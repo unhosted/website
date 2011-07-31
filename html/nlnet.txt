@@ -3,7 +3,7 @@ Cross-origin storage for web app persistence
 
 Project plan.
 -------------
-This project aims to change the very architecture of websites on the World Wide Web, so the data server hosting a particular user's data, is separate from the web server hosting the website's source code. That way, the default same-origin data server of the website becomes a replaceable component of the website's architecture. Users of cooperating websites will be able to choose where their data is hosted: on the same origin as the website's source code, or on cross-origin storage, advertised by the user's identity provider. The choice of data server is automatically made on the user's behalf, during login.
+This project aims to change the very architecture of websites on the World Wide Web, so the data server hosting a particular user's data, is separate from the web server hosting the website's source code. That way, the default same-origin data server of the website becomes a replaceable component of the website's architecture. Users of cooperating websites will be able to choose where their data is hosted: on the same origin as the website's source code, or on cross-origin storage, advertised by the user's identity provider. The choice of data server is automatically made on the user's behalf, via machine-readable formats that link the location a data server to a user's identity.
 
 	the problem solved by this project;
 	-----------------------------------
@@ -11,7 +11,7 @@ Currently, websites that follow the single-origin client-server architecture, an
 
 	the relative advantage of the proposed innovation;
 	--------------------------------------------------
-The advantage of our architecture is that it breaks the monopolization of data hosting. A web app that does not allow cross-origin storage, is not allowing free competition between data servers. For each web app, the same-origin data server has an unfair monopoly on the data hosting that is compatible with that specific web app. Our standard for cross-origin data storage allows benevolent websites to start to accepting unhosted accounts. We cannot force existing websites to voluntarily give up their lucrative monopolies. But once benevolent websites offer this, the user will have the choice to avoid malignent websites that don't. Choice is what breaks monopolies.
+The advantage of our architecture is that it breaks the monopolization of data hosting. A web app that does not allow cross-origin storage, is not allowing free competition between data servers. For each web app, the same-origin data server has an unfair monopoly on the data hosting that is compatible with that specific web app. Our standard for cross-origin data storage allows benevolent websites to start accepting unhosted accounts. We cannot force existing websites to voluntarily give up their lucrative monopolies. But once benevolent websites offer this, the user will have the choice to avoid malignent websites that don't. Choice is what breaks monopolies.
 
 But there's more: Our architecture also lowers the entry threshold for innovative web apps that can act upon existing personal data storage. The monopoly works both ways: first, a web app forces the user to use same-origin data storage, and with use, the user becomes more and more dependent on this data storage. Once this happens, the threshold to move to a different web app will be high, because it will involve exporting and importing all data. If the data had been stored cross-origin from the start, and in open formats like html and odf, then switching to a different app would be instant, and no manual export-save-retrieve-import procedure is required from the user. This significantly lowers the market-entry threshold for providers of innovative web apps.
 
@@ -34,7 +34,7 @@ Other projects that seek to decentralize the web often choose a specific target 
 
 Existing work by us
 -------------------
-We are finishing off the first year of the project, which has been focussed on feasibility study, identifying problem areas, and producing draft versions and demos of our architecture. Our main demo app is http://myfavouritesandwich.org/. Version 0.1 of the data server protocol is on http://unhosted.org/spec/dav/0.1.
+We are finishing off the first year of the project, which has been focussed on feasibility study, identifying problem areas, and producing draft versions and demos of our architecture. Our main demo app is https://myfavouritesandwich.org/. Version 0.1 of the data server protocol is on http://unhosted.org/spec/dav/0.1.
 
 Project setup --organizational, technical, eventual partners, dependencies on other projects, licenses, and such;
 -----------------------------------------------------------------------------------------------------------------
