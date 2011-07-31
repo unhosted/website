@@ -17,16 +17,15 @@ But there's more: Our architecture also lowers the entry threshold for innovativ
 
 So allowing cross-origin data storage is good for the fluidity of both the data hosting market and the web app market.
 
-
 	usability: for whom and to what purpose;
 	----------------------------------------
-Suppose my user address is 'me@data.com', and I log in to 'coolapp.com'. This situation occurs typically on the web as it is now. But now support that coolapp.com allows unhosted accounts, and data.com has some compatible storage space linked to it. Then the user will be asked by data.com "allow coolapp.com to store data in your personal data storage?" or even "allow coolapp.com access to your existing photos/documents?". In the first case, the purpose is for the user to build up data in her personal data storage at data.com, where she has more control over it, instead of in the data server that coolapp.com provides, and that is only compatible with their specific web app. In the second case, she has an easier way to start using a new app with her existing data.
+Suppose my user address is 'me@data.com', and I log in to 'coolapp.com'. This situation occurs typically on the web as it is now. But now suppose that coolapp.com allows unhosted accounts, and data.com has a compatible storage space linked to it. Then the user will be asked by data.com "allow coolapp.com to store data in your personal data storage?" or even "allow coolapp.com access to your existing photos/documents?". In the first case, the purpose is for the user to build up data in her personal data storage at data.com, where she has more control over it, instead of in the data server that coolapp.com provides, and that is only compatible with their specific web app. In the second case, she has an easier way to start using a new app with her existing data.
 
 In this scenario, data.com is the storage provider (SP), and coolapp.com is the relying party (RP). For smooth adoption, we encourage all websites to become both an SP and an RP. This also eliminates the chicken-and-egg problem between SPs and RPs.
 
 	perspectives for further development of this innovation and/or other technologies.
 	----------------------------------------------------------------------------------
-We foresee that this standard, if successful, will become an integral part of the web. It matches very nicely with the move (by both Google and Mozilla) from server-side web technology to client-side web technology ("AJAX"), in products like Chrome Web apps and Chromebook. The possibilities for developing in-browser web apps that are compatible with a generic data storage protocol are near-infinite.
+We foresee that this standard, if successful, will become an integral part of the web. It matches very nicely with the move (by both Google and Mozilla) from server-side web technology to client-side web technology ("AJAX"), in products like Chrome Web apps and Chromebook. The possibilities for developing in-browser web apps that are compatible with a generic cross-origin data storage protocol are near-infinite.
 
 Existing work by others
 -----------------------
