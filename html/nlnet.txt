@@ -3,7 +3,7 @@ Cross-origin storage for web app persistence
 
 Project plan.
 -------------
-This project aims to change the very architecture of websites on the World Wide Web, so the data server hosting a particular user's data, is separate from the web server hosting the website's source code. That way, the default same-origin data server of the website becomes a replaceable component of the website's architecture. Users of cooperating websites will be able to choose where their data is hosted: on the same origin as the website's source code, or on cross-origin storage, advertised by the user's identity provider. The choice of data server is automatically made on the user's behalf, via machine-readable formats that link the location a data server to a user's identity.
+This project aims to change the very architecture of websites on the World Wide Web, so the data server hosting a particular user's data, is separate from the web server hosting the website's source code. That way, the default same-origin data server of the website becomes a replaceable component of the website's architecture. Users of cooperating websites will be able to choose where their data is hosted: on the same origin as the website's source code, or on cross-origin storage, advertised by the user's identity provider. The choice of data server is automatically made on the user's behalf, via machine-readable formats that announce the location of a data server, linked to a user's identity.
 
 	the problem solved by this project;
 	-----------------------------------
