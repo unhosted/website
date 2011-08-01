@@ -25,9 +25,9 @@ function gup( name )
 //set donations progress here:
 var days = 15;
 var michiel = 6000;
-var paypal = 2313.09;
+var paypal = 2216.69;
 var other = 546.08;
-var flattr = 171.34;
+var flattr = 89.55;
 
 function load() {
 
@@ -36,6 +36,7 @@ function load() {
 		
 	} else {
 		document.getElementById("campaign").style.display="block";
+		document.getElementById("arrow").style.display="block";
 	}
 	
 	var total = michiel+paypal+other+flattr;
@@ -49,8 +50,8 @@ function load() {
 		document.getElementById("raised").innerHTML = ""+k+"."+i+"&euro;";
 	}
 	document.getElementById("bar").style.width = "" + (10 + 6.19 * k + 0.00619 * i) + "px";
-	//document.getElementById("daysleft").innerHTML = "" + days + " days left!";
-	//document.getElementById("daysleft").style.background = "url(_/css/img/days/" + days + ".png)";
+	document.getElementById("daysleft").innerHTML = "" + days + " days left!";
+	document.getElementById("daysleft").style.background = "url(_/css/img/days/" + days + ".png)";
 	
 	
 	
@@ -128,14 +129,15 @@ function load() {
 		<div id="logolight"></div>
 		<h1><a href="http://www.unhosted.org">UNHOSTED</a></h1>		
 		<div name="campaign" id="campaign" style="display:none">
-				<h2>The Unhosted donations campaign is paused...</h2>
-				<p><strong>The Unhosted donations campaign is currently paused because we reached the maximum we can receive without doing more paperwork.</strong> We're trying to resolve this as fast as possible.
+				<h2>Help the Unhosted Web Become a Reality!</h2>
+				<p>We are raising <strong>42,000 euros</strong> to pay for <strong>one full-time developer until March 2013.</strong> Donate <strong>one euro</strong> to be included on our <strong>Thanks to</strong> page. Donating <strong>25 euros</strong> entitles you to an <strong>Unhosted T-shirt!</strong>
 				</p>
-				<p>All your donations are safe and <strong>we'll continue the campaign as soon as we can get our limit increased.</strong> See the mailing list (below) for more details. Thanks for your patience!</p>
+				<p>Bank transfer payable to <strong>Unhosted e.V. (BIC: DEUTDEDB110 IBAN: DE08100708480069428100)</strong>, with an email address in the payment subject. Inside Germany, use BLZ 1007010, account 069428100
+				</p>
 				<div id="gauge">
 					<div id='counter'>
 						<h5>We raised</h5>
-						<div id='raised'>8.892&euro;</div>
+						<div id='raised'>9.030&euro;</div>
 						<span>out of 42.000&euro;</span>
 					</div>
 					<div id="meter">
@@ -143,13 +145,20 @@ function load() {
 						<div id="bar"></div>
 					</div>
 				</div>
+				<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+				<input type="hidden" name="cmd" value="_s-xclick">
+				<input type="hidden" name="hosted_button_id" value="5JX4Z9AZLJMJY">
+				<input type="image"  border="0" name="submit" alt=" ">
+				<img alt="" border="0" src="https://www.paypalobjects.com/de_DE/i/scr/pixel.gif" width="1" height="1">
+				</form>
 				
 			</div>
 			<div id="thanks" style="display:none">
 							<h2>Thank you for your kind donation!</h2>
 							<p><strong>Thanks to people like you, the unhosted web is one step closer to becoming a reality.</strong> Your donation will be included next time we update the donations meter.
 							</p>
-							<p><strong>We'll be in touch soon to ask you how you want to appear on the 'Thanks to...' page.</strong>  We also  give out 100 exclusive 'Unhosted Crowd Angel' T-shirts At the end of the T-shirts campaign.
+							<p><strong>We'll be in touch soon to ask you how you want to appear on the 'Thanks to...' page.</strong> We also give out 100 exclusive 'Unhosted Crowd Angel' T-shirts at the end of the T-shirts campaign.
+
 							</p>
 			
 							<span>You make Unhosted!</span>	
@@ -162,7 +171,7 @@ function load() {
 								
 					</div>
 			<div id="tshirts">
-				<!-- <div id="arrow" style="display: none;"></div> -->
+				<div id="arrow" style="display: none;"></div>
 				<div id="top"></div>
 				<div id="daysleft">15 days left!</div>
 				
@@ -177,16 +186,14 @@ function load() {
 
 	<div id="toplight"></div>
 <div class="wrapper"><!-- not needed? up to you: http://camendesign.com/code/developpeurs_sans_frontieres -->
-	
-	<article id="introduction">
-		<center>		
-			<script type="text/javascript" src="http://s3.www.universalsubtitles.org/embed.js">
-			(
-			  {"video_url": "http://www.unhosted.org/video/crowdFunding.ogg"}
-			)
-			</script>
-		</center>
-	</article>
+       <article id="introduction">
+                       <script type="text/javascript" src="http://s3.www.universalsubtitles.org/embed.js">
+                       (
+                         {"video_url": "http://www.unhosted.org/crowdFunding.ogg"}
+                       )
+                       </script>
+       </article>
+       
 	
 	<header>
 		
@@ -198,7 +205,8 @@ function load() {
 		<div id="preload2"></div>
 	</header>
 	
-</div> <!-- END Wrapper -->
+	
+	</div> <!-- END Wrapper -->
 	
 	<footer class="footer">
 		<div class="wrapper">
@@ -241,6 +249,8 @@ function load() {
 				</p>
 				
 				<p><strong>Be sure to check this site and join our mailing list</strong> for the latest on Unhosted development, documentation and other news regarding the project. We want to hear your ideas!
+				</p>
+				<p>Our <strong>Bitcoin address</strong> is 1L53beR311kxpj3UEAScVHEbMEuHJUsK8x
 				</p>
 				<div>You make Unhosted!</div>
 				<a class="FlattrButton" style="display:none;" href="http://www.unhosted.org/"></a>
