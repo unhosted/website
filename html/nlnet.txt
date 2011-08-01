@@ -69,6 +69,8 @@ So far, the project has survived on personal donations from its founders (6000 e
 ----------------
 Proposing a standard is easy. Proposing a good standard can be achieved by using your own standard for a year, and debugging it properly before publishing it. The real risk is not that we don't manage to publish a good standard. It is that nobody uses it, and it ends up on the stack of 'interesting ideas'. So our main risk, and main challenge, is whether we will get the developer experience right. We spend a lot of time thinking about this. See also the next point.
 
+Our technology requires end-users to have a DNS-based identity (with, or without DNSSEC), such as an email address. Right now, most web users have one. But in the unlikely case that Facebook (or some other monopoly) were to convince people to stop owning a DNS-based identity, we would have to rethink our technology to become compatible with that instead.
+
 8. Project results dissemination
 --------------------------------
 The biggest challenge will be to convince web app developers to accept unhosted accounts on the web apps they develop. If we can achieve that, then users and storage providers will follow. A big part of our strategy for this is to integrate with fashionable technologies on the web right now, like node.js, backbone.js, sproutcore, brunchwithcoffee, cloud9ide. We will also continuously request feedback from web app developers. They are the audience we want to disseminate our technology to, and our success will depend largely on creating a fun and productive developer experience for them.
