@@ -1,46 +1,51 @@
 Cross-origin storage for web app persistence
 --------------------------------------------
 
-Project plan.
--------------
+
+1. Project plan
+---------------
 This project aims to change the very architecture of websites on the World Wide Web, so the data server hosting a particular user's data, is separate from the web server hosting the website's source code. That way, the default same-origin data server of the website becomes a replaceable component of the website's architecture. Users of cooperating websites will be able to choose where their data is hosted: on the same origin as the website's source code, or on cross-origin storage, advertised by the user's identity provider. The choice of data server is automatically made on the user's behalf, via machine-readable formats that announce the location of a data server, linked to a user's identity.
 
-	the problem solved by this project;
-	-----------------------------------
-Currently, websites that follow the single-origin client-server architecture, and the 'web 2.0' business model, force us to use a specific data server (theirs) in combination with the web app they offer. If the web app is attractive, then the defence-less user will be convinced to sign abusive Terms of Service for the data server. This exploits a monopoly situation as the only provider of data hosting services that is compatible with a specific web app. Until now, this has package deal has largely gone unnoticed because providers argued that it is necessary for the web app and the data storage to be compatible, and in the same data center. Yet the development of the web towards ever more powerful client-side technology (html5 web storage, appcache, V8, sjcl, mozilla open web apps) makes this argument vacuous, and there is no blocking technical reason anymore why the web server and the data server should not be provided separately. The only data that should be hosted centrally are search indexes, and data that is provided by the app provider rather than by users.
+	1.1 the problem solved by this project
+	--------------------------------------
+	Currently, websites that follow the single-origin client-server architecture, and the 'web 2.0' business model, force us to use a specific data server (theirs) in combination with the web app they offer. If the web app is attractive, then the defence-less user will be convinced to sign abusive Terms of Service for the data server. This exploits a monopoly situation as the only provider of data hosting services that is compatible with a specific web app. Until now, this has package deal has largely gone unnoticed because providers argued that it is necessary for the web app and the data storage to be compatible, and in the same data center. Yet the development of the web towards ever more powerful client-side technology (html5 web storage, appcache, V8, sjcl, mozilla open web apps) makes this argument vacuous, and there is no blocking technical reason anymore why the web server and the data server should not be provided separately. The only data that should be hosted centrally are search indexes, and data that is provided by the app provider rather than by users.
 
-	the relative advantage of the proposed innovation;
-	--------------------------------------------------
-The advantage of our architecture is that it breaks the monopolization of data hosting. A web app that does not allow cross-origin storage, is not allowing free competition between data servers. For each web app, the same-origin data server has an unfair monopoly on the data hosting that is compatible with that specific web app. Our standard for cross-origin data storage allows benevolent websites to start accepting unhosted accounts. We cannot force existing websites to voluntarily give up their lucrative monopolies. But once benevolent websites offer this, the user will have the choice to avoid malignant websites that don't. Choice is what breaks monopolies.
+	1.2 the relative advantage of the proposed innovation
+	-----------------------------------------------------
+	The advantage of our architecture is that it breaks the monopolization of data hosting. A web app that does not allow cross-origin storage, is not allowing free competition between data servers. For each web app, the same-origin data server has an unfair monopoly on the data hosting that is compatible with that specific web app. Our standard for cross-origin data storage allows benevolent websites to start accepting unhosted accounts. We cannot force existing websites to voluntarily give up their lucrative monopolies. But once benevolent websites offer this, the user will have the choice to avoid malignant websites that don't. Choice is what breaks monopolies.
 
 But there's more: Our architecture also lowers the entry threshold for innovative web apps that can act upon existing personal data storage. The monopoly works both ways: first, a web app forces the user to use same-origin data storage, and with use, the user becomes more and more dependent on this data storage. Once this happens, the threshold to move to a different web app will be high, because it will involve exporting and importing all data. If the data had been stored cross-origin from the start, and in open formats like html and odf, then switching to a different app would be instant, and no manual export-save-retrieve-import procedure is required from the user. This significantly lowers the market-entry threshold for providers of innovative web apps.
 
 So allowing cross-origin data storage is good for the fluidity of both the data hosting market and the web app market.
 
-	usability: for whom and to what purpose;
-	----------------------------------------
-Suppose my user address is 'me@data.com', and I log in to 'coolapp.com'. This situation occurs typically on the web as it is now. But now suppose that coolapp.com allows unhosted accounts, and data.com has a compatible storage space linked to it. Then the user will be asked by data.com "allow coolapp.com to store data in your personal data storage?" or even "allow coolapp.com access to your existing photos/documents?". In the first case, the purpose is for the user to build up data in her personal data storage at data.com, where she has more control over it, instead of in the data server that coolapp.com provides, and that is only compatible with their specific web app. In the second case, she has an easier way to start using a new app with her existing data.
+	1.3 usability: for whom and to what purpose
+	-------------------------------------------
+	Suppose my user address is 'me@data.com', and I log in to 'coolapp.com'. This situation occurs typically on the web as it is now. But now suppose that coolapp.com allows unhosted accounts, and data.com has a compatible storage space linked to it. Then the user will be asked by data.com "allow coolapp.com to store data in your personal data storage?" or even "allow coolapp.com access to your existing photos/documents?". In the first case, the purpose is for the user to build up data in her personal data storage at data.com, where she has more control over it, instead of in the data server that coolapp.com provides, and that is only compatible with their specific web app. In the second case, she has an easier way to start using a new app with her existing data.
 
 In this scenario, data.com is the storage provider (SP), and coolapp.com is the relying party (RP). For smooth adoption, we encourage all websites to become both an SP and an RP. This also eliminates the chicken-and-egg problem between SPs and RPs.
 
-	perspectives for further development of this innovation and/or other technologies.
-	----------------------------------------------------------------------------------
-We foresee that this standard, if successful, will become an integral part of the web. It matches very nicely with the move (by both Google and Mozilla) from server-side web technology to client-side web technology ("AJAX"), in products like Chrome Web apps and Chromebook. The possibilities for developing in-browser web apps that are compatible with a generic cross-origin data storage protocol are near-infinite.
+	1.4 perspectives for further development of this innovation and/or other technologies
+	-------------------------------------------------------------------------------------
+	We foresee that this standard, if successful, will become an integral part of the web. It matches very nicely with the move (by both Google and Mozilla) from server-side web technology to client-side web technology ("AJAX"), in products like Chrome Web apps and Chromebook. The possibilities for developing in-browser web apps that are compatible with a generic cross-origin data storage protocol are near-infinite. In particular, decentralizing the web generates business opportunities for new small players who are currently locked out of the monopolies of the closed platforms.
 
-Existing work by others
------------------------
+	1.5 relevance for nlnet's mission
+	---------------------------------
+	The web is an increasingly important part of how we use the internet. It is now more than a web of interconnected content; it replace various types of desktop software (e.g. word processor), and it is even becoming an essential part of how we use other internet protocols (webmail, webchat). But probably even more so than the rest of the internet, the web is under big monopolizing pressure of closed platforms. Our project aims to keep the web decentralized, and guarantee the free exchange of electronic information between both private and commercial end users. In the process, it also helps to open up markets that are currently monopolized by closed platforms, and thus lowers the market entry thresholds for smaller companies.
+
+2. Existing work by others
+--------------------------
 Other projects that seek to decentralize the web often choose a specific target domain. Examples are Diaspora (a candidate replacement for Facebook) and StatusNet (a candidate replacement for Twitter). The problem with these proposals is that if a user chooses to run their own server, they need to install specific software on there for each website they aim to replace, and keep up with updates. If you want to use only free websites, you need to not only install Diaspora as well as StatusNet on your server, but also a calendar app, a word processing app, etcetera. That is not a scalable solution. Our proposal improves on this situation by proposing a generic per-user server at the lowest possible level of functionality. Installed once, it can then be used as a generic file storage, key-value store, or blob storage, anywhere where there is a concept of storing some data and retrieving it later. By operating on a much lower level, our proposal avoids the adoption scale problems that other project sometimes suffer.
 
-Existing work by us
--------------------
+3. Existing work by us
+-----------------------
 We are finishing off the first year of the project, which has been focussed on feasibility study, identifying problem areas, and producing draft versions and demos of our architecture. Our main demo app is https://myfavouritesandwich.org/. Version 0.1 of the data server protocol is on http://unhosted.org/spec/dav/0.1.
 
-Project setup --organizational, technical, eventual partners, dependencies on other projects, licenses, and such;
------------------------------------------------------------------------------------------------------------------
+4. Project setup
+----------------
 We have an active community (IRC channel: ~30 users, mailing list: ~300 subscribers, twitter: ~2400 followers), and our progress is followed by many of the web's important opinion leaders from W3C, Google, Mozilla, etcetera. The project is entirely funded by donations and its goals are entirely non-profit. We aim to research, publish and educate. We publish everything under AGPL for software, and Creative Commons licenses for everything else. The project's assets are organized as Unhosted e.V. (a registered association), which is controlled by its members meeting (a subset of the mailing list subscribers), and managed by a three-member board: Michiel de Jong (president), Javier Diaz (Treasurer), Kenny Bentley. The project currently employs Michiel de Jong as a full-time free-lance contractor, based in Berlin. Much of the expertise he brings to the project, was built up as a scalability engineer at Tuenti (Spain's equivalent of Hyves). http://www.linkedin.com/in/michielbdejong
 
-Project planning --milestones and related results;
---------------------------------------------------
+5. Project planning
+-------------------
 We are requesting funding for the second phase out of three. On 15 September 2011, the first phase will end, and the second phase will start. At this point, we will wrap up and present draft versions of the data server protocol, including two example data server implementations, and one example web app that uses the protocol for its persistent storage. The second phase will take these draft versions as its starting point, and aim to mature them to a live production version. It will span one year, with the following quarterly milestones:
 
 * 15 December 2011: complete necessary simplification of the current draft protocol from webdav to the least common denominator of webdav, couchdb, and camlistore. Deliverable: a quarterly report, including version 0.2 of the protocol.
@@ -50,8 +55,8 @@ We are requesting funding for the second phase out of three. On 15 September 201
 
 After that, the project will continue for another 6 months, to ensure proper dissemination of our results to our target audience, namely web app developers.
 
-Project budgeting;
-------------------
+6. Project budgeting
+--------------------
 So far, the project has survived on personal donations from its founders (6000 euros so far), and crowd funding (3000 euros so far). Now, we need financing to make our draft version production-ready. This will take one year, with 1 FTE financed out of the project, and other people participating in the project for free (in their spare time or as unpaid interns). This year will run from 15 September 2011 to 15 September 2012. The budget is 12x1500 = 18000 euros. This includes:
 
 * 1000 euros/month net 'salary' for 1 FTE
@@ -60,18 +65,18 @@ So far, the project has survived on personal donations from its founders (6000 e
 * 100 euros/month reserved for taxes for 1 FTE and other administrative costs like registry and bank fees
 * 100 euros/month reserved for demo hosting, conference attendance, and miscellaneous costs
 
-Project risks --which risks can be overseen from the start of the project;
---------------------------------------------------------------------------
+7. Project risks
+----------------
 Proposing a standard is easy. Proposing a good standard can be achieved by using your own standard for a year, and debugging it properly before publishing it. The real risk is not that we don't manage to publish a good standard. It is that nobody uses it, and it ends up on the stack of 'interesting ideas'. So our main risk, and main challenge, is whether we will get the developer experience right. We spend a lot of time thinking about this. See also the next point.
 
-Project results dissemination --how the project team is going to disseminate results and to whom, publicity, diffusion of the produced innovation;
---------------------------------------------------------------------------------------------------------------------------------------------------
+8. Project results dissemination
+--------------------------------
 The biggest challenge will be to convince web app developers to accept unhosted accounts on the web apps they develop. If we can achieve that, then users and storage providers will follow. A big part of our strategy for this is to integrate with fashionable technologies on the web right now, like node.js, backbone.js, sproutcore, brunchwithcoffee, cloud9ide. We will also continuously request feedback from web app developers. They are the audience we want to disseminate our technology to, and our success will depend largely on creating a fun and productive developer experience for them.
 
 If we manage to make our product attractive, then telling people about it will be the easy part. We get good media coverage on everything we publish, through tech blogs, twitter, HackerNews, etcetera. We also try to go to conferences and publish videos of conference talks. Also, cross-semination is an explicit strategy to get more visibility. As an example, we are reaching out to projects like OwnCloud, CouchDb, Locker Project and Camlistore to implement compatibility. That converts these projects from merely 'similar/alternative projects' into marketing channels for our architecture and standard, because they can list 'can be used as unhosted storage' in their feature list.
 
-Possibly, follow-ups on the project.
-------------------------------------
+9. Follow-ups on the project
+----------------------------
 After the submission of version 1.0 to a standards body of choice, the project will run another six months, until March 2013. This is not included in the current plan, and finance for that part will be sought through continued crowd funding. That time will be used mainly to ensure a smooth transition of version 1.0 of our standard from us to the standards body in question.
 
 Even though the project (as a dev community) will not cease to exist, there will no longer be a need for a full-time employee. By this point, evangelism to web devs should have reached the point where it is self-perpetuating, and accepting unhosted accounts should be standard practice for user-friendly web apps. Implementation instructions will have become common knowledge among web devs, and the standard will be supported by several code bases on both Storage Provider side and Relying Party side. The project will live on as a part of all these different SP and RP implementations.
