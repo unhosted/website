@@ -69,7 +69,7 @@ So far, the project has survived on personal donations from its founders (6000 e
 ----------------
 	7.1 Adoption
         ------------
-	Proposing a standard is easy. Proposing a good standard can be achieved by using your own standard for a year, and debugging it properly before publishing it. The real risk is not that we don't manage to publish a good standard. It is that nobody uses it, and it ends up on the stack of 'interesting ideas'. So our main risk, and main challenge, is whether we will get the developer experience right. We spend a lot of time thinking about this. See also the next point.
+	Proposing a standard is easy. Proposing a good standard can be achieved by using your own standard for a year, and debugging it properly before publishing it. The real risk is not that we don't manage to publish a good standard. It is that nobody uses it, and it ends up on the stack of 'interesting ideas'. So our main risk, and main challenge, is whether we will get the developer experience right. We spend a lot of time thinking about this (see point 8 below).
 
 	7.2 Identity
 	------------
