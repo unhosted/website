@@ -43,7 +43,7 @@
  	width: 50px; // Haz el calculo sobre 260px para el 100% y luego sumale 10
  	
  }
- 
+ #video{ width: 800px; display: block; margin: 0 auto; text-align: center; }
 #donations{
   height: 544px;
   background: url('./img/headerback.png') repeat-x top center;
@@ -52,7 +52,7 @@
 	top: 0;
 	margin-top: 0;
 }
-
+.mirosubs-videoTab-container{ width:800px; margin:0 auto;}
 #donations h1{
 position: relative;
 margin-top: 0;
