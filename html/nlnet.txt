@@ -73,7 +73,7 @@ So far, the project has survived on personal donations from its founders (6000 e
 
 	7.2 Identity
 	------------
-	Our technology requires end-users to have a DNS-based identity (preferrably with DNSSEC), such as an email address. Right now, most web users have one. But in the unlikely case that Facebook (or some other monopoly) were to convince people to stop owning a DNS-based identity, we would have to rethink our technology to become compatible with that instead.
+	Our technology requires end-users to have a DNS-based identity (preferably with DNSSEC), such as an email address. Right now, most web users have one. But in the unlikely case that Facebook (or some other monopoly) were to convince people to stop owning a DNS-based identity, we would have to rethink our technology to become compatible with that instead.
 
 8. Project results dissemination
 --------------------------------
