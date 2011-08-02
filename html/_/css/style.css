@@ -43,7 +43,11 @@
  	width: 50px; // Haz el calculo sobre 260px para el 100% y luego sumale 10
  	
  }
- #video{ width: 800px; display: block; margin: 0 auto; text-align: center; }
+ #video{ display: block;
+    margin: 0 auto;
+    text-align: center;
+    width: 720px;
+    margin-top: 40px; }
 #donations{
   height: 544px;
   background: url('./img/headerback.png') repeat-x top center;
@@ -51,6 +55,7 @@
 	position: relative;
 	top: 0;
 	margin-top: 0;
+	
 }
 .mirosubs-videoTab-container{ width:800px; margin:0 auto;}
 #donations h1{
@@ -473,3 +478,16 @@ footer{
 		float: right;
 	}
 .clear{ clear: both;}
+
+.mirosubs-widget video {
+    display: block !important;
+    margin: 40px !important;
+    margin-bottom: 0 !important;
+    }
+    
+ div.mirosubs-videoTab-container {
+     display: block;
+     height: 32px !important;
+     margin: 0 40px !important;
+     width: 257px !important;
+     }
