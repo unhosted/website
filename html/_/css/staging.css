@@ -1,0 +1,493 @@
+#toplight{
+	background: url('./img/bodyback.png') top center no-repeat transparent;
+	height: 450px;
+	min-height: 450px;
+	overflow: hidden;
+	width: 200px;
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%; 
+	z-index: -200;
+	}
+.wrapper { 
+		display: block;
+		margin: 0 auto;
+		width: 960px;
+		position: relative;
+		}
+
+
+ /*
+ //  DONATIONS STYLES
+ */ 
+ #daysleft{
+ 	background: url('./img/days/backsoon.png');
+ 	display: block;
+ 	height: 50px;
+ 	width: 210px;
+ 	position: absolute;
+ 	top: 340px;
+ 	left: 110px;
+ 	z-index: -20;
+ 	
+ }
+ 
+ #bar{
+ 	display: block;
+ 	background: url('./img/bar.png') no-repeat left;
+ 	height: 12px;
+ 	top: 6px;
+ 	left: 35px;
+ 	position: relative;
+ 	width: 10px; // Haz el calculo sobre 260px para el 100% y luego sumale 10
+ 	
+ }
+ #video{ display: block;
+    margin: 0 auto;
+    text-align: center;
+    width: 720px;
+    margin-top: 40px; }
+#donations{
+  height: 544px;
+  background: url('./img/headerback.png') repeat-x top center;
+	display: block;
+	position: relative;
+	top: 0;
+	margin-top: 0;
+	
+}
+.mirosubs-videoTab-container{ width:800px; margin:0 auto;}
+#donations h1{
+position: relative;
+margin-top: 0;
+top: 70px;
+background: url('./img/logo.png') no-repeat left top;
+text-indent: -5000px;
+height: 72px;
+width: 220px;
+position: absolute;
+z-index: 2000;
+left: 10px;
+}
+
+#logolight{
+	position: absolute;
+	display: block;
+	width: 500px;
+	height: 400px;
+	top: 0;
+	left: -130px;
+	background: url('./img/logolight.png') no-repeat top left;
+	z-index: 200;
+}
+
+#tshirts{
+	position: relative;
+	top: 110px;
+	text-indent: -5000px;
+	z-index: 1000;
+	padding-left: 10px;
+	width: 390px;
+	left: -30px;
+}
+#tshirts #top{
+	display: block;
+	background: url('./img/tshirt.png') no-repeat left top;
+	position: relative;
+	height: 450px;
+	width: 380px;
+
+	
+}
+	#tshirts #arrow{
+		position: absolute;
+		background: url('./img/arrow.png') no-repeat left top;
+		height: 53px;
+		width: 365px;
+		top: 365px;
+		left: 360px;
+	
+	}
+
+	#campaign, #thanks{
+		color: #a1aab0;
+		display: block;
+		width: 540px;
+		margin-top: 80px;
+		float: right;
+		margin-right: 10px;
+		}
+		#campaign strong,  #thanks strong{
+			color: #eaeaea;
+			font-weight: bold;
+		}
+		#campaign h2,  #thanks h2{
+			color: #b9e768;
+			font-size: 22px;
+			text-shadow: 0px 2px 1px #09151e;
+			background: url('./img/helpruler.png') bottom repeat-x;
+			padding-bottom: 10px;
+						
+		}
+		
+		#thanks h2{
+			color: #f7c231;
+			font-size: 30px;
+			padding-bottom: 15px;
+			text-shadow: 0px 2px 3px #142a37;
+			
+			
+		}
+		
+		#thanks span{
+			font-size: 22px;
+						color: white;
+			display: block;
+			padding-top: 30px;
+		}
+		
+		#thanks .twitter-share-button {
+			display:block; width:168px;height:46px; background:url('./img/tweetthis.png') no-repeat left top;
+			text-indent: -9999px;
+			margin-top:40px;
+			position: relative;
+			top: -75px;
+			float: right}
+		#thanks .twitter-share-button:hover {
+			background:url('./img/tweetthis_hover.png') no-repeat left top;	
+		}
+			#thanks .twitter-share-button:active {
+				background:url('./img/tweetthis_active.png') no-repeat left top;	
+			}
+	#campaign form{
+		display: block;
+		clear: both;
+		float: right;
+		width: 218px;
+		margin-top: 20px;	
+		border: noe;
+	}
+			#campaign form input[type=image]{
+				background: url('./img/paypal.png') no-repeat left top;
+				height: 46px;
+				width: 218px;
+				border: none;
+				display: block;
+				text-indent: -5000px;
+			}
+			#campaign form div{
+				background: url('./img/paypal_disabled.png') no-repeat left top;
+				height: 46px;
+				width: 218px;
+				border: none;
+				display: block;
+				text-indent: -5000px;
+			}
+	#gauge{
+		display: block;
+		width: 540px;
+		height: 105px;
+		background: url('./img/gauge.png') no-repeat left top;
+		margin-top: 33px;
+		margin-bottom: 17px;
+		}
+	#gauge #counter{
+		display: block;
+		float: left;
+		text-align: center;
+		width: 190px;
+		position: relative;
+	}
+	
+		#gauge h5{
+			text-align: center;
+			display: block;
+			text-transform: uppercase;
+			font-size: 13px;
+			color: #dcac1c;
+			margin-bottom: 6px;
+			margin-top: 14px;
+			font-weight: normal;
+		}
+		
+			#meter h5{
+				color: #eaeaea;
+			}
+	#meter{
+		float: left;
+		width: 350px;
+	}
+	#campaign #raised{
+		font-size: 32px;
+		font-weight: bold;
+		color: white;
+		margin-bottom: 6px;
+	}
+		
+/*
+//  HEADER STYLES
+*/
+#preload1, #preload2, #preload3, #preload4{
+	height: 1px;
+	width: 1px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background: url('./img/download_hover.png') top center no-repeat transparent;
+	
+}
+	#preload2{
+		background: url('./img/download_press.png') top center no-repeat transparent;	
+	}
+	
+	#preload3{
+		background: url('./img/tweetthis_hover.png') top center no-repeat transparent;	
+	}
+	#preload4{
+		background: url('./img/tweetthis_active.png') top center no-repeat transparent;	
+	}
+	
+header{
+	display: block;
+	position: relative;
+	height: 370px;
+	width: 100%;
+}
+	header.minimal{
+		height: 100px;
+	}
+		
+	header h1{ 
+		display: block;
+		height: 28px;
+		font-size: 24px;
+		font-weight:bold;
+		text-indent: -5000px;
+		background: url('./img/unhosted.png') no-repeat left top;
+		margin-top: 40px;
+		
+		}
+		
+		header h1 a{ display: block; width: 170px; height: 30px; text-decoration: none; color:inherit;	}
+	header .tagline{ position: relative; width:100%; text-align:center; }
+
+		header .tagline h2{ 
+			display: block;
+			width: 660px;
+			margin: 0 auto;
+			margin-bottom: 24px;
+			margin-top: 90px;
+			background: url('./img/imagine.png') top center
+			no-repeat;
+			height: 50px;
+			min-height: 50px;
+			text-indent: -5000px;
+			}
+			
+			header .tagline a{ color: #404a56; font-weight: bold; text-decoration: none; }
+			header .tagline a:hover{ text-decoration: underline; }
+			
+			
+		header .tagline p{ 
+			display: block; 
+			position: relative; 
+			width: 460px; 
+			margin: 0 auto;
+			text-align: center;
+			color:  #6d757f;
+			font-size: 15px;
+			font-style: italic;
+			text-shadow: 0px 1px 0px #fff;
+			}
+			
+			header .tagline p strong{
+				display: block;
+				color: #172535;
+				font-size: 18px;
+				margin-top: 10px; 
+			}
+			
+			header #downloadholder{
+				background: url('./img/downloadholder.png') no-repeat top center; 
+				display: block;
+				margin: 0 auto;
+				width: 600px;
+				height: 100px;
+			}
+			header #downloadholder a{
+				background: url('./img/download.png') top center no-repeat transparent;
+				display: block;
+				margin: 0 auto;
+				height: 80px;
+				width: 321px;
+				text-indent: -5000px;
+				cursor: pointer;
+				margin-top: 55px;
+				}
+				header #downloadholder a:hover{
+					background: url('./img/download_hover.png') top center no-repeat transparent;
+					}
+				header #downloadholder a:active{
+					background: url('./img/download_press.png') top center no-repeat transparent;
+					}
+			
+
+/*
+// INTRO STYLES
+*/
+
+		#introduction .column{
+			position: relative;
+			display: block;
+			float: left;
+			width: 280px;
+			margin: 0 10px;
+			padding: 0 10px;
+			margin-bottom: 40px;
+		}
+			#introduction .column#evolution{
+				background: url(./img/dna.png) no-repeat top center;
+			}
+			#introduction .column#data{
+				background: url(./img/data.png) no-repeat top center;
+			}
+			#introduction .column#solution{
+				background: url(./img/island.png) no-repeat top center;
+			}
+		
+			#introduction .column h3{
+				font-size: 16px;
+				font-weight: bold;
+				line-height: 22px;
+				margin-bottom: 22px;
+				margin-top: 260px;
+			}
+			
+
+/*
+// webDAV
+*/
+	#webDAV{
+		padding-left: 20px;
+		padding-right: 20px;
+	}
+		#webDAV ul.index{
+			list-style: disc;
+		}
+		#webDAV h3{
+			margin-top: 46px;
+		}			
+/*
+//FOOTER
+*/
+
+footer{
+	background: url('./img/footerback.png') repeat-x left top;
+	width: 100%;
+	margin: 0;
+	position: relative;
+	width: 100%;
+	display: block;
+	position: relative;
+	clear: both;
+	margin-top: 100px;
+	}
+	
+	footer .links{
+		display: block;
+		float: left;
+		margin-left: 20px;
+		margin-right: 20px;
+		margin-top: 24px;
+		width: 100px;
+		
+	}
+		footer .links h3{
+			font-size: 16px;
+			color: #74858f;
+			font-weight: normal;
+			border-bottom: 1px solid #314855;
+			text-shadow: 0px -1px 0px #0e1a22;
+			margin-bottom: 0px;
+			padding-bottom: 10px;
+		}
+	footer ul{
+		padding-left: 0;
+		font-size: 13px;
+		float: left;
+		margin-top: 10px;
+		
+	}
+		footer ul li a{
+			color: white;
+			font-weight: bold;
+			font-size: 12px;
+			text-shadow: 0px -1px 0px #09151e;
+			text-decoration: none;
+		}
+			
+				footer ul li a:hover{
+					text-decoration: underline;
+				}
+				
+		footer #community{
+			display: block;
+			float:right ;
+			background: #112632;
+			position: relative;
+			width: 500px;
+			color: #95a2aa;
+			padding: 10px 20px 20px 20px;
+			margin-top: 40px;
+			margin-bottom: 40px;
+			-moz-border-radius: 5px;
+			-webkit-border-radius: 5px;
+			border-radius: 5px;
+		}
+			footer #community p{
+				line-height: 23px;
+				padding: 0;
+				
+			}
+			
+				footer #community p strong{
+					color: white;
+					font-weight: normal;
+					font-size: 13px;
+				}
+				footer #community div{
+					position: absolute;
+					background: url('./img/youmake.png') no-repeat right bottom transparent;
+					right: 95px;
+					bottom: 33px;
+					width: 240px;
+					height: 120px;
+					text-indent: -5000px;
+					
+				}
+	#credits{
+		background: #10212b;
+		text-align: right;
+		padding: 10px 0;
+		color: #627784;
+	}
+		#credits a{color: white; text-decoration:none;}
+	.FlattrButton{
+		position: relative;
+		float: right;
+	}
+.clear{ clear: both;}
+
+.mirosubs-widget video {
+    display: block !important;
+    margin: 40px !important;
+    margin-bottom: 0 !important;
+    }
+    
+ div.mirosubs-videoTab-container {
+     display: block;
+     height: 32px !important;
+     margin: 0 40px !important;
+     width: 257px !important;
+     }
