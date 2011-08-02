@@ -33,6 +33,8 @@ function load() {
 
 	if(gup("show") == "thanks") {
 		document.getElementById("thanks").style.display="block";
+		document.getElementById("campaign").style.display="none";
+		document.getElementById("arrow").style.display="none";
 		
 	} else {
 		document.getElementById("campaign").style.display="block";
@@ -52,6 +54,8 @@ function load() {
 	document.getElementById("bar").style.width = "" + (10 + 6.19 * k + 0.00619 * i) + "px";
 	document.getElementById("daysleft").innerHTML = "" + days + " days left!";
 	document.getElementById("daysleft").style.background = "url(_/css/img/days/" + days + ".png)";
+	document.getElementById("daysleft").style.display = "block";
+	document.getElementById("raised").style.display = "block";
 	
 	
 	
@@ -128,16 +132,16 @@ function load() {
 	<div class="wrapper">
 		<div id="logolight"></div>
 		<h1><a href="http://www.unhosted.org">UNHOSTED</a></h1>		
-		<div name="campaign" id="campaign" style="display:none">
+		<div name="campaign" id="campaign" style="display:block">
 				<h2>Help the Unhosted Web Become a Reality!</h2>
-				<p>We are raising <strong>42,000 euros</strong> to pay for <strong>one full-time developer until March 2013.</strong> Donate <strong>one euro</strong> to be included on our <strong>Thanks to</strong> page. Donating <strong>25 euros</strong> entitles you to an <strong>Unhosted T-shirt!</strong>
+				<p>We are raising 42,000 euros to pay for <strong>one full-time developer until March 2013.</strong> Donate one euro or more to be included on our <strong>Thanks to</strong> page. Donating 25 euros entitles you to an <strong>Unhosted T-shirt!</strong>
 				</p>
-				<p>Bank transfer payable to <strong>Unhosted e.V. (IBAN: DE08100708480069428100, BIC/Swift: DEUTDEDB110)</strong>, with an email address in the payment subject. Inside Germany, use BLZ 1007010, account 069428100
+				<p>Please make bank transfer (with an email address in the payment subject) payable to: <span style="display:block;"><strong>Unhosted e.V.</strong>, BIC (Swift): <strong>DEUTDEDB110</strong>, IBAN: <strong>DE08100708480069428100</strong>.</span> Inside Germany, use Unhosted e.V., BLZ: 1007010, KTN: 069428100
 				</p>
 				<div id="gauge">
 					<div id='counter'>
 						<h5>We raised</h5>
-						<div id='raised'>9.030&euro;</div>
+						<div id='raised' style="display: none">9.030&euro;</div>
 						<span>out of 42.000&euro;</span>
 					</div>
 					<div id="meter">
@@ -171,9 +175,9 @@ function load() {
 								
 					</div>
 			<div id="tshirts">
-				<div id="arrow" style="display: none;"></div>
+				<div id="arrow" style="display: block;"></div>
 				<div id="top"></div>
-				<div id="daysleft">15 days left!</div>
+				<div id="daysleft" style="display: none">15 days left!</div>
 				
 			</div>
 		

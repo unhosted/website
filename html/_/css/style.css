@@ -40,7 +40,7 @@
  	top: 6px;
  	left: 35px;
  	position: relative;
- 	width: 50px; // Haz el calculo sobre 260px para el 100% y luego sumale 10
+ 	width: 10px; // Haz el calculo sobre 260px para el 100% y luego sumale 10
  	
  }
  #video{ display: block;
