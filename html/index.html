@@ -9,6 +9,21 @@
 
 <head id="www-unhosted-org" data-template-set="html5-reset">
 <script>
+//IE6 trap:
+function ie6goAway() {
+  if (navigator.appName == 'Microsoft Internet Explorer') {
+    var ua = navigator.userAgent;
+    var re  = new RegExp("MSIE ([0-9]{1,}[\.0-9]{0,})");
+    if (re.exec(ua) != null) {
+      rv = parseFloat( RegExp.$1 );
+      if(rv < 7) {
+        alert('Please view this website with a better browser, like Firefox');
+	window.location = 'http://getfirefox.com/';
+      }
+    }
+  }
+}
+
 //functions
 function gup( name )
 {
@@ -25,12 +40,12 @@ function gup( name )
 //set donations progress here:
 var days = 15;
 var michiel = 6000;
-var paypal = 2216.69;
+var paypal = 2394.69;
 var other = 546.08;
 var flattr = 89.55;
 
 function load() {
-
+	ie6goAway();
 	if(gup("show") == "thanks") {
 		document.getElementById("thanks").style.display="block";
 		document.getElementById("campaign").style.display="none";
