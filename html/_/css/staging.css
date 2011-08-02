@@ -46,8 +46,9 @@
  #video{ display: block;
     margin: 0 auto;
     text-align: center;
-    width: 720px;
-    margin-top: 40px; }
+    width: 480px;
+    margin-top: 40px;
+}
 #donations{
   height: 544px;
   background: url('./img/headerback.png') repeat-x top center;
