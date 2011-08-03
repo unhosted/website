@@ -40,12 +40,11 @@ function gup( name )
 //set donations progress here:
 var days = 15;
 var michiel = 6000;
-var paypal = 2394.69;
+var paypal = 2432.41;
 var other = 546.08;
-var flattr = 89.55;
+var flattr = 171.34;
 
-function load() {
-	ie6goAway();
+function onLoadHeader() {
 	if(gup("show") == "thanks") {
 		document.getElementById("thanks").style.display="block";
 		document.getElementById("campaign").style.display="none";
@@ -71,10 +70,12 @@ function load() {
 	document.getElementById("daysleft").style.background = "url(_/css/img/days/" + days + ".png)";
 	document.getElementById("daysleft").style.display = "block";
 	document.getElementById("raised").style.display = "block";
-	
-	
-	
 }
+
+function onLoadAll() {
+	ie6goAway();
+}
+
 </script>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<meta charset="utf-8">
@@ -142,7 +143,7 @@ function load() {
 	</script>
 </head>
 
-<body onload="load();">
+<body onload="onLoadAll();">
 <div id="donations">
 	<div class="wrapper">
 		<div id="logolight"></div>
@@ -202,6 +203,7 @@ function load() {
 		
 			
 </div>
+<script>onLoadHeader();</script>
 
 	<div id="toplight"></div>
 <div class="wrapper"><!-- not needed? up to you: http://camendesign.com/code/developpeurs_sans_frontieres -->
