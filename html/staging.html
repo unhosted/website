@@ -40,12 +40,11 @@ function gup( name )
 //set donations progress here:
 var days = 15;
 var michiel = 6000;
-var paypal = 2394.69;
+var paypal = 2432.41;
 var other = 546.08;
-var flattr = 89.55;
+var flattr = 171.34;
 
-function load() {
-	ie6goAway();
+function onLoadHeader() {
 	if(gup("show") == "thanks") {
 		document.getElementById("thanks").style.display="block";
 		document.getElementById("campaign").style.display="none";
@@ -71,10 +70,12 @@ function load() {
 	document.getElementById("daysleft").style.background = "url(_/css/img/days/" + days + ".png)";
 	document.getElementById("daysleft").style.display = "block";
 	document.getElementById("raised").style.display = "block";
-	
-	
-	
 }
+
+function onLoadAll() {
+	ie6goAway();
+}
+
 </script>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<meta charset="utf-8">
@@ -125,7 +126,7 @@ function load() {
 	
 	<!-- CSS: screen, mobile & print are all in the same file -->
 	<link rel="stylesheet" href="_/css/reset.css">
-	<link rel="stylesheet" href="_/css/staging.css">
+	<link rel="stylesheet" href="_/css/style.css">
 	
 	<!-- all our JS is at the bottom of the page, except for Modernizr. -->
 	<script src="_/js/modernizr-1.7.min.js"></script>
@@ -142,7 +143,7 @@ function load() {
 	</script>
 </head>
 
-<body onload="load();">
+<body onload="onLoadAll();">
 <div id="donations">
 	<div class="wrapper">
 		<div id="logolight"></div>
@@ -202,6 +203,7 @@ function load() {
 		
 			
 </div>
+<script>onLoadHeader();</script>
 
 	<div id="toplight"></div>
 <div class="wrapper"><!-- not needed? up to you: http://camendesign.com/code/developpeurs_sans_frontieres -->
@@ -286,7 +288,7 @@ function load() {
 				<ul>
 					
 					<li><a href="http://blogs.fsfe.org/fellowship-interviews/?p=299" target="_blank">FSFE</a>
-							<a href="http://framapad.org/unhosted-fsfe" target="_blank">(Tr: FR)</a></li>
+							<a href=" http://www.framalang.org/wiki/Projet_Unhosted_-_entretient_de_Michiel_de_Jong_avec_la_FSFE/ToShare" target="_blank">(Tr: FR)</a></li>
 					<li><a href="http://www.readwriteweb.com/cloud/2010/12/unhosted.php" target="_blank">Read Write Web</a></li>
 					<li><a href="http://www.h-online.com/open/features/Lessons-from-WikiLeaks-decentralize-decentralize-decentralize-1153977.html" target="_blank">The H online</a></li>
 					<li><a href="http://lwn.net/Articles/423902/" target="_blank">Linux Weekly</a></li>
