@@ -12,29 +12,45 @@ header, footer, aside, nav, article {
 body {
 	margin: 0 auto;
 	width: 940px;
-	font: 13px/22px Helvetica, Arial, sans-serif;
 	background: #808080;
+	font-family: 'Arial black','Arial', San-serif;
+	text-align: justify;
+}
+
+a:link {
+	color:#000000;
+}
+
+a:visited {
+	color:#000000;
 }
 
 h2 {
 	font-size: 28px;
 	line-height: 44px;
-	padding: 22px 0;
 }
 
-h3 {
-	font-size: 18px;
-	line-height: 22px;
-	padding: 11px 0;
+#names {
+	width: 920px;
+	padding-left:10px;
+	padding-right:10px;
 }
 
-p {
-	padding-bottom: 22px;
+#textBelow {
+	padding-top: 0px;
+	padding-bottom: 44px;
 }
+
 span {
 	margin: 10px;
 	padding: 10px;  
 	line-height: 60px;
 	background: #f0f0f0;
 	border-radius: 15px;
+	font-family: Gill Sans, Verdana;
+	font-size: 11px;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	font-weight: bold;
+	text-align: center;
 }
