@@ -1,0 +1,65 @@
+/* Makeshift CSS Reset */
+{
+	margin: 0;
+	padding: 0;
+}
+
+/* Tell the browser to render HTML 5 elements as block */
+header, footer, aside, nav, article {
+	display: block;
+}
+
+body {
+	margin: 0 auto;
+	width: 940px;
+	background: #c0c0c0;
+	font-family: 'Arial black','Arial', San-serif;
+	text-align: justify;
+}
+
+a:link {
+	color:#000000;
+}
+
+a:visited {
+	color:#000000;
+}
+
+h2 {
+	font-size: 28px;
+	line-height: 44px;
+	text-shadow:0px 0.5px 4.5px white;
+}
+
+#names {
+	width: 920px;
+	padding-left:10px;
+	padding-right:10px;
+	text-shadow:0px 0.5px 4.5px white;
+}
+
+#textBelow {
+	padding-top: 0px;
+	padding-bottom: 44px;
+	text-shadow:0px 0.5px 4.5px white;
+}
+
+span {
+	a:link {
+		color:#000000;
+	}
+	a:visited {
+		color:#000000;
+	}
+	margin: 10px;
+	padding: 10px;  
+	line-height: 60px;
+	background: #ffc0ff;
+	color: black;
+	border-radius: 15px;
+	font-family: Gill Sans, Verdana;
+	font-size: 11px;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	font-weight: bold;
+}
