@@ -46,10 +46,12 @@ h2 {
 
 
 #names {
+	clear: both;
 	width: 850px;
 	padding-left:40px;
 	padding-right:10px;
 	text-shadow:0px 0.5px 4.5px white;
+	display: block;
 	margin-bottom: 80px;
 	margin-top: 40px;
 	
@@ -68,10 +70,10 @@ h2 {
 span {
 	margin: 10px;
 	padding: 0px; 
-	display:block;
-
+	display:compact;
+	display: ;
 	line-height: 30px;
-	background: #e7d99f;
+	background: #f1e3a9;
 	color: black;
 	border-radius: 15px;
 	font-family: georgia;
