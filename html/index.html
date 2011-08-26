@@ -1,333 +1,81 @@
 <!doctype html>
-
-<!--[if lt IE 7 ]> <html class="ie ie6 no-js" lang="en"> <![endif]-->
-<!--[if IE 7 ]>    <html class="ie ie7 no-js" lang="en"> <![endif]-->
-<!--[if IE 8 ]>    <html class="ie ie8 no-js" lang="en"> <![endif]-->
-<!--[if IE 9 ]>    <html class="ie ie9 no-js" lang="en"> <![endif]-->
-<!--[if gt IE 9]><!--><html class="no-js" lang="en"><!--<![endif]-->
-<!-- the "no-js" class is for Modernizr. -->
-
-<head id="www-unhosted-org" data-template-set="html5-reset">
-<script>
-//IE6 trap:
-function ie6goAway() {
-  if (navigator.appName == 'Microsoft Internet Explorer') {
-    var ua = navigator.userAgent;
-    var re  = new RegExp("MSIE ([0-9]{1,}[\.0-9]{0,})");
-    if (re.exec(ua) != null) {
-      rv = parseFloat( RegExp.$1 );
-      if(rv < 7) {
-        alert('Please view this website with a better browser, like Firefox');
-	window.location = 'http://getfirefox.com/';
-      }
-    }
-  }
-}
-
-//functions
-function gup( name )
-{
-  name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
-  var regexS = "[\\?&]"+name+"=([^&#]*)";
-  var regex = new RegExp( regexS );
-  var results = regex.exec( window.location.href );
-  if( results == null )
-    return "";
-  else
-    return results[1];
-}
-
-//set donations progress here:
-var days = 1;
-var michiel = 6000;
-var paypal = 4077.80;
-var bank = 410.03;
-var flattr = 195.31;
-var other = 540+10+10+20;
-//total: 11263.14
-
-function onLoadHeader() {
-	if(gup("show") == "thanks") {
-		document.getElementById("thanks").style.display="block";
-		document.getElementById("campaign").style.display="none";
-		document.getElementById("arrow").style.display="none";
-		
-	} else {
-		document.getElementById("campaign").style.display="block";
-		document.getElementById("arrow").style.display="block";
-	}
-	
-	var total = michiel+paypal+bank+flattr+other;
-	var k = Math.floor(total/1000);
-	var i = Math.floor(total-k*1000);
-	if(i<10) {
-		document.getElementById("raised").innerHTML = ""+k+".00"+i+"&euro;";
-	} else if(i<100) {
-		document.getElementById("raised").innerHTML = ""+k+".0"+i+"&euro;";
-	} else {
-		document.getElementById("raised").innerHTML = ""+k+"."+i+"&euro;";
-	}
-	document.getElementById("bar").style.width = "" + (10 + 6.19 * k + 0.00619 * i) + "px";
-	document.getElementById("daysleft").innerHTML = "" + days + " days left!";
-	document.getElementById("daysleft").style.background = "url(_/css/img/days/" + days + ".png)";
-	document.getElementById("daysleft").style.display = "block";
-	document.getElementById("raised").style.display = "block";
-}
-
-function onLoadAll() {
-	ie6goAway();
-}
-
-</script>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<meta charset="utf-8">
-	
-	<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame -->
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	
-	<title>Unhosted - Imagine personal data freedom...</title>
-	
-	<meta name="title" content="Unhosted - Imagine personal data freedom...">
-	<meta name="description" content="Unhosted is an open web standard for decentralizing user data. On the unhosted web, data is stored per-user, under the user's control. 
-	That's where it belongs.">
-	<!-- Google will often use this as its description of your page/site. Make it good. -->
-	
-	<meta name="google-site-verification" content="">
-	<!-- Speaking of Google, don't forget to set your site up: http://google.com/webmasters -->
-	
-	<meta name="author" content="edokoa">
-	<meta name="Copyright" content="Unhosted 2011. Licensed under CC-.">
-
-	<!-- Dublin Core Metadata : http://dublincore.org/ -->
-	<meta name="DC.title" content="Unhosted">
-	<meta name="DC.subject" content="Unhosted is an open web standard for decentralizing user data. On the unhosted web, data is stored per-user, under the user's control. 
-	That's where it belongs.">
-	<meta name="DC.creator" content="edokoa">
-	
-	<!--  Mobile Viewport Fix
-	j.mp/mobileviewport & davidbcalhoun.com/2010/viewport-metatag 
-	device-width : Occupy full width of the screen in its current orientation
-	initial-scale = 1.0 retains dimensions instead of zooming out if page height > device height
-	maximum-scale = 1.0 retains dimensions instead of zooming in if page width < device width
-	-->
-	<!-- Uncomment to use Ñ use thoughtfully!
-	<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
-	-->
-
-	<link rel="shortcut icon" href="_/img/favicon.ico">
-	<!-- This is the traditional favicon.
-		 - size: 16x16 or 32x32
-		 - transparency is OK
-		 - see wikipedia for info on browser support: http://mky.be/favicon/ -->
-		 
-	<link rel="apple-touch-icon" href="_/img/apple-touch-icon.png">
-	<!-- The is the icon for iOS's Web Clip.
-		 - size: 57x57 for older iPhones, 72x72 for iPads, 114x114 for iPhone4's retina display (IMHO, just go ahead and use the biggest one)
-		 - To prevent iOS from applying its styles to the icon name it thusly: apple-touch-icon-precomposed.png
-		 - Transparency is not recommended (iOS will put a black BG behind the icon) -->
-	
-	<!-- CSS: screen, mobile & print are all in the same file -->
-	<link rel="stylesheet" href="_/css/reset.css">
-	<link rel="stylesheet" href="_/css/style.css">
-	
-	<!-- all our JS is at the bottom of the page, except for Modernizr. -->
-	<script src="_/js/modernizr-1.7.min.js"></script>
-	<script type="text/javascript">
-	/* <![CDATA[ */
-	    (function() {
-	        var s = document.createElement('script'), t = document.getElementsByTagName('script')[0];
-	        s.type = 'text/javascript';
-	        s.async = true;
-	        s.src = 'http://api.flattr.com/js/0.6/load.js?mode=auto';
-	        t.parentNode.insertBefore(s, t);
-	    })();
-	/* ]]> */
-	</script>
+<html>
+<head>
+ <title>Unhosted - making plans for the second year...</title>
+ <link rel="stylesheet" href="thanks.css" type="text/css" media="screen" />
+ <script type="text/javascript" src="http://use.typekit.com/iek6tvp.js"></script>
+ <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 </head>
+<body>
+<section id="thanks">
+<header>
+<h2>Thank you</h2>
+<section id="intro">
+<p>
+The web is not as open as it used to be: big monopoly platforms have formed new proprietary layers on top of it. But with your help, we will fix this. We are creating a better architecture for the web. We break the "you get our app, we get your data" package deal with a cross-origin data storage protocol, separating data servers from webservers.
+</p>
+<p>
+To know more, subscribe to, or browse through our <strong><a href="http://groups.google.com/group/unhosted">mailing list</a></strong>. We'll put some more info on here on 9 September 2011, which is our project's first birthday. And because you only turn one once, and in the spirit of the "digital nomad" dream, the party plan will be decentralized from Berlin to <strong><a href="http://www.webcams.travel/webcam/1299307479-Weather-Unho%C5%A1%C5%A5-Unho%C5%A1%C5%A5">a village in Central Bohemia</a></strong>.
+</p>
+</section>
 
-<body onload="onLoadAll();">
-<div id="donations" style="display:none">
-	<div class="wrapper">
-		<div id="logolight"></div>
-		<h1><a href="http://www.unhosted.org">UNHOSTED</a></h1>		
-		<div name="campaign" id="campaign" style="display:block">
-				<h2>Help the Unhosted Web Become a Reality!</h2>
-				<p>We are raising 42,000 euros to pay for <strong>one full-time developer until March 2013.</strong> Donate one euro or more to be included on our <strong>Thanks to</strong> page. Donating 25 euros entitles you to an <strong>Unhosted T-shirt!</strong>
-				</p>
-				<p>Please make bank transfer (with an email address in the payment subject) payable to: <span style="display:block;"><strong>Unhosted e.V.</strong>, BIC (Swift): <strong>DEUTDEDB110</strong>, IBAN: <strong>DE08100708480069428100</strong>.</span> Inside Germany, use Unhosted e.V., BLZ: 10070848, KTN: 069428100
-				</p>
-				<div id="gauge">
-					<div id='counter'>
-						<h5>We raised</h5>
-						<div id='raised' style="display: none">9.030&euro;</div>
-						<span>out of 42.000&euro;</span>
-					</div>
-					<div id="meter">
-						<h5>Current donation status</h5>
-						<div id="bar"></div>
-					</div>
-				</div>
-				<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
-				<input type="hidden" name="cmd" value="_s-xclick">
-				<input type="hidden" name="hosted_button_id" value="5JX4Z9AZLJMJY">
-				<input type="image"  border="0" name="submit" alt=" ">
-				<img alt="" border="0" src="https://www.paypalobjects.com/de_DE/i/scr/pixel.gif" width="1" height="1">
-				</form>
-				
-			</div>
-			<div id="thanks" style="display:none">
-							<h2>Thank you for your kind donation!</h2>
-							<p><strong>Thanks to people like you, the unhosted web is one step closer to becoming a reality.</strong> Your donation will be included next time we update the donations meter.
-							</p>
-							<p><strong>We'll be in touch soon to ask you how you want to appear on the 'Thanks to...' page.</strong> We also give out 100 exclusive 'Unhosted Crowd Angel' T-shirts at the end of the T-shirts campaign.
-
-							</p>
-			
-							<span>You make Unhosted!</span>	
-								<div id="preload3"></div>
-								<div id="preload4"></div>
-							    <a href="http://twitter.com/share?url=http://unhosted.org&text=I just helped making the web a better place by donating to @unhosted!"
-							       class="twitter-share-button" target="_blank"
-							       >Tweet</a>								
-					</div>
-			<div id="tshirts">
-				<div id="arrow" style="display: block;"></div>
-				<div id="top"></div>
-				<div id="daysleft" style="display: none">15 days left!</div>
-				
-			</div>
-		
-
-		
-	</div>	
-		
-			
+</header>
+<div class="clear"></div>
+<div id="names">
+<span>Adam&nbsp;Schepsis,&nbsp;<a href="http://twitter.com/#!/aschepsis">@aschepsis</a></span>
+<span>Alexandre&nbsp;Monnin,&nbsp;<a href="http://twitter.com/#!/aamonnz">@aamonnz</a></span>
+<span>Alex&nbsp;Eiras</span>
+<span>Alvaro&nbsp;Rodriguez&nbsp;Dominguez</span>
+<span>Andrew&nbsp;Miller</span>
+<span>Andy&nbsp;Isaacson</span>
+<span>Ayesha&nbsp;Garrett</span>
+<span>athinkingmeat</span>
+<span>BitCartel,&nbsp;<a href="http://www.bitcartel.com/">bitcartel.com</a></span>
+<span>Benjamin&nbsp;Fourio,&nbsp;<a href="http://twitter.com/#!/orfaz">@orfaz</a></span>
+<span><a href="http://twitter.com/#!/cesarob">@cesarob</a></span>
+<span><a href="http://identi.ca/charlesschulz">@charlesschulz</a>@identi.ca</span>
+<span>Christophe&nbsp;Drevet</span>
+<span><a href="http://identi.ca/clacke">@clacke</a>@identi.ca</span>
+<span><a href="http://twitter.com/#!/coeibu">@coeibu</a></span>
+<span><a href="http://crisp.se/">crisp.se</a></span>
+<span>Daniel&nbsp;Fahlke,&nbsp;<a href="http://flyingmana.de">flyingmana.de</a>,&nbsp;<a href="http://twitter.com/#!/flyingmana">@Flyingmana</a></span>
+<span>Daniel&nbsp;Mota</span>
+<span>Daniel&nbsp;Ripoll&eacute;s,&nbsp;<a href="http://twitter.com/#!/leidan">@leidan</a></span>
+<span>Dietrich&nbsp;Ayala,&nbsp;<a href="http://identi.ca/dietrich">@dietrich</a>@identi.ca</span>
+<span><a href="http://twitter.com/#!/edokoa">@edokoa</a>,&nbsp;<a href="http://edokoa.com">edokoa.com</a></span>
+<span><a href="http://twitter.com/#!/edwincheese">@edwincheese</a></span>
+<span><a href="http://twitter.com/#!/epilepticrabbit">@epilepticrabbit</a></span>
+<span>Frederic&nbsp;Caufriez</span>
+<span>Hans&nbsp;de&nbsp;Zwart,&nbsp;<a href="http://hdez.nl/blog">hdez.nl/blog</a></span>
+<span><a href="http://twitter.com/#!/hex29a">@hex29a</a></span>
+<span><a href="http://twitter.com/#!/hanshuebner">@HansHuebner</a></span>
+<span><a href="http://twitter.com/#!/hariseldon78">@hariseldon78</a></span>
+<span>Lockify,&nbsp;<a href="http://lockify.com">lockify.com</a></span>
+<span><a href="http://twitter.com/#!/louisebolotin">@louisebolotin</a></span>
+<span>Lucas,&nbsp;<a href="http://twitter.com/#!/eyefox42">@eyefox42</a></span>
+<span>Marc&nbsp;Laporte</span>
+<span>Martin&nbsp;Stadler</span>
+<span>Markus&nbsp;Schiegl</span>
+<span>mich_unhosted</span>
+<span>olav_2</span>
+<span>Oluf&nbsp;"Finkregh"&nbsp;Lorenzen</span>
+<span>Pablo&nbsp;L&oacute;pez&nbsp;Torres</span>
+<span>Parker&nbsp;Higgins</span>
+<span>Saul&nbsp;Albert</span>
+<span>Pierre&nbsp;Chapuis,&nbsp;<a href="http://catwell.info">catwell.info</a></span>
+<span>Rolf&nbsp;Timmermans,&nbsp;<a href="http://twitter.com/#!/molfie">@molfie</a></span>
+<span>Silvio&nbsp;Porcellana,&nbsp;<a href="http://mob.is.it">mob.is.it</a></span>
+<span>Pierros&nbsp;Papadeas,&nbsp;<a href="http://identi.ca/ppapadeas">@ppapadeas</a>@identi.ca</span>
+<span><a href="http://identi.ca/sindikat">@sindikat</a>@identi.ca</span>
+<span><a href="http://twitter.com/#!/stgpetrovic">@stgpetrovic</a></span>
+<span>Thomas&nbsp;Kahle</span>
+<span>Thad&nbsp;Guidry&nbsp;Sr.,&nbsp;<a href="http://www.freebase.com/view/en/thad_guidry">freebase.com/view/en/thad_guidry</a></span>
+<span>Timon&nbsp;Reinhard</span>
+<span>ww</span>
+<span>and&nbsp;many&nbsp;more...</span>
 </div>
-<script>onLoadHeader();</script>
-
-	<div id="toplight"></div>
-<div class="wrapper"><!-- not needed? up to you: http://camendesign.com/code/developpeurs_sans_frontieres -->
-       <article id="video" style="display:none">
-		<script type="text/javascript-DISABLED" src="http://s3.www.universalsubtitles.org/embed.js">
-		(
-		  {"base_state": {}, "video_url": "http://vimeo.com/27187557"}
-		)
-		</script>
-       </article>
-       
-	
-	<header>
-		
-		<div class="tagline">
-			<h2>Imagine personal data freedom...</h2>
-			<p>Unhosted is an <a href="http://www.unhosted.org/spec/dav/0.1/index.html">open web standard</a> for decentralizing user data. On the unhosted web, data is stored per-user, wherever the user decides.<em><strong>That's where it belongs.</strong></em></p>
-		</div>
-		<div id="preload1"></div>
-		<div id="preload2"></div>
-                <div id="downloadholder">
-                       <a href="https://github.com/unhosted/unhosted/tarball/master">Download Unhosted SDK alpha</a>-
-                </div>
-
-
-	</header>
-	<article id="introduction">
-		
-		<div class="column" id="evolution">
-			<h3>The web is evolving</h3>
-			<p>
-				In the last few years, the web has slowly changed from just being a source of information to something entirely different.
-			</p>
-			<p>
-				Today, the web is a place where you can share your thoughts, your experiences and your life with other people; a place to keep things that are important to you.
-			</p>
-		</div>
-		<div class="column" id="data">
-			<h3>What happens to your data?</h3>
-			<p>
-				Whenever you post content to the web (images, text, video, music...), it is  kept on the servers of that particular application.
-				
-			</p>
-			<p>
-				This means that your online data is stored in centralized servers belonging to various companies, meaning it's not really yours any more.
-			</p>
-		</div>
-		<div class="column" id="solution">
-			<h3>Bringing data back to the people</h3>
-			<p>
-				What if there were a way, that not only ensures security, freedom and control over your data, but also provides a better experience for both users and developers while resolving some of the other issues of the current web architecture?
-			</p>
-			<p>
-				<strong>This is where Unhosted kicks in...</strong>
-			</p>
-		</div>
-		
-		
-			
-	</article>
-	
-	
-	</div> <!-- END Wrapper -->
-	
-	<footer class="footer">
-		<div class="wrapper">
-			<div class="links">
-				<h3>Community</h3>
-				<ul>
-					<li><a href="http://groups.google.com/group/unhosted" target="_blank">Mailing list</a></li>
-					<li><a href="http://github.com/unhosted/unhosted/" target="_blank">Github</a></li>
-					<li><a href="https://github.com/unhosted/unhosted/wiki/" target="_blank">Wiki</a></li>
-					<li><a href="http://webchat.freenode.net/?channels=unhosted" target="_blank">IRC</a></li>	
-					
-				</ul>
-				
-				<div class="clear"></div>
-			</div>
-			
-			<div class="links">
-				<h3>Articles</h3>
-				<ul>
-					
-					<li><a href="http://blogs.fsfe.org/fellowship-interviews/?p=299" target="_blank">FSFE</a>
-							<a href=" http://www.framalang.org/wiki/Projet_Unhosted_-_entretient_de_Michiel_de_Jong_avec_la_FSFE/ToShare" target="_blank">(Tr: FR)</a></li>
-					<li><a href="http://www.readwriteweb.com/cloud/2010/12/unhosted.php" target="_blank">Read Write Web</a></li>
-					<li><a href="http://www.h-online.com/open/features/Lessons-from-WikiLeaks-decentralize-decentralize-decentralize-1153977.html" target="_blank">The H online</a></li>
-					<li><a href="http://lwn.net/Articles/423902/" target="_blank">Linux Weekly</a></li>
-				</ul>
-				<div class="clear"></div>
-			</div>
-			
-			<div class="links">
-				<h3>Social</h3>
-				<ul>
-					<li><a href="http://identi.ca/unhosted" target="_blank">Identi.ca</a></li>
-					<li><a href="http://www.twitter.com/#!/unhosted" target="_blank">Twitter</a></li>
-				</ul>
-				<div class="clear"></div>
-			</div>
-			
-			<div id="community">
-				<p><strong>Unhosted is a project from and for the community...</strong> We believe that we can achieve a better web together, and you are part of it.
-				</p>
-				
-				<p><strong>Be sure to check this site and join our mailing list</strong> for the latest on Unhosted development, documentation and other news regarding the project. We want to hear your ideas!
-				</p>
-				<p>Our <strong>Bitcoin address</strong> is 1L53beR311kxpj3UEAScVHEbMEuHJUsK8x
-				</p>
-				<div>You make Unhosted!</div>
-				<a class="FlattrButton" style="display:none;" href="http://www.unhosted.org/"></a>
-				<noscript><a href="http://flattr.com/thing/181201/The-Unhosted-Project" target="_blank">
-				<img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0" /></a></noscript>
-			</div>
-			<div class="clear"></div>
-		</div>	
-		<div id="credits">
-			<div class="wrapper">
-				<span>Sdk licensed under <a href="http://www.gnu.org/licenses/agpl.html" target="_blank">AGPL</a>. Website by <a href="http://www.edokoa.com" target="_blank">edokoa</a>, licensed under <a href="http://creativecommons.org/licenses/by/3.0/">Creative Commons BY</a></span>
-			</div>
-		</div>
-	</footer>
-
-
-
+<div class="clear"></div>
+</section>
+<section id="footer">You make Unhosted...</section>
 </body>
 </html>
