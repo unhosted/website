@@ -85,6 +85,7 @@ span {
 	width: auto;
 	margin: 10px auto;
 	text-align: center;
+	white-space:nowrap;
 }
 
 a:link {
