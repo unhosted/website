@@ -39,7 +39,7 @@ h2 {
 	display: block;
 	text-indent:-5000px;
 	width: 380px;
-	background: url('./_/css/img/thankyou/thankyou.png') no-repeat left top ;
+	background: url('img/thankyou/thankyou.png') no-repeat left top ;
 	height: 350px;
 	float: left;
 	}
@@ -100,6 +100,6 @@ a:visited {
 	margin-top: 40px;
 	text-indent: -5000px;
 	display: block;
-	background: url('./_/css/img/thankyou/footer.png') no-repeat left top ;
+	background: url('img/thankyou/footer.png') no-repeat left top ;
 	height: 440px;
 }
