@@ -127,7 +127,7 @@ button {width: auto; overflow: visible;}
 body {
 	
 		background: #e7ecef;
-		background: url('./img/backhaze.png') center 120px  repeat-x #e7ecef;
+		background: url('../img/backhaze.png') center 120px  repeat-x #e7ecef;
 		color: #172535;
 		font: 13px 'Lucida Grande', Lucida, Helvetica, Arial, Helmet, Freesans, sans-serif;
 		line-height:22px;
@@ -151,7 +151,7 @@ ins {background-color: #fcd700; color: #000; text-decoration: none;}
 mark {background-color: #fcd700; color: #000; font-style: italic; font-weight: bold;}
 
 
-#toplight{background: url('./img/bodyback.png') top center no-repeat transparent;
+#toplight{background: url('../img/bodyback.png') top center no-repeat transparent;
 	height: 450px;
 	min-height: 450px;
 	overflow: hidden;
@@ -189,7 +189,7 @@ header {
 			margin: 0 auto;
 			margin-bottom: 24px;
 			margin-top: 130px;
-			background: url('./img/imagine.png') top center
+			background: url('../img/imagine.png') top center
 			no-repeat;
 			height: 50px;
 			min-height: 50px;
