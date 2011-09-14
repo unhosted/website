@@ -1,4 +1,10 @@
+Options +FollowSymlinks
 RewriteEngine On
+
+DirectoryIndex index.php index.html
+Redirect /plan http://unhosted.titanpad.com/ep/pad/view/ro.AT2URSPl-r9/latest
+Redirect /code http://github.com/unhosted/unhosted
+Redirect /chat http://webchat.freenode.net/?channels=unhosted
 
 # remove www.
 RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
