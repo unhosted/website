@@ -38,7 +38,7 @@ function gup( name )
 }
 
 //set donations progress here:
-var days = 1;
+var days = 18;
 var michiel = 6000;
 var paypal = 4025.15;
 var bank = 295.03;
@@ -67,7 +67,7 @@ function onLoadHeader() {
 		document.getElementById("raised").innerHTML = ""+k+"."+i+"&euro;";
 	}
 	document.getElementById("bar").style.width = "" + (10 + 6.19 * k + 0.00619 * i) + "px";
-	document.getElementById("daysleft").innerHTML = "" + days + " days left!";
+	document.getElementById("daysleft").innerHTML = "18 days left!";
 	document.getElementById("daysleft").style.background = "url(css/img/days/" + days + ".png)";
 	document.getElementById("daysleft").style.display = "block";
 	document.getElementById("raised").style.display = "block";
@@ -192,7 +192,7 @@ function onLoadAll() {
 			<div id="tshirts">
 				<div id="arrow" style="display: block;"></div>
 				<div id="top"></div>
-				<div id="daysleft" style="display: none">15 days left!</div>
+				<div id="daysleft">15 days left!</div>
 				
 			</div>
 		
