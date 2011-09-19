@@ -348,13 +348,13 @@ header{
 			margin-bottom: 40px;
 		}
 			#introduction .column#evolution{
-				background: url(img/dna.png) no-repeat top center;
+				background: url('../img/dna.png') no-repeat top center;
 			}
 			#introduction .column#data{
-				background: url(img/data.png) no-repeat top center;
+				background: url('../img/data.png') no-repeat top center;
 			}
 			#introduction .column#solution{
-				background: url(img/island.png) no-repeat top center;
+				background: url('../img/island.png') no-repeat top center;
 			}
 		
 			#introduction .column h3{
