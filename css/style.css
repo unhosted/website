@@ -1,7 +1,7 @@
 #toplight{
 	background: url('../img/bodyback.png') top center no-repeat transparent;
-	height: 450px;
-	min-height: 450px;
+	height: 100px;
+    min-height:100px;
 	overflow: hidden;
 	width: 200px;
 	position: absolute;
@@ -17,40 +17,8 @@
 		position: relative;
 		}
 
-
- /*
- //  DONATIONS STYLES
- */ 
- #daysleft{
- 	background: url('../img/days/backsoon.png');
- 	display: block;
- 	height: 50px;
- 	width: 210px;
- 	position: absolute;
- 	top: 340px;
- 	left: 110px;
- 	z-index: -20;
- 	
- }
- 
- #bar{
- 	display: block;
- 	background: url('../img/bar.png') no-repeat left;
- 	height: 12px;
- 	top: 6px;
- 	left: 35px;
- 	position: relative;
- 	width: 10px; // Haz el calculo sobre 260px para el 100% y luego sumale 10
- 	
- }
- #video{ display: block;
-    margin: 0 auto;
-    text-align: center;
-    width: 480px;
-    margin-top: 40px;
-}
 #donations{
-  height: 544px;
+  height:100px;
   background: url('../img/headerback.png') repeat-x top center;
 	display: block;
 	position: relative;
@@ -58,11 +26,10 @@
 	margin-top: 0;
 	
 }
-.mirosubs-videoTab-container{ width:800px; margin:0 auto;}
 #donations h1{
 position: relative;
 margin-top: 0;
-top: 70px;
+top:.6em;
 background: url('../img/logo.png') no-repeat left top;
 text-indent: -5000px;
 height: 72px;
@@ -76,155 +43,13 @@ left: 10px;
 	position: absolute;
 	display: block;
 	width: 500px;
-	height: 400px;
-	top: 0;
+	height:100px;
+	top:0;
 	left: -130px;
 	background: url('../img/logolight.png') no-repeat top left;
 	z-index: 200;
 }
 
-#tshirts{
-	position: relative;
-	top: 110px;
-	text-indent: -5000px;
-	z-index: 1000;
-	padding-left: 10px;
-	width: 390px;
-	left: -30px;
-}
-#tshirts #top{
-	display: block;
-	background: url('../img/tshirt.png') no-repeat left top;
-	position: relative;
-	height: 450px;
-	width: 380px;
-
-	
-}
-	#tshirts #arrow{
-		position: absolute;
-		background: url('../img/arrow.png') no-repeat left top;
-		height: 53px;
-		width: 365px;
-		top: 365px;
-		left: 360px;
-	
-	}
-
-	#campaign, #thanks{
-		color: #a1aab0;
-		display: block;
-		width: 540px;
-		margin-top: 80px;
-		float: right;
-		margin-right: 10px;
-		}
-		#campaign strong,  #thanks strong{
-			color: #eaeaea;
-			font-weight: bold;
-		}
-		#campaign h2,  #thanks h2{
-			color: #b9e768;
-			font-size: 22px;
-			text-shadow: 0px 2px 1px #09151e;
-			background: url('../img/helpruler.png') bottom repeat-x;
-			padding-bottom: 10px;
-						
-		}
-		
-		#thanks h2{
-			color: #f7c231;
-			font-size: 30px;
-			padding-bottom: 15px;
-			text-shadow: 0px 2px 3px #142a37;
-			
-			
-		}
-		
-		#thanks span{
-			font-size: 22px;
-						color: white;
-			display: block;
-			padding-top: 30px;
-		}
-		
-		#thanks .twitter-share-button {
-			display:block; width:168px;height:46px; background:url('../img/tweetthis.png') no-repeat left top;
-			text-indent: -9999px;
-			margin-top:40px;
-			position: relative;
-			top: -75px;
-			float: right}
-		#thanks .twitter-share-button:hover {
-			background:url('../img/tweetthis_hover.png') no-repeat left top;	
-		}
-			#thanks .twitter-share-button:active {
-				background:url('../img/tweetthis_active.png') no-repeat left top;	
-			}
-	#campaign form{
-		display: block;
-		clear: both;
-		float: right;
-		width: 218px;
-		margin-top: 20px;	
-		border: noe;
-	}
-			#campaign form input[type=image]{
-				background: url('../img/paypal.png') no-repeat left top;
-				height: 46px;
-				width: 218px;
-				border: none;
-				display: block;
-				text-indent: -5000px;
-			}
-			#campaign form div{
-				background: url('../img/paypal_disabled.png') no-repeat left top;
-				height: 46px;
-				width: 218px;
-				border: none;
-				display: block;
-				text-indent: -5000px;
-			}
-	#gauge{
-		display: block;
-		width: 540px;
-		height: 105px;
-		background: url('../img/gauge.png') no-repeat left top;
-		margin-top: 33px;
-		margin-bottom: 17px;
-		}
-	#gauge #counter{
-		display: block;
-		float: left;
-		text-align: center;
-		width: 190px;
-		position: relative;
-	}
-	
-		#gauge h5{
-			text-align: center;
-			display: block;
-			text-transform: uppercase;
-			font-size: 13px;
-			color: #dcac1c;
-			margin-bottom: 6px;
-			margin-top: 14px;
-			font-weight: normal;
-		}
-		
-			#meter h5{
-				color: #eaeaea;
-			}
-	#meter{
-		float: left;
-		width: 350px;
-	}
-	#campaign #raised{
-		font-size: 32px;
-		font-weight: bold;
-		color: white;
-		margin-bottom: 6px;
-	}
 		
 /*
 //  HEADER STYLES
