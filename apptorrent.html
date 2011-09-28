@@ -37,7 +37,7 @@ function ie6goAway() {
 }
 
 function onLoadAll() {
-	ie6goAway();
+    ie6goAway();
 }
 
 </script>
@@ -88,31 +88,29 @@ function onLoadAll() {
 	<article id="introduction">
 		
 		<div class="column" id="evolution">
-			<h3>The web is evolving</h3>
+			<h3>Packager</h3>
 			<p>
-				In the last few years, the web has slowly changed from just being a source of information to something entirely different.
+    Scrapes localstorage-based Javascript applications
+    Packs them into a JSON object, saves them to your remote storage
+    Makes them identifiable via hash
+    You become a peer for that app
 			</p>
 			<p>
-				Today, the web is a place where you can share your thoughts, your experiences and your life with other people; a place to keep things that are important to you.
+				Use this bookmarklet to <a href="javascript:(function(u){var x=new XMLHttpRequest();x.open('GET',u,true);x.onreadystatechange=function(){if(x.readyState==4){eval(x.responseText)}};x.send()})('http://unhost.it/')">Unhost apps!</a>
 			</p>
 		</div>
 		<div class="column" id="data">
-			<h3>What happens to your data?</h3>
+			<h3>Player</h3>
+			<p>The player then loads a packaged app and displays it at an address like hash.apptorrent.net</p>
+            <p>The app isn’t really hosted at that address, it is pulled in live as data.</p>
 			<p>
-				Whenever you post content to the web (images, text, video, music...), it is  kept on the servers of that particular application.
-				
-			</p>
-			<p>
-				This means that your online data is stored in centralized servers belonging to various companies, meaning it's not really yours any more.
+				Check out 
 			</p>
 		</div>
 		<div class="column" id="solution">
-			<h3>Bringing data back to the people</h3>
+			<h3>Laucher</h3>
 			<p>
-				What if there were a way, that not only ensures security, freedom and control over your data, but also provides a better experience for both users and developers while resolving some of the other issues of the current web architecture?
-			</p>
-			<p>
-				<strong>This is where Unhosted kicks in...</strong>
+				Lists apps available from you or your peers
 			</p>
 		</div>
 		
