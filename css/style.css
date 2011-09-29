@@ -1,7 +1,7 @@
 #toplight{
 	background: url('../img/bodyback.png') top center no-repeat transparent;
-	height: 6em;
-    min-height:6em;
+	height: 20em;
+    min-height:20em;
 	overflow: hidden;
 	width: 12em;
 	position: absolute;
@@ -18,17 +18,17 @@
 		}
 
 #donations{
-  height:6em;
+  height:20em;
   background: url('../img/headerback.png') repeat-x top center;
 	display: block;
-	position: fixed;
+	position: relative;
 	width:100%;
     z-index:100;
     top:0;
 }
 #donations h1{
 position: relative;
-top:-.5em;
+top:1em;
 background: url('../img/logo.png') no-repeat left top;
 text-indent: -5000px;
 height:6em;
@@ -41,13 +41,34 @@ z-index:101;
 	position: absolute;
 	display: block;
 	width: 500px;
-	height:6em;
+	height:20em;
 	top:0;
 	left: -130px;
 	background: url('../img/logolight.png') no-repeat top left;
 	z-index: 99;
 }
 
+    #campaign, #thanks{
+		color: #a1aab0;
+		display: block;
+		width: 540px;
+		margin-top: .5em;
+		float: right;
+		margin-right: 1em;
+		}
+		#campaign strong,  #thanks strong, #campaign a{
+			color: #eaeaea;
+			font-weight: bold;
+            text-decoration:none;
+		}
+		#campaign h2,  #thanks h2{
+			color: #b9e768;
+			font-size: 22px;
+			text-shadow: 0px 2px 1px #09151e;
+			background: url('../img/helpruler.png') bottom repeat-x;
+			padding-bottom: 10px;
+						
+		}
 		
 /*
 //  HEADER STYLES
@@ -81,19 +102,19 @@ header{
 /*
 // INTRO STYLES
 */
-#introduction { position:relative; top:6em; }
+#introduction { position:relative; top:3em; }
 		#introduction .column{
 			position: relative;
-			display: block;
-			float: left;
-			margin-bottom: 40px;
+			display:block;
+            float:left;
 		}
+        #introduction h2 { text-align:center; }
         #introduction #you { }
-        #introduction #you svg#computer { width:30em; height:20em; }
+        #introduction #you svg#computer { width:30em; height:15em; }
         #introduction #sync { }
-        #introduction #sync svg#sync { }
+        #introduction #sync svg#sync { width:10em; height:15em; }
         #introduction #remotestorage { }
-        #introduction #remotestorage svg#cloud { }
+        #introduction #remotestorage svg#cloud { width:30em; height:15em; }
 		#introduction #arrow { position:absolute; }
         
 			#introduction .column h3{
@@ -104,7 +125,7 @@ header{
 				margin-top: 2em;
 			}
 		
-        
+        #apptorrent { display:block; position:absolute; top:30em; bottom:5em; }
     	#apptorrent .column{
 			position: relative;
 			display: block;
@@ -159,6 +180,7 @@ footer{
 	position: relative;
 	clear: both;
 	margin-top: 100px;
+    top:35em;
 	}
 	
 	footer .links{

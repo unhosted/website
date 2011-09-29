@@ -42,7 +42,13 @@
 <div id="donations">
 	<div class="wrapper">
 		<div id="logolight"></div>
-		<h1><a href="http://unhosted.org">Unhosted</a></h1>		
+		<h1><a href="http://unhosted.org">Unhosted</a></h1>
+        <div name="campaign" id="campaign" style="display:block">
+            <h2>Use your data anywhere, have it in one place.</h2>
+            <p>The web is not as open as it used to be: big monopoly platforms have formed new proprietary layers on top of it.
+            But we create a better architecture for the web. We break the &ldquo;you get our app, we get your data&rdquo; package deal with a <strong><a href="http://unhosted.org/spec/dav/0.1">cross-origin data storage protocol</a></strong>, separating data servers from application servers.</p>
+            <p>Unhosted is a non-profit project. To know more, check our <strong><a href="http://groups.google.com/group/unhosted">mailing list</a></strong> and <strong><a href="http://webchat.freenode.net/?channels=unhosted">chat room</a></strong>. Our project is now <strong><a href="https://github.com/unhosted/unhosted/wiki/happy-birthday">one year old</a></strong> and we&apos;re currently working on <strong><a href="http://apptorrent.org/">apptorrent</a></strong> and the new <strong><a href="https://github.com/unhosted/unhosted/wiki/new-website-content">website</a></strong>.</p>
+        </div>
 	</div>
 </div>
 
@@ -57,6 +63,8 @@
 <path d="M56.972,49.486v0.473c0,0.521-0.426,0.944-0.946,0.944h-11.75c-0.521,0-0.944-0.423-0.944-0.944v-0.473H0v2.519  c0,0,2.138,1.618,3.227,1.661v0.001h93.479v-0.006C97.77,53.69,100,52.005,100,52.005v-2.519H56.972z"/>
 </svg>
 			<h2>your browser</h2>
+            <p>Applications are pure client-side, Javascript, HTML &amp; CSS.<br />
+            That way they are not bound to a specific host and scalable.</p>
 		</div>
 		<div class="column" id="sync">
             <svg id="sync" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.0" id="Layer_1" x="0px" y="0px" viewBox="0 0 100 63.789" enable-background="new 0 0 100 63.789" xml:space="preserve" xmlns:xml="http://www.w3.org/XML/1998/namespace">
@@ -71,12 +79,7 @@
 <path d="M77.959,55.154H11.282C5.061,55.154,0,50.093,0,43.873c0-5.278,3.643-9.721,8.546-10.946  c2.188-5.469,7.248-9.386,13.149-10.089C22.317,10.14,32.843,0,45.693,0c9.417,0,17.822,5.536,21.723,13.756  c3.203-1.75,6.812-2.682,10.543-2.682c12.153,0,22.041,9.887,22.041,22.04C100,45.267,90.113,55.154,77.959,55.154L77.959,55.154z"/>
 </svg>
 			<h2>your remote storage</h2>
-			<ul>
-                <li>ownCloud</li>
-                <li>CouchDB</li>
-                <li>Google Drive</li>
-                <li>Dropbox</li>
-            </ul>
+			<p><a href="http://owncloud.org">ownCloud</a> is already compatible.<br />We work on integrating CouchDB, Google Drive, Dropbox and more.</p>
 		</div>
 
 <!--<svg id="arrow" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.0" id="Layer_1" x="0px" y="0px" width="70px" height="70px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve" xmlns:xml="http://www.w3.org/XML/1998/namespace">
@@ -87,15 +90,14 @@
 	
 
     <article id="apptorrent">
-		<h2>Apptorrent</h2>
+    <h2>Apptorrent</h2>
+    <p>A platform to save applications as data and distribute them like BitTorrent.</p>
 		<div class="column" id="evolution">
 			<h3>Packager</h3>
-			<ul>
-            <li>Scrapes localstorage-based Javascript applications</li>
-    <li>Packs them into a JSON object, saves them to your remote storage</li>
-    <li>Makes them identifiable via hash</li>
-    <li>You become a peer for that app</li>
-			</ul>
+			<p>Scrapes localstorage-based Javascript applications<br />
+            Packs them into a JSON object, saves them to your remote storage<br />
+            Makes them identifiable via hash<br />
+            You become a peer for that app</p>
 			<p>
 				Use this bookmarklet to <a href="javascript:(function(u){var x=new XMLHttpRequest();x.open('GET',u,true);x.onreadystatechange=function(){if(x.readyState==4){eval(x.responseText)}};x.send()})('http://unhost.it/')">Unhost apps!</a>
 			</p>
@@ -106,7 +108,7 @@
             <p>The app isn’t really hosted at that address, it is pulled in live as data.</p>
 		</div>
 		<div class="column" id="solution">
-			<h3>Laucher</h3>
+			<h3>Dashboard</h3>
 			<p>
 				Lists apps available from you or your peers
 			</p>
@@ -136,8 +138,7 @@
 				<h3>Articles</h3>
 				<ul>
 					
-					<li><a href="http://blogs.fsfe.org/fellowship-interviews/?p=299" target="_blank">FSFE</a>
-							<a href=" http://www.framalang.org/wiki/Projet_Unhosted_-_entretient_de_Michiel_de_Jong_avec_la_FSFE/ToShare" target="_blank">(Tr: FR)</a></li>
+					<li><a href="http://blogs.fsfe.org/fellowship-interviews/?p=299" target="_blank">FSFE interview</a></li>
 					<li><a href="http://www.readwriteweb.com/cloud/2010/12/unhosted.php" target="_blank">Read Write Web</a></li>
 					<li><a href="http://www.h-online.com/open/features/Lessons-from-WikiLeaks-decentralize-decentralize-decentralize-1153977.html" target="_blank">The H online</a></li>
 					<li><a href="http://lwn.net/Articles/423902/" target="_blank">Linux Weekly</a></li>
