@@ -1,5 +1,5 @@
 #toplight{
-	background: url('./img/bodyback.png') top center no-repeat transparent;
+	background: url('../img/bodyback.png') top center no-repeat transparent;
 	height: 450px;
 	min-height: 450px;
 	overflow: hidden;
@@ -22,7 +22,7 @@
  //  DONATIONS STYLES
  */ 
  #daysleft{
- 	background: url('./img/days/backsoon.png');
+ 	background: url('../img/days/backsoon.png');
  	display: block;
  	height: 50px;
  	width: 210px;
@@ -35,7 +35,7 @@
  
  #bar{
  	display: block;
- 	background: url('./img/bar.png') no-repeat left;
+ 	background: url('../img/bar.png') no-repeat left;
  	height: 12px;
  	top: 6px;
  	left: 35px;
@@ -51,7 +51,7 @@
 }
 #donations{
   height: 544px;
-  background: url('./img/headerback.png') repeat-x top center;
+  background: url('../img/headerback.png') repeat-x top center;
 	display: block;
 	position: relative;
 	top: 0;
@@ -63,7 +63,7 @@
 position: relative;
 margin-top: 0;
 top: 70px;
-background: url('./img/logo.png') no-repeat left top;
+background: url('../img/logo.png') no-repeat left top;
 text-indent: -5000px;
 height: 72px;
 width: 220px;
@@ -79,7 +79,7 @@ left: 10px;
 	height: 400px;
 	top: 0;
 	left: -130px;
-	background: url('./img/logolight.png') no-repeat top left;
+	background: url('../img/logolight.png') no-repeat top left;
 	z-index: 200;
 }
 
@@ -94,7 +94,7 @@ left: 10px;
 }
 #tshirts #top{
 	display: block;
-	background: url('./img/tshirt.png') no-repeat left top;
+	background: url('../img/tshirt.png') no-repeat left top;
 	position: relative;
 	height: 450px;
 	width: 380px;
@@ -103,7 +103,7 @@ left: 10px;
 }
 	#tshirts #arrow{
 		position: absolute;
-		background: url('./img/arrow.png') no-repeat left top;
+		background: url('../img/arrow.png') no-repeat left top;
 		height: 53px;
 		width: 365px;
 		top: 365px;
@@ -127,7 +127,7 @@ left: 10px;
 			color: #b9e768;
 			font-size: 22px;
 			text-shadow: 0px 2px 1px #09151e;
-			background: url('./img/helpruler.png') bottom repeat-x;
+			background: url('../img/helpruler.png') bottom repeat-x;
 			padding-bottom: 10px;
 						
 		}
@@ -149,17 +149,17 @@ left: 10px;
 		}
 		
 		#thanks .twitter-share-button {
-			display:block; width:168px;height:46px; background:url('./img/tweetthis.png') no-repeat left top;
+			display:block; width:168px;height:46px; background:url('../img/tweetthis.png') no-repeat left top;
 			text-indent: -9999px;
 			margin-top:40px;
 			position: relative;
 			top: -75px;
 			float: right}
 		#thanks .twitter-share-button:hover {
-			background:url('./img/tweetthis_hover.png') no-repeat left top;	
+			background:url('../img/tweetthis_hover.png') no-repeat left top;	
 		}
 			#thanks .twitter-share-button:active {
-				background:url('./img/tweetthis_active.png') no-repeat left top;	
+				background:url('../img/tweetthis_active.png') no-repeat left top;	
 			}
 	#campaign form{
 		display: block;
@@ -170,7 +170,7 @@ left: 10px;
 		border: noe;
 	}
 			#campaign form input[type=image]{
-				background: url('./img/paypal.png') no-repeat left top;
+				background: url('../img/paypal.png') no-repeat left top;
 				height: 46px;
 				width: 218px;
 				border: none;
@@ -178,7 +178,7 @@ left: 10px;
 				text-indent: -5000px;
 			}
 			#campaign form div{
-				background: url('./img/paypal_disabled.png') no-repeat left top;
+				background: url('../img/paypal_disabled.png') no-repeat left top;
 				height: 46px;
 				width: 218px;
 				border: none;
@@ -189,7 +189,7 @@ left: 10px;
 		display: block;
 		width: 540px;
 		height: 105px;
-		background: url('./img/gauge.png') no-repeat left top;
+		background: url('../img/gauge.png') no-repeat left top;
 		margin-top: 33px;
 		margin-bottom: 17px;
 		}
@@ -235,18 +235,18 @@ left: 10px;
 	position: absolute;
 	top: 0;
 	left: 0;
-	background: url('./img/download_hover.png') top center no-repeat transparent;
+	background: url('../img/download_hover.png') top center no-repeat transparent;
 	
 }
 	#preload2{
-		background: url('./img/download_press.png') top center no-repeat transparent;	
+		background: url('../img/download_press.png') top center no-repeat transparent;	
 	}
 	
 	#preload3{
-		background: url('./img/tweetthis_hover.png') top center no-repeat transparent;	
+		background: url('../img/tweetthis_hover.png') top center no-repeat transparent;	
 	}
 	#preload4{
-		background: url('./img/tweetthis_active.png') top center no-repeat transparent;	
+		background: url('../img/tweetthis_active.png') top center no-repeat transparent;	
 	}
 	
 header{
@@ -265,7 +265,7 @@ header{
 		font-size: 24px;
 		font-weight:bold;
 		text-indent: -5000px;
-		background: url('./img/unhosted.png') no-repeat left top;
+		background: url('../img/unhosted.png') no-repeat left top;
 		margin-top: 40px;
 		
 		}
@@ -279,7 +279,7 @@ header{
 			margin: 0 auto;
 			margin-bottom: 24px;
 			margin-top: 90px;
-			background: url('./img/imagine.png') top center
+			background: url('../img/imagine.png') top center
 			no-repeat;
 			height: 50px;
 			min-height: 50px;
@@ -310,14 +310,14 @@ header{
 			}
 			
 			header #downloadholder{
-				background: url('./img/downloadholder.png') no-repeat top center; 
+				background: url('../img/downloadholder.png') no-repeat top center; 
 				display: block;
 				margin: 0 auto;
 				width: 600px;
 				height: 100px;
 			}
 			header #downloadholder a{
-				background: url('./img/download.png') top center no-repeat transparent;
+				background: url('../img/download.png') top center no-repeat transparent;
 				display: block;
 				margin: 0 auto;
 				height: 80px;
@@ -327,10 +327,10 @@ header{
 				margin-top: 55px;
 				}
 				header #downloadholder a:hover{
-					background: url('./img/download_hover.png') top center no-repeat transparent;
+					background: url('../img/download_hover.png') top center no-repeat transparent;
 					}
 				header #downloadholder a:active{
-					background: url('./img/download_press.png') top center no-repeat transparent;
+					background: url('../img/download_press.png') top center no-repeat transparent;
 					}
 			
 
@@ -348,13 +348,13 @@ header{
 			margin-bottom: 40px;
 		}
 			#introduction .column#evolution{
-				background: url(./img/dna.png) no-repeat top center;
+				background: url('../img/dna.png') no-repeat top center;
 			}
 			#introduction .column#data{
-				background: url(./img/data.png) no-repeat top center;
+				background: url('../img/data.png') no-repeat top center;
 			}
 			#introduction .column#solution{
-				background: url(./img/island.png) no-repeat top center;
+				background: url('../img/island.png') no-repeat top center;
 			}
 		
 			#introduction .column h3{
@@ -384,7 +384,7 @@ header{
 */
 
 footer{
-	background: url('./img/footerback.png') repeat-x left top;
+	background: url('../img/footerback.png') repeat-x left top;
 	width: 100%;
 	margin: 0;
 	position: relative;
@@ -459,7 +459,7 @@ footer{
 				}
 				footer #community div{
 					position: absolute;
-					background: url('./img/youmake.png') no-repeat right bottom transparent;
+					background: url('../img/youmake.png') no-repeat right bottom transparent;
 					right: 95px;
 					bottom: 33px;
 					width: 240px;
