@@ -85,7 +85,37 @@
 			
 	</article>
 	
-	
+
+    <article id="apptorrent">
+		<h2>Apptorrent</h2>
+		<div class="column" id="evolution">
+			<h3>Packager</h3>
+			<ul>
+            <li>Scrapes localstorage-based Javascript applications</li>
+    <li>Packs them into a JSON object, saves them to your remote storage</li>
+    <li>Makes them identifiable via hash</li>
+    <li>You become a peer for that app</li>
+			</ul>
+			<p>
+				Use this bookmarklet to <a href="javascript:(function(u){var x=new XMLHttpRequest();x.open('GET',u,true);x.onreadystatechange=function(){if(x.readyState==4){eval(x.responseText)}};x.send()})('http://unhost.it/')">Unhost apps!</a>
+			</p>
+		</div>
+		<div class="column" id="data">
+			<h3>Player</h3>
+			<p>The player then loads a packaged app and displays it at an address like hash.apptorrent.net</p>
+            <p>The app isn’t really hosted at that address, it is pulled in live as data.</p>
+		</div>
+		<div class="column" id="solution">
+			<h3>Laucher</h3>
+			<p>
+				Lists apps available from you or your peers
+			</p>
+		</div>
+		
+		
+			
+	</article>
+
 	</div> <!-- END Wrapper -->
 	
 	<footer class="footer">

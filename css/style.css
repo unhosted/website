@@ -24,6 +24,7 @@
 	position: fixed;
 	width:100%;
     z-index:100;
+    top:0;
 }
 #donations h1{
 position: relative;
@@ -102,7 +103,34 @@ header{
 				margin-bottom: 22px;
 				margin-top: 2em;
 			}
+		
+        
+    	#apptorrent .column{
+			position: relative;
+			display: block;
+			float: left;
+			width: 280px;
+			margin: 0 10px;
+			padding: 0 10px;
+			margin-bottom: 40px;
+		}
+			#apptorrent .column#packager{
 			
+			}
+			#apptorrent .column#dashboard{
+			
+			}
+			#apptorrent .column#player{
+			
+			}
+		
+			#introduction .column h3{
+				font-size: 16px;
+				font-weight: bold;
+				line-height: 22px;
+				margin-bottom: 22px;
+				margin-top: 260px;
+			}
 
 /*
 // webDAV
