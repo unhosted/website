@@ -1,0 +1,33 @@
+the move towards hosted software
+what this means for software freedom
+how open source fails to solve this
+how open web fails to solve this
+user accounts should not live on the same host as the application
+unhosted identity: webfinger
+unhosted storage: webdav
+what you should do:
+	- create web apps that use SyncStorage.
+
+asynchronous synchronization for in-browser web apps
+
+// syncStorage = new SyncStorage();
+// syncStorage.linkAccount('user@host');
+// syncStorage.getWriteAccess(); //callback to same page (assume it's a SPA)
+
+// syncStorage.fetchItem('key')
+// syncStorage.setItem('key', 'val')
+// syncStorage.removeItem('key')
+
+// syncStorage.onStatus = function('offline'/'readonly'/'sending'/'receiving'/'ready', 'user@host')
+// syncStorage.onItem = function('key', 'val')
+
+demo:
+	- create account on myfavouritesandwich.org
+	- use it on todo.jack-bowman.com
+
+
+--draft: WebfingerPlus:
+	- cross-origin webfinger if available (statusnet, diaspora, wordpress)
+	- proxied webfinger if same-origin webfinger (aol, google, yahoo)
+	- 3rd request extension (put link in profile page instead of in xrd)
+	- add fakefinger (straight to profile page) (twitter, facebook, hotmail)
