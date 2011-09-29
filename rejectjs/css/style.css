@@ -1,0 +1,92 @@
+#toplight{
+	background: url('./img/bodyback.png') top center no-repeat transparent;
+	height: 450px;
+	min-height: 450px;
+	overflow: hidden;
+	width: 200px;
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%; 
+	z-index: -200;
+	}
+.wrapper { 
+		display: block;
+		margin: 0 auto;
+		width: 960px;
+		}
+
+/*
+//  HEADER STYLES
+*/
+	
+header{
+	display: block;
+	position: relative;
+	height: 40px;
+	opacity: .1;
+	width: 100%;
+}
+	header.minimal{
+		height: 100px;
+	}
+		
+	header h1{ 
+		display: block;
+		line-height: 32px;
+		height: 34px;
+		font-size: 24px;
+		font-weight:bold;
+		text-indent: -5000px;
+		position: ;
+		background: url('./img/unhosted.png') no-repeat right top;
+		margin-top: 40px;
+		}
+		
+				
+/*
+// SLIDE STYLES
+*/
+article{
+font-size: 21px;
+}
+		#slidetitle{
+		margin-bottom: 48px;
+	}
+			article #slidetitle h1{
+			font-size: 48px;
+			line-height: 45px;
+		}
+			article #slidetitle h2{
+			font-size: 32px;
+			margin-top: -12px;
+			font-weight: normal;
+			opacity: .5;
+			
+		}
+	
+			
+		article ul{
+		list-style: disc;
+		font-size: 18px;
+		margin-left: 62px;
+		margin-bottom: 62px;
+		margin-top: 62px;
+	list-style-type: disc;
+}
+		article ul li, article ol li{
+		margin-bottom: 24px;
+		padding-right: 360px;
+		font-size: 18px;
+		line-height: 26px;
+		
+	}
+		article ul li h3{
+		font-size: 18px;
+		margin-bottom: 0px;
+		font-weight: bold;
+	}
+			article ul li p{
+		font-size: 18px;
+
+	}
