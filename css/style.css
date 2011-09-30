@@ -32,7 +32,7 @@ top:1em;
 background: url('../img/logo.png') no-repeat left top;
 text-indent: -5000px;
 height:6em;
-width:100%;
+width:50%;
 position: absolute;
 z-index:101;
 }
