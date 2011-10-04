@@ -1,30 +1,85 @@
 (function() {
   if(!window.remoteStorage) {//shim switch
-      //////////////////
-     // stub backend //
-    //////////////////
+      ///////////////
+     // Webfinger //
+    ///////////////
 
-    var backend = (function(){
-      return {
-        clear: function(cb) {
-          alert('backend clearing');
-          cb();
-        },
-        setItem: function(key, value, revision, cb) {
-          alert('backend setting item "'+key+'" to "'+value+'" revision '+revision);
-          cb(revision);
-        },
-        removeItem: function(key, revision, cb) {
-          alert('backend removing item "'+key+'" revision '+revision);
-          cb(revision);
-        },
-        connect: function(userAddress, cb) {
-          alert('connecting to '+userAddress);
-          cb();
-        }
+    var webfinger = (function() {
+      var webFinger = {}
+      var getHostMeta = function( userAddress, linkRel, onError, cb ){
+	//split the userAddress at the '@' symbol:
+	var parts = userAddress.split('@')
+	if( parts.length == 2 ){
+	  var user = parts[0]
+	  var domain = parts[1]
+
+	  ajax(
+	    { url: 'https://'+ domain +'/.well-known/host-meta'
+	    , timeout: 1000
+	    , dataType: 'xml'
+	    , success: function( xml ){
+	      try {
+		$(xml).find('Link').each(function(){
+		  var rel = $(this).attr('rel')
+		  if( rel == linkRel ){
+		    cb( $(this).attr('template') )
+		  }
+		})
+	      } catch(e) {
+		onError()
+	      }
+	    }
+	    , error: function() {//retry with http:
+	      $.ajax(
+		{ url: 'http://'+ domain +'/.well-known/host-meta'
+		, timeout: 1000
+		, dataType: 'xml'
+		, success: function( xml ){
+		  try {
+		    $(xml).find('Link').each(function(){
+		      var rel = $(this).attr('rel')
+		      if( rel == linkRel ){
+			cb( $(this).attr('template') )
+		      }
+		    })
+		  } catch(e) {
+		    onError()
+		  }
+		}
+		, error: onError
+		} )
+	      }
+	    } )
+	} else {
+	  onError()
+	}
       }
+      webFinger.getDavBaseUrl = function(userAddress, cb, onError) {
+	//get the WebFinger data for the user and extract the uDAVdomain:
+	getHostMeta( userAddress, 'lrdd', onError, function( template ){
+	  ajax(
+	    { url: template.replace( /{uri}/, userAddress, true )
+	    , timeout: 10000
+	    , dataType: 'xml'
+	    , success: function(xml){
+	      try {
+		$(xml).find('Link').each(function() {
+		  if( $(this).attr('rel') == 'http://unhosted.org/spec/dav/0.1' ) ){
+		    cb( $(this).attr('href') )
+		    //TODO: should exit loop now that a matching result was found.                
+		  }
+		})
+	      } catch( e ) {
+		onError()
+	      }
+	    }
+	    , error: onError
+	  })
+	})
+      }
+      return webFinger
     })()
-      
+
       ///////////////////////////
      // remoteStorage backend //
     ///////////////////////////
@@ -44,8 +99,10 @@
           cb(revision);
         },
         connect: function(userAddress, cb) {
-          alert('connecting to '+userAddress);
-          cb();
+          var url = webfinger.getDavBaseUrl(userAddress, function() {
+            alert('connecting to '+url);
+            cb();
+          });
         }
       }
     })()
