@@ -1,6 +1,8 @@
 
 <!DOCTYPE html> 
 <html> 
+
+
     <!-- 
 		Copyright 2011 Brendan LaMarche 
 		http://www.appin8.com
@@ -12,6 +14,17 @@
 	<head> 
 		<title>RSS Mobile Reader</title> 
 		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.0a4.1/jquery.mobile-1.0a4.1.min.css" /> 
+
+
+
+
+
+        <script type="text/javascript" src="../../remoteStorage.js"></script>
+
+
+
+
+
 		<script type="text/javascript" src="https://www.google.com/jsapi?key=ABQIAAAAuvAXPRXL9qkzO0R8vzYpOhQ_BAnb8hQeSCQ2aBH79hHa1YbW_RQNN9ClKXG21xQObiXJ7diAAYaywg"></script>
 		<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script> -->
 		<script src="http://code.jquery.com/jquery-1.5.2.min.js"></script> 
@@ -140,6 +153,26 @@
 		<script src="http://code.jquery.com/mobile/1.0a4.1/jquery.mobile-1.0a4.1.min.js"></script> 
 	</head> 
 	<body> 
+
+
+
+
+<div>
+<input id="userAddressInput" type="text" value="user@host" style="visibility:hidden">
+<input type="submit" value="Sign in" onclick="
+  if(this.value=='Sign in') {
+    document.getElementById('userAddressInput').style.visibility='visible';
+    this.value='Go';
+  } else if (this.value == 'Go') {
+    window.remoteStorage.setUserAddress(document.getElementById('userAddressInput').value);
+    this.value='Disconnect';
+  } else { 
+    this.value='Sign in';
+  }
+">
+</div>
+
+
 		<div data-role="page" id="main" data-theme="b"> 
 			<div data-role="header"><h1>RSS Mobile Reader</h1></div> 
 			

@@ -4,6 +4,7 @@
   <head>
     <title>Backbone Demo: Todos</title>
     <link href="todos.css" media="all" rel="stylesheet" type="text/css"/>
+        <script type="text/javascript" src="../../remoteStorage.js"></script>
     <script src="json2.js"></script>
     <script src="jquery-1.5.js"></script>
     <script src="underscore-1.1.6.js"></script>
@@ -13,6 +14,26 @@
   </head>
 
   <body>
+
+
+
+
+
+<div>
+<input id="userAddressInput" type="text" value="user@host" style="visibility:hidden">
+<input type="submit" value="Sign in" onclick="
+  if(this.value=='Sign in') {
+    document.getElementById('userAddressInput').style.visibility='visible';
+    this.value='Go';
+  } else if (this.value == 'Go') {
+    window.remoteStorage.setUserAddress(document.getElementById('userAddressInput').value);
+    this.value='Disconnect';
+  } else { 
+    this.value='Sign in';
+  }
+">
+</div>
+
 
     <!-- Todo App Interface -->
 
