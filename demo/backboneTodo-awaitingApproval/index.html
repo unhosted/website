@@ -4,7 +4,8 @@
   <head>
     <title>Backbone Demo: Todos</title>
     <link href="todos.css" media="all" rel="stylesheet" type="text/css"/>
-        <script type="text/javascript" src="../../remoteStorage.js"></script>
+    <link rel="stylesheet" href="../../remoteStorage.css" />
+    <script src="../../remoteStorage.js"></script>
     <script src="json2.js"></script>
     <script src="jquery-1.5.js"></script>
     <script src="underscore-1.1.6.js"></script>
@@ -16,25 +17,42 @@
   <body>
 
 
-
-
-
-<div>
-<input id="userAddressInput" type="text" value="user@host" style="visibility:hidden">
-<input type="submit" value="Sign in" onclick="
-  if(this.value=='Sign in') {
-    document.getElementById('userAddressInput').style.visibility='visible';
-    this.value='Go';
-  } else if (this.value == 'Go') {
+<div id="remoteStorage">
+<input id="userAddressInput" type="text" placeholder="you@yourremotestorage" onkeyup="
+if(this.value=='') {
+    document.getElementById('userButton').style.display='none';
+    document.getElementById('userButton').className='';
+    document.getElementById('userButton').disabled='disabled';
+} else {
+    document.getElementById('userButton').disabled='';
+    document.getElementById('userButton').className='synced';
+    document.getElementById('userButton').style.display='inline';
+}"
+onmouseover="
+clearTimeout(this.delay);
+if(this.value!='') {
+    document.getElementById('userButton').style.display='inline';
+}"
+onmouseout="this.delay=setTimeout('document.getElementById(\'userButton\').style.display=\'none\';',1000);">
+<span id="userAddress" style="display:none"
+onmouseover="this.className='disconnected';"
+onmouseout="this.className='';"
+onclick="
+//window.remoteStorage.disconnect();
+document.getElementById('userAddressInput').value='';
+document.getElementById('userAddressInput').style.display='inline';
+document.getElementById('userAddressInput').disabled='';
+this.style.display='none';"></span>
+<input id="userButton" type="submit" value="Sign in" style="display:none" onclick="
+if(document.getElementById('userAddressInput').value!='') {
     window.remoteStorage.setUserAddress(document.getElementById('userAddressInput').value);
-    document.getElementById('userAddressInput').disabled=true;
-    this.value='Disconnect';
-  } else { 
-    document.getElementById('userAddressInput').style.visibility='hidden';
-    document.getElementById('userAddressInput').disabled=false;
-    this.value='Sign in';
-  }
-">
+    document.getElementById('userAddress').style.display='inline';
+    document.getElementById('userAddress').innerHTML=document.getElementById('userAddressInput').value;
+    document.getElementById('userAddressInput').style.display='none';
+    document.getElementById('userAddressInput').disabled='disabled';
+    this.style.display='none';
+    this.disabled='disabled';
+}">
 </div>
 
 
