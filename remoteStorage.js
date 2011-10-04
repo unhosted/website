@@ -53,7 +53,7 @@
     window.remoteStorage = (function(){
       function work(minRevision) {
         var queue = JSON.parse(localStorage.getItem('_remoteStorageActionQueue'));
-        if(queue) {
+        if(queue.length) {
           var thisAction = queue.shift();
           while(thisAction.revision<minRevision) {
             thisAction = queue.shift();
@@ -119,11 +119,10 @@
           }
         },
         setUserAddress: function(userAddress) {
-          this.userAddress = userAddress;
           backend.connect(userAddress, function() {
-            if(this.connected) {
-              work();
-            }
+            this.userAddress = userAddress;
+            this.connected = true;
+            work();
           })
         }
       }
