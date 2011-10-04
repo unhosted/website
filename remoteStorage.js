@@ -8,7 +8,7 @@
       function workRemoveItem(key, value, revision) {
       }
       function work() {
-        var queue = localStorage.getItem('_remoteStorageActionQueue');
+        var queue = JSON.parse(localStorage.getItem('_remoteStorageActionQueue'));
         if(queue) {
           if(queue[0].action == 'clear') {
             workClear();
@@ -20,7 +20,7 @@
         } 
       }
       function pushAction(action) {
-        var queue = localStorage.getItem('_remoteStorageActionQueue');
+        var queue = JSON.parse(localStorage.getItem('_remoteStorageActionQueue'));
         if(queue==null){
           queue=[];
         }
@@ -30,7 +30,7 @@
           action.revision = 0;
         }
         queue.push(action);
-        localStorage.setItem('_remoteStorageActionQueue', queue);
+        localStorage.setItem('_remoteStorageActionQueue', JSON.stringify(queue));
         work();
       }
       return {
