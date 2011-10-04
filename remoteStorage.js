@@ -1,12 +1,37 @@
 (function() {
   if(!window.remoteStorage) {
     window.remoteStorage = (function(){
+      function workClear() {
+      }
+      function workSetItem(key, value, revision) {
+      }
+      function workRemoveItem(key, value, revision) {
+      }
+      function work() {
+        var queue = localStorage.getItem('_remoteStorageActionQueue');
+        if(queue) {
+          if(queue[0].action == 'clear') {
+            workClear();
+          } else if(queue[0].action == 'setItem') {
+            workSetItem(queue[0].key, queue[0].value, queue[0].revision);
+          } else if(queue[0].action == 'removeItem') {
+            workRemoveItem(queue[0].key, queue[0].revision);
+          }
+        } 
+      }
       function pushAction(action) {
-        var oldQueue = localStorage.getItem('_remoteStorageActionQueue');
-        if(oldQueue==null){
-          oldQueue=[];
+        var queue = localStorage.getItem('_remoteStorageActionQueue');
+        if(queue==null){
+          queue=[];
         }
-        localStorage.setItem('_remoteStorageActionQueue', oldQueue.push(action));
+        if(queue.length) {
+          action.revision = queue[queue.length-1].revision + 1;
+        } else {
+          action.revision = 0;
+        }
+        queue.push(action);
+        localStorage.setItem('_remoteStorageActionQueue', queue);
+        work();
       }
       return {
         length: localStorage.length,
@@ -37,7 +62,8 @@
           }
         },
         setUserAddress: function(userAddress) {
-          alert('fake setting user address "'+userAddress+'"');
+          this.userAddress = userAddress;
+          work();
         }
       }
     })()
