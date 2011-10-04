@@ -1,34 +1,50 @@
 (function() {
   if(!window.remoteStorage) {
+    var backend = (function(){
+      return {
+        clear: function(cb) {
+          alert('backend clearing');
+          cb();
+        },
+        setItem: function(key, value, revision, cb) {
+          alert('backend setting item "'+key+'" to "'+value+'" revision '+revision);
+          cb(revision);
+        },
+        removeItem: function(key, revision, cb) {
+          alert('backend removing item "'+key+'" revision '+revision);
+          cb(revision);
+        }
+      }
+    })()
     window.remoteStorage = (function(){
-      function workClear() {
-      }
-      function workSetItem(key, value, revision) {
-      }
-      function workRemoveItem(key, value, revision) {
-      }
-      function work() {
+      function work(minRevision) {
         var queue = JSON.parse(localStorage.getItem('_remoteStorageActionQueue'));
         if(queue) {
-          if(queue[0].action == 'clear') {
-            workClear();
-          } else if(queue[0].action == 'setItem') {
-            workSetItem(queue[0].key, queue[0].value, queue[0].revision);
-          } else if(queue[0].action == 'removeItem') {
-            workRemoveItem(queue[0].key, queue[0].revision);
+          var thisAction = queue.shift();
+          while(thisAction.revision<minRevision) {
+            thisAction = queue.shift();
+            if(!queue.length) {
+              localStorage.setItem('_remoteStorageActionQueue', '[]');
+              return;
+            }
           }
-        } 
+          queue.unshift(thisAction);
+          localStorage.setItem('_remoteStorageActionQueue', JSON.stringify(queue));
+          if(thisAction.action == 'clear') {
+            backend.clear(function() {work(1);});
+          } else if(thisAction.action == 'setItem') {
+            backend.setItem(thisAction.key, thisAction.value, thisAction.revision, function(revision) {work(revision+1);});
+          } else if(thisAction.action == 'removeItem') {
+            backend.removeItem(thisAction.key, thisAction.revision, function(revision) {work(revision+1);});
+          }
+        }
       }
       function pushAction(action) {
         var queue = JSON.parse(localStorage.getItem('_remoteStorageActionQueue'));
         if(queue==null){
           queue=[];
         }
-        if(queue.length) {
-          action.revision = queue[queue.length-1].revision + 1;
-        } else {
-          action.revision = 0;
-        }
+        action.revision = new Date().getTime();
         queue.push(action);
         localStorage.setItem('_remoteStorageActionQueue', JSON.stringify(queue));
         work();
