@@ -30,7 +30,7 @@
       }
       positions = newPositions;
       $('#positions').val(positions);
-      localStorage.setItem('positions',positions);
+      remoteStorage.setItem('positions',positions);
     };
     
     $(document).ready(function() {
@@ -53,8 +53,8 @@
         return 'sq square' + i;
       });
       // Set up the board
-      if (localStorage.getItem('positions')) {
-        set_board(localStorage.getItem('positions'));
+      if (remoteStorage.getItem('positions')) {
+        set_board(remoteStorage.getItem('positions'));
       } else {
         set_board('rnbqkbnrpppppppp00000000000000000000000000000000PPPPPPPPRNBQKBNR');
       }

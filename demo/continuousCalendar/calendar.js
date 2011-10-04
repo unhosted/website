@@ -32,22 +32,22 @@
 
 function nextItemId()
 {
-	localStorage.nextId = localStorage.nextId ? parseInt(localStorage.nextId) + 1 : 0;
-	return 'item' + localStorage.nextId;
+	remoteStorage.nextId = remoteStorage.nextId ? parseInt(remoteStorage.nextId) + 1 : 0;
+	return 'item' + remoteStorage.nextId;
 }
 
 // callback expects a list of objects with the itemId and itemValue properties set
 function lookupItemsForParentId(parentId, callback)
 {
-	if(localStorage[parentId])
+	if(remoteStorage[parentId])
 	{
-		var parentIdsToItemIds = localStorage[parentId].split(',');
+		var parentIdsToItemIds = remoteStorage[parentId].split(',');
 		var list = [];
 
 		for(var i in parentIdsToItemIds)
 		{
 			var itemId = parentIdsToItemIds[i];
-			var itemValue = localStorage[itemId];
+			var itemValue = remoteStorage[itemId];
 			list.push({'itemId': itemId, 'itemValue': itemValue});
 		}
 
@@ -61,9 +61,9 @@ function storeValueForItemId(itemId)
 	if(item)
 	{
 		var parentId = item.parentNode.id;
-		localStorage[itemId] = item.value;
+		remoteStorage[itemId] = item.value;
 
-		var parentIdsToItemIds = localStorage[parentId] ? localStorage[parentId].split(',') : [];
+		var parentIdsToItemIds = remoteStorage[parentId] ? remoteStorage[parentId].split(',') : [];
 		var found = false;
 		for(var i in parentIdsToItemIds)
 		{
@@ -76,28 +76,28 @@ function storeValueForItemId(itemId)
 		if(!found)
 		{
 			parentIdsToItemIds.push(itemId);
-			localStorage[parentId] = parentIdsToItemIds;
+			remoteStorage[parentId] = parentIdsToItemIds;
 		}
 	}
 }
 
 function removeValueForItemId(itemId)
 {
-	delete localStorage[itemId];
+	delete remoteStorage[itemId];
 
 	var item = document.getElementById(itemId);
 	if(!item) return;
 	var parentId = item.parentNode.id;
-	if(localStorage[parentId])
+	if(remoteStorage[parentId])
 	{
-		var parentIdsToItemIds = localStorage[parentId].split(',');
+		var parentIdsToItemIds = remoteStorage[parentId].split(',');
 		for(var i in parentIdsToItemIds)
 		{
 			if(parentIdsToItemIds[i] == itemId)
 			{
 				parentIdsToItemIds = parentIdsToItemIds.slice(0, i).concat(parentIdsToItemIds.slice(i + 1));
-				if(parentIdsToItemIds.length) localStorage[parentId] = parentIdsToItemIds;
-				else delete localStorage[parentId];
+				if(parentIdsToItemIds.length) remoteStorage[parentId] = parentIdsToItemIds;
+				else delete remoteStorage[parentId];
 				break;
 			}
 		}

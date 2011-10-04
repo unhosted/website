@@ -18,7 +18,7 @@ function addSlide(){
 		slide_div.stop(false, true).hide();
 		$('.nav_link').removeClass('hit');
 		$('.nav_link[slide="' + (max_slides) + '"]').addClass('hit');	
-		$('.slide:eq(' + max_slides + ')').stop(false, true).fadeIn('slow', function(){localStorage.setItem("slideshow", $('#slide_wrapper').html());});	
+		$('.slide:eq(' + max_slides + ')').stop(false, true).fadeIn('slow', function(){remoteStorage.setItem("slideshow", $('#slide_wrapper').html());});	
 	}
 }
 
@@ -38,7 +38,7 @@ function removeSlide(){
 	}
 
 		createMenu(hit_slide);
-		localStorage.setItem("slideshow", $('#slide_wrapper').html());
+		remoteStorage.setItem("slideshow", $('#slide_wrapper').html());
 	
 	} else {
 		alert("Hey, I like minimalism too but don't you think we should have at least one slide there, Malevich?");
@@ -62,7 +62,7 @@ function removeSlide(){
 			if (slide != parseInt($('#nav li a.hit').attr('slide'))) {
 				slide_div.hide();
 				$('.slide:eq(' + cs + ')').stop(false, true).fadeIn('slow');
-				localStorage.setItem("currentslide", cs);	
+				remoteStorage.setItem("currentslide", cs);	
 
 			} 
 	}
@@ -84,7 +84,7 @@ function removeSlide(){
 		 	$('.nav_link[slide='+parseInt((s - 1))+']').addClass('hit'); 
 		 } else {
 		 	
-		 	var saved_slide = parseInt(localStorage.getItem('currentslide'));
+		 	var saved_slide = parseInt(remoteStorage.getItem('currentslide'));
 		 	if (saved_slide != null && saved_slide > 0 ) {
 	
 			 	$('.nav_link[slide='+ saved_slide  +']').addClass('hit'); 
@@ -106,14 +106,14 @@ $(function(){
 
 
 
-	if (localStorage.getItem('slideshow') != null){	 $('#slide_wrapper').html(localStorage.getItem('slideshow'));$('.slide').css('opacity','1')}
-	$('.slide > ul, h3 > span').attr('contenteditable','true').keyup(function(){ localStorage.setItem("slideshow", $('#slide_wrapper').html()); });
+	if (remoteStorage.getItem('slideshow') != null){	 $('#slide_wrapper').html(remoteStorage.getItem('slideshow'));$('.slide').css('opacity','1')}
+	$('.slide > ul, h3 > span').attr('contenteditable','true').keyup(function(){ remoteStorage.setItem("slideshow", $('#slide_wrapper').html()); });
 	
 	$('h3 > span').blur(function(){
 
 		if ($(this).html().length === 0) {
 			$(this).html('Enter Slide Title');
-			localStorage.setItem("slideshow", $('#slide_wrapper').html());
+			remoteStorage.setItem("slideshow", $('#slide_wrapper').html());
 
 		}
 	})
@@ -121,7 +121,7 @@ $(function(){
 	$('.slide > ul ').keyup(function(){
 		if($(this).children('li').length < 1) {
 			$(this).html('<li>Click to edit / add text</li>');
-			localStorage.setItem("slideshow", $('#slide_wrapper').html());
+			remoteStorage.setItem("slideshow", $('#slide_wrapper').html());
 		}
 	});
 	
@@ -148,9 +148,9 @@ $('#remove_all').click(function(){
 
 	var deleteall = confirm('Delete '+$('#nav li').length+' slide(s) and start over?')
 	if (deleteall){
-		localStorage.removeItem('currentslide');
-		localStorage.removeItem('slideshow');
-		localStorage.removeItem('theme');
+		remoteStorage.removeItem('currentslide');
+		remoteStorage.removeItem('slideshow');
+		remoteStorage.removeItem('theme');
 		window.location.reload( false );
 	}
 })
@@ -159,16 +159,16 @@ $('#theme').toggle(function(){
 
 	$('html, body').addClass('web375');
 	$('#theme').html('<a href="javascript:void(0)" title="Click to swap themes">Theme: Web 3.75</a>');
-	localStorage.setItem('theme', 'web375');
+	remoteStorage.setItem('theme', 'web375');
 	
 },function(){
 	$('html,body').removeClass('web375');
 	$('#theme').html('<a href="javascript:void(0)" title="Click to swap themes">Theme: DCP</a>');
-	localStorage.setItem('theme', 'dcp');	
+	remoteStorage.setItem('theme', 'dcp');	
 });
 
 			
-	if (localStorage.getItem('theme') != null){ if(localStorage.getItem('theme') == "web375") { $('html, body').addClass('web375');$('#theme').html('<a href="javascript:void(0)" title="Click to swap themes">Theme: Web 3.75</a>'); } }
+	if (remoteStorage.getItem('theme') != null){ if(remoteStorage.getItem('theme') == "web375") { $('html, body').addClass('web375');$('#theme').html('<a href="javascript:void(0)" title="Click to swap themes">Theme: Web 3.75</a>'); } }
 	
 
 //keyboard mapping			
@@ -196,7 +196,7 @@ $('#theme').toggle(function(){
 				$('.nav_link[slide='+cs+']').addClass('hit'); 
 				slide_div.stop(false, true).hide();
 				$('.slide:eq(' + cs + ')').stop(false, true).fadeIn('slow');
-				localStorage.setItem("currentslide", cs);	
+				remoteStorage.setItem("currentslide", cs);	
 			}
 		
 		

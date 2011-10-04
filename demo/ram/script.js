@@ -20,10 +20,10 @@ var RAMapp = {
 	
 	loadApp: function () {
 		$('#nojs').remove();
-		if (localStorage.getItem("isZoom")) {
-			$('html').css('fontSize', localStorage.getItem("zoom"));
+		if (remoteStorage.getItem("isZoom")) {
+			$('html').css('fontSize', remoteStorage.getItem("zoom"));
 		}	
-		if (localStorage.getItem("isDisHelp") == 1) {
+		if (remoteStorage.getItem("isDisHelp") == 1) {
 			this.initApp();
 			$('#startuphelp').attr('checked', 'checked');
 		} else {
@@ -59,16 +59,16 @@ var RAMapp = {
 			var isHelp = $('<p class="help-note"><input type="checkbox" id="startuphelp" /> <label for="startuphelp">Don\'t display this message at start!</label> </p>');
 			isHelp.click(function () {
 				if ($('#startuphelp').is(":checked")) {
-					localStorage.setItem("isDisHelp", 1);
+					remoteStorage.setItem("isDisHelp", 1);
 				} else {
-					localStorage.setItem("isDisHelp", 0);
+					remoteStorage.setItem("isDisHelp", 0);
 				}
 			});
 			$('#info').append(isHelp);
 		});
 		var h = $('#block-start').height(),
 			lis = "",
-			count = localStorage.getItem("cells"),
+			count = remoteStorage.getItem("cells"),
 			i = 1,
 			text = "",
 			info = "",
@@ -80,7 +80,7 @@ var RAMapp = {
 		});
 		if (count < 1) {
 			count = 20;
-			localStorage.setItem("cells", count);
+			remoteStorage.setItem("cells", count);
 		}
 
 		this.addCell(1,count);
@@ -92,7 +92,7 @@ var RAMapp = {
 		$('#adderAdd').click(function () {
 			var newBox = $(this).parent().parent().parent().clone(),
 				num = $('#board').find("li").length;
-			localStorage.setItem("cells", num + 1);
+			remoteStorage.setItem("cells", num + 1);
 			newBox.attr('id', 'box' + num);
 			newBox.find('.no').html('.' + RAMapp.formatNumber(num));
 			newBox.find('#adderAdd').remove();
@@ -109,10 +109,10 @@ var RAMapp = {
 		
 		$('#adderDel').click(function () {
 			var num = $('#board').find("li").length - 1;
-			localStorage.setItem("cells", num);
-			localStorage.removeItem('box' + num + "_text");
-			localStorage.removeItem('box' + num + "_date");
-			localStorage.removeItem('box' + num + "_color");
+			remoteStorage.setItem("cells", num);
+			remoteStorage.removeItem('box' + num + "_text");
+			remoteStorage.removeItem('box' + num + "_date");
+			remoteStorage.removeItem('box' + num + "_color");
 			$('#board').find('li:last').prev('li').remove();
 		});
 		
@@ -132,15 +132,15 @@ var RAMapp = {
 	},
 	
 	addCell: function (i,max) {
-		text = localStorage.getItem("box" + i + "_text");
+		text = remoteStorage.getItem("box" + i + "_text");
 		if (text == null) {
 			text = "";
 		}
-		info = localStorage.getItem("box" + i + "_date");
+		info = remoteStorage.getItem("box" + i + "_date");
 		if (info == null) {
 			info = "";
 		}
-		col = localStorage.getItem("box" + i + "_color");
+		col = remoteStorage.getItem("box" + i + "_color");
 		if (col != null && col != "") {
 			style = "background-color: " + col + "; border-color:inherit";
 			addClass = "done";
@@ -215,9 +215,9 @@ var RAMapp = {
 			$('#' + id).find('article').removeClass('done');
 			$('#' + id).find('article').css('borderColor', RAMapp.BASE_GRAY);
 			$('#' + id).find('article').css('backgroundColor', 'inherit');
-			localStorage.removeItem(id + "_text");
-			localStorage.removeItem(id + "_date");
-			localStorage.removeItem(id + "_color");
+			remoteStorage.removeItem(id + "_text");
+			remoteStorage.removeItem(id + "_date");
+			remoteStorage.removeItem(id + "_color");
 			RAMapp.closeBox(true);
 			return false;
 		});
@@ -226,7 +226,7 @@ var RAMapp = {
 	
 	addButtons: function () {
 		var themeCol = Math.floor(Math.random() * (360 + 1));
-		localStorage.setItem("themeCol", themeCol);
+		remoteStorage.setItem("themeCol", themeCol);
 		$('#tools').append('<section id="block-filter" style="background-color: hsl(' + themeCol + ',60%,40%);"><h1>tag cloud</h1><div class="content-wrapper clearfix"><div class="content clearfix"></div></div></section>');		
 		$('#tools').append('<section id="block-data" style="background-color: hsl(' + themeCol + ',60%,48%);"><h1>data</h1><div class="content-wrapper clearfix"><div class="content"><a href="#dataDelete" id="dataDelete">Delete all tasks</a><a href="#dataTest" id="dataTest">Load sample data</a><a href="#dataExport" id="dataExport">Export data</a><a href="#dataImport" id="dataImport">Import data</a></div></div></section>');
 		$('#tools').append('<section id="block-size" style="background-color: hsl(' + themeCol + ',60%,56%);"><h1>text size</h1><div class="content-wrapper clearfix"><div class="content clearfix"></div></div></section>');
@@ -242,41 +242,41 @@ var RAMapp = {
 	buttonsAdded: function () {
 		$('#zoom-in').click(function () {
 			$('html').css('fontSize', "+=2");
-			if (localStorage.getItem("isZoom")) {
-				localStorage.setItem("zoom", $('html').css('fontSize'));
+			if (remoteStorage.getItem("isZoom")) {
+				remoteStorage.setItem("zoom", $('html').css('fontSize'));
 			}
 			return false;
 		});
 		
 		$('#zoom-out').click(function () {
 			$('html').css('fontSize', "-=2");
-			if (localStorage.getItem("isZoom")) {
-				localStorage.setItem("zoom", $('html').css('fontSize'));
+			if (remoteStorage.getItem("isZoom")) {
+				remoteStorage.setItem("zoom", $('html').css('fontSize'));
 			}
 			return false;
 		});
 		$('#zoom-save-wrapper').click(function () {
 			if ($('#zoom-save').is(":checked")) {
-				localStorage.setItem("isZoom", true);
-				localStorage.setItem("zoom", $('html').css('fontSize'));
+				remoteStorage.setItem("isZoom", true);
+				remoteStorage.setItem("zoom", $('html').css('fontSize'));
 			} else {
-				localStorage.removeItem("isZoom");
+				remoteStorage.removeItem("isZoom");
 			}
 		});
 		
 		$('#colorizer').click(function () {
-			var count = localStorage.getItem("cells"),
+			var count = remoteStorage.getItem("cells"),
 				b = 30,
-				themeCol = localStorage.getItem("themeCol"),
+				themeCol = remoteStorage.getItem("themeCol"),
 				i = 0,
 				col = "";
 			for (i = 1; i < count; i = i + 1) {
-				col = localStorage.getItem("box" + i + "_color");
+				col = remoteStorage.getItem("box" + i + "_color");
 				if (col != null && col != '') {
 					b += (100 / count);
 					col = 'hsl(' + themeCol + ',85%, ' + b + '%)';
 					$('#board #box' + i + ' article').css('backgroundColor', col);
-					localStorage.setItem("box" + i + "_color", col);
+					remoteStorage.setItem("box" + i + "_color", col);
 				}
 			}
 			return false;
@@ -327,12 +327,12 @@ var RAMapp = {
 			$('#temp #dataOk').click(function () {
 				var importText = RAMapp.stripTags($('#temp textarea').val()),
 					tasks = importText.split("\n"),
-					count = parseInt(localStorage.getItem("cells")),
+					count = parseInt(remoteStorage.getItem("cells")),
 					lastID = count,
 					col = "",
 					i = 0;
 				
-				while (localStorage.getItem("box" + lastID + "_color") == null || localStorage.getItem("box" + lastID + "_color") == '') {
+				while (remoteStorage.getItem("box" + lastID + "_color") == null || remoteStorage.getItem("box" + lastID + "_color") == '') {
 					lastID--;
 					if (lastID < 0) {
 						break;
@@ -364,9 +364,9 @@ var RAMapp = {
 			var list = "",
 				i = 0;
 			RAMapp.dialog('Data Export', 'Plain text task list.');
-			for (i = 1; i < localStorage.getItem("cells"); i = i + 1) {
-				if (localStorage.getItem("box" + i + "_color") != null && localStorage.getItem("box" + i + "_color") != '') {
-					list += "[" + localStorage.getItem("box" + i + "_date") + "] " + localStorage.getItem("box" + i + "_text") + "\n";
+			for (i = 1; i < remoteStorage.getItem("cells"); i = i + 1) {
+				if (remoteStorage.getItem("box" + i + "_color") != null && remoteStorage.getItem("box" + i + "_color") != '') {
+					list += "[" + remoteStorage.getItem("box" + i + "_date") + "] " + remoteStorage.getItem("box" + i + "_text") + "\n";
 				}
 			}
 			$('#temp textarea').val(list);
@@ -378,7 +378,7 @@ var RAMapp = {
 		
 		this.tagCloud();
 		
-		if (localStorage.getItem("isZoom")) {
+		if (remoteStorage.getItem("isZoom")) {
 			$('#zoom-save').attr('checked', 'checked');
 		}
 		
@@ -411,19 +411,19 @@ var RAMapp = {
 	dataDelete: function () {
 		var obj = $('#board li[id^=box]'),
 			i = 0;
-		for (i = 1; i < localStorage.getItem("cells"); i = i + 1) {
-			//localStorage.removeItem("box" + i + "_text");
-			//localStorage.removeItem("box" + i + "_date");
-			//localStorage.removeItem("box" + i + "_color");
-			localStorage.setItem("box" + i + "_text", null);
-			localStorage.setItem("box" + i + "_date", null);
-			localStorage.setItem("box" + i + "_color", null);
+		for (i = 1; i < remoteStorage.getItem("cells"); i = i + 1) {
+			//remoteStorage.removeItem("box" + i + "_text");
+			//remoteStorage.removeItem("box" + i + "_date");
+			//remoteStorage.removeItem("box" + i + "_color");
+			remoteStorage.setItem("box" + i + "_text", null);
+			remoteStorage.setItem("box" + i + "_date", null);
+			remoteStorage.setItem("box" + i + "_color", null);
 			
 			if (i > 20) {
 				$('#board').find('li:last').prev('li').remove();
 			}
 		}
-		localStorage.setItem("cells", 20);
+		remoteStorage.setItem("cells", 20);
 		obj.find('.info').html('');
 		obj.find('.text').html('');
 		obj.find('article').removeClass('done');
@@ -459,9 +459,9 @@ var RAMapp = {
 		$('#' + id).find('article').css('borderColor', 'inherit');
 		$('#' + id).find('article').css('backgroundColor', bgcol);
 		$('#' + id).find('article').css('color', col);
-		localStorage.setItem(id + "_text", text);
-		localStorage.setItem(id + "_date", d.toUTCString());
-		localStorage.setItem(id + "_color", bgcol);
+		remoteStorage.setItem(id + "_text", text);
+		remoteStorage.setItem(id + "_date", d.toUTCString());
+		remoteStorage.setItem(id + "_color", bgcol);
 	},
 	   
 	saveBox: function () {
@@ -573,7 +573,7 @@ var RAMapp = {
 		$("#board li:last").show();
 		
 		$('#block-filter div.content').html("");
-		var count = localStorage.getItem("cells"),
+		var count = remoteStorage.getItem("cells"),
 			words = new Object(),
 			max = 0,
 			fontSize = 1,
@@ -589,7 +589,7 @@ var RAMapp = {
 			power = "",
 			w = "";
 		for (i = 1; i < count; i = i + 1) {
-			text = localStorage.getItem("box" + i + "_text");
+			text = remoteStorage.getItem("box" + i + "_text");
 			if (text != null) {
 				item = text.split(" ");
 				for (ii = 0; ii < item.length; ii++) {
@@ -613,7 +613,7 @@ var RAMapp = {
 		for (idx in words) {
 			power = words[idx];
 			b -= (40 / wcount);
-			toggle = $('<a href="#' + idx + '" style="color: hsl(' + localStorage.getItem("themeCol") + ',85%,' + b + '%)">' + idx + '</a>');
+			toggle = $('<a href="#' + idx + '" style="color: hsl(' + remoteStorage.getItem("themeCol") + ',85%,' + b + '%)">' + idx + '</a>');
 			toggle.click(function () {
 				w = $(this).html();
 				if ($(this).hasClass('active')) {
@@ -631,7 +631,7 @@ var RAMapp = {
 					$(this).css('color', '#000');
 					for (i = 1; i < count; i = i + 1) {
 						isView = false;
-						text = localStorage.getItem("box" + i + "_text");
+						text = remoteStorage.getItem("box" + i + "_text");
 						if (text != null) {
 							if (text.toLowerCase().indexOf(w) != -1) {
 								isView = true;
@@ -677,7 +677,7 @@ var RAMapp = {
 	dialog: function (title,descr) {
 		$('#temp').addClass('dialog');
 		$('#temp').append('<div id="dialog"><h1>' + title + '</h1><p>' + descr + '</p><textarea></textarea><a href="#ok" id="dataOk">ok</a><a href="#cancel" id="dataCancel">cancel</a></div>');
-		$('#dialog').css('background', 'hsl(' + localStorage.getItem("themeCol") + ',85%, 55%)');
+		$('#dialog').css('background', 'hsl(' + remoteStorage.getItem("themeCol") + ',85%, 55%)');
 		$('#temp').height($(document).height());
 		$('#temp').show();
 		$('#temp #dataCancel').click(function () {
