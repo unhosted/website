@@ -27,8 +27,11 @@
     this.value='Go';
   } else if (this.value == 'Go') {
     window.remoteStorage.setUserAddress(document.getElementById('userAddressInput').value);
+    document.getElementById('userAddressInput').disabled=true;
     this.value='Disconnect';
   } else { 
+    document.getElementById('userAddressInput').style.visibility='hidden';
+    document.getElementById('userAddressInput').disabled=false;
     this.value='Sign in';
   }
 ">
