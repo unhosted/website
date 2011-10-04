@@ -12,6 +12,22 @@
 
 	</head>
 <body>
+
+<div>
+<input id="userAddressInput" type="text" value="user@host" style="visibility:hidden">
+<input type="submit" value="Sign in" onclick="
+  if(this.value=='Sign in') {
+    document.getElementById('userAddressInput').style.visibility='visible';
+    this.value='Go';
+  } else if (this.value == 'Go') {
+    window.remoteStorage.setUserAddress(document.getElementById('userAddressInput').value);
+    this.value='Disconnect';
+  } else { 
+    this.value='Sign in';
+  }
+">
+</div>
+
 	<section id="slide_wrapper">
 		<article class="slide">
 			<h3><span>Welcome to the HTML5 Slideshow</span></h3>

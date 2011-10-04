@@ -8,14 +8,17 @@
         var ret = localStorage.setItem(k, v);
         window.remoteStorage.length = localStorage.length;
         return ret;
-      }
+      },
       removeItem: function(k,v) {
         var ret = localStorage.removeItem(k, v);
         window.remoteStorage.length = localStorage.length;
         return ret;
-      }
+      },
       clear: function() {
         return localStorage.clear();
+      },
+      setUserAddress: function(userAddress) {
+        alert('fake setting user address "'+userAddress+'"');
       }
     }
   }
