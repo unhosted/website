@@ -9,7 +9,7 @@
     document.addEventListener('DOMContentLoaded', function() {
       document.removeEventListener('DOMContentLoaded', arguments.callee, false );
       {
-        //
+        oauth.harvestToken(backend.setToken);
       }
     }, false)
 
@@ -52,8 +52,9 @@
     ///////////////
 
     var webfinger = (function(){
-      var ua, userName, host, templateParts;
+      var userAddress, userName, host, templateParts;//this is all a bit messy, but there are a lot of callbacks here, so globals help us with that.
       function getDavBaseUrl(ua, error, cb){
+        userAddress = ua;
         var parts = ua.split('@');
         if(parts.length < 2) {
           error('That is not a user address. There is no @-sign in it');
@@ -113,6 +114,7 @@
       }
 
       function continueWithHostmeta(data, error, cb) {
+        data = (new DOMParser()).parseFromString(data, 'text/xml');
         if(!data.getElementsByTagName) {
           error('Host-meta is not an XML document, or doesnt have xml mimetype.');
           return;
@@ -122,25 +124,25 @@
           error('no Link tags found in host-meta');
         } else {
           var lrddFound = false;
-          error('none of the Link tags have a lrdd rel-attribute');
+          var errorStr = 'none of the Link tags have a lrdd rel-attribute';
           for(var linkTagI in linkTags) {
             for(var attrI in linkTags[linkTagI].attributes) {
               var attr = linkTags[linkTagI].attributes[attrI];
               if((attr.name=='rel') && (attr.value=='lrdd')) {
                 lrddFound = true;
-                error('the first Link tag with a lrdd rel-attribute has no template-attribute');
+                errorStr = 'the first Link tag with a lrdd rel-attribute has no template-attribute';
                 for(var attrJ in linkTags[linkTagI].attributes) {
                   var attr2 = linkTags[linkTagI].attributes[attrJ];
                   if(attr2.name=='template') {
                     templateParts = attr2.value.split('{uri}');
                     if(templateParts.length == 2) {
                       ajax({
-                        url: templateParts[0]+ua+templateParts[1],
+                        url: templateParts[0]+userAddress+templateParts[1],
                         success: function(data) {afterLrddSuccess(data, error, cb);},
                         error: function(data){afterLrddNoAcctError(data, error, cb);},
                       })
                     } else {
-                      error('the template doesn\'t contain "{uri}"');
+                      errorStr = 'the template doesn\'t contain "{uri}"';
                     }
                     break;
                   }
@@ -152,17 +154,21 @@
               break;
             }
           }
+          if(!lrddFound) {
+            error(errorStr);//todo: make this error flow nicer
+          }
         }
       }
       function afterLrddNoAcctError() {
         error('the template doesn\'t contain "{uri}"');
-        $.ajax({
+        ajax({
           url: templateParts[0]+'acct:'+ua+templateParts[1],
           success: function() {afterLrddSuccess(error, cb);},
           error: function() {afterLrddAcctError(error, cb);}
         })
       }
       function afterLrddSuccess(data, error, cb) {
+        data = (new DOMParser()).parseFromString(data, 'text/xml');
         if(!data.getElementsByTagName) {
           error('Lrdd is not an XML document, or doesnt have xml mimetype.');
           return;
@@ -172,13 +178,13 @@
           error('no Link tags found in lrdd');
         } else {
           var davFound = false;
-          error('none of the Link tags have a http://unhosted.org/spec/dav/0.1 rel-attribute')
+          var errorStr = 'none of the Link tags have a http://unhosted.org/spec/dav/0.1 rel-attribute';
           for(var linkTagI in linkTags) {
             for(var attrI in linkTags[linkTagI].attributes) {
               var attr = linkTags[linkTagI].attributes[attrI];
               if((attr.name=='rel') && (attr.value=='http://unhosted.org/spec/dav/0.1')) {
                 davFound = true;
-                error('the first Link tag with a dav rel-attribute has no href-attribute')
+                errorStr = 'the first Link tag with a dav rel-attribute has no href-attribute';
                 for(var attrJ in linkTags[linkTagI].attributes) {
                   var attr2 = linkTags[linkTagI].attributes[attrJ];
                   davUrl = attr2.value;
@@ -189,7 +195,7 @@
 
 
                     ajax({
-                      url: davUrl+'/oauth2/auth',
+                      url: davUrl+'oauth2/auth',
                       success: function() {afterOAuthUrlSuccess(error, cb);},
                       error: function() {afterOAuthUrlError(error, cb);}
                     });
@@ -203,6 +209,9 @@
               break;
             }
           }
+          if(!davFound) {
+            error(errorStr);
+          }
         }
       }
       function afterOAuthUrlSuccess(error, cb) {
@@ -214,6 +223,43 @@
       }
 
       return {getDavBaseUrl: getDavBaseUrl};
+    })()
+
+      ///////////////////////////
+     // OAuth2 implicit grant //
+    ///////////////////////////
+
+    var oauth = (function() {
+      function go(url) {
+        window.location = url 
+          + 'oauth2/auth?client_id=' + window.location
+          + '&redirect_uri=' + window.location
+          + '&scope=' + window.location
+          + '&response_type=token';
+      }
+      function harvestToken(cb) {
+        var params = location.hash.split('&');
+        var paramsToStay = [];
+        for(param in params){
+          var kv = params[param].split('=');
+          if(kv.length == 2) {
+            if(kv[0]=='#access_token' || kv[0]=='access_token') {
+              cb(kv[1]);
+            } else if(kv[0]=='#token_type' || kv[0]=='token_type') {
+              //ignore silently
+            } else {
+              paramsToStay.push(params[param]);
+            }
+          } else {
+            paramsToStay.push(params[param]);
+          }
+        }
+        window.location='#'+paramsToStay.join('&');
+      }
+      return {
+        go: go,
+        harvestToken: harvestToken,
+        }
     })()
 
       ///////////////////////////
@@ -239,10 +285,13 @@
             alert(errorMsg);
           }
           var callback = function(davUrl) {
-            alert('connecting to '+davUrl);
+            //alert('connecting to '+davUrl);
             cb();
-          };
+            oauth.go(davUrl);
+          }
           webfinger.getDavBaseUrl(userAddress, onError, callback);
+        },
+        setToken: function(token) {
         }
       }
     })()
