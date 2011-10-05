@@ -1,7 +1,5 @@
-#remoteStorage { position:absolute; left:0; top:0; }
-#remoteStorage:hover #userButton { opacity:.5; }
-#remoteStorage #userButton { opacity:0; }
-#remoteStorage #userButton:hover { opacity:1; }
+#remoteStorage { position:absolute; right:0; top:0; opacity:.5; }
+#remoteStorage:hover { opacity:1; }
 #remoteStorage input {
     display:inline; margin:.5em; padding:.5em .6em; font-size:.8em;
 	color:#333; text-shadow:0 1px 1px rgba(255, 255, 255, 0.75);
