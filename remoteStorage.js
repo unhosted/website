@@ -50,52 +50,52 @@
     ///////////////
 
     var webfinger = (function(){
-      var ua, userName, host, templateParts
+      var ua, userName, host, templateParts;
       function getDavBaseUrl(ua, error, cb){
-	ua = document.getElementById('ua').value
-	var parts = ua.split('@')
+	ua = document.getElementById('ua').value;
+	var parts = ua.split('@');
 	if(parts.length < 2) {
-	  document.getElementById('result').innerHTML = 'That is not a user address. There is no @-sign in it'
+	  error('That is not a user address. There is no @-sign in it');
 	} else if(parts.length > 2) {
-	  document.getElementById('result').innerHTML = 'That is not a user address. There is more than one @-sign in it'
+	  error('That is not a user address. There is more than one @-sign in it');
 	} else {
 	  if(!(/^[\.0-9A-Za-z]+$/.test(parts[0]))) {
-	    document.getElementById('result').innerHTML = 'That is not a user address. There are non-dotalphanumeric symbols before the @-sign: "'+parts[0]+'"'
+	    error('That is not a user address. There are non-dotalphanumeric symbols before the @-sign: "'+parts[0]+'"');
 	  } else if(!(/^[\.0-9A-Za-z\-]+$/.test(parts[1]))) {
-	    document.getElementById('result').innerHTML = 'That is not a user address. There are non-dotalphanumeric symbols after the @-sign: "'+parts[1]+'"'
+	    error('That is not a user address. There are non-dotalphanumeric symbols after the @-sign: "'+parts[1]+'"');
 	  } else {
-	    userName = parts[0]
-	    host = parts[1]
-	    document.getElementById('result').innerHTML = 'So far so good. Looking up https host-meta for '+host
-	    $.ajax(
-	      { url: 'https://'+host+'/.well-known/host-meta'
-	      , success: afterHttpsHostmetaSuccess
-	      , error: afterHttpsHostmetaError
-	      })
+	    userName = parts[0];
+	    host = parts[1];
+	    error('So far so good. Looking up https host-meta for '+host);
+	    ajax({
+	      url: 'https://'+host+'/.well-known/host-meta',
+	      success: function(data) {afterHttpsHostmetaSuccess(data, error, cb);},
+	      error: function(data) {afterHttpsHostmetaError(data, error, cb);},
+	    })
 	  }
 	}
       }
-      function afterHttpsHostmetaSuccess(data) {
-	document.getElementById('result').innerHTML = 'Https Host-meta found.'
-	continueWithHostmeta(data)
+      function afterHttpsHostmetaSuccess(data, error, cb) {
+	error('Https Host-meta found.');
+	continueWithHostmeta(data, error, cb);
       }
 
-      function afterHttpsHostmetaError(data) {
-	    document.getElementById('result').innerHTML = 'Https Host-meta error. Trying http.'
-	    $.ajax(
-	      { url: 'http://'+host+'/.well-known/host-meta'
-	      , success: afterHttpHostmetaSuccess
-	      , error: afterHttpHostmetaError
-	      })
+      function afterHttpsHostmetaError(data, error, cb) {
+	    error('Https Host-meta error. Trying http.');
+	    ajax({
+	      url: 'http://'+host+'/.well-known/host-meta',
+	      success: function() {afterHttpHostmetaSuccess(data, error, cb);},
+	      error: function() {afterHttpHostmetaError(data, error, cb);},
+	    })
       }
 
-      function afterHttpHostmetaSuccess(data) {
-	document.getElementById('result').innerHTML = 'Http Host-meta found.'
-	continueWithHostmeta(data)
+      function afterHttpHostmetaSuccess(data, error, cb) {
+	error('Http Host-meta found.');
+	continueWithHostmeta(data);
       }
 
-      function afterHttpHostmetaError(data) {
-	document.getElementById('result').innerHTML = 'Cross-origin host-meta failed. Trying through proxy'
+      function afterHttpHostmetaError(data, error, cb) {
+	error('Cross-origin host-meta failed. Trying through proxy');
 	//$.ajax(
 	//  { url: 'http://useraddress.net/single-origin-webfinger...really?'+ua
 	//   , success: afterWebfingerSuccess
@@ -103,105 +103,105 @@
 	//  })
       }
 
-      function continueWithHostmeta(data) {
+      function continueWithHostmeta(data, error, cb) {
 	if(!data.getElementsByTagName) {
-	  document.getElementById('result').innerHTML = 'Host-meta is not an XML document, or doesnt have xml mimetype.'
-	  return
+	  error('Host-meta is not an XML document, or doesnt have xml mimetype.');
+	  return;
 	}
-	var linkTags = data.getElementsByTagName('Link')
+	var linkTags = data.getElementsByTagName('Link');
 	if(linkTags.length == 0) {
-	  document.getElementById('result').innerHTML = 'no Link tags found in host-meta'
+	  error('no Link tags found in host-meta');
 	} else {
-	  var lrddFound = false
-	  document.getElementById('result').innerHTML = 'none of the Link tags have a lrdd rel-attribute'
+	  var lrddFound = false;
+	  error('none of the Link tags have a lrdd rel-attribute');
 	  for(var linkTagI in linkTags) {
 	    for(var attrI in linkTags[linkTagI].attributes) {
-	      var attr = linkTags[linkTagI].attributes[attrI]
+	      var attr = linkTags[linkTagI].attributes[attrI];
 	      if((attr.name=='rel') && (attr.value=='lrdd')) {
-		lrddFound = true
-		document.getElementById('result').innerHTML = 'the first Link tag with a lrdd rel-attribute has no template-attribute'
+		lrddFound = true;
+		error('the first Link tag with a lrdd rel-attribute has no template-attribute');
 		for(var attrJ in linkTags[linkTagI].attributes) {
-		  var attr2 = linkTags[linkTagI].attributes[attrJ]
+		  var attr2 = linkTags[linkTagI].attributes[attrJ];
 		  if(attr2.name=='template') {
-		    templateParts = attr2.value.split('{uri}')
+		    templateParts = attr2.value.split('{uri}');
 		    if(templateParts.length == 2) {
-		      $.ajax(
-			{ url: templateParts[0]+ua+templateParts[1]
-			, success: afterLrddSuccess
-			, error: afterLrddNoAcctError
-			})
+		      ajax({
+			url: templateParts[0]+ua+templateParts[1],
+			success: function(data) {afterLrddSuccess(data, error, cb);},
+			error: function(data){afterLrddNoAcctError(data, error, cb);},
+                      })
 		    } else {
-		      document.getElementById('result').innerHTML = 'the template doesn\'t contain "{uri}"'
+		      error('the template doesn\'t contain "{uri}"');
 		    }
-		    break
+		    break;
 		  }
 		}
-		break
+		break;
 	      }
 	    }
 	    if(lrddFound) {
-	      break
+	      break;
 	    }
 	  }
 	}
       }
       function afterLrddNoAcctError() {
-	document.getElementById('result').innerHTML = 'the template doesn\'t contain "{uri}"'
-	$.ajax(
-	  { url: templateParts[0]+'acct:'+ua+templateParts[1]
-	  , success: afterLrddSuccess
-	  , error: afterLrddAcctError
-	  })
+	error('the template doesn\'t contain "{uri}"');
+	$.ajax({
+	  url: templateParts[0]+'acct:'+ua+templateParts[1],
+	  success: function() {afterLrddSuccess(error, cb);},
+	  error: function() {afterLrddAcctError(error, cb);}
+	})
       }
-      function afterLrddSuccess(data) {
+      function afterLrddSuccess(data, error, cb) {
 	if(!data.getElementsByTagName) {
-	  document.getElementById('result').innerHTML = 'Lrdd is not an XML document, or doesnt have xml mimetype.'
-	  return
+	  error('Lrdd is not an XML document, or doesnt have xml mimetype.');
+	  return;
 	}
-	var linkTags = data.getElementsByTagName('Link')
+	var linkTags = data.getElementsByTagName('Link');
 	if(linkTags.length == 0) {
-	  document.getElementById('result').innerHTML = 'no Link tags found in lrdd'
+	  error('no Link tags found in lrdd');
 	} else {
-	  var davFound = false
-	  document.getElementById('result').innerHTML = 'none of the Link tags have a http://unhosted.org/spec/dav/0.1 rel-attribute'
+	  var davFound = false;
+	  error('none of the Link tags have a http://unhosted.org/spec/dav/0.1 rel-attribute')
 	  for(var linkTagI in linkTags) {
 	    for(var attrI in linkTags[linkTagI].attributes) {
-	      var attr = linkTags[linkTagI].attributes[attrI]
+	      var attr = linkTags[linkTagI].attributes[attrI];
 	      if((attr.name=='rel') && (attr.value=='http://unhosted.org/spec/dav/0.1')) {
-		davFound = true
-		document.getElementById('result').innerHTML = 'the first Link tag with a dav rel-attribute has no href-attribute'
+		davFound = true;
+		error('the first Link tag with a dav rel-attribute has no href-attribute')
 		for(var attrJ in linkTags[linkTagI].attributes) {
-		  var attr2 = linkTags[linkTagI].attributes[attrJ]
-		  davUrl = attr2.value
+		  var attr2 = linkTags[linkTagI].attributes[attrJ];
+		  davUrl = attr2.value;
 		  if(attr2.name=='href') {
 
 //this is where webfinger flows into oauth:	
 
 
 
-		    $.ajax(
-		      { url: davUrl+'/oauth2/auth'
-		      , success: afterOAuthUrlSuccess
-		      , error: afterOAuthUrlError
-		      })
-		    break
+		    ajax({
+		      url: davUrl+'/oauth2/auth',
+		      success: function() {afterOAuthUrlSuccess(error, cb);},
+		      error: function() {afterOAuthUrlError(error, cb);}
+                    });
+		    break;
 		  }
 		}
-		break
+		break;
 	      }
 	    }
 	    if(davFound) {
-	      break
+	      break;
 	    }
 	  }
 	}
       }
-      function afterOAuthUrlSuccess() {
-	document.getElementById('result').innerHTML = 'found your remote storage ('+ua+') to be present at '+davUrl
+      function afterOAuthUrlSuccess(error, cb) {
+	cb('found your remote storage ('+ua+') to be present at '+davUrl)
       }
 
-      function afterOAuthUrlError() {
-	document.getElementById('result').innerHTML = 'found your remote storage ('+ua+') to be missing at '+davUrl
+      function afterOAuthUrlError(error, cb) {
+	error('found your remote storage ('+ua+') to be missing at '+davUrl)
       }
 
 
