@@ -15,17 +15,22 @@
 
     //implementing $.ajax():
     function ajax(params) {
-      var xhr = new XMLHttpRequest()
+      var xhr = new XMLHttpRequest();
       if(!params.method) {
-        params.method='GET'
+        params.method='GET';
       }
       if(!params.data) {
-        params.data = null
+        params.data = null;
       }
-      xhr.open(params.method, params.url, true)
+      xhr.open(params.method, params.url, true);
       if(params.headers) {
         for(var header in params.headers) {
-          xhr.setRequestHeader(header, params.headers[header])
+          xhr.setRequestHeader(header, params.headers[header]);
+        }
+      }
+      if(params.fields) {
+        for(var field in params.fields) {
+          xhr[field] = params.fields[field];
         }
       }
       xhr.onreadystatechange = function() {
@@ -38,7 +43,7 @@
           }
         }
       }
-      xhr.send(params.data)
+      xhr.send(params.data);
     }
 
     //implementing $():
@@ -255,33 +260,112 @@
     ///////////////////////////
 
     var backend = (function(){
+      function keyToUrl(key) {
+        var userAddressParts = localStorage.getItem('_remoteStorageUserAddress').split('@')
+        var resource = localStorage.getItem('_remoteStorageDataScope');
+        var url = localStorage.getItem('_remoteStorageDavUrl')
+          +'webdav/'+ userAddressParts[1]
+          +'/'+ userAddressParts[0]
+          +'/'+ resource
+          +'/'+ key
+        return url
+      }
+      function doCall(method, key, value, revision, cb) {
+	var bearerToken=Base64.encode(localStorage.getItem('_remoteStorageUserAddress')+':'+localStorage.getItem('_remoteStorageDavToken'));
+	ajax({
+	  url: keyToUrl(key),
+	  type: method,
+	  headers: {
+	    Authorization: 'Basic '+bearerToken
+	  },
+	  fields: {
+	    withCredentials: 'true'
+	  },
+	  data: JSON.stringify({
+	    value: value,
+	    _revision: revision
+	  }),
+	  success: function(text){
+	    try {//this is not necessary for current version of protocol, but might be in future:
+	      var obj = JSON.parse(text);
+	      obj.success = true;
+	      cb(obj);
+	    } catch(e){
+	      cb({
+		success:true
+	      });
+	    }
+	  },
+	  error: function(xhr) {
+	    cb({
+	      success:false,
+	      error: xhr.status
+	    })
+	  },
+	})
+      }
+
       return {
         clear: function(cb) {
-          //alert('backend clearing');
-          cb();
+          var revision = 0;
+          var index = JSON.parse(localStorage.getItem('_remoteStorageIndex'));
+          for(var i in index) {
+            doCall('DELETE', i, null, revision, function() {});
+          }
+          index={
+            '_remoteStorageAll': revision
+          }
+          localStorage.setItem('_remoteStorageIndex', index);
+          doCall('PUT', '_remoteStorageIndex', JSON.stringify(index), revision, cb);
         },
         setItem: function(key, value, revision, cb) {
-          //alert('backend setting item "'+key+'" to "'+value+'" revision '+revision);
-          cb(revision);
+          var index = JSON.parse(localStorage.getItem('_remoteStorageIndex'));
+          if(index['_remoteStorageAll']<revision) {
+            doCall('PUT', key, value, revision, function() {
+              index[key]=revision;
+              index['_remoteStorageAll']=revision;
+              localStorage.setItem('_remoteStorageIndex', index);
+              doCall('PUT', '_remoteStorageIndex', JSON.stringify(index), revision, cb);
+            });
+          }
         },
         removeItem: function(key, revision, cb) {
-          //alert('backend removing item "'+key+'" revision '+revision);
-          cb(revision);
+          var index = JSON.parse(localStorage.getItem('_remoteStorageIndex'));
+          if(index['_remoteStorageAll']<revision) {
+            doCall('DELETE', key, null, revision, function() {
+              index[key]=undefined;
+              index['_remoteStorageAll']=revision;
+              localStorage.setItem('_remoteStorageIndex', index);
+              doCall('PUT', '_remoteStorageIndex', JSON.stringify(index), revision, cb);
+            });
+          }
         },
         connect: function(userAddress, cb) {
-          localStorage.setItem('_remoteStorageUserAddress', userAddress);
           var onError = function(errorMsg) {
             alert(errorMsg);
           }
           var callback = function(davUrl) {
-            //alert('connecting to '+davUrl);
             cb();
+            localStorage.setItem('_remoteStorageUserAddress', userAddress);
             oauth.go(davUrl);
           }
           webfinger.getDavBaseUrl(userAddress, onError, callback);
         },
         setToken: function(token) {
           localStorage.setItem('_remoteStorageOauthToken', token);
+          var localIndex = localStorage.getItem('_remoteStorageItem');
+          doCall('GET', '_remoteStorageIndex', null, null, function(remoteIndex) {
+            for(var i in remoteIndex.value) {
+              if(remoteIndex.value[i] > localIndex[i]) {//need to fetch it
+                doCall('GET', i, null, revision, function(data) {
+                  localStorage.setItem(data.key, data.value);
+                  var localIndex = localStorage.getItem('_remoteStorageItem');
+                  localIndex[data.key]=data._revision;
+                  localStorage.setItem('_remoteStorageIndex', localIndex);              
+                });
+              }
+            }
+          });
         }
       }
     })()
@@ -289,7 +373,7 @@
     window.remoteStorage = (function(){
       function work(minRevision) {
         var queue = JSON.parse(localStorage.getItem('_remoteStorageActionQueue'));
-        if(queue.length) {
+        if(queue && queue.length) {
           var thisAction = queue.shift();
           while(thisAction.revision<minRevision) {
             thisAction = queue.shift();
