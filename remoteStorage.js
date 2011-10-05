@@ -32,7 +32,7 @@
         if(xhr.readyState == 4) {
           if(xhr.status == 0) {
             //alert('looks like '+params.url+' has no CORS headers on it! try copying this scraper and that file both onto your localhost')
-            params.error(xhr.respondeText);
+            params.error(xhr.responseText);
           } else {
             params.success(xhr.responseText);
           }
@@ -70,8 +70,12 @@
             //error('So far so good. Looking up https host-meta for '+host);
             ajax({
               url: 'https://'+host+'/.well-known/host-meta',
-              success: function(data) {afterHttpsHostmetaSuccess(data, error, cb);},
-              error: function(data) {afterHttpsHostmetaError(data, error, cb);},
+              success: function(data) {
+                afterHttpsHostmetaSuccess(data, error, cb);
+              },
+              error: function(data) {
+                afterHttpsHostmetaError(data, error, cb);
+              },
             })
           }
         }
@@ -85,14 +89,18 @@
             //error('Https Host-meta error. Trying http.');
             ajax({
               url: 'http://'+host+'/.well-known/host-meta',
-              success: function() {afterHttpHostmetaSuccess(data, error, cb);},
-              error: function() {afterHttpHostmetaError(data, error, cb);},
+              success: function(data) {
+                afterHttpHostmetaSuccess(data, error, cb);
+              },
+              error: function(data) {
+                afterHttpHostmetaError(data, error, cb);
+              },
             })
       }
 
       function afterHttpHostmetaSuccess(data, error, cb) {
         //error('Http Host-meta found.');
-        continueWithHostmeta(data);
+        continueWithHostmeta(data, error, cb);
       }
 
       function afterHttpHostmetaError(data, error, cb) {
