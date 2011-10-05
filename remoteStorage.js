@@ -189,16 +189,8 @@
                   var attr2 = linkTags[linkTagI].attributes[attrJ];
                   davUrl = attr2.value;
                   if(attr2.name=='href') {
-
-//this is where webfinger flows into oauth:        
-
-
-
-                    ajax({
-                      url: davUrl+'oauth2/auth',
-                      success: function() {afterOAuthUrlSuccess(error, cb);},
-                      error: function() {afterOAuthUrlError(error, cb);}
-                    });
+                    //SUCCESS:
+                    cb(davUrl);
                     break;
                   }
                 }
@@ -214,14 +206,6 @@
           }
         }
       }
-      function afterOAuthUrlSuccess(error, cb) {
-        cb(davUrl);
-      }
-
-      function afterOAuthUrlError(error, cb) {
-        error('found your remote storage ('+ua+') to be missing at '+davUrl);
-      }
-
       return {getDavBaseUrl: getDavBaseUrl};
     })()
 
@@ -231,21 +215,25 @@
 
     var oauth = (function() {
       function go(url) {
+        var loc = encodeURIComponent((''+window.location).split('#')[0]);
         window.location = url 
-          + 'oauth2/auth?client_id=' + window.location
-          + '&redirect_uri=' + window.location
-          + '&scope=' + window.location
+          + 'oauth2/auth?client_id=' + loc
+          + '&redirect_uri=' + loc
+          + '&scope=' + loc
           + '&response_type=token';
       }
       function harvestToken(cb) {
         var params = location.hash.split('&');
         var paramsToStay = [];
         for(param in params){
+          if(params[param].length && params[param][0] =='#') {
+            params[param] = params[param].substring(1);
+          }
           var kv = params[param].split('=');
           if(kv.length == 2) {
-            if(kv[0]=='#access_token' || kv[0]=='access_token') {
+            if(kv[0]=='access_token') {
               cb(kv[1]);
-            } else if(kv[0]=='#token_type' || kv[0]=='token_type') {
+            } else if(kv[0]=='token_type') {
               //ignore silently
             } else {
               paramsToStay.push(params[param]);
@@ -281,6 +269,7 @@
           cb(revision);
         },
         connect: function(userAddress, cb) {
+          localStorage.setItem('_remoteStorageUserAddress', userAddress);
           var onError = function(errorMsg) {
             alert(errorMsg);
           }
@@ -292,6 +281,7 @@
           webfinger.getDavBaseUrl(userAddress, onError, callback);
         },
         setToken: function(token) {
+          localStorage.setItem('_remoteStorageOauthToken', token);
         }
       }
     })()
