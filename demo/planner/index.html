@@ -7,15 +7,71 @@
 	<meta name="description" content="A prototype personal event planner app that uses remoteStorage. Features include: - Calendar month view - Day view - Add/edit/delete events - Event types/labels (personal, work..) - Tweet events - Export calendar to iCal - Dark / Light themes - Keyboard navigation - Device/resolution awareness External libraries used: jQuery 1.6" />
 
 	<link href="style.css" rel="stylesheet" type="text/css" />
+	<link href="../../remoteStorage.css" rel="stylesheet" type="text/css" />
 
 	<link rel="author" href="http://kailashnadh.name/" />
 	<link rel="payment" type="tipjar" href="https://flattr.com/profile/knadh" />
 	<link rel="license" href="http://www.gnu.org/licenses/gpl.html" />
 
+	<script src="../../remoteStorage.js"></script>
 	<script src="jquery-1.6.2.min.js"></script>
 	<script src="lib.js"></script>
 </head>
 <body class="dark">
+
+
+
+<div id="remoteStorage">
+  <script type="text/javascript" src="../../remoteStorage.js"></script><link rel="stylesheet" href="../../remoteStorage.css" />
+  <input id="userAddressInput" type="text" placeholder="you@yourremotestorage" onkeyup="InputKeyUp(this);">
+  <span id="userAddress" style="display:none" onmouseover="SpanMouseOver(this);" onmouseout="SpanMouseOut(this);" onclick="SpanClick(this)"></span>
+  <input id="userButton" type="submit" value="Sign in" onclick="ButtonClick(this)">
+</div>
+
+
+<div id="remoteStorage">
+<input id="userAddressInput" type="text" placeholder="you@yourremotestorage" onkeyup="
+if(this.value=='') {
+    document.getElementById('userButton').className='';
+    document.getElementById('userButton').disabled='disabled';
+    this.parentNode.style.opacity='.5';
+} else {
+    document.getElementById('userButton').disabled='';
+    document.getElementById('userButton').className='synced';
+    this.parentNode.style.opacity='1';
+}">
+<span id="userAddress" style="display:none"
+onmouseover="this.className='disconnected';"
+onmouseout="this.className='';"
+onclick="
+window.remoteStorage.removeBackend();
+document.getElementById('userAddressInput').value='';
+document.getElementById('userAddressInput').style.display='inline';
+document.getElementById('userAddressInput').disabled='';
+this.style.display='none';"></span>
+<input id="userButton" type="submit" value="Sign in" onclick="
+if(document.getElementById('userAddressInput').value!='') {
+      window.remoteStorage.setBackend(document.getElementById('userAddressInput').value, 'backboneTodo');
+      document.getElementById('userAddress').style.display='inline';
+      document.getElementById('userAddress').innerHTML=document.getElementById('userAddressInput').value;
+      document.getElementById('userAddressInput').style.display='none';
+      document.getElementById('userAddressInput').disabled='disabled';
+      this.style.display='none';
+      this.disabled='disabled';
+    }
+}">
+<script>
+if(window.remoteStorage.getBackend()) {
+  document.getElementById('userAddressInput').style.display='none';
+  document.getElementById('userAddress').style.display='inline';
+  document.getElementById('userButton').value=window.remoteStorage.getBackend();
+  //document.getElementById('userButton').onclick='window.remoteStorage.removeBackend();';
+}
+</script>
+</div>
+
+
+
 
 <div id="calendar-wrap" class="box">
 	<div id="calendar">

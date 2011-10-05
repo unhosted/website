@@ -15,16 +15,6 @@
 		<title>RSS Mobile Reader</title> 
 		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.0a4.1/jquery.mobile-1.0a4.1.min.css" /> 
 
-
-
-
-
-        <script type="text/javascript" src="../../remoteStorage.js"></script>
-
-
-
-
-
 		<script type="text/javascript" src="https://www.google.com/jsapi?key=ABQIAAAAuvAXPRXL9qkzO0R8vzYpOhQ_BAnb8hQeSCQ2aBH79hHa1YbW_RQNN9ClKXG21xQObiXJ7diAAYaywg"></script>
 		<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script> -->
 		<script src="http://code.jquery.com/jquery-1.5.2.min.js"></script> 
@@ -157,20 +147,16 @@
 
 
 
-<div>
-<input id="userAddressInput" type="text" value="user@host" style="visibility:hidden">
-<input type="submit" value="Sign in" onclick="
-  if(this.value=='Sign in') {
-    document.getElementById('userAddressInput').style.visibility='visible';
-    this.value='Go';
-  } else if (this.value == 'Go') {
-    window.remoteStorage.setUserAddress(document.getElementById('userAddressInput').value);
-    this.value='Disconnect';
-  } else { 
-    this.value='Sign in';
-  }
-">
+
+<div id="remoteStorage">
+  <script type="text/javascript" src="../../remoteStorage.js"></script><link rel="stylesheet" href="../../remoteStorage.css" />
+  <input id="userAddressInput" type="text" placeholder="you@yourremotestorage" onkeyup="InputKeyUp(this);">
+  <span id="userAddress" style="display:none" onmouseover="SpanMouseOver(this);" onmouseout="SpanMouseOut(this);" onclick="SpanClick(this)"></span>
+  <input id="userButton" type="submit" value="Sign in" onclick="ButtonClick(this)">
 </div>
+
+
+
 
 
 		<div data-role="page" id="main" data-theme="b"> 

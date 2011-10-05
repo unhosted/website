@@ -24,6 +24,16 @@
   </script> 
 </head>
 <body>
+
+
+
+<div id="remoteStorage">
+  <script type="text/javascript" src="../../remoteStorage.js"></script><link rel="stylesheet" href="../../remoteStorage.css" />
+  <input id="userAddressInput" type="text" placeholder="you@yourremotestorage" onkeyup="InputKeyUp(this);">
+  <span id="userAddress" style="display:none" onmouseover="SpanMouseOver(this);" onmouseout="SpanMouseOut(this);" onclick="SpanClick(this)"></span>
+  <input id="userButton" type="submit" value="Sign in" onclick="ButtonClick(this)">
+</div>
+
   <div id="boardEdge" class="boardEdge">
     <div id="board" class="board"></div>
   </div>

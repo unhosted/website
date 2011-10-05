@@ -603,3 +603,46 @@
     })()
   }
 })()
+
+  ////////
+ // UI //
+////////
+function InputKeyUp(el) {
+  if(el.value=='') {
+    document.getElementById('userButton').className='';
+    document.getElementById('userButton').disabled='disabled';
+    el.parentNode.style.opacity='.5';
+  } else {
+    document.getElementById('userButton').disabled='';
+    document.getElementById('userButton').className='synced';
+    el.parentNode.style.opacity='1';
+  }
+}
+function SpanMouseOver(el) {
+  el.className='disconnected';
+}
+function SpanMouseOver(el) {
+  el.className='';
+}
+function SpanClick(el) {
+  window.remoteStorage.removeBackend();
+  document.getElementById('userAddressInput').value='';
+  document.getElementById('userAddressInput').style.display='inline';
+  document.getElementById('userAddressInput').disabled='';
+  el.style.display='none';
+}
+function ButtonClick(el) {
+  if(document.getElementById('userAddressInput').value!='') {
+    if(window.remoteStorage.getBackend()) {
+      document.getElementById('userButton').className='synced';
+    } else {
+      window.remoteStorage.setBackend(document.getElementById('userAddressInput').value, 'backboneTodo');
+      document.getElementById('userAddress').style.display='inline';
+      document.getElementById('userAddress').innerHTML=document.getElementById('userAddressInput').value;
+      document.getElementById('userAddressInput').style.display='none';
+      document.getElementById('userAddressInput').disabled='disabled';
+      el.style.display='none';
+      el.disabled='disabled';
+    }
+  }
+}
