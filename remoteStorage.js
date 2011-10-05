@@ -1,84 +1,209 @@
 (function() {
   if(!window.remoteStorage) {//shim switch
+
+      ///////////////////////
+     // poor man's jQuery //
+    ///////////////////////
+
+    //implementing $(document).ready(embody):
+    document.addEventListener('DOMContentLoaded', function() {
+      document.removeEventListener('DOMContentLoaded', arguments.callee, false );
+      {
+        //
+      }
+    }, false)
+
+    //implementing $.ajax():
+    function ajax(params) {
+      var xhr = new XMLHttpRequest()
+      if(!params.method) {
+	params.method='GET'
+      }
+      if(!params.data) {
+	params.data = null
+      }
+      xhr.open(params.method, params.url, true)
+      if(params.headers) {
+	for(var header in params.headers) {
+	  xhr.setRequestHeader(header, params.headers[header])
+	}
+      }
+      xhr.onreadystatechange = function() {
+	if(xhr.readyState == 4) {
+	  if(xhr.status == 0) {
+	    alert('looks like '+params.url+' has no CORS headers on it! try copying this scraper and that file both onto your localhost')
+	  }
+	  params.success(xhr.responseText)
+	}
+      }
+      xhr.send(params.data)
+    }
+
+    //implementing $():
+    function $(str) {
+      return document.getElementById(str);
+    }
+
+
       ///////////////
      // Webfinger //
     ///////////////
 
-    var webfinger = (function() {
-      var webFinger = {}
-      var getHostMeta = function( userAddress, linkRel, onError, cb ){
-	//split the userAddress at the '@' symbol:
-	var parts = userAddress.split('@')
-	if( parts.length == 2 ){
-	  var user = parts[0]
-	  var domain = parts[1]
-
-	  ajax(
-	    { url: 'https://'+ domain +'/.well-known/host-meta'
-	    , timeout: 1000
-	    , dataType: 'xml'
-	    , success: function( xml ){
-	      try {
-		$(xml).find('Link').each(function(){
-		  var rel = $(this).attr('rel')
-		  if( rel == linkRel ){
-		    cb( $(this).attr('template') )
-		  }
-		})
-	      } catch(e) {
-		onError()
-	      }
-	    }
-	    , error: function() {//retry with http:
-	      $.ajax(
-		{ url: 'http://'+ domain +'/.well-known/host-meta'
-		, timeout: 1000
-		, dataType: 'xml'
-		, success: function( xml ){
-		  try {
-		    $(xml).find('Link').each(function(){
-		      var rel = $(this).attr('rel')
-		      if( rel == linkRel ){
-			cb( $(this).attr('template') )
-		      }
-		    })
-		  } catch(e) {
-		    onError()
-		  }
-		}
-		, error: onError
-		} )
-	      }
-	    } )
+    var webfinger = (function(){
+      var ua, userName, host, templateParts
+      function getDavBaseUrl(ua, error, cb){
+	ua = document.getElementById('ua').value
+	var parts = ua.split('@')
+	if(parts.length < 2) {
+	  document.getElementById('result').innerHTML = 'That is not a user address. There is no @-sign in it'
+	} else if(parts.length > 2) {
+	  document.getElementById('result').innerHTML = 'That is not a user address. There is more than one @-sign in it'
 	} else {
-	  onError()
+	  if(!(/^[\.0-9A-Za-z]+$/.test(parts[0]))) {
+	    document.getElementById('result').innerHTML = 'That is not a user address. There are non-dotalphanumeric symbols before the @-sign: "'+parts[0]+'"'
+	  } else if(!(/^[\.0-9A-Za-z\-]+$/.test(parts[1]))) {
+	    document.getElementById('result').innerHTML = 'That is not a user address. There are non-dotalphanumeric symbols after the @-sign: "'+parts[1]+'"'
+	  } else {
+	    userName = parts[0]
+	    host = parts[1]
+	    document.getElementById('result').innerHTML = 'So far so good. Looking up https host-meta for '+host
+	    $.ajax(
+	      { url: 'https://'+host+'/.well-known/host-meta'
+	      , success: afterHttpsHostmetaSuccess
+	      , error: afterHttpsHostmetaError
+	      })
+	  }
 	}
       }
-      webFinger.getDavBaseUrl = function(userAddress, cb, onError) {
-	//get the WebFinger data for the user and extract the uDAVdomain:
-	getHostMeta( userAddress, 'lrdd', onError, function( template ){
-	  ajax(
-	    { url: template.replace( /{uri}/, userAddress, true )
-	    , timeout: 10000
-	    , dataType: 'xml'
-	    , success: function(xml){
-	      try {
-		$(xml).find('Link').each(function() {
-		  if( $(this).attr('rel') == 'http://unhosted.org/spec/dav/0.1' ) ){
-		    cb( $(this).attr('href') )
-		    //TODO: should exit loop now that a matching result was found.                
+      function afterHttpsHostmetaSuccess(data) {
+	document.getElementById('result').innerHTML = 'Https Host-meta found.'
+	continueWithHostmeta(data)
+      }
+
+      function afterHttpsHostmetaError(data) {
+	    document.getElementById('result').innerHTML = 'Https Host-meta error. Trying http.'
+	    $.ajax(
+	      { url: 'http://'+host+'/.well-known/host-meta'
+	      , success: afterHttpHostmetaSuccess
+	      , error: afterHttpHostmetaError
+	      })
+      }
+
+      function afterHttpHostmetaSuccess(data) {
+	document.getElementById('result').innerHTML = 'Http Host-meta found.'
+	continueWithHostmeta(data)
+      }
+
+      function afterHttpHostmetaError(data) {
+	document.getElementById('result').innerHTML = 'Cross-origin host-meta failed. Trying through proxy'
+	//$.ajax(
+	//  { url: 'http://useraddress.net/single-origin-webfinger...really?'+ua
+	//   , success: afterWebfingerSuccess
+	//   , error: afterProxyError
+	//  })
+      }
+
+      function continueWithHostmeta(data) {
+	if(!data.getElementsByTagName) {
+	  document.getElementById('result').innerHTML = 'Host-meta is not an XML document, or doesnt have xml mimetype.'
+	  return
+	}
+	var linkTags = data.getElementsByTagName('Link')
+	if(linkTags.length == 0) {
+	  document.getElementById('result').innerHTML = 'no Link tags found in host-meta'
+	} else {
+	  var lrddFound = false
+	  document.getElementById('result').innerHTML = 'none of the Link tags have a lrdd rel-attribute'
+	  for(var linkTagI in linkTags) {
+	    for(var attrI in linkTags[linkTagI].attributes) {
+	      var attr = linkTags[linkTagI].attributes[attrI]
+	      if((attr.name=='rel') && (attr.value=='lrdd')) {
+		lrddFound = true
+		document.getElementById('result').innerHTML = 'the first Link tag with a lrdd rel-attribute has no template-attribute'
+		for(var attrJ in linkTags[linkTagI].attributes) {
+		  var attr2 = linkTags[linkTagI].attributes[attrJ]
+		  if(attr2.name=='template') {
+		    templateParts = attr2.value.split('{uri}')
+		    if(templateParts.length == 2) {
+		      $.ajax(
+			{ url: templateParts[0]+ua+templateParts[1]
+			, success: afterLrddSuccess
+			, error: afterLrddNoAcctError
+			})
+		    } else {
+		      document.getElementById('result').innerHTML = 'the template doesn\'t contain "{uri}"'
+		    }
+		    break
 		  }
-		})
-	      } catch( e ) {
-		onError()
+		}
+		break
 	      }
 	    }
-	    , error: onError
-	  })
-	})
+	    if(lrddFound) {
+	      break
+	    }
+	  }
+	}
       }
-      return webFinger
-    })()
+      function afterLrddNoAcctError() {
+	document.getElementById('result').innerHTML = 'the template doesn\'t contain "{uri}"'
+	$.ajax(
+	  { url: templateParts[0]+'acct:'+ua+templateParts[1]
+	  , success: afterLrddSuccess
+	  , error: afterLrddAcctError
+	  })
+      }
+      function afterLrddSuccess(data) {
+	if(!data.getElementsByTagName) {
+	  document.getElementById('result').innerHTML = 'Lrdd is not an XML document, or doesnt have xml mimetype.'
+	  return
+	}
+	var linkTags = data.getElementsByTagName('Link')
+	if(linkTags.length == 0) {
+	  document.getElementById('result').innerHTML = 'no Link tags found in lrdd'
+	} else {
+	  var davFound = false
+	  document.getElementById('result').innerHTML = 'none of the Link tags have a http://unhosted.org/spec/dav/0.1 rel-attribute'
+	  for(var linkTagI in linkTags) {
+	    for(var attrI in linkTags[linkTagI].attributes) {
+	      var attr = linkTags[linkTagI].attributes[attrI]
+	      if((attr.name=='rel') && (attr.value=='http://unhosted.org/spec/dav/0.1')) {
+		davFound = true
+		document.getElementById('result').innerHTML = 'the first Link tag with a dav rel-attribute has no href-attribute'
+		for(var attrJ in linkTags[linkTagI].attributes) {
+		  var attr2 = linkTags[linkTagI].attributes[attrJ]
+		  davUrl = attr2.value
+		  if(attr2.name=='href') {
+
+//this is where webfinger flows into oauth:	
+
+
+
+		    $.ajax(
+		      { url: davUrl+'/oauth2/auth'
+		      , success: afterOAuthUrlSuccess
+		      , error: afterOAuthUrlError
+		      })
+		    break
+		  }
+		}
+		break
+	      }
+	    }
+	    if(davFound) {
+	      break
+	    }
+	  }
+	}
+      }
+      function afterOAuthUrlSuccess() {
+	document.getElementById('result').innerHTML = 'found your remote storage ('+ua+') to be present at '+davUrl
+      }
+
+      function afterOAuthUrlError() {
+	document.getElementById('result').innerHTML = 'found your remote storage ('+ua+') to be missing at '+davUrl
+      }
+
 
       ///////////////////////////
      // remoteStorage backend //
