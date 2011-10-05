@@ -27,7 +27,6 @@ if(this.value=='') {
 } else {
     document.getElementById('userButton').disabled='';
     document.getElementById('userButton').className='synced';
-    document.getElementById('userButton').style.display='inline';
 }">
 <span id="userAddress" style="display:none"
 onmouseover="this.className='removeBackended';"
@@ -38,7 +37,7 @@ document.getElementById('userAddressInput').value='';
 document.getElementById('userAddressInput').style.display='inline';
 document.getElementById('userAddressInput').disabled='';
 this.style.display='none';"></span>
-<input id="userButton" type="submit" value="Sign in" style="display:none" onclick="
+<input id="userButton" type="submit" value="Sign in" onclick="
 if(document.getElementById('userAddressInput').value!='') {
     if(window.remoteStorage.getBackend()) {
       document.getElementById('userButton').className='synced';
