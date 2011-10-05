@@ -28,11 +28,11 @@
           xhr.setRequestHeader(header, params.headers[header]);
         }
       }
-      if(params.fields) {
-        for(var field in params.fields) {
-          xhr[field] = params.fields[field];
-        }
-      }
+//      if(params.fields) {
+//        for(var field in params.fields) {
+//          xhr[field] = params.fields[field];
+//        }
+//      }
       xhr.onreadystatechange = function() {
         if(xhr.readyState == 4) {
           if(xhr.status == 0) {
@@ -414,7 +414,7 @@
       function doCall(method, key, value, revision, cb) {
         var ajaxObj = {
           url: keyToUrl(key),
-          type: method,
+          method: method,
           success: function(text){
             try {//this is not necessary for current version of protocol, but might be in future:
               var obj = JSON.parse(text);
@@ -434,9 +434,9 @@
           },
         }
         if(method!='GET') {
-          var bearerToken=Base64.encode(localStorage.getItem('_remoteStorageUserAddress')+':'+localStorage.getItem('_remoteStorageDavToken'));
+          var bearerToken=Base64.encode(localStorage.getItem('_remoteStorageUserAddress')+':'+localStorage.getItem('_remoteStorageOauthToken'));
           ajaxObj.headers= {Authorization: 'Basic '+bearerToken};
-          ajaxObj.fields={withCredentials: 'true'};
+//          ajaxObj.fields={withCredentials: 'true'};
           ajaxObj.data=JSON.stringify({
             value: value,
             _revision: revision
