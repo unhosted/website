@@ -522,6 +522,9 @@
 
     window.remoteStorage = (function(){
       function work(minRevision) {
+        if(!(localStorage.getItem('_remoteStorageUserAddress'))) {
+          return;
+        }
         var queue = JSON.parse(localStorage.getItem('_remoteStorageActionQueue'));
         if(queue && queue.length) {
           var thisAction = queue.shift();
@@ -597,6 +600,8 @@
         },
         removeBackend: function() {
           localStorage.removeItem('_remoteStorageUserAddress');
+          localStorage.removeItem('_remoteStorageDataScope');
+          localStorage.removeItem('_remoteStorageDavUrl');
           localStorage.removeItem('_remoteStorageOauthToken');
         }
       }
@@ -636,7 +641,7 @@ function ButtonClick(el) {
     if(window.remoteStorage.getBackend()) {
       document.getElementById('userButton').className='synced';
     } else {
-      window.remoteStorage.setBackend(document.getElementById('userAddressInput').value, 'backboneTodo');
+      window.remoteStorage.setBackend(document.getElementById('userAddressInput').value, 'ChessBored');
       document.getElementById('userAddress').style.display='inline';
       document.getElementById('userAddress').innerHTML=document.getElementById('userAddressInput').value;
       document.getElementById('userAddressInput').style.display='none';
