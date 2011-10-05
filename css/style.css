@@ -1,3 +1,4 @@
+body { margin-top:-1.5em; } /*why is this needed?*/
 #toplight{
 	background: url('../img/bodyback.png') top center no-repeat transparent;
 	height: 20em;
@@ -26,16 +27,7 @@
     z-index:100;
     top:0;
 }
-#donations h1{
-position: relative;
-top:1em;
-background: url('../img/logo.png') no-repeat left top;
-text-indent: -5000px;
-height:6em;
-width:50%;
-position: absolute;
-z-index:101;
-}
+h1 img { position:absolute; width:9em; float:left; top:1em; left:3em; z-index:101; }
 
 #logolight{
 	position: absolute;
@@ -43,8 +35,8 @@ z-index:101;
 	width: 500px;
 	height:20em;
 	top:0;
-	left: -130px;
-	background: url('../img/logolight.png') no-repeat top left;
+	left:-3em;
+	background: url('../img/logolightdark.png') no-repeat top left;
 	z-index: 99;
 }
 
@@ -91,7 +83,6 @@ header{
 		font-weight:bold;
 		text-indent: -5000px;
 		background: url('../img/unhosted.png') no-repeat left top;
-		margin-top: 40px;
 		
 		}
 		
