@@ -203,7 +203,7 @@
       function afterOAuthUrlError(error, cb) {
 	error('found your remote storage ('+ua+') to be missing at '+davUrl)
       }
-
+    })()
 
       ///////////////////////////
      // remoteStorage backend //
