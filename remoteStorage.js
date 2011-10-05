@@ -360,6 +360,13 @@
             this.connected = true;
             work();
           })
+        },
+        getUserAddress: function() {
+          return localStorage.getItem('_remoteStorageUserAddress');
+        },
+        disconnect: function() {
+          localStorage.removeItem('_remoteStorageUserAddress');
+          localStorage.removeItem('_remoteStorageOauthToken');
         }
       }
     })()

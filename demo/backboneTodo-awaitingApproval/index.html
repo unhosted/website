@@ -33,20 +33,24 @@ if(this.value=='') {
 onmouseover="this.className='disconnected';"
 onmouseout="this.className='';"
 onclick="
-//window.remoteStorage.disconnect();
+window.remoteStorage.disconnect();
 document.getElementById('userAddressInput').value='';
 document.getElementById('userAddressInput').style.display='inline';
 document.getElementById('userAddressInput').disabled='';
 this.style.display='none';"></span>
 <input id="userButton" type="submit" value="Sign in" style="display:none" onclick="
 if(document.getElementById('userAddressInput').value!='') {
-    window.remoteStorage.setUserAddress(document.getElementById('userAddressInput').value);
-    document.getElementById('userAddress').style.display='inline';
-    document.getElementById('userAddress').innerHTML=document.getElementById('userAddressInput').value;
-    document.getElementById('userAddressInput').style.display='none';
-    document.getElementById('userAddressInput').disabled='disabled';
-    this.style.display='none';
-    this.disabled='disabled';
+    if(window.remoteStorage.getUserAddress()) {
+      document.getElementById('userButton').className='synced';
+    } else {
+      window.remoteStorage.setUserAddress(document.getElementById('userAddressInput').value);
+      document.getElementById('userAddress').style.display='inline';
+      document.getElementById('userAddress').innerHTML=document.getElementById('userAddressInput').value;
+      document.getElementById('userAddressInput').style.display='none';
+      document.getElementById('userAddressInput').disabled='disabled';
+      this.style.display='none';
+      this.disabled='disabled';
+    }
 }">
 </div>
 
