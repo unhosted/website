@@ -42,7 +42,7 @@ if(document.getElementById('userAddressInput').value!='') {
     if(window.remoteStorage.getBackend()) {
       document.getElementById('userButton').className='synced';
     } else {
-      window.remoteStorage.setBackend(document.getElementById('userAddressInput').value);
+      window.remoteStorage.setBackend(document.getElementById('userAddressInput').value, 'backboneTodo');
       document.getElementById('userAddress').style.display='inline';
       document.getElementById('userAddress').innerHTML=document.getElementById('userAddressInput').value;
       document.getElementById('userAddressInput').style.display='none';

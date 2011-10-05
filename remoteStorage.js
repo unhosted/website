@@ -359,12 +359,13 @@
     ///////////////////////////
 
     var oauth = (function() {
-      function go(url) {
+      function go(url, dataScope, userAddress) {
         var loc = encodeURIComponent((''+window.location).split('#')[0]);
         window.location = url 
           + 'oauth2/auth?client_id=' + loc
           + '&redirect_uri=' + loc
-          + '&scope=' + loc
+          + '&scope=' + dataScope
+          + '&user_address=' + userAddress
           + '&response_type=token';
       }
       function harvestToken(cb) {
@@ -486,14 +487,16 @@
             });
           }
         },
-        connect: function(userAddress, cb) {
+        connect: function(userAddress, dataScope, cb) {
           var onError = function(errorMsg) {
             alert(errorMsg);
           }
           var callback = function(davUrl) {
             cb();
             localStorage.setItem('_remoteStorageUserAddress', userAddress);
-            oauth.go(davUrl);
+            localStorage.setItem('_remoteStorageDataScope', dataScope);
+            localStorage.setItem('_remoteStorageDavUrl', davUrl)
+            oauth.go(davUrl, dataScope, userAddress);
           }
           webfinger.getDavBaseUrl(userAddress, onError, callback);
         },
@@ -583,8 +586,8 @@
             }
           }
         },
-        setBackend: function(userAddress) {
-          backend.connect(userAddress, function() {
+        setBackend: function(userAddress, dataScope) {
+          backend.connect(userAddress, dataScope, function() {
             work();
           })
         },
