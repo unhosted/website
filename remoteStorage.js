@@ -1,3 +1,22 @@
+// INTERFACE:
+//
+// 1) interface for data is the same as localStorage and sessionStorage, namely:
+//
+// window.remoteStorage.length
+// window.remoteStorage.key(i)
+// window.remoteStorage.getItem(key)
+// window.remoteStorage.setItem(key, value);
+// window.remoteStorage.removeItem(key);
+// window.remoteStorage.clear();
+//
+//
+// 2) additional interface to get/set/disconnect backend:
+//
+// window.remoteStorage.getBackend();
+// window.remoteStorage.setBackend(user@host);
+// window.remoteStorage.removeBackend();
+
+
 (function() {
   if(!window.remoteStorage) {//shim switch
 
