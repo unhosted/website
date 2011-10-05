@@ -354,17 +354,17 @@
             }
           }
         },
-        setUserAddress: function(userAddress) {
+        setBackend: function(userAddress) {
           backend.connect(userAddress, function() {
             this.userAddress = userAddress;
             this.connected = true;
             work();
           })
         },
-        getUserAddress: function() {
+        getBackend: function() {
           return localStorage.getItem('_remoteStorageUserAddress');
         },
-        disconnect: function() {
+        removeBackend: function() {
           localStorage.removeItem('_remoteStorageUserAddress');
           localStorage.removeItem('_remoteStorageOauthToken');
         }
