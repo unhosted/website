@@ -10,11 +10,11 @@
 // window.remoteStorage.clear();
 //
 //
-// 2) additional interface to get/set/disconnect backend:
+// 2) additional interface to check/connect/disconnect backend:
 //
-// window.remoteStorage.getBackend();
-// window.remoteStorage.setBackend(user@host);
-// window.remoteStorage.removeBackend();
+// window.remoteStorage.checkBackend();
+// window.remoteStorage.connectBackend(user@host);
+// window.remoteStorage.disconnectBackend();
 
 
 (function() {
@@ -217,7 +217,7 @@
 
     var webfinger = (function(){
       var userAddress, userName, host, templateParts;//this is all a bit messy, but there are a lot of callbacks here, so globals help us with that.
-      function getDavBaseUrl(ua, error, cb){
+      function getDavBaseAddress(ua, error, cb){
         userAddress = ua;
         var parts = ua.split('@');
         if(parts.length < 2) {
@@ -351,10 +351,10 @@
                 errorStr = 'the first Link tag with a dav rel-attribute has no href-attribute';
                 for(var attrJ in linkTags[linkTagI].attributes) {
                   var attr2 = linkTags[linkTagI].attributes[attrJ];
-                  davUrl = attr2.value;
+                  davAddress = attr2.value;
                   if(attr2.name=='href') {
                     //SUCCESS:
-                    cb(davUrl);
+                    cb(davAddress);
                     break;
                   }
                 }
@@ -370,7 +370,7 @@
           }
         }
       }
-      return {getDavBaseUrl: getDavBaseUrl};
+      return {getDavBaseAddress: getDavBaseAddress};
     })()
 
       ///////////////////////////
@@ -378,9 +378,9 @@
     ///////////////////////////
 
     var oauth = (function() {
-      function go(url, dataScope, userAddress) {
+      function go(address, dataScope, userAddress) {
         var loc = encodeURIComponent((''+window.location).split('#')[0]);
-        window.location = url 
+        window.location = address
           + 'oauth2/auth?client_id=' + loc
           + '&redirect_uri=' + loc
           + '&scope=' + dataScope
@@ -420,19 +420,19 @@
     //////////////////////
 
     var backend = (function(){
-      function keyToUrl(key) {
+      function keyToAddress(key) {
         var userAddressParts = localStorage.getItem('_remoteStorageUserAddress').split('@')
         var resource = localStorage.getItem('_remoteStorageDataScope');
-        var url = localStorage.getItem('_remoteStorageDavUrl')
+        var address = localStorage.getItem('_remoteStorageDavAddress')
           +'webdav/'+ userAddressParts[1]
           +'/'+ userAddressParts[0]
           +'/'+ resource
           +'/'+ key
-        return url
+        return address
       }
       function doCall(method, key, value, revision, cb) {
         var ajaxObj = {
-          url: keyToUrl(key),
+          url: keyToAddress(key),
           method: method,
           success: function(text){
             try {//this is not necessary for current version of protocol, but might be in future:
@@ -515,14 +515,14 @@
           var onError = function(errorMsg) {
             alert(errorMsg);
           }
-          var callback = function(davUrl) {
+          var callback = function(davAddress) {
             cb();
             localStorage.setItem('_remoteStorageUserAddress', userAddress);
             localStorage.setItem('_remoteStorageDataScope', dataScope);
-            localStorage.setItem('_remoteStorageDavUrl', davUrl)
-            oauth.go(davUrl, dataScope, userAddress);
+            localStorage.setItem('_remoteStorageDavAddress', davAddress)
+            oauth.go(davAddress, dataScope, userAddress);
           }
-          webfinger.getDavBaseUrl(userAddress, onError, callback);
+          webfinger.getDavBaseAddress(userAddress, onError, callback);
         },
         setToken: function(token) {
           localStorage.setItem('_remoteStorageOauthToken', token);
@@ -594,7 +594,7 @@
         },
         setItem: function(k,v) {
           pushAction({action: 'setItem', key: k, value: v});
-          if(this.getBackend()) {
+          if(this.checkBackend()) {
             work();
           }
           var ret = localStorage.setItem('_remoteStorage_'+k, v);
@@ -603,7 +603,7 @@
         },
         removeItem: function(k) {
           pushAction({action: 'removeItem', key: k});
-          if(this.getBackend()) {
+          if(this.checkBackend()) {
             work();
           }
           var ret = localStorage.removeItem('_remoteStorage_'+k);
@@ -612,7 +612,7 @@
         },
         clear: function() {
           localStorage.setItem('_remoteStorageActionQueue', '[{"action": "clear"}]');
-          if(this.getBackend()) {
+          if(this.checkBackend()) {
             work();
           }
           for(var i=0;i<localStorage.length;i++) {
@@ -621,18 +621,18 @@
             }
           }
         },
-        setBackend: function(userAddress, dataScope) {
+        connectBackend: function(userAddress, dataScope) {
           backend.connect(userAddress, dataScope, function() {
             work();
           })
         },
-        getBackend: function() {
+        checkBackend: function() {
           return localStorage.getItem('_remoteStorageUserAddress');
         },
-        removeBackend: function() {
+        disconnectBackend: function() {
           localStorage.removeItem('_remoteStorageUserAddress');
           localStorage.removeItem('_remoteStorageDataScope');
-          localStorage.removeItem('_remoteStorageDavUrl');
+          localStorage.removeItem('_remoteStorageDavAddress');
           localStorage.removeItem('_remoteStorageOauthToken');
         }
       }
@@ -661,7 +661,7 @@ function SpanMouseOver(el) {
   el.className='';
 }
 function SpanClick(el) {
-  window.remoteStorage.removeBackend();
+  window.remoteStorage.disconnectBackend();
   document.getElementById('userAddressInput').value='';
   document.getElementById('userAddressInput').style.display='inline';
   document.getElementById('userAddressInput').disabled='';
@@ -669,10 +669,10 @@ function SpanClick(el) {
 }
 function ButtonClick(el) {
   if(document.getElementById('userAddressInput').value!='') {
-    if(window.remoteStorage.getBackend()) {
+    if(window.remoteStorage.checkBackend()) {
       document.getElementById('userButton').className='synced';
     } else {
-      window.remoteStorage.setBackend(document.getElementById('userAddressInput').value, 'ChessBored');
+      window.remoteStorage.connectBackend(document.getElementById('userAddressInput').value, 'ChessBored');
       document.getElementById('userAddress').style.display='inline';
       document.getElementById('userAddress').innerHTML=document.getElementById('userAddressInput').value;
       document.getElementById('userAddressInput').style.display='none';
