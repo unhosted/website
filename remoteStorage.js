@@ -415,9 +415,9 @@
         }
     })()
 
-      ///////////////////////////
-     // remoteStorage backend //
-    ///////////////////////////
+      //////////////////////
+     // GET, PUT, DELETE //
+    //////////////////////
 
     var backend = (function(){
       function keyToUrl(key) {
@@ -463,6 +463,10 @@
         }
         ajax(ajaxObj);
       }
+
+      ////////////////////////////////////////
+     // asynchronous synchronization tasks //
+    ////////////////////////////////////////
 
       return {
         clear: function(cb) {
@@ -539,6 +543,10 @@
       }
     })()
 
+      ////////////////////////////////////////
+     // asynchronous synchronization queue //
+    ////////////////////////////////////////
+
     window.remoteStorage = (function(){
       function work(minRevision) {
         if(!(localStorage.getItem('_remoteStorageUserAddress'))) {
@@ -554,7 +562,11 @@
               return;
             }
           }
-          queue.unshift(thisAction);
+          //avoid other work() calls from attempting thisAction:
+          //queue.unshift(thisAction);
+          //although if the action fails, it should be requeued i guess..
+          //maybe really what should happen is not queue individual actions but always compare timestamps for all keys,
+          //and sync opportunistically (is that the right word?). we also need to fire Storage events if data comes in.
           localStorage.setItem('_remoteStorageActionQueue', JSON.stringify(queue));
           if(thisAction.action == 'clear') {
             backend.clear(function() {work(1);});
