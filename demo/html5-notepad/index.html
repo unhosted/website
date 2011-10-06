@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en" manifest="cache.manifest.php"> 
+<head>
+	<meta charset="utf-8" />
+	<title>Cloud Notepad</title>
+	<style>	
+		body { font:13px/1.5 arial; background:#eee; margin:0; padding:2em 0; }
+		a { text-decoration:none; color:#666; text-shadow:1px 1px #fff; }
+		a:hover { color:#000; }
+		#entries { position:fixed; padding:1.5em 0 2em 2.7em; top:1em; left:0; bottom:0; float:left; width:12em; margin-right:-100em; }
+		#entries nav { margin-top:1em; }
+		#entries a.edit:before { content:''; margin:0 -10em -10em -1.3em; display:block; float:left; width:20px; height:13px; background:url('images/icon-doc.png') no-repeat top left; }
+		#entries .active a.edit { color:#000; }
+		#entries .active a.edit:before { background-position:bottom left; }
+		nav ul, nav li { line-height:1.2; display:block; margin:0; padding:0; position:relative; }
+		nav a { display:block; padding:0.5em 1.5em 0.5em 0.5em; }
+		#editor-wrap { display:block; margin-left:10em; }
+		form { width:650px; margin:0 auto; padding:1em 2em; display:none; position:absolute; top:2.4em; left:50%; margin-left:-28%; bottom:0; }
+		form input.title { font-family:inherit; font-weight:bold; width:inherit; outline:none; background:transparent; color:#000; border:1px dotted transparent; padding:5px 18px; margin:0; font-size:1em; position:absolute; top:1.3em; left:0; right:0; }
+		textarea { width:inherit; height:80%; color:#333; background:transparent; border:1px dotted transparent; font:15px/1.5 monospace; outline:none; display:block; margin:1em 0; padding:10px 20px 20px 20px; position:absolute; left:0; right:0; bottom:0; top:2.5em; }
+		input.title:focus, textarea:focus { border:1px dotted #ccc; }
+		nav a.delete { color:#666; display:none; position:absolute; padding:0.5em; right:-0.5em; top:0.4em; -moz-border-radius:1em; -webkit-border-radius:1em; width:0.6em; height:0.6em; line-height:0.5; text-align:center; }
+		nav a.delete:hover { background:#fff; }
+		nav li:hover a.delete { display:block; }
+		#tools { padding-top:0.5em; position:fixed; line-height:1; top:0; right:0; left:0; z-index:10; background:#ccc; }
+		#tools a { display:block; float:left; padding:0.5em 1em; background:#eee; }
+		#tools a:focus { background:#fff; }
+		#tools a:hover { color:#000; }
+		#tools li { float:left; margin-right:0.5em; }
+		#tools nav { margin-left:2em; }
+		#inform { display:none; position:fixed; width:20em; padding:1em; background:#333; color:#fff; z-index:50; top:0; left:50%; margin-left:-10em; font-size:1.2em; text-align:center; }
+		#tools .clear-localstorage	{ position:absolute; float:right; right:1em; }
+		#tools #tool-save { display:none; position:absolute; left:9em; }
+		#credits { position:fixed; bottom:2em; right:2em; float:left; }
+	</style>
+</head>
+<body>
+
+<div id="remoteStorage">
+  <script type="text/javascript" src="../../remoteStorage.js"></script><link rel="stylesheet" href="../../remoteStorage.css" />
+  <input id="userAddressInput" type="text" placeholder="you@yourremotestorage" onkeyup="InputKeyUp(this);">
+  <span id="userAddress" style="display:none" onmouseover="SpanMouseOver(this);" onmouseout="SpanMouseOut(this);" onclick="SpanClick(this)"></span>
+  <input id="userButton" type="submit" value="Sign in" onclick="ButtonClick(this)">
+</div>
+
+<div id="wrap">
+	<header id="tools">
+		<nav>
+			<ul>
+				<li><a id="tool-new" href="#" title="Add New">+</a></li>
+				<li><a id="tool-sync" href="#" title="Sync Entries">Sync</a></li>
+				<li><a id="tool-save" href="#" title="Save">Save</a></li>
+				<li class="clear-localstorage"><a href="#" id="clear" title="Clear localStorage">Clear Local Storage</a></li>
+			</ul>
+		</nav>
+	</header>
+	
+	<header id="entries">
+		<nav>
+			<ul><ul>
+		</nav>
+	</header>
+	
+	<section id="editor-wrap">
+		<form name="editor" id="editor" method="post" action="">
+			<input id="entry-id" type="hidden" name="entry-id" value="" />
+			<input id="entry-title" class="title" name="entry-title" type="text" value="" placeholder="Title" />
+			<textarea name="entry-content" id="entry-content" placeholder="Content"></textarea>
+			<!-- <input type="submit" value="Save" /> -->
+		</form>
+	</section>
+	
+	<section id="inform"></section>
+	
+	<a id="credits" href="http://konstruktors.com/cloud-notepad-html5" title="Could Pad HTML5 App by Kaspars Dambis"><img src="images/cloud-pad.png" /></a>
+</div>
+
+<script src="jquery.min.js"></script>
+<script>
+jQuery(document).ready(function($) {
+	var $index = {};
+	
+	sync();
+	
+	$('#entries a.edit').live('click', function(c) {
+		c.preventDefault();
+		save_entry();
+		var $id = $(this).attr('href').replace('#', '');
+		var $item = JSON.parse(remoteStorage.getItem($id));
+		$.each($item, function(key, val) {
+			$('#' + key).val(val);
+  		});
+		$(this).parent('li').addClass('active').siblings().removeClass('active');
+		$('form').fadeIn();
+		$('#tool-save').show();
+	});
+	
+	$('#entries a.delete').live('click', function(c) {
+		c.preventDefault();
+		if (confirm('Delete "' + $(this).siblings('a').text() + '"?') == true) {
+			var $id = $(this).attr('href').replace('#', '');
+			remoteStorage.removeItem($id);
+			$index[$id] = { timestamp: 0 };
+			remoteStorage.setItem('index', JSON.stringify($index));
+			get_entries();
+			if ($('#entry-id').val() == $id) { // we deleted the currently viewed item
+				$('#entry-id').val('');
+				$('#entry-title, #entry-content').val('');
+				$('form').fadeOut();
+				$('#tool-save').hide();
+			}
+		}
+	});
+	
+	$('#tool-new').click(function(c) {
+		c.preventDefault();
+		save_entry(); // Save the current document before creating a new one
+		$new_id = new Date().getTime() + '';
+		$('#entry-id').val($new_id);
+		$('#entry-title, #entry-content').val('');
+		save_entry(); // Save the newly created file
+		get_entries(); // Update the file listing
+		$('#entries .e-' + $new_id).addClass('active').siblings().removeClass('active'); // mark the new one active
+		$('form').fadeIn();
+	});
+	
+	$('#tool-sync').click(function(c) {
+		c.preventDefault();
+		sync();
+	});
+	
+	$('input, textarea').blur(function() {
+		$('form').submit();
+	}).focus(function() {
+		$('#tool-save').show();
+	});
+	
+	$('form').submit(function() {
+		save_entry();
+		get_entries();
+		return false;
+	});
+	
+	$('#entry-title').keyup(function() {
+  		$('.e-' + $('#entry-id').val() + ' a.edit').text($('#entry-title').val());
+	});
+	
+	$('#tool-save').click(function(e) {
+		e.preventDefault();
+		$('form').submit();
+		$(this).hide();
+	});
+	
+	function save_entry() {
+		var $id = $('#entry-id').val() + '';
+		if ($id.length < 1)
+			return;
+		
+		var $title = $('#entry-title').val() + '';
+		var $timestamp = new Date().getTime() + ''; // make it a string
+		
+		$index[$id] = { timestamp: $timestamp, title: $title }; // set a new version number
+		
+		remoteStorage.setItem('index', JSON.stringify($index));
+		remoteStorage.setItem($id, JSON.stringify($('form').formToJSON()));
+		console.log(remoteStorage);
+	}
+	
+	function sync() {
+		if (navigator.onLine) {
+			$.post('sync.php', remoteStorage, function(data) {
+				console.log(data);
+				data = JSON.parse(data);
+				if (data.error) {
+					inform(data.error);
+					return;
+				}
+				remoteStorage.setItem('index', JSON.stringify(data.index));
+				for (k in data.entries) {
+					remoteStorage.setItem(k, JSON.stringify(data.entries[k]));
+				}
+				inform('Sync Completed!');
+				get_entries();
+			});
+		} else {
+			inform("Can't sync because you are offline!");
+			get_entries();
+		}
+	}
+	
+	function get_entries() {
+		$index = new Object(JSON.parse(remoteStorage.getItem('index')));
+		if ($index.length < 1)
+			$index = {};
+		build_entries($index);
+	}
+	
+	function build_entries(data) {
+		var $items = [];
+		if (data == null) {
+			$('#entries ul').html('');
+			return;
+		}
+		$.each(data, function(key, val) {
+			title = val['title'];
+			if (title === '')
+				title = 'Untitled';
+			if (val['timestamp'] !== 0)
+				$items.push('<li class="e-' + key + '"><a class="edit" href="#' + key + '">' + title + '</a> <a class="delete" href="#' + key + '">-</a></li>');
+  		});
+  		$('#entries ul').hide().html($items.reverse().join('')).show();
+	}
+	
+	function inform($message) {
+		$('#inform').html($message).stop().fadeIn().delay(1000).fadeOut('fast');
+	}
+	
+	$('#clear').click(function() {
+		remoteStorage.clear();
+		get_entries();
+		return false;
+	});	
+	
+	$.fn.formToJSON = function() {
+		var json = {};
+		$.map($(this).serializeArray(), function(n, i){
+			json[n['name']] = n['value'];
+		});
+		return json;
+	};
+});
+
+</script>
+
+</body>
+</html>

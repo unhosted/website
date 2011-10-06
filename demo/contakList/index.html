@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>contakList</title>
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<script type="text/javascript" src="js/dynamics.min.js"></script>
+</head>
+<body onload="startAddressBook()">
+
+<div id="remoteStorage">
+  <script type="text/javascript" src="../../remoteStorage.js"></script><link rel="stylesheet" href="../../remoteStorage.css" />
+  <input id="userAddressInput" type="text" placeholder="you@yourremotestorage" onkeyup="InputKeyUp(this);">
+  <span id="userAddress" style="display:none" onmouseover="SpanMouseOver(this);" onmouseout="SpanMouseOut(this);" onclick="SpanClick(this)"></span>
+  <input id="userButton" type="submit" value="Sign in" onclick="ButtonClick(this)">
+</div>
+
+		<header id="main_head">
+			<h1>contakList</h1>
+		</header>
+	<article>
+		<header>
+			<h2>Welcome!</h2>
+		</header>
+		<p>This web app lets you add, edit and remove contacts. The information you input is stored locally in your computer. Add contacts using the form below and manage them by browsing through the list.</p>
+		<a name="edit"></a>
+		<header><h3>Create a new contact</h3></header>
+		<form method="post" onsubmit="submitContact();">
+			<ul>
+				<li>Name:<br>
+				<input id="name_field" type="text" size="50" value=""></li>
+				<li>Email:<br>
+				<input id="email_field" type="email" size="50" value=""></li>
+				<li>Phone:<br>
+				<input type="text" id="phone_field" name="phone" size="50" value=""><input type="hidden" id="id_field" value=""></li>
+				<li><input id="submit" type="submit" name="submit" value="Add contact"></li>
+			</ul>
+		</form>
+	</article>
+	<article>
+		<header>
+			<h3>Browse your contacts</h3>
+		</header>
+		<form>
+			<select id="search_contacts" onchange="showContact()">
+			</select>
+		</form>
+		<ul id="contacts">
+		</ul>
+		<button type="button" id="remove_all" onclick="clearAllData()">Remove all Contacts</button>
+	</article>
+	<footer>
+		<p>Developed for the <a href="http://10k.aneventapart.com/" title="Contest website">10K Apart Contest</a>. Support HTML5 and Open Standards!</p>
+	</footer>
+</body>
+</html>
