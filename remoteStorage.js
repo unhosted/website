@@ -591,8 +591,33 @@
         localStorage.setItem('_remoteStorageActionQueue', JSON.stringify(queue));
       }
       work(0);
+
+        //////////////////
+       // DOM API shim //
+      //////////////////
+
+      function calcLength() {
+        var len = 0;
+        for(var i=0; i<localStorage.length; i++) {
+          if(localStorage.key(i).substring(0,15)=='_remoteStorage_') {
+            len++;
+          }
+        }
+        return len;
+      }
+
       return {
-        length: localStorage.length,
+        length: calcLength(),
+        key: function(req) {
+          for(var i=0; i<localStorage.length; i++) {
+            if(localStorage.key(i).substring(0,15)=='_remoteStorage_') {
+              if(req == 0) {
+                return localStorage.key(i).substring(15);
+              }
+              req--;
+            }
+          }
+        },
         getItem: function(k) {
           return localStorage.getItem('_remoteStorage_'+k);
         },
@@ -602,7 +627,7 @@
             work();
           }
           var ret = localStorage.setItem('_remoteStorage_'+k, v);
-          this.length = localStorage.length;
+          this.length = calcLength();
           return ret;
         },
         removeItem: function(k) {
@@ -611,7 +636,7 @@
             work();
           }
           var ret = localStorage.removeItem('_remoteStorage_'+k);
-          window.remoteStorage.length = localStorage.length;
+          window.remoteStorage.length = calcLength();
           return ret;
         },
         clear: function() {
