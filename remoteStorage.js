@@ -651,7 +651,12 @@
  // UI //
 ////////
 function DisplayConnectionState() {
-
+  if(remoteStorage.isConnected()) {
+    document.getElementById('userButton').value='Disconnect';
+    document.getElementById('userAddressInput').value=remoteStorage.getUserAddress();
+  } else {
+    document.getElementById('userButton').value='Sign in';
+  }
 }
 
 function InputKeyUp(el) {
@@ -661,7 +666,7 @@ function InputKeyUp(el) {
     el.parentNode.style.opacity='.5';
   } else {
     document.getElementById('userButton').disabled='';
-    document.getElementById('userButton').className='synced';
+    document.getElementById('userButton').className='green';
     el.parentNode.style.opacity='1';
   }
 }
@@ -681,7 +686,7 @@ function SpanClick(el) {
 function ButtonClick(el, dataScope) {
   if(document.getElementById('userAddressInput').value!='') {
     if(window.remoteStorage.isConnected()) {
-      document.getElementById('userButton').className='synced';
+      document.getElementById('userButton').className='green';
     } else {
       window.remoteStorage.connect(document.getElementById('userAddressInput').value, dataScope);
       document.getElementById('userAddress').style.display='inline';
