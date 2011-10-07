@@ -32,6 +32,7 @@
       document.removeEventListener('DOMContentLoaded', arguments.callee, false );
       {
         oauth.harvestToken(backend.setToken);
+        DisplayConnectionState();
       }
     }, false)
 
@@ -649,6 +650,10 @@
   ////////
  // UI //
 ////////
+function DisplayConnectionState() {
+
+}
+
 function InputKeyUp(el) {
   if(el.value=='') {
     document.getElementById('userButton').className='';
