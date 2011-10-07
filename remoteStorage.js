@@ -685,9 +685,9 @@ function InputKeyUp(el) {
   }
 }
 function SpanMouseOver(el) {
-  el.className='disconnected';
+  el.className='red';
 }
-function SpanMouseOver(el) {
+function SpanMouseOut(el) {
   el.className='';
 }
 function SpanClick(el) {
