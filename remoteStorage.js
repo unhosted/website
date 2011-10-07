@@ -9,10 +9,12 @@
 // window.remoteStorage.removeItem(key);
 // window.remoteStorage.clear();
 //
+// Note: we don't support syntactic sugar like localStorage.key or localStorage['key'] - please stick to getItem()/setItem()
+//
 //
 // 2) additional interface to connect/check/disconnect backend:
 //
-// window.remoteStorage.connect('user@host');
+// window.remoteStorage.connect('user@host', 'sandwiches');
 // window.remoteStorage.isConnected();//boolean
 // window.remoteStorage.getUserAddress();//'user@host'
 // window.remoteStorage.disconnect();
@@ -671,12 +673,12 @@ function SpanClick(el) {
   document.getElementById('userAddressInput').disabled='';
   el.style.display='none';
 }
-function ButtonClick(el) {
+function ButtonClick(el, dataScope) {
   if(document.getElementById('userAddressInput').value!='') {
     if(window.remoteStorage.isConnected()) {
       document.getElementById('userButton').className='synced';
     } else {
-      window.remoteStorage.connect(document.getElementById('userAddressInput').value, 'ChessBored');
+      window.remoteStorage.connect(document.getElementById('userAddressInput').value, dataScope);
       document.getElementById('userAddress').style.display='inline';
       document.getElementById('userAddress').innerHTML=document.getElementById('userAddressInput').value;
       document.getElementById('userAddressInput').style.display='none';
