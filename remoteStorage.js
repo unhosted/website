@@ -10,11 +10,12 @@
 // window.remoteStorage.clear();
 //
 //
-// 2) additional interface to check/connect/disconnect backend:
+// 2) additional interface to connect/check/disconnect backend:
 //
-// window.remoteStorage.checkBackend();
-// window.remoteStorage.connectBackend(user@host);
-// window.remoteStorage.disconnectBackend();
+// window.remoteStorage.connect('user@host');
+// window.remoteStorage.isConnected();//boolean
+// window.remoteStorage.getUserAddress();//'user@host'
+// window.remoteStorage.disconnect();
 
 
 (function() {
@@ -594,7 +595,7 @@
         },
         setItem: function(k,v) {
           pushAction({action: 'setItem', key: k, value: v});
-          if(this.checkBackend()) {
+          if(this.isConnected()) {
             work();
           }
           var ret = localStorage.setItem('_remoteStorage_'+k, v);
@@ -603,7 +604,7 @@
         },
         removeItem: function(k) {
           pushAction({action: 'removeItem', key: k});
-          if(this.checkBackend()) {
+          if(this.isConnected()) {
             work();
           }
           var ret = localStorage.removeItem('_remoteStorage_'+k);
@@ -612,7 +613,7 @@
         },
         clear: function() {
           localStorage.setItem('_remoteStorageActionQueue', '[{"action": "clear"}]');
-          if(this.checkBackend()) {
+          if(this.isConnected()) {
             work();
           }
           for(var i=0;i<localStorage.length;i++) {
@@ -621,15 +622,18 @@
             }
           }
         },
-        connectBackend: function(userAddress, dataScope) {
+        connect: function(userAddress, dataScope) {
           backend.connect(userAddress, dataScope, function() {
             work();
           })
         },
-        checkBackend: function() {
+        isConnected: function() {
+          return (this.getUserAddress() != null);
+        },
+        getUserAddress: function() {
           return localStorage.getItem('_remoteStorageUserAddress');
         },
-        disconnectBackend: function() {
+        disconnect: function() {
           localStorage.removeItem('_remoteStorageUserAddress');
           localStorage.removeItem('_remoteStorageDataScope');
           localStorage.removeItem('_remoteStorageDavAddress');
@@ -661,7 +665,7 @@ function SpanMouseOver(el) {
   el.className='';
 }
 function SpanClick(el) {
-  window.remoteStorage.disconnectBackend();
+  window.remoteStorage.disconnect();
   document.getElementById('userAddressInput').value='';
   document.getElementById('userAddressInput').style.display='inline';
   document.getElementById('userAddressInput').disabled='';
@@ -669,10 +673,10 @@ function SpanClick(el) {
 }
 function ButtonClick(el) {
   if(document.getElementById('userAddressInput').value!='') {
-    if(window.remoteStorage.checkBackend()) {
+    if(window.remoteStorage.isConnected()) {
       document.getElementById('userButton').className='synced';
     } else {
-      window.remoteStorage.connectBackend(document.getElementById('userAddressInput').value, 'ChessBored');
+      window.remoteStorage.connect(document.getElementById('userAddressInput').value, 'ChessBored');
       document.getElementById('userAddress').style.display='inline';
       document.getElementById('userAddress').innerHTML=document.getElementById('userAddressInput').value;
       document.getElementById('userAddressInput').style.display='none';
