@@ -652,10 +652,24 @@
 ////////
 function DisplayConnectionState() {
   if(remoteStorage.isConnected()) {
+    //button to disconnect:
     document.getElementById('userButton').value='Disconnect';
-    document.getElementById('userAddressInput').value=remoteStorage.getUserAddress();
+    //display span:
+    document.getElementById('userAddress').style.display='inline';
+    document.getElementById('userAddress').innerHTML=remoteStorage.getUserAddress();
+    //hide input:
+    document.getElementById('userAddressInput').style.display='none';
+    document.getElementById('userAddressInput').disabled='disabled';
   } else {
+    //button to Sign in:
     document.getElementById('userButton').value='Sign in';
+    //display input:
+    document.getElementById('userAddressInput').value='';
+    document.getElementById('userAddressInput').style.display='inline';
+    document.getElementById('userAddressInput').disabled='';
+    //hide input:
+    document.getElementById('userAddress').style.display='none';
+    document.getElementById('userAddress').disabled='disabled';
   }
 }
 
@@ -678,23 +692,15 @@ function SpanMouseOver(el) {
 }
 function SpanClick(el) {
   window.remoteStorage.disconnect();
-  document.getElementById('userAddressInput').value='';
-  document.getElementById('userAddressInput').style.display='inline';
-  document.getElementById('userAddressInput').disabled='';
-  el.style.display='none';
 }
 function ButtonClick(el, dataScope) {
-  if(document.getElementById('userAddressInput').value!='') {
-    if(window.remoteStorage.isConnected()) {
-      document.getElementById('userButton').className='green';
-    } else {
+  if(window.remoteStorage.isConnected()) {
+    window.remoteStorage.disconnect();
+    DisplayConnectionState();
+  } else {
+    if(document.getElementById('userAddressInput').value!='') {
       window.remoteStorage.connect(document.getElementById('userAddressInput').value, dataScope);
-      document.getElementById('userAddress').style.display='inline';
-      document.getElementById('userAddress').innerHTML=document.getElementById('userAddressInput').value;
-      document.getElementById('userAddressInput').style.display='none';
-      document.getElementById('userAddressInput').disabled='disabled';
-      el.style.display='none';
-      el.disabled='disabled';
+      DisplayConnectionState();
     }
   }
 }
