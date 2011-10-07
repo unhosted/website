@@ -1,4 +1,4 @@
-#remoteStorage { position:absolute; right:0; top:0; opacity:.5; }
+#remoteStorage { z-index:9999; position:absolute; right:0; top:0; opacity:.5; }
 #remoteStorage:hover { opacity:1; }
 #remoteStorage input {
     display:inline; margin:.5em; padding:.5em .6em; font-size:.8em;
