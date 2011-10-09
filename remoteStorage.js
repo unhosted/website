@@ -530,13 +530,13 @@
         },
         setToken: function(token) {
           localStorage.setItem('_remoteStorageOauthToken', token);
-          var localIndex = localStorage.getItem('_remoteStorageItem');
+          var localIndex = JSON.parse(localStorage.getItem('_remoteStorageItem'));
           doCall('GET', '_remoteStorageIndex', null, null, function(remoteIndex) {
-            for(var i in remoteIndex.value) {
+            for(var i in JSON.parse(remoteIndex.value)) {
               if(remoteIndex.value[i] > localIndex[i]) {//need to fetch it
                 doCall('GET', i, null, revision, function(data) {
                   localStorage.setItem(data.key, data.value);
-                  var localIndex = localStorage.getItem('_remoteStorageItem');
+                  var localIndex = JSON.parse(localStorage.getItem('_remoteStorageItem'));
                   localIndex[data.key]=data._revision;
                   localStorage.setItem('_remoteStorageIndex', JSON.stringify(localIndex));              
                 });
