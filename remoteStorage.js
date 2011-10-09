@@ -531,9 +531,10 @@
         setToken: function(token) {
           localStorage.setItem('_remoteStorageOauthToken', token);
           var localIndex = JSON.parse(localStorage.getItem('_remoteStorageItem'));
-          doCall('GET', '_remoteStorageIndex', null, null, function(remoteIndex) {
-            for(var i in JSON.parse(remoteIndex.value)) {
-              if(remoteIndex.value[i] > localIndex[i]) {//need to fetch it
+          doCall('GET', '_remoteStorageIndex', null, null, function(data) {
+            var remoteIndex = JSON.parse(data.value);
+            for(var i in remoteIndex) {
+              if(remoteIndex[i] > localIndex[i]) {//need to fetch it
                 doCall('GET', i, null, revision, function(data) {
                   localStorage.setItem(data.key, data.value);
                   var localIndex = JSON.parse(localStorage.getItem('_remoteStorageItem'));
