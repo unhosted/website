@@ -100,12 +100,14 @@ header{
             float:left;
 		}
         #introduction h2 { text-align:center; }
-        #introduction #you { }
-        #introduction #you svg#computer { width:30em; height:15em; }
-        #introduction #sync { }
+	#introduction div { margin:0 1em; }
+	#introduction svg { margin:-2em auto; }
+        #introduction #you { width:36%; }
+        #introduction #you svg#computer { width:23em; height:15em; }
+        #introduction #sync { width:16%; }
         #introduction #sync svg#sync { width:10em; height:15em; }
-        #introduction #remotestorage { }
-        #introduction #remotestorage svg#cloud { width:30em; height:15em; }
+        #introduction #remotestorage { width:35%; }
+        #introduction #remotestorage svg#cloud { width:20em; height:15em; }
 		#introduction #arrow { position:absolute; }
         
 			#introduction .column h3{
