@@ -534,8 +534,16 @@
           doCall('GET', '_remoteStorageIndex', null, null, function(data) {
             var remoteIndex = JSON.parse(data.value);
             for(var i in remoteIndex) {
-              if(remoteIndex[i] > localIndex[i]) {//need to fetch it
+              if(remoteIndex[i] > localIndex[i]) {//need to pull it
                 doCall('GET', i, null, revision, function(data) {
+                  localStorage.setItem(data.key, data.value);
+                  var localIndex = JSON.parse(localStorage.getItem('_remoteStorageIndex'));
+                  localIndex[data.key]=data._revision;
+                  localStorage.setItem('_remoteStorageIndex', JSON.stringify(localIndex));              
+                });
+              } else if(remoteIndex[i] < localIndex[i]) {//need to push it
+                localValue = localStorage.getItem('_remoteStorage_'+i);
+                doCall('PUT', i, localValue, revision, function(data) {
                   localStorage.setItem(data.key, data.value);
                   var localIndex = JSON.parse(localStorage.getItem('_remoteStorageIndex'));
                   localIndex[data.key]=data._revision;
