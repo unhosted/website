@@ -1,0 +1,10 @@
+* { margin:0; padding:0; }
+details { display:none; }
+body { width:800px; height:600px; margin-left:-400px; margin-top:-300px; position:absolute; top:50%; left:50%; overflow:hidden; }
+section { position:absolute; pointer-events:none; width:100%; height:100%; }
+section[aria-selected] { pointer-events:auto; }
+html { overflow:hidden; }
+body { display:none; }
+body.loaded { display:block; }
+.incremental {visibility:hidden; }
+.incremental[active] {visibility:visible; }

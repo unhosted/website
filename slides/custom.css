@@ -1,0 +1,29 @@
+html { background:black; }
+body { background:url('background.png'); color:#a1aab0; text-shadow:0 -1px 0 #212230; }
+/* A section is a slide. It's size is 800x600, and this will never change */
+section { font-family:FreeSans, arial, serif; font-size:40px; background:url('bodyback.png') 100% 100% center; }
+
+h1, h2, h3 { text-align:center; margin-top:200px; font-size:80px; }
+h2 { margin-top:100px; color:#B9E768; font-size:40px; text-shadow:0px 2px 1px #09151E; background:url('helpruler.png') bottom repeat-x; padding-bottom:10px; }
+h3, p { margin:50px; font-size:36px; }
+ul { margin:50px 100px; }
+q { display:inline-block; width:700px; height:600px; color:white; font-size:60px; padding:50px; }
+img, video { width:800px; height:600px; position:absolute; top:0; z-index:-1; }
+footer { position:absolute; bottom:10px; right:20px; font-size:16px; }
+
+/* Transition effect, see http://developer.mozilla.org/en/CSS/CSS_transitions */
+section { -moz-transition:left 400ms linear 0s; -webkit-transition:left 400ms linear 0s; -ms-transition:left 400ms linear 0s; transition:left 400ms linear 0s; }
+/* Before */
+section { left: -150%; }
+/* Now */
+section[aria-selected] { left: 0; }
+/* After */
+section[aria-selected] ~ section { left: +150%; }
+
+/* Incremental elements */
+/* By default, visible */
+.incremental > * { opacity:1; }
+/* The current item */
+.incremental > *[aria-selected] { color:#fff; opacity:1; }
+/* The items to-be-selected */
+.incremental > *[aria-selected] ~ * { opacity:0.2; }
