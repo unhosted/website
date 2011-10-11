@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" manifest=".appcache">
-<head>
-<script src="http://unhosted.org/remoteStorage-staging.js"></script>
-</head>
-<body>
-<textarea onkeyup="remoteStorage.setItem('text', this.value);">
-</textarea>
-</body>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>A minimal remoteStorage demo</title>
+    <script src="http://unhosted.org/remoteStorage-staging.js"></script>
+  </head>
+  <body>
+    <textarea onkeyup="remoteStorage.setItem('text', this.value);"></textarea>
+  </body>
 </html>
