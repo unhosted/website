@@ -528,12 +528,6 @@
           webfinger.getDavBaseAddress(userAddress, onError, callback);
         },
         setToken: function(token) {
-          var afterCall = function(data) {
-            localStorage.setItem(data.key, data.value);
-            var localIndex = JSON.parse(localStorage.getItem('_remoteStorageIndex'));
-            localIndex[data.key]=data._revision;
-            localStorage.setItem('_remoteStorageIndex', JSON.stringify(localIndex));              
-          }
           localStorage.setItem('_remoteStorageOauthToken', token);
           var localIndex = JSON.parse(localStorage.getItem('_remoteStorageIndex'));
           if(!localIndex) {
@@ -544,7 +538,17 @@
             for(var i in remoteIndex) {
               if(i != '_remoteStorageAll') {
                 if((localIndex[i] == undefined) || (remoteIndex[i] > localIndex[i])) {//need to pull it
-                  doCall('GET', i, null, null, afterCall);
+                  doCall('GET', i, null, null, function(data) {
+                    localStorage.setItem('_remoteStorage_'+i, data.value);
+                    var localIndex = JSON.parse(localStorage.getItem('_remoteStorageIndex'));
+                    if(!localIndex) {
+                      localIndex = {};
+                    }
+                    localIndex[i]=data._revision;
+                    localStorage.setItem('_remoteStorageIndex', JSON.stringify(localIndex));
+                    var oldValue = localStorage.getItem('_remoteStorage+'+i);
+                    window.remoteStorage.onChange(i, oldValue, data.value);
+                  });
                 } else if(remoteIndex[i] < localIndex[i]) {//need to push it
                   localValue = localStorage.getItem('_remoteStorage_'+i);
                   doCall('PUT', i, localValue, localIndex[i], function() {});
