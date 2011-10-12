@@ -742,7 +742,7 @@ function ButtonClick(el, dataScope) {
 
 window.remoteStorage.init = function(dataScope) {
   var divEl = document.createElement('div');
-  divEl.class = 'remoteStorageDiv';
+  divEl.id = 'remoteStorageDiv';
   divEl.innerHTML = '<link rel="stylesheet" href="../../remoteStorage.css" />'
     +'<input id="userAddressInput" type="text" placeholder="you@yourremotestorage" onkeyup="InputKeyUp(this);">'
     +'<span id="userAddress" style="display:none" onmouseover="SpanMouseOver(this);" onmouseout="SpanMouseOut(this);" onclick="SpanClick(this)"></span>'
