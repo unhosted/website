@@ -748,5 +748,5 @@ window.remoteStorage.init = function(dataScope) {
     +'<span id="userAddress" style="display:none" onmouseover="SpanMouseOver(this);" onmouseout="SpanMouseOut(this);" onclick="SpanClick(this)"></span>'
     +'<input id="userButton" type="submit" value="Sign in" onclick="ButtonClick(this,'
     +'\''+dataScope+'\')">';
-  document.body.appendChild(divEl);
+  document.body.insertBefore(divEl, document.body.firstChild);
 }
