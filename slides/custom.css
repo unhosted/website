@@ -1,10 +1,10 @@
 html { background:black; }
-body { background:url('background.png'); color:#a1aab0; text-shadow:0 -1px 0 #212230; }
+body { background:url('img/background.png'); color:#a1aab0; text-shadow:0 -1px 0 #212230; }
 /* A section is a slide. It's size is 800x600, and this will never change */
-section { font-family:FreeSans, arial, serif; font-size:40px; background:url('bodyback.png') 100% 100% center; }
+section { font-family:FreeSans, arial, serif; font-size:40px; background:url('img/bodyback.png') 100% 100% center; }
 
 h1, h2, h3 { text-align:center; margin-top:200px; font-size:80px; }
-h2 { margin-top:100px; color:#B9E768; font-size:40px; text-shadow:0px 2px 1px #09151E; background:url('helpruler.png') bottom repeat-x; padding-bottom:10px; }
+h2 { margin-top:100px; color:#B9E768; font-size:40px; text-shadow:0px 2px 1px #09151E; background:url('img/helpruler.png') bottom repeat-x; padding-bottom:10px; }
 h3, p { margin:50px; font-size:36px; }
 ul { margin:50px 100px; }
 q { display:inline-block; width:700px; height:600px; color:white; font-size:60px; padding:50px; }

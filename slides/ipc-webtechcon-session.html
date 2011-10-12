@@ -1,7 +1,7 @@
 <!DOCTYPE html><!-- dzslides by Paul Rouget, http://github.com/paulrouget/dzslides, licensed under WTFPL -->
 <meta charset="utf-8">
 <link rel="stylesheet" href="core.css"><link rel="stylesheet" href="custom.css"><script src="core.js"></script>
-<link rel="icon" href="favicon.png" type="image/png">
+<link rel="icon" href="img/favicon.png" type="image/png">
 <title>Unhosted</title>
 
 <!-- Your Slides -->
@@ -10,21 +10,21 @@
 <section>
     <!-- This is the first slide -->
     <h2>Freedom from the web&apos;s monopolies</h2>
-    <h3>jan<strong>@unhosted</strong>.org</h3>
-    <img src="island-light.png" style="width:239px; height:198px; top:8em; left:7em;" />
-</section>
-
-<section>
-    <h2>Freedom from the web’s monopolies</h2>
-    <p>Use your data anywhere<br />Have it in one place</p>
+    <h3>jan@unhosted.org</h3>
+    <img src="img/island-light.png" style="width:239px; height:198px; top:8em; left:7em;" />
 </section>
 
 <section>
     <h2>Jan-Christoph Borchardt</h2>
+    <h3>usability, freedom &amp; web</h3>
+</section>
+
+<section>
+    <h2>Unhosted</h2>
     <ul class="incremental">
-        <li>usability
-        <li>freedom
-        <li>web
+        <li>non-profit
+        <li>funded by donations
+        <li>web revolution
     </ul>
 </section>
 
@@ -39,26 +39,50 @@
 </section>
 
 <section>
-    <h2>Unhosted</h2>
-    <ul class="incremental">
-        <li>non-profit
-        <li>funded by donations
-        <li>
-    </ul>
+    <img src="content/networks.png" />
 </section>
 
 <section>
     <h2>A better architecture</h2>
-    <p>Separate application servers<br />from storage providers</p>
-    <p>And connect them back together</p>
+    <p align="center">Separate application servers<br />from storage providers</p>
+</section>
+
+<section>
+    <img src="content/cloud-w.svg" style="width:600px; height:330px; top:3em; left:2.5em;" />
+</section>
+
+<section>
+    <img src="content/application-w.svg" style="width:600px; height:400px; top:2em; left:2em;" />
+    <img src="content/storage-w.svg" style="width:230px; height:270px; top:3.5em; left:8.5em;" />
+</section>
+
+<section>
+    <img src="content/application-w.svg" style="width:375px; height:250px; top:3.2em; left:2em;" />
+    <img src="content/storage-w.svg" style="width:230px; height:270px; top:3em; left:13em;" />
+</section>
+
+<section>
+    <img src="content/browser-w.svg" style="width:600px; height:400px; top:2em; left:2.5em;" />
+</section>
+
+<section>
+    <img src="content/browser-w.svg" style="width:600px; height:400px; top:2em; left:2.5em;" />
+    <img src="content/application-w.svg" style="width:580px; height:310px; top:4.2em; left:3em;" />
+</section>
+
+<section>
+    <img src="content/browser-w.svg" style="width:600px; height:400px; top:2em; left:2.5em;" />
+    <img src="content/application-w.svg" style="width:580px; height:310px; top:4.2em; left:3em;" />
+    <img src="content/storage-w.svg" style="width:200px; height:240px; top:5em; left:10em;" />
 </section>
 
 <section>
     <h2>Protocol stack</h2>
     <ul class="incremental">
-        <li><strong>CORS</strong> cross-origin communication
+        <li><strong>CORS</strong> cross-AJAX
         <li><strong>WebFinger</strong> discovery
-        <li><strong>OAuth</strong> authentication
+        <li><strong>OAuth</strong> authorization
+        <li>get, set, remove
     </ul>
 </section>
 
@@ -73,51 +97,40 @@
 
 <section>
     <h2>remoteStorage.js</h2>
-    <p>&lt;script src="http://unhosted.org/remoteStorage.js"&gt;&lt;/script&gt;</p>
-</section>
-
-<section>
-    <h2>remoteStorage</h2>
-    <ul class="incremental">
-        <li>remoteStorage.<strong>getItem(key)</strong>
-        <li>remoteStorage.<strong>setItem(key, value)</strong>
-        <li>remoteStorage.<strong>removeItem(key)</strong>
+    <ul class="incremental" style="font-size:.9em;">
+        <li>remoteStorage.<strong>init(dataScope);</strong>
+        <li>remoteStorage.<strong>getItem(key);</strong>
+        <li>remoteStorage.<strong>setItem(key, value);</strong>
+        <li>remoteStorage.<strong>removeItem(key);</strong>
     </ul>
 </section>
 
 <section>
-    <h2>remoteStorage</h2>
-    <ul class="incremental">
-        <li>remoteStorage.<strong>connect('user@host', 'notes');</strong>
-        <li>remoteStorage.<strong>isConnected();</strong>
-        <li>remoteStorage.<strong>getUserAddress();</strong>
-        <li>remoteStorage.<strong>disconnect();</strong>
-    </ul>
+    <h2>Demo</h2>
 </section>
 
 <section>
     <h2>App developers</h2>
-    <ul class="incremental">
-        <li>
-    </ul>
+    <h3>write Javascript apps<br />
+        make use of remoteStorage
+    </h3>
 </section>
 
 <section>
     <h2>Storage providers</h2>
-    <ul class="incremental">
-        <li>
-    </ul>
+    <h3>enable CORS headers<br />
+        provide WebFinger<br />
+        use OAuth<br />
+    </h3>
 </section>
 
 <section>
     <h2>Users</h2>
-    <ul class="incremental">
-        <li>
-    </ul>
+    <h3>enjoy!</h3>
 </section>
 
 <section>
     <h2>Freedom from the web&apos;s monopolies</h2>
     <h3>jan<strong>@unhosted</strong>.org</h3>
-    <img src="island-light.png" style="width:239px; height:198px; top:8em; left:7em;" />
+    <img src="img/island-light.png" style="width:239px; height:198px; top:8em; left:7em;" />
 </section>
