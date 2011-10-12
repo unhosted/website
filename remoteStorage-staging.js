@@ -683,6 +683,11 @@
           localStorage.removeItem('_remoteStorageDataScope');
           localStorage.removeItem('_remoteStorageDavAddress');
           localStorage.removeItem('_remoteStorageOauthToken');
+          for(var i=0; i<localStorage.length()) {
+            if(localStorage.key(i).substring(0,15)=='_remoteStorage_') {
+              localStorage.removeItem(localStorage.key(i));
+            }
+          }
         }
       }
     })()
