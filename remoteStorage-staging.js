@@ -32,8 +32,7 @@
       document.removeEventListener('DOMContentLoaded', arguments.callee, false );
       {
         oauth.harvestToken(backend.setToken);
-        remoteStorage.init('sandwiches');
-        DisplayConnectionState();
+        //remoteStorage.init('sandwiches');
       }
     }, false)
 
@@ -534,7 +533,12 @@
             localIndex = {};
           }
           doCall('GET', '_remoteStorageIndex', null, null, function(data) {
-            var remoteIndex = JSON.parse(data.value);
+            var remoteIndex;
+            try {
+              remoteIndex = JSON.parse(data.value);
+            } catch(e) {
+              remoteIndex = {};
+            }
             for(var i in remoteIndex) {
               if(i != '_remoteStorageAll') {
                 if((localIndex[i] == undefined) || (remoteIndex[i] > localIndex[i])) {//need to pull it
@@ -752,4 +756,5 @@ window.remoteStorage.init = function(dataScope) {
     +'<input id="userButton" type="submit" value="Sign in" onclick="ButtonClick(this,'
     +'\''+dataScope+'\')">';
   document.body.insertBefore(divEl, document.body.firstChild);
+  DisplayConnectionState();
 }
