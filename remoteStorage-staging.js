@@ -639,6 +639,9 @@
           return localStorage.getItem('_remoteStorage_'+k);
         },
         setItem: function(k,v) {
+          if(v == localStorage.getItem('_remoteStorage_'+k)) {
+            return;
+          }
           pushAction({action: 'setItem', key: k, value: v});
           if(this.isConnected()) {
             work();
