@@ -10,6 +10,7 @@ ul { margin:50px 100px; }
 q { display:inline-block; width:700px; height:600px; color:white; font-size:60px; padding:50px; }
 img, video { width:800px; height:600px; position:absolute; top:0; z-index:-1; }
 footer { position:absolute; bottom:10px; right:20px; font-size:16px; }
+a { color:#a1aab0; text-decoration:none; }
 
 /* Transition effect, see http://developer.mozilla.org/en/CSS/CSS_transitions */
 section { -moz-transition:left 400ms linear 0s; -webkit-transition:left 400ms linear 0s; -ms-transition:left 400ms linear 0s; transition:left 400ms linear 0s; }
