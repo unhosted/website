@@ -5,7 +5,7 @@
     <title>A minimal remoteStorage demo</title>
     <script src="../../remoteStorage-staging.js"></script>
     <script>
-      function onload() {
+      function onbodyload() {
          window.remoteStorage.init('documents');
          window.remoteStorage.onChange = function(key, oldValue, newValue) {
            if(key=='text') {
@@ -18,7 +18,7 @@
     <style>* { padding:0; margin:0; border:0; outline:0; } html { overflow-x:hidden; overflow-y:hidden; }
     textarea { position:absolute; padding:10% 20%; font:2em FreeSans,Helvetica,sans-serif; color:#333; background:#eee; text-shadow:0 0 1px #666677; width:60%; height:80%; overflow-x:hidden; overflow-y:auto; resize:none; }</style>
   </head>
-  <body onload="onload();">
+  <body onload="onbodyload();">
     <textarea id="text" onkeyup="remoteStorage.setItem('text', this.value);" autofocus>This is a remoteStorage demo.
 
 Try to log in on the top right with your remote storage user address. Or just use test@yourremotestorage.com (password: unhosted) to try it out.
