@@ -1,7 +1,7 @@
 <!DOCTYPE html><!-- dzslides by Paul Rouget, http://github.com/paulrouget/dzslides, licensed under WTFPL -->
 <meta charset="utf-8">
 <link rel="stylesheet" href="core.css"><link rel="stylesheet" href="custom.css"><script src="core.js"></script>
-<link rel="icon" href="img/favicon.png" type="image/png">
+<link rel="icon" href="../favicon.png" type="image/png">
 <title>Unhosted</title>
 
 <!-- Your Slides -->
@@ -9,14 +9,8 @@
 
 <section>
     <!-- This is the first slide -->
-    <h2>Freedom from the web&apos;s monopolies</h2>
-    <h3>jan@unhosted.org</h3>
-    <img src="img/island-light.png" style="width:239px; height:198px; top:8em; left:7em;" />
-</section>
-
-<section>
-    <h2>Jan-Christoph Borchardt</h2>
-    <h3>usability, freedom &amp; web</h3>
+    <h2 style="background:0;">Freedom from the web&apos;s monopolies</h2>
+    <img src="img/island-light.png" style="width:360px; height:300px; top:5.5em; left:4.5em;" />
 </section>
 
 <section>
@@ -32,9 +26,9 @@
     <h2>State of the web</h2>
     <ul class="incremental">
         <li>Centralized platforms
+        <li>Apps bound to storage
         <li>Overseas storage providers
-        <li>Developer responsible for storage
-        <li>AGPL is no solution
+        <li>Free software is no solution
     </ul>
 </section>
 
@@ -48,35 +42,29 @@
 </section>
 
 <section>
-    <img src="content/cloud-w.svg" style="width:600px; height:330px; top:3em; left:2.5em;" />
+    <ul class="incremental morph">
+        <li><img src="content/cloud-w.svg" style="width:600px; height:330px; top:2em; left:2em;" /></li>
+        <li><img src="content/application-w.svg" style="width:600px; height:400px; top:2em; left:2em;" />
+            <img src="content/storage-w.svg" style="width:230px; height:270px; top:3.5em; left:7.7em;" /></li>
+        <li><img src="content/application-w.svg" style="width:375px; height:250px; top:3em; left:1.5em;" />
+            <img src="content/storage-w.svg" style="width:200px; height:250px; top:3em; left:11em;" /></li>
+    </ul>
 </section>
 
 <section>
-    <img src="content/application-w.svg" style="width:600px; height:400px; top:2em; left:2em;" />
-    <img src="content/storage-w.svg" style="width:230px; height:270px; top:3.5em; left:8.5em;" />
+    <ul class="incremental morph">
+        <li><img src="content/browser-w.svg" style="width:600px; height:400px; top:2em; left:2.5em;" /></li>
+        <li><img src="content/browser-w.svg" style="width:600px; height:400px; top:2em; left:2.5em;" />
+            <img src="content/application-w.svg" style="width:600px; height:310px; top:3.85em; left:2.5em;" /></li>
+        <li><img src="content/browser-w.svg" style="width:600px; height:400px; top:2em; left:2.5em;" />
+            <img src="content/application-w.svg" style="width:600px; height:310px; top:3.85em; left:2.5em;" />
+            <img src="content/storage-w.svg" style="width:200px; height:240px; top:4.6em; left:8.5em;" /></li>
+    </ul>
 </section>
 
-<section>
-    <img src="content/application-w.svg" style="width:375px; height:250px; top:3.2em; left:2em;" />
-    <img src="content/storage-w.svg" style="width:230px; height:270px; top:3em; left:13em;" />
-</section>
-
-<section>
-</section>
-
-<section>
-    <img src="content/browser-w.svg" style="width:600px; height:400px; top:2em; left:2.5em;" />
-</section>
-
-<section>
-    <img src="content/browser-w.svg" style="width:600px; height:400px; top:2em; left:2.5em;" />
-    <img src="content/application-w.svg" style="width:580px; height:310px; top:4.2em; left:3em;" />
-</section>
-
-<section>
-    <img src="content/browser-w.svg" style="width:600px; height:400px; top:2em; left:2.5em;" />
-    <img src="content/application-w.svg" style="width:580px; height:310px; top:4.2em; left:3em;" />
-    <img src="content/storage-w.svg" style="width:200px; height:240px; top:5em; left:10em;" />
+<section class="red">
+    <h2>WARNING</h2>
+    <h3>Now it gets technical</h3>
 </section>
 
 <section>
@@ -85,7 +73,7 @@
         <li><strong>CORS</strong> cross-domain AJAX
         <li><strong>WebFinger</strong> discovery
         <li><strong>OAuth</strong> authorization
-        <li>get, set, remove
+        <li>GET, PUT, DELETE
     </ul>
 </section>
 
@@ -93,14 +81,14 @@
     <h2>remoteStorage</h2>
     <ul class="incremental">
         <li>Like localStorage
-        <li>Syncs with storage providers
+        <li>Syncs to storage providers
         <li>Leverages existing apps
     </ul>
 </section>
 
 <section>
     <h2>remoteStorage.js</h2>
-    <ul class="incremental" style="font-size:.9em;">
+    <ul class="incremental" style="font-size:.75em;">
         <li>remoteStorage.<strong>init(dataScope);</strong>
         <li>remoteStorage.<strong>getItem(key);</strong>
         <li>remoteStorage.<strong>setItem(key, value);</strong>
@@ -109,7 +97,7 @@
 </section>
 
 <section>
-    <h2>Demo</h2>
+    <h2>Demo!</h2>
     <h3><a href="http://unhosted.org/demo/text">unhosted.org/demo/text</a></h3>
     <p>test@yourremotestorage.com<br />
     password: unhosted</p>
@@ -132,7 +120,7 @@
 </section>
 
 <section>
-    <h2>Free people from the web&apos;s monopolies</h2>
-    <h3>jan<strong>@unhosted</strong>.org</h3>
-    <img src="img/island-light.png" style="width:239px; height:198px; top:8em; left:7em;" />
+    <h2 style="background:0;">Free people from the web&apos;s monopolies</h2>
+    <h3 style="margin:0;">hey@unhosted.org</h3>
+    <img src="img/island-light.png" style="width:239px; height:198px; top:7em; left:6em;" />
 </section>

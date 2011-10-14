@@ -1,30 +1,30 @@
 html { background:black; }
-body { background:url('img/background.png'); color:#a1aab0; text-shadow:0 -1px 0 #212230; }
+body { background:url('img/background.png'); color:#fff; text-shadow:0 -1px 0 #212230; }
 /* A section is a slide. It's size is 800x600, and this will never change */
-section { font-family:FreeSans, arial, serif; font-size:40px; background:url('img/bodyback.png') 100% 100% center; }
+section { font-family:FreeSans, arial, serif; font-size:3em; }
 
 h1, h2, h3 { text-align:center; margin-top:200px; font-size:80px; }
-h2 { margin-top:100px; color:#B9E768; font-size:40px; text-shadow:0px 2px 1px #09151E; background:url('img/helpruler.png') bottom repeat-x; padding-bottom:10px; }
-h3, p { margin:50px; font-size:36px; }
+h2 { margin-top:.5em; color:#B9E768; font-size:1.5em; text-shadow:0px 2px 1px #09151E; background:url('img/helpruler.png') bottom repeat-x; padding-bottom:10px; }
+h3, p { margin:50px; font-size:1em; }
 ul { margin:50px 100px; }
 q { display:inline-block; width:700px; height:600px; color:white; font-size:60px; padding:50px; }
 img, video { width:800px; height:600px; position:absolute; top:0; z-index:-1; }
 footer { position:absolute; bottom:10px; right:20px; font-size:16px; }
 a { color:#a1aab0; text-decoration:none; }
+.red { background:#e20; color:#fff; }
+.red h2 { color:#eee; text-shadow:0 -1px 0 #212230; background:none; }
 
 /* Transition effect, see http://developer.mozilla.org/en/CSS/CSS_transitions */
 section { -moz-transition:left 400ms linear 0s; -webkit-transition:left 400ms linear 0s; -ms-transition:left 400ms linear 0s; transition:left 400ms linear 0s; }
-/* Before */
-section { left: -150%; }
-/* Now */
-section[aria-selected] { left: 0; }
-/* After */
-section[aria-selected] ~ section { left: +150%; }
+section { left: -150%; } /* Before */
+section[aria-selected] { left: 0; } /* Now */
+section[aria-selected] ~ section { left: +150%; } /* After */
 
 /* Incremental elements */
-/* By default, visible */
-.incremental > * { opacity:1; }
-/* The current item */
-.incremental > *[aria-selected] { color:#fff; opacity:1; }
-/* The items to-be-selected */
-.incremental > *[aria-selected] ~ * { opacity:0.2; }
+.incremental > * { opacity:1; color:#a1aab0; } /* By default, visible */
+.incremental > *[aria-selected] { color:#fff; opacity:1; } /* The current item */
+.incremental > *[aria-selected] ~ * { opacity:0.2; } /* The items to-be-selected */
+
+.incremental.morph > * { list-style:none; opacity:0; -moz-transition:opacity 500ms; -webkit-transition:opacity 500ms; transition:opacity 500ms; } /* By default, visible */
+.incremental.morph > *[aria-selected] { color:#fff; opacity:1; -moz-transition:opacity 500ms; -webkit-transition:opacity 500ms; transition:opacity 500ms; } /* The current item */
+.incremental.morph > *[aria-selected] ~ * { opacity:0; -moz-transition:opacity 500ms; -webkit-transition:opacity 500ms; transition:opacity 500ms; } /* The items to-be-selected */
