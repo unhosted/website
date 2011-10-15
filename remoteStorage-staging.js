@@ -416,6 +416,8 @@
         }
         if(paramsToStay.length) {
           window.location='#'+paramsToStay.join('&');
+        } else {
+          window.location='';
         }
       }
       return {
