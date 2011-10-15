@@ -32,7 +32,7 @@
       document.removeEventListener('DOMContentLoaded', arguments.callee, false );
       {
         oauth.harvestToken(backend.setToken);
-        DisplayConnectionState();
+        //remoteStorage.init('sandwiches');
       }
     }, false)
 
@@ -392,6 +392,9 @@
           + '&response_type=token';
       }
       function harvestToken(cb) {
+        if(location.hash.length == 0) {
+          return;
+        }
         var params = location.hash.split('&');
         var paramsToStay = [];
         for(param in params){
@@ -411,7 +414,9 @@
             paramsToStay.push(params[param]);
           }
         }
-        window.location='#'+paramsToStay.join('&');
+        if(paramsToStay.length) {
+          window.location='#'+paramsToStay.join('&');
+        }
       }
       return {
         go: go,
@@ -439,21 +444,19 @@
           url: keyToAddress(key),
           method: method,
           success: function(text){
+            var obj={};
             try {//this is not necessary for current version of protocol, but might be in future:
-              var obj = JSON.parse(text);
-              obj.success = true;
-              cb(obj);
+              obj = JSON.parse(text);
             } catch(e){
-              cb({
-          success:true
-              });
             }
+            obj.success = true;
+            cb(obj);
           },
           error: function(xhr) {
             cb({
               success:false,
               error: xhr.status
-            })
+            });
           },
         }
         if(method!='GET') {
@@ -531,24 +534,34 @@
         setToken: function(token) {
           localStorage.setItem('_remoteStorageOauthToken', token);
           var localIndex = JSON.parse(localStorage.getItem('_remoteStorageIndex'));
+          if(!localIndex) {
+            localIndex = {};
+          }
           doCall('GET', '_remoteStorageIndex', null, null, function(data) {
-            var remoteIndex = JSON.parse(data.value);
+            var remoteIndex;
+            try {
+              remoteIndex = JSON.parse(data.value);
+            } catch(e) {
+              remoteIndex = {};
+            }
             for(var i in remoteIndex) {
-              if(remoteIndex[i] > localIndex[i]) {//need to pull it
-                doCall('GET', i, null, revision, function(data) {
-                  localStorage.setItem(data.key, data.value);
-                  var localIndex = JSON.parse(localStorage.getItem('_remoteStorageIndex'));
-                  localIndex[data.key]=data._revision;
-                  localStorage.setItem('_remoteStorageIndex', JSON.stringify(localIndex));              
-                });
-              } else if(remoteIndex[i] < localIndex[i]) {//need to push it
-                localValue = localStorage.getItem('_remoteStorage_'+i);
-                doCall('PUT', i, localValue, revision, function(data) {
-                  localStorage.setItem(data.key, data.value);
-                  var localIndex = JSON.parse(localStorage.getItem('_remoteStorageIndex'));
-                  localIndex[data.key]=data._revision;
-                  localStorage.setItem('_remoteStorageIndex', JSON.stringify(localIndex));              
-                });
+              if(i != '_remoteStorageAll') {
+                if((localIndex[i] == undefined) || (remoteIndex[i] > localIndex[i])) {//need to pull it
+                  doCall('GET', i, null, null, function(data) {
+                    localStorage.setItem('_remoteStorage_'+i, data.value);
+                    var localIndex = JSON.parse(localStorage.getItem('_remoteStorageIndex'));
+                    if(!localIndex) {
+                      localIndex = {};
+                    }
+                    localIndex[i]=data._revision;
+                    localStorage.setItem('_remoteStorageIndex', JSON.stringify(localIndex));
+                    var oldValue = localStorage.getItem('_remoteStorage+'+i);
+                    window.remoteStorage.onChange(i, oldValue, data.value);
+                  });
+                } else if(remoteIndex[i] < localIndex[i]) {//need to push it
+                  localValue = localStorage.getItem('_remoteStorage_'+i);
+                  doCall('PUT', i, localValue, localIndex[i], function() {});
+                }
               }
             }
           });
@@ -631,6 +644,9 @@
           return localStorage.getItem('_remoteStorage_'+k);
         },
         setItem: function(k,v) {
+          if(v == localStorage.getItem('_remoteStorage_'+k)) {
+            return;
+          }
           pushAction({action: 'setItem', key: k, value: v});
           if(this.isConnected()) {
             work();
@@ -675,6 +691,11 @@
           localStorage.removeItem('_remoteStorageDataScope');
           localStorage.removeItem('_remoteStorageDavAddress');
           localStorage.removeItem('_remoteStorageOauthToken');
+          for(var i=0; i<localStorage.length; i++) {
+            if(localStorage.key(i).substring(0,15)=='_remoteStorage_') {
+              localStorage.removeItem(localStorage.key(i));
+            }
+          }
         }
       }
     })()
@@ -737,4 +758,16 @@ function ButtonClick(el, dataScope) {
       DisplayConnectionState();
     }
   }
+}
+
+window.remoteStorage.init = function(dataScope) {
+  var divEl = document.createElement('div');
+  divEl.id = 'remoteStorageDiv';
+  divEl.innerHTML = '<link rel="stylesheet" href="../../remoteStorage.css" />'
+    +'<input id="userAddressInput" type="text" placeholder="you@yourremotestorage" onkeyup="InputKeyUp(this);">'
+    +'<span id="userAddress" style="display:none" onmouseover="SpanMouseOver(this);" onmouseout="SpanMouseOut(this);" onclick="SpanClick(this)"></span>'
+    +'<input id="userButton" type="submit" value="Sign in" onclick="ButtonClick(this,'
+    +'\''+dataScope+'\')">';
+  document.body.insertBefore(divEl, document.body.firstChild);
+  DisplayConnectionState();
 }
