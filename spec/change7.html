@@ -76,7 +76,8 @@
 		it should add a link element with
 		<strong>rel</strong>-attribute
 		'<strong>http://w3.org/ns/remoteStorage</strong>'.
-		The link should have a <strong>href</strong> attribute containing a url which we shall call <strong>$KV</strong>,
+		The link should have a <strong>template</strong> attribute containing a url template with the string '{scope}' in it,
+		which we shall call <strong>$KV</strong>,
 		an <strong>auth</strong> attribute containing a url which we shall call <strong>$AUTH</strong>,
 		and a <strong>type</strong> attribute containing the string <strong>$TYPE</strong>, optionally followed by a
 		<strong>TYPE-MODIFIERS</strong> string.
@@ -88,15 +89,23 @@
 		<p>The remoteStorage implementer MUST make <a
 		href="http://tools.ietf.org/html/draft-ietf-oauth-v2-13#section-4.2">OAuth2-cs</a>
 		available on <strong>$AUTH</strong> announced in the lrdd link's auth attribute (no need for CORS headers
-		here, because OAuth does redirection and not AJAX).  </p>
+		here, because OAuth does redirection and not AJAX).
+		The resource scope for OAuth should always be either <strong>$DATASCOPE</strong>
+		(the same string as the data scope that will be accessed), or the wildcard symbol '*'. In the first
+		case, the user should be informed that they are giving the app in question read/write access to the
+		given data scope.
+		In the second case, the user should be informed that they are giving the app in question read/write access to
+		all current and future data scopes.
+		</p>
 
 		<h3><a id="KV">Key-value store</a></h3>
 		<p>Whenever a user grants an app access to a <strong>$DATASCOPE</strong>, the remoteStorage
 		implementer MUST make a key-value store available on
-		<strong>$KV/$DATASCOPE/</strong>, implementing the GET, PUT and DELETE verbs of the WebDAV protocol,
-		with CORS
-		headers that allow any from whichever app sends it a valid
-		bearer token in the http request headers. If <strong>$TYPE</strong> is 'public', the
+		the URL obtained by taking the template <strong>$KV</strong> and replacing '{scope}' with
+		<strong>$DATASCOPE/</strong>, implementing the GET, PUT and DELETE verbs of the WebDAV protocol,
+		with CORS headers that allow any app that sends it a valid
+		bearer token in the http request headers.
+		If <strong>$TYPE</strong> is 'public', the
 		key-value store should allow GET requests (as well as HEAD and OPTIONS) without any
 		bearer token in the http request headers. That's to say, the OAuth token gives
 		the bearer write-access, but all data is publicly readable.
@@ -108,7 +117,7 @@
 		store can reply to a PUT call with a redirect http code, plus a 'Location:' headers, to indicate under
 		which key the new value was stored.
 		</p> 
-		<h3><a id="JSON">Requiring JSON</a></h3>
+		<h3><a id="JSON">Requiring JSON payloads</a></h3>
 		<p>By default, the key-value store should accept any valid POST data as the payload for PUT calls. However,
 		if <strong>$TYPE-MODIFIERS</strong> contains 'json', it is only required to allow valid UTF-8 JSON. Furthermore,
 		if it then replies to any PUT with a JSON-object containing a 'rev' field, then it can require that any subsequent
@@ -118,14 +127,6 @@
 		<p>[UNDER CONSTRUCTION] Including 'resumable' in <strong>$TYPE-MODIFIERS</strong> means the key-value store only
 		needs to implement resumable uploads. See <a href="http://code.google.com/apis/documents/docs/3.0/developers_guide_protocol.html#UploadingDocs">Google Drive</a> for an example of a key-value store that relies on the 'resumable' type modifier.
 		</p> 
-
-			<p>Non-normative hint: For this, it is necessary to 
-		exclude (apart from the HEAD and GET verbs) the OPTIONS verb 
-		from the http basic auth restrictions. It is also necessary to set the
-		-Allow-Credentials header to true, and to echo the Origin specified in the
-		request headers back in the -Allow-Origin header (setting it to '*' works for
-		the Webfinger URL, but not here, because of an extra restriction on CORS that
-		applies when there are credentials involved).</p>
 
 		<h3><a id="conclusion">Conclusion</a></h3>
 		<p> A non-normative example
