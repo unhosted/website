@@ -47,16 +47,17 @@
 		<p>A remoteStorage service acts as an always-on data storage
 		for its users. It does not host any application source code, nor does it execute
 		any processing.
-		 To make use of a remoteStorage account, the user visits unhosted web apps 
+		 To make use of a remoteStorage account, the user visits html apps 
 		that run in a browser, or user-agent. This user-agent discovers the user's
 		remoteStorage service through WebFinger. It then redirects the user to an OAuth
-		dialogue, to establish authentication. Finally, it uses the GET, PUT and DELETE verbs of WebDAV
+		dialogue, to establish authorization. Finally, it uses the GET, PUT and DELETE verbs of WebDAV
 		to read and write the data on the remoteStorage account.
 		</p>
 		<p>This document is meant for implementers of a
 		<strong>remoteStorage service</strong>. It descibes how a remoteStorage
-		service should behave. <strong>Developers</strong> of unhosted web apps should
-		download the <a href="https://github.com/unhosted/unhosted/">SDK</a> instead.
+		service should behave. <strong>Developers</strong> of html apps should
+		include <a href="http://unhosted.org/remoteStorage.js">remoteStorage.js</a> and use its
+		<a href="http://unhosted.org/api.html">API</a>.
 		<strong>End-users</strong> who are interested in understanding the concepts
 		behind the unhosted web, are better off reading this <a 
 		href="http://blogs.fsfe.org/fellowship-interviews/?p=299">interview</a>. In any case, follow our <a
