@@ -392,6 +392,9 @@
           + '&response_type=token';
       }
       function harvestToken(cb) {
+        if(location.hash.length == 0) {
+          return;
+        }
         var params = location.hash.split('&');
         var paramsToStay = [];
         for(param in params){
@@ -411,7 +414,9 @@
             paramsToStay.push(params[param]);
           }
         }
-        window.location='#'+paramsToStay.join('&');
+        if(paramsToStay.length) {
+          window.location='#'+paramsToStay.join('&');
+        }
       }
       return {
         go: go,
@@ -676,7 +681,7 @@
           })
         },
         isConnected: function() {
-          return (this.getUserAddress() != null);
+          return (localStorage.getItem('_remoteStorageOauthToken') != null);
         },
         getUserAddress: function() {
           return localStorage.getItem('_remoteStorageUserAddress');

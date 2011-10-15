@@ -665,7 +665,7 @@
           })
         },
         isConnected: function() {
-          return (this.getUserAddress() != null);
+          return (localStorage.getItem('_remoteStorageOauthToken') != null);
         },
         getUserAddress: function() {
           return localStorage.getItem('_remoteStorageUserAddress');
