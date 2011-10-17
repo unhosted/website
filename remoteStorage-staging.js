@@ -762,7 +762,7 @@ function ButtonClick(el, dataScope) {
   }
 }
 
-window.remoteStorage.init = function(dataScope) {
+window.remoteStorage.init = function(dataScope, onChangeFunc) {
   var divEl = document.createElement('div');
   divEl.id = 'remoteStorageDiv';
   divEl.innerHTML = '<link rel="stylesheet" href="../../remoteStorage.css" />'
@@ -772,4 +772,5 @@ window.remoteStorage.init = function(dataScope) {
     +'\''+dataScope+'\')">';
   document.body.insertBefore(divEl, document.body.firstChild);
   DisplayConnectionState();
+  window.remoteStorage.onChange = onChangeFunc;
 }

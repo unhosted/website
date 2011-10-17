@@ -6,14 +6,20 @@
     <script src="../../remoteStorage-staging.js"></script>
     <script>
       function onbodyload() {
-         window.remoteStorage.init('documents');
-         window.remoteStorage.onChange = function(key, oldValue, newValue) {
+         window.remoteStorage.init('documents', function(key, oldValue, newValue) {
            if(key=='text') {
              document.getElementById('text').value=newValue;
            }
-         };
-         if(remoteStorage.isConnected()) {
-           document.getElementById('text').value=remoteStorage.getItem('text');
+         });
+         document.getElementById('text').value=remoteStorage.getItem('text');
+         if(document.getElementById('text').value == '') {
+           document.getElementById('text').value = 'This is a remoteStorage demo.\n\n'
+             + 'Try to log in on the top right with your remote storage user address.\n'
+             + 'Or just use test@yourremotestorage.com (user: test, password: unhosted)\n'
+             + 'to try it out.\n'
+             + 'You will be redirected to the remote storage where you have to authorize this\n'
+             + 'app to store data on your remote storage.\n\n'
+             + 'Happy writing!\n';
          }
        }
     </script>
@@ -21,11 +27,6 @@
     textarea { position:absolute; padding:10% 20%; font:2em FreeSans,Helvetica,sans-serif; color:#333; background:#eee; text-shadow:0 0 1px #666677; width:60%; height:80%; overflow-x:hidden; overflow-y:auto; resize:none; }</style>
   </head>
   <body onload="onbodyload();">
-    <textarea id="text" onkeyup="remoteStorage.setItem('text', this.value);" autofocus>This is a remoteStorage demo.
-
-Try to log in on the top right with your remote storage user address. Or just use test@yourremotestorage.com (password: unhosted) to try it out.
-You will be redirected to the remote storage where you have to authenticate.
-
-Happy writing!</textarea>
+    <textarea id="text" onkeyup="remoteStorage.setItem('text', this.value);" autofocus></textarea>
   </body>
 </html>
