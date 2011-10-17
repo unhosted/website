@@ -32,8 +32,8 @@
 
 function nextItemId()
 {
-	remoteStorage.setItem(nextId, remoteStorage.getItem(nextId) ? parseInt(remoteStorage.getItem(nextId)) + 1 : 0);
-	return 'item' + remoteStorage.getItem(nextId);
+	remoteStorage.setItem('nextId', remoteStorage.getItem('nextId') ? parseInt(remoteStorage.getItem('nextId')) + 1 : 0);
+	return 'item' + remoteStorage.getItem('nextId');
 }
 
 // callback expects a list of objects with the itemId and itemValue properties set
