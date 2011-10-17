@@ -452,9 +452,10 @@
             var obj={};
             try {//this is not necessary for current version of protocol, but might be in future:
               obj = JSON.parse(text);
+              obj.success = true;
             } catch(e){
+              obj.success = false;
             }
-            obj.success = true;
             cb(obj);
           },
           error: function(xhr) {
@@ -487,24 +488,19 @@
           for(var i in index) {
             doCall('DELETE', i, null, revision, function() {});
           }
-          index={
-            '_remoteStorageAll': revision
-          }
+          index={};
           localStorage.setItem('_remoteStorageIndex', JSON.stringify(index));
           doCall('PUT', '_remoteStorageIndex', JSON.stringify(index), revision, cb);
         },
         setItem: function(key, value, revision, cb) {
           var index = JSON.parse(localStorage.getItem('_remoteStorageIndex'));
           if(!index) {//first use
-            index={
-              '_remoteStorageAll': 0
-            };
+            index={};
             localStorage.setItem('_remoteStorageIndex', JSON.stringify(index));
           }
-          if(index['_remoteStorageAll']<revision) {
+          if((!index[key]) || (index[key]<revision)) {
             doCall('PUT', key, value, revision, function() {
               index[key]=revision;
-              index['_remoteStorageAll']=revision;
               localStorage.setItem('_remoteStorageIndex', JSON.stringify(index));
               doCall('PUT', '_remoteStorageIndex', JSON.stringify(index), revision, cb);
             });
@@ -514,10 +510,9 @@
         },
         removeItem: function(key, revision, cb) {
           var index = JSON.parse(localStorage.getItem('_remoteStorageIndex'));
-          if(index['_remoteStorageAll']<revision) {
+          if((!index[key]) || (index[key]<revision)) {
             doCall('DELETE', key, null, revision, function() {
-              index[key]=undefined;
-              index['_remoteStorageAll']=revision;
+              index[keys]=revision;
               localStorage.setItem('_remoteStorageIndex', JSON.stringify(index));
               doCall('PUT', '_remoteStorageIndex', JSON.stringify(index), revision, cb);
             });
@@ -552,23 +547,21 @@
               remoteIndex = {};
             }
             for(var i in remoteIndex) {
-              if(i != '_remoteStorageAll') {
-                if((localIndex[i] == undefined) || (remoteIndex[i] > localIndex[i])) {//need to pull it
-                  doCall('GET', i, null, null, function(data) {
-                    localStorage.setItem('_remoteStorage_'+i, data.value);
-                    var localIndex = JSON.parse(localStorage.getItem('_remoteStorageIndex'));
-                    if(!localIndex) {
-                      localIndex = {};
-                    }
-                    localIndex[i]=data._revision;
-                    localStorage.setItem('_remoteStorageIndex', JSON.stringify(localIndex));
-                    var oldValue = localStorage.getItem('_remoteStorage+'+i);
-                    window.remoteStorage.onChange(i, oldValue, data.value);
-                  });
-                } else if(remoteIndex[i] < localIndex[i]) {//need to push it
-                  localValue = localStorage.getItem('_remoteStorage_'+i);
-                  doCall('PUT', i, localValue, localIndex[i], function() {});
-                }
+              if((localIndex[i] == undefined) || (remoteIndex[i] > localIndex[i])) {//need to pull it
+                doCall('GET', i, null, null, function(data) {
+                  localStorage.setItem('_remoteStorage_'+i, data.value);
+                  var localIndex = JSON.parse(localStorage.getItem('_remoteStorageIndex'));
+                  if(!localIndex) {
+                    localIndex = {};
+                  }
+                  localIndex[i]=data._revision;
+                  localStorage.setItem('_remoteStorageIndex', JSON.stringify(localIndex));
+                  var oldValue = localStorage.getItem('_remoteStorage+'+i);
+                  window.remoteStorage.onChange(i, oldValue, data.value);
+                });
+              } else if(remoteIndex[i] < localIndex[i]) {//need to push it
+                localValue = localStorage.getItem('_remoteStorage_'+i);
+                doCall('PUT', i, localValue, localIndex[i], function() {});
               }
             }
           });
@@ -582,7 +575,7 @@
 
     window.remoteStorage = (function(){
       function work(minRevision) {
-        if(!(localStorage.getItem('_remoteStorageUserAddress'))) {
+        if(!(localStorage.getItem('_remoteStorageOauthToken'))) {
           return;
         }
         var queue = JSON.parse(localStorage.getItem('_remoteStorageActionQueue'));
