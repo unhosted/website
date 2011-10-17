@@ -777,11 +777,11 @@ function ButtonClick(el, dataScope) {
 window.remoteStorage.init = function(dataScope, onChangeFunc) {
   var divEl = document.createElement('div');
   divEl.id = 'remoteStorageDiv';
-  divEl.innerHTML = '<form><link rel="stylesheet" href="../../remoteStorage.css" />'
+  divEl.innerHTML = '<link rel="stylesheet" href="../../remoteStorage.css" />'
     +'<input id="userAddressInput" type="text" placeholder="you@yourremotestorage" onkeyup="InputKeyUp(this);">'
     +'<span id="userAddress" style="display:none" onmouseover="SpanMouseOver(this);" onmouseout="SpanMouseOut(this);" onclick="SpanClick(this)"></span>'
     +'<input id="userButton" type="submit" value="Sign in" onclick="ButtonClick(this,'
-    +'\''+dataScope+'\')"></form>';
+    +'\''+dataScope+'\')">';
   document.body.insertBefore(divEl, document.body.firstChild);
   if(window.remoteStorage.isConnected()) {
     window.remoteStorage._init();
