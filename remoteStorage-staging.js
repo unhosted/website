@@ -578,39 +578,44 @@
         if(!(localStorage.getItem('_remoteStorageOauthToken'))) {
           return;
         }
-        var queue = JSON.parse(localStorage.getItem('_remoteStorageActionQueue'));
-        if(queue && queue.length) {
-          var thisAction = queue.shift();
-          while(thisAction.revision<minRevision) {
-            thisAction = queue.shift();
-            if(!queue.length) {
-              localStorage.setItem('_remoteStorageActionQueue', '[]');
+        var dirties = JSON.parse(localStorage.getItem('_remoteStorageDirties'));
+        for(dirty in dirties) {
+          var thisAction = dirties[dirty];
+          if(thisAction.revision>=minRevision) {
+            var alreadyWorking = localStorage.getItem('_remoteStorageWorking_'+thisAction.key);
+            if(!alreadyWorking) {
+              localStorage.setItem('_remoteStorageWorking_'+thisAction.key, thisAction.revision);
+              dirties[dirty]=undefined;
+              localStorage.setItem('_remoteStorageDirties', JSON.stringify(dirties));
+              if(thisAction.action == 'clear') {
+                backend.clear(function() {
+                  localStorage.removeItem('_remoteStorageWorking_'+thisAction.key);
+                  work(1);
+                });
+              } else if(thisAction.action == 'setItem') {
+                backend.setItem(thisAction.key, thisAction.value, thisAction.revision, function(revision) {
+                  localStorage.removeItem('_remoteStorageWorking_'+thisAction.key);
+                  work(revision+1);
+                });
+              } else if(thisAction.action == 'removeItem') {
+                backend.removeItem(thisAction.key, thisAction.revision, function(revision) {
+                  localStorage.removeItem('_remoteStorageWorking_'+thisAction.key);
+                  work(revision+1);
+                });
+              }
               return;
             }
-          }
-          //avoid other work() calls from attempting thisAction:
-          //queue.unshift(thisAction);
-          //although if the action fails, it should be requeued i guess..
-          //maybe really what should happen is not queue individual actions but always compare timestamps for all keys,
-          //and sync opportunistically (is that the right word?). we also need to fire Storage events if data comes in.
-          localStorage.setItem('_remoteStorageActionQueue', JSON.stringify(queue));
-          if(thisAction.action == 'clear') {
-            backend.clear(function() {work(1);});
-          } else if(thisAction.action == 'setItem') {
-            backend.setItem(thisAction.key, thisAction.value, thisAction.revision, function(revision) {work(revision+1);});
-          } else if(thisAction.action == 'removeItem') {
-            backend.removeItem(thisAction.key, thisAction.revision, function(revision) {work(revision+1);});
           }
         }
       }
       function pushAction(action) {
-        var queue = JSON.parse(localStorage.getItem('_remoteStorageActionQueue'));
-        if(queue==null){
-          queue=[];
+        var dirties = JSON.parse(localStorage.getItem('_remoteStorageDirties'));
+        if(dirties==null){
+          dirties={};
         }
         action.revision = new Date().getTime();
-        queue.push(action);
-        localStorage.setItem('_remoteStorageActionQueue', JSON.stringify(queue));
+        dirties[action.key] = action;
+        localStorage.setItem('_remoteStorageDirties', JSON.stringify(dirties));
       }
       work(0);
 
@@ -649,7 +654,7 @@
           }
           pushAction({action: 'setItem', key: k, value: v});
           if(this.isConnected()) {
-            work();
+            work(0);
           }
           var ret = localStorage.setItem('_remoteStorage_'+k, v);
           this.length = calcLength();
@@ -658,7 +663,7 @@
         removeItem: function(k) {
           pushAction({action: 'removeItem', key: k});
           if(this.isConnected()) {
-            work();
+            work(0);
           }
           var ret = localStorage.removeItem('_remoteStorage_'+k);
           window.remoteStorage.length = calcLength();
@@ -667,7 +672,7 @@
         clear: function() {
           localStorage.setItem('_remoteStorageActionQueue', '[{"action": "clear"}]');
           if(this.isConnected()) {
-            work();
+            work(0);
           }
           for(var i=0;i<localStorage.length;i++) {
             if(localStorage.key(i).substring(0,15)=='_remoteStorage_') {
@@ -677,7 +682,7 @@
         },
         connect: function(userAddress, dataScope) {
           backend.connect(userAddress, dataScope, function() {
-            work();
+            work(0);
           })
         },
         isConnected: function() {
