@@ -31,7 +31,10 @@
     document.addEventListener('DOMContentLoaded', function() {
       document.removeEventListener('DOMContentLoaded', arguments.callee, false );
       {
-        oauth.harvestToken(backend.setToken);
+        oauth.harvestToken(function(token) {
+          backend.setToken(token);
+          //backend.sync();
+        });
         //remoteStorage.init('sandwiches');
       }
     }, false)
@@ -416,6 +419,8 @@
         }
         if(paramsToStay.length) {
           window.location='#'+paramsToStay.join('&');
+        } else {
+          window.location='';
         }
       }
       return {
@@ -533,6 +538,8 @@
         },
         setToken: function(token) {
           localStorage.setItem('_remoteStorageOauthToken', token);
+        },
+        sync: function() {
           var localIndex = JSON.parse(localStorage.getItem('_remoteStorageIndex'));
           if(!localIndex) {
             localIndex = {};
@@ -691,11 +698,18 @@
           localStorage.removeItem('_remoteStorageDataScope');
           localStorage.removeItem('_remoteStorageDavAddress');
           localStorage.removeItem('_remoteStorageOauthToken');
+          localStorage.removeItem('_remoteStorageIndex');
           for(var i=0; i<localStorage.length; i++) {
             if(localStorage.key(i).substring(0,15)=='_remoteStorage_') {
-              localStorage.removeItem(localStorage.key(i));
+              var keyName = localStorage.key(i);
+              localStorage.removeItem(keyName);
+              remoteStorage.onChange(keyName.substring(15), localStorage.getItem(keyName), null);
+              localStorage.removeItem(keyName);
             }
           }
+        },
+        _init: function() {
+          backend.sync();
         }
       }
     })()
@@ -760,7 +774,7 @@ function ButtonClick(el, dataScope) {
   }
 }
 
-window.remoteStorage.init = function(dataScope) {
+window.remoteStorage.init = function(dataScope, onChangeFunc) {
   var divEl = document.createElement('div');
   divEl.id = 'remoteStorageDiv';
   divEl.innerHTML = '<link rel="stylesheet" href="../../remoteStorage.css" />'
@@ -769,5 +783,9 @@ window.remoteStorage.init = function(dataScope) {
     +'<input id="userButton" type="submit" value="Sign in" onclick="ButtonClick(this,'
     +'\''+dataScope+'\')">';
   document.body.insertBefore(divEl, document.body.firstChild);
+  if(window.remoteStorage.isConnected()) {
+    window.remoteStorage._init();
+  }
   DisplayConnectionState();
+  window.remoteStorage.onChange = onChangeFunc;
 }
