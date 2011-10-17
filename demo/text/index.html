@@ -21,7 +21,7 @@
       function onbodyload() {
         window.remoteStorage.init('documents', function(key, oldValue, newValue) {
           if(key=='text') {
-            document.getElementById('text').value=newValue;
+            displayText();
           }
         });
         displayText();
