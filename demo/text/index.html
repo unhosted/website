@@ -1,19 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>A minimal remoteStorage demo</title>
-    <script src="../../remoteStorage-staging.js">{
-          dataScope: 'documents',
-          type: 'private',
-          onChange: function(key, oldValue, newValue) {
-            if(key=='text') {
-              displayText();
-            }
-          },
-          preferBrowserSessionIfNative: false,
-          preferBrowserIdIfNative: false,
-          preferBrowserIdAlways: false}</script>
+    <title>A simple text editor using remoteStorage as backend</title>
+    <script src="http://unhosted.org/remoteStorage.js">{
+      dataScope: 'documents',
+      onChange: function(key, oldValue, newValue) {
+        if(key=='text') {
+          document.getElementById('text').value = newValue;
+        }
+      }
+    </script>
     <script>
       function displayText() {
         if(remoteStorage.getItem('text') != null) {
