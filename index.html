@@ -125,16 +125,13 @@
 <pre>
 &lt;html>
   &lt;head>
-    &lt;title>A simple text editor using remoteStorage as backend&lt;/title>
     &lt;link rel="stylesheet" href="http://unhosted.org/demo/text/style.css">
-    <a href="#" id="exampleinit" title="just put this script in your code to enable users to sync data to their remote storage">&lt;script src="http://unhosted.org/<strong>remoteStorage.js</strong>">
-    { <strong>dataScope</strong>: 'documents',
-      <strong>onChange</strong>: function(key, oldValue, newValue) {
-        if(key=='text') { document.getElementById('textfield').value = newValue; }
-      }
-    }&lt;/script></a>
-  &lt;body>
-    &lt;textarea id="textfield" onkeyup="<a href="#" id="exampleset" title="setting the value">remoteStorage.<strong>setItem</strong>('text', this.value);</a>" autofocus>Write here&lt;/textarea>
+    &lt;script src="http://unhosted.org/remoteStorage.js"><em>{dataScope: 'documents'}</em>&lt;/script>
+  &lt;/head>
+  &lt;body onload="document.getElementById('text').value = <em>remoteStorage.getItem('text');</em>">
+    &lt;textarea id="textfield" onkeyup="<em>remoteStorage.setItem('text', this.value);</em>" autofocus>Write here&lt;/textarea>
+  &lt;/body>
+&lt;/html>
 </pre>
 
 </article>
