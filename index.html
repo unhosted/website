@@ -25,6 +25,8 @@
 	
 	<!-- all our JS is at the bottom of the page, except for Modernizr. -->
 	<script src="js/modernizr-1.7.min.js"></script>
+    <script src="js/jquery.tipsy.js"></script>
+    <script src="js/functions.js"></script>
 	<script type="text/javascript">
 	/* <![CDATA[ */
 	    (function() {
@@ -119,29 +121,15 @@
 -->
 
 <article id="examplecode">
-<h2>A simple text editor using remoteStorage as backend</h2>
+<h2>A <a href="http://unhosted.org/demo/text">simple text editor</a> using remoteStorage as backend</h2>
 <pre>
-&lt;!DOCTYPE html>&lt;html lang="en">
+&lt;html>
   &lt;head>
-    &lt;meta charset="utf-8">
-    &lt;title>A simple text editor using remoteStorage as backend&lt;/title>
-    <em>&lt;script src="http://unhosted.org/remoteStorage.js">
-      { dataScope: 'documents',
-        onChange: function(key, oldValue, newValue) {
-          if(key=='text') {
-            document.getElementById('text').value = newValue;
-          }
-        }
-      }
-    &lt;/script></em>
-    &lt;style>
-      * { padding:0; margin:0; border:0; outline:0; }
-      html { overflow-x:hidden; overflow-y:hidden; }
-      textarea { position:absolute; padding:10% 20%; font:2em; width:60%; height:80%; overflow-x:hidden; overflow-y:auto; resize:none; }
-    &lt;/style>
+    &lt;link rel="stylesheet" href="http://unhosted.org/demo/text/style.css">
+    &lt;script src="http://unhosted.org/remoteStorage.js"><em>{dataScope: 'documents'}</em>&lt;/script>
   &lt;/head>
-  &lt;body>
-    &lt;textarea id="text" onkeyup="<em>remoteStorage.setItem('text', this.value);</em>" autofocus&gt;Write here&lt;/textarea&gt;
+  &lt;body onload="document.getElementById('text').value = <em>remoteStorage.getItem('text');</em>">
+    &lt;textarea id="textfield" onkeyup="<em>remoteStorage.setItem('text', this.value);</em>" autofocus>Write here&lt;/textarea>
   &lt;/body>
 &lt;/html>
 </pre>
