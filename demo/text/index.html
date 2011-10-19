@@ -21,8 +21,11 @@
         }
       }
     </script>
-    <style>* { padding:0; margin:0; border:0; outline:0; } html { overflow-x:hidden; overflow-y:hidden; }
-    textarea { position:absolute; padding:10% 20%; font:2em FreeSans,Helvetica,sans-serif; color:#333; background:#eee; text-shadow:0 0 1px #666677; width:60%; height:80%; overflow-x:hidden; overflow-y:auto; resize:none; }</style>
+    <style>
+      * { padding:0; margin:0; border:0; outline:0; }
+      html { overflow-x:hidden; overflow-y:hidden; }
+      textarea { position:absolute; padding:10% 20%; font:2em FreeSans,Helvetica,sans-serif; color:#333; background:#eee; text-shadow:0 0 1px #666677; width:60%; height:80%; overflow-x:hidden; overflow-y:auto; resize:none; }
+    </style>
   </head>
   <body onload="displayText();">
     <textarea id="text" onkeyup="remoteStorage.setItem('text', this.value);" autofocus>
