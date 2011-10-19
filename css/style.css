@@ -98,12 +98,16 @@ header{
 #introduction h2 { text-align:center; }
 #introduction div { margin:0 1em; }
 #introduction img { margin:0 3em; }
-#introduction #you { width:36%; }
-#introduction #you img#browser { width:20em; height:15em; }
-#introduction #sync { width:16%; }
-#introduction #sync svg#sync { width:10em; height:15em; }
+#introduction #apps { width:36%; position:relative; }
+#introduction #apps img { width:10em; height:7em; }
+#introduction #apps img.app1 { margin:-4em 0 0 0; padding:2em; }
+#introduction #apps img.app2 { margin:1em -3em 0 0; }
+#introduction #apps img.app3 { margin:-.5em 0 0 3em; }
+#introduction #sync { width:16%; margin-top:5em; }
+#introduction #sync img { width:10em; height:7em; }
+#introduction #sync h2 { margin-top:2.9em; }
 #introduction #remotestorage { width:35%; }
-#introduction #remotestorage img#storage { width:13em; height:15em; }
+#introduction #remotestorage img { width:13em; height:15em; }
 #introduction #arrow { position:absolute; left:4em; top:22em; }
 #introduction .column h3{ font-size: 16px; font-weight: bold; line-height: 22px; margin-bottom: 22px; margin-top: 2em; }
 
