@@ -3,7 +3,17 @@
   <head>
     <meta charset="utf-8">
     <title>A minimal remoteStorage demo</title>
-    <script src="../../remoteStorage-staging.js"></script>
+    <script src="../../remoteStorage-staging.js">{
+          dataScope: 'documents',
+          type: 'private',
+          onChange: function(key, oldValue, newValue) {
+            if(key=='text') {
+              displayText();
+            }
+          },
+          preferBrowserSessionIfNative: false,
+          preferBrowserIdIfNative: false,
+          preferBrowserIdAlways: false}</script>
     <script>
       function displayText() {
         if(remoteStorage.getItem('text') == null) {//first use
@@ -19,18 +29,6 @@
         }
       }
       function onbodyload() {
-        window.remoteStorage.init(
-          { dataScope: 'documents',
-          , type: private
-          , onChange: function(key, oldValue, newValue) {
-              if(key=='text') {
-                displayText();
-              }
-            }
-          , preferBrowserSessionIfNative: false,
-          , preferBrowserIdIfNative: false,
-          , preferBrowserIdAlways: false,
-          });
         displayText();
       }
     </script>

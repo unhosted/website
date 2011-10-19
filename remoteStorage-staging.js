@@ -31,6 +31,13 @@
     document.addEventListener('DOMContentLoaded', function() {
       document.removeEventListener('DOMContentLoaded', arguments.callee, false );
       {
+        var scripts = document.getElementsByTagName('script');
+	for(i in scripts) {
+          if(/remoteStorage-staging.js$/.test(scripts[i].src)) {
+            var options = (new Function('return ' + scripts[i].innerHTML.replace(/\n|\r/g, '')))();
+            window.remoteStorage.init(options);
+          }
+        }
         oauth.harvestToken(function(token) {
           backend.setToken(token);
           //backend.sync();
