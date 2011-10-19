@@ -784,6 +784,12 @@ function ButtonClick(el, dataScope) {
 }
 
 window.remoteStorage.init = function(options) {
+  if(!options) {
+    options = {};
+  }
+  if (!(options.dataScope)) {
+    options.dataScope = location.host;
+  }
   var divEl = document.createElement('div');
   divEl.id = 'remoteStorageDiv';
   divEl.innerHTML = '<link rel="stylesheet" href="../../remoteStorage.css" />'

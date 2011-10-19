@@ -1,8 +1,1 @@
-<html>
-  <head>
-    <script src="http://unhosted.org/remoteStorage.js">{dataScope: 'documents'}</script>
-  </head>
-  <body onload="document.getElementById('text').value = remoteStorage.getItem('text');">
-    <textarea id="text" onkeyup="remoteStorage.setItem('text', this.value);"></textarea>
-  </body>
-</html>
+<script src="/remoteStorage.js"></script><body onload="document.getElementById('t').value = remoteStorage.getItem('t');"><textarea id="t" onkeyup="remoteStorage.setItem('t', this.value);">
