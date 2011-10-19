@@ -114,7 +114,10 @@ header{
 #demoapps ul li { display:inline; float:left; margin:1em; }
 #demoapps a img { border-radius:.5em; }
 
-#examplecode { float:left; margin-top:5em; }
+#quickstart { float:left; margin-top:3em; clear:both; }
+#quickstart h2 { text-align:left; }
+
+#examplecode { float:left; margin-top:3em; }
 #examplecode h2 { text-align:left; }
 #examplecode h2 a { color:#333; text-decoration:underline; }
 #examplecode pre { color:#778595; }
