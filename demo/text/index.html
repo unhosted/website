@@ -19,11 +19,18 @@
         }
       }
       function onbodyload() {
-        window.remoteStorage.init('documents', function(key, oldValue, newValue) {
-          if(key=='text') {
-            displayText();
-          }
-        });
+        window.remoteStorage.init(
+          { dataScope: 'documents',
+          , type: private
+          , onChange: function(key, oldValue, newValue) {
+              if(key=='text') {
+                displayText();
+              }
+            }
+          , preferBrowserSessionIfNative: false,
+          , preferBrowserIdIfNative: false,
+          , preferBrowserIdAlways: false,
+          });
         displayText();
       }
     </script>
