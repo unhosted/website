@@ -94,60 +94,32 @@ header{
 // INTRO STYLES
 */
 #introduction { position:relative; top:3em; }
-		#introduction .column{
-			position: relative;
-			display:block;
-            float:left;
-		}
-        #introduction h2 { text-align:center; }
-	#introduction div { margin:0 1em; }
-	#introduction img { margin:0 3em; }
-        #introduction #you { width:36%; }
-        #introduction #you img#browser { width:20em; height:15em; }
-        #introduction #sync { width:16%; }
-        #introduction #sync svg#sync { width:10em; height:15em; }
-        #introduction #remotestorage { width:35%; }
-        #introduction #remotestorage img#storage { width:13em; height:15em; }
-		#introduction #arrow { position:absolute; left:4em; top:22em; }
-        
-			#introduction .column h3{
-				font-size: 16px;
-				font-weight: bold;
-				line-height: 22px;
-				margin-bottom: 22px;
-				margin-top: 2em;
-			}
+#introduction .column { position: relative; display:block; float:left; }
+#introduction h2 { text-align:center; }
+#introduction div { margin:0 1em; }
+#introduction img { margin:0 3em; }
+#introduction #you { width:36%; }
+#introduction #you img#browser { width:20em; height:15em; }
+#introduction #sync { width:16%; }
+#introduction #sync svg#sync { width:10em; height:15em; }
+#introduction #remotestorage { width:35%; }
+#introduction #remotestorage img#storage { width:13em; height:15em; }
+#introduction #arrow { position:absolute; left:4em; top:22em; }
+#introduction .column h3{ font-size: 16px; font-weight: bold; line-height: 22px; margin-bottom: 22px; margin-top: 2em; }
 
 #demoapps ul li { display:inline; float:left; margin:1em; }
 #demoapps a img { border-radius:.5em; }
-		
-        #apptorrent { display:block; position:absolute; top:30em; bottom:5em; }
-    	#apptorrent .column{
-			position: relative;
-			display: block;
-			float: left;
-			width: 280px;
-			margin: 0 10px;
-			padding: 0 10px;
-			margin-bottom: 40px;
-		}
-			#apptorrent .column#packager{
-			
-			}
-			#apptorrent .column#dashboard{
-			
-			}
-			#apptorrent .column#player{
-			
-			}
-		
-			#introduction .column h3{
-				font-size: 16px;
-				font-weight: bold;
-				line-height: 22px;
-				margin-bottom: 22px;
-				margin-top: 260px;
-			}
+
+#examplecode { float:left; margin-top:5em; }
+#examplecode h2 { text-align:left; }
+#examplecode pre { color:#778595; }
+#examplecode pre em { color:#000; font-style:normal; }
+
+#apptorrent { display:block; position:absolute; top:30em; bottom:5em; }
+#apptorrent .column{ position: relative; display: block; float: left; width: 280px; margin: 0 10px; padding: 0 10px; margin-bottom: 40px; }
+#apptorrent .column#packager { }
+#apptorrent .column#dashboard { }
+#apptorrent .column#player { }
 
 /*
 // webDAV
