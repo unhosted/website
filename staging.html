@@ -137,30 +137,11 @@
         }
       <em>}
     &lt;/script></em>
-    &lt;script>
-      <em>function displayText() {
-        if(remoteStorage.getItem('text') != null) {
-          document.getElementById('text').value = remoteStorage.getItem('text');
-        }
-      }</em>
-    &lt;/script>
-    &lt;style>
-      * { padding:0; margin:0; border:0; outline:0; }
-      html { overflow-x:hidden; overflow-y:hidden; }
-      textarea { position:absolute; padding:10% 20%; font:2em; width:60%; height:80%; overflow-x:hidden; overflow-y:auto; resize:none; }
-    &lt;/style>
+    &lt;link rel="stylesheet" href="/demo/text/text.css" type="text/css" />
   &lt;/head>
-  &lt;body <em>onload="displayText();"</em>>
+  &lt;body onload="<em>if(remoteStorage.getItem('text')) { document.getElementById('text').value = remoteStorage.getItem('text'); }</em>">
     &lt;textarea id="text" onkeyup="<em>remoteStorage.setItem('text', this.value);</em>" autofocus>
-      This is a remoteStorage demo.
-
-      Try to log in on the top right with your remote storage user address.
-      Or just use test@yourremotestorage.com (user: test, password: unhosted)
-      to try it out.
-      You will be redirected to the remote storage where you have to authorize this
-      app to store data on your remote storage.
-
-      Happy writing!
+      ...
     &lt;/textarea&gt;
   &lt;/body>
 &lt;/html>
