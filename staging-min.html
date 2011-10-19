@@ -122,27 +122,12 @@
 <h2>A simple text editor using remoteStorage as backend</h2>
 <!--<a href="/demo/text">(try it!)</a>-->
 <pre>
-&lt;!DOCTYPE html>
-&lt;html lang="en">
+&lt;html>
   &lt;head>
-    &lt;meta charset="utf-8">
-    &lt;title>A simple text editor using remoteStorage as backend&lt;/title>
-    <em>&lt;script src="http://unhosted.org/remoteStorage.js">
-      {
-        dataScope: 'documents'</em>,
-        onChange: function(key, oldValue, newValue) {
-          if(key=='text') {
-            document.getElementById('text').value = newValue;
-          }
-        }
-      <em>}
-    &lt;/script></em>
-    &lt;link rel="stylesheet" href="/demo/text/text.css" type="text/css" />
+    &lt;script src="http://unhosted.org/remoteStorage.js"><em>{dataScope: 'documents'}</em>&lt;/script>
   &lt;/head>
-  &lt;body onload="<em>if(remoteStorage.getItem('text')) { document.getElementById('text').value = remoteStorage.getItem('text'); }</em>">
-    &lt;textarea id="text" onkeyup="<em>remoteStorage.setItem('text', this.value);</em>" autofocus>
-      ...
-    &lt;/textarea&gt;
+  &lt;body onload="document.getElementById('text').value = <em>remoteStorage.getItem</em>('text'); }">
+    &lt;textarea id="text" onkeyup="<em>remoteStorage.setItem</em>('text', this.value);">&lt;/textarea&gt;
   &lt;/body>
 &lt;/html>
 </pre>
