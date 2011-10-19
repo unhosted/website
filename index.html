@@ -125,11 +125,10 @@
 <pre>
 &lt;html>
   &lt;head>
-    &lt;link rel="stylesheet" href="http://unhosted.org/demo/text/style.css">
-    &lt;script src="http://unhosted.org/remoteStorage.js"><em>{dataScope: 'documents'}</em>&lt;/script>
+    &lt;script src="http://unhosted.org/remoteStorage.js"><em>{<strong>dataScope</strong>: 'documents'}</em>&lt;/script>
   &lt;/head>
-  &lt;body onload="document.getElementById('text').value = <em>remoteStorage.getItem('text');</em>">
-    &lt;textarea id="textfield" onkeyup="<em>remoteStorage.setItem('text', this.value);</em>" autofocus>Write here&lt;/textarea>
+  &lt;body onload="document.getElementById('text').value = <em>remoteStorage.<strong>getItem</strong>('text');</em>">
+    &lt;textarea id="textfield" onkeyup="<em>remoteStorage.<strong>setItem</strong>('text', this.value);</em>">&lt;/textarea>
   &lt;/body>
 &lt;/html>
 </pre>
