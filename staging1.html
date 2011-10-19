@@ -1,0 +1,29 @@
+<h2>A simple text editor using remoteStorage as backend</h2>
+<pre>
+&lt;!DOCTYPE html>
+&lt;html lang="en">
+  &lt;head>
+    &lt;meta charset="utf-8">
+    &lt;title>
+      A simple text editor using remoteStorage as backend
+    &lt;/title>
+    <strong>&lt;script src="http://unhosted.org/remoteStorage.js">
+      { dataScope: 'documents'
+      , onChange: function(key, oldValue, newValue) {
+          if(key=='text') {
+            document.getElementById('text').value = newValue;
+          }
+        }
+      }
+    &lt;/script></strong>
+    &lt;style>
+      * { padding:0; margin:0; border:0; outline:0; }
+      html { overflow-x:hidden; overflow-y:hidden; }
+      textarea { position:absolute; padding:10% 20%; font:2em; width:60%; height:80%; overflow-x:hidden; overflow-y:auto; resize:none; }
+    &lt;/style>
+  &lt;/head>
+  &lt;body>
+    <strong>&lt;textarea id="text" onkeyup="remoteStorage.setItem('text', this.value);" autofocus&gt;Write here&lt;/textarea&gt;</strong>
+  &lt;/body>
+&lt;/html>
+</pre>

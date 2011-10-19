@@ -31,6 +31,13 @@
     document.addEventListener('DOMContentLoaded', function() {
       document.removeEventListener('DOMContentLoaded', arguments.callee, false );
       {
+        var scripts = document.getElementsByTagName('script');
+	for(i in scripts) {
+          if(/remoteStorage-staging.js$/.test(scripts[i].src)) {
+            var options = (new Function('return ' + scripts[i].innerHTML.replace(/\n|\r/g, '')))();
+            window.remoteStorage.init(options);
+          }
+        }
         oauth.harvestToken(function(token) {
           backend.setToken(token);
           //backend.sync();
@@ -557,7 +564,7 @@
                   localIndex[i]=data._revision;
                   localStorage.setItem('_remoteStorageIndex', JSON.stringify(localIndex));
                   var oldValue = localStorage.getItem('_remoteStorage+'+i);
-                  window.remoteStorage.onChange(i, oldValue, data.value);
+                  window.remoteStorage.options.onChange(i, oldValue, data.value);
                 });
               } else if(remoteIndex[i] < localIndex[i]) {//need to push it
                 localValue = localStorage.getItem('_remoteStorage_'+i);
@@ -701,7 +708,7 @@
             if(localStorage.key(i).substring(0,15)=='_remoteStorage_') {
               var keyName = localStorage.key(i);
               localStorage.removeItem(keyName);
-              remoteStorage.onChange(keyName.substring(15), localStorage.getItem(keyName), null);
+              remoteStorage.options.onChange(keyName.substring(15), localStorage.getItem(keyName), null);
               localStorage.removeItem(keyName);
             }
           }
@@ -772,18 +779,18 @@ function ButtonClick(el, dataScope) {
   }
 }
 
-window.remoteStorage.init = function(dataScope, onChangeFunc) {
+window.remoteStorage.init = function(options) {
   var divEl = document.createElement('div');
   divEl.id = 'remoteStorageDiv';
   divEl.innerHTML = '<link rel="stylesheet" href="../../remoteStorage.css" />'
     +'<input id="userAddressInput" type="text" placeholder="you@yourremotestorage" onkeyup="InputKeyUp(this);">'
     +'<span id="userAddress" style="display:none" onmouseover="SpanMouseOver(this);" onmouseout="SpanMouseOut(this);" onclick="SpanClick(this)"></span>'
     +'<input id="userButton" type="submit" value="Sign in" onclick="ButtonClick(this,'
-    +'\''+dataScope+'\')">';
+    +'\''+options.dataScope+'\')">';
   document.body.insertBefore(divEl, document.body.firstChild);
   if(window.remoteStorage.isConnected()) {
     window.remoteStorage._init();
   }
   DisplayConnectionState();
-  window.remoteStorage.onChange = onChangeFunc;
+  window.remoteStorage.options = options;
 }
