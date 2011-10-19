@@ -25,6 +25,8 @@
 	
 	<!-- all our JS is at the bottom of the page, except for Modernizr. -->
 	<script src="js/modernizr-1.7.min.js"></script>
+    <script src="js/jquery.tipsy.js"></script>
+    <script src="js/functions.js"></script>
 	<script type="text/javascript">
 	/* <![CDATA[ */
 	    (function() {
@@ -119,31 +121,20 @@
 -->
 
 <article id="examplecode">
-<h2>A simple text editor using remoteStorage as backend</h2>
+<h2>A <a href="http://unhosted.org/demo/text">simple text editor</a> using remoteStorage as backend</h2>
 <pre>
-&lt;!DOCTYPE html>&lt;html lang="en">
+&lt;html>
   &lt;head>
-    &lt;meta charset="utf-8">
     &lt;title>A simple text editor using remoteStorage as backend&lt;/title>
-    <em>&lt;script src="http://unhosted.org/remoteStorage.js">
-      { dataScope: 'documents',
-        onChange: function(key, oldValue, newValue) {
-          if(key=='text') {
-            document.getElementById('text').value = newValue;
-          }
-        }
+    &lt;link rel="stylesheet" href="http://unhosted.org/demo/text/style.css">
+    <a href="#" id="exampleinit" title="just put this script in your code to enable users to sync data to their remote storage">&lt;script src="http://unhosted.org/<strong>remoteStorage.js</strong>">
+    { <strong>dataScope</strong>: 'documents',
+      <strong>onChange</strong>: function(key, oldValue, newValue) {
+        if(key=='text') { document.getElementById('textfield').value = newValue; }
       }
-    &lt;/script></em>
-    &lt;style>
-      * { padding:0; margin:0; border:0; outline:0; }
-      html { overflow-x:hidden; overflow-y:hidden; }
-      textarea { position:absolute; padding:10% 20%; font:2em; width:60%; height:80%; overflow-x:hidden; overflow-y:auto; resize:none; }
-    &lt;/style>
-  &lt;/head>
+    }&lt;/script></a>
   &lt;body>
-    &lt;textarea id="text" onkeyup="<em>remoteStorage.setItem('text', this.value);</em>" autofocus&gt;Write here&lt;/textarea&gt;
-  &lt;/body>
-&lt;/html>
+    &lt;textarea id="textfield" onkeyup="<a href="#" id="exampleset" title="setting the value">remoteStorage.<strong>setItem</strong>('text', this.value);</a>" autofocus>Write here&lt;/textarea>
 </pre>
 
 </article>

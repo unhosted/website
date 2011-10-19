@@ -8,3 +8,6 @@
 	   return false;
 	});
 })(window.jQuery);
+
+$('#exampleinit').tipsy();
+$('#exampleset').tipsy();
