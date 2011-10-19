@@ -1,27 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
-    <meta charset="utf-8">
-    <title>
-      A simple text editor using remoteStorage as backend
-    </title>
-    <script src="http://unhosted.org/remoteStorage.js">
-      { dataScope: 'documents'
-      , onChange: function(key, oldValue, newValue) {
-           if(key=='text') {
-             document.getElementById('text').value = newValue;
-          }
-        }
-      }
-    </script>
-    <style>
-      * { padding:0; margin:0; border:0; outline:0; }
-      html { overflow-x:hidden; overflow-y:hidden; }
-      textarea { position:absolute; padding:10% 20%; font:2em; width:60%; height:80%; overflow-x:hidden; overflow-y:auto; resize:none; }
-    </style>
+    <script src="http://unhosted.org/remoteStorage.js">{dataScope: 'documents'}</script>
   </head>
-  <body>
-    <textarea id="text" onkeyup="remoteStorage.setItem('text', this.value);" autofocus>Write here</textarea>
+  <body onload="document.getElementById('text').value = remoteStorage.getItem('text');">
+    <textarea id="text" onkeyup="remoteStorage.setItem('text', this.value);"></textarea>
   </body>
 </html>
-

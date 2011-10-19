@@ -564,7 +564,9 @@
                   localIndex[i]=data._revision;
                   localStorage.setItem('_remoteStorageIndex', JSON.stringify(localIndex));
                   var oldValue = localStorage.getItem('_remoteStorage+'+i);
-                  window.remoteStorage.options.onChange(i, oldValue, data.value);
+                  if(window.remoteStorage.options.onChange) {
+                    window.remoteStorage.options.onChange(i, oldValue, data.value);
+                  }
                 });
               } else if(remoteIndex[i] < localIndex[i]) {//need to push it
                 localValue = localStorage.getItem('_remoteStorage_'+i);
@@ -708,7 +710,9 @@
             if(localStorage.key(i).substring(0,15)=='_remoteStorage_') {
               var keyName = localStorage.key(i);
               localStorage.removeItem(keyName);
-              remoteStorage.options.onChange(keyName.substring(15), localStorage.getItem(keyName), null);
+              if(window.remoteStorage.options.onChange) {
+                remoteStorage.options.onChange(keyName.substring(15), localStorage.getItem(keyName), null);
+              }
               localStorage.removeItem(keyName);
             }
           }

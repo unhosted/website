@@ -126,7 +126,7 @@
   &lt;head>
     &lt;script src="http://unhosted.org/remoteStorage.js"><em>{dataScope: 'documents'}</em>&lt;/script>
   &lt;/head>
-  &lt;body onload="document.getElementById('text').value = <em>remoteStorage.getItem</em>('text'); }">
+  &lt;body onload="document.getElementById('text').value = <em>remoteStorage.getItem</em>('text');">
     &lt;textarea id="text" onkeyup="<em>remoteStorage.setItem</em>('text', this.value);">&lt;/textarea&gt;
   &lt;/body>
 &lt;/html>
