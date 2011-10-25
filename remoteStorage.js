@@ -248,7 +248,8 @@
             host = parts[1];
             //error('So far so good. Looking up https host-meta for '+host);
             ajax({
-              url: 'https://'+host+'/.well-known/host-meta',
+              //url: 'https://'+host+'/.well-known/host-meta',
+              url: 'http://'+host+'/.well-known/host-meta',
               success: function(data) {
                 afterHttpsHostmetaSuccess(data, error, cb);
               },
