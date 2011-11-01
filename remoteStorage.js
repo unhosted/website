@@ -393,12 +393,12 @@
     ///////////////////////////
 
     var oauth = (function() {
-      function go(address, category, userAddress) {
+      function go(address, dataScope, userAddress) {
         var loc = encodeURIComponent((''+window.location).split('#')[0]);
         window.location = address
           + 'oauth2/auth?client_id=' + loc
           + '&redirect_uri=' + loc
-          + '&category=' + category
+          + '&scope=' + dataScope
           + '&user_address=' + userAddress
           + '&response_type=token';
       }
@@ -444,7 +444,7 @@
     var backend = (function(){
       function keyToAddress(key) {
         var userAddressParts = localStorage.getItem('_remoteStorageUserAddress').split('@')
-        var resource = localStorage.getItem('_remoteStorageCategory');
+        var resource = localStorage.getItem('_remoteStorageDataScope');
         var address = localStorage.getItem('_remoteStorageDavAddress')
           +'webdav/'+ userAddressParts[1]
           +'/'+ userAddressParts[0]
@@ -526,16 +526,16 @@
             });
           }
         },
-        connect: function(userAddress, category, cb) {
+        connect: function(userAddress, dataScope, cb) {
           var onError = function(errorMsg) {
             alert(errorMsg);
           }
           var callback = function(davAddress) {
             cb();
             localStorage.setItem('_remoteStorageUserAddress', userAddress);
-            localStorage.setItem('_remoteStorageCategory', category);
+            localStorage.setItem('_remoteStorageDataScope', dataScope);
             localStorage.setItem('_remoteStorageDavAddress', davAddress)
-            oauth.go(davAddress, category, userAddress);
+            oauth.go(davAddress, dataScope, userAddress);
           }
           webfinger.getDavBaseAddress(userAddress, onError, callback);
         },
@@ -690,8 +690,8 @@
             }
           }
         },
-        connect: function(userAddress, category) {
-          backend.connect(userAddress, category, function() {
+        connect: function(userAddress, dataScope) {
+          backend.connect(userAddress, dataScope, function() {
             work(0);
           })
         },
@@ -703,7 +703,7 @@
         },
         disconnect: function() {
           localStorage.removeItem('_remoteStorageUserAddress');
-          localStorage.removeItem('_remoteStorageCategory');
+          localStorage.removeItem('_remoteStorageDataScope');
           localStorage.removeItem('_remoteStorageDavAddress');
           localStorage.removeItem('_remoteStorageOauthToken');
           localStorage.removeItem('_remoteStorageIndex');
@@ -772,13 +772,13 @@ function SpanMouseOut(el) {
 function SpanClick(el) {
   window.remoteStorage.disconnect();
 }
-function ButtonClick(el, category) {
+function ButtonClick(el, dataScope) {
   if(window.remoteStorage.isConnected()) {
     window.remoteStorage.disconnect();
     DisplayConnectionState();
   } else {
     if(document.getElementById('userAddressInput').value!='') {
-      window.remoteStorage.connect(document.getElementById('userAddressInput').value, category);
+      window.remoteStorage.connect(document.getElementById('userAddressInput').value, dataScope);
       DisplayConnectionState();
     }
   }
@@ -788,8 +788,8 @@ window.remoteStorage.init = function(options) {
   if(!options) {
     options = {};
   }
-  if (!(options.category)) {
-    options.category = location.host;
+  if (!(options.dataScope)) {
+    options.dataScope = location.host;
   }
   var divEl = document.createElement('div');
   divEl.id = 'remoteStorageDiv';
@@ -797,7 +797,7 @@ window.remoteStorage.init = function(options) {
     +'<input id="userAddressInput" type="text" placeholder="you@yourremotestorage" onkeyup="InputKeyUp(this);">'
     +'<span id="userAddress" style="display:none" onmouseover="SpanMouseOver(this);" onmouseout="SpanMouseOut(this);" onclick="SpanClick(this)"></span>'
     +'<input id="userButton" type="submit" value="Sign in" onclick="ButtonClick(this,'
-    +'\''+options.category+'\')">';
+    +'\''+options.dataScope+'\')">';
   document.body.insertBefore(divEl, document.body.firstChild);
   if(window.remoteStorage.isConnected()) {
     window.remoteStorage._init();
