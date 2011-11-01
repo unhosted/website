@@ -158,7 +158,8 @@ footer{
 	margin-top:100px;
     top:5em;
 	}
-	
+	footer a { color:#fff; text-decoration:none; }
+    footer a:hover, footer a:focus { color:#ccc; }
 	footer .links{
 		display: block;
 		float: left;
@@ -198,12 +199,12 @@ footer{
 				
 		footer #community{
 			display: block;
-			float:right ;
+			float:right;
 			background: #112632;
 			position: relative;
 			width: 500px;
 			color: #95a2aa;
-			padding: 10px 20px 20px 20px;
+			padding: 10px 20px 0px 20px;
 			margin-top: 40px;
 			margin-bottom: 40px;
 			-moz-border-radius: 5px;
@@ -222,15 +223,15 @@ footer{
 					font-size: 13px;
 				}
 				footer #community div{
-					position: absolute;
-					background: url('../img/youmake.png') no-repeat right bottom transparent;
-					right: 95px;
-					bottom: 33px;
-					width: 240px;
-					height: 120px;
+					position:relative;
+					background:url('../img/youmake.png') no-repeat top left transparent;
+                    top:1em;
+					width:240px;
+					height:40px;
 					text-indent: -5000px;
 					
 				}
+                footer #community .donation { display:inline; margin:1em 2em; }
 	#credits{
 		background: #10212b;
 		text-align: right;
@@ -238,10 +239,6 @@ footer{
 		color: #627784;
 	}
 		#credits a{color: white; text-decoration:none;}
-	.FlattrButton{
-		position: relative;
-		float: right;
-	}
 .clear{ clear: both;}
 
 .mirosubs-widget video {
