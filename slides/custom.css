@@ -6,7 +6,8 @@ section { font-family:FreeSans, arial, serif; font-size:3em; }
 h1, h2, h3 { text-align:center; margin-top:200px; font-size:80px; }
 h2 { margin-top:.5em; color:#B9E768; font-size:1.5em; text-shadow:0px 2px 1px #09151E; background:url('img/helpruler.png') bottom repeat-x; padding-bottom:10px; }
 h3, p { margin:50px; font-size:1em; }
-ul { margin:50px 100px; }
+ul, ol { margin:50px 100px; }
+li { margin:.5em 0; }
 q { display:inline-block; width:700px; height:600px; color:white; font-size:60px; padding:50px; }
 img, video { width:800px; height:600px; position:absolute; top:0; z-index:-1; }
 footer { position:absolute; bottom:10px; right:20px; font-size:16px; }
