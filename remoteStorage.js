@@ -1,4 +1,6 @@
-// INTERFACE:
+// Version: 9 Nov 2011
+//
+//INTERFACE:
 //
 // 1) interface for data is the same as localStorage and sessionStorage, namely:
 //
