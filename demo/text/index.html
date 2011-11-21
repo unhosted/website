@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>A simple text editor using remoteStorage as backend</title>
-    <script src="http://unhosted.org/remoteStorage.js">{
+    <script src="http://unhost.it/remoteStorage.js">{
       dataScope: 'documents',
       onChange: function(key, oldValue, newValue) {
         if(key=='text') {
@@ -13,8 +13,8 @@
     }</script>
     <script>
       function displayText() {
-        if(remoteStorage.getItem('text') != null) {
-          document.getElementById('text').value=remoteStorage.getItem('text');
+        if(localStorage.getItem('text') != null) {
+          document.getElementById('text').value=localStorage.getItem('text');
         }
       }
     </script>
@@ -25,7 +25,7 @@
     </style>
   </head>
   <body onload="displayText();">
-    <textarea id="text" onkeyup="remoteStorage.setItem('text', this.value);" autofocus>
+    <textarea id="text" onkeyup="localStorage.setItem('text', this.value);" autofocus>
 This is a remoteStorage demo.
 
 Try to log in on the top right with your remote storage user address.
