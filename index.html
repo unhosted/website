@@ -25,19 +25,6 @@
 	
 	<!-- all our JS is at the bottom of the page, except for Modernizr. -->
 	<script src="js/modernizr-1.7.min.js"></script>
-    <script src="js/jquery.tipsy.js"></script>
-    <script src="js/functions.js"></script>
-	<script type="text/javascript">
-	/* <![CDATA[ */
-	    (function() {
-	        var s = document.createElement('script'), t = document.getElementsByTagName('script')[0];
-	        s.type = 'text/javascript';
-	        s.async = true;
-	        s.src = 'http://api.flattr.com/js/0.6/load.js?mode=auto';
-	        t.parentNode.insertBefore(s, t);
-	    })();
-	/* ]]> */
-	</script>
 </head>
 
 <body>
@@ -45,19 +32,14 @@
 	<div class="wrapper">
 		<div id="logolight"></div>
 		<h1><a href="http://unhosted.org"><img src="img/island-light.png" alt="Unhosted" /></a></h1>
-        <div name="campaign" id="campaign" style="display:block">
-            <h2>Separating web apps from data storage</h2>
-            <p>The web is not as open as it used to be: monopoly platforms formed new proprietary layers
-            on top of it.
-            But we create a better architecture for the web. We break the package deal &raquo;you get our app, we get your
-            data&laquo; with <strong><a target="_blank" href="http://www.w3.org/community/unhosted/wiki/index.php?title=RemoteStorage&oldid=45">
-            remoteStorage</a></strong>, a cross-origin data storage protocol separating application servers from data storage.</p>
-            <p>Unhosted is a non-profit project. To know more, check our
-            <strong><a target="_blank" href="http://groups.google.com/group/unhosted">mailing list</a></strong> and
-            <strong><a target="_blank" href="http://webchat.freenode.net/?channels=unhosted">chat room</a></strong>.<br />
-            <a target="_blank" href="http://pentamedia.org/datenspuren/ds11-mitschnitte-online/ds11_4612_unhosted.avi">Watch a talk</a>, 
-            follow <a href="http://twitter.com/#!/unhosted">@unhosted</a> or find more links in the footer of this page.</p>
-        </div>
+		<a style="width:250px;height:70px;vertical-align:middle;text-align:center;background-color:#000;position:absolute;z-index:5555;top:70px;left:70px;background-image:url(http://americancensorship.org/images/stop-censorship-small.png);background-position:center center;background-repeat:no-repeat;-moz-transform: rotate(-3deg);
+-webkit-transform: rotate(-3deg);" href="http://americancensorship.org"></a>
+		<div id="campaign" style="display:block">
+			<h2>Separating web apps from data storage</h2>
+			<p>The web is not as open as it used to be: monopoly platforms formed new proprietary layers on top of it. But we create a better architecture for the web. We break the package deal &raquo;you get our app, we get your data&laquo; with <strong><a target="_blank" href="http://www.w3.org/community/unhosted/wiki/index.php?title=RemoteStorage&amp;oldid=45">remoteStorage</a></strong>, a cross-origin data storage protocol separating application servers from data storage.</p>
+			<p>Unhosted is a non-profit project. To know more, check our <strong><a target="_blank" href="http://groups.google.com/group/unhosted">mailing list</a></strong> and <strong><a target="_blank" href="http://webchat.freenode.net/?channels=unhosted">chat room</a></strong>.<br />
+			<a target="_blank" href="http://pentamedia.org/datenspuren/ds11-mitschnitte-online/ds11_4612_unhosted.avi">Watch a talk</a>, follow <a href="http://twitter.com/unhosted">@unhosted</a> or find more links in the footer of this page.</p>
+        	</div>
 	</div>
 </div>
 
@@ -67,9 +49,9 @@
 	<article id="introduction">
 		
 		<div class="column" id="apps">
-            <img class="app1" src="img/application.svg" />
-            <img class="app2" src="img/application.svg" />
-            <img class="app3" src="img/application.svg" />
+            <img alt="Application" class="app1" src="img/application.svg" />
+            <img alt="Application" class="app2" src="img/application.svg" />
+            <img alt="Application" class="app3" src="img/application.svg" />
 			<h2>web apps</h2>
             <p>Applications are pure client-side Javascript, HTML &amp; CSS.<br />
             That way they are not bound to a specific host.
@@ -78,24 +60,23 @@
             </p>
 		</div>
 		<div class="column" id="sync">
-            <img src="img/sync.svg" />
+            <img alt="Synchronization" src="img/sync.svg" />
             <h2>sync with</h2>
-	<p>Using the open<br /><a href="http://www.w3.org/community/unhosted/wiki/index.php?title=RemoteStorage&oldid=45">remoteStorage</a> protocol.</p>
+	<p>Using the open<br /><a href="http://www.w3.org/community/unhosted/wiki/index.php?title=RemoteStorage&amp;oldid=45">remoteStorage</a> protocol.</p>
 		</div>
         
 		<div class="column" id="remotestorage">
-        <img src="img/storage.svg" />
+        <img alt="remote storage" src="img/storage.svg" />
 			<h2>your remote storage</h2>
 			<p>We work on making many storage providers compatible,<br />
 			such as <a href="https://github.com/unhosted/gd-proxy">Google Drive</a>, Wordpress, Dropbox and more.<br/>
 			<a href="https://groups.google.com/forum/#!topic/unhosted/TDzEfJAzAH4/discussion">CouchDB</a> and <a href="http://owncloud.org/install/">ownCloud</a> are already compatible.
 		</div>
+	</article>
 <!--
 <svg id="arrow" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.0" id="Layer_1" x="0px" y="0px" width="70px" height="70px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve" xmlns:xml="http://www.w3.org/XML/1998/namespace">
 <path d="M69.271,42.085c-5.941-7.138-11.883-14.276-17.824-21.414c-0.437-0.524-0.951-0.715-1.447-0.681  c-0.496-0.034-1.011,0.157-1.447,0.681c-5.941,7.137-11.883,14.276-17.824,21.414c-1.1,1.319-0.461,3.494,1.446,3.494  c2.494,0,4.986,0,7.479,0c0,10.795,0,21.59,0,32.386c0,1.116,0.931,2.047,2.047,2.047c5.532,0,11.065,0,16.598,0  c1.116,0,2.047-0.931,2.047-2.047c0-10.796,0-21.591,0-32.386c2.493,0,4.985,0,7.479,0C69.732,45.579,70.371,43.404,69.271,42.085z"/>
 </svg>
-			
-	</article>
 
 <article id="demoapps">
 	<h2>Demo applications</h2>
@@ -214,11 +195,11 @@
                 <div>You make Unhosted!</div>
 				<p><strong>Unhosted is a project from and for the community.</strong> Everybody is considered an equal member based on merit and contribution. There are two full-time volunteers:<br />Jan-Christoph Borchardt (Design Dictator) & Michiel de Jong (Code Communist)</p>
                 <p>Thanks to <a href="thanks">our awesome supporters and donors</a>!</p>
-                <a class="donation" target="_blank" href="http://nlnet.nl/press/20110909-unhosted.html"><img src="http://nlnet.nl/logo/banner-160x60.png"/></a>
-                <a class="FlattrButton donation" style="display:none;" href="http://unhosted.org/"></a><noscript><a href="http://flattr.com/thing/181201/The-Unhosted-Project" target="_blank"><img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0" /></a></noscript>
+                <a class="donation" target="_blank" href="http://nlnet.nl/press/20110909-unhosted.html"><img alt="NLnet" src="http://nlnet.nl/logo/banner-160x60.png"/></a>
+                <a class="FlattrButton donation" style="display:none;" href="http://unhosted.org/"></a><noscript><a href="http://flattr.com/thing/181201/The-Unhosted-Project" target="_blank"><img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" /></a></noscript>
                 <form class="donation" action="https://www.paypal.com/cgi-bin/webscr" method="post" style="display:inline;"><input type="hidden" name="cmd" value="_s-xclick" /><input type="hidden" name="hosted_button_id" value="5JX4Z9AZLJMJY" />
-				<input type="image"  border="0" name="submit" alt=" " style="display:inline; border:0; margin-top:-4.5em; height:45px; width:75px; background:url('img/paypal.gif') no-repeat;" />
-				<img alt="" border="0" src="https://www.paypalobjects.com/de_DE/i/scr/pixel.gif" width="1" height="1" />
+				<input type="image" name="submit" alt=" " style="display:inline; border:0; margin-top:-4.5em; height:45px; width:75px; background:url('img/paypal.gif') no-repeat;" />
+				<img alt="" src="https://www.paypalobjects.com/de_DE/i/scr/pixel.gif" width="1" height="1" />
 				</form>
 			</div>
 			<div class="clear"></div>
@@ -230,7 +211,20 @@
 		</div>
 	</footer>
 
+<script src="js/jquery.tipsy.js"></script>
+<script src="js/functions.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+    (function() {
+        var s = document.createElement('script'), t = document.getElementsByTagName('script')[0];
+        s.type = 'text/javascript';
+        s.async = true;
+        s.src = 'http://api.flattr.com/js/0.6/load.js?mode=auto';
+        t.parentNode.insertBefore(s, t);
+    })();
+/* ]]> */
+</script>
 
-
+<!-- »There’s something deeper than making money off stuff. Being a part of creating stuff for the universe is awesome.« – Ilya Zhitomirskiy, 1989–2011 -->
 </body>
 </html>
