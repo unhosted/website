@@ -16,6 +16,7 @@ a { color:#a1aab0; text-decoration:none; }
 .orange h2 { color:#222; text-shadow:0 1px 0 #8182a0; background:none; }
 .red { background:#e20; color:#fff; }
 .red h2 { color:#eee; text-shadow:0 -1px 0 #212230; background:none; }
+.speakernotes { position:absolute; margin:1em; left:0; bottom:0; width:29em; align:center; text-align:center; font-size:.5em; background:rgba(0,0,0,.5); padding:1em; border-radius:1em; }
 
 /* Transition effect, see http://developer.mozilla.org/en/CSS/CSS_transitions */
 section { -moz-transition:left 400ms linear 0s; -webkit-transition:left 400ms linear 0s; -ms-transition:left 400ms linear 0s; transition:left 400ms linear 0s; }
