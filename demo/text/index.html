@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>A simple text editor using remoteStorage as backend</title>
-    <script src="http://unhost.it/remoteStorage.js">{
+    <script src="http://unhosted.org/remoteStorage.js">{
       dataScope: 'documents',
       onChange: function(key, oldValue, newValue) {
         if(key=='text') {
@@ -28,10 +28,19 @@
     <textarea id="text" onkeyup="localStorage.setItem('text', this.value);" autofocus>
 This is a remoteStorage demo.
 
-Try to log in on the top right with your remote storage user address.
-Or just use test@yourremotestorage.com (user: test, password: unhosted) to try it out.
+Quickstart option:
+1) sign up at http://iriscouch.com/
+2) log in on the top right as you@iriscouch.com.
+3) you will be redirected to the remote storage.
+4) authorize this app to store data on your remote storage.
 
-You will be redirected to the remote storage where you have to authorize this app to store data on your remote storage.
+For other CouchDB providers too, you can use our centralized proxy simply with:
+    you@domain.com
+to:
+    http://you.domain.com/_utils/
+
+To be really free, implement webfinger on your indie web domain,
+and host the CouchDB proxy yourself.
 
 Happy writing!
     </textarea>
