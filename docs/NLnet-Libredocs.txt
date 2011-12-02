@@ -1,0 +1,68 @@
+Libre Docs
+--------------
+
+
+1. Project plan
+-------------------
+This project aims to develop a free software, web-based office suite, and offer it online for everybody to use, free of charge, while leaving users in control of the documents they author with it.
+
+1.1 the problem solved by this project
+--------------------
+With gnu/linux, libre office (previously called 'open office') and other projects, the free software movement has provided us with a full stack of free desktop software. We no longer have to use Microsoft Windows and Microsoft Office on the desktop. But with the growing popularity of hosted software, desktop software is disappearing. Both microsoft and Google are offering ever more cloud-based software solutions. Whereas copying and distributing a free desktop-based office suite like Libre Office does not
+cost any money, the same is not true for hosted software. This is why there is currently no free alternative to Google Docs. The Libre Docs project will fix this situation.
+
+1.2 relevance as a sub-project of the Unhosted project
+---------------------
+The Unhosted project has already shown a proof-of-concept of how applications and user data can be separated from each other, using only web standards. So far, nobody has taken the lead on creating the first success story for this new architecture. Libre Docs is the perfect application to apply the research results that have come out of the Unhosted project so far. This will help the Unhosted project evolve from a proposed technology to a proven technology, after which many more applications can follow this successful lead. At the same time, it is a project that can stand on its
+own, so it makes sense to make it into an independent sub-project. 
+
+1.3 the relative advantage of the proposed solution
+---------------------
+We distinguish three advantages relative to the status quo (which is pretty much dominated by Google Docs). First, free software is better than proprietary software because it allows technology to evolve freely, without generating lock-in and monopolies. Second, the Unhosted web architecture is better than hosted software because it separates user data from applications, thus increasing the consumer's freedom of provider choice further. And third, storing the data in a location that is chosen by the user instead of by the application provider, gives the user control over
+who gets to see their data, leading to better privacy control and security.
+
+1.4 perspectives for further development of this innovation and/or other technologies
+-----------------------
+the funding we ask for is for the trajectory from zero to alpha launch. Once Libre Docs is live and starts attracting users, it will be run in the same way as wikipedia. A foundation will be created, with a yearly campaign inside the application (like wikipedia's "personal appeal" banners). This only works though once there are users. That's why we need the bootstrap money first.
+
+1.5 relevance for nlnet's mission
+-----------------------
+hosted software is an increasingly important part of how we use the internet. Libre Docs is first in its kind as an "unhosted software project". It is very much about user freedom, free software, and the internet, all combined in one unique project.
+
+2. Existing work by others
+--------------------------
+* The UNG 2.0 project is well underway to create a browser based office environment completely independent of any server  technology. It builds on the unhosted protocoll http://www.ung-project.org/project/ungdoc
+* Etherpad is a web-based collaborative real-time editor, allowing authors to simultaneously edit a text document, and see all of the participants' edits in real-time, with the ability to display each author's text in their own color.
+
+3. Existing work by us
+-----------------------
+The remoteStorage standard describes a common interface for a per-user online data storage for web apps.   http://www.w3.org/community/unhosted/wiki/RemoteStorage
+We also developed a proof of concept of etherpad storing it's data in such a remote storage. https://groups.google.com/group/unhosted/browse_thread/thread/83b06a1d0f570411
+
+4. Project setup
+----------------
+We have an active community (IRC channel: ~30 users, mailing list: ~300 subscribers, twitter: ~2400 followers), and our progress is followed by many of the web's important opinion leaders from W3C, Google, Mozilla, etcetera. The project is entirely funded by donations and its goals are entirely non-profit. We aim to research, publish and educate. We publish everything under AGPL for software, and Creative Commons licenses for everything else. The project's assets are organized as Unhosted e.V. (a registered association), which is controlled by its members meeting (a subset of the mailing list subscribers), and managed by a three-member board: Michiel de Jong (president), Javier Diaz (Treasurer), Kenny Bentley. The project currently employs Michiel de Jong as a full-time free-lance contractor, based in Berlin. Azul will be working on the Project as a developer. He's experienced as a free software web developer working on crabgrass ( crabgrass.riseup.net ). He also wrote the unhosted etherpad proof of concept this project will build upon.
+
+5. Project planning
+-------------------
+We are requesting funding for an initial phase of development. We'll take the unhosted data server protocol, UNG docs and etherpad and combine them into an alpha version of a web app. The development will span over 3 Month following monthly milestones:
+* 15 January 2012: Develop Etherpad Version that uses the current Unhosted Web protocol to store it's data on an unhosted storage Deliverable: Demo site with etherpad storing data on a remote server.
+* 15 February 2012: Clean up UNG and make it store it's data on an unhosted server with a smooth login procedure. Deliverable: Demo site with UNG storing it's data remotely
+* 15 March 2012: Combine the two projects with a common login procedure. Deliverable: Demo Site running etherpad and UNG in a common UI both storing their data on a unhosted storage selected by the user.
+
+6. Project budgeting
+--------------------
+Living expenses Azul: 3x 1600 euros
+Miscellaneous expenses: 200 euros
+
+7. Project risks
+----------------
+       We have pretty good confidence in the plan. Adoption of the technology by users is crucial for funding the ongoing development. So our main challenge, is to build a community around the project. Working within the very successful unhosted community is a good starting point.
+
+8. Project results dissemination
+--------------------------------
+The combination of both collaborative editing and office applications with remote storage has already created a big interest. A number of open source communities are involved and the knowledge is build and transfered between them. The storage providers, app developers and unhosted community all have an interest in keeping this process going. We build on top of our experiences and share the new ones. The development process will take place in the open and be shared with the communities involved via email lists, irc channels, code repositories and the like. It is embedded in ongoing long term efforts like the ones of UNG-docs and unhosted and will feed back into their development process.
+
+9. Follow-ups on the project
+----------------------------
+The project (as a dev community) will continue to exist, but there will no longer be a need for a full-time employee. Azul will continue maintaining the code. The project is a collaboration with open source projects in full swing. So some of the early adopters are likely to come from these communities and help maintain it. We will also promote parts of the source code for inclusion in the codebase of the related projects.

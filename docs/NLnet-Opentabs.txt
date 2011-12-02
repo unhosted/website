@@ -1,0 +1,152 @@
+Opentabs Distributed IOU System
+--------------------------------------------------
+
+
+1. Project plan
+---------------
+Opentabs aims to use advanced Web Standards, to create a compelling application, which demonstrates the power, and the read-write architecture, of the World Wide Web.  The project will make use of, both decentralized workflows, and distributed data storage, in order to achieve maximum flexibility.
+In particular, the system will allow individuals in the network to keep a track of IOUs that are set up between other trusted agents.  This will enable people to keep track of personal transactions between friends (trusted parties), small items such as drinks, work hours, books, or even more abstract ideas such as 'karma' in an open source project or for a non-profit organization.
+
+The open nature of distributed data storage, particularly provided via HTTP(S) and as exemplified by the 'unhosted' and data.fm projects, will allow people to interact in new frictionless and hopefully fun ways!
+The first implementation / app will be built on top of remoteStorage, the data storage standard driven forward by the Unhosted project. The project has already generated some interest from people in the web, book authors and testers, with 99 people signed up for the alpha testing before it closed.
+
+
+1.1 the problem solved by this project
+--------------------------------------
+One of the main motivations for the Opentabs subproject, is to create a first class "web-scale" application, that can be used to demonstrate the power and flexibility of decentralized data and distributed workflows.
+
+Distributed Web-Application architecture, design, and workflows - particularly where applications are separated from storage - are very much in their infancy. Opentabs provides a real world use case, with compelling and sometimes complex requirements, which will be used to explore, establish, and mature both design patterns and codebases. Sitting at the intersection of many technologies currently being developed and standardized, the project provides a unique chance to converge technologies and their respective communities, in order to further advance the distributed read-write architecture of the World Wide Web as a whole.
+
+The Opentabs IOU use case itself attacks two problem spaces: in the first instance it's a generic, web mounted, transaction manager for personal use which will facilitate lending between friends. In later revisions it approaches some of the issues addressed by many currency based projects from the opposite angle. It's primary advantage is that in many use cases it can alleviate any need for a Medium of Exchange thus simplifying transactions, however it's also generalized across all monetary systems, allowing for transactions to be based on any Unit of Account, from traditional commodities and currency through to non-fungible tangible goods, and on to more abstract notions such as time or karma. Thus we expect a high probability of unexpected reuse within multiple problem domains.
+
+
+1.2 the relative advantage of the proposed innovation
+-----------------------------------------------------
+Opentabs is a vector by which we can achieve iterative innovations in multiple domains, each feature and layer of the project entails the combination or refinement of multiple technologies.
+
+The development cycle will provide many advantages, including but not limited to:
+ - creating / documenting workflows and design patterns,
+ - providing reusable and extensible modules,
+ - combining technologies to allow new web application architectures and distributed data flows, and,
+ - bringing together members of various technical communities to consider overlapping use cases.
+
+We foresee the Opentabs application as providing many long term benefits to users, it's free, low friction, doesn't entail any transaction fees, gives full data ownership to the user, and it frees individuals from being constrained to only thinking in terms of a limited number of traditional monetary systems for transactions. On a broader scope, Opentabs can be leveraged to build up a Web of Trust, to serve as a catalyst in the development of the Read Write Web of Data, and due to the law of unintended consequences we expect numerous advantages to be gained as a result of unexpected reuse and application to more specific problem domains.
+
+
+1.3 usability: for whom and to what purpose
+-------------------------------------------
+The Opentabs app will be freely available to anyone that has access to some form of net connected data storage. The initial target vectors are primarily unhosted and data.fm, but it should ideally be able to handle any standards based / well defined cloud storage solution, such as: openstack, amazon, ubuntu one, couchDB, dropbox, terrastore etc.
+The target audience for this app is broad, however initially it will be most suited to single users and for transactions between friends, since there is already an existing trust relationship, the application can simply augment the existing relationship, rather than requiring a new trust infrastructure. It is often the case that friends would like to keep track of small items owed to each other, in a user friendly, low overhead way; Opentabs addresses this need.
+
+One particular market segment in which the app could gain popularity is the student sector.  These are people generally open to new technologies, with perhaps limited budgets, and who need to keep track of lent books, meals, drinks, and casual lending on a regular basis.
+The system would also be usable as a 'karma', or time, banking system to show recognition to those that make a positive impact on a community. This could be, for example, used in an open source project, non profit organisation, or existing time banking community help system.
+
+The target environment for this app is the web, additionally facebook and mobile device specific variants will be created to increase exposure and enable the widest possible audience. The simplicity of the app will allow effort to be spent refining the design and user experience.
+
+
+1.4 perspectives for further development of this innovation and/or other technologies
+-------------------------------------------------------------------------------------
+Although the original concept of the idea is simple, there are many possible extensions to this work. Technically many of the component modules and technology combinations will be reusable in a wide variety of applications, and the application itself can serve as a framework which can be applied to numerous domains. Essentially any problem space which involves the management and aggregation of transactions (both financial and non) will be a possible target for the application.
+
+Given the sensitive nature of some financial transactions each use case adopted by the team would have to be carefully studied such that it complies to the local regulatory framework.  However possible development lines include:
+ - the use of trust metrics to also allow for lending between strangers, such a mechanism has been exhibited by ebay and the bitcoin otc market.
+ - helping people in less fortunate nations who have mobile devices but no bank account, as the system can be used for any Medium of Exchange such as commodities, and many optimizations can be made for microcredit use cases such as M-PESA.
+ - use of near field communication and geolocation for ease of use, interaction, and for refining the user experience.
+ - extensions to work with established communities such as LETS and time banking, which currently need to rely on a full blown CMS such as Drupal.
+
+Development avenues are wide and varied, and to a large extent the general web community on the whole and social factors will be a driving force as to which avenues are explored. We do however hope, that the project will be forked in many different directions and applied to multiple exciting problem domains by various communities.
+
+
+1.5 relevance for nlnet's mission
+---------------------------------
+Multiple web standards and technologies to create a "web platform" are currently being developed, additionally Sir Tim Berners-Lee together with CSAIL/MIT and individuals from multiple communities are working to realise the Read Write Web of Linked Open Data. The web is close to providing everything needed for a new generation of distributed applications running a top a web of open data. What's currently lacking are applications which tie all of these technologies together to address coherent real world use cases. Opentabs aims to act as a catalyst in this department, converging the technologies together in order to a) provide a useful application to multiple different domains, and b) serve as a novel reference application for developers which implements a new paradigm for the web. We foresee that Opentabs, along with other projects, will perform an important role in the standardization of web technologies, by acting as a reference point, and by merging them to address problems which the working groups acting alone may not have seen.
+
+The key members of the project both commit a large amount of their personal time to a plethora of working groups at related communities, including all of those listed within this document, and see Opentabs as providing a potential, and much needed, meshing for these various efforts.
+
+
+2. Existing work by others
+--------------------------
+Opentabs covers many different areas, to a large extent it will build on both the unhosted project, and existing Web Standards work from HTTP through to HTML, and much in between. 
+
+Many related areas of work are actively being discussed and worked in Community and Working Groups around the web, including:
+ - Unhosted CG
+ - Read Write Web CG
+ - Data.fm
+ - Web Payments CG
+ - Cloud Computing CG
+ - Data Driven Standards CG
+ - Networked Data CG
+ - Web Crypto API CG
+ - Web Apps WG
+ - W3C TAG, to ensure clean extensible standard based design.
+
+The project will also reap extensive benefits by building on the hard work and lessons learned within the many opensource financial projects, such as:
+ - Ripple Pay
+ - LETS
+ - M-Pesa
+ - BitCoin
+ - OpenTransactions
+ - Voucher Safe
+.. and many more. Cross pollination of ideas can ensure that the right tool is used in the right place.
+
+In addition, the project will build on work from the crypto and social web communities.
+**Finally, Sir Tim Berners-Lee has outlined a vision of the Read Write Web of Linked Open Data in his Socially Aware Cloud Storage Design Issue, Opentabs aims to build on this work, and the work done on data.fm, to provide a fully functional and useful reference application, together with reusable component modules, for those developers who would develop these open data applications using this new paradigm.
+
+
+3. Existing work by us
+-----------------------
+The Opentabs project will build on the already successful unhosted community project, and be able to use the in-browser remoteStorage library to persist data beyond the lifetime of a web session.  The project will also build on the work we have contributed to, together with the Decentralized Information Group at MIT, headed by Tim Berners-Lee.  In particular, the open source cloud storage solution data.fm, will be a target solution for persisting application data.
+
+The website Opentabs.net has been configured into our source tree, and has been promoted to a number of groups. A private alpha testing program with 99 places was opened, and quickly filled in a short period of time. A basic app is under development and expected to reach alpha stage by the new year.
+
+
+4. Project setup
+----------------
+The Opentabs project will be run by Nathan Rixam with volunteer support from Melvin Carvalho. Both Nathan (http://webr3.org/ ) are Melvin (http://melvincarvalho.com/ ) are well-known opinion leaders on web technology. Legally, and for tax purposes, Opentabs will fall wholly under the umbrella of the unhosted project, which is already funded by nlnet, and is entirely non-profit. We aim to research, publish and educate. We publish everything under AGPL for software, and Creative Commons licenses for everything else. Unhosted's assets are organized as Unhosted e.V., Berlin (a registered association), which is controlled by its members meeting (a subset of the mailing list subscribers), and managed by a three-member board: Michiel de Jong (president), Javier Diaz (Treasurer), and Kenny Bentley. 
+
+
+5. Project planning
+-------------------
+We are requesting funding for the second phase out of three. The Opentabs concept has proven to be popular, the prototype is in development, beta testers and potential users are numerable, and skilled developers with a passion for the project have been secured. The project will run parralel with the development of unhosted, and has the following quarterly milestones:
+
+* 15 March 2011: complete an unhosted-backed working prototype along with user interface, roll out to alpha testers, and collect feedback on potential application to different problem domains. Signature checking will be fake still (implemented as a stub). Deliverable: Version 0.1 of the application and a first quarter project report.
+
+* 15 June 2012: add signature checking. usable version of the application which fully supports user to user based IOUs with notifications and full acceptence / verification workflows. Deliverable: Version 0.2 of the application together, second quarter report, and proposed problem domains to address.
+
+* 15 September 2012: a polished, generic iteration of the application which can be forked and applied to different use-cases and scenarios. Deliverable: a quarterly report, including version 1.0 of the application, together with feedback from testers and early prototypes of the application applied to at least two specific problem domains.
+
+* 15 Decemeber 2012: platform specific optimisations to the user interface of the generic application tailored for mobile devices and facebook. Re-usable, well documented modules made available to the web communities. Beta release of extensions tailored for at least one active problem domain. Deliverable: Final report including details of offshoot work and project forks, feedback from adopters, and new technologies or protocols which have resulted from the project.
+
+The project has no clear end, rather we hope (along with existing unhosted work) to provide a generic framework on which multiple other groups and communities can build upon, and which we can continue to apply to multiple different spaces.
+
+6. Project budgeting
+--------------------
+
+So far the project has no budget, some time and resources from the unhosted project have been used so far (since Opentabs was originally an unhosted example app concept), and members of the community have given time. Now, we need financing to develop the generic application and specializations thereof. This will initially take one year, with 2 x 0.8 FTE financed out of the project, and other people participating in the project for free (in their spare time or as unpaid interns). This year will run from 15 December 2011 to 15 December 2012. The budget is 12x1000 = 12000 euros. This includes:
+
+* 800 euros/month net 'salary' for 1 x 0.8 FTE
+* 200 euros/month reserved for graphic design, server costs, UI assets and miscellaneous costs
+
+
+7. Project risks
+----------------
+
+        7.1 Adoption
+        ------------
+        Proposing a standard is easy. Proposing a good standard can be achieved by using your own standard for a year, and debugging it properly before publishing it. The real risk is not that we don't manage to publish a good standard. It is that nobody uses it, and it ends up on the stack of 'interesting ideas'. So our main risk, and main challenge, is whether we will get the developer experience right. We spend a lot of time thinking about this (see point 8 below).
+
+        7.2 Identity
+        ------------
+        Our technology requires end-users to have a DNS-based identity (preferably with DNSSEC), such as an email address. Right now, most web users have one. But in the unlikely case that Facebook (or some other monopoly) were to convince people to stop owning a DNS-based identity, we would have to rethink our technology to become compatible with that instead.
+
+
+8. Project results dissemination
+--------------------------------
+The success of Opentabs is closely aligned with the parent frameworks.  The biggest challenge will be to convince web app developers to accept unhosted accounts on the web apps they develop. If we can achieve that, then users and storage providers will follow. A big part of our strategy for this is to integrate with fashionable technologies on the web right now, like node.js, backbone.js, sproutcore, brunchwithcoffee, cloud9ide. We will also continuously request feedback from web app developers. They are the audience we want to disseminate our technology to, and our success will depend largely on creating a fun and productive developer experience for them.
+
+If we manage to make our product attractive, then telling people about it will be the easy part. We get good media coverage on everything we publish, through tech blogs, twitter, HackerNews, etcetera. We also try to go to conferences and publish videos of conference talks. Also, cross-semination is an explicit strategy to get more visibility. As an example, we are reaching out to projects like OwnCloud, CouchDb, Locker Project and Camlistore to implement compatibility. That converts these projects from merely 'similar/alternative projects' into marketing channels for our architecture and standard, because they can list 'can be used as unhosted storage' in their feature list.
+
+
+9. Follow-ups on the project
+----------------------------
+Even though the project (as a dev community) will not cease to exist, there will no longer be a need for a full-time employee. By this point, evangelism to web devs should have reached the point where it is self-perpetuating, and accepting unhosted accounts should be standard practice for user-friendly web apps. Implementation instructions will have become common knowledge among web devs, and the standard will be supported by several code bases on both Storage Provider side and Relying Party side. The project will live on as a part of all these different SP and RP implementations.
