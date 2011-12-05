@@ -1,22 +1,10 @@
-body { margin-top:-1.5em; } /*why is this needed?*/
-#toplight{
-	background: url('../img/bodyback.png') top center no-repeat transparent;
-	height: 20em;
-    min-height:20em;
-	overflow: hidden;
-	width: 12em;
-	position: absolute;
-	left: 0;
-	top: 0;
-	width: 100%; 
-	z-index: -200;
-	}
-.wrapper { 
-		display: block;
-		margin: 0 auto;
-		width: 960px;
-		position: relative;
-		}
+body { margin-top:-1.5em; }
+.wrapper {
+	display: block;
+	margin: 0 auto;
+	width: 960px;
+	position: relative;
+}
 
 #donations{
   height:20em;
@@ -123,26 +111,7 @@ header{
 #examplecode pre { color:#778595; }
 #examplecode pre em { color:#000; font-style:normal; font-weight:normal; }
 #examplecode pre a { color:#000; font-style:normal; font-weight:normal; }
-
-#apptorrent { display:block; position:absolute; top:30em; bottom:5em; }
-#apptorrent .column{ position: relative; display: block; float: left; width: 280px; margin: 0 10px; padding: 0 10px; margin-bottom: 40px; }
-#apptorrent .column#packager { }
-#apptorrent .column#dashboard { }
-#apptorrent .column#player { }
-
-/*
-// webDAV
-*/
-	#webDAV{
-		padding-left: 20px;
-		padding-right: 20px;
-	}
-		#webDAV ul.index{
-			list-style: disc;
-		}
-		#webDAV h3{
-			margin-top: 46px;
-		}			
+		
 /*
 //FOOTER
 */
@@ -207,7 +176,7 @@ footer{
 			color: #95a2aa;
 			padding: 10px 20px 20px 20px;
 			margin-top: 40px;
-			margin-bottom: 40px;
+			margin-bottom:1em;
 			-moz-border-radius: 5px;
 			-webkit-border-radius: 5px;
 			border-radius: 5px;
