@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <title>A simple text editor using remoteStorage as backend</title>
     <script src="http://unhosted.org/remoteStorage.js">{
-      dataScope: 'documents',
+      category: 'documents',
       onChange: function(key, oldValue, newValue) {
         if(key=='text') {
           document.getElementById('text').value = newValue;
