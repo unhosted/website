@@ -18,20 +18,44 @@
         console.log('couchPut("'+couchAddress+'", "'+user+'", "'+pass+'", "'+dbName+'", "'+key+'", '+JSON.stringify(value)+', cb);');
         cb();
       }
-      function genToken() {
-        return 'asdf';
+      function genToken(clientId, password) {
+        return (clientId+':'+password).toString(32);
       }
+      function randStr(length) {
+        var buffer = '';
+        while(buffer.length < length) {
+          buffer += Math.random().toString(36).substring(2);
+        }
+        return buffer.substring(0, length);
+      }
+      function genUser(userName, pwd) {
+        var salt=randStr(40);
+        return {
+          type: 'user',
+          name: userName,
+          roles: [],
+          password_sha: str2sha(pwd+salt),
+          salt: salt
+        };
+      }
+
       function createUser(couchAddress, masterUser, masterPass, newUser, newPass, cb) {
-        couchPut(couchAddress, masterUser, masterPass, '_users', 'org.couchdb.user:'+newUser, {
-          user: newUser,
-          password: newPass
-        }, cb);
+        var userObj = genUser(newUser, newPass);
+        couchPut(couchAddress, masterUser, masterPass, '_users', 'org.couchdb.user:'+newUser, userObj, cb);
       }
       function createDatabase(couchAddress, masterUser, masterPass, dbName, userName, isPublic, cb) {
-        couchPut(couchAddress, masterUser, masterPass, dbName, '_design/auth', {
-          readers: [userName],
-          writers: [userName]
-        }, cb);
+        var sec;
+        if(isPublic) {
+          sec = {
+            admins: {names:[userName]}
+          };
+        } else {
+          sec = {
+            admins: {names:[userName]},
+            readers: {names:[userName]}
+          };
+        }
+        couchPut(couchAddress, masterUser, masterPass, dbName, '_security', sec, cb);
       }
       function allow() {
         var couchAddress = 'michielbdejong.iriscouch.com';
@@ -53,10 +77,19 @@
         }
         var couchUser = document.getElementById('userName').value;
         var couchPass = document.getElementById('password').value;
-        var clientId = 'http___myfavouritesandwich_org_';
-        var token = genToken();
-        createUser(couchAddress, couchUser, couchPass, clientId, token, function() {
-          createDatabase(couchAddress, couchUser, couchPass, scope, clientId, (scope == 'public'), function() {
+        var clientId = '';
+        for(var i=0; i<redirectUri.length; i++) {
+          var thisChar = redirectUri[i];
+          if((thisChar >= 'a' && thisChar <= 'z') || (thisChar >= 'A' && thisChar <= 'Z')) {
+            clientId += thisChar;
+          } else {
+            clientId += '_';
+          }
+        }
+        var newPass = randStr(40);
+        var token = genToken(clientId, newPass);
+        createUser(couchAddress, couchUser, couchPass, clientId, newPass, function() {
+          createDatabase(couchAddress, couchUser, couchPass, scope.replace('.', '_'), clientId, (scope == 'public'), function() {
             console.log('location = '+redirectUri + '#access_token='+token);
           });
         });
