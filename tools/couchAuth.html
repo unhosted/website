@@ -18,7 +18,21 @@
       }
       function couchPut(couchAddress, user, pass, dbName, key, value, cb) {
         console.log('couchPut("'+couchAddress+'", "'+user+'", "'+pass+'", "'+dbName+'", "'+key+'", '+JSON.stringify(value)+', cb);');
-        cb();
+        var xhr = new XMLHttpRequest();
+        xhr.open('PUT', 'http://yourremotestorage.net/CouchDB/proxy/'+couchAddress+'/'+dbName+'/'+key, true);
+        xhr.withCredentials = true;
+        xhr.setRequestHeader('Authorization', 'Bearer '+Base64.encode(user+':'+pass));
+        xhr.onreadystatechange = function() {
+          if(xhr.readyStatus == 4) {
+            if(xhr.status == 200) {
+              cb();
+            } else {
+              console.log('oops! got a '+xhr.status+' from CouchDB PUT');
+              cb();
+            }
+          }
+        };
+        xhr.send(JSON.stringify(value));
       }
       function genToken(clientId, password) {
         return Base64.encode(clientId+':'+password);
