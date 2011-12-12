@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script>
+      function showForm() {
+        var couchAddress = 'michielbdejong.iriscouch.com';
+        var couchUser = 'adpin';
+        document.getElementById('formDiv').innerHTML =
+          '  If this is the first time you use '+couchAddress+' then click <a href="http://yourremotestorage.net/CouchDB/register/'+couchAddress+'?userName='+couchUser+'&redirect_uri='
+          +'http://yourremotestorage.net/CouchDB/auth/'+couchAddress+'/'+couchUser+'">'
+          +'here</a> to initialize it. Otherwise, enter your credentials below:<br>\n'
+          +'  You user: <input id="userName" value="'+couchUser+'"><br>\n'
+          +'  Your password:<input id="password" type="password" value=""><br>\n'
+          +'  <input type="submit" value="Allow this app to read and write on your couch" onclick="allow();"><br>\n'
+          +'  <a target="_blank" href="http://github.com/unhosted/yourremotestorage/">If you have your own server or domain, host this proxy yourself!</a><br>\n'
+      }
+      function couchPut(couchAddress, user, pass, dbName, key, value, cb) {
+        console.log('couchPut("'+couchAddress+'", "'+user+'", "'+pass+'", "'+dbName+'", "'+key+'", '+JSON.stringify(value)+', cb);');
+        cb();
+      }
+      function genToken() {
+        return 'asdf';
+      }
+      function createUser(couchAddress, masterUser, masterPass, newUser, newPass, cb) {
+        couchPut(couchAddress, masterUser, masterPass, '_users', 'org.couchdb.user:'+newUser, {
+          user: newUser,
+          password: newPass
+        }, cb);
+      }
+      function createDatabase(couchAddress, masterUser, masterPass, dbName, userName, isPublic, cb) {
+        couchPut(couchAddress, masterUser, masterPass, dbName, '_design/auth', {
+          readers: [userName],
+          writers: [userName]
+        }, cb);
+      }
+      function allow() {
+        var couchAddress = 'michielbdejong.iriscouch.com';
+        var redirectUri, scope;
+        var queryParts = location.search.split('&');
+        if(queryParts.length > 0 && queryParts[0].length > 0) {
+          queryParts[0] = queryParts[0].substring(1);
+        }
+        for(var i = 0; i < queryParts.length; i++) {
+          var thisParts = queryParts[i].split('=');
+          if(thisParts.length > 1) {
+            if(thisParts[0] == 'redirect_uri') {
+              redirectUri = thisParts[1];
+            }
+            if(thisParts[0] == 'scope') {
+              scope = thisParts[1];
+            }
+          }
+        }
+        var couchUser = document.getElementById('userName').value;
+        var couchPass = document.getElementById('password').value;
+        var clientId = 'http___myfavouritesandwich_org_';
+        var token = genToken();
+        createUser(couchAddress, couchUser, couchPass, clientId, token, function() {
+          createDatabase(couchAddress, couchUser, couchPass, scope, clientId, (scope == 'public'), function() {
+            console.log('location = '+redirectUri + '#access_token='+token);
+          });
+        });
+      }
+    </script>
+  </head>
+  <body onload="showForm();">
+    <div id="formDiv">
+    </div>
+  </body>
+</html>
