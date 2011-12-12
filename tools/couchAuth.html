@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <script src="sha1.js"></script>
+    <script src="base64.js"></script>
     <script>
       function showForm() {
         var couchAddress = 'michielbdejong.iriscouch.com';
@@ -19,7 +21,7 @@
         cb();
       }
       function genToken(clientId, password) {
-        return (clientId+':'+password).toString(32);
+        return Base64.encode(clientId+':'+password);
       }
       function randStr(length) {
         var buffer = '';
@@ -34,7 +36,7 @@
           type: 'user',
           name: userName,
           roles: [],
-          password_sha: str2sha(pwd+salt),
+          password_sha: SHA1(pwd+salt),
           salt: salt
         };
       }
