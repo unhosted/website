@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<XRD
+  xmlns="http://docs.oasis-open.org/ns/xri/xrd-1.0"
+  xmlns:hm="http://host-meta.net/xrd/1.0"> 
+  <hm:Host xmlns="http://host-meta.net/xrd/1.0">unhosted.org</hm:Host>
+  <Link 
+    rel="remoteStorage"
+    api="CouchDB"
+    auth="http://michiel.iriscouch.com:5984/cors/auth/modal.html"
+    template="http://yourremotestorage.net/CouchDB/proxy/michiel.iriscouch.com/{category}/"
+  />
+</XRD>
