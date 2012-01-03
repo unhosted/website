@@ -8,5 +8,6 @@
     api="CouchDB"
     auth="http://michiel.iriscouch.com:5984/cors/auth/modal.html"
     template="http://yourremotestorage.net/CouchDB/proxy/michiel.iriscouch.com/{category}/"
+    browseridaccess="http://unhosted.org/browserid2couch"
   />
 </XRD>
