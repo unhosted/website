@@ -1,139 +1,122 @@
-<!DOCTYPE html><!-- dzslides by Paul Rouget, http://github.com/paulrouget/dzslides, licensed under WTFPL -->
-<meta charset="utf-8">
-<link rel="stylesheet" href="core.css"><link rel="stylesheet" href="custom.css"><script src="core.js"></script>
-<link rel="icon" href="../../img/favicon.png">
-<title>Unhosted</title>
-
-<!-- Your Slides -->
-<!-- One section is one slide -->
-
 <section>
-    <!-- This is the first slide -->
-    <h2 style="background:0;">We fix SaaS</h2>
-    <img src="img/island-light.png" style="width:360px; height:300px; top:5.5em; left:4.5em;" />
+    <h2 style="background:0;">Freedom from the web's monopolies</h2>
+    <img src="img/island-light.png" style="width:360px; height:300px; top:5.5em; left:4.5em;" alt="">
 </section>
 
 <section>
-    <h2>Unhosted</h2>
-    <ul class="incremental">
-        <li>Started as hobby
-        <li>Supported by nlnet
-        <li>Fighting SaaS
-        <li>IANASE
-    </ul>
-</section>
-
-<section>
-    <img src="img/unhost.jpg" />
-</section>
-
-<section>
-    <h2>State of the web</h2>
-    <ul class="incremental">
-        <li>Data lock-in
-        <li>App+storage: package deal
-        <li>Web has no My Documents
-        <li>FOSS is no solution :(
-    </ul>
-</section>
-
-<section>
-    <h2>SaaS + Security?</h2>
-    <ul class="incremental">
-        <li>Orgs use GoogleApps...
-        <li>Employees use Dropbox...
-        <li>Photos on Facebook...
-        <li>Consider it compromised!
-    </ul>
-</section>
-
-<section>
-    <h2>Avoid SaaS?</h2>
-    <ul class="incremental">
-        <li>"Open source cloud"
-        <li>FSF says "avoid it"
-        <li>But people want usability
-        <li>So we say fix SaaS
-    </ul>
-</section>
-
-<section>
-    <h2>A better architecture</h2>
-    <h3><strong>SEPARATE</strong><br />cloud storage<br />FROM<br />cloud app logic</h3>
+    <h1>Software evolution</h1>
+    <p class="speakernotes">Let me tell you about how software evolved, from desktop to the web, what the problems are and what we see as solution.</p>
 </section>
 
 <section>
     <ul class="incremental morph">
-        <li><img src="../img/cloud-w.svg" style="width:600px; height:330px; top:2em; left:2em;" /></li>
-        <li><img src="../img/application-w.svg" style="width:300px; height:200px; top:2em; left:1em;" />
-            <img src="../img/storage-w.svg" style="width:115px; height:135px; top:2.7em; left:3.7em;" />
-            <img src="../img/application-w.svg" style="width:300px; height:200px; top:1em; left:8em;" />
-            <img src="../img/storage-w.svg" style="width:115px; height:135px; top:1.7em; left:10.7em;" />
-            <img src="../img/application-w.svg" style="width:300px; height:200px; top:7em; left:2em;" />
-            <img src="../img/storage-w.svg" style="width:115px; height:135px; top:7.7em; left:4.7em;" /></li>
-        <li><img src="../img/application-w.svg" style="width:300px; height:200px; top:2em; left:1em;" />
-            <img src="../img/application-w.svg" style="width:300px; height:200px; top:1em; left:8em;" />
-            <img src="../img/application-w.svg" style="width:300px; height:200px; top:7em; left:2em;" />
-            <img src="../img/storage-w.svg" style="width:200px; height:250px; top:6em; left:11em;" /></li>
-        <li><img src="../img/browser-w.svg" style="width:310px; height:260px; top:.8em; left:.9em;" />
-            <img src="../img/application-w.svg" style="width:300px; height:200px; top:2em; left:1em;" />
-            <img src="../img/application-w.svg" style="width:300px; height:200px; top:1em; left:8em;" />
-            <img src="../img/application-w.svg" style="width:300px; height:200px; top:7em; left:2em;" />
-            <img src="../img/storage-w.svg" style="width:200px; height:250px; top:6em; left:11em;" /></li>
-        <li><img src="../img/browser-w.svg" style="width:310px; height:260px; top:.8em; left:.9em;" />
-            <img src="../img/application-w.svg" style="width:300px; height:200px; top:2em; left:1em;" />
-            <img src="../img/storage-w.svg" style="width:115px; height:135px; top:2.7em; left:3.7em;" />
-            <img src="../img/application-w.svg" style="width:300px; height:200px; top:1em; left:8em;" />
-            <img src="../img/application-w.svg" style="width:300px; height:200px; top:7em; left:2em;" />
-            <img src="../img/storage-w.svg" style="width:200px; height:250px; top:6em; left:11em;" /></li>
-        <li><img src="../img/application-w.svg" style="width:300px; height:200px; top:2em; left:1em;" />
-            <img src="../img/application-w.svg" style="width:300px; height:200px; top:1em; left:8em;" />
-            <img src="../img/application-w.svg" style="width:300px; height:200px; top:7em; left:2em;" />
-            <img src="../img/storage-w.svg" style="width:200px; height:250px; top:6em; left:11em;" /></li>
-        <li><img src="../img/application-w.svg" style="width:300px; height:200px; top:2em; left:1em;" />
-            <img src="../img/browser-w.svg" style="width:310px; height:260px; top:-.2em; left:7.9em;" />
-            <img src="../img/application-w.svg" style="width:300px; height:200px; top:1em; left:8em;" />
-            <img src="../img/application-w.svg" style="width:300px; height:200px; top:7em; left:2em;" />
-            <img src="../img/storage-w.svg" style="width:200px; height:250px; top:6em; left:11em;" /></li>
-        <li><img src="../img/application-w.svg" style="width:300px; height:200px; top:2em; left:1em;" />
-            <img src="../img/browser-w.svg" style="width:310px; height:260px; top:-.2em; left:7.9em;" />
-            <img src="../img/application-w.svg" style="width:300px; height:200px; top:1em; left:8em;" />
-            <img src="../img/storage-w.svg" style="width:115px; height:135px; top:1.7em; left:10.7em;" />
-            <img src="../img/application-w.svg" style="width:300px; height:200px; top:7em; left:2em;" />
-            <img src="../img/storage-w.svg" style="width:200px; height:250px; top:6em; left:11em;" /></li>
+        <li>
+            <img src="../img/application-w.svg" style="width:200px; height:150px; top:2em; left:1.7em;" alt="">
+            <img src="../img/application-w.svg" style="width:200px; height:150px; top:1em; left:6.2em;" alt="">
+            <img src="../img/application-w.svg" style="width:200px; height:150px; top:3em; left:10.7em;" alt="">
+            <img src="../img/desktop-w.svg" style="width:750px; height:580px; top:.5em; left:.5em;" alt="">
+            <img src="../img/storage-w.svg" style="width:115px; height:135px; top:5.8em; left:7em;" alt="">
+            <p class="speakernotes">Secure but also confined to your personal computer.</p>
+        </li>
+        <li>
+            <img src="../img/application-w.svg" style="width:200px; height:150px; top:2em; left:1.7em;" alt="">
+            <img src="../img/storage-w.svg" style="width:100px; height:100px; top:2.5em; left:3.3em;" alt="">
+            <img src="../img/application-w.svg" style="width:200px; height:150px; top:1em; left:6.2em;" alt="">
+            <img src="../img/storage-w.svg" style="width:100px; height:100px; top:1.5em; left:7.8em;" alt="">
+            <img src="../img/application-w.svg" style="width:200px; height:150px; top:3em; left:10.7em;" alt="">
+            <img src="../img/storage-w.svg" style="width:100px; height:100px; top:3.5em; left:12.3em;" alt="">
+            <img src="../img/browser-w.svg" style="width:240px; height:200px; top:7em; left:6em;" alt="">
+            <p class="speakernotes">… everything with a web browser.</p>
+        </li>
     </ul>
 </section>
 
 <section>
-    <h2>Protocol stack</h2>
-    <ul class="incremental">
-    <li>We are not a product
-    <li>We are not a provider
-    <li>We are not a library
-    <li>We are a one-page spec
-    </ul>
+    <h1>A better architecture</h1>
+    <p class="speakernotes">People should have the versatility of the web <strong>and</strong> the safety of having their data in one place.</p>
 </section>
 
+<section>
+    <ul class="incremental morph">
+        <li>
+            <img src="../img/application-w.svg" style="width:200px; height:150px; top:2em; left:1.7em;" alt="">
+            <img src="../img/storage-w.svg" style="width:100px; height:100px; top:2.5em; left:3.3em;" alt="">
+            <img src="../img/application-w.svg" style="width:200px; height:150px; top:1em; left:6.2em;" alt="">
+            <img src="../img/storage-w.svg" style="width:100px; height:100px; top:1.5em; left:7.8em;" alt="">
+            <img src="../img/application-w.svg" style="width:200px; height:150px; top:3em; left:10.7em;" alt="">
+            <img src="../img/storage-w.svg" style="width:100px; height:100px; top:3.5em; left:12.3em;" alt="">
+            <img src="../img/browser-w.svg" style="width:240px; height:200px; top:7em; left:6em;" alt="">
+            <p class="speakernotes">From the current architecture …</p>
+        </li>
+        <li>
+            <img src="../img/application-w.svg" style="width:200px; height:150px; top:2em; left:1.7em;" alt="">
+            <img src="../img/application-w.svg" style="width:200px; height:150px; top:1em; left:6.2em;" alt="">
+            <img src="../img/application-w.svg" style="width:200px; height:150px; top:3em; left:10.7em;" alt="">
+            <img src="../img/storage-w.svg" style="width:120px; height:120px; top:8em; left:12em;" alt="">
+            <img src="../img/browser-w.svg" style="width:240px; height:200px; top:7em; left:6em;" alt="">
+            <p class="speakernotes">User data needs to be separated from the applications.</p>
+        </li>
+        <li>
+            <img src="../img/application-w.svg" style="width:200px; height:150px; top:2em; left:1.7em;" alt="">
+            <img src="../img/application-w.svg" style="width:200px; height:150px; top:1em; left:6.2em;" alt="">
+            <img src="../img/application.svg" style="width:200px; height:150px; top:3em; left:10.7em;" alt="">
+            <img src="../img/application-w.svg" style="width:200px; height:150px; top:7.9em; left:6.7em;" alt="">
+            <img src="../img/storage-w.svg" style="width:120px; height:120px; top:8em; left:12em;" alt="">
+            <img src="../img/browser-w.svg" style="width:240px; height:200px; top:7em; left:6em;" alt="">
+            <p class="speakernotes">Then every time you use an application …</p>
+        </li>
+        <li>
+            <img src="../img/application-w.svg" style="width:200px; height:150px; top:2em; left:1.7em;" alt="">
+            <img src="../img/application-w.svg" style="width:200px; height:150px; top:1em; left:6.2em;" alt="">
+            <img src="../img/application.svg" style="width:200px; height:150px; top:3em; left:10.7em;" alt="">
+            <img src="../img/application-w.svg" style="width:200px; height:150px; top:7.9em; left:6.7em;" alt="">
+            <img src="../img/storage.svg" style="width:120px; height:120px; top:8em; left:12em;" alt="">
+            <img src="../img/storage-w.svg" style="width:100px; height:100px; top:8.4em; left:8.3em;" alt="">
+            <img src="../img/browser-w.svg" style="width:240px; height:200px; top:7em; left:6em;" alt="">
+            <p class="speakernotes">… app and data only meet in the browser.</p>
+        </li>
+        <li>
+            <img src="../img/application-w.svg" style="width:200px; height:150px; top:2em; left:1.7em;" alt="">
+            <img src="../img/application-w.svg" style="width:200px; height:150px; top:1em; left:6.2em;" alt="">
+            <img src="../img/application-w.svg" style="width:200px; height:150px; top:3em; left:10.7em;" alt="">
+            <img src="../img/storage-w.svg" style="width:120px; height:120px; top:8em; left:12em;" alt="">
+            <img src="../img/browser-w.svg" style="width:240px; height:200px; top:7em; left:6em;" alt="">
+            <p class="speakernotes">No multiple accounts, no data lock-in – but data safety and full advantage of the web.</p>
+        </li>
+    </ul>
+</section>
+<section>
+   <h2>A better architecture</h2>
+   <h3><strong>SEPARATE</strong><br>cloud storage<br>FROM<br>cloud app logic</h3>
+</section>
+<section>
+   <h2>remoteStorage</h2>
+    <ul>
+    <li>Cross-origin data storage.</li>
+    <li>Standardized.</li>
+    <li>That's all.</li>
+    </ul>
+</section>
 <section style="background:#fcdc20;">
-    <img style="margin:3em 5em; width:340px; height:340px; z-index:100;"src="img/js.png" />
+    <img style="margin:3em 5em; width:340px; height:340px; z-index:100;" src="img/js.png">
 </section>
 
 <section>
     <h2>WebFinger</h2>
-    <h3 style="margin-top:8em; font-size:.9em;">user address & discovery</h3>
-    <img style="width:220px; height:339px; margin:3em 5em;" src="img/webfinger.png" />
+    <h3 style="margin-top:8em; font-size:.9em;">user address &amp; discovery</h3>
+    <img style="width:220px; height:339px; margin:3em 5em;" src="img/webfinger.png">
 </section>
 
 <section>
     <h2>OAuth</h2>
     <h3 style="margin-top:8em; font-size:.9em;">authorization</h3>
-    <img style="width:350px; height:350px; margin:2.6em 4.5em;" src="img/oauth.png" />
+    <img style="width:350px; height:350px; margin:2.6em 4.5em;" src="img/oauth.png">
 </section>
 
 <section style="background:#fff;">
     <h2 style="background:none;">CORS</h2>
     <h3 style="margin-top:5em; color:#444; font-size:.9em;">Access-Control-Allow-Origin: *</h3>
-    <img style="width:625px; height:200px; margin:3em 1.5em; z-index:100;" src="img/cors.jpg" />
+    <img style="width:625px; height:200px; margin:3em 1.5em; z-index:100;" src="img/cors.jpg">
 </section>
 
 <section>
@@ -142,63 +125,39 @@
 </section>
 
 <section>
-    <img src="img/diagram.svg" />
+    <img src="content/diagram.svg">
 </section>
 
 <section>
-    <h2>remoteStorage</h2>
-    <ul class="incremental">
-        <li>W3C Community Group
-        <li>app frontend: html5-like
-        <li>storage backend: REST-like
-        <li>open standard; use it!
+    <h2>Adoption: storage</h2>
+    <ul>
+    <li>IrisCouch</li>
+    <li>UserAddress</li>
+    <li>Surfnet</li>
+    <li>Your domain? :)</li>
+    </ul>
+</section>
+<section>
+    <h2>Adoption: apps</h2>
+    <ul>
+    <li>LibreDocs</li>
+    <li>Opentabs</li>
+    <li>Any localStorage app</li>
+    <li>Your site? :)</li>
+    </ul>
+</section>
+<section aria-selected="true">
+    <h2>Challenges</h2>
+    <ul>
+    <li>end-to-end encryption</li>
+    <li>content-addressable indices</li>
+    <li>push notifications</li>
+    <li>operations on global data</li>
     </ul>
 </section>
 
 <section>
-    <h2>The plan</h2>
-    <ul class="incremental">
-        <li>open spec, evangelism
-        <li>libredocs.org
-        <li>opentabs.net
-        <li>NL academics &amp; students:
-        <li>surfnet, spring 2012!
-    </ul>
+    <h2 style="background:0;">Freedom from the web's monopolies</h2>
+    <img src="img/island-light.png" style="width:360px; height:300px; top:5.5em; left:4.5em;" alt="">
 </section>
 
-<section>
-    <h2>Advantages</h2>
-    <ul class="incremental">
-        <li>Our data outside Microsoft
-        <li>Control who sees our data
-        <li>Instant data liberation
-        <li>$$$ cheaper to buy $$$
-    </ul>
-</section>
-
-<section>
-    <h2>Decision makers:</h2>
-    <ul class="incremental">
-        <li>Stop buying SaaS!
-        <li>SaaS = compromised
-        <li>Separate storage = better
-        <li>Ask for it!
-    </ul>
-</section>
-
-<section>
-    <h2>Solution providers:</h2>
-    <ul class="incremental">
-        <li>Stop selling SaaS!
-        <li>SaaS = evil. You're not.
-        <li>Separate storage = better
-        <li>Offer it!
-    </ul>
-</section>
-
-<section>
-    <h2 style="background:0;">remoteStorage</h2>
-    <h3 style="margin:.3em;"><a href="https://github.com/unhosted">github.com/unhosted</a></h3>
-    <h3 style="margin:.3em;"><a href="https://twitter.com/unhosted">@unhosted</a></h3>
-    <img src="img/island-light.png" style="width:239px; height:198px; top:8em; left:6em;" />
-</section>
