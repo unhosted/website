@@ -1,10 +1,11 @@
 body { background:#fff url('../img/backhaze.png') center 120px repeat-x; }
 
-.brand { position:absolute; top:-8em; left:2em; }
+.brand { position:absolute; top:-7.2em; left:2em; }
 
 .navbar.navbar-fixed-top { position:relative; }
-.navbar .navbar-inner { height:16em; background:url('../img/headerback.png') repeat-x top center; }
+.navbar .navbar-inner { height:15em; background:url('../img/headerback.png') repeat-x top center; }
 .navbar .container { position:absolute; bottom:0; left:5em; }
+.navbar .nav { margin-left:20em; }
 .navbar .nav a { outline:0; }
 .navbar ul.nav>li>a:hover { background:rgba(0, 0, 0, 0.25); }
 .navbar .nav .icon-white { opacity:.5; margin-top:.15em; }
@@ -17,5 +18,4 @@ body { background:#fff url('../img/backhaze.png') center 120px repeat-x; }
 
 #description { position:absolute; top:-11em; left:20em; color:#a1aab0; width:60em; }
 #description strong, #description a { color:#eaeaea; font-weight:bold; text-decoration:none; }
-#description h2, #description h2 { color:#b9e768; font-size:22px; text-shadow:0px 2px 1px #09151e; background:url('../img/helpruler.png') bottom repeat-x; padding-bottom:.5em; }
-
+#description h2 { color:#b9e768; font-size:22px; text-shadow:0px 2px 1px #09151e; margin-bottom:.3em; }
