@@ -33,7 +33,7 @@ header .tagline { position:relative; width:100%; text-align:center; }
 #introduction #remotestorage { width:35%; }
 #introduction #remotestorage img { width:13em; height:15em; }
 #introduction #arrow { position:absolute; left:4em; top:22em; }
-#introduction .column h3{ font-size:16px; font-weight:bold; line-height:22px; margin-bottom:22px; margin-top:2em; }
+#introduction .column h3 { font-size:16px; font-weight:bold; line-height:22px; margin-bottom:22px; margin-top:2em; }
 
 #demoapps ul li { display:inline; float:left; margin:1em; }
 #demoapps a img { border-radius:.5em; }
