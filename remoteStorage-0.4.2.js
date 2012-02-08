@@ -21,7 +21,7 @@ define([
   function createOAuthAddress(storageInfo, categories, redirectUri) {
      return storageInfo.auth
           +'?redirect_uri='+encodeURIComponent(redirectUri)
-          +'&scope'+encodeURIComponent(categories.join(','))
+          +'&scope='+encodeURIComponent(categories.join(','))
           +'&response_type=token'
           +'&client_id='+encodeURIComponent(redirectUri);
   }
