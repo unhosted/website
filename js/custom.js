@@ -1,6 +1,6 @@
 function loadpage(page) {
-	$('article.active').hide();
-	$('article.'+page).show();
+	$('article.active').fadeToggle();
+	$('article.'+page).fadeToggle();
 	$('.nav .active').removeClass('active');
 	$('#nav-'+page).parent().addClass('active');
 	$('article.active').removeClass('active');
