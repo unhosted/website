@@ -1,10 +1,10 @@
 function loadpage(page) {
+	$('#content').load(page+'.html');
 	$('.nav .active').removeClass('active');
 	$('#nav-'+page).parent().addClass('active');
 	$('#content').removeClass(window.location.hash.slice(1));
 	$('#content').addClass(page);
 	window.location.hash = '#'+page;
-	$('#content').load(page+'.html');
 }
 
 // can these calls be simplified into one function?
