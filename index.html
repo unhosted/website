@@ -12,6 +12,7 @@
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link href="css/custom.css" rel="stylesheet">
 		<link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+		<link href="css/prettify.css" rel="stylesheet">
 
 		<link rel="shortcut icon" href="images/favicon.ico">
 		<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
@@ -86,8 +87,8 @@
 			<p>Using the open<br /><a target="_blank" href="http://www.w3.org/community/unhosted/wiki/RemoteStorage">remoteStorage</a> protocol.</p>
 		</div>
 		<div class="column span4" id="remotestorage">
-			<img alt="remote storage" src="img/storage.svg" />
-			<h2>your remote storage</h2>
+			<img alt="remoteStorage" src="img/storage.svg" />
+			<h2>your remoteStorage</h2>
 			<p>We work on making many storage providers compatible,<br />
 			such as <a href="https://github.com/unhosted/gd-proxy">Google Drive</a>, Wordpress, Dropbox and more.<br/>
 			<a href="https://groups.google.com/forum/#!topic/unhosted/TDzEfJAzAH4/discussion">CouchDB</a> and <a href="http://owncloud.org/install/">ownCloud</a> are already compatible.
@@ -126,82 +127,80 @@
 
 	<p>We provide a client-side library called remoteStorage.js, which you can use to easily make your web app compatible with unhosted accounts. The first thing you do is include it. We use require.js, so the script you need to include in your page's head will look roughly as follows (assuming version number 0.4.2):</p>
 
-	<pre><code>&lt;script src="http://unhosted.org/require.js"&gt;&lt;/script&gt;
-	&lt;script&gt;
-	  require(['http://unhosted.org/remoteStorage-0.4.2.js'], function(remoteStorage) {
-
-		//do stuff with remoteStorage...
-
-	  });
-	&lt;/script&gt;
-	</code></pre>
+	<pre class="prettyprint">
+&lt;script src="http://unhosted.org/require.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+  require(['http://unhosted.org/remoteStorage-0.4.2.js'], function(remoteStorage) {
+    // do stuff with remoteStorage &hellip;
+  });
+&lt;/script&gt;</pre>
 
 	<p>You can also host require.js yourself, and you can host the <a href="https://github.com/unhosted/remoteStorage.js">library</a> yourself too if you prefer.</p>
 
-	<p>The next step is to look up whether a user has remote storage linked to their user address. This is done with the getStorageInfo function. It takes a user address ('user@host') and a callback as its arguments. The callback will get an error code, and a storageInfo object. If the error code is null, then the storageInfo object will have some data fields in it that we will need later. It looks as follows:</p>
+	<p>The next step is to look up whether a user has remoteStorage linked to their user address. This is done with the getStorageInfo function. It takes a user address ('user@host') and a callback as its arguments. The callback will get an error code, and a storageInfo object. If the error code is null, then the storageInfo object will have some data fields in it that we will need later. It looks as follows:</p>
 
-	<pre><code>  function connect() {
-		var userAddress=document.getElementById('userAddress').value;
-		remoteStorage.getStorageInfo(userAddress, function(err, storageInfo) {
-		  if(err) {
-		    alert('no, sorry!');
-		  } else {
-		    alert('yes! look: '+JSON.stringify(storageInfo));
-		    localStorage.currUserStorageInfo = JSON.stringify(storageInfo);
-		  }
-		});
-	  }
-	</code></pre>
+	<pre class="prettyprint">
+function connect() {
+  var userAddress=document.getElementById('userAddress').value;
+  remoteStorage.getStorageInfo(userAddress, function(err, storageInfo) {
+    if(err) {
+      alert('No, sorry!');
+    } else {
+      alert('Yes! Look: '+JSON.stringify(storageInfo));
+      localStorage.currUserStorageInfo = JSON.stringify(storageInfo);
+    }
+  });
+}</pre>
 
-	<p>The next step is to get some public information from someone's remote storage. We use the createClient method to create a client, and on there call the get method to retrieve the information we want:</p>
+	<p>The next step is to get some public information from someone's remoteStorage. We use the createClient method to create a client, and on there call the get method to retrieve the information we want:</p>
 
-	<pre><code>function getPublicFoo(userAddress, cb) {
-	  remoteStorage.getStorageInfo(userAddress, function(err, storageInfo) {
-		if(err) {
-		  alert('could not find the remote storage of '+userAddress);
-		} else {
-		  var client = remoteStorage.createClient(storageInfo, 'public');
-		  client.get('foo', function(err, data) {
-		    if(err) {
-		      alert('could not find foo on the remote storage of '+userAddress);
-		    } else {
-		      cb(data);    
-		    }
-		  });
-		}
-	  });
-	}
-	</code></pre>
+	<pre class="prettyprint">
+function getPublicFoo(userAddress, cb) {
+  remoteStorage.getStorageInfo(userAddress, function(err, storageInfo) {
+    if(err) {
+      alert('Could not find the remoteStorage of '+userAddress);
+    } else {
+      var client = remoteStorage.createClient(storageInfo, 'public');
+      client.get('foo', function(err, data) {
+        if(err) {
+          alert('Could not find foo on the remoteStorage of '+userAddress);
+        } else {
+          cb(data);    
+        }
+      });
+    }
+  });
+}</pre>
 
 	<p>Getting public data is easy because it requires no credentials. If we want to write to a user's public data, or read or write from one of the other categories, we need to do an OAuth dialog first, and obtain a token. Our library provides two functions to make this easier. On our main page, we add the following code to open the popup window. Say we want to connect to the user's "contacts" and "pictures" categories, and have set up a token receiver (see below) on <a href="https://myfavouritesandwich.org/rcvToken.html:">https://myfavouritesandwich.org/rcvToken.html:</a></p>
 
-	<pre><code>function doOAuth() {
-	  var receiverPage = 'https://myfavouritesandwich.org/rcvToken.html';
-	  var oauthPage = remoteStorage.makeOAuthAddress(localStorage.currUserStorageInfo, ['public', 'pictures'], receiverPage);
-	  var popup = window.open(oauthPage);
-	  //when the popup closes, if the OAuth dance was successful,
-	  //localStorage.bearerToken will have been populated
-	}
-	</code></pre>
+	<pre class="prettyprint">
+function doOAuth() {
+  var receiverPage = 'https://myfavouritesandwich.org/rcvToken.html';
+  var oauthPage = remoteStorage.makeOAuthAddress(localStorage.currUserStorageInfo, ['public', 'pictures'], receiverPage);
+  var popup = window.open(oauthPage);
+  // when the popup closes, if the OAuth dance was successful,
+  // localStorage.bearerToken will have been populated
+}</pre>
 
 	<p>With the bearerToken, you can create clients with credentials, and use the get, put and delete methods on there, for instance:</p>
 
-	<pre><code>function publishAvatar() {
-	  var publicClient = remoteStorage.createClient(storageInfo, 'public', localStorage.bearerToken);
-	  var picturesClient = remoteStorage.createClient(storageInfo, 'pictures', localStorage.bearerToken);
-	  picturesClient.get('foto01', function(err, data) {
-		publicClient.put('avatar', data, function(err, data2) {
-		  alert('copied //user@host/pictures#foto01 to //user@host/public#avatar');
-		});
-	  });
-	}
-	</code></pre>
+	<pre class="prettyprint">
+function publishAvatar() {
+  var publicClient = remoteStorage.createClient(storageInfo, 'public', localStorage.bearerToken);
+  var picturesClient = remoteStorage.createClient(storageInfo, 'pictures', localStorage.bearerToken);
+  picturesClient.get('photo01', function(err, data) {
+    publicClient.put('avatar', data, function(err, data2) {
+      alert('copied //user@host/pictures#photo01 to //user@host/public#avatar');
+    });
+  });
+}</pre>
 
 	<p>And then on /rcvToken.html we would need the following:</p>
 
-	<pre><code>localStorage.bearerToken = remoteStorage.receiveToken();
-	window.close();
-	</code></pre>
+	<pre class="prettyprint">
+localStorage.bearerToken = remoteStorage.receiveToken();
+window.close();</pre>
 
 	<p>Putting this all together, the resulting <a href="https://github.com/unhosted/MyFavouriteSandwich.org/blob/master/tutorial.html">code</a> is on <a href="https://myfavouritesandwich.org/tutorial.html">https://myfavouritesandwich.org/tutorial.html</a> 
 	and the <a href="https://github.com/unhosted/MyFavouriteSandwich.org/blob/master/rcvToken.html">helper page</a> on <a href="https://myfavouritesandwich.org/rcvToken.html">https://myfavouritesandwich.org/rcvToken.html</a>.</p>
@@ -270,9 +269,9 @@
 
 
 		<script src="js/jquery-1.7.1.min.js"></script>
-		<script src="https://raw.github.com/padolsey/jQuery-Lint/master/jquery.lint.js"></script>
 		<script src="js/bootstrap.min.js"></script>
 		<script src="js/custom.js"></script>
+		<script src="js/prettify.js"></script>
 		<!-- »There’s something deeper than making money off stuff. Being a part of creating stuff for the universe is awesome.« – Ilya Zhitomirskiy, 1989–2011 -->
 	</body>
 </html>
