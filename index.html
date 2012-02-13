@@ -66,32 +66,18 @@
 
 
 <article class="container introduction active">
-	<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/dIFtFJgIQuk?rel=0"></iframe>
-	<p>The web is not as open as it used to be: monopoly platforms formed new proprietary layers on top of it. But we create a better architecture for the web. We break the package deal &raquo;you get our app, we get your data&laquo; with <a href="http://www.w3.org/community/unhosted/wiki/RemoteStorage" target="_blank">remoteStorage</a>, a cross-origin data storage protocol separating application servers from data storage.</p>
-	<p>Unhosted is an open non-profit project, everyone can participate, including you!</p>
+	<iframe width="760" height="416" src="https://www.youtube-nocookie.com/embed/dIFtFJgIQuk?rel=0"></iframe>
+	<h1>Freedom from the web&apos;s monopolies</h1>
+	<p><strong>The web is not as open as it used to be: monopoly platforms formed new proprietary layers on top of it. But we create a better architecture for the web. We break the package deal &raquo;you get our app, we get your data&laquo; with <a href="http://www.w3.org/community/unhosted/wiki/RemoteStorage" target="_blank">remoteStorage</a>, a cross-origin data storage protocol separating application servers from data storage.</strong></p>
+	<p>Web applications usually come with storage attached to it, users can not choose where their data is stored. Put plainly: You get their app, they get your data.</p>
 
-	<div id="infographic" class="row">
-		<div class="column span4" id="apps">
-			<img alt="Application" class="app1" src="img/application.svg" />
-			<img alt="Application" class="app2" src="img/application.svg" />
-			<img alt="Application" class="app3" src="img/application.svg" />
-			<h2>web apps</h2>
-			<p>Applications are pure client-side Javascript, HTML &amp; CSS.<br />
-			That way they are not bound to a specific host.</p>
-		</div>
-		<div class="column span4" id="sync">
-			<img alt="Synchronization" src="img/sync.svg" />
-			<h2>sync with</h2>
-			<p>Using the open<br /><a href="http://www.w3.org/community/unhosted/wiki/RemoteStorage" target="_blank">remoteStorage</a> protocol.</p>
-		</div>
-		<div class="column span4" id="remotestorage">
-			<img alt="remoteStorage" src="img/storage.svg" />
-			<h2>your remoteStorage</h2>
-			<p>We work on making many storage providers compatible,<br />
-			such as <a href="https://github.com/unhosted/gd-proxy">Google Drive</a>, Wordpress, Dropbox and more.<br/>
-			<a href="https://groups.google.com/forum/#!topic/unhosted/TDzEfJAzAH4/discussion">CouchDB</a> and <a href="http://owncloud.org/install/">ownCloud</a> are already compatible.
-		</div>
-	</div>
+	<p>We want to improve the web infrastructure by separating web application logic from per-user data storage: Users should be able to use web services they love but keep their life stored in one place they control &ndash; a &raquo;home folder for the web&laquo;. At the same time, application developers shouldn&apos;t need to bother about providing data storage.</p>
+
+	<p>We also believe that freedom on the web is not achieved by freely licensed web applications running on servers you can&apos;t control. That&apos;s why applications should be pure Javascript which runs client-side, all in the browser. It doesn&apos;t matter if free or proprietary – everything can be inspected and verified.</p>
+
+	<p>Technically speaking, we define a protocol stack called <a href="http://www.w3.org/community/unhosted/wiki/RemoteStorage" target="_blank">remoteStorage</a>. A combination of WebFinger for discovery, OAuth for authorization, CORS (Cross-Origin Resource Sharing) for cross-domain AJAX calls and GET, PUT, DELETE for synchronization. We also work on its adoption through developing apps like <a href="http://libredocs.org">Libre Docs</a> and <a href="http://opentabs.net">Opentabs</a> as well as making existing apps and <a href="https://github.com/unhosted/website/wiki/remoteStorage-providers" target="_blank">storage providers</a> compatible.
+
+	<p><strong>Unhosted is an open non-profit project, everyone can participate, including you!</strong></p>
 </article><!-- /introduction -->
 
 
@@ -271,6 +257,6 @@ window.close();</pre>
 		<script src="js/bootstrap.min.js"></script>
 		<script src="js/custom.js"></script>
 		<script src="js/prettify.js"></script>
-		<!-- »There’s something deeper than making money off stuff. Being a part of creating stuff for the universe is awesome.« – Ilya Zhitomirskiy, 1989–2011 -->
+		<!-- »There&apos;s something deeper than making money off stuff. Being a part of creating stuff for the universe is awesome.« – Ilya Zhitomirskiy, 1989–2011 -->
 	</body>
 </html>
