@@ -1,4 +1,4 @@
-body { background:#fff url('../img/backhaze.png') center 120px repeat-x; }
+body { background:#fff url('../img/backhaze.png') center 120px repeat-x; margin-bottom:10em; }
 
 .brand { position:absolute; top:-7.2em; left:2em; }
 
@@ -19,3 +19,26 @@ body { background:#fff url('../img/backhaze.png') center 120px repeat-x; }
 #description { position:absolute; top:-11em; left:20em; color:#a1aab0; width:60em; }
 #description strong, #description a { color:#eaeaea; font-weight:bold; text-decoration:none; }
 #description h2 { color:#b9e768; font-size:22px; text-shadow:0px 2px 1px #09151e; margin-bottom:.3em; }
+
+
+
+.introduction article { position:relative; top:3em; }
+.introduction .column { position:relative; display:block; float:left; }
+.introduction article h2 { text-align:center; }
+.introduction article div { margin:0 1em; }
+.introduction article img { margin:0 3em; }
+.introduction article #apps { width:36%; position:relative; }
+.introduction article #apps img { width:10em; height:7em; }
+.introduction article #apps img.app1 { margin:-4em 0 0 0; padding:2em; }
+.introduction article #apps img.app2 { margin:1em -3em 0 0; }
+.introduction article #apps img.app3 { margin:-.5em 0 0 3em; }
+.introduction article #sync { width:16%; margin-top:5em; }
+.introduction article #sync img { width:10em; height:7em; }
+.introduction article #sync h2 { margin-top:2.9em; }
+.introduction article #remotestorage { width:35%; }
+.introduction article #remotestorage img { width:13em; height:15em; }
+.introduction article #arrow { position:absolute; left:4em; top:22em; }
+.introduction article .column h3 { font-size:16px; font-weight:bold; line-height:22px; margin-bottom:22px; margin-top:2em; }
+
+
+.donation { display:inline; }
