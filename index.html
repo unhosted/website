@@ -62,38 +62,214 @@
 		</div>
 
 
-		<article id="content" class="container introduction">
-			<div class="hero-unit">
-				<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/dIFtFJgIQuk?rel=0" frameborder="0" allowfullscreen></iframe>
-				<h1>Hello, world!</h1>
-				<p>This is a template for a simple marketing or informational website. It includes a large callout called the hero unit and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-				<p><a class="btn btn-primary btn-large">Try Libre Docs &raquo;</a></p>
-			</div>
-			
 
-			<div id="infographic" class="row">
-				<div class="column span4" id="apps">
-					<img alt="Application" class="app1" src="img/application.svg" />
-					<img alt="Application" class="app2" src="img/application.svg" />
-					<img alt="Application" class="app3" src="img/application.svg" />
-					<h2>web apps</h2>
-					<p>Applications are pure client-side Javascript, HTML &amp; CSS.<br />
-					That way they are not bound to a specific host.</p>
-				</div>
-				<div class="column span4" id="sync">
-					<img alt="Synchronization" src="img/sync.svg" />
-					<h2>sync with</h2>
-					<p>Using the open<br /><a target="_blank" href="http://www.w3.org/community/unhosted/wiki/RemoteStorage">remoteStorage</a> protocol.</p>
-				</div>
-				<div class="column span4" id="remotestorage">
-					<img alt="remote storage" src="img/storage.svg" />
-					<h2>your remote storage</h2>
-					<p>We work on making many storage providers compatible,<br />
-					such as <a href="https://github.com/unhosted/gd-proxy">Google Drive</a>, Wordpress, Dropbox and more.<br/>
-					<a href="https://groups.google.com/forum/#!topic/unhosted/TDzEfJAzAH4/discussion">CouchDB</a> and <a href="http://owncloud.org/install/">ownCloud</a> are already compatible.
-				</div>
-			</div>
-		</article>
+
+
+<article class="container introduction active">
+	<div class="hero-unit">
+		<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/dIFtFJgIQuk?rel=0" frameborder="0" allowfullscreen></iframe>
+		<h1>Hello, world!</h1>
+		<p>This is a template for a simple marketing or informational website. It includes a large callout called the hero unit and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
+		<p><a class="btn btn-primary btn-large">Try Libre Docs &raquo;</a></p>
+	</div>
+	
+
+	<div id="infographic" class="row">
+		<div class="column span4" id="apps">
+			<img alt="Application" class="app1" src="img/application.svg" />
+			<img alt="Application" class="app2" src="img/application.svg" />
+			<img alt="Application" class="app3" src="img/application.svg" />
+			<h2>web apps</h2>
+			<p>Applications are pure client-side Javascript, HTML &amp; CSS.<br />
+			That way they are not bound to a specific host.</p>
+		</div>
+		<div class="column span4" id="sync">
+			<img alt="Synchronization" src="img/sync.svg" />
+			<h2>sync with</h2>
+			<p>Using the open<br /><a target="_blank" href="http://www.w3.org/community/unhosted/wiki/RemoteStorage">remoteStorage</a> protocol.</p>
+		</div>
+		<div class="column span4" id="remotestorage">
+			<img alt="remote storage" src="img/storage.svg" />
+			<h2>your remote storage</h2>
+			<p>We work on making many storage providers compatible,<br />
+			such as <a href="https://github.com/unhosted/gd-proxy">Google Drive</a>, Wordpress, Dropbox and more.<br/>
+			<a href="https://groups.google.com/forum/#!topic/unhosted/TDzEfJAzAH4/discussion">CouchDB</a> and <a href="http://owncloud.org/install/">ownCloud</a> are already compatible.
+		</div>
+	</div>
+</article><!-- /introduction -->
+
+
+
+
+
+<article class="container manifesto">
+	<h1>Unhosted: freedom from the web&apos;s monopolies</h1>
+
+	<h2>Apps & data shouldn&apos;t be a package deal<h2>
+	<p>Most web applications today require users to sign up for an account which also stores their files. Data is held hostage on the application servers and can not be used by other similar applications which might offer other features.</p>
+
+	<h2>App developers shouldn&apos;t be hosting providers</h2>
+	<p>Even independent app developers do the same thing. Users might be able to sign in with their Twitter or Facebook account but the data will still be stored on the application server.</p>
+
+	<h2>Hosted open source software doesn&apos;t exist</h2>
+	<p>No matter if freely licensed or not, when the software runs on a server out of your control, you can not be sure that the app actually uses the code it pretends to do.</p>
+
+	<h2>There are more browsers than servers</h2>
+	<p>Applications become more and more client-side through using mostly Javascript, HTML and CSS. To make an app more scalable and able to handle more users, using the power of every browser that connects to it rather than central servers is more scalable.</p>
+</article><!-- /manifesto -->
+
+
+
+
+
+<article class="container developer">
+	<h1>How to accept remoteStorage accounts in your web app</h1>
+
+	<p>See also the <a href="https://github.com/unhosted/website/wiki/API-0.4">API specification</a>.</p>
+
+	<p>We provide a client-side library called remoteStorage.js, which you can use to easily make your web app compatible with unhosted accounts. The first thing you do is include it. We use require.js, so the script you need to include in your page's head will look roughly as follows (assuming version number 0.4.2):</p>
+
+	<pre><code>&lt;script src="http://unhosted.org/require.js"&gt;&lt;/script&gt;
+	&lt;script&gt;
+	  require(['http://unhosted.org/remoteStorage-0.4.2.js'], function(remoteStorage) {
+
+		//do stuff with remoteStorage...
+
+	  });
+	&lt;/script&gt;
+	</code></pre>
+
+	<p>You can also host require.js yourself, and you can host the <a href="https://github.com/unhosted/remoteStorage.js">library</a> yourself too if you prefer.</p>
+
+	<p>The next step is to look up whether a user has remote storage linked to their user address. This is done with the getStorageInfo function. It takes a user address ('user@host') and a callback as its arguments. The callback will get an error code, and a storageInfo object. If the error code is null, then the storageInfo object will have some data fields in it that we will need later. It looks as follows:</p>
+
+	<pre><code>  function connect() {
+		var userAddress=document.getElementById('userAddress').value;
+		remoteStorage.getStorageInfo(userAddress, function(err, storageInfo) {
+		  if(err) {
+		    alert('no, sorry!');
+		  } else {
+		    alert('yes! look: '+JSON.stringify(storageInfo));
+		    localStorage.currUserStorageInfo = JSON.stringify(storageInfo);
+		  }
+		});
+	  }
+	</code></pre>
+
+	<p>The next step is to get some public information from someone's remote storage. We use the createClient method to create a client, and on there call the get method to retrieve the information we want:</p>
+
+	<pre><code>function getPublicFoo(userAddress, cb) {
+	  remoteStorage.getStorageInfo(userAddress, function(err, storageInfo) {
+		if(err) {
+		  alert('could not find the remote storage of '+userAddress);
+		} else {
+		  var client = remoteStorage.createClient(storageInfo, 'public');
+		  client.get('foo', function(err, data) {
+		    if(err) {
+		      alert('could not find foo on the remote storage of '+userAddress);
+		    } else {
+		      cb(data);    
+		    }
+		  });
+		}
+	  });
+	}
+	</code></pre>
+
+	<p>Getting public data is easy because it requires no credentials. If we want to write to a user's public data, or read or write from one of the other categories, we need to do an OAuth dialog first, and obtain a token. Our library provides two functions to make this easier. On our main page, we add the following code to open the popup window. Say we want to connect to the user's "contacts" and "pictures" categories, and have set up a token receiver (see below) on <a href="https://myfavouritesandwich.org/rcvToken.html:">https://myfavouritesandwich.org/rcvToken.html:</a></p>
+
+	<pre><code>function doOAuth() {
+	  var receiverPage = 'https://myfavouritesandwich.org/rcvToken.html';
+	  var oauthPage = remoteStorage.makeOAuthAddress(localStorage.currUserStorageInfo, ['public', 'pictures'], receiverPage);
+	  var popup = window.open(oauthPage);
+	  //when the popup closes, if the OAuth dance was successful,
+	  //localStorage.bearerToken will have been populated
+	}
+	</code></pre>
+
+	<p>With the bearerToken, you can create clients with credentials, and use the get, put and delete methods on there, for instance:</p>
+
+	<pre><code>function publishAvatar() {
+	  var publicClient = remoteStorage.createClient(storageInfo, 'public', localStorage.bearerToken);
+	  var picturesClient = remoteStorage.createClient(storageInfo, 'pictures', localStorage.bearerToken);
+	  picturesClient.get('foto01', function(err, data) {
+		publicClient.put('avatar', data, function(err, data2) {
+		  alert('copied //user@host/pictures#foto01 to //user@host/public#avatar');
+		});
+	  });
+	}
+	</code></pre>
+
+	<p>And then on /rcvToken.html we would need the following:</p>
+
+	<pre><code>localStorage.bearerToken = remoteStorage.receiveToken();
+	window.close();
+	</code></pre>
+
+	<p>Putting this all together, the resulting <a href="https://github.com/unhosted/MyFavouriteSandwich.org/blob/master/tutorial.html">code</a> is on <a href="https://myfavouritesandwich.org/tutorial.html">https://myfavouritesandwich.org/tutorial.html</a> 
+	and the <a href="https://github.com/unhosted/MyFavouriteSandwich.org/blob/master/rcvToken.html">helper page</a> on <a href="https://myfavouritesandwich.org/rcvToken.html">https://myfavouritesandwich.org/rcvToken.html</a>.</p>
+</article><!-- /developer -->
+
+
+
+
+
+<article class="container community">
+
+</article><!-- /community -->
+
+
+
+
+
+<article class="container thanks">
+	<h1>You make Unhosted!</h1>
+
+	<p>Unhosted is a project from and for the community. Everybody, including you, is considered an equal member based on merit and contribution.</p>
+
+	<p>Our current full-time volunteers are:<br />
+	Michiel de Jong (Code Communist), Jan-Christoph Borchardt (Design Dictator), Melvin Carvalho (Transaction Technocrat), and Azul (Real-time Revolutionary).</p>
+
+	<a id="nlnet" class="donation" target="_blank" href="http://nlnet.nl/press/20110909-unhosted.html"><img alt="NLnet" src="http://nlnet.nl/logo/banner-160x60.png"/></a>
+	<form id="paypal" class="donation" action="https://www.paypal.com/cgi-bin/webscr" method="post">
+		<input type="hidden" name="cmd" value="_s-xclick" />
+		<input type="hidden" name="hosted_button_id" value="5JX4Z9AZLJMJY" />
+		<input type="image" name="submit" alt=" " src="img/paypal.gif"
+	style="height:45px; width:75px; background:url('img/paypal.gif') no-repeat;" />
+		<img alt="" src="https://www.paypalobjects.com/de_DE/i/scr/pixel.gif" width="1" height="1" />
+	</form>
+	<a id="flattr" class="FlattrButton donation" style="display:none;" href="http://unhosted.org/"></a>
+	<noscript>
+		<a href="http://flattr.com/thing/181201/The-Unhosted-Project" target="_blank"><img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" /></a>
+	</noscript>
+
+	<p>We are a non-profit project, made possible by all the awesome people who donated and support the project:<br />
+	<a href="http://twitter.com/aschepis">Adam Schepis</a>, <a href="http://twitter.com/aamonnz">Alexandre Monnin</a>, Alex Benik, <a href="http://twitter.com/alexeiras">Alex Eiras</a>, Alex Salvador, Alvaro Rodriguez Dominguez, Andrew Miller, Andy Isaacson, Ayesha Garrett, athinkingmeat, <a href="http://bitcartel.com/">BitCartel</a>, <a href="http://twitter.com/sphax3d">Benjamin Danon</a>, <a href="http://twitter.com/orfaz">Benjamin Fourio</a>, <a href="http://bencharp.com">Beno&icirc;t Charpentier</a>, <a href="http://yagraph.org">Camille Bissuel</a>, <a href="http://twitter.com/cesarob">@cesarob</a>, <a href="http://identi.ca/charlesschulz">Charles-H. Schulz</a>, Christian Weiske, Christophe Drevet, <a href="http://identi.ca/clacke">@clacke</a>, <a href="http://twitter.com/coeibu">@coeibu</a>, <a href="http://crisp.se/">crisp.se</a>, <a href="http://viedma.es/">Crist&oacute;bal Viedma</a>, <a href="http://flyingmana.de">Daniel Fahlke</a> (<a href="http://twitter.com/flyingmana">@Flyingmana</a>), Daniel Mota, <a href="http://twitter.com/leidan">Daniel Ripoll&eacute;s</a>, <a href="http://identi.ca/dietrich">Dietrich Ayala</a>, <a href="http://edokoa.com">edokoa</a> (<a href="http://twitter.com/edokoa">@edokoa</a>), <a href="http://twitter.com/edwincheese">@edwincheese</a>, <a href="http://twitter.com/epilepticrabbit">@epilepticrabbit</a>, Frederic Caufriez, Friedemann Altrock, Greg Roodt, <a href="http://hdez.nl/blog">Hans de Zwart</a>, <a href="http://twitter.com/hanshuebner">@HansHuebner</a>, <a href="http://twitter.com/hariseldon78">@hariseldon78</a>, <a href="http://twitter.com/hex29a">@hex29a</a>, <a href="http://hugoroy.eu">Hugo Roy</a>, <a href="http://identi.ca/idoric">@idoric</a>, <a href="http://jancborchardt.wordpress.com">Jan-Christoph Borchardt</a> (<a href="http://twitter.com/jancborchardt">@jancborchardt</a>), <a href="http://twitter.com/thejtoken">Javier Juarez</a>, <a href="http://lockify.com">Lockify</a>, <a href="http://twitter.com/louisebolotin">@louisebolotin</a>, <a href="http://twitter.com/eyefox42">Lucas</a>, Marc Laporte, Mark P Sullivan, Martin Holzhauer, Martin Stadler, Markus Schiegl, Mattias Wahlberg, Micha&#322; &raquo;Vesper&laquo; Dziewo&#324;ski, Michiel de Jong, Nils R Grotnes, <a href="http://nlnet.nl/press/20110909-unhosted.html">NLnet</a>, olav_2, Oluf &raquo;Finkregh&laquo; Lorenzen, Pablo Joubert, Pablo L&oacute;pez Torres, <a href="http://parkerhiggins.net">Parker Higgins</a>, <a href="http://paulbooker.co.uk">Paul Booker</a>, Peter Rukavina, <a href="http://twitter.com/psvensson">Peter Svensson</a> (<a href="http://greenergrasswebdesign.com">Greener Grass</a>), <a href="http://catwell.info">Pierre Chapuis</a>, <a href="http://identi.ca/ppapadeas">Pierros Papadeas</a>, Robert Rees, <a href="http://twitter.com/molfie">Rolf Timmermans</a>, Romain Courteaud, <a href="http://twitter.com/RomainPouzol">Romain Pouzol</a>, Saul Albert, <a href="http://mob.is.it">Silvio Porcellana</a>, <a href="http://identi.ca/sindikat">@sindikat</a>, <a href="http://twitter.com/stgpetrovic">@stgpetrovic</a>, <a href="http://freebase.com/view/en/thad_guidry">Thad Guidry Sr.</a>, Thomas Kahle, Timon Reinhard, <a href="http://twitter.com/tbaldauf">Tobias Baldauf</a> (<a href="http://twitter.com/cgnwebperf">@cgnwebperf</a>), ww, and many more &hellip;
+	</p>
+
+	<p>
+	Freely licensed <a title="AGPL" href="http://www.gnu.org/licenses/agpl.html" target="_blank">code</a> &amp; <a title="Creative Commons Attribution" href="http://creativecommons.org/licenses/by/3.0/" target="_blank">everything else</a>.
+	Hosted on <a href="http://nodejitsu.com">nodejitsu</a>.
+	Icons by <a href="http://thenounproject.com">The Noun Project</a>.
+	Logo by <a href="http://edokoa.com" target="_blank">edokoa</a>.
+	Website built with <a href="http://twitter.github.com/bootstrap/">Bootstrap</a> by <a href="http://jancborchardt.wordpress.com">Jan-Christoph Borchardt</a>.
+	</p>
+
+	<script type="text/javascript">
+	/* <![CDATA[ */
+		(function() {
+			var s = document.createElement('script'), t = document.getElementsByTagName('script')[0];
+			s.type = 'text/javascript';
+			s.async = true;
+			s.src = 'http://api.flattr.com/js/0.6/load.js?mode=auto';
+			t.parentNode.insertBefore(s, t);
+		})();
+	/* ]]> */
+	</script>
+</article><!-- /thanks -->
+
+
+
 
 
 		<script src="js/jquery-1.7.1.min.js"></script>

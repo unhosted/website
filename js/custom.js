@@ -1,9 +1,10 @@
 function loadpage(page) {
-	$('#content').load(page+'.html');
+	$('article.active').hide();
+	$('article.'+page).show();
 	$('.nav .active').removeClass('active');
 	$('#nav-'+page).parent().addClass('active');
-	$('#content').removeClass(window.location.hash.slice(1));
-	$('#content').addClass(page);
+	$('article.active').removeClass('active');
+	$('article.'+page).addClass('active');
 	window.location.hash = '#'+page;
 }
 
