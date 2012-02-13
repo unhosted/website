@@ -20,6 +20,8 @@ body { background:#fafafa; margin-bottom:10em; }
 #description strong, #description a { color:#eaeaea; font-weight:bold; text-decoration:none; }
 #description h2 { color:#b9e768; font-size:22px; text-shadow:0px 2px 1px #09151e; margin-bottom:.3em; }
 
+article.container { width:60em; margin-left:25em; }
+article.container.introduction { width:940px; margin-left:auto; }
 
 
 .introduction .hero-unit { height:23em; }
