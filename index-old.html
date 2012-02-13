@@ -1,0 +1,195 @@
+<!doctype html>
+<!--[if lt IE 7 ]> <html class="ie ie6 no-js" lang="en"> <![endif]-->
+<!--[if IE 7 ]> <html class="ie ie7 no-js" lang="en"> <![endif]-->
+<!--[if IE 8 ]> <html class="ie ie8 no-js" lang="en"> <![endif]-->
+<!--[if IE 9 ]> <html class="ie ie9 no-js" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<!-- the "no-js" class is for Modernizr. -->
+
+<head id="unhosted-org" data-template-set="html5-reset">
+
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta charset="utf-8">
+	<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame -->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	
+	<title>Unhosted: separating web apps from data storage</title>
+	<meta name="title" content="Unhosted: separating web apps from data storage">
+	<meta name="description" content="remoteStorage http://www.w3.org/community/unhosted/wiki/RemoteStorage is an open web standard for decentralizing user data. On the unhosted web, data is stored per-user, under the user's control. 
+	That's where it belongs.">
+
+	<link rel="shortcut icon" href="img/favicon.png">
+	<link rel="apple-touch-icon" href="img/favicon-touch.png">
+	<link rel="stylesheet" href="css/reset.css">
+	<link rel="stylesheet" href="css/style.css">
+	
+	<!-- all our JS is at the bottom of the page, except for Modernizr. -->
+	<script src="js/modernizr-1.7.min.js"></script>
+<script type="text/javascript">var a=new Date,b=a.getHours()+a.getTimezoneOffset()/60;if(18==a.getDate()&&0==a.getMonth()&&2012==a.getFullYear()&&3<=b&&24>=b)window.location="http://sopastrike.com/strike";</script>
+</head>
+
+<body>
+<div id="donations">
+	<div class="wrapper">
+		<div id="logolight"></div>
+		<h1><a href="http://unhosted.org"><img src="img/island-light.png" alt="Unhosted" /></a></h1>
+		<a style="width:250px;height:70px;vertical-align:middle;text-align:center;background-color:#000;position:absolute;z-index:5555;top:70px;left:70px;background-image:url(http://americancensorship.org/images/stop-censorship-small.png);background-position:center center;background-repeat:no-repeat;-moz-transform: rotate(-3deg);
+-webkit-transform: rotate(-3deg);" href="http://americancensorship.org"></a>
+		<div id="campaign" style="display:block">
+			<h2>Separating web apps from data storage</h2>
+			<p>The web is not as open as it used to be: monopoly platforms formed new proprietary layers on top of it. But we create a better architecture for the web. We break the package deal &raquo;you get our app, we get your data&laquo; with <a target="_blank" href="http://www.w3.org/community/unhosted/wiki/RemoteStorage">remoteStorage</a>, a cross-origin data storage protocol separating application servers from data storage.</p>
+			<p>Unhosted is an open non-profit project. Participate on <a target="_blank" href="https://github.com/unhosted">code</a>, <a target="_blank" href="http://groups.google.com/group/unhosted">mailing list</a> and <a target="_blank" href="http://webchat.freenode.net/?channels=unhosted">chat room</a></strong>. Follow <a href="http://twitter.com/unhosted">@unhosted</a> or find more links in the footer of this page.</p>
+		</div>
+	</div>
+</div>
+
+<div id="toplight"></div>
+<div class="wrapper">
+
+<iframe style="margin:2em 20%;" width="560" height="315" src="https://www.youtube-nocookie.com/embed/dIFtFJgIQuk?rel=0" frameborder="0" allowfullscreen></iframe>
+
+<article id="introduction">
+	<div class="column" id="apps">
+		<img alt="Application" class="app1" src="img/application.svg" />
+		<img alt="Application" class="app2" src="img/application.svg" />
+		<img alt="Application" class="app3" src="img/application.svg" />
+		<h2>web apps</h2>
+		<p>Applications are pure client-side Javascript, HTML &amp; CSS.<br />
+		That way they are not bound to a specific host.
+		</p>
+	</div>
+	<div class="column" id="sync">
+		<img alt="Synchronization" src="img/sync.svg" />
+		<h2>sync with</h2>
+		<p>Using the open<br /><a target="_blank" href="http://www.w3.org/community/unhosted/wiki/RemoteStorage">remoteStorage</a> protocol.</p>
+	</div>
+	<div class="column" id="remotestorage">
+		<img alt="remote storage" src="img/storage.svg" />
+		<h2>your remote storage</h2>
+		<p>We work on making many storage providers compatible,<br />
+		such as <a href="https://github.com/unhosted/gd-proxy">Google Drive</a>, Wordpress, Dropbox and more.<br/>
+		<a href="https://groups.google.com/forum/#!topic/unhosted/TDzEfJAzAH4/discussion">CouchDB</a> and <a href="http://owncloud.org/install/">ownCloud</a> are already compatible.
+	</div>
+</article>
+
+<!--
+<article id="quickstart">
+	<h2>remoteStorage: localStorage + sync</h2>
+	<ol>
+		<li>Write a localStorage app or take an existing one!
+		<li>Include <a href="http://unhosted.org/remoteStorage.js">remoteStorage.js</a>
+		<li>Inside the &lt;script> ... &lt/script> element, specify '<code>onChange</code>' and '<code>category</code>' like below
+	</ol>
+	<p>Done! Now people can use your app with their remote storage provider.</p>
+</article>
+
+
+<article id="examplecode">
+	<h2>A <a href="http://unhosted.org/demo/text/">simple text editor</a> using <a target="_blank" href="http://www.w3.org/community/unhosted/wiki/RemoteStorage">remoteStorage</a> as backend</h2>
+<pre>
+&lt;html>
+  &lt;head>
+    &lt;script src="<a href="http://unhosted.org/remoteStorage.js">http://unhosted.org/<strong>remoteStorage.js</strong></a>"><em>{
+      <strong>onChange</strong>: function(key, oldValue, newValue) {
+        if(key=='text') {
+          document.getElementById('textfield').value= newValue;
+        }
+      },
+      <strong>category</strong>: 'documents'
+    }</em>&lt;/script>
+  &lt;/head>
+  &lt;body onload="document.getElementById('textfield').value = <em>localStorage.<strong>getItem</strong>('text');</em>">
+    &lt;textarea id="textfield" onkeyup="<em>localStorage.<strong>setItem</strong>('text', this.value);</em>">&lt;/textarea>
+  &lt;/body>
+&lt;/html>
+</pre>
+</article>
+-->
+
+</div><!-- END Wrapper -->
+
+<footer class="footer">
+	<div class="wrapper">
+		<div class="links">
+			<h3>Community</h3>
+			<ul>
+				<li><a target="_blank" href="https://github.com/unhosted/website/issues">Tasks</a></li>
+				<li><a target="_blank" href="https://github.com/unhosted/website/wiki/report">Progress report</a>
+				<li><a href="https://github.com/unhosted/" target="_blank">Code</a></li>
+				<li><a href="http://groups.google.com/group/unhosted" target="_blank">Mailing list</a></li>
+				<li><a href="http://webchat.freenode.net/?channels=unhosted" target="_blank">Chat room</a></li>
+			</ul>
+			<div class="clear"></div>
+		</div>
+		
+		<div class="links">
+			<h3>Media</h3>
+			<ul>
+				<li><a target="_blank" href="http://www.youtube.com/watch?v=dIFtFJgIQuk">Introduction talk</a></li>
+				<li><a target="_blank" href="https://www.c3d2.de/news/pentacast-36-unhosted.html">Podcast</a></li>
+				<li><a href="http://blogs.fsfe.org/fellowship-interviews/?p=299" target="_blank">FSFE interview</a></li>
+				<li><a href="http://www.readwriteweb.com/cloud/2010/12/unhosted.php" target="_blank">Read Write Web</a></li>
+				<li><a href="http://www.h-online.com/open/features/Lessons-from-WikiLeaks-decentralize-decentralize-decentralize-1153977.html" target="_blank">The H online</a></li>
+			</ul>
+			<div class="clear"></div>
+		</div>
+		
+		<div class="links">
+			<h3>Social</h3>
+			<ul>
+				<li><a href="http://joindiaspora.com/u/unhosted" target="_blank">Diaspora</a></li>
+				<li><a href="http://identi.ca/unhosted" target="_blank">Identi.ca</a></li>
+				<li><a href="http://twitter.com/unhosted" target="_blank">Twitter</a></li>
+			</ul>
+			<div class="clear"></div>
+		</div>
+
+		<div id="community">
+			<div>You make Unhosted!</div>
+			<p>Unhosted is a project from and for the community. Everybody, including you, is considered an equal member based on merit and contribution. Our current full-time volunteers are:<br />
+		Jan-Christoph Borchardt (Design Dictator), Michiel de Jong (Code Communist), Melvin Carvalho &amp; Nathan Rixham (Transaction Technocrats), and Azul (Real-time Revolutionary).
+			</p>
+			<p>Thanks to <a href="thanks.html">our splendid supporters and donors</a>!</p>
+			<a class="donation" target="_blank" href="http://nlnet.nl/press/20110909-unhosted.html"><img alt="NLnet" src="http://nlnet.nl/logo/banner-160x60.png"/></a>
+			<form class="donation" action="https://www.paypal.com/cgi-bin/webscr" method="post">
+				<input type="hidden" name="cmd" value="_s-xclick" />
+				<input type="hidden" name="hosted_button_id" value="5JX4Z9AZLJMJY" />
+				<input type="image" name="submit" alt=" " src="img/paypal.gif"
+		style="display:inline; border:0; margin-top:-4.5em; height:45px; width:75px; background:url('img/paypal.gif') no-repeat;" />
+				<img alt="" src="https://www.paypalobjects.com/de_DE/i/scr/pixel.gif" width="1" height="1" />
+			</form>
+			<a class="FlattrButton donation" style="display:none;" href="http://unhosted.org/"></a>
+			<noscript>
+				<a href="http://flattr.com/thing/181201/The-Unhosted-Project" target="_blank"><img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" /></a>
+			</noscript>
+		</div>
+<div class="clear"></div>
+	</div>	
+	<div id="credits">
+		<div class="wrapper">
+			<span>
+			Freely licensed <a title="AGPL" href="http://www.gnu.org/licenses/agpl.html" target="_blank">code</a> &amp; <a title="Creative Commons Attribution" href="http://creativecommons.org/licenses/by/3.0/" target="_blank">everything else</a>.
+			Hosted on <a href="http://nodejitsu.com">nodejitsu</a>.
+			Icons by <a href="http://thenounproject.com">The Noun Project</a>.
+			Design &amp; logo by <a href="http://edokoa.com" target="_blank">@edokoa</a>.
+			Website by <a href="http://jancborchardt.wordpress.com" target="_blank">@jancborchardt</a>.
+			</span>
+		</div>
+	</div>
+</footer>
+
+<script type="text/javascript">
+/* <![CDATA[ */
+	(function() {
+		var s = document.createElement('script'), t = document.getElementsByTagName('script')[0];
+		s.type = 'text/javascript';
+		s.async = true;
+		s.src = 'http://api.flattr.com/js/0.6/load.js?mode=auto';
+		t.parentNode.insertBefore(s, t);
+	})();
+/* ]]> */
+</script>
+
+<!-- »There’s something deeper than making money off stuff. Being a part of creating stuff for the universe is awesome.« – Ilya Zhitomirskiy, 1989–2011 -->
+</body>
+</html>
