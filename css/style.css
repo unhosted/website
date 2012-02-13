@@ -16,7 +16,7 @@ header h1 { display:block; height:28px; font-size:24px; font-weight:bold; text-i
 header h1 a { display:block; width:170px; height:30px; text-decoration:none; color:inherit;}
 header .tagline { position:relative; width:100%; text-align:center; }
 
-
+#introduction iframe { border:0; }
 #introduction { position:relative; top:3em; }
 #introduction .column { position:relative; display:block; float:left; }
 #introduction h2 { text-align:center; }

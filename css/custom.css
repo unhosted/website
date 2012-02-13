@@ -28,8 +28,7 @@ body { background:#fafafa; margin-bottom:10em; }
 
 article.container { width:60em; margin-left:25em; }
 
-.introduction .hero-unit { height:23em; width:940px; margin-left:-7em; }
-.introduction .hero-unit iframe { float:left; margin-right:1em; }
+.introduction iframe { border:0; }
 .introduction #infographic { position:relative; top:3em; }
 .introduction #infographic .column { position:relative; display:block; float:left; }
 .introduction #infographic h2 { text-align:center; }

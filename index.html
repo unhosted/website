@@ -26,7 +26,7 @@
 					<a class="brand" href="#"><img src="img/island-website.png" alt="Unhosted" /></a>
 					<p class="libredocs">
 						try the first app!<br />
-						<a href="http://libredocs.org" class="btn btn-large" target="_blank"><img src="http://libredocs.org/images/cheerleader.svg" />Libre Docs</a>
+						<a href="http://libredocs.org" class="btn btn-large" target="_blank"><img src="http://libredocs.org/images/cheerleader.svg" alt="" />Libre Docs</a>
 					</p>
 					<div class="nav-collapse">
 						<ul class="nav">
@@ -38,15 +38,15 @@
 							<li class="dropdown">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-eye-open icon-white"></i> Follow<b class="caret"></b></a>
 								<ul class="dropdown-menu">
-									<li><a target="_blank" href="http://twitter.com/unhosted"><img src="img/icon-twitter.ico" /> Twitter</a></li>
-									<li><a target="_blank" href="http://identi.ca/unhosted"><img src="img/icon-identica.ico" /> Identi.ca</a></li>
-									<li><a target="_blank" href="http://joindiaspora.com/u/unhosted"><img src="img/icon-diaspora.png" /> Diaspora</a></li>
+									<li><a target="_blank" href="http://twitter.com/unhosted"><img src="img/icon-twitter.ico" alt="" /> Twitter</a></li>
+									<li><a target="_blank" href="http://identi.ca/unhosted"><img src="img/icon-identica.ico" alt="" /> Identi.ca</a></li>
+									<li><a target="_blank" href="http://joindiaspora.com/u/unhosted"><img src="img/icon-diaspora.png" alt="" /> Diaspora</a></li>
 								</ul>
 							</li>
 							<li class="dropdown">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user icon-white"></i> Participate<b class="caret"></b></a>
 								<ul class="dropdown-menu">
-									<li><a target="_blank" href="https://github.com/unhosted"><img src="img/icon-github.ico" /> Code</a></li>
+									<li><a target="_blank" href="https://github.com/unhosted"><img src="img/icon-github.ico" alt="" /> Code</a></li>
 									<li><a target="_blank" href="http://groups.google.com/group/unhosted"><i class="icon-envelope"></i> Mailing list</a></li>
 									<li><a target="_blank" href="http://webchat.freenode.net/?channels=unhosted"><i class="icon-comment"></i> Chat room</a></li>
 								</ul>
@@ -66,8 +66,8 @@
 
 
 <article class="container introduction active">
-	<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/dIFtFJgIQuk?rel=0" frameborder="0" allowfullscreen></iframe>
-	<p>The web is not as open as it used to be: monopoly platforms formed new proprietary layers on top of it. But we create a better architecture for the web. We break the package deal &raquo;you get our app, we get your data&laquo; with <a target="_blank" href="http://www.w3.org/community/unhosted/wiki/RemoteStorage">remoteStorage</a>, a cross-origin data storage protocol separating application servers from data storage.</p>
+	<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/dIFtFJgIQuk?rel=0"></iframe>
+	<p>The web is not as open as it used to be: monopoly platforms formed new proprietary layers on top of it. But we create a better architecture for the web. We break the package deal &raquo;you get our app, we get your data&laquo; with <a href="http://www.w3.org/community/unhosted/wiki/RemoteStorage" target="_blank">remoteStorage</a>, a cross-origin data storage protocol separating application servers from data storage.</p>
 	<p>Unhosted is an open non-profit project, everyone can participate, including you!</p>
 
 	<div id="infographic" class="row">
@@ -82,7 +82,7 @@
 		<div class="column span4" id="sync">
 			<img alt="Synchronization" src="img/sync.svg" />
 			<h2>sync with</h2>
-			<p>Using the open<br /><a target="_blank" href="http://www.w3.org/community/unhosted/wiki/RemoteStorage">remoteStorage</a> protocol.</p>
+			<p>Using the open<br /><a href="http://www.w3.org/community/unhosted/wiki/RemoteStorage" target="_blank">remoteStorage</a> protocol.</p>
 		</div>
 		<div class="column span4" id="remotestorage">
 			<img alt="remoteStorage" src="img/storage.svg" />
@@ -100,8 +100,9 @@
 
 <article class="container manifesto" style="display:none;">
 	<h1>Unhosted: freedom from the web&apos;s monopolies</h1>
+	<p>On the unhosted web, data is stored per-user, under the user&apos;s control on their <a href="http://www.w3.org/community/unhosted/wiki/RemoteStorage" target="_blank">remoteStorage</a>. That&apos;s where it belongs.</p>
 
-	<h2>Apps & data shouldn&apos;t be a package deal<h2>
+	<h2>Apps & data shouldn&apos;t be a package deal</h2>
 	<p>Most web applications today require users to sign up for an account which also stores their files. Data is held hostage on the application servers and can not be used by other similar applications which might offer other features.</p>
 
 	<h2>App developers shouldn&apos;t be hosting providers</h2>
@@ -123,7 +124,7 @@
 
 	<p>See also the <a href="https://github.com/unhosted/website/wiki/API-0.4">API specification</a>.</p>
 
-	<p>We provide a client-side library called remoteStorage.js, which you can use to easily make your web app compatible with unhosted accounts. The first thing you do is include it. We use require.js, so the script you need to include in your page's head will look roughly as follows (assuming version number 0.4.2):</p>
+	<p>We provide a client-side library called remoteStorage.js, which you can use to easily make your web app compatible with unhosted accounts. The first thing you do is include it. We use require.js, so the script you need to include in your page&apos;s head will look roughly as follows (assuming version number 0.4.2):</p>
 
 	<pre class="prettyprint">
 &lt;script src="http://unhosted.org/require.js"&gt;&lt;/script&gt;
@@ -150,7 +151,7 @@ function connect() {
   });
 }</pre>
 
-	<p>The next step is to get some public information from someone's remoteStorage. We use the createClient method to create a client, and on there call the get method to retrieve the information we want:</p>
+	<p>The next step is to get some public information from someone&apos;s remoteStorage. We use the createClient method to create a client, and on there call the get method to retrieve the information we want:</p>
 
 	<pre class="prettyprint">
 function getPublicFoo(userAddress, cb) {
@@ -170,7 +171,7 @@ function getPublicFoo(userAddress, cb) {
   });
 }</pre>
 
-	<p>Getting public data is easy because it requires no credentials. If we want to write to a user's public data, or read or write from one of the other categories, we need to do an OAuth dialog first, and obtain a token. Our library provides two functions to make this easier. On our main page, we add the following code to open the popup window. Say we want to connect to the user's "contacts" and "pictures" categories, and have set up a token receiver (see below) on <a href="https://myfavouritesandwich.org/rcvToken.html:">https://myfavouritesandwich.org/rcvToken.html:</a></p>
+	<p>Getting public data is easy because it requires no credentials. If we want to write to a user&apos;s public data, or read or write from one of the other categories, we need to do an OAuth dialog first, and obtain a token. Our library provides two functions to make this easier. On our main page, we add the following code to open the popup window. Say we want to connect to the user&apos;s "contacts" and "pictures" categories, and have set up a token receiver (see below) on <a href="https://myfavouritesandwich.org/rcvToken.html:">https://myfavouritesandwich.org/rcvToken.html:</a></p>
 
 	<pre class="prettyprint">
 function doOAuth() {
