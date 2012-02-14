@@ -97,13 +97,10 @@
 	<p>A hosted website provides two things: processing and storage. An unhosted website only hosts its source code (or even just a bootloader for it). Processing is done in the browser, with ajax against cross-origin cloud storage. These unhosted storage nodes can be provided by whoever provides your email hosting: your employer, ISP, university, mobile operator, public library, a hobbyist friend who runs a server at home, a hosting company, etc. They become just like mailservers, BGP switches, fibre links and other commodity infrastructure: independent of which application you run on top of them. To maximize the control of the user over their data, migration from one storage node to another is an integral part of the protocol stack design. Our remoteStorage protocol can be seen as a cross-platform cloud-sync solution; comparable to iCloud on Apple&apos;s platform, but for the web.</p>
 
 	<h2>Apps & data shouldn&apos;t be a package deal</h2>
-	<p>Most web applications today require users to sign up for an account which also stores their files. Data is held hostage on the application servers and can not be used by other similar applications which might offer other features.
-  Even independent app developers often reluctantly build apps that host user data inside the application. Users might be able to sign in with their Twitter or Facebook account but the data will still be stored on the application server.
-	But applications become more and more client-side through using mostly Javascript, HTML and CSS. To make an app more scalable and able to handle more users, using the power of every browser that connects to it rather than central servers is more scalable. Data storage should then be independent from application development.</p>
+	<p>Most web applications today require users to sign up for an account which also stores their files. Data is held hostage on the application servers and can not be used by other similar applications which might offer other features. Even independent app developers often reluctantly build apps that host user data inside the application. Users might be able to sign in with their Twitter or Facebook account but the data will still be stored on the application server. But applications become more and more client-side through using mostly Javascript, HTML and CSS. To make an app more scalable and able to handle more users, using the power of every browser that connects to it rather than central servers is more scalable. Data storage should then be independent from application development.</p>
 
-  <h2>How it works</h2>
-  <p>We have been working on this for about a year now, and have defined the <a href="http://www.w3.org/community/unhosted/wiki/RemoteStorage">remoteStorage</a> protocol stack as our central value proposition. It works quite simply by combining HTTP, CORS, OAuth2 and Webfinger. On top of this, we have started building <a href="http://libredocs.org">Libre Docs</a> (an office suite) and <a href="http://opentabs.net">Opentabs.net</a> (an online anti-banking tool). The Netherlands are the first country to provide remoteStorage accounts to all their students and academic staff. Through Libre Docs, you can also sign up for a freemium account at <a href="http://iriscouch.com">Iris Couch</a>. We are also working on a generic app player, through which users can sync data from any client-side app to their remoteStorage. We need more developers to start accepting unhosted accounts on their websites. That way, users will be able to use these websites for their software needs, yet still own their own data just like they do with desktop software: the best of both worlds.
-  </p>
+	<h2>How it works</h2>
+	<p>We have been working on this for about a year now, and have defined the <a href="http://www.w3.org/community/unhosted/wiki/RemoteStorage">remoteStorage</a> protocol stack as our central value proposition. It works quite simply by combining HTTP, CORS, OAuth2 and Webfinger. On top of this, we have started building <a href="http://libredocs.org">Libre Docs</a> (an office suite) and <a href="http://opentabs.net">Opentabs.net</a> (an online anti-banking tool). The Netherlands are the first country to provide remoteStorage accounts to all their students and academic staff. Through Libre Docs, you can also sign up for a freemium account at <a href="http://iriscouch.com">Iris Couch</a>. We are also working on a generic app player, through which users can sync data from any client-side app to their remoteStorage. We need more developers to start accepting unhosted accounts on their websites. That way, users will be able to use these websites for their software needs, yet still own their own data just like they do with desktop software: the best of both worlds.</p>
 </article><!-- /manifesto -->
 
 
@@ -203,13 +200,13 @@ var client = remoteStorage.createClient(storageInfo, category, bearerToken);
 </pre>
 
 	<p><strong>remoteStorage.createOAuthAddress(storageInfo, categories, redirectUri) {}</strong></p>
-Example usage:
-  <pre class="prettyprint">
+	<p>Example usage:</p>
+	<pre class="prettyprint">
 window.open(remoteStorage.createOAuthAddress(storageInfo, categories, redirectUri));
 </pre>
 
 	<p><strong>remoteStorage.receiveToken() {}</strong></p>
-Example usage on redirectUri page:
+	<p>Example usage on redirectUri page:</p>
 	<pre class="prettyprint">
 localStorage.bearerToken = remoteStorage.receiveToken();
 window.close();
@@ -223,12 +220,11 @@ client.get(key, function(err, data){ });</pre>
 	<pre class="prettyprint">
 client.put(key, value, function(err){ });</pre>
 
-
 	<p><strong>client.delete(key, callback) {}</strong></p>
 	<pre class="prettyprint">
 client.delete(key, function(err){ });</pre>
 
-<p>See also our <a href="https://github.com/unhosted/MyFavouriteSandwich.org/blob/master/tutorial.html">code example</a>.
+	<p>See also our <a href="https://github.com/unhosted/MyFavouriteSandwich.org/blob/master/tutorial.html">code example</a>.
 </article><!-- /developer -->
 
 
