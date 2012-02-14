@@ -124,10 +124,9 @@
 <article class="container developer" style="display:none;">
 	<h1>Accepting remoteStorage accounts in your web app</h1>
 
-	<p>See also the <a href="https://github.com/unhosted/website/wiki/API-0.4">API specification</a>.</p>
+	<p>See also the API specification below.</p>
 
 	<p>We provide a client-side library called remoteStorage.js, which you can use to easily make your web app compatible with unhosted accounts. The first thing you do is include it. We use require.js, so the script you need to include in your page&apos;s head will look roughly as follows (assuming version number 0.4.2):</p>
-
 	<pre class="prettyprint">
 &lt;script src="http://unhosted.org/require.js"&gt;&lt;/script&gt;
 &lt;script&gt;
@@ -139,7 +138,6 @@
 	<p>You can also host require.js yourself, and you can host the <a href="https://github.com/unhosted/remoteStorage.js">library</a> yourself too if you prefer.</p>
 
 	<p>The next step is to look up whether a user has remoteStorage linked to their user address. This is done with the getStorageInfo function. It takes a user address ('user@host') and a callback as its arguments. The callback will get an error code, and a storageInfo object. If the error code is null, then the storageInfo object will have some data fields in it that we will need later. It looks as follows:</p>
-
 	<pre class="prettyprint">
 function connect() {
   var userAddress=document.getElementById('userAddress').value;
@@ -154,7 +152,6 @@ function connect() {
 }</pre>
 
 	<p>The next step is to get some public information from someone&apos;s remoteStorage. We use the createClient method to create a client, and on there call the get method to retrieve the information we want:</p>
-
 	<pre class="prettyprint">
 function getPublicFoo(userAddress, cb) {
   remoteStorage.getStorageInfo(userAddress, function(err, storageInfo) {
@@ -174,7 +171,6 @@ function getPublicFoo(userAddress, cb) {
 }</pre>
 
 	<p>Getting public data is easy because it requires no credentials. If we want to write to a user&apos;s public data, or read or write from one of the other categories, we need to do an OAuth dialog first, and obtain a token. Our library provides two functions to make this easier. On our main page, we add the following code to open the popup window. Say we want to connect to the user&apos;s "contacts" and "pictures" categories, and have set up a token receiver (see below) on <a href="https://myfavouritesandwich.org/rcvToken.html:">https://myfavouritesandwich.org/rcvToken.html:</a></p>
-
 	<pre class="prettyprint">
 function doOAuth() {
   var receiverPage = 'https://myfavouritesandwich.org/rcvToken.html';
@@ -185,7 +181,6 @@ function doOAuth() {
 }</pre>
 
 	<p>With the bearerToken, you can create clients with credentials, and use the get, put and delete methods on there, for instance:</p>
-
 	<pre class="prettyprint">
 function publishAvatar() {
   var publicClient = remoteStorage.createClient(storageInfo, 'public', localStorage.bearerToken);
@@ -198,13 +193,50 @@ function publishAvatar() {
 }</pre>
 
 	<p>And then on /rcvToken.html we would need the following:</p>
-
 	<pre class="prettyprint">
 localStorage.bearerToken = remoteStorage.receiveToken();
 window.close();</pre>
 
 	<p>Putting this all together, the resulting <a href="https://github.com/unhosted/MyFavouriteSandwich.org/blob/master/tutorial.html">code</a> is on <a href="https://myfavouritesandwich.org/tutorial.html">https://myfavouritesandwich.org/tutorial.html</a> 
 	and the <a href="https://github.com/unhosted/MyFavouriteSandwich.org/blob/master/rcvToken.html">helper page</a> on <a href="https://myfavouritesandwich.org/rcvToken.html">https://myfavouritesandwich.org/rcvToken.html</a>.</p>
+	
+
+	<h2>API 0.4</h2>
+
+	<p><strong>remoteStorage.getStorageInfo(userAddress, callback) {}</strong></p>
+	<pre class="prettyprint">
+remoteStorage.getStorageInfo(userAddress, function(err, storageInfo) {
+  //save the storageInfo object (it's stringifiable)
+});</pre>
+
+	<p><strong>remoteStorage.createClient(storageInfo, category, bearerToken) {}</strong></p>
+	<pre class="prettyprint">
+var publicClient = remoteStorage.createClient(storageInfo, 'public');</pre>
+
+
+	<p><strong>remoteStorage.createOAuthAddress(storageInfo, categories, redirectUri) {}</strong></p>
+For all categories other than 'public', you still have to do OAuth, so open a popup to the address returned by:
+	<pre class="prettyprint">
+var addressForPopup = remoteStorage.createOAuthAddress(storageInfo, categories, redirectUri);</pre>
+
+
+	<p>The page on redirectUri can use remoteStorage.receiveToken save bearerToken in localStorage, and when your main tab detects this, you&apos;re ready for:</p>
+
+	<p><strong>client.get(key, callback) {}</strong></p>
+	<pre class="prettyprint">
+var client = remoteStorage.createClient(storageInfo, category, bearerToken);
+client.get(key, cb);</pre>
+
+	<p><strong>client.put(key, value, callback) {}</strong></p>
+	<pre class="prettyprint">
+var client = remoteStorage.createClient(storageInfo, category, bearerToken);
+client.put(key, value, cb);</pre>
+
+
+	<p><strong>client.delete(key, callback) {}</strong></p>
+	<pre class="prettyprint">
+var client = remoteStorage.createClient(storageInfo, category, bearerToken);
+client.delete(key, cb);</pre>
 </article><!-- /developer -->
 
 
