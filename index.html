@@ -124,7 +124,7 @@
 <article class="container developer" style="display:none;">
 	<h1>Accepting remoteStorage accounts in your web app</h1>
 
-	<p>See also the API specification below.</p>
+	<p>See also the API reference below.</p>
 
 	<p>We provide a client-side library called remoteStorage.js, which you can use to easily make your web app compatible with unhosted accounts. The first thing you do is include it. We use require.js, so the script you need to include in your page&apos;s head will look roughly as follows (assuming version number 0.4.2):</p>
 	<pre class="prettyprint">
@@ -201,7 +201,7 @@ window.close();</pre>
 	and the <a href="https://github.com/unhosted/MyFavouriteSandwich.org/blob/master/rcvToken.html">helper page</a> on <a href="https://myfavouritesandwich.org/rcvToken.html">https://myfavouritesandwich.org/rcvToken.html</a>.</p>
 	
 
-	<h2>API 0.4</h2>
+	<h2>API 0.4 reference</h2>
 
 	<p><strong>remoteStorage.getStorageInfo(userAddress, callback) {}</strong></p>
 	<pre class="prettyprint">
@@ -211,32 +211,38 @@ remoteStorage.getStorageInfo(userAddress, function(err, storageInfo) {
 
 	<p><strong>remoteStorage.createClient(storageInfo, category, bearerToken) {}</strong></p>
 	<pre class="prettyprint">
-var publicClient = remoteStorage.createClient(storageInfo, 'public');</pre>
-
+var publicClient = remoteStorage.createClient(storageInfo, 'public');
+var client = remoteStorage.createClient(storageInfo, category, bearerToken);
+</pre>
 
 	<p><strong>remoteStorage.createOAuthAddress(storageInfo, categories, redirectUri) {}</strong></p>
-For all categories other than 'public', you still have to do OAuth, so open a popup to the address returned by:
+Example usage:
+  <pre class="prettyprint">
+window.open(remoteStorage.createOAuthAddress(storageInfo, categories, redirectUri));
+window.addEventListener('message', function(event) {
+  if(event.origin == location.protocol+'//'+location.host) {
+    localStorage.bearerToken = event.data;
+  }
+}, false);
+</pre>
+
+	<p><strong>remoteStorage.receiveToken() {}</strong></p>
+Example usage on redirectUri page:
 	<pre class="prettyprint">
-var addressForPopup = remoteStorage.createOAuthAddress(storageInfo, categories, redirectUri);</pre>
-
-
-	<p>The page on redirectUri can use remoteStorage.receiveToken save bearerToken in localStorage, and when your main tab detects this, you&apos;re ready for:</p>
+window.opener.postMessage(remoteStorage.receiveToken(), location.protocol+'//'+location.host);</pre>
 
 	<p><strong>client.get(key, callback) {}</strong></p>
 	<pre class="prettyprint">
-var client = remoteStorage.createClient(storageInfo, category, bearerToken);
-client.get(key, cb);</pre>
+client.get(key, function(err, data){ });</pre>
 
 	<p><strong>client.put(key, value, callback) {}</strong></p>
 	<pre class="prettyprint">
-var client = remoteStorage.createClient(storageInfo, category, bearerToken);
-client.put(key, value, cb);</pre>
+client.put(key, value, function(err){ });</pre>
 
 
 	<p><strong>client.delete(key, callback) {}</strong></p>
 	<pre class="prettyprint">
-var client = remoteStorage.createClient(storageInfo, category, bearerToken);
-client.delete(key, cb);</pre>
+client.delete(key, function(err){ });</pre>
 </article><!-- /developer -->
 
 
