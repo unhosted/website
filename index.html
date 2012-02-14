@@ -162,20 +162,18 @@ function getPublicFoo(userAddress, cb) {
 	<pre class="prettyprint">
 function doOAuth() {
   var receiverPage = 'https://myfavouritesandwich.org/rcvToken.html';
-  var oauthPage = remoteStorage.makeOAuthAddress(localStorage.currUserStorageInfo, ['public', 'pictures'], receiverPage);
+  var oauthPage = remoteStorage.makeOAuthAddress(localStorage.currUserStorageInfo, ['public', 'documents'], receiverPage);
   var popup = window.open(oauthPage);
-  // when the popup closes, if the OAuth dance was successful,
-  // localStorage.bearerToken will have been populated
 }</pre>
 
 	<p>With the bearerToken, you can create clients with credentials, and use the get, put and delete methods on there, for instance:</p>
 	<pre class="prettyprint">
-function publishAvatar() {
+function publishFoo() {
   var publicClient = remoteStorage.createClient(storageInfo, 'public', localStorage.bearerToken);
-  var picturesClient = remoteStorage.createClient(storageInfo, 'pictures', localStorage.bearerToken);
-  picturesClient.get('photo01', function(err, data) {
-    publicClient.put('avatar', data, function(err, data2) {
-      alert('copied //user@host/pictures#photo01 to //user@host/public#avatar');
+  var documentsClient = remoteStorage.createClient(storageInfo, 'documents', localStorage.bearerToken);
+  documentsClient.get('foo', function(err, data) {
+    publicClient.put('foo', data, function(err) {
+      alert('copied //user@host/documents#foo to //user@host/public#foo');
     });
   });
 }</pre>
@@ -194,7 +192,7 @@ window.close();</pre>
 	<p><strong>remoteStorage.getStorageInfo(userAddress, callback) {}</strong></p>
 	<pre class="prettyprint">
 remoteStorage.getStorageInfo(userAddress, function(err, storageInfo) {
-  //save the storageInfo object (it's stringifiable)
+  localStorage.storageInfo = JSON.stringify(storageInfo);
 });</pre>
 
 	<p><strong>remoteStorage.createClient(storageInfo, category, bearerToken) {}</strong></p>
@@ -207,17 +205,14 @@ var client = remoteStorage.createClient(storageInfo, category, bearerToken);
 Example usage:
   <pre class="prettyprint">
 window.open(remoteStorage.createOAuthAddress(storageInfo, categories, redirectUri));
-window.addEventListener('message', function(event) {
-  if(event.origin == location.protocol+'//'+location.host) {
-    localStorage.bearerToken = event.data;
-  }
-}, false);
 </pre>
 
 	<p><strong>remoteStorage.receiveToken() {}</strong></p>
 Example usage on redirectUri page:
 	<pre class="prettyprint">
-window.opener.postMessage(remoteStorage.receiveToken(), location.protocol+'//'+location.host);</pre>
+localStorage.bearerToken = remoteStorage.receiveToken();
+window.close();
+</pre>
 
 	<p><strong>client.get(key, callback) {}</strong></p>
 	<pre class="prettyprint">
