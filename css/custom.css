@@ -1,4 +1,4 @@
-body { background:#fafafa; margin-bottom:10em; }
+body { background:#fafafa; margin-bottom:10em; min-width:1110px; }
 
 .brand { position:absolute; top:-7.5em; left:2em; }
 .libredocs { position:absolute; top:3em; left:3.4em; color:black; font-weight:bold; font-size:1.5em; }
@@ -7,7 +7,7 @@ body { background:#fafafa; margin-bottom:10em; }
 
 .navbar.navbar-fixed-top { position:relative; }
 .navbar .navbar-inner { height:15em; background:url('../img/headerback.png') repeat-x top center; }
-.navbar .container { position:absolute; bottom:0; left:5em; }
+.navbar .container { position:absolute; bottom:0; left:5em; white-space:nowrap; }
 .navbar .nav { margin-left:20em; }
 .navbar .nav a { outline:0; }
 .navbar ul.nav>li>a:hover { background:rgba(0, 0, 0, 0.25); }
