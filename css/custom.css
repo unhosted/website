@@ -18,8 +18,6 @@ body { background:#fafafa; margin-bottom:10em; min-width:1110px; }
 .navbar .dropdown-menu { min-width:100px; }
 .navbar .dropdown-menu img { vertical-align:text-top; }
 .navbar .dropdown-menu i { margin-top:.15em; }
-.navbar .dropdown { margin-left:15em; }
-.navbar .dropdown+.dropdown { margin-left:0; }
 
 #description { position:absolute; top:-9em; left:20em; color:#a1aab0; width:60em; }
 #description strong, #description a { color:#eaeaea; font-weight:bold; text-decoration:none; }
