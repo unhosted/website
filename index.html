@@ -129,7 +129,7 @@ function connect() {
       alert('No, sorry!');
     } else {
       alert('Yes! Look: '+JSON.stringify(storageInfo));
-      localStorage.currUserStorageInfo = JSON.stringify(storageInfo);
+      localStorage.setItem('currUserStorageInfo', JSON.stringify(storageInfo));
     }
   });
 }</pre>
@@ -157,15 +157,16 @@ function getPublicFoo(userAddress, cb) {
 	<pre class="prettyprint">
 function doOAuth() {
   var receiverPage = 'https://myfavouritesandwich.org/rcvToken.html';
-  var oauthPage = remoteStorage.makeOAuthAddress(localStorage.currUserStorageInfo, ['public', 'documents'], receiverPage);
+  var oauthPage = remoteStorage.makeOAuthAddress(localStorage.getItem('currUserStorageInfo'), ['public', 'documents'], receiverPage);
   var popup = window.open(oauthPage);
 }</pre>
 
 	<p>With the bearerToken, you can create clients with credentials, and use the get, put and delete methods on there, for instance:</p>
 	<pre class="prettyprint">
 function publishFoo() {
-  var publicClient = remoteStorage.createClient(storageInfo, 'public', localStorage.bearerToken);
-  var documentsClient = remoteStorage.createClient(storageInfo, 'documents', localStorage.bearerToken);
+  var token = localStorage.getItem('bearerToken');
+  var publicClient = remoteStorage.createClient(storageInfo, 'public', token);
+  var documentsClient = remoteStorage.createClient(storageInfo, 'documents', token);
   documentsClient.get('foo', function(err, data) {
     publicClient.put('foo', data, function(err) {
       alert('copied //user@host/documents#foo to //user@host/public#foo');
@@ -175,7 +176,7 @@ function publishFoo() {
 
 	<p>And then on /rcvToken.html we would need the following:</p>
 	<pre class="prettyprint">
-localStorage.bearerToken = remoteStorage.receiveToken();
+localStorage.setItem('bearerToken', remoteStorage.receiveToken());
 window.close();</pre>
 
 	<p>Putting this all together, the resulting <a href="https://github.com/unhosted/MyFavouriteSandwich.org/blob/master/tutorial.html">code</a> is on <a href="https://myfavouritesandwich.org/tutorial.html">https://myfavouritesandwich.org/tutorial.html</a> 
@@ -187,7 +188,7 @@ window.close();</pre>
 	<p><strong>remoteStorage.getStorageInfo(userAddress, callback) {}</strong></p>
 	<pre class="prettyprint">
 remoteStorage.getStorageInfo(userAddress, function(err, storageInfo) {
-  localStorage.storageInfo = JSON.stringify(storageInfo);
+  localStorage.setItem('storageInfo', JSON.stringify(storageInfo));
 });</pre>
 
 	<p><strong>remoteStorage.createClient(storageInfo, category, bearerToken) {}</strong></p>
@@ -205,7 +206,7 @@ window.open(remoteStorage.createOAuthAddress(storageInfo, categories, redirectUr
 	<p><strong>remoteStorage.receiveToken() {}</strong></p>
 	<p>Example usage on redirectUri page:</p>
 	<pre class="prettyprint">
-localStorage.bearerToken = remoteStorage.receiveToken();
+localStorage.setItem('bearerToken', remoteStorage.receiveToken());
 window.close();
 </pre>
 
