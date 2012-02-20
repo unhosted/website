@@ -157,7 +157,7 @@ function getPublicFoo(userAddress, cb) {
 	<pre class="prettyprint">
 function doOAuth() {
   var receiverPage = 'https://myfavouritesandwich.org/rcvToken.html';
-  var oauthPage = remoteStorage.makeOAuthAddress(localStorage.getItem('currUserStorageInfo'), ['public', 'documents'], receiverPage);
+  var oauthPage = remoteStorage.createOAuthAddress(localStorage.getItem('currUserStorageInfo'), ['public', 'documents'], receiverPage);
   var popup = window.open(oauthPage);
 }</pre>
 
