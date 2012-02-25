@@ -3,9 +3,9 @@
      xmlns:hm='http://host-meta.net/xrd/1.0'>
      <hm:Host></hm:Host>
   <Link rel='remoteStorage'
-        api='CoucDB'
-        auth='http://jan-at-unhosted-dot-org-26.iriscouch.com/cors/_design/auth/modal.html'
-        template='http://jan-at-unhosted-dot-org-26.iriscouch.com/{category}/'/>
+        api='CouchDB'
+        auth='http://jan-at-unhosted-dot-org.iriscouch.com/cors/_design/auth/modal.html'
+        template='http://jan-at-unhosted-dot-org.iriscouch.com/{category}/'/>
     <Title>Resource Descriptor</Title>
   </Link>
 </XRD>

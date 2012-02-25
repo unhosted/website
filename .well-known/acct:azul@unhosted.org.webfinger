@@ -3,9 +3,9 @@
      xmlns:hm='http://host-meta.net/xrd/1.0'>
      <hm:Host></hm:Host>
   <Link rel='remoteStorage'
-        api='CoucDB'
-        auth='http://azul-at-unhosted-dot-org-30.iriscouch.com/cors/_design/auth/modal.html'
-        template='http://azul-at-unhosted-dot-org-30.iriscouch.com/{category}/'/>
+        api='simple'
+        auth='http://surf.unhosted.org:4000/_oauth/azul@unhosted.org'
+        template='http://surf.unhosted.org:4000/azul@unhosted.org/{category}/'>
     <Title>Resource Descriptor</Title>
   </Link>
 </XRD>
