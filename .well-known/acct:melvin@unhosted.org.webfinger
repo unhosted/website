@@ -4,8 +4,8 @@
      <hm:Host></hm:Host>
   <Link rel='remoteStorage'
         api='simple'
-        auth='http://surf.unhosted.org/_oauth?user_id=melvin@unhosted.org'
-        template='http://surf.unhosted.org/melvin@unhosted.org/{category}/'>
+        auth='http://surf.unhosted.org:4000/_oauth/melvin@unhosted.org'
+        template='http://surf.unhosted.org:4000/melvin@unhosted.org/{category}/'>
     <Title>Resource Descriptor</Title>
   </Link>
 </XRD>
