@@ -4,7 +4,7 @@
      <hm:Host></hm:Host>
   <Link rel='remoteStorage'
         api='CouchDB'
-        auth='http://jan-at-unhosted-dot-org.iriscouch.com/cors/_design/auth/modal.html'
+        auth='http://jan-at-unhosted-dot-org.iriscouch.com/cors/auth/modal.html'
         template='http://jan-at-unhosted-dot-org.iriscouch.com/{category}/'/>
     <Title>Resource Descriptor</Title>
   </Link>
