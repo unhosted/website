@@ -1,5 +1,5 @@
 define(
-  ['require', './lib/ajax', './lib/couch', './lib/dav', './lib/webfinger'],
+  ['require', './lib-0.4.4/ajax', './lib-0.4.4/couch', './lib-0.4.4/dav', './lib-0.4.4/webfinger'],
   function (require, ajax, couch, dav, webfinger) {
     var onError = function (code, msg) {
         console.log(msg);
