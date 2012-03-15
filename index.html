@@ -30,7 +30,7 @@
 					<ul class="nav">
 						<li class="active"><a id="nav-introduction" href="#"><i class="icon-home icon-white"></i> Introduction</a></li>
 						<li><a id="nav-manifesto" href="#"><i class="icon-bookmark icon-white"></i> Manifesto</a></li>
-						<li><a id="nav-developer" href="#"><i class="icon-cog icon-white"></i> Developer</a></li>
+						<li><a id="nav-remotestorage" href="#"><i class="icon-cog icon-white"></i> remoteStorage</a></li>
 						<!--<li><a id="nav-community" href="#"><i class="icon-flag icon-white"></i> Community</a></li>-->
 						<li><a id="nav-thanks" href="#"><i class="icon-heart icon-white"></i> Thanks</a></li>
 						<li class="dropdown follow">
@@ -98,133 +98,29 @@
 	<p>Most web applications today require users to sign up for an account which also stores their files. Data is held hostage on the application servers and can not be used by other similar applications which might offer other features. Even independent app developers often reluctantly build apps that host user data inside the application. Users might be able to sign in with their Twitter or Facebook account but the data will still be stored on the application server. But applications become more and more client-side through using mostly Javascript, HTML and CSS. To make an app more scalable and able to handle more users, using the power of every browser that connects to it rather than central servers is more scalable. Data storage should then be independent from application development.</p>
 
 	<h2>How it works</h2>
-	<p>We have been working on this for about a year now, and have defined the <a href="http://www.w3.org/community/unhosted/wiki/RemoteStorage">remoteStorage</a> protocol stack as our central value proposition. It works quite simply by combining HTTP, CORS, OAuth2 and Webfinger. On top of this, we have started building <a href="http://libredocs.org">Libre Docs</a> (an office suite) and <a href="http://opentabs.net">Opentabs.net</a> (an online anti-banking tool). The Netherlands are the first country to provide remoteStorage accounts to all their students and academic staff. Through Libre Docs, you can also sign up for a freemium account at <a href="http://iriscouch.com">Iris Couch</a>. We are also working on a generic app player, through which users can sync data from any client-side app to their remoteStorage. We need more developers to start accepting unhosted accounts on their websites. That way, users will be able to use these websites for their software needs, yet still own their own data just like they do with desktop software: the best of both worlds.</p>
+	<p>We have been working on this for about a year now, and have defined the <a href="http://www.w3.org/community/unhosted/wiki/RemoteStorage">remoteStorage</a> protocol stack as our central value proposition. It works quite simply by combining HTTP, CORS, OAuth2 and Webfinger. On top of this, we have started building <a href="http://libredocs.org">Libre Docs</a> (an office suite) and <a href="http://opentabs.net">Opentabs.net</a> (an online anti-banking tool). The Netherlands are the first country to provide remoteStorage accounts to all their students and academic staff. Through Libre Docs, you can also sign up for a freemium account at <a href="http://5apps.com">5apps</a> (aimed at developers) or <a href="http://owncube.com">OwnCube</a> (aimed at end-users). We need more developers to  <a href="#remotestoragejs">start accepting unhosted accounts</a>. on their websites. That way, users will be able to use these websites for their software needs, yet still own their own data just like they do with desktop software: the best of both worlds.</p>
 </article><!-- /manifesto -->
 
 
 
 
 
-<article class="container developer" style="display:none;">
-	<h1>Accepting remoteStorage accounts in your web app</h1>
+<article class="container remotestorage" style="display:none;">
+	<h1>Getting started</h1>
+  <p>To quickly try out how remoteStorage works, get a remoteStorage account at one of these fine purveyors:</p>
+  <ul>
+  <li> <a href="http://5apps.com">5apps</a> are a start-up who are developing an easy way to deploy html5 web apps. They are buddies of ours from the Berlin JS scene. If you get an account with them, they also offer some remoteStorage, so you can test your own apps with your own account.</li>
+  <li><a href="http://owncube.com">OwnCube</a> are a start-up who offer ownCube hosting. In their ownCube install they have activated the remoteStorage app, so if you get an account with them (their smallest plan is free), you will also be able to use it as remoteStorage. At the same time, you'll get all the other functionality that is baked into ownCloud.</li>
+  </ul>
+  <p>If you can't work out how to get a remoteStorage account, or something is not clear, then come to our <a href="http://webchat.freenode.net/?channels=unhosted">chat room</a> and ask around for help setting one up. Once you have your remoteStorage account, you'll probably be eager to use it. To do this, go to the first application in the world to accept remoteStorage accounts, which is <a href="http://libredocs.org">Libre Docs</a>. When you use it, you'll notice it's just like using a normal website. But Libre Docs does not host your documents. Your documents, and your list of documents, will be on your remoteStorage account, under your control.</p>
 
-	<p>See also the API reference below, as well as our <a href="https://github.com/unhosted/MyFavouriteSandwich.org/blob/master/tutorial.html">code example</a>.
-
-	<p>We provide a client-side library called remoteStorage.js, which you can use to easily make your web app compatible with unhosted accounts. The first thing you do is include it. We use require.js, so the script you need to include in your page&apos;s head will look roughly as follows (assuming version number 0.4.2):</p>
-	<pre class="prettyprint">
-&lt;script src="http://unhosted.org/require.js"&gt;&lt;/script&gt;
-&lt;script&gt;
-  require(['http://unhosted.org/remoteStorage-0.4.2.js'], function(remoteStorage) {
-    // do stuff with remoteStorage &hellip;
-  });
-&lt;/script&gt;</pre>
-
-	<p>You can also host require.js yourself, and you can host the <a href="https://github.com/unhosted/remoteStorage.js">library</a> yourself too if you prefer.</p>
-
-	<p>The next step is to look up whether a user has remoteStorage linked to their user address. This is done with the getStorageInfo function. It takes a user address ('user@host') and a callback as its arguments. The callback will get an error code, and a storageInfo object. If the error code is null, then the storageInfo object will have some data fields in it that we will need later. It looks as follows:</p>
-	<pre class="prettyprint">
-function connect() {
-  var userAddress=document.getElementById('userAddress').value;
-  remoteStorage.getStorageInfo(userAddress, function(err, storageInfo) {
-    if(err) {
-      alert('No, sorry!');
-    } else {
-      alert('Yes! Look: '+JSON.stringify(storageInfo));
-      localStorage.setItem('currUserStorageInfo', JSON.stringify(storageInfo));
-    }
-  });
-}</pre>
-
-	<p>The next step is to get some public information from someone&apos;s remoteStorage. We use the createClient method to create a client, and on there call the get method to retrieve the information we want:</p>
-	<pre class="prettyprint">
-function getPublicFoo(userAddress, cb) {
-  remoteStorage.getStorageInfo(userAddress, function(err, storageInfo) {
-    if(err) {
-      alert('Could not find the remoteStorage of '+userAddress);
-    } else {
-      var client = remoteStorage.createClient(storageInfo, 'public');
-      client.get('foo', function(err, data) {
-        if(err) {
-          alert('Could not find foo on the remoteStorage of '+userAddress);
-        } else {
-          cb(data);    
-        }
-      });
-    }
-  });
-}</pre>
-
-	<p>Getting public data is easy because it requires no credentials. If we want to write to a user&apos;s public data, or read or write from one of the other categories, we need to do an OAuth dialog first, and obtain a token. Our library provides two functions to make this easier. On our main page, we add the following code to open the popup window. Say we want to connect to the user&apos;s "contacts" and "pictures" categories, and have set up a token receiver (see below) on <a href="https://myfavouritesandwich.org/rcvToken.html:">https://myfavouritesandwich.org/rcvToken.html:</a></p>
-	<pre class="prettyprint">
-function doOAuth() {
-  var receiverPage = 'https://myfavouritesandwich.org/rcvToken.html';
-  var oauthPage = remoteStorage.createOAuthAddress(localStorage.getItem('currUserStorageInfo'), ['public', 'documents'], receiverPage);
-  var popup = window.open(oauthPage);
-}</pre>
-
-	<p>With the bearerToken, you can create clients with credentials, and use the get, put and delete methods on there, for instance:</p>
-	<pre class="prettyprint">
-function publishFoo() {
-  var token = localStorage.getItem('bearerToken');
-  var publicClient = remoteStorage.createClient(storageInfo, 'public', token);
-  var documentsClient = remoteStorage.createClient(storageInfo, 'documents', token);
-  documentsClient.get('foo', function(err, data) {
-    publicClient.put('foo', data, function(err) {
-      alert('copied //user@host/documents#foo to //user@host/public#foo');
-    });
-  });
-}</pre>
-
-	<p>And then on /rcvToken.html we would need the following:</p>
-	<pre class="prettyprint">
-localStorage.setItem('bearerToken', remoteStorage.receiveToken());
-window.close();</pre>
-
-	<p>Putting this all together, the resulting <a href="https://github.com/unhosted/MyFavouriteSandwich.org/blob/master/tutorial.html">code</a> is on <a href="https://myfavouritesandwich.org/tutorial.html">https://myfavouritesandwich.org/tutorial.html</a> 
-	and the <a href="https://github.com/unhosted/MyFavouriteSandwich.org/blob/master/rcvToken.html">helper page</a> on <a href="https://myfavouritesandwich.org/rcvToken.html">https://myfavouritesandwich.org/rcvToken.html</a>.</p>
-	
-
-	<h2>API 0.4 reference</h2>
-
-	<p><strong>remoteStorage.getStorageInfo(userAddress, callback) {}</strong></p>
-	<pre class="prettyprint">
-remoteStorage.getStorageInfo(userAddress, function(err, storageInfo) {
-  localStorage.setItem('storageInfo', JSON.stringify(storageInfo));
-});</pre>
-
-	<p><strong>remoteStorage.createClient(storageInfo, category, bearerToken) {}</strong></p>
-	<pre class="prettyprint">
-var publicClient = remoteStorage.createClient(storageInfo, 'public');
-var client = remoteStorage.createClient(storageInfo, category, bearerToken);
-</pre>
-
-	<p><strong>remoteStorage.createOAuthAddress(storageInfo, categories, redirectUri) {}</strong></p>
-	<p>Example usage:</p>
-	<pre class="prettyprint">
-window.open(remoteStorage.createOAuthAddress(storageInfo, categories, redirectUri));
-</pre>
-
-	<p><strong>remoteStorage.receiveToken() {}</strong></p>
-	<p>Example usage on redirectUri page:</p>
-	<pre class="prettyprint">
-localStorage.setItem('bearerToken', remoteStorage.receiveToken());
-window.close();
-</pre>
-
-	<p><strong>client.get(key, callback) {}</strong></p>
-	<pre class="prettyprint">
-client.get(key, function(err, data){ });</pre>
-
-	<p><strong>client.put(key, value, callback) {}</strong></p>
-	<pre class="prettyprint">
-client.put(key, value, function(err){ });</pre>
-
-	<p><strong>client.delete(key, callback) {}</strong></p>
-	<pre class="prettyprint">
-client.delete(key, function(err){ });</pre>
-
-	<p>See also our <a href="https://github.com/unhosted/MyFavouriteSandwich.org/blob/master/tutorial.html">code example</a>.
-</article><!-- /developer -->
+  <h1>Accepting remoteStorage accounts in your web app</h1>
+  <p>We provide a javascript library for this. It's on <a href="http://remotestoragejs.com">remoteStoragejs.com</a>. To see how to use it, you can try out the <a href="http://tutorial.unhosted.5apps.com">tutorial</a> that 5apps made for it.</p>
+  <h1>Running your own server</h1>
+  <p>Of course, if you have your server or VPS, then you may also want to run your own remoteStorage instance on there. The easiest way to do this is running ownCloud. For that, you need just Apache installed with PHP5, and then follow the <a href="http://owncloud.org/support/setup-and-installation/linux-server/">ownCloud Server Guide</a>. Note that you'll need to run your ownCloud installation in the root of your domain (not a subdirectory), the www-data user should have write access on /var/www when you activate both the 'Webfinger' and the 'remoteStorage' apps, you need to enable mod_rewrite in Apache, and you need to set 'AllowOverride All' for /var/www in the Apache config.</p>
+  <p>Another option is to run <a href="https://github.com/unhosted/express-storage">express-storage</a>, a remoteStorage server based on nodejs and redis. It's still under development, and mainly meant for testing purposes.</p>
+  <p>If you run a Ruby-on-Rails site, you should consider integrating <a href="https://github.com/5apps/liquor-cabinet">liquor-cabinet</a>. It's based on ruby and riak, and it's what 5apps use themselves to implement remoteStorage for their users.</p>
+</article><!-- /remotestorage -->
 
 
 
