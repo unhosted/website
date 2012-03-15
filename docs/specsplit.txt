@@ -24,48 +24,88 @@ core "unhosted apps + user-hosted service" spec
       -> something that can go on http+cors, or WebSocket, or JSONP, or outgoing GET, or some other cross-domain way for the app to communicate with something dynamically linked.
 - since most current user agents don't implement any of this, usually the 'user-agent' role is folded into the 'unhosted app' role, using an "unhosted app player" js library
 
-generic part:
+service record in lrdd has:
+  - id (so that the user may recognise which one it is)
+  - type (functionality)
+  - caps (parameterizes type)
+  - details (how to contact it)
+  - params (parameterizes session)
+
+generic part version 1: lib-with-app:
 -start with user[user identifier, server identifier, credentials, app identifier], and agent
 user->agent: app identifier
--add appserver[app code, lib code]
+-add appserver[app code, lib code[controller code, discoverer code, auther code, client code]
 appserver->agent: app code, lib code
--add app[app code], lib[lib code]
+-add app[app code], controller[controller code], discoverer[discoverer code], auther[auther code], client[client code]
 app->user: start screen
-lib->user: login box
-user->lib: user identifier, server identifier
+controller->user: login box
+
+generic disco-then-auth flow:
+user->controller: user identifier, server identifier
+-foreach discovery mechanism:
+  controller->discoverer: discovery mechanism, user identifier, server identifier
+  ...
+  -if successful:
+    discoverer->controller:services(list(service id, type, caps & details, list(auth mechanism id, type, caps & details)))
+  -if not:
+    discoverer->controller:NACK
+controller->app:grand total of (service id, type, caps) combinations discovered.
+app->controller:requested[list(service id, service params)]
+-foreach different auth option occuring in at least one service in requested
+  controller->user:auth mechanism id (don't know if this makes sense, let's say this is optional info to display to the user)
+  controller->auther:auth mechanism type, caps, details, list(service type, caps, params)
+  ...
+  -if successful:
+    auther->controller:list of service type, caps, params, credentials, status ('should work' or 'might work')
+  -if not:
+    auther->controller:NACK
+controller->app:grand total list of service id, type, caps, params, status ('should work' or 'might work')
+-foreach action:
+  app->controller: service id, action, action params
+  controller->client: service id, type, caps, details, params, status, action, action params, credentials
+  ..
+  client->controller:result
+  controller->app:result
 
 discovery mechanism 'webfinger-based':
+controller->discoverer: user identifier, server identifier
 -add server[host-meta, map(user identifier->lrdd)]
-server->lib: host-meta
-lib->server: user identifier
-server->lib: user's lrdd
--if successful, lib now has extracted from the user's lrdd a list of services, and for each one the following data:
-  -service type
-  -service params
-  -foreach supported auth mechanism:
-    -auth mechanism type
-    -auth mechanism params
-lib->app: service types
+server->discoverer: host-meta
+discoverer->server: user identifier
+server->discoverer: user's lrdd
+-if successful:
+  discoverer->controller:services(list(service type, service caps, service details, list(auth mechanism type, auth mechanism details)))
+-if not:
+  discoverer->controller:NACK
 
 auth mechanism OAuth-based:
--start with user[user identifier, server identifier, credentials, app identifier], agent, app[app code[scopes], service types], lib[lib code, user identifier, server identifier, auth mechanism params:[popupPath]]
-app->lib: service type, scopes
-lib->agent: popupUrl[server identifier, popupPath, scopes]
+-start with user[user identifier, server identifier, credentials, app identifier], agent, app[app code[scopes], service types], auther[auther code, user identifier, server identifier, auth mechanism params:[popupPath]]
+controller->auther:auth mechanism type, caps, details, list(service type, caps, params)
+auther->agent: popupUrl[server identifier, popupPath, scopes]
 agent->server: popupUrl[server identifier, popupPath, scopes]
 server->agent: dialog code
 -add dialog[dialog code]
 dialog->user: start screen
 user->dialog: decision
 dialog->server:decision
-server->agent:token
-agent->lib:token
-lib->app:ACK
-
+-if successful:
+  server->agent:token
+  agent->auther:token
+  auther->controller:list of service type, caps, params, credentials, status ('should work' or 'might work')
+-if not:
+  server->agent:NACK
+  agent->auther:NACK
+  auther->controller:NACK
+  controller->app:NACK
 app-initiated service access:
 app[app code[scopes], service types], lib[libcode[map(service type, action, actionParams->requestType, requestParams, map(responseParams->result))],lrdd,token]
+app->controller: service id, action, action params
+controller->client: service id, type, caps, details, params, status, action, action params, credentials
+client->server:requestType,requestParams, credentials
+server->client:responseParams
+client->controller:result
+controller->app:result
 app->lib:service type, action, actionParams
-lib->server:requestType,requestParams, token
-server->lib:responseParams
 lib->app:result
 
 for now, we're modelling server-initiated and bidirectional services and app-to-app services all as if they were app-initiated services, using for instance the 'callback' pattern like the one often used in javascript.
