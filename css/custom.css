@@ -47,6 +47,8 @@ article.container { width:60em; margin-left:25em; }
 .introduction #infographic #arrow { position:absolute; left:4em; top:22em; }
 .introduction #infographic .column h3 { font-size:16px; font-weight:bold; line-height:22px; margin-bottom:22px; margin-top:2em; }
 
-.remotestorage h2 { margin-top:2em; }
+.remotestorage ul { list-style:none; margin-left:0; padding-left:0; }
+.remotestorage img { float:left; clear:both; width:10em; margin:1em 1em 1em 0; }
+.remotestorage li { margin:1em 0; }
 
 .thanks .donation { display:inline; margin-right:2em; }
