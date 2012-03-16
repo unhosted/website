@@ -107,19 +107,20 @@
 
 <article class="container remotestorage" style="display:none;">
 	<h1>Getting started</h1>
-  <p>To quickly try out how remoteStorage works, get a remoteStorage account at one of these fine purveyors:</p>
-  <ul>
-  <li> <a href="http://5apps.com">5apps</a> are a start-up who are developing an easy way to deploy html5 web apps. They are buddies of ours from the Berlin JS scene. If you get an account with them, they also offer some remoteStorage, so you can test your own apps with your own account.</li>
-  <li><a href="http://owncube.com">OwnCube</a> are a start-up who offer ownCube hosting. In their ownCube install they have activated the remoteStorage app, so if you get an account with them (their smallest plan is free), you will also be able to use it as remoteStorage. At the same time, you'll get all the other functionality that is baked into ownCloud.</li>
-  </ul>
-  <p>If you can't work out how to get a remoteStorage account, or something is not clear, then come to our <a href="http://webchat.freenode.net/?channels=unhosted">chat room</a> and ask around for help setting one up. Once you have your remoteStorage account, you'll probably be eager to use it. To do this, go to the first application in the world to accept remoteStorage accounts, which is <a href="http://libredocs.org">Libre Docs</a>. When you use it, you'll notice it's just like using a normal website. But Libre Docs does not host your documents. Your documents, and your list of documents, will be on your remoteStorage account, under your control.</p>
+		<p>To quickly try out how remoteStorage works, get a remoteStorage account at one of these fine purveyors:</p>
+		<ul>
+			<li><a href="http://5apps.com">5apps</a> are a start-up who are developing an easy way to deploy html5 web apps. They are buddies of ours from the Berlin JS scene. If you get an account with them, they also offer some remoteStorage, so you can test your own apps with your own account.</li>
+			<li><a href="http://owncube.com">OwnCube</a> are a start-up who offer ownCube hosting. In their ownCube install they have activated the remoteStorage app, so if you get an account with them (their smallest plan is free), you will also be able to use it as remoteStorage. At the same time, you'll get all the other functionality that is baked into ownCloud.</li>
+		</ul>
+		<p>If you can't work out how to get a remoteStorage account, or something is not clear, then come to our <a href="http://webchat.freenode.net/?channels=unhosted">chat room</a> and ask around for help setting one up. Once you have your remoteStorage account, you'll probably be eager to use it. To do this, go to the first application in the world to accept remoteStorage accounts, which is <a href="http://libredocs.org">Libre Docs</a>. When you use it, you'll notice it's just like using a normal website. But Libre Docs does not host your documents. Your documents, and your list of documents, will be on your remoteStorage account, under your control.</p>
 
-  <h1>Accepting remoteStorage accounts in your web app</h1>
-  <p>We provide a javascript library for this. It's on <a href="http://remotestoragejs.com">remoteStoragejs.com</a>. To see how to use it, you can try out the <a href="http://tutorial.unhosted.5apps.com">tutorial</a> that 5apps made for it.</p>
-  <h1>Running your own server</h1>
-  <p>Of course, if you have your server or VPS, then you may also want to run your own remoteStorage instance on there. The easiest way to do this is running ownCloud. For that, you need just Apache installed with PHP5, and then follow the <a href="http://owncloud.org/support/setup-and-installation/linux-server/">ownCloud Server Guide</a>. Note that you'll need to run your ownCloud installation in the root of your domain (not a subdirectory), the www-data user should have write access on /var/www when you activate both the 'Webfinger' and the 'remoteStorage' apps, you need to enable mod_rewrite in Apache, and you need to set 'AllowOverride All' for /var/www in the Apache config.</p>
-  <p>Another option is to run <a href="https://github.com/unhosted/express-storage">express-storage</a>, a remoteStorage server based on nodejs and redis. It's still under development, and mainly meant for testing purposes.</p>
-  <p>If you run a Ruby-on-Rails site, you should consider integrating <a href="https://github.com/5apps/liquor-cabinet">liquor-cabinet</a>. It's based on ruby and riak, and it's what 5apps use themselves to implement remoteStorage for their users.</p>
+	<h1>Accepting remoteStorage accounts in your web app</h1>
+	<p>We provide a javascript library for this. It's on <a href="http://remotestoragejs.com">remoteStoragejs.com</a>. To see how to use it, you can try out the <a href="http://tutorial.unhosted.5apps.com">tutorial</a> that 5apps made for it.</p>
+
+	<h1>Running your own server</h1>
+	<p>Of course, if you have your server or VPS, then you may also want to run your own remoteStorage instance on there. The easiest way to do this is running ownCloud. For that, you need just Apache installed with PHP5, and then follow the <a href="http://owncloud.org/support/setup-and-installation/linux-server/">ownCloud Server Guide</a>. Note that you'll need to run your ownCloud installation in the root of your domain (not a subdirectory), the www-data user should have write access on /var/www when you activate both the 'Webfinger' and the 'remoteStorage' apps, you need to enable mod_rewrite in Apache, and you need to set 'AllowOverride All' for /var/www in the Apache config.</p>
+	<p>Another option is to run <a href="https://github.com/unhosted/express-storage">express-storage</a>, a remoteStorage server based on nodejs and redis. It's still under development, and mainly meant for testing purposes.</p>
+	<p>If you run a Ruby-on-Rails site, you should consider integrating <a href="https://github.com/5apps/liquor-cabinet">liquor-cabinet</a>. It's based on ruby and riak, and it's what 5apps use themselves to implement remoteStorage for their users.</p>
 </article><!-- /remotestorage -->
 
 
