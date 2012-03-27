@@ -12,6 +12,7 @@ q { display:inline-block; width:700px; height:600px; color:white; font-size:60px
 img, video { width:800px; height:600px; position:absolute; top:0; z-index:-1; }
 footer { position:absolute; bottom:10px; right:20px; font-size:16px; }
 a { color:#a1aab0; text-decoration:none; }
+h2 a { color:#B9E768; }
 .orange { background:#e80; color:#222; text-shadow:0 1px 0 #8182a0; }
 .orange h2 { color:#222; text-shadow:0 1px 0 #8182a0; background:none; }
 .red { background:#e20; color:#fff; }
