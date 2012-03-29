@@ -30,7 +30,7 @@
 					<ul class="nav">
 						<li class="active"><a id="nav-introduction" href="#"><i class="icon-home icon-white"></i> Introduction</a></li>
 						<li><a id="nav-manifesto" href="#"><i class="icon-bookmark icon-white"></i> Manifesto</a></li>
-						<li><a id="nav-remotestorage" href="#"><i class="icon-cog icon-white"></i> remoteStorage</a></li>
+						<li><a id="nav-remotestorage" href="#"><img src="img/remoteStorage-icon.png" alt="" /> remoteStorage</a></li>
 						<!--<li><a id="nav-community" href="#"><i class="icon-flag icon-white"></i> Community</a></li>-->
 						<li><a id="nav-thanks" href="#"><i class="icon-heart icon-white"></i> Thanks</a></li>
 						<li class="dropdown follow">
@@ -106,23 +106,23 @@
 
 
 <article class="container remotestorage" style="display:none;">
-	<h2>Getting started</h2>
-		<p>To quickly try out how remoteStorage works, get a remoteStorage account at one of these fine purveyors:</p>
+	<h2>Get your own remoteStorage</h2>
+		<p>Choose one of the existing remoteStorage providers:</p>
 		<ul>
 			<li><a href="http://5apps.com" target="_blank"><img src="img/provider-5apps.png" alt="" />
 			5apps</a> are a startup who are developing an easy way to deploy HTML5 web apps. They are buddies of ours from the Berlin Javascript scene. If you get an account with them, they also offer some remoteStorage, so you can test your own apps with your own account.</li>
 			<li><a href="http://owncube.com" target="_blank"><img src="img/provider-owncube.png" alt="" />
 			OwnCube</a> are a startup who offer <a href="http://owncloud.org" target="_blank">ownCloud</a> hosting. In their ownCloud install they have activated the remoteStorage app, so if you get an account with them (their smallest plan is free), you will also be able to use it as remoteStorage. At the same time, you&apos;ll get all the other functionality that is baked into ownCloud.</li>
 		</ul>
-		<p>If you can&apos;t work out how to get a remoteStorage account, or something is not clear, then come to our <a href="http://webchat.freenode.net/?channels=unhosted" target="_blank">chat room</a> and ask around for help setting one up. Once you have your remoteStorage account, you&apos;ll probably be eager to use it. To do this, go to the first application in the world to accept remoteStorage accounts, which is <a href="http://libredocs.org" target="_blank">Libre Docs</a>. It&apos;s just like a normal web application &ndash; but Libre Docs does not host your data. Your documents, and your list of documents, will be on your remoteStorage account, under your control.</p>
+		<p>If you need help, come to our <a href="http://webchat.freenode.net/?channels=unhosted" target="_blank">chat room</a> and let us know. Once you have your remoteStorage account, you can try <a href="http://libredocs.org" target="_blank">Libre Docs</a>, the world’s first application to accept remoteStorage accounts. It&apos;s just like a normal web application, but does not host your data &ndash; Your documents are stored on your remoteStorage account, under your control.</p>
 
-	<h2>Accepting remoteStorage accounts in your web app</h2>
+	<h2>Accept remoteStorage accounts in your web app</h2>
 	<p>We provide a Javascript library for this, called <a href="http://remotestoragejs.com" target="_blank">remoteStorage.js</a>. See how to use it with the <a href="http://tutorial.unhosted.5apps.com" target="_blank">tutorial</a> that 5apps made for it.</p>
 
-	<h2>Running your own server</h2>
-	<p>Of course, if you have your server or VPS, then you may also want to run your own remoteStorage instance on there. The easiest way to do this is running ownCloud. For that, you need just Apache installed with PHP5, and then follow the <a href="http://owncloud.org/support/setup-and-installation/linux-server/" target="_blank">ownCloud Server Guide</a>. Note that you&apos;ll need to run your ownCloud installation in the root of your domain (not a subdirectory), the www-data user should have write access on /var/www when you activate both the <em>Webfinger</em> and the <em>remoteStorage</em> apps, you need to enable mod_rewrite in Apache, and you need to set <em>AllowOverride All</em> for /var/www in the Apache config.</p>
-	<p>Another option is to run <a href="https://github.com/unhosted/express-storage" target="_blank">express-storage</a>, a remoteStorage server based on nodejs and redis. It&apos;s still under development, and mainly meant for testing purposes.</p>
-	<p>If you have a Ruby-on-Rails site, you should consider integrating <a href="https://github.com/5apps/liquor-cabinet" target="_blank">liquor-cabinet</a>. It&apos;s based on Ruby and Riak, and it&apos;s what 5apps use themselves to implement remoteStorage for their users.</p>
+	<h2>Run your own remoteStorage</h2>
+	<p>Of course, if you have your server or VPS, then you may also want to run your own remoteStorage instance on there. The easiest way to do this is running <a href="http://owncloud.org" target="_blank">ownCloud</a>. For that, you need just Apache installed with PHP5, and then follow the <a href="http://owncloud.org/support/setup-and-installation/webspace/" target="_blank">ownCloud installation instructions</a>. Note that you&apos;ll need to run your ownCloud installation in the root of your domain (not a subdirectory), the www-data user should have write access on /var/www when you activate both the <em>Webfinger</em> and the <em>remoteStorage</em> apps, you need to enable mod_rewrite in Apache, and you need to set <em>AllowOverride All</em> for /var/www in the Apache config.</p>
+	<p>Another option is to run <a href="http://github.com/5apps/express-storage" target="_blank">express-storage</a>, a remoteStorage server based on nodejs and redis. It&apos;s still under development, and mainly meant for testing purposes.</p>
+	<p>If you have a Ruby-on-Rails site, you should consider integrating <a href="http://github.com/5apps/liquor-cabinet" target="_blank">liquor-cabinet</a>. It&apos;s based on Ruby and Riak, and it&apos;s what 5apps use themselves to implement remoteStorage for their users.</p>
 </article><!-- /remotestorage -->
 
 
