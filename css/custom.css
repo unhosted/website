@@ -53,3 +53,4 @@ article.container { width:60em; margin-left:25em; }
 .remotestorage li { margin:1em 0; }
 
 .thanks .donation { display:inline; margin-right:2em; }
+abbr { text-transform:none; }
