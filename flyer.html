@@ -1,0 +1,97 @@
+<!DOCTYPE HTML>
+
+<html>
+<head>
+  <meta name="generator" content="HTML Tidy for Linux (vers 25 March 2009), see www.w3.org">
+  <meta charset="UTF-8">
+
+  <title>Unhosted</title>
+  <style type="text/css">
+  body { font-size: 85%; font-family: "Helvetica Neue",Helvetica,Arial,sans-serif; background-color: #1b3544; color: #1b3544; } 
+  div#page { width: 700px; border: 1px solid #000; margin: 20px auto; border-radius: 10px; padding: 20px; background-color: #fff; }
+  img.arch { border: 1px solid #000; margin: 0 auto 5px auto; display: block; border-radius: 10px; } 
+  div.picture { margin: 15px 0; }
+  span.red,span.green, span.blue { padding: 1px 5px; border: 1px solid #000; }
+  span.red { background-color: #e32; }
+  span.green { background-color: #9d9; }
+  span.blue { background-color: #55b; color: #fff; }
+  span.name { font-variant: small-caps; }
+  a { text-decoration: none; color: #1b3544; font-variant: small-caps; }
+  a:hover { text-decoration: underline; }
+  .right { float: right; margin-left: 10px; }
+  .left { float: left; margin-right: 10px; }
+  .fiveapps { background-color: #2a2a2a; padding: 5px; }
+  ul { padding-left: 25px; }
+  li { margin: 0.6em 0; list-style: circle; }
+  h1,h2,h3 { color: #1b3544; font-variant: small-caps; }
+  h1 { text-align: center; }
+  div.license { text-align: center; border: 1px solid; padding: 10px; border-radius: 10px; background-color: #eee; }
+  span.caption { display: block; text-align: center; font-size: small; }
+  span.url { font-family: monospace; }
+  /* a:link:after, a:visited:after { content:" [" attr(href) "] "; } */
+  </style>
+</head>
+
+<body>
+  <div id="page">
+    <a class="right" href="http://www.unhosted.org"><img src="img/flyer/island-website.png" alt="Unhosted Logo" title="Unhosted Logo"></a>
+
+    <h1>The Unhosted Project</h1>
+
+    <h2>Introduction</h2>
+
+    <p>A little over a year ago the <a href="http://www.unhosted.org">Unhosted</a> project was started. The goal of the <a href="http://www.unhosted.org">Unhosted</a> project is to give users back the control over the data that is stored in their favorite web applications. In popular web applications like <span class="name">Google Docs</span>, <span class="name">Facebook</span> and <span class="name">Flickr</span> the data is stored on the server together with the application. Web applications have a number of benefits compared to applications running on the desktop like for instance <span class="name">Microsoft Office</span>:</p>
+
+    <ul>
+      <li>You can access the application everywhere around the world, e.g. on holidays while using your smart phone;</li>
+
+      <li>The application provider may take care of creating backups of your data;</li>
+	
+	<li>No maintenance of the application on the client required, always the latest version through the web.</li>
+    </ul>Unfortunately it also has a number of drawbacks for both the users and application developers:
+
+    <ul>
+      <li>The application provider has unlimited access to your, possibly corporate or research, data;</li>
+
+      <li>The user is locked into the application, i.e.: there usually is not a way to extract all your data from the application and use it with a different application;</li>
+
+      <li>The application provider may revoke access to your account depending on their Terms of Service without giving you back your data</li>
+
+      <li>It can be very expensive to operate a popular application on the web, i.e: lots of servers, bandwidth and maintenance of infrastructure may be required;</li>
+
+      <li>There is no way for anyone to make sure the program does (only) what is advertized.</li>
+    </ul>The <a href="http://www.unhosted.org">Unhosted</a> project aims at resolving these drawbacks using open web standards while maintaining the benefits of web applications.
+
+    <h2>How does it work?</h2
+<p>In <span class="name">Web 2.0</span>, and also <span class="name">Web 1.0</span> applications, the user controls just the browser. The web application and the data are under the control of the application provider as shown in <span class="name">Figure 1</span>.</p>
+
+    <div class="picture">
+      <a href="img/flyer/unhosted_web20.txt"><img class="arch" width="504" height="108" src="img/flyer/unhosted_web20.png" alt="Web 2.0" title="Web 2.0"></a> <span class="caption"><span class="name">Figure 1</span>: Web applications, <span class="name">Web 2.0</span>.</span>
+    </div> <!-- picture -->
+
+    <p>In order to improve this, it seems obvious to externalize the data from the application as shown in <span class="name">Figure 2</span>.</p>
+
+    <div class="picture">
+      <a href="img/flyer/unhosted_arch.txt"><img class="arch" width="396" height="180" src="img/flyer/unhosted_arch.png" alt="Unhosted Architecture" title="Unhosted Architecture"></a> <span class="caption"><span class="name">Figure 2</span>: Web applications, <span class="name">Unhosted</span>.</span>
+    </div> <!-- picture -->
+
+    <p>Now the browser is put in charge of managing the communication between the application and the data and giving the user the ability to select a data storage provider they trust, or operate themselves.</p>
+
+    <h2>Available Applications</h2><a href="http://libredocs.org"><img class="left" src="img/flyer/libredocs.png" alt="Libre Docs" title="Libre Docs"></a> <a href="http://5apps.com"><img class="right fiveapps" src="img/flyer/5apps.png" alt="5apps" title="5apps"></a>
+
+    <p>Currently one application, <a href="http://libredocs.org">Libre Docs</a> is available that is suited for demonstration purposes. It is based on <a href="https://github.com/Pita/etherpad-lite">EtherPad Lite</a> and can be used to collaborate on documents stored on the storage of one of the participants.</p>
+
+    <p>More applications are currently being developed for deployment through the <a href="http://5apps.com">5apps</a> project.</p>
+
+    <h2>Data Storage Providers</h2><a href="http://www.surfnet.nl"><img class="left" src="img/flyer/surfnet.gif" alt="SURFnet" title="SURFnet"></a> <a href="http://www.owncube.com"><img class="right" src="img/flyer/owncube.png" alt="OwnCube" title="OwnCube"></a>
+
+    <p>In the near future all students and researchers in The Netherlands will be able to use <a href="http://www.unhosted.org">Unhosted</a> applications with storage provided through <a href="http://www.surfnet.nl">SURFnet</a> and <a href="http://www.sara.nl">SARA</a>. The storage will be connected to <a href="http://www.surfconext.nl">SURFconext</a>. That way every student and researcher will be able to use her institute's account to login to the data storage. Also, a commercial storage provider supporting <a href="http://www.unhosted.org">Unhosted</a> applications, <a href="http://www.owncube.com">OwnCube</a> is available.</p>
+
+    <div class="license">
+      <a rel="license" href="http://creativecommons.org/licenses/by/3.0/nl/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by/3.0/nl/88x31.png"></a><br>
+      <br>
+      This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/nl/">Creative Commons Attribution 3.0 Netherlands License</a>.
+    </div> <!-- license -->
+  </div>
+</body>
+</html>
