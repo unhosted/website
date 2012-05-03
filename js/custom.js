@@ -15,7 +15,7 @@ $('#nav-remotestorage').click(function() { loadpage('remotestorage'); });
 $('#nav-community').click(function() { loadpage('community'); });
 $('#nav-thanks').click(function() { loadpage('thanks'); });
 
-$(document).ready(function() 
+$(document).ready(function() {
 	if(!$('.active').hasClass(window.location.hash.slice(1))) {
 		var page = window.location.hash.slice(1);
 		if(page=='introduction' || page=='manifesto' || page=='remotestorage' || page=='community' || page=='thanks') {
