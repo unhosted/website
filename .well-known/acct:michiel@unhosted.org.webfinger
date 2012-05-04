@@ -2,8 +2,7 @@
   "links": {
     "remotestorage": [
       {
-        "href": "http://lamp.unhosted.org/storage/michiel",
-        "type": "http://www.w3.org/community/unhosted/wiki/RemoteStorage-2012.04#simple",
+        "href": "http://lamp.unhosted.org/storage/unhosted.org/michiel",
         "links": {
           "auth": [
             {
