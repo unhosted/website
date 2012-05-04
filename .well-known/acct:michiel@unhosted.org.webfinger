@@ -8,7 +8,7 @@
           "auth": [
             {
               "type": "oauth2-ig",
-              "href": "http://lamp.unhosted.org/oauth/michiel"
+              "href": "http://lamp.unhosted.org/phpvoot/oauth/authorize?user_address=michiel@unhosted.org"
             }
           ]
         }
