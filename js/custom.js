@@ -20,10 +20,8 @@ $(document).ready(function() {
 		var page = window.location.hash.slice(1);
 		if(page=='introduction' || page=='manifesto' || page=='remotestorage' || page=='community' || page=='thanks') {
 			loadpage(page);
-		} else if(page=='developer') {
-      loadpage('remotestorage');
-    } else {
-			loadpage('introduction');
+		} else {
+			loadpage('remotestorage');
 		}
 	}
 	prettyPrint();
