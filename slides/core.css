@@ -8,3 +8,4 @@ body { display:none; }
 body.loaded { display:block; }
 .incremental {visibility:hidden; }
 .incremental[active] {visibility:visible; }
+.blurred { opacity:.2; }
