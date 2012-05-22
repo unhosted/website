@@ -21,7 +21,7 @@ $(document).ready(function() {
 		if(page=='introduction' || page=='manifesto' || page=='remotestorage' || page=='community' || page=='thanks') {
 			loadpage(page);
 		} else {
-			loadpage('remotestorage');
+			loadpage('introduction');
 		}
 	}
 	prettyPrint();
