@@ -4,6 +4,7 @@ body { background:#fafafa; margin-bottom:10em; min-width:1110px; }
 .firstapps { position:absolute; top:3em; left:3.4em; color:#000; font-weight:bold; font-size:1.5em; }
 .firstapps a { position:relative; float:left; font-size:1em; }
 .firstapps img { width:2em; position:relative; top:1.2em; left:0; }
+#ipv6 { position:absolute; bottom:1em; left:9em; font-size:1.3em; font-weight:bold; }
 
 .navbar.navbar-fixed-top { position:relative; }
 .navbar .navbar-inner { height:15em; background:url('../img/headerback.png') repeat-x top center; }
