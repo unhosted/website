@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+<script src="html5.js"></script><!-- this is the javascript allowing html5 to run in older browsers -->
+
+<title>UNHOSTED - Freedom from web 2.0's monopoly platforms</title>
+<link rel="stylesheet" href="css/uncompressed/reset.css" />
+<link rel="stylesheet" href="css/uncompressed/text.css" />
+<link rel="stylesheet" href="css/uncompressed/960.css" />
+<link rel="stylesheet" href="css/uncompressed/960.css" />
+<link rel="stylesheet" href="general.css" />
+<link rel="stylesheet" href="css/uncompressed/layout.css" />
+</head>
+	<body>
+		<div class="preload"></div>
+		<div class="preload2"></div>
+		<header>
+			<div class="container_12">
+				<div id="title" class="grid_6">
+					<h1>Unhosted</h1>
+					<h2>Freedom from web 2.0's monopoly platforms</h2>
+					<p id="intro">
+						<strong>Unhosted web apps are web apps without servers.</strong> This makes them safer to use than both server-side and ajax-based web apps. They're also easier to develop and more resilient.
+					</p>
+					<p>
+						Because unhosted web apps have no own server, they need to access the user's data using alternative technologies like <a href-"https://wiki.mozilla.org/WebAPI" target="_blank">WebAPI</a>, <a href="http://webintents.org/" target="_blank">WebIntents</a> or <a href="http://remotestoragejs.com" target="_blank">remoteStorageJs</a>. This last one is based on the <a href="http://www.w3.org/community/unhosted/wiki/RemoteStorage">remoteStorage</a> standard which was developed here on our own <a href="https://groups.google.com/forum/#!forum/unhosted" target="_blank">mailing list</a>.
+					</p>
+					<div id="buttons">
+						<a class="button download" href="http://remotestoragejs.com">Developers</a>
+						<a class="button manifesto" href="manifesto.html">Read the manifesto</a>
+					</div>
+				</div>
+				<div id="island" class="grid_6"><figure></figure></div>
+			</div>
+		</header>
+		<div class="clear"></div>
+		<section style="display:none" id="howitworks">
+			<div class="container_12">
+				<div id="explanation" class="grid_4">
+				<h3>How does it work?</h3>
+					<p>
+						In hosted web apps, your user data is stored in the same server as the application. 
+					</p>
+					<p>
+						In unhosted web apps, data is taken away from app servers and instead lives on the data node you connect with.
+					</p>
+					<p>
+						This is a simple change, but it has great implications.
+					</p>
+				</div>
+				<div class="hSeparator"></div>
+			</div>
+		</section>
+		
+		<section id="maincontent" class="container_12">
+			<div class="container_12">
+				<div class="fivereasons grid_7">
+					<div>
+						<h5>
+							Benefits of unhosted web apps
+							<span>
+								Five reasons to migrate now
+							</span>
+						</h5>
+						<p>
+							The unhosted web architecture moves user data away from app servers. This has many advantages over the web2.0 architecture, both for users and for developers.						</p>
+						<ul>
+							<li id="dataControl"><h6>More privacy</h6><p>Because unhosted web apps don't force the use of their servers on you, you can sync your data yourself, to a place that you trust. Dutch universities already run such a 'remote storage' service, specifically designed to be compatible with unhosted web apps.</p></li>
+							<li id="freeSoftware"><h6>Easier to publish</h6><p>The developer doesn't need to run any infrastructure.
+              This makes it feasible to publish unhosted web apps into the public domain. Once an unhosted web app is set free into the public domain, it will be available forever.
+							</p></li>
+							<li id="decentralization"><h6>Decentralization</h6><p>More robust/resilient architecture, with no Single Point of Failure - especially if combined with 
+						  peer-to-peer distribution.</p></li>
+							<li id="dataFreedom"><h6>Data freedom</h6><p>With your data living outside the app, you can switch back and forth between apps without even 
+							exporting and importing. Better than data liberation, this is personal data freedom brought to the web.</p></li>
+							<li id="scalability"><h6>Scalability</h6><p>Since apps are distributed through app stores, and each user runs their own copy of the app, while each syncing their data to their own remote storage, the scalability of your unhosted web app is basically unlimited.</p></li>
+						</ul>
+						
+						
+					</div>
+				</div>
+			</div> <!-- end fivereasons -->
+			<div class="sidebar grid_5">
+					<h4>Developer preview:</h4>
+				<div>
+          <h5>Remote storage for unhosted web apps</h5>
+					<a href="http://remotestoragejs.com/" target="_blank"><img src="./remotestorage.png" alt="remotestoragejs.com" width="340" height="256"/></a>
+				</div>
+			</div>
+			<div class="sidebar grid_5" style="display:none">
+				<div>
+					<h5>Check out the Unhosted talk at DynCon</h5>
+					<iframe src="http://player.vimeo.com/video/21109220?portrait=0" width="340" height="251" frameborder="0"></iframe>
+				</div>
+			</div>
+		</section><!-- end maincontent -->
+		<div class="clear"></div>
+		<footer>
+		 <div class="container_12">
+				<div id="twitter">
+					<a href="http://twitter.com/unhosted" target="_blank" id="icon">Follow us! @Unhosted on Twitter</a>
+					<h4>Follow us on <a href="http://identi.ca/unhosted" target="_blank">identi.ca</a> or 
+					<a href="http://twitter.com/unhosted" target="_blank" id="twittitle">twitter</a>
+						<span>@Unhosted</span>
+					</h4>
+					
+					<ul id="twitter_update_list"></ul>
+					      <script type="text/javascript" src="http://twitter.com/javascripts/blogger.js"></script>
+					      <script type="text/javascript" src="http://twitter.com/statuses/user_timeline/unhosted.json?callback=twitterCallback2&amp;count=1"></script>
+					
+				</div>
+				<div id="participate">
+					<div class="icon"></div>	
+					<h4>Participate</h4>
+					<p>The world of unhosted web apps has <strong>no leaders</strong>, and is an entirely altruistic movement. <strong>If you want to help, please join</strong> <a href="http://groups.google.com/forum/#!forum/unhosted" target="_blank">the mailing list</a>, and open a thread about what you think should happen next.</p>
+				</div>
+		</footer>
+		
+	</body>
+</html>
