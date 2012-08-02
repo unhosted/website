@@ -1,224 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<title>Unhosted: personal data freedom</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta name="title" content="Unhosted: personal data freedom">
-		<meta name="description" content="On the unhosted web, data is stored per-user, under the user's control on their remoteStorage. That's where it belongs.">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 
-		<!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+<script src="html5.js"></script><!-- this is the javascript allowing html5 to run in older browsers -->
 
-		<link href="css/bootstrap.min.css" rel="stylesheet">
-		<link href="css/custom.css" rel="stylesheet">
-		<link href="css/prettify.css" rel="stylesheet">
-
-		<link rel="shortcut icon" href="img/favicon.png">
-		<link rel="apple-touch-icon-precomposed" href="img/favicon-touch.png">
-	</head>
-
+<title>UNHOSTED - Freedom from web 2.0's monopoly platforms</title>
+<link rel="stylesheet" href="css/uncompressed/reset.css" />
+<link rel="stylesheet" href="css/uncompressed/text.css" />
+<link rel="stylesheet" href="css/uncompressed/960.css" />
+<link rel="stylesheet" href="css/uncompressed/960.css" />
+<link rel="stylesheet" href="general.css" />
+<link rel="stylesheet" href="css/uncompressed/layout.css" />
+</head>
 	<body>
-
-		<div class="navbar navbar-fixed-top">
-			<div class="navbar-inner">
-				<div class="container">
-					<a class="brand" href="#"><img src="img/island-website.png" alt="Unhosted" /></a>
-					<p class="firstapps">
-						try the first apps!<br />
-						<!--<a href="http://libredocs.org" class="btn btn-large" target="_blank"><img src="img/libredocs.svg" alt="" />Libre Docs</a>-->
-						<!--<a href="http://todomvc.unhosted.5apps.com" class="btn btn-large" target="_blank">Todos</a><br/>-->
-						<a href="http://shared-stuff.github.com" class="btn btn-large" target="_blank">Shared Stuff</a><br/>
-						<a href="http://jancborchardt.net/taskboard-lite" class="btn btn-large" target="_blank">Taskboard</a><br/>
-						<a href="http://docrastinate.com" class="btn btn-large" target="_blank">Docrastinate</a><br/>
+		<div class="preload"></div>
+		<div class="preload2"></div>
+		<header>
+			<div class="container_12">
+				<div id="title" class="grid_6">
+					<h1>Unhosted</h1>
+					<h2>Freedom from web 2.0's monopoly platforms</h2>
+					<p id="intro">
+						By &quot;unhosted web apps&quot; we mean
+              <strong>browser-based apps with no server-side backend</strong>.
+            Unlike server-side or client-server apps,
+            unhosted web apps leave users in control of their valuable user data and privacy, by default.
+          </p>
+					<p>
+            They are also more resilient and more scalable.
+            Most importantly, unlike Apple/iOS, Flash, and Facebook apps,
+            <strong>the web platform is open and free</strong>: controlled by you and not by stockholders.
 					</p>
-					
-					<ul class="nav">
-						<li class="active"><a id="nav-introduction" href="#"><i class="icon-home icon-white"></i> Introduction</a></li>
-						<li><a id="nav-manifesto" href="#"><i class="icon-bookmark icon-white"></i> Manifesto</a></li>
-						<li><a id="nav-remotestorage" href="#"><img src="img/remoteStorage-icon.png" alt="" /> remoteStorage</a></li>
-						<!--<li><a id="nav-community" href="#"><i class="icon-flag icon-white"></i> Community</a></li>-->
-						<li><a id="nav-thanks" href="#"><i class="icon-heart icon-white"></i> Thanks</a></li>
-
-						<li class="dropdown follow">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-eye-open icon-white"></i> Follow<b class="caret"></b></a>
-							<ul class="dropdown-menu">
-								<li><a target="_blank" href="http://twitter.com/unhosted"><img src="img/icon-twitter.png" alt="" /> Twitter</a></li>
-								<li><a target="_blank" href="http://identi.ca/unhosted"><img src="img/icon-identica.png" alt="" /> Identi.ca</a></li>
-								<li><a target="_blank" href="http://joindiaspora.com/u/unhosted"><img src="img/icon-diaspora.png" alt="" /> Diaspora</a></li>
-							</ul>
-						</li>
-						<li class="dropdown participate">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user icon-white"></i> Participate<b class="caret"></b></a>
-							<ul class="dropdown-menu">
-								<li><a target="_blank" href="https://github.com/unhosted"><img src="img/icon-github.png" alt="" /> Code</a></li>
-								<li><a target="_blank" href="https://github.com/unhosted/website/wiki/State-of-the-movement"><i class="icon-align-left"></i> Wiki</a></li>
-								<li><a target="_blank" href="https://groups.google.com/forum/#!forum/unhosted"><i class="icon-envelope"></i> Mailing list</a></li>
-								<li><a target="_blank" href="http://webchat.freenode.net/?channels=unhosted"><i class="icon-comment"></i> Chat room</a></li>
-							</ul>
-						</li>
-					</ul>
-					<div id="description">
-						<h2>Personal data freedom</h2>
-						<p>A movement to separate web apps from user data</p>
+					<div id="buttons">
+						<a class="button download" href="developer.html">Developers</a>
+						<a class="button manifesto" href="manifesto.html">Read the manifesto</a>
 					</div>
 				</div>
+				<div id="island" class="grid_6"><figure></figure></div>
 			</div>
-		</div>
-
-<p id="ipv6"><a href="http://worldipv6launch.org"><img src="img/ipv6.png" /><br />We use IPv6!</a></p>
-
-
-
-
-<article class="container introduction active">
-	<iframe width="760" height="416" src="https://www.youtube-nocookie.com/embed/dIFtFJgIQuk?rel=0&wmode=opaque"></iframe>
-
-	<h1>Freedom from the web&apos;s monopolies</h1>
-
-	<p><strong>The web is not as open as it used to be: monopoly platforms formed new proprietary layers on top of it. But we create a better architecture for the web. We break the package deal &raquo;you get our app, we get your data&laquo; with <a href="http://www.w3.org/community/unhosted/wiki/RemoteStorage" target="_blank">remoteStorage</a>, a cross-origin storage protocol separating application servers from people&apos;s documents.</strong></p>
-
-	<p>This enables everyone to use various web services but keep their data in one place they choose and trust &ndash; their remote storage, their &raquo;home folder&laquo; for the web. The applications will <em>not</em> run on servers you can&apos;t control, but be pure Javascript which runs client-side, in your browser. And app developers don&apos;t need to bother about providing storage or managing user accounts.</p>
-
-	<p>Technically speaking, we define a protocol stack called <a href="http://www.w3.org/community/unhosted/wiki/RemoteStorage" target="_blank">remoteStorage</a>. A combination of WebFinger for discovery, OAuth for authorization, CORS (Cross-Origin Resource Sharing) for cross-domain AJAX calls and GET, PUT, DELETE for synchronization. We also work on its adoption through developing apps like <a href="http://libredocs.org" target="_blank">Libre Docs</a> and <a href="http://opentabs.net" target="_blank">Opentabs</a> as well as making existing apps and <a href="https://github.com/unhosted/website/wiki/remoteStorage-providers" target="_blank">storage providers</a> compatible. If you speak French, there is also some info on <a href="http://www.framablog.org/index.php/post/2011/08/06/unhosted">Framablog en Fran&ccedil;ais</a>.
-
-	<p><strong>Unhosted is a movement by the people, for the people. Everyone can participate, including you!</strong></p>
-</article><!-- /introduction -->
-
-
-
-
-
-<article class="container manifesto" style="display:none;">
-	
-	<h1>Unhosted: freedom from the web&apos;s monopolies</h1>
-	<p><strong>Unhosted is a movement for strengthening free software against hosted software</strong>. With our protocol, a website is only source code. Dynamic data is decentralised to per-user storage nodes and once user data is unhosted, it can be encrypted to prevent Spying-for-free. This lowers hosting costs, and benefits <strong>scalability</strong>, <strong>robustness</strong>, and <strong>online privacy</strong>.</p>
-
-	<h2>Freedom on the web</h2>
-	<p>Free/libre and Open Source Software (FLOSS) frees us from having to install proprietary software on our terminals. But installable software is losing ground to hosted software (websites). The server software is often open source (e.g. LAMP), but the website itself as a software product is almost always proprietary. There is an obvious reason for this: Even if an Affero license allows us to download the website&apos;s source code, only a commercial company can finance the thousands of servers needed to host a successful website. To make things worse, hosted software has more power over its users than installable software, because it forces you to put your user data on servers owned by the same company that publishes the software. If you want to use Google Docs, you have to reveal your work to a Google-owned server (what Richard Stallman calls &raquo;careless computing&laquo;).</p>
-
-	<h2>FLOSS-as-a-Service on top of a commodity infrastructure</h2>
-	<p>A hosted website provides two things: processing and storage. An unhosted website only hosts its source code (or even just a bootloader for it). Processing is done in the browser, with ajax against cross-origin cloud storage. These unhosted storage nodes can be provided by whoever provides your email hosting: your employer, ISP, university, mobile operator, public library, a hobbyist friend who runs a server at home, a hosting company, etc. They become just like mailservers, BGP switches, fibre links and other commodity infrastructure: independent of which application you run on top of them. To maximize the control of the user over their data, migration from one storage node to another is an integral part of the protocol stack design. Our remoteStorage protocol can be seen as a cross-platform cloud-sync solution; comparable to iCloud on Apple&apos;s platform, but for the web.</p>
-
-	<h2>Apps & data shouldn&apos;t be a package deal</h2>
-	<p>Most web applications today require users to sign up for an account which also stores their files. Data is held hostage on the application servers and can not be used by other similar applications which might offer other features. Even independent app developers often reluctantly build apps that host user data inside the application. Users might be able to sign in with their Twitter or Facebook account but the data will still be stored on the application server. But applications become more and more client-side through using mostly Javascript, HTML and CSS. To make an app more scalable and able to handle more users, using the power of every browser that connects to it rather than central servers is more scalable. Data storage should then be independent from application development.</p>
-
-	<h2>How it works</h2>
-	<p>We have been working on this for about a year now, and have defined the <a href="http://www.w3.org/community/unhosted/wiki/RemoteStorage" target="_blank">remoteStorage</a> protocol stack as our central value proposition. It works quite simply by combining HTTP, CORS, OAuth2 and Webfinger. On top of this, we have started building <a href="http://libredocs.org" target="_blank">Libre Docs</a> (an office suite) and <a href="http://opentabs.net" target="_blank">Opentabs.net</a> (an online anti-banking tool). The Netherlands are the first country to provide remoteStorage accounts to all their students and academic staff. You can also sign up for a free remoteStorage account at <a href="http://5apps.com" target="_blank">5apps</a> (aimed at developers) or <a href="http://owncube.com" target="_blank">OwnCube</a> (aimed at end-users). We need more developers to start accepting remoteStorage account on their websites. That way, users will be able to use these websites for their software needs, yet still own their own data just like they do with desktop software: the best of both worlds.</p>
-</article><!-- /manifesto -->
-
-
-
-
-
-<article class="container remotestorage" style="display:none;">
-	<h2>Get your own remoteStorage</h2>
-		<p>Choose one of the existing remoteStorage providers:</p>
-		<ul>
-			<li><a href="https://pagekite.net" target="_blank"><img src="img/provider-pagekite.png" alt="" />
-      Pagekite</a> offer a fast, reliable way to make localhost part of the Web. They offer a <a href="https://github.com/pagekite/plugins-pyUnhosted" target="__blank">remoteStorage server</a> that you can run on your own computer. This solution is not hard to use, and provides by far the easiest way to 'own' your data, and see what is happening to it, but it does require use of the command line (terminal).</li>
-			<li><a href="https://owncube.com" target="_blank"><img src="img/provider-owncube.png" alt="" />
-			OwnCube</a> are a startup who offer <a href="http://owncloud.org" target="_blank">ownCloud</a> hosting. In their ownCloud install they have activated the remoteStorage app, so if you get an account with them (their smallest plan is free), you will also be able to use it as remoteStorage. At the same time, you&apos;ll get all the other functionality that is baked into ownCloud.</li>
-			<li><a href="http://5apps.com" target="_blank"><img src="img/provider-5apps.png" alt="" />
-			5apps</a> are a startup who are developing an easy way to deploy HTML5 web apps. They are buddies of ours from the Berlin Javascript scene. If you get an account with them, they also offer some remoteStorage, so you can test your own apps with your own account.</li>
-		</ul>
-		<p style="clear:left">If you need help, come to our <a href="http://webchat.freenode.net/?channels=unhosted" target="_blank">chat room</a> and let us know. Once you have your remoteStorage account, you can try <a href="http://libredocs.org" target="_blank">Libre Docs</a>, the world’s first application to accept remoteStorage accounts. It&apos;s just like a normal web application, but does not host your data &ndash; Your documents are stored on your remoteStorage account, under your control.</p>
-
-	<h2>Accept remoteStorage accounts in your web app</h2>
-	<p>We provide a Javascript library for this, called <a href="http://remotestoragejs.com" target="_blank">remoteStorage.js</a>. See how to use it with the <a href="http://tutorial.unhosted.5apps.com" target="_blank">tutorial</a> that 5apps made for it.</p>
-
-	<h2>Run your own remoteStorage</h2>
-	<p>Of course, if you have your server or VPS, then you may also want to run your own remoteStorage instance on there. The easiest way to do this is running <a href="http://owncloud.org" target="_blank">ownCloud</a>. For that, you need just Apache installed with PHP5, and then follow the <a href="http://owncloud.org/support/setup-and-installation/webspace/" target="_blank">ownCloud installation instructions</a>.</p>
-  <p>Unless you're deploying the latest master, you will need to overwrite <a href="downloads/owncloud/user_webfinger.tar.gz">apps/user_webfinger</a> and  <a href="downloads/owncloud/remotestorage.tar.gz">apps/remotestorage</a> subdirectories of your ownCloud install with these latest versions.</p> 
-
-  <p>Note that you&apos;ll need to run your ownCloud installation in the root of your domain (not a subdirectory), the www-data user should have write access on /var/www when you activate both the <em>Webfinger</em> and the <em>remoteStorage</em> apps, you need to enable mod_rewrite in Apache, and you need to set <em>AllowOverride All</em> for /var/www in the Apache config.</p>
-	<p>Another option is to run <a href="http://github.com/5apps/express-storage" target="_blank">express-storage</a>, a remoteStorage server based on nodejs and redis. It&apos;s still under development, and mainly meant for testing purposes.</p>
-	<p>If you have a Ruby-on-Rails site, you should consider integrating <a href="http://github.com/5apps/liquor-cabinet" target="_blank">liquor-cabinet</a>. It&apos;s based on Ruby and Riak, and it&apos;s what 5apps use themselves to implement remoteStorage for their users.</p>
-</article><!-- /remotestorage -->
-
-
-
-
-
-<!--<article class="container community" style="display:none;">
-
-</article>--><!-- /community -->
-
-
-
-
-
-<article class="container thanks" style="display:none;">
-	<h1>You make Unhosted!</h1>
-
-	<p>We are a non-profit movement from and for the community. Everybody, including you, is considered an equal member based on merit and contribution. Our current full-time volunteers are: <a href="http://twitter.com/michielbdejong" target="_blank">Michiel de Jong</a> (Code Communist), <a href="http://jancborchardt.net" target="_blank">Jan-Christoph Borchardt</a> (Design Dictator), <a href="http://melvincarvalho.com" target="_blank">Melvin Carvalho</a> (Transaction Technocrat) and <a href="http://github.com/azul" target="_blank">Azul</a> (Real-time Revolutionary). Unhosted <abbr title="eingetragener Verein">e. V.</abbr> is a registered association in Germany (Amtsgericht Charlottenburg, VR 30665 B).</p>
-
-	<form id="paypal" class="donation" action="https://www.paypal.com/cgi-bin/webscr" method="post">
-		<input type="hidden" name="cmd" value="_s-xclick" />
-		<input type="hidden" name="hosted_button_id" value="5JX4Z9AZLJMJY" />
-		<input type="image" name="submit" alt=" " src="img/paypal.gif"
-	style="height:45px; width:75px; background:url('img/paypal.gif') no-repeat; margin:-2em 0 2em 0;" />
-		<img alt="" src="https://www.paypalobjects.com/de_DE/i/scr/pixel.gif" width="1" height="1" />
-	</form>
-	<a id="flattr" class="FlattrButton donation" style="display:none;" href="http://unhosted.org/"></a>
-	<noscript>
-		<a href="http://flattr.com/thing/181201/Unhosted" target="_blank"><img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" /></a>
-	</noscript>
-
-	<h2>Thanks to all the awesome donors &amp; supporters!</h2>
-	<a class="donation" target="_blank" href="http://nlnet.nl/press/20110909-unhosted.html"><img alt="NLnet" src="img/donor-nlnet.svg"/></a>
-	<a class="donation" target="_blank" href="http://www.gabrielweinberg.com/blog/2012/03/duckduckgo-foss-donations-2011.html"><img alt="Duck Duck Go" src="img/donor-duckduckgo.svg"/></a>
-	<p>
-	<!--A--><a target="_blank" href="http://twitter.com/aschepis">Adam Schepis</a>, <a target="_blank" href="http://twitter.com/aamonnz">Alexandre Monnin</a>, Alex Benik, <a target="_blank" href="http://twitter.com/alexeiras">Alex Eiras</a>, Alex Salvador, Alvaro Rodriguez Dominguez, Andrew Miller, Andy Isaacson, Ayesha Garrett, athinkingmeat,
-	<!--B--><a target="_blank" href="http://twitter.com/sphax3d">Benjamin Danon</a>, <a target="_blank" href="http://twitter.com/orfaz">Benjamin Fourio</a>, <a target="_blank" href="http://bencharp.com">Beno&icirc;t Charpentier</a>, <a target="_blank" href="http://bitcartel.com/">BitCartel</a>, <a target="_blank" href="http://romeda.org">Blaine Cook</a>,
-	<!--C--><a target="_blank" href="http://yagraph.org">Camille Bissuel</a>, <a target="_blank" href="http://twitter.com/cesarob">@cesarob</a>, <a target="_blank" href="http://identi.ca/charlesschulz">Charles-H. Schulz</a>, Christian Weiske, Christophe Drevet, <a target="_blank" href="http://identi.ca/clacke">@clacke</a>, <a target="_blank" href="http://twitter.com/coeibu">@coeibu</a>, <a target="_blank" href="http://crisp.se/">crisp.se</a>, <a target="_blank" href="http://viedma.es/">Crist&oacute;bal Viedma</a>,
-	<!--D--><a target="_blank" href="http://flyingmana.de">Daniel Fahlke</a> (<a target="_blank" href="http://twitter.com/flyingmana">@Flyingmana</a>), Daniel Mota, <a target="_blank" href="http://twitter.com/leidan">Daniel Ripoll&eacute;s</a>, <a target="_blank" href="http://identi.ca/dietrich">Dietrich Ayala</a>,
-	<!--E--><a target="_blank" href="http://edokoa.com">edokoa</a> (<a target="_blank" href="http://twitter.com/edokoa">@edokoa</a>), <a target="_blank" href="http://twitter.com/edwincheese">@edwincheese</a>, <a target="_blank" href="http://twitter.com/epilepticrabbit">@epilepticrabbit</a>,
-	<!--F-->Frederic Caufriez, Friedemann Altrock,
-	<!--G--><a target="_blank" href="http://gabrielweinberg.com">Gabriel Weinberg</a> (<a target="_blank" href="http://duckduckgo.com">Duck Duck Go</a>), <a target="_blank" href="http://garretalfert.com">Garret Alfert</a>, Greg Roodt,
-	<!--H--><a target="_blank" href="http://hdez.nl/blog">Hans de Zwart</a>, <a target="_blank" href="http://twitter.com/hanshuebner">@HansHuebner</a>, <a target="_blank" href="http://twitter.com/hariseldon78">@hariseldon78</a>, <a target="_blank" href="http://twitter.com/hex29a">@hex29a</a>, <a target="_blank" href="http://hugoroy.eu">Hugo Roy</a>,
-	<!--I--><a target="_blank" href="http://identi.ca/idoric">@idoric</a>,
-	<!--J--><a target="_blank" href="http://jancborchardt.net">Jan-Christoph Borchardt</a> (<a target="_blank" href="http://twitter.com/jancborchardt">@jancborchardt</a>), <a target="_blank" href="http://twitter.com/thejtoken">Javier Juarez</a>, <a target="_blank" href="http://jgraph.com">JGraph</a>,
-	<!--L--><a target="_blank" href="http://lockify.com">Lockify</a>, <a target="_blank" href="http://twitter.com/louisebolotin">@louisebolotin</a>, <a target="_blank" href="http://twitter.com/eyefox42">Lucas</a>,
-	<!--M-->Marc Laporte, Mark P Sullivan, Markus Schiegl, Martin Holzhauer, Martin Stadler, Mattias Wahlberg, Micha&#322; &raquo;Vesper&laquo; Dziewo&#324;ski, <a target="_blank" href="http://twitter.com/michielbdejong">Michiel de Jong</a>,
-	<!--N-->Nils R Grotnes, <a target="_blank" href="http://nlnet.nl/press/20110909-unhosted.html">NLnet</a>,
-	<!--O-->olav_2, Oluf &raquo;Finkregh&laquo; Lorenzen,
-	<!--P-->Pablo Joubert, Pablo L&oacute;pez Torres, <a target="_blank" href="http://parkerhiggins.net">Parker Higgins</a>, <a target="_blank" href="http://paulbooker.co.uk">Paul Booker</a>, Peter Rukavina, <a target="_blank" href="http://twitter.com/psvensson">Peter Svensson</a> (<a target="_blank" href="http://greenergrasswebdesign.com">Greener Grass</a>), <a target="_blank" href="http://catwell.info">Pierre Chapuis</a>, <a target="_blank" href="http://identi.ca/ppapadeas">Pierros Papadeas</a>,
-	<!--R-->Robert Rees, <a target="_blank" href="http://twitter.com/molfie">Rolf Timmermans</a>, Romain Courteaud, <a target="_blank" href="http://twitter.com/RomainPouzol">Romain Pouzol</a>,
-	<!--S-->Saul Albert, <a target="_blank" href="http://mob.is.it">Silvio Porcellana</a>, <a target="_blank" href="http://identi.ca/sindikat">@sindikat</a>, <a target="_blank" href="http://twitter.com/stgpetrovic">@stgpetrovic</a>,
-	<!--T--><a target="_blank" href="http://freebase.com/view/en/thad_guidry">Thad Guidry Sr.</a>, Thomas Kahle, Timon Reinhard, <a target="_blank" href="http://twitter.com/tbaldauf">Tobias Baldauf</a> (<a target="_blank" href="http://twitter.com/cgnwebperf">@cgnwebperf</a>),
-	<!--W-->ww,
-	and many more &hellip;
-	</p>
-
-	<p>
-	Freely licensed <a title="AGPL" href="http://www.gnu.org/licenses/agpl.html" target="_blank">code</a> &amp; <a title="Creative Commons Attribution" href="http://creativecommons.org/licenses/by/3.0/" target="_blank">everything else</a>.
-	Hosted on <a href="http://nodejitsu.com" target="_blank">nodejitsu</a>.
-	Icons by <a href="http://thenounproject.com" target="_blank">The Noun Project</a>.
-	Logo by <a href="http://edokoa.com" target="_blank">edokoa</a>.
-	Website built with <a href="http://twitter.github.com/bootstrap/" target="_blank">Bootstrap</a> by <a href="http://jancborchardt.net" target="_blank">Jan-Christoph Borchardt</a>. Feel free to <a href="http://github.com/unhosted/website" target="_blank">contribute</a>.
-	</p>
-
-	<script type="text/javascript">
-	/* <![CDATA[ */
-		(function() {
-			var s = document.createElement('script'), t = document.getElementsByTagName('script')[0];
-			s.type = 'text/javascript';
-			s.async = true;
-			s.src = 'http://api.flattr.com/js/0.6/load.js?mode=auto';
-			t.parentNode.insertBefore(s, t);
-		})();
-	/* ]]> */
-	</script>
-</article><!-- /thanks -->
-
-
-
-
-
-		<script src="js/jquery-1.7.1.min.js"></script>
-		<script src="js/bootstrap.min.js"></script>
-		<script src="js/custom.js"></script>
-		<script src="js/prettify.js"></script>
-		<!-- »There&apos;s something deeper than making money off stuff. Being a part of creating stuff for the universe is awesome.« – Ilya Zhitomirskiy, 1989–2011 -->
+		</header>
+		<div class="clear"></div>
+		
+		<section id="maincontent" class="container_12">
+			<div class="container_12">
+				<div class="fivereasons grid_7">
+					<div>
+						<h5>
+							Move your web-based app into the browser
+							<span>
+								Five reasons to develop unhosted web apps
+							</span>
+						</h5>
+						<p>
+							Unhosted web apps do not harvest user data onto a server. For both users and web developers
+              this has many advantages over the more server-centric web 2.0 architecture
+              that's typically used in web-based Software-as-a-Service (hosted web apps),
+              and in same-origin AJAX apps (so called "one-page apps") that use one tightly coupled backend.
+            </p>
+						<ul>
+							<li id="dataControl"><h6>More privacy</h6><p>Because unhosted web apps don't force the use of their servers on you, you can sync your data yourself, to a place that you trust. Dutch universities already run such a 'remote storage' service, specifically designed to be compatible with unhosted web apps.</p></li>
+							<li id="freeSoftware"><h6>Cheaper to publish</h6><p>The developer doesn't need to pay for the infrastructure.
+              This makes it feasible to publish unhosted web apps as altruistic free software. Once an unhosted web app is set free into the public domain, it will be available forever.
+							</p></li>
+							<li id="decentralization"><h6>Decentralization</h6><p>More robust/resilient architecture, with no Single Point of Failure - especially if combined with 
+						  peer-to-peer distribution.</p></li>
+							<li id="dataFreedom"><h6>Data freedom</h6><p>With your data living outside the app, you can switch back and forth between apps without even 
+							exporting and importing. Better than data liberation, this is personal data freedom brought to the web.</p></li>
+							<li id="scalability"><h6>Scalability</h6><p>Since apps are distributed through app stores, and each user runs their own copy of the app, while each syncing their data to their own remote storage, scalability is built into your unhosted web app from the start.</p></li>
+						</ul>
+						
+						
+					</div>
+				</div>
+			</div> <!-- end fivereasons -->
+			<div class="sidebar grid_5">
+					<h4>Recent updates:</h4>
+				<div>
+          <h5>Developer preview: RemoteStorageJs</h5>
+					<a href="http://remotestoragejs.com/" target="_blank"><img src="./remoteStorage.png" alt="remotestoragejs.com" width="340"/></a>
+				</div>
+				<div style="background:white">
+          <h5>The Unhosted Unconference 2012</h5>
+					<a href="https://github.com/unhosted/website/wiki/Unhost12" style="margin-left:70px;margin-right:70px">
+            <img src="./Unhost-znak.jpeg" alt="Unconference" width="200"/>
+          </a>
+					<a href="https://github.com/unhosted/website/wiki/Unhost12">
+            <br>The weekend of 7-9 September, near Prague, CZ
+          </a>
+				</div>
+			</div>
+			<div class="sidebar grid_5" style="display:none">
+				<div>
+					<h5>Check out the Unhosted talk at DynCon</h5>
+					<iframe src="http://player.vimeo.com/video/21109220?portrait=0" width="340" height="251" frameborder="0"></iframe>
+				</div>
+			</div>
+		</section><!-- end maincontent -->
+		<div class="clear"></div>
+		<footer>
+		 <div class="container_12">
+				<div id="twitter">
+					<a href="http://twitter.com/unhosted" target="_blank" id="icon">Follow us! @Unhosted on Twitter</a>
+					<h4>Follow #unhosted on <a href="http://identi.ca/unhosted" target="_blank">identi.ca</a> or 
+					<a href="http://twitter.com/unhosted" target="_blank" id="twittitle">twitter</a>
+						<span>@Unhosted</span>
+					</h4>
+					
+					<ul id="twitter_update_list"></ul>
+					      <script type="text/javascript" src="http://twitter.com/javascripts/blogger.js"></script>
+					      <script type="text/javascript" src="http://twitter.com/statuses/user_timeline/unhosted.json?callback=twitterCallback2&amp;count=1"></script>
+					
+				</div>
+				<div id="participate">
+					<div class="icon"></div>	
+					<h4>Participate</h4>
+					<p>The web as an app platform has <strong>no leaders</strong>, and this advocacy blog is an entirely altruistic and non-commercial initiative. <strong>If you want to help feed the conversation, please join</strong> <a href="http://groups.google.com/forum/#!forum/unhosted" target="_blank">the mailing list</a> and/or <a href="http://webchat.freenode.net/?channels=#unhosted" target="_blank">the chatroom</a>.</p>
+				</div>
+		</footer>
+		
 	</body>
 </html>
