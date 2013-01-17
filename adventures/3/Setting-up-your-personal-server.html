@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="description" content="Official Handbook of the No Cookie Crew" />
+    <title>Unhosted 3: Setting up your personal server</title>
+    <link rel="stylesheet" href="../hljs/default.min.css" />
+    <link rel="hub" href="http://pubsubhubbub.appspot.com/"/>
+    <link rel="updates alternate" type="application/atom+xml" href="../feed.atom" />
+    <link rel="author" type="text/html" href="https://michielbdejong.com/"/>
+
+    <script src="../hljs/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <link rel="stylesheet" href="../adventures.css" />
+  </head>
+
+  <body>
+    <article>
+      <header>
+        <h1>Unhosted Adventures</h1>
+        <h2>Official Handbook of the No Cookie Crew</h2>
+      </header>
+      <h2>Episode 3: Setting up your personal server</h2>
+      
+      <h3>Why you need a server</h3>
+      <p>Last week we created an unhosted javascript/html/markdown editor that can run on a data URL, create other apps as data URLs,
+        load files from the local file system, and (sort of clumsily) also save them again. This doesn't however allow us to
+        communicate with other devices, nor with other users, let alone people in other "web 2.0 worlds". At some point we
+        will want to send and receive emails and chat messages, so to do those thing with an unhosted web app, we need a sort
+        of proxy server.</p>
+      <p>There are three important restrictions of unhosted web apps compared to hosted web apps:</p>
+      <ul>
+        <li>they are not addressable from the outside. Even if your device has its own static IP address, the application instance
+          (for instance the editor we created last week) is running in one of the tabs of one of your browsers, and does not have
+          the possibility to open any ports that listen externally on the internet address of your device.</li>
+        <li>the data they store is emprisoned in one specific device, which is not practical if you use multiple devices, or if your device
+          is damaged, lost or stolen.</li>
+        <li>they cannot run when you have your device switched off, and cannot receive data when your device is not online, or
+          on a low-bandwidth connection</li>
+      </ul>
+      <p>For these reasons, you cannot run your online life from unhosted web apps alone. You will need a personal server on the web.
+        To run your own personal server on the web, there are initially four components you need to procure:</p>
+      <ul>
+        <li>a virtual private server (VPS),</li>
+        <li>a domain name registration (DNR),</li>
+        <li>a zone record at a domain name service (DNS), and</li>
+        <li>a secure server certificate (TLS).</li>
+      </ul>
+      
+      <h3>Shopping for the bits and bobs</h3>
+      <p>The VPS is the most expensive one, and will cost you about 15 US dollars a month from for instance Rackspace. The domain name will cost you
+        about 10 US dollars per year from for instance Gandi, and the TLS certificate you can get for
+        free from StartCom, or for very little money from other suppliers as well. You could in theory set up your DNS hosting on your VPS, but
+        usually your domain name registration will include free DNS hosting.</p>
+      <p>Unless you already have a domain name, you need to make an important choice at this point, namely choosing the domain name that will become
+        your personal identity on the web. Most people have the same username in different web 2.0 worlds, for instance I often use 'michielbdejong'.
+        When I decided it was time for me to create my own Indie Web presence, and went looking for a domain name a few months ago, 'michielbdejong.com'
+        was still free, so I picked that. Likewise, you can probably find some domain name that is in some way related to usernames you already use
+        elsewhere.</p>
+      <p>I registered my TLS certificate for 'apps.michielbdejong.com' because I aim to run an apps dashboard on there at some point, but you could
+        also go for 'www.' or 'blog.' or whichever subdomain tickles your fancy.
+        In any case, you get one subdomain plus the root domain for free, plus as many extra origins as you want on ports other than 443.
+        So you cannot create endless subdomains, but you can host different kinds of content in subdirectories (like this blog that is hosted on
+        /adventures on the root domain of unhosted.org), and you can get for instance
+        <a href="https://michielbdejong.com:10001/">https://michielbdejong.com:10001/</a> as an isolated javascript
+        origin that will work on the same IP address and SSL certificate.</p>
+      <p><em><strong>No Cookie Crew - Warning #1:</strong>
+        Last week's tutorial could be followed entirely with cookies disabled. I am probably still the only person in the world who has all cookies
+        disabled, but in case readers of this blog want to join the "No Cookie Crew", I will start indicating clearly where violations are required.
+        Although Rackspace works without cookies (with URL-based sessions over https), StartCom uses client-side certificates in their wizard and
+        other services are also likely to require you to white-list their cookies. In any case, you need to acquire three actual products here, which means you
+        will need to white-list cookies from second-party e-commerce applications, and also corresponding control-panel applications which are hosted by each vendor.
+        So that in itself is not a violation, but you will also probably need to use some desktop or hosted application to confirm your email address
+        while signing up, and you will need something like an ssh and scp client for the next steps.</em></p>
+
+      <h3>First run</h3>
+      <p>Once you have your server running, point your domain name to it, and upload your TLS certificate to it. The first thing you always want to do
+        when you ssh into a new server is to update it. On Debian this is done by typing:</p><pre><code>
+apt-get update
+apt-get upgrade
+</code></pre>
+      <p>There are several ways to run a
+        server, but here we will use <a href="http://nodejs.org">nodejs</a>, because it's fun and powerful. So follow the instructions on the nodejs
+        website to
+        install it onto your server. Nodejs comes with the 'node' executable that lets you execute javascript programs, as well as the 'npm' package
+        manager, that gives you access to a whole universe of very useful high-quality libraries.</p>
+        
+      <h3>Your webserver</h3>
+      <p>Once you have node working, you can use the example from the
+        <a href="http://docs.nodejitsu.com/articles/HTTP/servers/how-to-serve-static-files">nodejitsu docs</a>
+        to set up your website; adapted here to make it serve your website from https:</p><pre><code>
+var static = require('node-static'),
+    http = require('http'),
+    https = require('https'),
+    fs = require('fs'),
+    config = {
+      contentDir: '/var/www',
+      tlsDir: '/root/tls'
+    };
+
+http.createServer(function(req, res) {
+  var domain = req.headers.host;
+  req.on('end', function() {
+    res.writeHead(302, {
+      Location: 'https://'+domain+'/'+req.url.substring(1),
+        'Access-Control-Allow-Origin': '*'
+      });
+    res.end('Location: https://'+domain+'/'+req.url.substring(1));
+  });
+}).listen(80);
+
+var file = new(static.Server)(config.contentDir, {
+  'Access-Control-Allow-Origin': '*'
+});
+
+https.createServer({
+  key: fs.readFileSync(config.tlsDir+'/tls.key'),
+  cert: fs.readFileSync(config.tlsDir+'/tls.cert'),
+  ca: fs.readFileSync(config.tlsDir+'/ca.pem')
+}, function(req, res) {
+  file.serve(req, res);
+}).listen(443);
+</code></pre>
+      <p>Here, tls.key and tls.cert are the secret and public parts of your TLS certificate, and
+        the ca.pem is an extra <a href="http://www.startssl.com/certs/sub.class1.server.ca.pem">StartCom chain certificate</a>
+        that you <a href="https://www.startssl.com/?app=20">will need</a> if you use a StartCom certificate.</p>
+      <p>Note that we also set up an http website, that redirects to your https website, and we have added
+        <a href="http://enable-cors.org/">CORS headers</a> everywhere, to do our bit in helping break down the web's "Same Origin" walls.</p>
+      <h3>Using 'forever' to start and stop server processes</h3>
+      <p>Now that you have a script for a http server and a https server, upload them to your server, and then run:</p><pre><code>
+npm install  node-static
+npm install -g forever
+forever start path/to/myWebServer.js
+forever list
+</pre></code>
+      <p>If all went well, you will now have a new log file in ~/.forever/. Whenever it gets too long, you can issue 'echo > ~/.forever/abcd.log'
+        to truncate the log of forever process 'abcd'.</p>
+      <p>You can test that your http server redirects to your https website, and you can add some basic placeholder information there, or copy and paste
+        your profile page from one of your existing web 2.0 identities onto there.</p>
+
+      <h3>File sharing</h3>
+      <p>One advantage of having your own website with support for TLS is that you can host files for other people there, and as long as your web server does
+        not provide a way to find the file without knowing its URL, only people who know or guess a file's link, and people who have access to your server,
+        will be able to retrieve the file. This includes employees of your VPS providers, as well as employees of any governments who exert power over that
+        provider.</p>
+      <p>In theory, employees of your TLS certificate provider can also get access if they have access to eavesdropping on your TCP traffic or
+        on that of the person retrieving the file, or if they manage to poison DNS for your domain name, but that seem very remote possibilities,
+        so if you trust your VPS provider and its government, or you host your server under your own physical control, and you have a good way to generate
+        a URL that nobody will guess, then this is a pretty feasible way to
+        send a file to someone. If you implement it without bugs, then it would be more secure than standard unencrypted email, for instance.</p>
+      <p>In the other direction, you can also let other people send files to you; just run something like the following script on your server:</p>
+      <pre><code>
+var https = require('https'),
+    fs = require('fs'),
+    config = {
+      tlsDir: '/root/tls',
+      uploadDir: '/root/uploads',
+      port: 3000
+    },
+    formidable = require('formidable'),
+    
+
+https.createServer({
+  key: fs.readFileSync(config.tlsDir+'/tls.key'),
+  cert: fs.readFileSync(config.tlsDir+'/tls.cert'),
+  ca: fs.readFileSync(config.tlsDir+'/ca.pem')
+}, function(req, res) {
+  var form = new formidable.IncomingForm();
+  form.uploadDir = config.uploadDir;
+  form.parse(req, function(err, fields, files) {
+    res.writeHead(200, {'content-type': 'text/plain'});
+    res.end('upload received, thank you!\n');
+  });
+}).listen(config.port);
+</code></pre>
+      <p>and allow people to post files to it with an html form like this:<pre><code>
+&lt;form action="https://example.com:3000/"
+    enctype="multipart/form-data" method="post">
+  &lt;input type="file" name="datafile" size="40">
+  &lt;input type="submit" value="Send">
+&lt;/form>
+</code></pre>
+
+      <h3>Indie Web</h3>
+      <p>If you followed this episode, then you will have spent maybe 10 or 20 dollars, and probably about one working day working out how to fit all
+        the pieces together and get it working, but you will have made a big leap in terms of your technological freedom: you are now a member of the
+        "Indie Web" - the small guard of people who run their own webserver, independently from any big platforms. It's a bit like musicians who publish
+        their own vinyls on small independent record labels. :) And it's definitely something you can be proud of. Now that it's up and running, add some
+        nice pages to your website by simply uploading html files to your server.</p>
+      <p>From now on you will need your personal server in pretty much all
+        coming episodes. For instance, next week we will explore a young but very powerful web technology, which will form an important basis for all
+        communications between your personal server and the unhosted web apps you will be developing: WebSockets. And the week after that, we will
+        connect your Indie Web server to Facebook and Twitter... exciting! :) Stay tuned, follow us, and spread the word:
+        <a href="atom">atom</a>,
+        <a href="https://groups.google.com/forum/#!forum/unhosted">mailing list</a>,
+        <a href="http://webchat.freenode.net/?channels=#unhosted">irc channel</a>,
+        <a href="https://twitter.com/unhosted">twitter</a>,
+        <a href="https://facebook.com/unhostedwebapps">facebook</a></p>
+    </article>      
+	
+    <div class="logo">
+      <img src="/img/island-color.png" />
+    </div>
+    
+    <nav>
+      <div>
+        <h4>Episodes:</h4>
+        <p><a href="/adventures/1/Personal-servers-and-unhosted-web-apps.html">1.</a> Personal servers and unhosted web apps</p>
+        <p><a href="/adventures/2/An-unhosted-editor.html">2.</a> An unhosted editor</p>
+        <p><strong>3. Setting up your personal server</strong></p>
+      </div>
+            
+      <div>
+        <h4>Follow:</h4> 
+        <ul>
+          <li style="list-style-image: url('/img/atom.gif')"><a target="_blank" href="../feed.atom">atom</a></li>
+          <li style="list-style-image: url('/img/rss2.gif')"><a target="_blank" href="../feed.rss">rss</a></li>
+          <li style="list-style-image: url('/img/facebook.gif')"><a target="_blank" href="https://www.facebook.com/unhostedwebapps">facebook</a></li>
+          <li style="list-style-image: url('/img/twitter.png')"><a target="_blank" href="https://twitter.com/unhosted">twitter</a></li>
+          <li style="list-style-image: url('/img/statusnet.png')"><a target="_blank" href="https://identi.ca/unhosted">identica</a></li>
+          <li style="list-style-image: url('/img/diaspora.png')"><a target="_blank" href="https://joindiaspora.com/u/unhosted">diaspora</a></li>
+          <li style="list-style-image: url('/img/mailinglist.jpg')"><a target="_blank" href="https://groups.google.com/forum/#!forum/unhosted">mailing list</a></li>
+          <li style="list-style-image: url('/img/irc.png')"><a target="_blank" href="http://webchat.freenode.net/?channels=#unhosted">irc channel</a></li>
+        </ul>
+      </div>
+      
+      <div>
+        <h4>Author:</h4>
+        <div class="logo">
+          <img src="/img/michiel.jpg" />
+        </div>
+        <p>
+          <a href="https://michielbdejong.com/">Michiel B. de Jong</a>
+        </p>
+      </div>
+      
+      <div>      
+        <h4>Location:</h4>
+        <div class="logo">
+          <img src="/img/hackerbeach.png">
+        </div>
+        <p>
+          <a href="http://hackerbeach.org/">Hacker Beach</a>
+        </p>
+      </div>
+      
+      <div>
+        <h4>Unhošť12 unconference:</h4>
+        <p>
+          <a class="logo" href="http://2012.unhosted.org/">
+            <img src="/img/2012.png"/>
+          </a>
+          &nbsp;
+        </p>
+      </div>
+      
+      <div>
+        <h4>Unhošť13 unconference:</h4>
+        <p>
+          <a class="logo" href="http://2013.unhosted.org/">
+            <img src="/img/2013.png"/>
+          </a>
+          &nbsp;
+        </p>
+      </div>
+      
+      <div>
+        <h4>Spin-off projects:</h4>
+        <p>
+          <a class="logo" href="http://remotestorage.io/">
+            <img src="/img/remotestorage.png"/>
+          </a>
+          &nbsp;
+        </p>
+
+        <p>
+          <a class="logo" href="http://tos-dr.info/">
+            <img src="/img/tosdr.png"/>
+          </a>
+          &nbsp;
+        </p>
+
+        <p>
+          <a class="logo" href="http://opentabs.net/">
+            <img src="/img/opentabs.png"/>
+          </a>
+          &nbsp;
+        </p>
+      </div>
+      
+      <div>
+        <h4>Supporters:</h4>
+        <p>
+          <a class="logo" href="http://nlnet.nl/">
+            <img src="/img/nlnet.gif" />
+          </a>
+          &nbsp;
+        </p>
+
+        <p>
+          <a class="logo" href="http://wauland.de/">
+            <img src="/img/wau.png" />
+          </a>
+          &nbsp;
+        </p>
+
+        <p>
+          <a class="logo" href="http://www.gabrielweinberg.com/blog/2012/03/duckduckgo-foss-donations-2011.html">
+            <img src="/img/duckduckgo.jpg" />
+          </a>
+          &nbsp;
+        </p>
+
+        <p>
+          and <a href="/thankyou.html">many more</a>&hellip;
+        </p>
+      </div>
+    </nav>
+    
+    <footer>
+      <strong>You can follow</strong>
+      <img src="/img/twitter.png" /><a target="_blank" href="https://twitter.com/unhosted">@unhosted</a>
+      <strong>on twitter and in</strong>
+      <a href="#">many other ways</a><strong>. So stay tuned! :)</strong>
+      </strong>
+    </footer>
+  </body>
+</html>

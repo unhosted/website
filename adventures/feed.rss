@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:georss="http://www.georss.org/georss">
+  <channel>
+    <title>Unhosted Adventures</title>
+    <link>https://unhosted.org/adventures/</link>
+    <atom:link type="application/rss+xml" href="https://unhosted.org/adventures/feed.rss2" rel="self"></atom:link>
+    <image>
+      <link>https://unhosted.org/adventures/img/island-color.jpg</link>
+      <title>Unhosted Adventures</title>
+      <url>https://unhosted.org/adventures/img/island-color.jpg</url>
+    </image>
+    <description>Official handbook of the No Cookie Crew</description>
+    <language>en-us</language>
+    <ttl>40</ttl>
+    <item>
+      <title>3. Setting up your personal server</title>
+      <description>Episode 3 of Unhosted Adventures</description>
+      <pubDate>Tue, 1 Jan 2013 10:00:00 +0800</pubDate>
+      <guid>https://unhosted.org/adventures/3/Setting-up-your-personal-server.html</guid>
+      <link>https://unhosted.org/adventures/3/Setting-up-your-personal-server.html</link>
+      <georss:point>10.2 104.0</georss:point>
+    </item>
+    <item>
+      <title>2. An unhosted editor</title>
+      <description>Episode 2 of Unhosted Adventures</description>
+      <pubDate>Tue, 25 Dec 2012 10:00:00 +0800</pubDate>
+      <guid>https://unhosted.org/adventures/2/An-unhosted-editor.html</guid>
+      <link>https://unhosted.org/adventures/2/An-unhosted-editor.html</link>
+      <georss:point>10.2 104.0</georss:point>
+    </item>
+    <item>
+      <title>1. Personal servers and unhosted web apps</title>
+      <description>Episode 1 of Unhosted Adventures</description>
+      <pubDate>Tue, 18 Dec 2012 10:00:00 +0800</pubDate>
+      <guid>https://unhosted.org/adventures/1/Personal-servers-and-unhosted-web-apps.html</guid>
+      <link>https://unhosted.org/adventures/1/Personal-servers-and-unhosted-web-apps.html</link>
+      <georss:point>10.2 104.0</georss:point>
+    </item>
+  </channel>
+</rss>

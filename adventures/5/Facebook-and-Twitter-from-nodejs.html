@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="description" content="Official Handbook of the No Cookie Crew" />
+    <title>Unhosted 5: Facebook and Twitter from nodejs</title>
+    <link rel="stylesheet" href="../hljs/default.min.css" />
+    <link rel="hub" href="http://pubsubhubbub.appspot.com/"/>
+    <link rel="updates alternate" type="application/atom+xml" href="../feed.atom" />
+    <link rel="author" type="text/html" href="https://michielbdejong.com/"/>
+
+    <script src="../hljs/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <link rel="stylesheet" href="../adventures.css" />
+  </head>
+
+  <body>
+    <article>
+      <header>
+        <h1>Unhosted Adventures</h1>
+        <h2>Official Handbook of the No Cookie Crew</h2>
+      </header>
+      <h2>Episode 5: Facebook and Twitter from nodejs</h2>
+      <p><em><strong>No Cookie Crew  - Warning #3:</strong> This tutorial still requires you to update your personal server using an
+        ssh/scp client.
+        Also, to register your personal server with the respective APIs, you need to
+        log in to Twitter and Facebook, accepting their cookies onto your device one last time...</em></p>
+        
+      <h3>Connecting to Facebook</h3>
+      <p>Connecting to Facebook is easier than you might think. First, of course you need a Facebook account, so register one if you don't have one yet.
+        Then you need to visit the <a href="https://developers.facebook.com/tools/explorer" target="_blank">Graph API Explorer</a>,
+        and click 'Get Acces Token'. Log in as yourself, and click 'Get Access Token' a second time to get the dialog for requesting access scopes. In there,
+        go to 'Extended Permissions', and select 'publish_stream'; it should look something like this:</p>
+      <img src="fb-get-token.png">
+      
+      <p>The OAuth dance will ask you to grant Graph API Explorer access your Facebook account, which obviously you have to allow for this to work.</p>
+      <p>Once you are back on the Graph API Explorer, you can play around to browse the different kinds of data you can now access. You can also
+        read more about this in <a href="https://developers.facebook.com/docs/getting-started/graphapi/">Facebook's Getting Started guide</a>.
+        For instance, if you do a POST to /me/feed while adding a field "message" (click "Add a field") with some string value, that will post the message to your
+        timeline.</p>
+      <p>But the point here is
+        to copy the token from the explorer tool, and save it in a config file on your personal server. Once you have done that, you can use the
+        <code>http.Request</code>
+        class from nodejs to make http calls to Facebook's API. Here is an example script that updates your status in your Facebook timeline:
+        <pre><code>
+var https = require('https'),
+    config = require('./config').config;
+    
+function postToFacebook(str, cb) {
+  var req = https.request({
+    host: 'graph.facebook.com',
+    path: '/me/feed',
+    method: 'POST'
+  }, function(res) {
+    res.setEncoding('utf8');
+    res.on('data', function(chunk) {
+      console.log('got chunk '+chunk);
+    });
+    res.on('end', function() {
+      console.log('response end with status '+res.status);
+    });
+  });
+  req.end('message='+encodeURIComponent(str)
+    +'&access_token='+encodeURIComponent(config.facebookToken));
+  console.log('sent');
+};
+
+postToFacebook('test from my personal server');
+</code></pre>
+      
+      <p>The result will look something like this:</p>
+      <img src="fb-from-explorer.png">
+      
+      <p>If in the menu of the Graph API Explorer you click "apps" on the top right (while logged in as yourself), then you
+        can define your own client app. The advantage of this is that it looks slightly nicer in the timeline, because you 
+        can set the 'via' attribute to advertise your personal server's domain name, instead of the confusing and incorrect
+        'via Graph API Explorer':</p>
+      <img src="fb-from-app.png">
+      
+      <p>Normally, you would see the name of an actual application there, for instance 'via Foursquare' or 'via Spotify'.
+        But since we are taking the application out of the server and putting it into the browser, and the access token is
+        guarded by your personal server, not by the unhosted web app you may use to edit the text and issue the actual posting
+        command, it is correct here to say that this post was posted via your personal server.</p>
+      <p>This means that for everybody who federates their personal server with Facebook, there will effectively be one "Facebook
+        client app", but each one will have only one user, because each user individually registers their own personal gateway server as such.</p>
+      <p>There is a second advantage of registering your own app: it gives you an appId and a clientSecret with which you can exchange
+        the one-hour token for a 60-day token. To do that, you can call the following nodejs function once, giving your appId, clientSecret, and 
+        the short-lived token as arguments to do that:</p><pre><code>
+var https = require('https');
+
+function longLiveMyToken(token, appId, clientSecret) {
+  var req = https.request({
+    host: 'graph.facebook.com',
+    path: '/oauth/access_token',
+    method: 'POST'
+  }, function(res) {
+    res.setEncoding('utf8');
+    res.on('data', function(chunk) {
+      console.log(chunk);
+    });
+    res.on('end', function() {
+      console.log('status: '+res.status);
+    });
+  });
+  req.end('grant_type=fb_exchange_token'
+    +'&client_id='+encodeURIComponent(appId)
+    +'&client_secret='+encodeURIComponent(clientSecret)
+    +'&fb_exchange_token='+encodeURIComponent(token)
+   );
+};
+</code></pre>
+      <p>Once you run this script on your server, you will see the long-lived token on the console output, so you can paste it from there into
+        your config file. You can also use the Graph API Browser to "Debug" access tokens - that way you see their permissions scope and 
+        their time to live. As far as I know you will have to repeat this token exchanging process every 60 days, but maybe there is some way
+        we could automate that. We will worry about that in two months from now. :)</p>
+
+      <h3>Connecting to Twitter</h3>
+      <p>And just because this is so easy in nodejs, here is the equivalent server-side script for twitter as well:</p>
+        <pre><code>
+var twitter = require('ntwitter'),
+    config = require('./config').config;
+
+var twit = new twitter({
+  consumer_key: config.twitterConsumerKey,
+  consumer_secret: config.twitterConsumerSecret,
+  access_token_key: config.twitterAccessToken,
+  , access_token_secret: config.twitterAccessTokenSecret
+});
+
+function postToTwitter(str, cb) {
+  twit.verifyCredentials(function (err, data) {
+    if (err) {
+      cb("Error verifying credentials: " + err);
+    } else {
+      twit.updateStatus(str, function (err, data) {
+        if (err) {
+          cb('Tweeting failed: ' + err);
+        } else {
+          cb('Success!')
+        }
+      });
+    }
+  });
+}
+postToTwitter('Sent from my personal server', function(result) {
+  console.log(result);
+}
+</code></pre>
+      <p>To obtain the config values for the twitter script, you need to log in to <a href="https://dev.twitter.com/apps">dev.twitter.com/apps</a>
+        and click 'Create a new application'. 
+        You can, again, put your own domain name as the app name, because it will be your server that effectively acts as the connecting app.
+        Under 'Setting', set the Application Type to 'Read, Write and Access direct messages', and by default, for the twitter handle
+        by which you  registered the app, the app will have permission to act on your behalf.</p>
+      <p>At the time of writing, there is a <a href="https://github.com/AvianFlu/ntwitter/issues/74">bug in ntwitter</a> which means that tweets with
+        apostrophes or exclamation marks will fail. A patch is given there, so if you are really eager to tweet apostrophes then you could apply that,
+        but I haven't tried this myself. I just take this into account until the bug is fixed, and rephrase my tweets so that they contain no
+        apostrophes. :)</p>
+    
+      <h3>A WebSocket-based gateway</h3>
+      <p>The next step is to connect this up to a WebSocket. We simply integrate our postToFacebook and postToTwitter functions into the pinger.js
+        script that we created last week. One thing to keep in mind though, is that we don't want random people guessing the port of the WebSocket,
+        and being able to freely post to your Facebook and Twitter identities. So the solution for that
+        is that we give out a token to the unhosted web app from which you will be connecting, and then
+        we make it send that token each time it wants to post something.</p>
+      <p>Upload this server-side script, making sure you have the right variables in a 'config.js' file in the same directory. You can run it using
+        'forever':</p><pre><code>
+var sockjs = require('sockjs'),
+    fs = require('fs'),
+    https = require('https'),
+    twitter = require('ntwitter'),
+    config = require('./config').config,
+    twit = new twitter({
+      consumer_key: config.twitterConsumerKey,
+      consumer_secret: config.twitterConsumerSecret,
+      access_token_key: config.twitterAccessToken,
+      access_token_secret: config.twitterAccessTokenSecret
+    });
+
+function postToTwitter(str, cb) {
+  twit.verifyCredentials(function (err, data) {
+    if (err) {
+      cb("Error verifying credentials: " + err);
+    } else {
+      twit.updateStatus(str, function (err, data) {
+        if (err) {
+          cb('Tweeting failed: ' + err);
+        } else {
+          cb('Success!')
+        }
+      });
+    }
+  });
+}
+
+function postToFacebook(str, cb) {
+  var req = https.request({
+    host: 'graph.facebook.com',
+    path: '/me/feed',
+    method: 'POST'
+  }, function(res) {
+    res.setEncoding('utf8');
+    var str = '';
+    res.on('data', function(chunk) {
+      str += chunk;
+    });
+    res.on('end', function() {
+      cb({
+        status: res.status,
+        text: str
+      });
+    });
+  });
+  req.end("message="+encodeURIComponent(str)
+    +'&access_token='+encodeURIComponent(config.facebookToken));
+};
+
+function handle(conn, chunk) {
+  var obj;
+  try {
+    obj = JSON.parse(chunk);
+  } catch(e) {
+  }
+  if(typeof(obj) == 'object' && obj.secret == config.secret 
+     && typeof(obj.object) == 'object') {
+    if(obj.world == 'twitter') {
+      postToTwitter(obj.object.text, function(result) {
+        conn.write(JSON.stringify(result));
+      });
+    } else if(obj.world == 'facebook') {
+      postToFacebook(obj.object.text, function(result) {
+        conn.write(JSON.stringify(result));
+      });
+    } else {
+      conn.write(chunk);
+    }
+  }
+}
+
+var httpsServer = https.createServer({ 
+  key: fs.readFileSync(config.tlsDir+'/tls.key'), 
+  cert: fs.readFileSync(config.tlsDir+'/tls.cert'), 
+  ca: fs.readFileSync(config.tlsDir+'/ca.pem') 
+}, function(req, res) {
+  res.writeHead(200); 
+  res.end('connect a websocket please'); 
+});
+httpsServer.listen(config.port);
+
+var sockServer = sockjs.createServer();
+sockServer.on('connection', function(conn) {
+  conn.on('data', function(chunk) {
+    handle(conn, chunk);
+  });
+});
+sockServer.installHandlers(httpsServer, {
+  prefix:'/sock'
+});
+console.log('up');
+</code></pre>
+      <p>And then you can use this simple unhosted web app as your new <a href="data:text/html;utf-8,%3C!DOCTYPE%20html%20lang%3D%22en%22%3E%0A%3Chtml%3E%0A%20%20%3Chead%3E%0A%20%20%20%20%3Cmeta%20charset%3D%22utf-8%22%3E%0A%20%20%20%20%3Ctitle%3Esocial%20dashboard%3C%2Ftitle%3E%0A%20%20%3C%2Fhead%3E%0A%20%20%3Cbody%3E%0A%20%20%20%20%3Cp%3E%0A%20%20%20%20%20%20Domain%3A%20%3Cinput%20id%3D%22domain%22%3E%0A%20%20%20%20%20%20Port%3A%20%3Cinput%20id%3D%22port%22%3E%0A%20%20%20%20%20%20Secret%3A%20%3Cinput%20id%3D%22secret%22%3E%0A%20%20%20%20%20%20%3Cinput%20type%3D%22submit%22%20value%3D%22connect%22%20onclick%3D%22connect()%3B%22%3E%0A%20%20%20%20%3C%2Fp%3E%0A%20%20%20%20%3Cp%3E%0A%20%20%20%20%20%20Text%3A%20%3Cinput%20id%3D%22text%22%20style%3D%22width%3A70em%22%3E%0A%20%20%20%20%20%20%3Cinput%20type%3D%22submit%22%20value%3D%22f%22%20onclick%3D%22sendTo('facebook')%3B%22%20style%3D%22background-color%3A%23008%3Bcolor%3A%23fff%22%3E%0A%20%20%20%20%20%20%3Cinput%20type%3D%22submit%22%20value%3D%22t%22%20onclick%3D%22sendTo('twitter')%3B%22%20style%3D%22background-color%3A%23bbf%3Bcolor%3A%23fff%22%3E%0A%20%20%20%20%3C%2Fp%3E%0A%20%20%3C%2Fbody%3E%0A%20%20%3Cscript%3E%0A%20%20%20%20var%20sock%3B%0A%20%20%20%20function%20v(id)%20%7B%20return%20document.getElementById(id).value%3B%20%7D%0A%20%20%20%20function%20connect()%20%7B%0A%20%20%20%20%20%20sock%20%3D%20new%20WebSocket('wss%3A%2F%2F'%2Bv('domain')%2B'%3A'%2Bv('port')%2B'%2Fsock%2Fwebsocket')%3B%0A%20%20%20%20%20%20sock.onopen%20%3D%20function()%20%7B%20console.log('open')%3B%20%7D%0A%20%20%20%20%20%20sock.onmessage%20%3D%20function(e)%20%7B%20console.log(e.data)%3B%20%7D%0A%20%20%20%20%20%20sock.onclose%20%3D%20function()%20%7B%20console.log('closed')%3B%20%7D%0A%20%20%20%20%7D%0A%20%20%20%20%0A%20%20%20%20setInterval(function()%20%7B%0A%20%20%20%20%20%20if(sock%20%26%26%20sock.readyState%20%3D%3D%20WebSocket.CLOSED)%20%7B%0A%20%20%20%20%20%20%20%20connect()%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%2C%201000)%3B%0A%20%20%20%20%0A%20%20%20%20function%20sendTo(world)%20%7B%0A%20%20%20%20%20%20sock.send(JSON.stringify(%7B%0A%20%20%20%20%20%20%20%20world%3A%20world%2C%0A%20%20%20%20%20%20%20%20id%3A%20new%20Date().getTime()%2C%0A%20%20%20%20%20%20%20%20object%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20text%3A%20v('text')%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20secret%3A%20v('secret')%0A%20%20%20%20%20%20%7D))%3B%0A%20%20%20%20%7D%0A%20%20%3C%2Fscript%3E%0A%3C%2Fhtml%3E"
+        target="_blank">social dashboard</a>.</p>
+        
+      <h3>Federated or just proxied?</h3>
+      <p>So now you can stay in touch with your friends on Facebook
+        and Twitter, without you yourself ever logging in to either of these walled gardens,
+        the monopoly platforms of web 2.0.</p>
+
+      <p>Several people here at <a href="http://hackerbeach.org/">Hacker Beach</a>
+        have reacted to drafts of this post, saying that proxying your requests through a server
+        does not change the fact that you are using these platforms. I understand this reaction,
+        but I do not agree, for several reasons:</p>
+
+      <h3>Separating applications from namespaces.</h3>
+      <p>Many online services offer a hosted web app, combined with a data storage service.
+        But apart from application hosting and data storage, many of them define a "namespace",
+        a limited context that confines who and what you interact with, and a walled garden in
+        which your data "lives".</p>
+
+      <p>For instance, the Facebook application will allow you to read about things that happen in the
+        Facebook world, but not outside it. As an application, it is restricted to Facebook's "name space".
+        This means this hosted application gives you a restricted view of the online universe; it is a
+        software application that is specific to only one namespace. As an application, we can say that
+        it is "namespace-locked", very similar to the way in which a mobile phone device can be "SIM-locked"
+        to a specific SIM-card provider.</p>
+
+      <p>The way we circumvent this restriction is by interacting with the namespace of a service *without*
+        using the namespace-locked application that the service offers. Namespace-locked applications limit our
+        view of the world to what the application provider wants us to interact with.</p>
+
+      <p>So by communicating with the API of a service instead of with its web interface, we open up the possibility
+        of using an "unlocked" application which we can develop ourselves, and improve and adapt however we want,
+        without any restrictions imposed by any particular namespace provider. While using such a namespace-lock-free
+        application, our view of the online world will be more universal and free, and less controlled and influenced
+        by commercial interests.</p>
+
+      <h3>Avoiding Cookie federation</h3>
+      <p>Both Facebook and Google will attempt to platformize your web experience. Using a proxy avoids that</p>
+      
+      <h3>Your account in each world is only a marionet, you own your identity</h3>
+      
+      <h3>Your data is only mirrored, you own the master copy.</h3>
+      <p>This means you can easily relay posts outside the namespace you
+        originally posted them to, and hold on to them as long as you want in your personal historical data log. You can also
+        easily post the same content to several namespaces at the same time
+        when this makes sense.</p>
+      
+      <h3>What if they retract your API key and kick your "app" off their platform?</h3>
+      <p>That's equivalent to a mailserver blacklisting you as a sender.</p>
+      
+      <h3>Conclusion</h3>
+      <p>The big advantage of using a personal server like this is that you are only sending data to each web 2.0 world when this is needed to interact
+        with other people on there. You yourself are basically logged out of web 2.0, using only unhosted web apps, even though your friends still see
+        your posts and actions through these "puppet" identities. They have no idea that they are effectively looking at a hologram when they interact
+        with you.</p>
+      <p>We will come back to both Facebook and Twitter in later episodes to discuss other things like controlling more than one Twitter handle,
+        receiving and responding to Facebook friend requests, and everything else. These basic examples mainly serve to show you how easy it is to
+        build a personal server that federates seamlessly with the existing web 2.0 worlds.</p>
+      <p>Also, if you browse through the API documentation of both Twitter and Facebook, you will see all kinds of things you can control through there.
+        So you can go ahead yourself and add all those functions to your gateway
+        (just make sure you always check if the correct secret is being sent on the WebSocket), 
+        and then build out this social dashboard app to do many more things.</p>
+      <p>You may or may not be aware that most other web2.0 websites actually have very similar REST APIs, and when
+        the API is a bit more complicated, there is probably a nodejs module available that wraps it up, like in the case of Twitter here.
+        So it should be possible this way to, for instance, create an unhosted web app that posts github issues, using your personal server of a gateway
+        to the relevant APIs.</p>
+      <p>Have fun! I moved this episode forward in the series from where it was originally, so that you can have a better feeling of where we are going
+        with all this, even though you still have to do all of this through ssh. Next week we will solve that though, as we add what you could call
+        a "webshell" interface to the personal server. That way, you can use an unhosted web app to upload, modify, and run nodejs scripts on your server,
+        as well as doing any other server maintenance which you may now be doing via ssh. This will be another important step forward for the
+        No Cookie Crew. See you next week: same time, same place!</p>
+    </article>      
+	
+    <div class="logo">
+      <img src="/img/island-color.png" />
+    </div>
+    
+    <nav>
+      <div id="episodes">
+        <h4>Episodes:</h4>
+        <p>(loading index)</p>
+      </div>
+            
+      <div>
+        <h4>Follow:</h4> 
+        <ul>
+          <li style="list-style-image: url('/img/atom.gif')"><a target="_blank" href="../feed.atom">atom</a></li>
+          <li style="list-style-image: url('/img/rss2.gif')"><a target="_blank" href="../feed.rss">rss</a></li>
+          <li style="list-style-image: url('/img/facebook.gif')"><a target="_blank" href="https://www.facebook.com/unhostedwebapps">facebook</a></li>
+          <li style="list-style-image: url('/img/twitter.png')"><a target="_blank" href="https://twitter.com/unhosted">twitter</a></li>
+          <li style="list-style-image: url('/img/statusnet.png')"><a target="_blank" href="https://identi.ca/unhosted">identica</a></li>
+          <li style="list-style-image: url('/img/diaspora.png')"><a target="_blank" href="https://joindiaspora.com/u/unhosted">diaspora</a></li>
+          <li style="list-style-image: url('/img/mailinglist.jpg')"><a target="_blank" href="https://groups.google.com/forum/#!forum/unhosted">mailing list</a></li>
+          <li style="list-style-image: url('/img/irc.png')"><a target="_blank" href="http://webchat.freenode.net/?channels=#unhosted">irc channel</a></li>
+        </ul>
+      </div>
+      
+      <div>
+        <h4>Author:</h4>
+        <div class="logo">
+          <img src="/img/michiel.jpg" />
+        </div>
+        <p>
+          <a href="https://michielbdejong.com/">Michiel B. de Jong</a>
+        </p>
+      </div>
+      
+      <div>      
+        <h4>Location:</h4>
+        <div class="logo">
+          <img src="/img/hackerbeach.png">
+        </div>
+        <p>
+          <a href="http://hackerbeach.org/">Hacker Beach</a>
+        </p>
+      </div>
+      
+      <div>
+        <h4>Unhošť12 unconference:</h4>
+        <p>
+          <a class="logo" href="http://2012.unhosted.org/">
+            <img src="/img/2012.png"/>
+          </a>
+          &nbsp;
+        </p>
+      </div>
+      
+      <div>
+        <h4>Unhošť13 unconference:</h4>
+        <p>
+          <a class="logo" href="http://2013.unhosted.org/">
+            <img src="/img/2013.png"/>
+          </a>
+          &nbsp;
+        </p>
+      </div>
+      
+      <div>
+        <h4>Spin-off projects:</h4>
+        <p>
+          <a class="logo" href="http://remotestorage.io/">
+            <img src="/img/remotestorage.png"/>
+          </a>
+          &nbsp;
+        </p>
+
+        <p>
+          <a class="logo" href="http://tos-dr.info/">
+            <img src="/img/tosdr.png"/>
+          </a>
+          &nbsp;
+        </p>
+
+        <p>
+          <a class="logo" href="http://opentabs.net/">
+            <img src="/img/opentabs.png"/>
+          </a>
+          &nbsp;
+        </p>
+      </div>
+      
+      <div>
+        <h4>Supporters:</h4>
+        <p>
+          <a class="logo" href="http://nlnet.nl/">
+            <img src="/img/nlnet.gif" />
+          </a>
+          &nbsp;
+        </p>
+
+        <p>
+          <a class="logo" href="http://wauland.de/">
+            <img src="/img/wau.png" />
+          </a>
+          &nbsp;
+        </p>
+
+        <p>
+          <a class="logo" href="http://www.gabrielweinberg.com/blog/2012/03/duckduckgo-foss-donations-2011.html">
+            <img src="/img/duckduckgo.jpg" />
+          </a>
+          &nbsp;
+        </p>
+
+        <p>
+          and <a href="/thankyou.html">many more</a>&hellip;
+        </p>
+      </div>
+    </nav>
+    
+    <footer>
+      <strong>You can follow</strong>
+      <img src="/img/twitter.png" /><a target="_blank" href="https://twitter.com/unhosted">@unhosted</a>
+      <strong>on twitter and in</strong>
+      <a href="#">many other ways</a><strong>. So stay tuned! :)</strong>
+      </strong>
+    </footer>
+  </body>
+  <script src="../episodes.js"></script>
+</html>
