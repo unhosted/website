@@ -71,7 +71,7 @@
       <p>Actions like mouse clicks and key strokes from the user are received by DOM elements in your app. Usually, this DOM element could 
         determine by itself how it should be updating its appearance in reaction to that. But in the V-model, these actions are only passed
         through.</p>
-      <p>The DOM element would at first leave its own state unchanged, passing the action to the controller, so the javascript code that
+      <p>The DOM element would at first leave its own state unchanged, passing the action to the controller, to the javascript code that
         implements the business logic and determines what the result (in terms of data state) of the user action should be. This state change
         is then effectuated by calling a method in one of the remoteStorage modules. So far, nothing still has changed on the screen.</p>
       <p>If we were to completely follow the V-model, then the change would first move further down to the storage server, and then ripple
@@ -123,7 +123,11 @@
         <a href="http://todo.unhosted.5apps.com/">demo</a>
         <a href="http://drinks.unhosted.5apps.com/">apps</a>. If you don't have a remotestorage account yet, you can get one at
         <a href="https://5apps.com/">5apps</a> or at <a href="https://heahdk.net/">heahdk</a>. For more options and more info
-        about remtestorage in general, see <a href="http://remotestorage.io/">remotestorage.io</a>. Enjoy! :)
+        about remotestorage in general, see <a href="http://remotestorage.io/">remotestorage.io</a>.</p>
+      <p>Remote storage is of course a vital piece of the puzzle when using unhosted web apps, because
+        they have no per-app server-side database backend of themselves. The remotestorage protocol and the 
+        remoteStorage.js library are something many of us have been working on really hard for years, and since last week, finally, we are able to
+        use it for a few real production-ready apps. So we are really enthusiastic about this recent release, and hope you enjoy it as much as we do! :)</p>
     </article>
 	
     <div class="logo">
