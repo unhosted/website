@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="description" content="Official Handbook of the No Cookie Crew" />
-    <title>Unhosted 7: ActivityStreams to federate with the platforms</title>
+    <title>Unhosted 8: Adding remote storage to unhosted web apps</title>
     <link rel="stylesheet" href="../hljs/default.min.css" />
     <link rel="hub" href="http://pubsubhubbub.appspot.com/"/>
     <link rel="updates alternate" type="application/atom+xml" href="../feed.atom" />
@@ -21,73 +21,21 @@
         <h1>Unhosted Adventures</h1>
         <h2>Official Handbook of the No Cookie Crew</h2>
       </header>
-      <h2>Episode 7: ActivityStreams to federate with the platforms</h2>
-you may have noticed we used a general format:
-    {
-      '@type': 'command',
-      world: world,
-      '@id': new Date().getTime(),
-      verb: verb,
-      object: object,
-      target: target,
-      token: config.token
-    }
-
-- token should match for the socket (one access level)
-- @id will be referred to in replies
-- will be dispatched to world.
-- verb will determine interpretation of object and target fields.
-- will respond with 'failure' or 'completed', and optionally 'progress' responses, all which can have 'result' fields which will be objects merged and arrays joined; rest overwritten.
-    {
-      '@type': 'welcome',
-      '@context': 'https://unhosted.org/spec/mysocks-1.html'
-    }
-
-ping (no world): will not be dispatched or logged
-execute: object is a command executable in world. result: {stdout, stderr}
-retrieve: target is a resource path in world, result: contents (utf-8 string)
-store: target is a resource path in world, object: contents (utf-8 string)
-
-
-##5.1 modularity: run services on unix sockets, and dispatch to them from the pinger-server.
-##5.2 first two welten modules: 'shell' and 'file'. run them with 'forever'
-##5.3 dispatcher
-##5.4 client: editor-pinger. Command format (ones with * go to the welten modules):
-    @context: https://unhosted.org/spec/sockethub/1.0/command
-    @type: ping
-    id: millitimestamp
-    token: config.token
-    
-    @context: https://unhosted.org/spec/sockethub/1.0/command
-    world: shell
-    * @type: execute
-    * object: (command)
-    * result: stdout, stderr
-    id: millitimestamp
-    token: config.token
-    
-    @context: https://unhosted.org/spec/sockethub/1.0/command
-    world: file
-    * @type: retrieve/save
-    * object: (contents in case of save)
-    * target: (path)
-    * result: (string for retrieve)
-    id: millitimestamp
-    token: config.token
-
-##4.4 overview of the api for welten modules
-
-#5 Sockethub clients and welten modules [NCC warnings: none.]
-##5.1 the importance of standardization
-##5.2 json-ld
-##5.3 welten: makeWorld (should already start sock!), registerHandler(@type), reportActivity.
-##5.4 sockethub:
-    * client->server @type 'command'
-    * server->client reply (keep 'id' field): @type 'completed'/'failure'/'running'
-    * server->client @type 'activity'
-##5.5 json-ld commands @type: (actor, verb, object, target, ...)->(result). activities: AS
-
-
+      <h2>Episode 7: Adding remote storage to unhosted web apps</h2>
+      <h3>Apps storing user data on your personal server</h3>
+      <p>(rest and cors)</p>
+      
+      <h3>Reusing reusable user data</h3>
+      <p>(oauth and modules)</p>
+      
+      <h3>Cloud sync should be transparent</h3>
+      <p>(sync, behind module, V-model)</p>
+      
+      <h3>Two easy ways to connect at runtime</h3>
+      <p>(app-first, storage-first)</p>
+      
+      <h3>Featured apps</h3>
+      <p>(so far, i use music, editor and grouptabs)</p>
     </article>      
 	
     <div class="logo">
