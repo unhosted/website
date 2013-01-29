@@ -33,15 +33,18 @@
         <a href="https://tools.ietf.org/id/draft-dejong-remotestorage-00.txt">draft-dejong-remotestorage-00</a>,
         an IETF Internet-Draft that is currently in version -00. At its core are the http protocol, TLS, and CORS headers.</p>
       <p>A remotestorage server allows you to store, retrieve, and remove documents in a directory structure,
-        using http PUT, GET, and DELETE verbs, respectively. It will respond with CORS headers in the http response, so
+        using http PUT, GET, and DELETE verbs, respectively. It will respond with
+        <a href="https://en.wikipedia.org/wiki/Cross-origin_resource_sharing">CORS headers</a> in the http response, so
         that your browser will not forbid your web app from making requests to the storage origin.</p>
       <p>As an app developer, you will not have to write these http requests yourself. You can use the
         <a href="http://remotestorage.io/integrate/">remoteStorage.js</a> library.</p>
       
       <h3>Reusing reusable user data</h3>
-      <p>The remoteStorage.js library is divided up into modules, one for each type of data. Your app would typically only
+      <p>The remoteStorage.js library is divided up into modules (documents, music, pictures, ...),
+        one for each type of data. Your app would typically only
         request access to one or two such modules (possibly read-only). The library then takes care of displaying a widget in the top right of
         the window, which will obtain access to the corresponding parts of the storage using OAuth2's Implicit Grant flow.</p>
+      <img src="widget.png" />
       <p>The Implicit Grant flow is special in that there is no requirement for server-to-server communication, so it can
         be used by unhosted web apps, despite their lack of server backend.
         The OAuth "dance" consists of two redirects: to a dialog page hosted by the storage provider,
@@ -124,10 +127,14 @@
         <a href="http://drinks.unhosted.5apps.com/">apps</a>. If you don't have a remotestorage account yet, you can get one at
         <a href="https://5apps.com/">5apps</a> or at <a href="https://heahdk.net/">heahdk</a>. For more options and more info
         about remotestorage in general, see <a href="http://remotestorage.io/">remotestorage.io</a>.</p>
+      <p>After you have used the <a href="http://todo.unhosted.5apps.com">todo app</a> to add some tasks to your remote storage, try out the 
+        <a href="http://unhosted-time-tracker.nilclass.5apps.com">unhosted time tracker</a> app. You will see it retrieve your task list from
+        your remote storage even though you added those tasks using a different app. So that is a nice first demonstration of how remotestorage
+        separates the data you own from the apps you happen to use.</p>
       <p>Remote storage is of course a vital piece of the puzzle when using unhosted web apps, because
         they have no per-app server-side database backend of themselves. The remotestorage protocol and the 
         remoteStorage.js library are something many of us have been working on really hard for years, and since last week, finally, we are able to
-        use it for a few real production-ready apps. So we are really enthusiastic about this recent release, and hope you enjoy it as much as we do! :)</p>
+        use it for a few real apps. So we are really enthusiastic about this recent release, and hope you enjoy it as much as we do! :)</p>
     </article>
 	
     <div class="logo">
