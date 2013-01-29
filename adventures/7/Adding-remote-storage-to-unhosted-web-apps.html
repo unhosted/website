@@ -31,10 +31,11 @@
         your personal server as cloud storage.</p>
       <p>The protocol by which a client interacts with a remotestorage server is describe in
         <a href="https://tools.ietf.org/id/draft-dejong-remotestorage-00.txt">draft-dejong-remotestorage-00</a>,
-        an IETF Internet-Draft that is currently in version -00. At its core are the http protocol, TLS, and CORS headers.</p>
+        an IETF Internet-Draft that is currently in version -00. At its core are the http protocol, TLS, and
+        <a href="https://en.wikipedia.org/wiki/Cross-origin_resource_sharing">CORS headers</a>.</p>
       <p>A remotestorage server allows you to store, retrieve, and remove documents in a directory structure,
         using http PUT, GET, and DELETE verbs, respectively. It will respond with
-        <a href="https://en.wikipedia.org/wiki/Cross-origin_resource_sharing">CORS headers</a> in the http response, so
+        CORS headers in the http response, so
         that your browser will not forbid your web app from making requests to the storage origin.</p>
       <p>As an app developer, you will not have to write these http requests yourself. You can use the
         <a href="http://remotestorage.io/integrate/">remoteStorage.js</a> library.</p>
