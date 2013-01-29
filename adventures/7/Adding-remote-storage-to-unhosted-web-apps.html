@@ -99,21 +99,25 @@
         web apps. It is very nice to see how the processes around open standards on the web actually allowed us to put this issue on the agenda in
         this way.</p>
       <p>So the way this looks to the user is like this:</p>
-      <ul>
+      <ol>
         <li>Click 'connect remotestorage'</li>
-        <li>Type your 'user@host' remotestorage address</li>
+        <li>Type your 'user@host' remotestorage address into the widget</li>
         <li>Log in to your remotestorage provider (with Persona or otherwise)</li>
         <li>Review which modules the app requests</li>
         <li>If it looks OK, click 'Accept'</li>
         <li>Your data will start appearing in the app</li>
-      </ul>
-      <!-- screenshots of first 4 steps -->
+      </ol>
+      <p>We call this the 'app first flow'. Step 4 and 5 will look something like this (example shown is <a href="https://5apps.com">5apps</a>):</p>
+      <img src="app-first.png" />
       <p>Another way to connect an unhosted web app and a remotestorage account at runtime is if you have an app launch panel that is already
         linked to your remotestorage account. You will get this for instance when you install the
         <a href="https://github.com/michielbdejong/owncloud-owa">ownCloud app</a>. Apps will simply appear with their icons in the web interface
         of your storage server, and because you launch them from there, there is no need to explicitly type in your remotestorage address once
         the app opens.</p>
-      <!-- screenshot of owa screen -->
+      <p>We call this the 'storage first flow', Fran&#231;ois invented it this summer when he was in Berlin.
+        The launch screen will probably look a bit like the home screen of a smartphone (example shown is
+        <a href="https://github.com/michielbdejong/owncloud-owa">ownCloud</a>):</p>
+      <img src="storage-first.png" />
       <h3>Featured apps</h3>
       <p>The remoteStorage.js library reached its first beta version (labeled 0.7.0) last week, and we have collected a number of
         <a href="https://unhosted.org/apps/">featured apps</a> that use this version of the library. So far, I am using the
