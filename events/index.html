@@ -4,25 +4,36 @@
     <title>unhosted web apps - featured events</title>
     <meta charset="utf-8" />
     <style>
-      h1 { color: #666; font: 55px sans-serif; margin: 40px 40px 40px 145px }
-      ul li { display: inline; float: left }
+      header h1 { color: #666; font: 55px sans-serif; margin: 40px 40px 10px 145px }
+      header p { margin: 10px 0px 40px 145px }
+      header p a { color: #666; font: 10px sans-serif; margin: 10px }
+      ul li { display: inline; float: left; text-align: center; color: #666 }
       ul li:nth-child(5n+1) { clear: left }
-      ul li a { margin: 32px }
+      ul li a { margin: 32px; color: #666 }
+      ul li p a { margin: 0px }
       ul li a img { color: #E0E0E0; margin: 1px auto; border-style: solid; border-radius: 8px; box-shadow: 0 0 1em #D0D0D0 }
-      ul li a p { color: #666; text-align: center }
     </style>
   </head>
   <body>
-    <h1>featured events</h1>
+    <header>
+      <h1>featured events</h1>
+      <p>
+        <a href="../"><strong>&lt;&lt; back</strong></a>
+        <a href="https://github.com/unhosted/website/tree/master/apps/events.html"><strong>+ add yours</strong></a></p>
+      </p>
+    </header>
     <section>
       <ul>
-        <li> <a href="http://2013.unhosted.org/"><img src="unhost13.png" /><p>Unho&#353;&#357;13</p></a> </li>
-        <li> <a href="http://berlinjs.org/apps/"><img src="berlinjs.png" /><p>apps.berlin.js</p></a> </li>
-        <li> <a href="http://hackerbeach.org/"><img src="hackerbeach.png" /><p>Hacker Beach</p></a> </li>
-        <li> <a href="http://2012.unhosted.org/"><img src="unhost12.png" /><p>Unho&#353;&#357;12</p></a> </li>
-        <li> <a href="http://2011.unhosted.org/"><img src="unhost11.png" /><p>Unho&#353;&#357;11</p></a> </li>
-        <li> <a href="https://github.com/unhosted/website/tree/master/events/index.html"><img src="add.png" /><p>add yours</p></a> </li>
-        <li> <a href="../"><img src="back.png" /><p>back</p></a> </li>
+        <li> <a href="http://2013.unhosted.org/"><img src="unhost13.png" /></a>
+          <p><a href="http://2013.unhosted.org/">Unho&#353;&#357;13</a></p><p>September 2013</p> </li>
+        <li> <a href="http://berlinjs.org/apps/"><img src="berlinjs.png" /></a>
+          <p><a href="http://berlinjs.org/apps/">apps.berlin.js</a></p><p>every 3 months</p></li>
+        <li> <a href="http://hackerbeach.org/"><img src="hackerbeach.png" /></a>
+          <p><a href="http://hackerbeach.org/">Hacker Beach</a></p><p>when it makes sense</p></li>
+        <li> <a href="http://2012.unhosted.org/"><img src="unhost12.png" /></a>
+          <p><a href="http://2012.unhosted.org/">Unho&#353;&#357;12</a></p><p>last year</p> </li>
+        <li> <a href="http://2011.unhosted.org/"><img src="unhost11.png" /></a>
+          <p><a href="http://2011.unhosted.org/">Unho&#353;&#357;11</a></p><p>before that</p> </li>
       </ul>
     </section>
   </body>
