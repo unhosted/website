@@ -1,3 +1,55 @@
+<p>As a member of the No Cookie Crew you will using unhosted web apps for everything you currently use hosted web apps for.
+None of these apps will store your user data, because they do not have a server backend to store it on. You will have to
+store your data yourself.</p>
+<p>Collecting and organizing your own data is quite a bit of work, depending on how organized you want to be about it.
+This work is usually done by the developers and system administrators of the hosted web apps you have been using.
+The main task is to "tidy your room", like a kid putting all their toys back in the right storage place inside their bedroom.</p>
+
+<h3>Collecting your data from your own backups</h3>
+<p>We sometimes like to pretend that the Chromebook generation is already here, and that all our data is in the cloud. In reality,
+obviously, a lot of our data is still just on our laptop hard disk, on external hard disks, on USB sticks, and on DVDs that we
+created over the years.</p>
+<p>The first step towards making this data usable with unhosted web apps is to put it all together in one place. When I started
+doing this, I realised I have roughly four types of data, if you split by the reason why I'm keeping it:</p>
+<ul>
+  <li>Souvenirs: mainly folders with photos, and videos. I hardly ever access these, but at the same time they are in a way
+    the most valuable, since they are unique and personal, and represent powerful memories.</li>
+  <li>Products: things I published in the past, like for instance papers I wrote as a student, code I published over the years,
+    and the content of my website. In several cases I have source files that were not published as such, for instance original
+    svg files of designs that were published only as png files, or screen-printed onto a T-shirt. It's all the original raw copies
+    of the things that took me some effort to create, and that I may want to reuse in the future.</li>
+  <li>Media Cache: my music collection, mostly. It used to be that when you lost a CD, you could no longer listen to it, but for
+    all but the most obscure and rare albums, this is no longer the case, and should you lose this data, then it's easy to get
+    it back from elsewhere.</li>
+  <li>Working Set: the files I open and edit most often, but that are part of a product that is not finished yet, or that
+    (unlike souvenirs) have only a temporary relevance.</li>
+</ul>
+<p>Most work goes into pruning the ever growing Working Set: determining which files and folders can be safely deleted (or moved
+to the "old/" folder), archiving all the source files of products I've published, and deciding which souvenirs to keep and which
+ones are really just more of the same.</p>
+<p>My "to do" list and calendar clearly fit into "Working Set", but the one thing that doesn't really fit into this is my address
+book. It is at the same time part of my working set, my products, and my souvenirs. I use them it on a daily basis, but many contacts
+in there are from the past, and I only keep them just in case some day I want to reuse those contacts for a new project, and of course
+there is also a nostalgic value to an address book.</p>
+
+<h3>Some stuff on your Indie Web server, the rest on your Freedombox server</h3>
+<p>At first, we had the idea of putting all this data of various types into one remotestorage account. This idea quickly ran into three
+problems: first, after scanning in all my backup DVDs, even after removing all the duplicate folders, I had gathered about 40 Gigs, and my
+server only has 7 Gigs of disk space. It is possible to get a bigger server of course, but this didn't seem like an efficient thing to
+spend money on, especially for the Media Cache data.</p>
+<p>Second, I am often in places with limited bandwidth, and even if I would upload 40 Gigs to my remote server, it would still be a waste
+of resources to try to stream music from there for hours on end.</p>
+<p>Third, even though I want to upload my photos to a place where I can share them with friends, I have a lot of my photos in formats
+that take up several Megabytes, and typically photos you share online would probably be more around 50 K for good online browsing
+performance. So even if I upload all my photos to my Indie Web server, I would want to upload the "web size" version of them, and not
+the huge originals.</p>
+<p>After some discussion with Basti and Fran&cdille;ois, I concluded that having one remote storage server is not enough to cover all use
+cases: you need two. The "Indie Web" one should be always on, on a public domain name, and the "Freedombox" one should be in your home.</p>
+<p>On your Indie Web server, you would store only a copy of your Working Set data,
+plus probably sized down derivatives of some of your products and
+souvenirs. On your Freedombox you would simply store everything.</p>
+<p>This means you will already have to do some manual versioning, probably, and think about when to upload something to your Indie Web
+server.
 Export your data from Google: <img src="google.png" />
 
 and from Facebook: <img src="facebook.png" />
