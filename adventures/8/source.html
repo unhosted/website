@@ -1,0 +1,97 @@
+Export your data from Google: <img src="google.png" />
+
+and from Facebook: <img src="facebook.png" />
+
+for twitter, data is mostly transient, but to export your contacts,
+you can do for instance this:
+on https://twitter.com/following or https://twitter.com/followers
+open the web console (Ctrl-Shift-K in Firefox), and paste:
+<pre><code>
+  var screenNames = [],
+    accounts = document.getElementsByClassName('account');
+  for(var i=0; i<accounts.length; i++) {
+    screenNames.push(accounts[i].getAttribute('data-screen-name'));
+  }
+  alert(screenNames);
+</code></pre>
+Do make sure you scroll down first to get all the accounts in view.
+You could also go through the api of course (see episode 5).
+  
+  
+      <h2>Episode 10: Collecting and organizing your data</h2>
+
+
+
+You will have souvenirs, products, "media cache" and "hand data". Media cache is data of which
+you keep a mirror copy, even if it's available online, because it's big, or because you are not
+always online. Hand data refers to currently unfinished projects, but also
+includes pan-project data like your contacts or calendar:
+    souvenirs
+    products
+    mediaCache
+    handData
+      contacts
+      messages+stream
+      calendar+tasks
+      money
+      bookmarks
+      preferences+settings
+      documents
+
+Google Takeout: https://accounts.google.com/ServiceLogin?service=backup
+Facebook zip file: Account > Settings > Download your information.
+Twitter: following, followers.
+
+Convert photos to 50K "web size"
+
+Convert your music and sound to ogg:
+
+    for i in `ls */*/*` ; do echo avconv -i $i -acodec libvorbis -aq 60 ~/allmydata/mediaCache/$i.ogg ; done | sh
+
+Convert your videos to ogg: [TODO: fix image quality, make sound work]
+
+    for i in `ls *.AVI` ; do echo avconv -i $i -f ogg ~/allmydata/souvenirs/$i.ogg ; done | sh
+
+
+Playlist app for music:
+    <!DOCTYPE html>
+    <html lang="en">
+      <head>
+        <meta charset="utf-8" />
+        <title>Programming</title>
+      </head>
+      <body>
+        <h1>Programming</h1>
+        <audio id="player"></audio>
+        <ul id="playlist"></ul>
+      </body>
+      <script>
+        var songs = [
+          '99 problems.ogg',
+          'skrillex.ogg',
+          'minimal.ogg'
+        ];
+        var i=0;    
+        document.getElementById('player').controls=false;
+    
+        function go() {
+          document.getElementById('player').src=songs[i];
+          document.getElementById('player').play();
+          var str ='';
+          for(var j=0; j<songs.length; j++) {
+            if(j==i) {
+              str += '<li><strong>'+songs[j]+'</strong>(playing)';
+            } else {
+              str += '<li>'+songs[j]+'<input type="submit" value="play" onclick="i='+j+'; go();" /></li>';
+            }
+          }
+          document.getElementById('playlist').innerHTML = str;
+        }
+    
+        document.querySelector('audio').addEventListener('pause', function() {
+          i = (i+1) % songs.length;
+          go();
+        }, false);
+        go();
+      </script>
+    </html>

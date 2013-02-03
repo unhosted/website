@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="description" content="Weekly Handbook about Unhosted Web App" />
+    <title>Unhosted 8: Collecting and organizing your data</title>
+    <link rel="stylesheet" href="../hljs/default.min.css" />
+    <link rel="hub" href="http://pubsubhubbub.appspot.com/"/>
+    <link rel="updates alternate" type="application/atom+xml" href="../feed.atom" />
+    <link rel="author" type="text/html" href="https://michielbdejong.com/"/>
+
+    <script src="../hljs/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <link rel="stylesheet" href="../adventures.css" />
+  </head>
+
+  <body>
+    <article>
+      <header>
+        <h1>Unhosted Adventures</h1>
+        <h2>Weekly Handbook about Unhosted Web Apps</h2>
+      </header>
+      
+      <h2>8. Collecting and organizing your data</h2>
+
+Export your data from Google: <img src="google.png" />
+
+and from Facebook: <img src="facebook.png" />
+
+for twitter, data is mostly transient, but to export your contacts,
+you can do for instance this:
+on https://twitter.com/following or https://twitter.com/followers
+open the web console (Ctrl-Shift-K in Firefox), and paste:
+<pre><code>
+  var screenNames = [],
+    accounts = document.getElementsByClassName('account');
+  for(var i=0; i<accounts.length; i++) {
+    screenNames.push(accounts[i].getAttribute('data-screen-name'));
+  }
+  alert(screenNames);
+</code></pre>
+Do make sure you scroll down first to get all the accounts in view.
+You could also go through the api of course (see episode 5).
+  
+  
+      <h2>Episode 10: Collecting and organizing your data</h2>
+
+
+
+You will have souvenirs, products, "media cache" and "hand data". Media cache is data of which
+you keep a mirror copy, even if it's available online, because it's big, or because you are not
+always online. Hand data refers to currently unfinished projects, but also
+includes pan-project data like your contacts or calendar:
+    souvenirs
+    products
+    mediaCache
+    handData
+      contacts
+      messages+stream
+      calendar+tasks
+      money
+      bookmarks
+      preferences+settings
+      documents
+
+Google Takeout: https://accounts.google.com/ServiceLogin?service=backup
+Facebook zip file: Account > Settings > Download your information.
+Twitter: following, followers.
+
+Convert photos to 50K "web size"
+
+Convert your music and sound to ogg:
+
+    for i in `ls */*/*` ; do echo avconv -i $i -acodec libvorbis -aq 60 ~/allmydata/mediaCache/$i.ogg ; done | sh
+
+Convert your videos to ogg: [TODO: fix image quality, make sound work]
+
+    for i in `ls *.AVI` ; do echo avconv -i $i -f ogg ~/allmydata/souvenirs/$i.ogg ; done | sh
+
+
+Playlist app for music:
+    <!DOCTYPE html>
+    <html lang="en">
+      <head>
+        <meta charset="utf-8" />
+        <title>Programming</title>
+      </head>
+      <body>
+        <h1>Programming</h1>
+        <audio id="player"></audio>
+        <ul id="playlist"></ul>
+      </body>
+      <script>
+        var songs = [
+          '99 problems.ogg',
+          'skrillex.ogg',
+          'minimal.ogg'
+        ];
+        var i=0;    
+        document.getElementById('player').controls=false;
+    
+        function go() {
+          document.getElementById('player').src=songs[i];
+          document.getElementById('player').play();
+          var str ='';
+          for(var j=0; j<songs.length; j++) {
+            if(j==i) {
+              str += '<li><strong>'+songs[j]+'</strong>(playing)';
+            } else {
+              str += '<li>'+songs[j]+'<input type="submit" value="play" onclick="i='+j+'; go();" /></li>';
+            }
+          }
+          document.getElementById('playlist').innerHTML = str;
+        }
+    
+        document.querySelector('audio').addEventListener('pause', function() {
+          i = (i+1) % songs.length;
+          go();
+        }, false);
+        go();
+      </script>
+    </html>
+    </article>      
+	
+    <div class="logo">
+      <img src="/img/island-color.png" />
+    </div>
+    
+    <nav>
+      <div>
+        <h4>Episodes:</h4>
+        <p> 1. <a href="../1/Personal-servers-and-unhosted-web-apps.html">Personal servers and unhosted web apps</a></p>
+        <p> 2. <a href="../2/An-unhosted-editor.html">An unhosted editor</a></p>
+        <p> 3. <a href="../3/Setting-up-your-personal-server.html">Setting up your personal server</a></p>
+        <p> 4. <a href="../4/WebSockets.html">WebSockets</a></p>
+        <p> 5. <a href="../5/Facebook-and-Twitter-from-nodejs.html">Facebook and Twitter from nodejs</a></p>
+        <p> 6. <a href="../6/Controlling-your-server-over-a-WebSocket.html">Controlling your server over a WebSocket</a></p>
+        <p> 7. <a href="../7/Adding-remote-storage-to-unhosted-web-apps.html">Adding remote storage to unhosted web apps</a></p>
+        <p><strong>8. Collecting and organizing your data</strong></p>
+      </div>
+            
+      <div>
+        <h4>Follow:</h4> 
+        <ul>
+          <li style="list-style-image: url('/img/atom.gif')"><a target="_blank" href="../feed.atom">atom</a></li>
+          <li style="list-style-image: url('/img/rss2.gif')"><a target="_blank" href="../feed.rss">rss</a></li>
+          <li style="list-style-image: url('/img/facebook.gif')"><a target="_blank" href="https://www.facebook.com/unhostedwebapps">facebook</a></li>
+          <li style="list-style-image: url('/img/twitter.png')"><a target="_blank" href="https://twitter.com/unhosted">twitter</a></li>
+          <li style="list-style-image: url('/img/statusnet.png')"><a target="_blank" href="https://identi.ca/unhosted">identica</a></li>
+          <li style="list-style-image: url('/img/diaspora.png')"><a target="_blank" href="https://joindiaspora.com/u/unhosted">diaspora</a></li>
+          <li style="list-style-image: url('/img/mailinglist.jpg')"><a target="_blank" href="https://groups.google.com/forum/#!forum/unhosted">mailing list</a></li>
+          <li style="list-style-image: url('/img/irc.png')"><a target="_blank" href="http://webchat.freenode.net/?channels=#unhosted">irc channel</a></li>
+        </ul>
+      </div>
+      
+      <div>
+        <h4>No Cookie Crew:</h4>
+        <div class="logo">
+          <img rel="author avatar" src="/img/michiel.jpg" />
+        </div>
+        <p>
+          <a rel="author" href="https://michielbdejong.com/">Michiel B. de Jong</a>
+        </p>
+      </div>
+      
+      <div>
+        <h4>Supporters:</h4>
+        <p>
+          <a class="logo" href="http://nlnet.nl/">
+            <img src="/img/nlnet.gif" />
+          </a>
+          &nbsp;
+        </p>
+
+        <p>
+          <a class="logo" href="http://wauland.de/">
+            <img src="/img/wau.png" />
+          </a>
+          &nbsp;
+        </p>
+
+        <p>
+          <a class="logo" href="http://www.gabrielweinberg.com/blog/2012/03/duckduckgo-foss-donations-2011.html">
+            <img src="/img/duckduckgo.jpg" />
+          </a>
+          &nbsp;
+        </p>
+
+        <p>
+          and <a href="/thankyou.html">many more</a>&hellip;
+        </p>
+      </div>
+    </nav>
+    
+    <footer>
+      <strong>You can follow</strong>
+      <img src="/img/twitter.png" /><a target="_blank" href="https://twitter.com/unhosted">@unhosted</a>
+      <strong>on twitter and in</strong>
+      <a href="#">many other ways</a><strong>. So stay tuned! :)</strong>
+      </strong>
+    </footer>
+  </body>
+</html>
