@@ -1,4 +1,4 @@
-var latestEpisode = 1;
+var latestEpisode = 7;
 
 var fs = require('fs'),
   part0 = fs.readFileSync('build/0.html'),
@@ -24,6 +24,6 @@ function makeEpisodesDiv(current) {
 for(var i=1; i<=latestEpisode; i++) {
   var source = fs.readFileSync(i+'/source.html'),
     title = '    <title>Unhosted '+ i +': '+ episodes[i] +'</title>\n',
-    header = '      <h2>'+ i + '. '+ episodes[i] +'</h2>\n\n';
+    header = '      <h2>Episode '+ i + ': '+ episodes[i] +'</h2>\n\n';
   fs.writeFileSync(getFilename(i), part0 + title + part1 + header + source + part2 + makeEpisodesDiv(i) + part3);
 }
