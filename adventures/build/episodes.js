@@ -5,5 +5,7 @@
   "4": "WebSockets",
   "5": "Facebook and Twitter from nodejs",
   "6": "Controlling your server over a WebSocket",
-  "7": "Adding remote storage to unhosted web apps"
+  "7": "Adding remote storage to unhosted web apps",
+  "8": "Collecting and organizing your data",
+  "9": "Email"
 }
