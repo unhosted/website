@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="description" content="Weekly Handbook about Unhosted Web App" />
+    <title>Unhosted 8: Collecting and organizing your data</title>
+    <link rel="stylesheet" href="../hljs/default.min.css" />
+    <link rel="hub" href="http://pubsubhubbub.appspot.com/"/>
+    <link rel="updates alternate" type="application/atom+xml" href="../feed.atom" />
+    <link rel="author" type="text/html" href="https://michielbdejong.com/"/>
+
+    <script src="../hljs/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <link rel="stylesheet" href="../adventures.css" />
+  </head>
+
+  <body>
+    <article>
+      <header>
+        <h1>Unhosted Adventures</h1>
+        <h2>A Handbook that grows every Tuesday</h2>
+      </header>
+      
+      <h2>8. Collecting and organizing your data</h2>
+
+<p>As a member of the No Cookie Crew you will using unhosted web apps for everything you currently use hosted web apps for.
+None of these apps will store your user data, because they do not have a server backend to store it on. You will have to
+store your data yourself.</p>
+<p>Collecting and organizing your own data is quite a bit of work, depending on how organized you want to be about it.
+This work is usually done by the developers and system administrators of the hosted web apps you have been using.
+The main task is to "tidy your room", like a kid putting all their toys back in the right storage place inside their bedroom.</p>
+
+<h3>Collecting your data from your own backups</h3>
+<p>We sometimes like to pretend that the Chromebook generation is already here, and that all our data is in the cloud. In reality,
+obviously, a lot of our data is still just on our laptop hard disk, on external hard disks, on USB sticks, and on DVDs that we
+created over the years.</p>
+<p>The first step towards making this data usable with unhosted web apps is to put it all together in one place. When I started
+doing this, I realised I have roughly four types of data, if you split by the reason why I'm keeping it:</p>
+<ul>
+  <li>Souvenirs: mainly folders with photos, and videos. I hardly ever access these, but at the same time they are in a way
+    the most valuable, since they are unique and personal, and represent powerful memories.</li>
+  <li>Products: things I published in the past, like for instance papers I wrote as a student, code I published over the years,
+    and the content of my website. In several cases I have source files that were not published as such, for instance original
+    svg files of designs that were published only as png files, or screen-printed onto a T-shirt. It's all the original raw copies
+    of the things that took me some effort to create, and that I may want to reuse in the future.</li>
+  <li>Media Cache: my music collection, mostly. It used to be that when you lost a CD, you could no longer listen to it, but for
+    all but the most obscure and rare albums, this is no longer the case, and should you lose this data, then it's easy to get
+    it back from elsewhere.</li>
+  <li>Working Set: the files I open and edit most often, but that are part of a product that is not finished yet, or that
+    (unlike souvenirs) have only a temporary relevance.</li>
+</ul>
+<p>Most work goes into pruning the ever growing Working Set: determining which files and folders can be safely deleted (or moved
+to the "old/" folder), archiving all the source files of products I've published, and deciding which souvenirs to keep and which
+ones are really just more of the same.</p>
+<p>My "to do" list and calendar clearly fit into "Working Set", but the one thing that doesn't really fit into this is my address
+book. It is at the same time part of my working set, my products, and my souvenirs. I use them it on a daily basis, but many contacts
+in there are from the past, and I only keep them just in case some day I want to reuse those contacts for a new project, and of course
+there is also a nostalgic value to an address book.</p>
+
+<h3>Some stuff on your Indie Web server, the rest on your Freedombox server</h3>
+<p>At first, we had the idea of putting all this data of various types into one remotestorage account. This idea quickly ran into three
+problems: first, after scanning in all my backup DVDs, even after removing all the duplicate folders, I had gathered about 40 Gigs, and my
+server only has 7 Gigs of disk space. It is possible to get a bigger server of course, but this didn't seem like an efficient thing to
+spend money on, especially for the Media Cache data.</p>
+<p>Second, I am often in places with limited bandwidth, and even if I would upload 40 Gigs to my remote server, it would still be a waste
+of resources to try to stream music from there for hours on end.</p>
+<p>Third, even though I want to upload my photos to a place where I can share them with friends, I have a lot of my photos in formats
+that take up several Megabytes, and typically photos you share online would probably be more around 50 K for good online browsing
+performance. So even if I upload all my photos to my Indie Web server, I would want to upload the "web size" version of them, and not
+the huge originals.</p>
+<p>After some discussion with Basti and Fran&cdille;ois, I concluded that having one remote storage server is not enough to cover all use
+cases: you need two. The "Indie Web" one should be always on, on a public domain name, and the "Freedombox" one should be in your home.</p>
+<p>On your Indie Web server, you would store only a copy of your Working Set data,
+plus probably sized down derivatives of some of your products and
+souvenirs. On your Freedombox you would simply store everything.</p>
+<p>This means you will already have to do some manual versioning, probably, and think about when to upload something to your Indie Web
+server.
+Export your data from Google: <img src="google.png" />
+
+and from Facebook: <img src="facebook.png" />
+
+for twitter, data is mostly transient, but to export your contacts,
+you can do for instance this:
+on https://twitter.com/following or https://twitter.com/followers
+open the web console (Ctrl-Shift-K in Firefox), and paste:
+<pre><code>
+  var screenNames = [],
+    accounts = document.getElementsByClassName('account');
+  for(var i=0; i<accounts.length; i++) {
+    screenNames.push(accounts[i].getAttribute('data-screen-name'));
+  }
+  alert(screenNames);
+</code></pre>
+Do make sure you scroll down first to get all the accounts in view.
+You could also go through the api of course (see episode 5).
+  
+  
+      <h2>Episode 10: Collecting and organizing your data</h2>
+
+
+
+You will have souvenirs, products, "media cache" and "hand data". Media cache is data of which
+you keep a mirror copy, even if it's available online, because it's big, or because you are not
+always online. Hand data refers to currently unfinished projects, but also
+includes pan-project data like your contacts or calendar:
+    souvenirs
+    products
+    mediaCache
+    handData
+      contacts
+      messages+stream
+      calendar+tasks
+      money
+      bookmarks
+      preferences+settings
+      documents
+
+Google Takeout: https://accounts.google.com/ServiceLogin?service=backup
+Facebook zip file: Account > Settings > Download your information.
+Twitter: following, followers.
+
+Convert photos to 50K "web size"
+
+Convert your music and sound to ogg:
+
+    for i in `ls */*/*` ; do echo avconv -i $i -acodec libvorbis -aq 60 ~/allmydata/mediaCache/$i.ogg ; done | sh
+
+Convert your videos to ogg: [TODO: fix image quality, make sound work]
+
+    for i in `ls *.AVI` ; do echo avconv -i $i -f ogg ~/allmydata/souvenirs/$i.ogg ; done | sh
+
+
+Playlist app for music:
+    <!DOCTYPE html>
+    <html lang="en">
+      <head>
+        <meta charset="utf-8" />
+        <title>Programming</title>
+      </head>
+      <body>
+        <h1>Programming</h1>
+        <audio id="player"></audio>
+        <ul id="playlist"></ul>
+      </body>
+      <script>
+        var songs = [
+          '99 problems.ogg',
+          'skrillex.ogg',
+          'minimal.ogg'
+        ];
+        var i=0;    
+        document.getElementById('player').controls=false;
+    
+        function go() {
+          document.getElementById('player').src=songs[i];
+          document.getElementById('player').play();
+          var str ='';
+          for(var j=0; j<songs.length; j++) {
+            if(j==i) {
+              str += '<li><strong>'+songs[j]+'</strong>(playing)';
+            } else {
+              str += '<li>'+songs[j]+'<input type="submit" value="play" onclick="i='+j+'; go();" /></li>';
+            }
+          }
+          document.getElementById('playlist').innerHTML = str;
+        }
+    
+        document.querySelector('audio').addEventListener('pause', function() {
+          i = (i+1) % songs.length;
+          go();
+        }, false);
+        go();
+      </script>
+    </html>
+    </article>      
+	
+    <div class="logo">
+      <img src="/img/island-color.png" />
+    </div>
+    
+    <nav>
+      <div>
+        <h4>Episodes:</h4>
+        <p> 1. <a href="../1/Personal-servers-and-unhosted-web-apps.html">intro</a></p>
+        <p> 2. <a href="../2/An-unhosted-editor.html">editor</a></p>
+        <p> 3. <a href="../3/Setting-up-your-personal-server.html">server</a></p>
+        <p> 4. <a href="../4/WebSockets.html">websockets</a></p>
+        <p> 5. <a href="../5/Facebook-and-Twitter-from-nodejs.html">social</a></p>
+        <p> 6. <a href="../6/Controlling-your-server-over-a-WebSocket.html">sockethub</a></p>
+        <p> 7. <a href="../7/Adding-remote-storage-to-unhosted-web-apps.html">remotestorage</a></p>
+        <p><strong>8. your data</strong></p>
+      </div>
+            
+      <div>
+        <h4>Follow:</h4> 
+        <ul>
+          <li style="list-style-image: url('/img/atom.gif')"><a target="_blank" href="../feed.atom">atom</a></li>
+          <li style="list-style-image: url('/img/rss2.gif')"><a target="_blank" href="../feed.rss">rss</a></li>
+          <li style="list-style-image: url('/img/facebook.gif')"><a target="_blank" href="https://www.facebook.com/unhostedwebapps">facebook</a></li>
+          <li style="list-style-image: url('/img/twitter.png')"><a target="_blank" href="https://twitter.com/unhosted">twitter</a></li>
+          <li style="list-style-image: url('/img/statusnet.png')"><a target="_blank" href="https://identi.ca/unhosted">identica</a></li>
+          <li style="list-style-image: url('/img/diaspora.png')"><a target="_blank" href="https://joindiaspora.com/u/unhosted">diaspora</a></li>
+          <li style="list-style-image: url('/img/mailinglist.jpg')"><a target="_blank" href="https://groups.google.com/forum/#!forum/unhosted">mailing list</a></li>
+          <li style="list-style-image: url('/img/irc.png')"><a target="_blank" href="http://webchat.freenode.net/?channels=#unhosted">irc channel</a></li>
+        </ul>
+      </div>
+      
+      <div>
+        <h4>No Cookie Crew:</h4>
+        <div class="logo">
+          <img rel="author avatar" src="/img/michiel.jpg" />
+        </div>
+        <p>
+          <a rel="author" href="https://michielbdejong.com/">Michiel B. de Jong</a>
+        </p>
+      </div>
+      
+      <div>
+        <h4>Supporters:</h4>
+        <p>
+          <a class="logo" href="http://nlnet.nl/">
+            <img src="/img/nlnet.gif" />
+          </a>
+          &nbsp;
+        </p>
+
+        <p>
+          <a class="logo" href="http://wauland.de/">
+            <img src="/img/wau.png" />
+          </a>
+          &nbsp;
+        </p>
+
+        <p>
+          <a class="logo" href="http://www.gabrielweinberg.com/blog/2012/03/duckduckgo-foss-donations-2011.html">
+            <img src="/img/duckduckgo.jpg" />
+          </a>
+          &nbsp;
+        </p>
+
+        <p>
+          and <a href="/thankyou.html">many more</a>&hellip;
+        </p>
+      </div>
+    </nav>
+    
+    <footer>
+      <strong>You can follow</strong>
+      <img src="/img/twitter.png" /><a target="_blank" href="https://twitter.com/unhosted">@unhosted</a>
+      <strong>on twitter and in</strong>
+      <a href="#">many other ways</a><strong>. So stay tuned! :)</strong>
+      </strong>
+    </footer>
+  </body>
+</html>

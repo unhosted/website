@@ -1,0 +1,13 @@
+We will use simplesmtp(?) and MailParser for incoming, and SendGrid for outgoing.
+
+We moved the 'to' and 'toname' fields of the SendGrid email object into 'target', set the 'from' and 'fromname' fields on the server, and left the other fields as the
+'object' of the 'send' command in version 0.1 of the 'smtp' world.
+
+SendGrid seems to support bcc but not cc for outgoing mail, at least according to the documentation.
+
+Here is the code: [...]
+
+And here is the editor app with email sending functionality added to it: [...]
+
+For receiving email we simply saved the parsed objects to a folder, which you may then access using the new 'next' command from the file world: [...]
+
