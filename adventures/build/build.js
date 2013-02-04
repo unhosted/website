@@ -1,4 +1,4 @@
-var latestEpisode = 8;
+var latestEpisode = 7;
 
 var fs = require('fs'),
   part0 = fs.readFileSync('build/0.html'),
