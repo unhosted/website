@@ -20,7 +20,7 @@ doing this, I realised I have roughly four types of data, if you split it by the
     of the things that took me some effort to create, and that I may want to reuse in the future.</li>
   <li>Media Cache: my music collection, mostly. It used to be that when you lost a CD, you could no longer listen to it, but for
     all but the most obscure and rare albums, this is no longer the case, and should you lose this data, then it's easy to get
-    it back from elsewhere. The only reason you cache is is basically so that you don't have to stream it.</li>
+    it back from elsewhere. The only reason you cache it is basically so that you don't have to stream it.</li>
   <li>Working Set: the files I open and edit most often, but that are part of a product that is not finished yet, or that
     (unlike souvenirs) have only a temporary relevance.</li>
 </ul>
@@ -49,7 +49,7 @@ cases: you need two. The "Indie Web" one should be always on, on a public domain
 plus probably sized down derivatives of some of your products and
 souvenirs. On your Freedombox you would simply store everything.</p>
 <p>This means you will already have to do some manual versioning, probably, and think about when to upload something to your Indie Web
-server. At some point we will probably want to build publishing apps that connect to both accounts take care of this, but for now, since
+server. At some point we will probably want to build publishing apps that connect to both accounts and take care of this, but for now, since
   we have webshell access to both servers, we can do this with a simple <code>scp</code> command.</p>
 
 <h3>Freedombox and the remotestorage-stick</h3>
@@ -58,11 +58,11 @@ server. At some point we will probably want to build publishing apps that connec
   server and a USB drive that you stick into it, for the data storage. The two reasons for splitting the device this way are that it makes it
   clear to the user where their data is and how they can copy it and back it up, and that it makes tech support easier, since the device contains
   no valuable data, and can thus easily be reset to factory settings.</p>
-<p>To allow this Freedombox to also serve a public website, we would sell a package containing:</p>
+<p>To allow this FreedomBox to also serve a public website, we would sell a package containing:</p>
 <ul>
   <li>the plug server</li>
   <li>the 'remotestorage-stick'</li>
-  <li>a <a href="https://pagekite.net/">PageKite</a> account to tunnel through</li>
+  <li>a <a href="https://pagekite.net/">Pagekite</a> account to tunnel through</li>
   <li>a TLS certificate for end-to-end encryption</li>
   <li>tokens for flattering unhosted web apps in the 5apps store</li>
 </ul>
@@ -71,14 +71,16 @@ server. At some point we will probably want to build publishing apps that connec
   tiny ones that have the hardware built into the connector and don't stick out, so I leave it plugged in to my laptop by default.</p>
 
 <h3>Putting your data into your remotestorage server</h3>
-<p>By way of FreedomBox prototype, I installed ownCloud on my localhost and added a 'freedombox' domain, pointing to 127.0.0.1, to my <code>/etc/hosts</code>.
+<p>By way of FreedomBox prototype, I installed ownCloud on my localhost and pointed a 'freedombox' domain to 127.0.0.1 in my <code>/etc/hosts</code>.
 To make your data available through a remotestorage API, install one of the remotestorage-compatible personal data servers listed under 'host your own storage'
-  on <a href="http://remotestorage.io/get/">remotestorage.io/get/</a>. I went for the ownCloud one here, because it maps data directly onto the filesystem (it
+  on <a href="http://remotestorage.io/get/">remotestorage.io/get/</a>. I went for the ownCloud one here, because (like the php-remoteStorage one) it maps data
+  directly onto the filesystem (it
 uses extended attributes to store the Content-Types). This means you can just import data onto your remotestorage account by copying it onto your
   remotestorage-stick. Do make sure your remotestorage-stick is formatted with a filesystem that supports extended file attributes.</p>
 
 <h3>Export your data from Google, Facebook and Twitter</h3>
-<p><em><strong>No Cookie Crew  - Warning #5:</strong> For this tutorial you will need to update your personal server using an ssh/scp client.</em></p>
+<p><em><strong>No Cookie Crew  - Warning #5:</strong> You will have to log in to these services now, because apart from Twitter, they do not offer this same
+  functionality through their APIs.</em></p>
 
 <p>This part is quite fun: Data Liberation! :) It is actually quite easy to download all your data from Google. This is what it looks like:</p>
   <img src="google.png" />
