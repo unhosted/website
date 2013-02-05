@@ -4,7 +4,7 @@
  <title>Unhosted Adventures</title>
  <subtitle>Official Handbook of the No Cookie Crew</subtitle>
   <logo>https://unhosted.org/adventures/img/island-color.jpg</logo>
- <updated>2012-12-18T10:00:00+08:00</updated>
+ <updated>2013-02-05T12:00:00.000Z</updated>
 <author>
  <activity:object-type>http://activitystrea.ms/schema/1.0/person</activity:object-type>
   <uri>https://michielbdejong.com/</uri>
@@ -26,12 +26,62 @@
 <link href="https://unhosted.org/adventures/feed.atom" rel="self" type="application/atom+xml"/>
 <entry>
  <activity:object-type>http://activitystrea.ms/schema/1.0/comment</activity:object-type>
+ <id>https://unhosted.org/adventures/8/Collecting-and-organizing-your-data.html</id>
+ <title>8. Collecting and organizing your data</title>
+ <link rel="alternate" type="text/html" href="https://unhosted.org/adventures/8/Collecting-and-organizing-your-data.html"/>
+ <activity:verb>http://activitystrea.ms/schema/1.0/post</activity:verb>
+ <published>2013-02-05T12:00:00.000Z</published>
+ <updated>2013-02-05T12:00:00.000Z</updated>
+ <georss:point>10.20 104.0</georss:point>
+</entry>
+<entry>
+ <activity:object-type>http://activitystrea.ms/schema/1.0/comment</activity:object-type>
+ <id>https://unhosted.org/adventures/7/Adding-remote-storage-to-unhosted-web-apps.html</id>
+ <title>7. Adding remote storage to unhosted web apps</title>
+ <link rel="alternate" type="text/html" href="https://unhosted.org/adventures/7/Adding-remote-storage-to-unhosted-web-apps.html"/>
+ <activity:verb>http://activitystrea.ms/schema/1.0/post</activity:verb>
+ <published>2013-01-29T12:00:00.000Z</published>
+ <updated>2013-01-29T12:00:00.000Z</updated>
+ <georss:point>10.20 104.0</georss:point>
+</entry>
+<entry>
+ <activity:object-type>http://activitystrea.ms/schema/1.0/comment</activity:object-type>
+ <id>https://unhosted.org/adventures/6/Controlling-your-server-over-a-WebSocket.html</id>
+ <title>6. Controlling your server over a WebSocket</title>
+ <link rel="alternate" type="text/html" href="https://unhosted.org/adventures/6/Controlling-your-server-over-a-WebSocket.html"/>
+ <activity:verb>http://activitystrea.ms/schema/1.0/post</activity:verb>
+ <published>2013-01-22T12:00:00.000Z</published>
+ <updated>2013-01-22T12:00:00.000Z</updated>
+ <georss:point>10.20 104.0</georss:point>
+</entry>
+<entry>
+ <activity:object-type>http://activitystrea.ms/schema/1.0/comment</activity:object-type>
+ <id>https://unhosted.org/adventures/5/Facebook-and-Twitter-from-nodejs.html</id>
+ <title>5. Facebook and Twitter from nodejs</title>
+ <link rel="alternate" type="text/html" href="https://unhosted.org/adventures/5/Facebook-and-Twitter-from-nodejs.html"/>
+ <activity:verb>http://activitystrea.ms/schema/1.0/post</activity:verb>
+ <published>2013-01-15T12:00:00.000Z</published>
+ <updated>2013-01-15T12:00:00.000Z</updated>
+ <georss:point>10.20 104.0</georss:point>
+</entry>
+<entry>
+ <activity:object-type>http://activitystrea.ms/schema/1.0/comment</activity:object-type>
+ <id>https://unhosted.org/adventures/4/WebSockets.html</id>
+ <title>4. WebSockets</title>
+ <link rel="alternate" type="text/html" href="https://unhosted.org/adventures/4/WebSockets.html"/>
+ <activity:verb>http://activitystrea.ms/schema/1.0/post</activity:verb>
+ <published>2013-01-08T12:00:00.000Z</published>
+ <updated>2013-01-08T12:00:00.000Z</updated>
+ <georss:point>10.20 104.0</georss:point>
+</entry>
+<entry>
+ <activity:object-type>http://activitystrea.ms/schema/1.0/comment</activity:object-type>
  <id>https://unhosted.org/adventures/3/Setting-up-your-personal-server.html</id>
  <title>3. Setting up your personal server</title>
-  <link rel="alternate" type="text/html" href="https://unhosted.org/adventures/3/Setting-up-your-personal-server.html"/>
+ <link rel="alternate" type="text/html" href="https://unhosted.org/adventures/3/Setting-up-your-personal-server.html"/>
  <activity:verb>http://activitystrea.ms/schema/1.0/post</activity:verb>
- <published>2013-01-01T10:00:00+08:00</published>
- <updated>2013-01-01T10:00:00+08:00</updated>
+ <published>2013-01-01T12:00:00.000Z</published>
+ <updated>2013-01-01T12:00:00.000Z</updated>
  <georss:point>10.20 104.0</georss:point>
 </entry>
 <entry>
@@ -40,8 +90,8 @@
  <title>2. An unhosted editor</title>
  <link rel="alternate" type="text/html" href="https://unhosted.org/adventures/2/An-unhosted-editor.html"/>
  <activity:verb>http://activitystrea.ms/schema/1.0/post</activity:verb>
- <published>2012-12-25T10:00:00+08:00</published>
- <updated>2012-12-25T10:00:00+08:00</updated>
+ <published>2012-12-25T12:00:00.000Z</published>
+ <updated>2012-12-25T12:00:00.000Z</updated>
  <georss:point>10.20 104.0</georss:point>
 </entry>
 <entry>
@@ -50,8 +100,8 @@
  <title>1. Personal servers and unhosted web apps</title>
  <link rel="alternate" type="text/html" href="https://unhosted.org/adventures/1/Personal-servers-and-unhosted-web-apps.html"/>
  <activity:verb>http://activitystrea.ms/schema/1.0/post</activity:verb>
- <published>2012-12-18T10:00:00+08:00</published>
- <updated>2012-12-18T10:00:00+08:00</updated>
+ <published>2012-12-18T12:00:00.000Z</published>
+ <updated>2012-12-18T12:00:00.000Z</updated>
  <georss:point>10.20 104.0</georss:point>
 </entry>
 </feed>
