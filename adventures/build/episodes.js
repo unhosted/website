@@ -6,7 +6,7 @@ module.exports = {
     "websockets": "WebSockets",
     "social": "Facebook and Twitter from nodejs",
     "sockethub": "Controlling your server over a WebSocket",
-    "remotestorage": "Adding remote storage to unhosted web apps",
+    "remoteStorage": "Adding remote storage to unhosted web apps",
     "your data": "Collecting and organizing your data",
     //  * user, cache, product, souvenir
     //  * freedombox + remotestorage stick

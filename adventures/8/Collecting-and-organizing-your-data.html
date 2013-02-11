@@ -59,7 +59,7 @@ in there are from the past, and I only keep them just in case some day I want to
 there is also a nostalgic value to an address book.</p>
 
 <h3>Some stuff on your Indie Web server, the rest on your Freedombox server</h3>
-<p>At first, we had the idea of putting all this data of various types into one remotestorage account. This idea quickly ran into three
+<p>At first, we had the idea of putting all this data of various types into one remoteStorage account. This idea quickly ran into three
 problems: first, after scanning in all my backup DVDs, even after removing all the duplicate folders, I had gathered about 40 Gigs, and my
 server only has 7 Gigs of disk space. It is possible to get a bigger server of course, but this didn't seem like an efficient thing to
 spend money on, especially for the Media Cache data.</p>
@@ -78,31 +78,31 @@ souvenirs. On your Freedombox you would simply store everything.</p>
 server. At some point we will probably want to build publishing apps that connect to both accounts and take care of this, but for now, since
   we have webshell access to both servers, we can do this with a simple <code>scp</code> command.</p>
 
-<h3>Freedombox and the remotestorage-stick</h3>
+<h3>Freedombox and the remoteStorage-stick</h3>
 <p>The topic of having a data server in your home brought up the work Markus and I did on combining the
-  <a href="http://freedomboxfoundation.org/">FreedomBox</a> with remotestorage. Our idea was to split the Freedombox into the actual plug
+  <a href="http://freedomboxfoundation.org/">FreedomBox</a> with remoteStorage. Our idea was to split the Freedombox into the actual plug
   server and a USB drive that you stick into it, for the data storage. The two reasons for splitting the device this way are that it makes it
   clear to the user where their data is and how they can copy it and back it up, and that it makes tech support easier, since the device contains
   no valuable data, and can thus easily be reset to factory settings.</p>
 <p>To allow this FreedomBox to also serve a public website, we would sell a package containing:</p>
 <ul>
   <li>the plug server</li>
-  <li>the 'remotestorage-stick'</li>
+  <li>the 'remoteStorage-stick'</li>
   <li>a <a href="https://pagekite.net/">Pagekite</a> account to tunnel through</li>
   <li>a TLS certificate for end-to-end encryption</li>
   <li>tokens for flattering unhosted web apps in the 5apps store</li>
 </ul>
 <p>There is still a long way to go to make this a sellable product, but it doesn't hurt to start experimenting with its architecture ourselves
-  first, which is why I bought a usb drive, formatted it as ext4 with encryption, and mounted it as my 'remotestorage' stick. It's one of those
+  first, which is why I bought a usb drive, formatted it as ext4 with encryption, and mounted it as my 'remoteStorage' stick. It's one of those
   tiny ones that have the hardware built into the connector and don't stick out, so I leave it plugged in to my laptop by default.</p>
 
-<h3>Putting your data into your remotestorage server</h3>
+<h3>Putting your data into your remoteStorage server</h3>
 <p>By way of FreedomBox prototype, I installed ownCloud on my localhost and pointed a 'freedombox' domain to 127.0.0.1 in my <code>/etc/hosts</code>.
-To make your data available through a remotestorage API, install one of the remotestorage-compatible personal data servers listed under 'host your own storage'
+To make your data available through a remoteStorage API, install one of the remoteStorage-compatible personal data servers listed under 'host your own storage'
   on <a href="http://remotestorage.io/get/">remotestorage.io/get/</a>. I went for the ownCloud one here, because (like the php-remoteStorage one) it maps data
   directly onto the filesystem (it
-uses extended attributes to store the Content-Types). This means you can just import data onto your remotestorage account by copying it onto your
-  remotestorage-stick. Do make sure your remotestorage-stick is formatted with a filesystem that supports extended file attributes.</p>
+uses extended attributes to store the Content-Types). This means you can just import data onto your remoteStorage account by copying it onto your
+  remoteStorage-stick. Do make sure your remoteStorage-stick is formatted with a filesystem that supports extended file attributes.</p>
 
 <h3>Export your data from Google, Facebook and Twitter</h3>
 <p><em><strong>No Cookie Crew  - Warning #5:</strong> You will have to log in to these services now, because apart from Twitter, they do not offer this same
@@ -118,7 +118,7 @@ uses extended attributes to store the Content-Types). This means you can just im
 <img src="linkedin.png" />
 
 <p>For twitter, tweet data is mostly transient, so there is not much point probably in exporting that. Instead, you could start saving a copy of everything you
-  tweet through sockethub onto your remotestorage from now on. But to export your contacts,
+  tweet through sockethub onto your remoteStorage from now on. But to export your contacts,
   if they are not too many, you can simply scrape <a href="https://twitter.com/following">https://twitter.com/following</a> and
   <a href="https://twitter.com/followers">https://twitter.com/followers</a> by
  opening the web console (Ctrl-Shift-K in Firefox), and pasting:
@@ -160,8 +160,8 @@ uses extended attributes to store the Content-Types). This means you can just im
   media conversion software on your computer until you get it the way you want it.</p>
   
   <h3>Playing your music through your browser</h3>
-  <p>If you're setting up your remotestorage server to serve your music files, then make sure you put them under <code>/public/music/</code> on your
-    remotestorage, so you can use François' <a href="http://music.unhosted.5apps.com/">Unhosted Music Player</a>. Otherwise, you can also use <code>file:///</code>
+  <p>If you're setting up your remoteStorage server to serve your music files, then make sure you put them under <code>/public/music/</code> on your
+    remoteStorage, so you can use François' <a href="http://music.unhosted.5apps.com/">Unhosted Music Player</a>. Otherwise, you can also use <code>file:///</code>
     URLs to play your music. In the folder containing the files, simply add an html file that acts as a playlist app for them:
 <pre><code>
 &lt;!DOCTYPE html>
@@ -216,7 +216,7 @@ uses extended attributes to store the Content-Types). This means you can just im
   even some make some sound recordings when you are on holiday, and add them into a your next
   "photo album".</p>
 <p>I also found that so far, it has been far more important to me to have all my imported contacts in <em>some</em> format
-  on my remotestorage, even if it is just a text file that I search through with Ctrl-F, than to necessarily have a polished
+  on my remoteStorage, even if it is just a text file that I search through with Ctrl-F, than to necessarily have a polished
   app for each task. I also use javascript a lot to, for instance, read in csv files and do some spreadsheet calculations on
   them.</p>
 <p>A lot of the applications we usually assume are necessary on a computer (spreadsheets are a prime example) become irrelevant as soon as
@@ -239,7 +239,7 @@ uses extended attributes to store the Content-Types). This means you can just im
         <p> 4. <a href="../4/WebSockets.html">websockets</a></p>
         <p> 5. <a href="../5/Facebook-and-Twitter-from-nodejs.html">social</a></p>
         <p> 6. <a href="../6/Controlling-your-server-over-a-WebSocket.html">sockethub</a></p>
-        <p> 7. <a href="../7/Adding-remote-storage-to-unhosted-web-apps.html">remotestorage</a></p>
+        <p> 7. <a href="../7/Adding-remote-storage-to-unhosted-web-apps.html">remoteStorage</a></p>
         <p><strong>8. your data</strong></p>
       </div>
             

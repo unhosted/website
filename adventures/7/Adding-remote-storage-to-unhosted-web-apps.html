@@ -29,13 +29,13 @@
         We have set up our own personal server, but have only used it to host a profile and to run
         <a href="http://sockethub.org/">Sockethub</a> so that we can relay outgoing messages
         through it, to the servers it federates with. This week we will have a look at
-        <a href="http://remotestorage.io/">remotestorage</a>, a protocol for allowing unhosted web apps to use
+        <a href="http://remotestorage.io/">remoteStorage</a>, a protocol for allowing unhosted web apps to use
         your personal server as cloud storage.</p>
-      <p>The protocol by which a client interacts with a remotestorage server is describe in
+      <p>The protocol by which a client interacts with a remoteStorage server is describe in
         <a href="https://tools.ietf.org/id/draft-dejong-remotestorage-00.txt">draft-dejong-remotestorage-00</a>,
         an IETF Internet-Draft that is currently in version -00. At its core are the http protocol, TLS, and
         <a href="https://en.wikipedia.org/wiki/Cross-origin_resource_sharing">CORS headers</a>.</p>
-      <p>A remotestorage server allows you to store, retrieve, and remove documents in a directory structure,
+      <p>A remoteStorage server allows you to store, retrieve, and remove documents in a directory structure,
         using http PUT, GET, and DELETE verbs, respectively. It will respond with
         CORS headers in the http response, so
         that your browser will not forbid your web app from making requests to the storage origin.</p>
@@ -55,9 +55,9 @@
         so the part after the '#' sign. That means that the token is not even sent to the statics-server that happens to serve up the
         unhosted web app. Of course the app could contain code that does post the data there, but at least such token leaking would be
         detectable.</p>
-      <p>By default, OAuth requires each relying party to register with each service provider, and the remotestorage spec states that
+      <p>By default, OAuth requires each relying party to register with each service provider, and the remoteStorage spec states that
         servers "MAY require the user to register applications as OAuth clients
-        before first use", but in practice most remotestorage servers allow their users full freedom in their choice of which apps to 
+        before first use", but in practice most remoteStorage servers allow their users full freedom in their choice of which apps to 
         connect with.</p>
       <p>As an app developer you don't have to worry about all the ins and outs of the OAuth dance that goes on when the user connects
         your app to their storage. You just use the methods that the modules expose.</p>
@@ -70,9 +70,9 @@
       <p>As an app developer, you only call methods that are exposed by the various remoteStorage.js modules. The app is not at all concerned
         with all the data synchronization that goes on between its instance of remoteStorage.js, other apps running on the same device, apps
         running on other devices, and the
-        canonical copy of the data on the remotestorage server. All the sync machinery is "behind" each module, so to speak, and the module
+        canonical copy of the data on the remoteStorage server. All the sync machinery is "behind" each module, so to speak, and the module
         will inform the app when relevant data comes in.</p>
-      <p>Since all data your app touches needs to be sent to the user's remotestorage server, and changes can also arrive from there without
+      <p>Since all data your app touches needs to be sent to the user's remoteStorage server, and changes can also arrive from there without
         prior warning, we have so far found it easiest to develop apps using a variation on what emberjs calls "the V-model".</p>
       <p>Actions like mouse clicks and key strokes from the user are received by DOM elements in your app. Usually, this DOM element could 
         determine by itself how it should be updating its appearance in reaction to that. But in the V-model, these actions are only passed
@@ -89,10 +89,10 @@
         for synchronization to finish; synchronization with the server happens asynchronously, in the background.</p>
       
       <h3>Two easy ways to connect at runtime</h3>
-      <p>We mentioned that the remotestorage spec uses OAuth to allow a remoteStorage.js module to get access, at runtime, to its designated
-        part of the user's storage. To allow the remoteStorage.js library to make contact with the user's remotestorage server, the user inputs
-        their remotestorage address into the widget at the top right of the page. A remotestorage address looks like an email address, in that
-        it takes the form 'user@host'. But here of course 'host' is your remotestorage provider, not your email provider, and 'user' is whatever
+      <p>We mentioned that the remoteStorage spec uses OAuth to allow a remoteStorage.js module to get access, at runtime, to its designated
+        part of the user's storage. To allow the remoteStorage.js library to make contact with the user's remoteStorage server, the user inputs
+        their remoteStorage address into the widget at the top right of the page. A remoteStorage address looks like an email address, in that
+        it takes the form 'user@host'. But here of course 'host' is your remoteStorage provider, not your email provider, and 'user' is whatever
         username you have at that provider.</p>
       <p>The protocol that is used to discover the connection details from this 'user@host' string is called webfinger. Luckily, webfinger
         supports CORS headers, so it can be queried from an unhosted web app without needing to go through a server for that.
@@ -102,19 +102,19 @@
         this way.</p>
       <p>So the way this looks to the user is like this:</p>
       <ol>
-        <li>Click 'connect remotestorage'</li>
-        <li>Type your 'user@host' remotestorage address into the widget</li>
-        <li>Log in to your remotestorage provider (with Persona or otherwise)</li>
+        <li>Click 'connect remoteStorage'</li>
+        <li>Type your 'user@host' remoteStorage address into the widget</li>
+        <li>Log in to your remoteStorage provider (with Persona or otherwise)</li>
         <li>Review which modules the app requests</li>
         <li>If it looks OK, click 'Accept'</li>
         <li>You are back in the app and your data will start appearing</li>
       </ol>
       <p>We call this the 'app first flow'. Step 4 and 5 will look something like this (example shown is <a href="https://5apps.com">5apps</a>):</p>
       <img src="app-first.png" />
-      <p>Another way to connect an unhosted web app and a remotestorage account at runtime is if you have an app launch panel that is already
-        linked to your remotestorage account. You will get this for instance when you install the
+      <p>Another way to connect an unhosted web app and a remoteStorage account at runtime is if you have an app launch panel that is already
+        linked to your remoteStorage account. You will get this for instance when you install the
         <a href="https://github.com/michielbdejong/owncloud-owa">ownCloud app</a>. Apps will simply appear with their icons in the web interface
-        of your storage server, and because you launch them from there, there is no need to explicitly type in your remotestorage address once
+        of your storage server, and because you launch them from there, there is no need to explicitly type in your remoteStorage address once
         the app opens.</p>
       <p>We call this the 'storage first flow', Fran&#231;ois invented it this summer when he was in Berlin.
         The launch screen will probably look a bit like the home screen of a smartphone, with one icon per app (example shown is
@@ -128,18 +128,18 @@
         needs, respectively.</p>
       <p>There is also a minimal writing app on there called <a href="http://litewrite.unhosted.5apps.com/">Litewrite</a>, a video-bookmarking
         app called <a href="http://vidmarks.silverbucket.5apps.com/">Vidmarks</a>,
-        a generic <a href="http://remotestorage-browser.nilclass.5apps.com/">remotestorage browser</a>, and a
+        a generic <a href="http://remotestorage-browser.nilclass.5apps.com/">remoteStorage browser</a>, and a
         <a href="http://social.unhosted.5apps.com/">number</a> of
         <a href="http://todo.unhosted.5apps.com/">demo</a>
-        <a href="http://drinks.unhosted.5apps.com/">apps</a>. If you don't have a remotestorage account yet, you can get one at
+        <a href="http://drinks.unhosted.5apps.com/">apps</a>. If you don't have a remoteStorage account yet, you can get one at
         <a href="https://5apps.com/">5apps</a> or at <a href="https://heahdk.net/">heahdk</a>. For more options and more info
-        about remotestorage in general, see <a href="http://remotestorage.io/">remotestorage.io</a>.</p>
+        about remoteStorage in general, see <a href="http://remotestorage.io/">remotestorage.io</a>.</p>
       <p>After you have used the <a href="http://todo.unhosted.5apps.com">todo app</a> to add some tasks to your remote storage, try out the 
         <a href="http://unhosted-time-tracker.nilclass.5apps.com">unhosted time tracker</a> app. You will see it retrieve your task list from
-        your remote storage even though you added those tasks using a different app. So that is a nice first demonstration of how remotestorage
+        your remote storage even though you added those tasks using a different app. So that is a nice first demonstration of how remoteStorage
         separates the data you own from the apps you happen to use.</p>
       <p>Remote storage is of course a vital piece of the puzzle when using unhosted web apps, because
-        they have no per-app server-side database backend of themselves. The remotestorage protocol and the 
+        they have no per-app server-side database backend of themselves. The remoteStorage protocol and the 
         remoteStorage.js library are something many of us have been working on really hard for years, and since last week, finally, we are able to
         use it for a few real apps. So we are really enthusiastic about this recent release, and hope you enjoy it as much as we do! :)</p>
 <p><a href="https://groups.google.com/d/topic/unhosted/BLx6IGK_5EU/discussion">Comments welcome!</a></p>
@@ -158,7 +158,7 @@
         <p> 4. <a href="../4/WebSockets.html">websockets</a></p>
         <p> 5. <a href="../5/Facebook-and-Twitter-from-nodejs.html">social</a></p>
         <p> 6. <a href="../6/Controlling-your-server-over-a-WebSocket.html">sockethub</a></p>
-        <p><strong>7. remotestorage</strong></p>
+        <p><strong>7. remoteStorage</strong></p>
         <p> 8. <a href="../8/Collecting-and-organizing-your-data.html">your data</a></p>
       </div>
             
