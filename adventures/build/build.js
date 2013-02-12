@@ -1,4 +1,4 @@
-var latestEpisode = 8,
+var latestEpisode = 9,
   zeroDate = 1355227200000;
 
 var fs = require('fs'),

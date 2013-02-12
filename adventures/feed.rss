@@ -13,6 +13,14 @@
     <language>en-us</language>
     <ttl>40</ttl>
     <item>
+      <title>9. Sending and receiving email from unhosted web apps</title>
+      <description>Episode 9 of Unhosted Adventures</description>
+      <pubDate>2013-02-12T12:00:00.000Z</pubDate>
+      <guid>https://unhosted.org/adventures/9/Sending-and-receiving-email-from-unhosted-web-apps.html</guid>
+      <link>https://unhosted.org/adventures/9/Sending-and-receiving-email-from-unhosted-web-apps.html</link>
+      <georss:point>10.2 104.0</georss:point>
+    </item>
+    <item>
       <title>8. Collecting and organizing your data</title>
       <description>Episode 8 of Unhosted Adventures</description>
       <pubDate>2013-02-05T12:00:00.000Z</pubDate>
