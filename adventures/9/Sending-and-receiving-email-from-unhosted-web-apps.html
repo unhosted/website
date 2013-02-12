@@ -56,7 +56,7 @@
   to <a href="http://gandi.net/">Gandi</a> and get their standard mail hosting package. You could
   also of course use GMail as your incoming and outgoing mailserver, that is in itself equivalent.</p>
 
-<p>Pointing the MX records of your domain to a email hosting provider resolves a significant part of
+<p>Pointing the MX records of your domain to an email hosting provider resolves a significant part of
   the engineering problem, and means we don't have to run anything on port 25 (the standard TCP port for
   incoming email) ourselves. Instead, our Sockethub server only has to retrieve the email from that email
   hosting provider, using either
@@ -83,7 +83,7 @@
 <p>Unhosted web apps can only open http connections, since a few years WebSocket connections,
   and since a few weeks, PeerConnections. They cannot open SMTP connections, IMAP connections, or POP3 connections.</p>
 <p>Sockethub takes on the role of connecting a WebSocket on the side of the unhosted web app with an SMTP, IMAP, or POP3
-  connection on the side of the remote server, and relaying the communication in two direction. It plays the role of a hub
+  connection on the side of the remote server, and relaying the communication in two directions. It plays the role of a hub
   inbetween WebSockets on the one hand, and TCP sockets on the other.</p>
 <p>For outgoing email, the unhosted web app sends an Activity with verb 'send' to Sockethub, putting the message into the
   Activity's object field, the various types of recipients into the target field, and the From: address into the actor field.</p>
@@ -100,7 +100,7 @@
   to a thread. I hadn't at first realised that this was so vital, but if you don't do this, then other people's mail clients will start a
   new thread each time you reply to something. The value of these header fields should be the Message-ID of the email message you are replying to.</p>
 <p>Adding sender and recipient names is also useful; since I'm using 'anything@michielbdejong.com', I show up in people's addressbooks as the user
-  'anything'. That's a bit ugly. The proper way is to specify for instance 'Michiel B. de Jong &lt;anything@michielbdejong.com&gt;' instead. And same
+  'anything'. That's a bit ugly. The proper way is to specify for instance 'Michiel B. de Jong &lt;anything@michielbdejong.com&gt;' instead. And the same
   for recipient addresses.</p>
 <p>The latest feature I added to my email sending app is support for multiple To: addresses as well as multiple Cc: addresses. It seem SendGrid does not
   implement Bcc:, and I also never use this feature, so I left that out, at least for outgoing emails.</p>
@@ -140,14 +140,15 @@
   <p>But with sockethub, provided you run your sockethub server inside your home, or at least inside your trusted local network, we have
     an opportunity to implement end-to-end encryption in a way that is entirely transparent to the unhosted web apps that send and receive
     the emails.</p>
-  <p>So far, I have added PGP clearsigning to Sockethub, using the 'gpg' nodejs package. This is still an early proof-of-concept, and
+  <p>So far, I have added PGP clearsigning to Sockethub, using the '<a href="https://github.com/drudge/node-gpg">gpg</a>' nodejs package.
+    This is still an early proof-of-concept, and
     especially generating and storing the keys still needs a lot of work, but I think we should include this as a basic part of our platform.</p>
   <p>When not all recipients of an email message have a PGP key, the message needs to be sent in cleartext, and PGP can only be used to sign the
     message, so that recipients can check from whose computer (or in this case, from whose sockethub server) it was sent.</p>
   <p>When the sender knows the PGP keys of all recipients, the message can be encrypted before it is signed and sent, to protect it from
     third parties reading the content of the messages. They will still of course be able to detect the fact that a message was sent at a
     certain time, and roughly what length it had, but it's still a vital improvement over the current situation where commercial companies
-    and random governments have, by default, full access to spy at will on pretty much everything we do online.</p>
+    and random nation state governments have, by default, full access to spy at will on pretty much everything we do online.</p>
 
 <h3>Inbox search</h3>
   <p>A feature which many current GMail users will have grown fond of, is inbox search. For now, I am using <code>grep</code> to search through
@@ -158,7 +159,7 @@
     hopefully nice integrations with unhosted addressbook apps.</p>
   <p>I guess the main message here is, it works, but there is still quite a long way to go before most of you who read this will be ready
     to start using your own unhosted email app.</p>
-  <p>But email and PGP is an essential part of decentralized online freedom, and it is important that a few of us live through these growing pains
+  <p>But email and PGP are an essential part of decentralized online freedom, and it is important that a few of us live through these growing pains
     so that, as Eben said in the FOSDEM <a href="https://fosdem.org/2013/interviews/2013-bdale-garbee-and-eben-moglen/">interview</a>,
     "by the time you know you need a FreedomBox, we will have it ready for you." The No Cookie Crew is looking for brave pioneer members, to make this
     also true for unhosted web apps. :)</p>
