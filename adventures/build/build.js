@@ -41,13 +41,20 @@ function writeEpisodes() {
     var source = fs.readFileSync(i+'/source.html'),
       title = '    <title>Unhosted '+ i +': '+ episodes[i] +'</title>\n',
       header = '      <h2>'+ i + '. '+ episodes[i] +'</h2>\n\n',
-      next = (i==latestEpisode?'':'\n      <p>Next: <a href="../'+getFilename(i+1) + '">'+ episodes[i+1] +'</a></p>');
+      next = (i==latestEpisode?'\n      <p>The next episode will appear on Tuesday '+getNextTuesday()+'.</p>':'\n      <p>Next: <a href="../'+getFilename(i+1) + '">'+ episodes[i+1] +'</a></p>');
     fs.writeFileSync(getFilename(i), part0 + title + part1 + header + source + next + part2 + makeEpisodesDiv(i) + part3);
   }
 }
 
 function getDate(i) {
   return new Date(zeroDate+i*7*86400*1000).toISOString();
+}
+function getNextTuesday() {
+  var d = new Date(zeroDate+(latestEpisode+1)*7*86400*1000),
+    months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  return d.getUTCDate()
+    +' '+months[d.getUTCMonth()]
+    +', '+d.getUTCFullYear();
 }
 function writeRss() {
   var str = '<?xml version="1.0" encoding="UTF-8"?>\n'
