@@ -41,7 +41,7 @@ function makeEpisodesDiv(current) {
     if(i == current) {
       str += '        <p><strong>'+ i +'. '+ abbrev[i] +'</strong></p>\n';
     } else {
-      str += '        <p> '+ i +'. <a href="../'+ getFilename(i) +'">'+ abbrev[i] +'</a></p>\n';
+      str += '        <p> '+ i +'. <a href="/adventures/'+ getFilename(i) +'">'+ abbrev[i] +'</a></p>\n';
     }
   }
   return str;
