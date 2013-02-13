@@ -58,7 +58,7 @@ book. It is at the same time part of my working set, my products, and my souveni
 in there are from the past, and I only keep them just in case some day I want to reuse those contacts for a new project, and of course
 there is also a nostalgic value to an address book.</p>
 
-<h3>Some stuff on your Indie Web server, the rest on your Freedombox server</h3>
+<h3>Some stuff on your Indie Web server, the rest on your FreedomBox server</h3>
 <p>At first, we had the idea of putting all this data of various types into one remoteStorage account. This idea quickly ran into three
 problems: first, after scanning in all my backup DVDs, even after removing all the duplicate folders, I had gathered about 40 Gigs, and my
 server only has 7 Gigs of disk space. It is possible to get a bigger server of course, but this didn't seem like an efficient thing to
@@ -70,17 +70,17 @@ that take up several Megabytes, and typically photos you share online would prob
 performance. So even if I upload all my photos to my Indie Web server, I would want to upload the "web size" version of them, and not
 the huge originals.</p>
 <p>After some discussion with Basti and François, I concluded that having one remote storage server is not enough to cover all use
-cases: you need two. The "Indie Web" one should be always on, on a public domain name, and the "Freedombox" one should be in your home.</p>
+cases: you need two. The "Indie Web" one should be always on, on a public domain name, and the "FreedomBox" one should be in your home.</p>
 <p>On your Indie Web server, you would store only a copy of your Working Set data,
 plus probably sized down derivatives of some of your products and
-souvenirs. On your Freedombox you would simply store everything.</p>
+souvenirs. On your FreedomBox you would simply store everything.</p>
 <p>This means you will already have to do some manual versioning, probably, and think about when to upload something to your Indie Web
 server. At some point we will probably want to build publishing apps that connect to both accounts and take care of this, but for now, since
   we have webshell access to both servers, we can do this with a simple <code>scp</code> command.</p>
 
-<h3>Freedombox and the remoteStorage-stick</h3>
+<h3>FreedomBox and the remoteStorage-stick</h3>
 <p>The topic of having a data server in your home brought up the work Markus and I did on combining the
-  <a href="http://freedomboxfoundation.org/">FreedomBox</a> with remoteStorage. Our idea was to split the Freedombox into the actual plug
+  <a href="http://freedomboxfoundation.org/">FreedomBox</a> with remoteStorage. Our idea was to split the FreedomBox into the actual plug
   server and a USB drive that you stick into it, for the data storage. The two reasons for splitting the device this way are that it makes it
   clear to the user where their data is and how they can copy it and back it up, and that it makes tech support easier, since the device contains
   no valuable data, and can thus easily be reset to factory settings.</p>
