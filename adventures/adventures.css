@@ -9,6 +9,7 @@ header { margin-top: 50px; margin-bottom:100px; line-height:1.0em; color:#666 }
 article { float:right; max-width:600px; margin:10px 10px 40px 10px}
 
 nav { float:right; width:250px; margin:30px 50px 50px 50px; background-color:#EEE; color:#002; border-radius:5px }
+nav p { margin-left:1em }
 nav a:hover,active { color:#006 }
 nav div { text-align:left; margin:10px }
 nav div img { border-radius:5px }
