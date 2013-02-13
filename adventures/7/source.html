@@ -14,10 +14,10 @@
         CORS headers in the http response, so
         that your browser will not forbid your web app from making requests to the storage origin.</p>
       <p>As an app developer, you will not have to write these http requests yourself. You can use the
-        <a href="http://remotestorage.io/integrate/">remoteStorage.js</a> library.</p>
+        <a href="http://remotestorage.io/integrate/">remotestorage.js</a> library.</p>
       
       <h3>Reusing reusable user data</h3>
-      <p>The remoteStorage.js library is divided up into modules (documents, music, pictures, ...),
+      <p>The remotestorage.js library is divided up into modules (documents, music, pictures, ...),
         one for each type of data. Your app would typically only
         request access to one or two such modules (possibly read-only). The library then takes care of displaying a widget in the top right of
         the window, which will obtain access to the corresponding parts of the storage using OAuth2's Implicit Grant flow:</p>
@@ -41,8 +41,8 @@
         
       
       <h3>Cloud sync should be transparent</h3>
-      <p>As an app developer, you only call methods that are exposed by the various remoteStorage.js modules. The app is not at all concerned
-        with all the data synchronization that goes on between its instance of remoteStorage.js, other apps running on the same device, apps
+      <p>As an app developer, you only call methods that are exposed by the various remotestorage.js modules. The app is not at all concerned
+        with all the data synchronization that goes on between its instance of remotestorage.js, other apps running on the same device, apps
         running on other devices, and the
         canonical copy of the data on the remoteStorage server. All the sync machinery is "behind" each module, so to speak, and the module
         will inform the app when relevant data comes in.</p>
@@ -63,8 +63,8 @@
         for synchronization to finish; synchronization with the server happens asynchronously, in the background.</p>
       
       <h3>Two easy ways to connect at runtime</h3>
-      <p>We mentioned that the remoteStorage spec uses OAuth to allow a remoteStorage.js module to get access, at runtime, to its designated
-        part of the user's storage. To allow the remoteStorage.js library to make contact with the user's remoteStorage server, the user inputs
+      <p>We mentioned that the remoteStorage spec uses OAuth to allow a remotestorage.js module to get access, at runtime, to its designated
+        part of the user's storage. To allow the remotestorage.js library to make contact with the user's remoteStorage server, the user inputs
         their remoteStorage address into the widget at the top right of the page. A remoteStorage address looks like an email address, in that
         it takes the form 'user@host'. But here of course 'host' is your remoteStorage provider, not your email provider, and 'user' is whatever
         username you have at that provider.</p>
@@ -95,7 +95,7 @@
         <a href="https://github.com/michielbdejong/owncloud-owa">ownCloud</a>):</p>
       <img src="storage-first.png" />
       <h3>Featured apps</h3>
-      <p>The remoteStorage.js library reached its first beta version (labeled 0.7.0) last week, and we have collected a number of
+      <p>The remotestorage.js library reached its first beta version (labeled 0.7.0) last week, and we have collected a number of
         <a href="https://unhosted.org/apps/">featured apps</a> that use this version of the library. So far, I am using the
         <a href="http://music.unhosted.5apps.com/">music</a>, <a href="http://editor.unhosted.5apps.com/">editor</a> and
         <a href="http://grouptabs.xmartin.5apps.com/">grouptabs</a> apps for my real music-listening, text-editing, and peer-to-peer bookkeeping
@@ -114,6 +114,6 @@
         separates the data you own from the apps you happen to use.</p>
       <p>Remote storage is of course a vital piece of the puzzle when using unhosted web apps, because
         they have no per-app server-side database backend of themselves. The remoteStorage protocol and the 
-        remoteStorage.js library are something many of us have been working on really hard for years, and since last week, finally, we are able to
+        remotestorage.js library are something many of us have been working on really hard for years, and since last week, finally, we are able to
         use it for a few real apps. So we are really enthusiastic about this recent release, and hope you enjoy it as much as we do! :)</p>
 <p><a href="https://groups.google.com/d/topic/unhosted/BLx6IGK_5EU/discussion">Comments welcome!</a></p>
