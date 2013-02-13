@@ -7,7 +7,6 @@ var fs = require('fs'),
   part2 = fs.readFileSync('build/2.html'),
   part3 = fs.readFileSync('build/3.html'),
   part4 = fs.readFileSync('build/4.html'),
-  part5 = fs.readFileSync('build/5.html'),
   episodesDict = require('./episodes'),
   overviewPages = {
     i: 'definition',
@@ -46,7 +45,7 @@ function makeEpisodesDiv(current) {
       str += '        <p> '+ i +'. <a href="/adventures/'+ getFilename(i) +'">'+ abbrev[i] +'</a></p>\n';
     }
   }
-  return str;
+  return str + '      </div>\n';
 }
 
 function processTitles() {
@@ -68,7 +67,7 @@ function writeEpisodes() {
       header = '      <h2>'+ i +'. '+ episodes[i] +'</h2>\n\n',
       next = (i==latestEpisode?'\n      <p>The next episode will appear on Tuesday '+getNextTuesday()+'.</p>':'\n      <p>Next: <a href="../'+getFilename(i+1) + '">'+ episodes[i+1] +'</a></p>');
     fs.writeFileSync(getFilename(i), part0 + title + part1 + header + source + next + part2 + makeEpisodesDiv(i)
-        + part3 + part4 + part5);
+        + part3 + part4);
   }
 }
 function writeOverviewPage(i) {
@@ -76,7 +75,7 @@ function writeOverviewPage(i) {
     header = '      <h2>'+ overviewPages[i] +'</h2>\n\n',
     source = fs.readFileSync('..'+overviewPaths[i]+'source.html');
   fs.writeFileSync('..'+overviewPaths[i]+'index.html', part0 + title + part1 + header + source + part2 + makeEpisodesDiv(i)
-      + part3 + part5);
+      + part4);
 }
 function getDate(i) {
   return new Date(zeroDate+i*7*86400*1000).toISOString();
