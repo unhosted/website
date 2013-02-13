@@ -127,7 +127,7 @@ exports.config = {
             browser supports WebSockets, so I do not need that backdrop.</li>
           <li>I spent a lot of time writing code that tries to detect when something goes wrong. I experimented with suspending my
             laptop while wifi was down, then restarting the server-side, and seeing if it could recover. My findings are that it
-            often still recovers, unless goes into readyState 3 (<code>WebSocket.CLOSED</code>).
+            often still recovers, unless it goes into readyState 3 (<code>WebSocket.CLOSED</code>).
             Whenever this happens, I think you will lose any data that was queued on both client-side and server-side, so make sure
             you have ways of resending that. Also make sure you discard the closed WebSocket object and open up a new one.</li>
           <li>The WebSocket will time out after 10 minutes of loss of connectivity, and then try to reconnect. In Firefox it does this with a beautiful
