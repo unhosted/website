@@ -7,13 +7,36 @@ var fs = require('fs'),
   part2 = fs.readFileSync('build/2.html'),
   part3 = fs.readFileSync('build/3.html'),
   episodesDict = require('./episodes'),
+  overviewPages = {
+    i: 'definition',
+    //ii: 'advantages',
+    ii: 'events',
+    iii: 'tools',
+    iv: 'examples',
+    v: 'forum'
+  }, overviewPaths = {
+    i: '/',
+    //ii: '/advantages/',
+    ii: '/events/',
+    iii: '/tools/',
+    iv: '/apps/',
+    v: 'https://groups.google.com/forum/#!forum/unhosted'
+  },
   episodes = [], abbrev = [];
 
 function getFilename(i) {
   return i+'/'+episodes[i].split(' ').join('-')+'.html';
 }
 function makeEpisodesDiv(current) {
-  var str = '';
+  var str = '\n<h4>Overview:</h4>\n'; 
+  for(var i in overviewPages) {
+    if(i == current) {
+      str += '        <p><strong>'+ i +'. '+ overviewPages[i] +'</strong></p>\n';
+    } else {
+      str += '        <p> '+ i +'. <a href="'+ overviewPaths[i] +'">'+ overviewPages[i] +'</a></p>\n';
+    }
+  }
+  str += '\n<h4>Handbook:</h4>\n';
   for(var i in episodes) {
     if(i == current) {
       str += '        <p><strong>'+ i +'. '+ abbrev[i] +'</strong></p>\n';
@@ -45,7 +68,10 @@ function writeEpisodes() {
     fs.writeFileSync(getFilename(i), part0 + title + part1 + header + source + next + part2 + makeEpisodesDiv(i) + part3);
   }
 }
-
+function writeOverviewPage(index) {
+  var source = fs.readFileSync('..'+overviewPaths[i]+'source.html');
+  fs.writeFileSync('..'+overviewPaths[i]+'index.html', part0 + title + part1 + header + source);
+}
 function getDate(i) {
   return new Date(zeroDate+i*7*86400*1000).toISOString();
 }
