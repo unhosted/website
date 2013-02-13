@@ -44,7 +44,7 @@ var httpsServer = https.createServer({
   ca: fs.readFileSync(config.tlsDir+'/ca.pem') 
 }, function(req, res) {
   res.writeHead(200); 
-  res.end('connect a websocket please'); 
+  res.end('connect a WebSocket please'); 
 });
 httpsServer.listen(config.port);
 

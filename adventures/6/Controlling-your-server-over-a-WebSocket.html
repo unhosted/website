@@ -55,12 +55,12 @@
       chose, but it is a restriction on your choice of application if this decision was made for you by your server hosting provider. This problem can be
       solved by using an <em>unhosted shell client</em> instead of a hosted one. The principle of separating unhosted web apps from minimal server-side
       gateways and services is of course the main topic of this blog series, so let's also try to apply it here.</p>
-      <p>A minimal way to implement a command shell service would be for instance by opening a websocket on the server, and executing commands that get sent
-        to it as strings. You could put this websocket on a hard-to-guess URL, so that random people cannot get access to your server without your permission.</p>
+      <p>A minimal way to implement a command shell service would be for instance by opening a WebSocket on the server, and executing commands that get sent
+        to it as strings. You could put this WebSocket on a hard-to-guess URL, so that random people cannot get access to your server without your permission.</p>
       <p>An unhosted web app could then provide an interface for typing a command and sending it, pretty much exactly in the same way as we did for the
         <a href="../5/Facebook-and-Twitter-from-nodejs.html">social dashboard</a> we built last week.</p>
       <p>But there are two things in that proposal that we can improve upon. First, we should document the "wire protocol", that is, the exact format of messages that
-        the unhosted web app sends into the websocket, and that come back out of it in response. And second, if we open a new websocket for each service we add
+        the unhosted web app sends into the WebSocket, and that come back out of it in response. And second, if we open a new WebSocket for each service we add
         to our personal server, then this can become quite unwieldy. It would be nicer to have one clean interface that can accept various kinds of commands,
         and that dispatches them to one of several functionalities that run on the server.</p>
       <h3>Sockethub to the rescue</h3>
