@@ -1,14 +1,15 @@
-body { font:15px sans-serif; line-height:1.4em; max-width:1000px }
-h1 { font:45px sans-serif; margin: 10px 0px 10px 0px }
+body { font:15px sans-serif; line-height:1.4em; max-width:1000px; color:#222 }
+h1 { font:57px sans-serif; margin: 0px 0px 10px 0px }
 h2 { font:25px sans-serif }
 h3 { font:20px sans-serif }
 h4 { font:18px sans-serif }
 
-header { margin-top: 80px; margin-bottom:100px; line-height:1.0em }
+header { margin-top: 50px; margin-bottom:100px; line-height:1.0em; color:#666 }
 
 article { float:right; max-width:600px; margin:10px 10px 40px 10px}
 
-nav { float:right; width:250px; margin:30px 50px 50px 50px; background-color:#EEE; border-radius:5px }
+nav { float:right; width:250px; margin:30px 50px 50px 50px; background-color:#EEE; color:#002; border-radius:5px }
+nav a:hover,active { color:#006 }
 nav div { text-align:left; margin:10px }
 nav div img { border-radius:5px }
 .logo { float:right; width:350px; text-align:center }
