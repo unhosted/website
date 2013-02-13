@@ -8,6 +8,11 @@ header { margin-top: 50px; margin-bottom:100px; line-height:1.0em; color:#666 }
 
 article { float:right; max-width:600px; margin:10px 10px 40px 10px}
 
+article ul li { display: inline; float: left; text-align: center; color: #666; margin: 0px 0px 40px 0px }
+article ul li a { margin: 16px; color: #666 }
+article ul li p a { margin: 0px }
+article ul li a img { color: #E0E0E0; margin: 1px auto; border-style: solid; border-radius: 8px; box-shadow: 0 0 1em #D0D0D0 }
+
 nav { float:right; width:250px; margin:30px 50px 50px 50px; background-color:#EEE; color:#002; border-radius:5px }
 nav p { margin-left:1em }
 nav a:hover,active { color:#006 }

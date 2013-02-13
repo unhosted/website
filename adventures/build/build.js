@@ -62,15 +62,17 @@ function processTitles() {
 function writeEpisodes() {
   for(var i=1; i<=latestEpisode; i++) {
     var source = fs.readFileSync(i+'/source.html'),
-      title = '    <title>Unhosted '+ i +': '+ episodes[i] +'</title>\n',
-      header = '      <h2>'+ i + '. '+ episodes[i] +'</h2>\n\n',
+      title = '    <title>unhosted web apps '+ i +': '+ abbrev[i] +'</title>\n',
+      header = '      <h2>'+ i +'. '+ episodes[i] +'</h2>\n\n',
       next = (i==latestEpisode?'\n      <p>The next episode will appear on Tuesday '+getNextTuesday()+'.</p>':'\n      <p>Next: <a href="../'+getFilename(i+1) + '">'+ episodes[i+1] +'</a></p>');
     fs.writeFileSync(getFilename(i), part0 + title + part1 + header + source + next + part2 + makeEpisodesDiv(i) + part3);
   }
 }
-function writeOverviewPage(index) {
-  var source = fs.readFileSync('..'+overviewPaths[i]+'source.html');
-  fs.writeFileSync('..'+overviewPaths[i]+'index.html', part0 + title + part1 + header + source);
+function writeOverviewPage(i) {
+  var title = '    <title>unhosted web apps: '+ overviewPages[i] +'</title>\n',
+    header = '      <h2>'+ overviewPages[i] +'</h2>\n\n',
+    source = fs.readFileSync('..'+overviewPaths[i]+'source.html');
+  fs.writeFileSync('..'+overviewPaths[i]+'index.html', part0 + title + part1 + header + source + part2 + makeEpisodesDiv(i) + part3);
 }
 function getDate(i) {
   return new Date(zeroDate+i*7*86400*1000).toISOString();
@@ -156,5 +158,6 @@ function writeAtom() {
 //...
 processTitles();
 writeEpisodes();
+writeOverviewPage('i'); writeOverviewPage('ii'); writeOverviewPage('iii'); writeOverviewPage('iv');
 writeRss();
 writeAtom();
