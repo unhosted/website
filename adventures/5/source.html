@@ -62,7 +62,7 @@ postToFacebook('test from my personal server');
         client app", but each one will have only one user, because each user individually registers their own personal gateway server as such.</p>
       <p>There is a second advantage of registering your own app: it gives you an appId and a clientSecret with which you can exchange
         the one-hour token for a 60-day token. To do that, you can call the following nodejs function once, giving your appId, clientSecret, and 
-        the short-lived token as arguments to do that:</p><pre><code>
+        the short-lived token as arguments:</p><pre><code>
 var https = require('https');
 
 function longLiveMyToken(token, appId, clientSecret) {
