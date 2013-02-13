@@ -6,6 +6,8 @@ var fs = require('fs'),
   part1 = fs.readFileSync('build/1.html'),
   part2 = fs.readFileSync('build/2.html'),
   part3 = fs.readFileSync('build/3.html'),
+  part4 = fs.readFileSync('build/4.html'),
+  part5 = fs.readFileSync('build/5.html'),
   episodesDict = require('./episodes'),
   overviewPages = {
     i: 'definition',
@@ -65,14 +67,16 @@ function writeEpisodes() {
       title = '    <title>unhosted web apps '+ i +': '+ abbrev[i] +'</title>\n',
       header = '      <h2>'+ i +'. '+ episodes[i] +'</h2>\n\n',
       next = (i==latestEpisode?'\n      <p>The next episode will appear on Tuesday '+getNextTuesday()+'.</p>':'\n      <p>Next: <a href="../'+getFilename(i+1) + '">'+ episodes[i+1] +'</a></p>');
-    fs.writeFileSync(getFilename(i), part0 + title + part1 + header + source + next + part2 + makeEpisodesDiv(i) + part3);
+    fs.writeFileSync(getFilename(i), part0 + title + part1 + header + source + next + part2 + makeEpisodesDiv(i)
+        + part3 + part4 + part5);
   }
 }
 function writeOverviewPage(i) {
   var title = '    <title>unhosted web apps: '+ overviewPages[i] +'</title>\n',
     header = '      <h2>'+ overviewPages[i] +'</h2>\n\n',
     source = fs.readFileSync('..'+overviewPaths[i]+'source.html');
-  fs.writeFileSync('..'+overviewPaths[i]+'index.html', part0 + title + part1 + header + source + part2 + makeEpisodesDiv(i) + part3);
+  fs.writeFileSync('..'+overviewPaths[i]+'index.html', part0 + title + part1 + header + source + part2 + makeEpisodesDiv(i)
+      + part3 + part5);
 }
 function getDate(i) {
   return new Date(zeroDate+i*7*86400*1000).toISOString();
