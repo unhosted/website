@@ -9,37 +9,39 @@ module.exports = {
     "remoteStorage": "Adding remote storage to unhosted web apps",
     "your data": "Collecting and organizing your data",
     "email": "Sending and receiving email from unhosted web apps",
-    "WebRTC": "",
+    "app hosting": "",
+       /* packaged vs hosted
+        * origins
+        * port42000.js
+        * Powered by Dropbox
+        * gh-pages
+        * caching, https offloading, reverse caching, proxies
+        * using appcache
+        * 5apps */
     "GitHub": "",
     "contacts": "",
-    "linked data": "",
-  /* commented data
-  * not magic
-  * 303s and hash uris
-  * web of data
-  * read-write web, independence from remoteStorage*/
-    "app hosting and manifest distribution": "",
-  /* packaged vs hosted
-  * origins
-  * port42000.js
-  * Powered by Dropbox
-  * gh-pages
-  * using appcache
-  * 5apps
-  * web
-  * Mozilla Marketplace
-  * chrome app store
-  * 5apps store
-  * apptorrent */
+    "web linking": "",
+       /* commented data
+        * semantic web not magic
+        * 303s and hash uris
+        * web of data
+        * read-write web, independence from remoteStorage*/
+    "PeerConnection": "",
+    "distribution": "",
+       /* web
+        * Mozilla Marketplace
+        * chrome app store
+        * 5apps store
+        * apptorrent */
     "conclusion": "Our platform so far"
-  /* we can listen to music
-  * we can edit text files
-  * we can communicate via email, twitter, github, and facebook
-  * we can manage our pictures, contacts, and calendar
-  * we can publish apps and run server-side code
-  * we can download apps and run them locally
-  * this concludes the basis of unhosted web apps as a software platform
-  * part two of this handbook will be a showcase of specific technologies you should know about */
+       /* we can listen to music
+        * we can edit text files
+        * we can communicate via email, twitter, github, and facebook
+        * we can manage our pictures, contacts, and calendar
+        * we can publish apps and run server-side code
+        * we can download apps and run them locally
+        * this concludes the basis of unhosted web apps as a software platform
+        * part two of this handbook will be a showcase of specific technologies you should know about */
   },
   "Technologies You Should Know About" : {
 /*- adventures 16: Cryptography
