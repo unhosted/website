@@ -10,18 +10,18 @@ var fs = require('fs'),
   episodesDict = require('./episodes'),
   overviewPages = {
     i: 'definition',
-    //ii: 'advantages',
-    ii: 'events',
-    iii: 'tools',
-    iv: 'examples',
-    v: 'forum'
+    ii: 'examples',
+    iii: 'people',
+    iv: 'events',
+    v: 'tools',
+    vi: 'forum'
   }, overviewPaths = {
     i: '/',
-    //ii: '/advantages/',
-    ii: '/events/',
-    iii: '/tools/',
-    iv: '/apps/',
-    v: 'https://groups.google.com/forum/#!forum/unhosted'
+    ii: '/apps/',
+    iii: '/people/',
+    iv: '/events/',
+    v: '/tools/',
+    vi: 'https://groups.google.com/forum/#!forum/unhosted'
   },
   episodes = [], abbrev = [];
 
@@ -161,6 +161,6 @@ function writeAtom() {
 //...
 processTitles();
 writeEpisodes();
-writeOverviewPage('i'); writeOverviewPage('ii'); writeOverviewPage('iii'); writeOverviewPage('iv');
+writeOverviewPage('i'); writeOverviewPage('ii'); writeOverviewPage('iii'); writeOverviewPage('iv'); writeOverviewPage('v');
 writeRss();
 writeAtom();
