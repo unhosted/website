@@ -9,6 +9,7 @@ module.exports = {
     "remoteStorage": "Adding remote storage to unhosted web apps",
     "your data": "Collecting and organizing your data",
     "email": "Sending and receiving email from unhosted web apps",
+    "web linking": "Linking things together on the world wide web",
     "app hosting": "",
        /* packaged vs hosted
         * origins
@@ -18,22 +19,15 @@ module.exports = {
         * caching, https offloading, reverse caching, proxies
         * using appcache
         * 5apps */
-    "GitHub": "",
-    "contacts": "",
-    "web linking": "",
-       /* commented data
-        * semantic web not magic
-        * 303s and hash uris
-        * web of data
-        * read-write web, independence from remoteStorage*/
-    "PeerConnection": "",
     "distribution": "",
        /* web
         * Mozilla Marketplace
         * chrome app store
         * 5apps store
         * apptorrent */
-    "conclusion": "Our platform so far"
+    "GitHub": "",
+    "PeerConnection": "",
+    "contacts": "Adding support for contacts to our platform"
        /* we can listen to music
         * we can edit text files
         * we can communicate via email, twitter, github, and facebook

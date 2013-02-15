@@ -1,0 +1,152 @@
+<!-- linking: Linking things together on the world wide web -->
+<h3>The web as a database</h3>
+<p>If, like me, you got into unhosted web app development from the software engineering
+  side, then you will have to learn a few tricks to make that switch. First of all, of 
+  course, JavaScript and the Document Object Model (DOM) that we manipulate with it,
+  lend themselves much more to a asynchronous, event-driven programming than to procedural
+  or object-oriented programming.</p>
+<p>Organizing variables in closures instead of in classes
+  takes bit of getting used to. Recently, there is a move towards
+  <a href="https://en.wikipedia.org/wiki/Futures_and_promises">promises</a> which makes this
+  a bit more intuitive, but as always when you switch programming platforms, you can learn the
+  syntax in a day, but learning the mindset can take a year.</p>
+<p>This is not the only paradigm switch you will have to go through, though. Remember the web
+  was originally designed as a collection of interlinked hypertext documents. Links are its most
+  basic atomic structure. This implies two big differences with traditional software engineering.</p>
+<p>First, each data record, or in web terms each document, refers to other records using pointers
+  that live in the untyped global namespace of URLs, and that may or may not work.</p>
+<p>Second, the data is not enumerable. You can enumerate the data that is reachable by following
+  links from one specific document, but you can never retrieve an exhaustive list of all the web's content.</p>
+<p>Of course, both these characteristics can be overcome by restricting the data your app uses to
+  one specific DNS domain. But in its design, the web is open-ended, and this makes it a very
+  funny sort of database.</p>
+
+<h3>In-app content</h3>
+<p>Suppose you develop an app for a newspaper, which allows people to read issues
+  of that newspaper on a tablet, in a "rich" way, as they say, so with a responsive, full-screen
+  layout and with interactive use of swipe gestures, etcetera. You would probably split this into
+  a "shell", which is all the parts of the app that stay the same, and "content" which is the
+  actual content of that day's newspaper issue, so the text, images, etcetera.</p>
+<p>If you were to develop such an app using non-web technology, then the newspaper content would
+  be locked into the app, in the sense that the user would not have an obvious way to share a
+  specific newspaper article with a friend. But if you were to develop this app as a web apps,
+  then linking to content would suddenly be easy.</p>
+<p>The user should be able to exit full-screen mode at any point, and see a URL in the address bar
+  that uniquely identifies the current content of the screen. In a hosted web app, this URL can be
+  relative to the currently logged-in user, as determined by the Cookie.</p>
+<p>In an unhosted web app, there is no Cookie, and no logged-in user. However, there can be state
+  that is relative to for instance a remoteStorage account that was connected to the app at runtime.</p>
+<p>The URL in the address bar will change when a user clicks a link, but you will often want to design
+  your app so that content is retrieved asynchronously instead of loading a new page on each click. This
+  type of app architecture is often called a one-page app, or "OPA". In that case you will need to use
+  <a href="https://developer.mozilla.org/en-US/docs/DOM/Manipulating_the_browser_history">history.pushState()</a>
+  to update the current URL to reflect the current app state.</p>
+<p>Apart from using URLs to represent app state, in a way that allows users to link deeply into specific
+  states (pages) of your app, you should also think about the URLs of the data your retrieves in the background.</p>
+<p>This leads us to the next important topic, the web of data.</p>
+
+<h3>Linked data</h3>
+<p>As we said earlier, the web started as a collection of hypertext documents, and evolved from there into
+  the "html5" app platform we know today. But very early on, its potential of using the web for not only human-readable
+  but also machine-readable data was discovered.</p>
+<p>Suppose you publish an unhosted web app that contains a map of the world. This probably means you will split your app
+  up into on the one hand a "shell" that is able to display parts of a map, and on the other hand the actual map data.</p>
+<p>Now thanks to the open design of the web there are two things you can do, which would not be so easy to do on other
+  app platforms. First, you can allow other apps to reuse the map data that forms part of your app. Just as long as it
+  is in a well-known data format, if you tell other app developers the URLs on which you host the data that your app fetches
+  asynchronously, they will be able to reuse it in their apps.</p>
+<p>And likewise, you will be able to seamlessly reuse data from other publishers in your app, as long as those other publishers
+  use a data format that your app shell can read, and you trust what they publish.</p>
+<p>There is no way for the user to easily extract the URLs of data that your app fetches in the background. The developers of other
+  apps will have to either study your app to reverse-engineer it, or read your app's API documentation. To make this job easier, it
+  is good practice to include documentation links in your data. Many good data formats actually contain this requirement. For instance,
+  many of the data formats that our remoteStorage modules use contain an '@type' field that points to a documentation URL. Other
+  developers can find those links when looking at the data, and that way they stand a better chance of decyphering what your data means.</p>
+<p>There is a second advantage of including documentation URLs inside data: it makes data formats uniquely recognizable. A URL is a Universal
+  Resource Locator, but at the same time it can be a "URI": a Universal Resource Identifier that uniquely identifies a concept rather than
+  a document. In this case, a data format can require its instances to contain the URL of its documentation by means of a URI that confirms
+  that the object indeed complies to that format.</p>
+<p>In practice, this is not working very well yet because there are a lot of equivalent data formats, each with their own URI, that overlap and
+  that could be merged. For instance, Facebook publishes machine-readable data about users with the URI
+  "<a href="http://graph.facebook.com/schema/user">http://graph.facebook.com/schema/user</a>" in there. This URI is Facebook-specific, so it doesn't 
+  help a lot in generalizing the data format. Of course, the data that Facebook exposes <em>is</em> in large part Facebook-specific, and there is no
+  obviously good way to map a Facebook Like to a Twitter Retweet, so this is all partially inevitable.</p>
+
+<h3>Emerging intelligence is a myth</h3>
+<p>A lot of things that computers do seem like magic. If you are not a programmer (and even if you are) then it's often hard to predict what computers
+  will be able to do, and what they won't. Specifically, there seems to be a belief among the general public that machine-readable data allows a machine
+  to "understand" the data, in the sense that it will be able to adopt to fluctuations in data formats, as long as those fluctuations are documented in
+  ways that are again machine-readable. I'm sorry if this is news to you, but that is simply not true.</p>
+<p>It all stands and falls with how you define "understanding" of course, but in general, the rule of thumb is that each app will have a finite list of
+  data formats it supports. If a data format is not in this list, then the app will not be able to make sensible use of data in that format, in terms of
+  the app's functionality. The app developer has to put support for each data format into an app one-by-one, writing unit tests that describe each significant
+  behavioral response to such data, and if those tests pass, then the app supports the new data format.</p>
+<p>Once a data format is supported, the app can read it without supervision of the programmer (that is what we mean by machine-readable), and using the URIs,
+  or other unique markers, it can even detect on the fly, and with reasonable certainty, <em>if</em> a document you throw at it was intended by its publisher
+  to be in a certain data format.</p>
+<p>But an app cannot learn how to react to new data formats. At least not at the current stance of Artificial Intelligence engineering.</p>
+<p>The only exception to this are "data browser" apps: their only task is to allow the user to browse data, and these apps process whole families of data formats
+  because all they have to do with them is maybe a bit of syntax highlighting or at most some data type validation. They do not interact "deeply" with the data,
+  which is why they can deal with data from any domain - the domain of the data is simply irrelevant to the app's functionality. Even so, even those apps cannot
+  learn to read json formats, however compliant and self-describing the format, if they were designed to read xml formats.</p>
+
+<h3>Hash URIs and 303s</h3>
+<p>There is a school in web architecture (I always half-jokingly call it the "URI purism" school), which states that whenever you use a URL as a URI (i.e., to
+  denote a concept), then you may not call it a URL (you have to call it either URI or URN), and it should either have a hash ('#') in it, <em>or</em> respond
+  with a 303 status code. I don't see the point of this; everybody outside of URI purism just uses URLs without these imho random complications, which is
+  a lot simpler and works fine, too.</p>
+<p>I'm only mentioning this here for completeness, not as an actual recommendation. :)</p>
+
+
+<h3>Design each convention independently</h3>
+<p>For a programmer, there is often no bigger joy than inventing something from scratch. Trying to come up with the ultimate
+  all-encompassing solution to a problem is fun.</p>
+<p>We already saw this effect in <a href="/adventures/1/Personal-servers-and-unhosted-web-apps.html">episode 1</a>; when faced
+  with the problem of closed Social Networking Sites, most programmers will set out to build an open SNS system from scratch.</p>
+<p>But it's not how we should be developing the web platform. The web is extensible, and we have to add small pieces bit-by-bit,
+  letting each of them win adoption or not, based on what that small piece does.</p>
+<p>This makes developing the web platform a bit harder than developing a closed platform. At the same time, it leads to a more
+  robust result.</p>
+<p>To make this a bit clearer, I will give two examples. First, suppose we want to allow users of a remoteStorage-based app to
+  set an avatar for themselves, and display avatars of their friends. We could for instance add  <code>setAvatar()</code> and
+  <code>getAvatar()</code> methods. We then submit this addition to the <code>remoteStorage.profile</code> module upstream,
+  and this way, other remoteStorage-based apps can use the same avatars in an app-independent way.</p>
+<p>But we can do even better: we can use the avatar people advertise in their webfinger profile. That way, the system we use for
+  avatars is independent of remoteStorage as a specific storage API.</p>
+<p>The other example I want to give is the separation of data formats and interaction protocols. For instance, an ActivityStreams
+  document can be published in an atom feed or in many other ways, and likewise many other data formats can be used when publishing
+  data through an atom feed; these two things are independently swappable building blocks. This flexibility is what sometimes makes
+  the web chaotic as an application platform, but ultimately it's also what makes it very decentralized and robust.</p>
+  
+<h3>Read-write web</h3>
+<p>We can take the avatar-example from the last paragraph even a bit further. By adding a link from their webfinger file to a
+  public document on their remoteStorage account, users can still edit their avatar using remoteStorage. We added support for
+  Content-Type headers to <a href="https://tools.ietf.org/id/draft-dejong-remotestorage-00.txt">draft-dejong-remotestorage-00.txt</a>
+  specifically to make things like this possible. It turns the user's remoteStorage account into a "read-write web" site: a
+  website where the content can be edited over its standard default http interface, using verbs other than GET (in our case PUT
+  and DELETE).</p>
+
+<h3>Semantic markup</h3>
+<p>There is one last thing I want to mention about the architecture of the web: documents that are primarily human-readable, but also
+  partially machine-readable. Whenever you publish a human-readable document, it is good practice to add some machine-readable links
+  inside the html code. This page for instance has a link to the rss feed of this blog series, and a machine-readable link to my own
+  Indie Web site, with a link-relation of "author".</p>
+<p>This means for instance that if you have Dynamic Bookmarks enabled in Firefox,
+  you will see the 'subscribe' button light up when you are on this page, and your browser will be able to find the machine-readable
+  rss feed through which updates to this blog will be published. Likewise, search engines and other "meta" websites can display
+  meta-data about a URL just by parsing these small machine-readable hints from the html. Google also provides instructions on
+  <a href="http://support.google.com/webmasters/bin/answer.py?hl=en&answer=173379">how to mark up recipes</a> so that they will become
+  searchable in a "deep" way.</p>
+<p>As an unhosted web app developer you will probably deal more with documents that are already primarily machine-readable, but it's
+  still an important feature to be aware of, that one document on the web can form part of the human-readable document web, and of the
+  machine-readable data web, at the same time.</p>
+
+<h3>Conclusion</h3>
+<p>The loosely coupled architecture of web linking is an essential part of its power as a platform, but mainly also it is what gives
+  the web its openness. The web is what people do in practice. Some technologies will need support from browser vendors, in which case
+  it may for instance happen that Firefox and Chrome both implement a version of the feature, then compare notes, choose one standard version of
+  the feature, and document that so that other browsers can implement it too.</p>
+<p>For features that require no changes to how browsers work, literally anyone can try to start a convention, blog about it, and try
+  to convince other people with the same problem to join in. It is a truly open system.</p>
+
+<p><a href="https://groups.google.com/forum/#!forum/unhosted">comments welcome!</a></p>
