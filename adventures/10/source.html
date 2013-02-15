@@ -6,7 +6,7 @@
   lend themselves much more to a asynchronous, event-driven programming than to procedural
   or object-oriented programming.</p>
 <p>Organizing variables in closures instead of in classes
-  takes bit of getting used to. Recently, there is a move towards
+  takes a bit of getting used to. Recently, there is a move towards
   <a href="https://en.wikipedia.org/wiki/Futures_and_promises">promises</a> which makes this
   a bit more intuitive, but as always when you switch programming platforms, you can learn the
   syntax in a day, but learning the mindset can take a year.</p>
@@ -29,7 +29,7 @@
   actual content of that day's newspaper issue, so the text, images, etcetera.</p>
 <p>If you were to develop such an app using non-web technology, then the newspaper content would
   be locked into the app, in the sense that the user would not have an obvious way to share a
-  specific newspaper article with a friend. But if you were to develop this app as a web apps,
+  specific newspaper article with a friend. But if you develop this app as a web app,
   then linking to content would suddenly be easy.</p>
 <p>The user should be able to exit full-screen mode at any point, and see a URL in the address bar
   that uniquely identifies the current content of the screen. In a hosted web app, this URL can be
@@ -42,12 +42,12 @@
   <a href="https://developer.mozilla.org/en-US/docs/DOM/Manipulating_the_browser_history">history.pushState()</a>
   to update the current URL to reflect the current app state.</p>
 <p>Apart from using URLs to represent app state, in a way that allows users to link deeply into specific
-  states (pages) of your app, you should also think about the URLs of the data your retrieves in the background.</p>
+  states (pages) of your app, you should also think about the URLs of the data your app retrieves in the background.</p>
 <p>This leads us to the next important topic, the web of data.</p>
 
 <h3>Linked data</h3>
 <p>As we said earlier, the web started as a collection of hypertext documents, and evolved from there into
-  the "html5" app platform we know today. But very early on, its potential of using the web for not only human-readable
+  the "html5" app platform we know today. But very early on, the potential of using the web for not only human-readable
   but also machine-readable data was discovered.</p>
 <p>Suppose you publish an unhosted web app that contains a map of the world. This probably means you will split your app
   up into on the one hand a "shell" that is able to display parts of a map, and on the other hand the actual map data.</p>
@@ -64,7 +64,7 @@
   developers can find those links when looking at the data, and that way they stand a better chance of decyphering what your data means.</p>
 <p>There is a second advantage of including documentation URLs inside data: it makes data formats uniquely recognizable. A URL is a Universal
   Resource Locator, but at the same time it can be a "URI": a Universal Resource Identifier that uniquely identifies a concept rather than
-  a document. In this case, a data format can require its instances to contain the URL of its documentation by means of a URI that confirms
+  a document. In this case, a data format can require its instances to contain the URL of its documentation by means of a URI that represents the claim
   that the object indeed complies to that format.</p>
 <p>In practice, this is not working very well yet because there are a lot of equivalent data formats, each with their own URI, that overlap and
   that could be merged. For instance, Facebook publishes machine-readable data about users with the URI
