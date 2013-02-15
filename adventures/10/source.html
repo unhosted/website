@@ -65,7 +65,7 @@
 <p>There is a second advantage of including documentation URLs inside data: it makes data formats uniquely recognizable. A URL is a Universal
   Resource Locator, but at the same time it can be a "URI": a Universal Resource Identifier that uniquely identifies a concept rather than
   a document. In this case, a data format can require its instances to contain the URL of its documentation by means of a URI that represents the claim
-  that the object indeed complies to that format.</p>
+  that the object indeed complies with that format.</p>
 <p>In practice, this is not working very well yet because there are a lot of equivalent data formats, each with their own URI, that overlap and
   that could be merged. For instance, Facebook publishes machine-readable data about users with the URI
   "<a href="http://graph.facebook.com/schema/user">http://graph.facebook.com/schema/user</a>" in there. This URI is Facebook-specific, so it doesn't 
@@ -95,7 +95,7 @@
   denote a concept), then you may not call it a URL (you have to call it either URI or URN), and it should either have a hash ('#') in it, <em>or</em> respond
   with a 303 status code. I don't see the point of this; everybody outside of URI purism just uses URLs without these imho random complications, which is
   a lot simpler and works fine, too.</p>
-<p>I'm only mentioning this here for completeness, not as an actual recommendation. :)</p>
+<p>I'm only mentioning this here for completeness, not as an actual recommendation from my side. :)</p>
 
 
 <h3>Design each convention independently</h3>
@@ -122,19 +122,20 @@
 <p>We can take the avatar-example from the last paragraph even a bit further. By adding a link from their webfinger file to a
   public document on their remoteStorage account, users can still edit their avatar using remoteStorage. We added support for
   Content-Type headers to <a href="https://tools.ietf.org/id/draft-dejong-remotestorage-00.txt">draft-dejong-remotestorage-00.txt</a>
-  specifically to make things like this possible. It turns the user's remoteStorage account into a "read-write web" site: a
-  website where the content can be edited over its standard default http interface, using verbs other than GET (in our case PUT
+  specifically to make the data on a user's remoteStorage account be data that is fully "on the web" in every sense, and to make
+  things like this possible. It turns the user's remoteStorage account into a "read-write web" site: a
+  website, where the content can be edited over its normal primary http interface, using verbs other than GET (in our case PUT
   and DELETE).</p>
 
 <h3>Semantic markup</h3>
 <p>There is one last thing I want to mention about the architecture of the web: documents that are primarily human-readable, but also
   partially machine-readable. Whenever you publish a human-readable document, it is good practice to add some machine-readable links
-  inside the html code. This page for instance has a link to the rss feed of this blog series, and a machine-readable link to my own
+  inside the html code. This page for instance has a link to the atom feed of this blog series, and a machine-readable link to my own
   Indie Web site, with a link-relation of "author".</p>
 <p>This means for instance that if you have Dynamic Bookmarks enabled in Firefox,
-  you will see the 'subscribe' button light up when you are on this page, and your browser will be able to find the machine-readable
-  rss feed through which updates to this blog will be published. Likewise, search engines and other "meta" websites can display
-  meta-data about a URL just by parsing these small machine-readable hints from the html. Google also provides instructions on
+  you will see the 'Subscribe to this page...' button light up, and your browser will be able to find the machine-readable
+  atom feed through which updates to this blog will be published. Likewise, search engines and other "meta" websites can display
+  meta-data about a web page just by parsing these small machine-readable hints from the html. Google also provides instructions on
   <a href="http://support.google.com/webmasters/bin/answer.py?hl=en&answer=173379">how to mark up recipes</a> so that they will become
   searchable in a "deep" way.</p>
 <p>As an unhosted web app developer you will probably deal more with documents that are already primarily machine-readable, but it's
