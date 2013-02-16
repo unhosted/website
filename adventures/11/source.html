@@ -2,7 +2,7 @@
 <h3>Hosting is a telecommunications transport through space and time.</h3>
 <p>This blogpost goes from me to you. I am writing this on a rainy saturday at the Bukit Bintang Starbucks in Kuala Lumpur.
 You are reading this at a later time, at a different place. Hosting is just a transport that makes this possible.</p>
-<p>We should not forget to design our internet applications with end-to-end principle in mind. If we want the internet to
+<p>We should not forget to design our internet applications with the end-to-end principle in mind. If we want the internet to
 empower people, then we should model all communication as taking place between people. This may disrupt a few assumptions that
 you will have been fed during the age of hosted software.</p>
 
@@ -18,15 +18,15 @@ the content. This was probably
 true for 90% of the first websites, 20 years ago, but this percentage is probably closer to 10% (or even less) nowadays. This means
 we should consider servers as intermediate hops, not end points, in the end-to-end communication model.</p>
 <p>The problem is reasonably limited with co-located servers, where the data center hosting your server does not have the root password
-to your server. In this case, any intrusion would at least be detectable, provided your co-located server has sensors for "case open"
+to it. In this case, any intrusion would at least be detectable, provided your co-located server has good sensors for "case open"
 and similar alerts.</p>
 <p>But current-day Infrastructure-as-a-Service hosting provides virtualized servers, not physical ones. This is good because it allows
 the IaaS provider to move your server around for load-balancing and live resizing, but it also means that the host system has access to
 your private TLS key.</p>
 <p>At a good IaaS company, only systems administrators under <a href="https://www.usenix.org/lisa/system-administrators-code-ethics">sysadmin oath</a>
 and the management above them will have access to your server. Good managers at IaaS companies will only use their access to grant newly employed
-sysadmins the necessary access, and apart from that maybe "a few" nation state governments.</p>
-<p>You can tell a sysadmin because he or she will look away with a resolute gesture when you type your password in their presence. Even if it's the
+sysadmins the necessary access, and apart from that maybe a few nation state governments, presumably only if they present probable cause.</p>
+<p>You can always recognize sysadmins because they will look away with a resolute gesture when you type your password in their presence. Even if it's the
 password that you just asked them to reset. It is in a sysadmin's professional genes to be very precise about security and privacy. Still, TLS-hosted
 websites
 can no longer be sensibly called end-to-end secure in the age of web 2.0 and "the cloud", since the communicating parties (Alice and Bob, as we
@@ -46,11 +46,11 @@ exception to this: <a href="http://mailman.klaki.net/mailman/listinfo/revprotun"
 <h3>RevProTun and Pagekite</h3>
 <p>If you have a <a href="http://freedomboxfoundation.org/">FreedomBox</a> in your home, or you otherwise run a server that is always-on in a place that you physically
 control, then you can put the unhosted web apps you publish on there, hosted on a simple statics server with TLS. You can use a nodejs script for this like the one we
-described in <a href="/3/Setting-up-your-own-server.html">episode 3: setting up your own server</a>. Once have a TLS-enable website running on localhost, you can
+  described in <a href="/adventures/3/Setting-up-your-own-server.html">episode 3: setting up your own server</a>. Once you have a TLS-enable website running on localhost, you can
 publish your localhost to the world using a RevProTun service. A good example, personal friends of mine and also the main drivers behind the development of RevProTun,
 are <a href="https://pagekite.net/">Pagekite</a>. You open a tunnel account with them, install their client app in a place where it can "see" the localhost service
-you want to publish, and it will start delivering traffic from the outside world to it, functioning as a reverse proxy tunnel from your publically accessible hosting
-origin to your locally ran TLS-secured statics hosting service.</p>
+you want to publish, and it will start delivering traffic from the outside world to it, functioning as a reverse proxy tunnel from your publically accessible URL
+  to your locally ran TLS-secured statics hosting service.</p>
 <p>RevProTun is an important part of how we want to add Indie Web hosting to FreedomBox. These are still future plans for which we always struggle to find time, but we
 are determined to make a "freedom-compatible web hosting" solution like this available in a format that is also usable by end-users who may not want to know all the exact
 details of how reverse proxy tunnels work. If you do want to know more about them, a good place to start is Bjarni's

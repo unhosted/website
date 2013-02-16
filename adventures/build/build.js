@@ -1,4 +1,5 @@
 var latestEpisode = 9,
+  buildAhead = 2,
   zeroDate = 1355227200000;
 
 var fs = require('fs'),
@@ -54,6 +55,8 @@ function makeEpisodesDiv(current) {
 }
 
 function processTitles() {
+  episodes = [];
+  abbrev = [];
   var i = 1;
   for(var j in episodesDict["The Basics"]) {
     episodes[i] = episodesDict["The Basics"][j];
@@ -164,6 +167,12 @@ function writeAtom() {
 }
 
 //...
+latestEpisode += buildAhead;
+console.log('building up to '+latestEpisode);
+processTitles();
+writeEpisodes();
+latestEpisode -= buildAhead;
+console.log('now building up to '+latestEpisode);
 processTitles();
 writeEpisodes();
 writeOverviewPage('i'); writeOverviewPage('ii'); writeOverviewPage('iii'); writeOverviewPage('iv'); writeOverviewPage('v');
