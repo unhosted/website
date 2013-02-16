@@ -78,22 +78,23 @@ are <a href="https://pagekite.net/">Pagekite</a>. You open a tunnel account with
 you want to publish, and it will start delivering traffic from the outside world to it, functioning as a reverse proxy tunnel from your publically accessible URL
   to your locally ran TLS-secured statics hosting service.</p>
 <p>RevProTun is an important part of how we want to add Indie Web hosting to FreedomBox. These are still future plans for which we always struggle to find time, but we
-are determined to make a "freedom-compatible web hosting" solution like this available in a format that is also usable by end-users who may not want to know all the exact
+are determined to make a "freedom-compatible home hosting" solution like this available in a format that is also usable by end-users who may not want to know all the exact
 details of how reverse proxy tunnels work. If you do want to know more about them, a good place to start is Bjarni's
 <a href="https://pagekite.net/wiki/Floss/Video/">FOSDEM talk about Pagekite</a>.
 
 <h3>How origins work</h3>
 <p>Each unhosted web app should be hosted on its own "origin", meaning its own unique combination of scheme, host and port.</p>
-<p>The reason for this is that your browser will shield off apps from each other, putting them each in one sandbox for each app.
+<p>The reason for this is that your browser will shield off apps from each other, putting them each in their own limited sandbox.
 If you would host two apps on the same origin, then your browser would allow these apps to access each other's data (for instance,
-the data they store in localStorage), and then things would generally just become a big mess. So when hosting apps, host each one
+the data they store in localStorage), and then things would generally just become a big mess. So don't ever try to do this. When hosting apps, host each one
 on its own origin.</p>
 <p>This also means that you don't want to publish any unhosted web apps directly on
 <a href="https://tech.dropbox.com/2012/08/some-love-for-javascript-applications-2/">https://dl.dropbox.com/</a>, or host more than
 one app on each <a href="http://pages.github.com/">http://username.github.com/</a>, unless maybe if they are apps that will not handle
 any user data (for short-lived and self-contained html5 games for instance, this security consideration may be less important).</p>
 <p>So suppose you have your Indie Web domain name and you want to publish some unhosted web apps to the world.
-For http hosting this is not so difficult to do: the scheme of each app's origin will always be 'http', but you can point as many subdomain hosts
+For http hosting this is not so difficult to do. Remember an origin is defined by scheme, host and port. The scheme of each app's origin will always
+  be 'http', but you can point as many subdomain hosts
 to your IP address as you want; especially if you use a
 <a href="https://en.wikipedia.org/wiki/Wildcard_DNS_record">wild-card CNAME</a>. Then you can just use
 <code>http://app1.example.com/</code>, <code>http://app2.example.com/</code>, etcetera as origins for the apps you host.</p>
@@ -104,13 +105,13 @@ Unless you own a wild-card certificate, you will probably only have two hosts, p
 use origins like "https://apps.yourdomain.com:42001/", "https://apps.yourdomain.com:42002/", etcetera.</p>
 
 <h3>Using SNI to host multiple TLS cert</h3>
-<p>Five or ten years ago SNI didn't exist yet, and you had to get a dedicated IP address for every TLS cert you want to host on an IP address.
+<p>Five or ten years ago SNI didn't exist yet, and you had to get one dedicated IPv4 address for each and every TLS cert.
   Until recently I thought this was still the case, but as Bjarni explained to me the other day, this is now a resolved problem.
   <a href="http://nodejs.org/api/tls.html#tls_npn_and_sni">Using</a>
   <a href="http://en.wikipedia.org/wiki/Server_Name_Indication#Browsers_with_support_for_TLS_server_name_indication.5B5.5D">SNI</a>, you can host as many TLS certs
   on one virtual server as you like, without having to request extra IPv4 addresses and paying the extra fee for them. I haven't switched to this myself yet, since
   I have so far published my unhosted web apps apps all through 5apps. I do have two IPv4 addresses on my server, one for nodejs and one for apache,
-  and your server will need two IP addresses to do STUN in a few episodes from now (yes! we're going to play with PeerConnection and WebRTC soon!).</p>
+  and your server will need two IP addresses to do <a href="https://en.wikipedia.org/wiki/STUN">STUN</a> in a few episodes from now (yes! we're going to play with that soon!).</p>
 
 <h3>5apps</h3>
 <p>There is a very cool Berlin start-up, again, also personal friends of mine, called <a href="https://5apps.com/">5apps</a>. They specialize in app
