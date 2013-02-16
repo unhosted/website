@@ -10,7 +10,7 @@ module.exports = {
     "your data": "Collecting and organizing your data",
     "email": "Sending and receiving email from unhosted web apps",
     "web linking": "Linking things together on the world wide web",
-    "app hosting": "",
+    "app hosting": "App hosting",
        /* packaged vs hosted
         * origins
         * port42000.js
