@@ -85,13 +85,14 @@ use origins like "https://apps.yourdomain.com:42001/", "https://apps.yourdomain.
   <a href="http://en.wikipedia.org/wiki/Server_Name_Indication#Browsers_with_support_for_TLS_server_name_indication.5B5.5D">SNI</a>, you can host as many TLS certs
   on one virtual server as you like, without having to request extra IPv4 addresses and paying the extra fee for them. I haven't switched to this myself yet, since
   I have so far published my unhosted web apps apps all through 5apps. I do have two IPv4 addresses on my server, one for nodejs and one for apache,
-  and your server will need two IP addresses to do <a href="https://en.wikipedia.org/wiki/STUN">STUN</a> in a few episodes from now (yes! we're going to play with that soon!).</p>
+  and your server will need two IP addresses to do <a href="https://en.wikipedia.org/wiki/STUN">STUN</a> in a few episodes from now (yes! we're going to play with 
+  PeerConnections soon), but in general, SNI is a good thing to know about when you're hosting apps.</p>
 
 <h3>5apps</h3>
 <p>There is a very cool Berlin start-up, again, also personal friends of mine, called <a href="https://5apps.com/">5apps</a>. They specialize in app
 hosting for unhosted web apps. You may have seen them mentioned on our <a href="https://unhosted.org/tools/">tools</a> page, and most of our
-<a href="https://unhosted.org/apps/">featured apps</a> are hosted on 5apps. The will soon be launching https hosting (using a wildcard TLS cert for
-*.5apps.com), and deploying your app to their hosting gives you a number of advantages over home-backing your own app hosting. They will automatically
+<a href="https://unhosted.org/apps/">featured apps</a> are hosted on 5apps. They will soon be launching https hosting (using their wildcard TLS cert for
+*.5apps.com), and deploying your app to their hosting gives you a number of advantages over home-baking your own app hosting. They will automatically
 generate an appcache manifest for your app (more about this below), resize your icon for the various favicon formats for browsers as well as for instance
   iPad devices, and generate all the various file formats for submitting your app to various review sites and app stores (more about that next week).</p>
 <p>On top of that, they offer a number of things which "make your app nice", like browser compatibility detection, a user feedback widget, and JavaScript
@@ -105,22 +106,24 @@ generate an appcache manifest for your app (more about this below), resize your 
   function showVideo(that) {
     that.innerHTML = '<iframe width="560" height="315" src="http://www.youtube.com/embed/Oic22dQMRXQ" frameborder="0" allowfullscreen></iframe>';
   }
-</script><h1 onclick="showVideo(this);">(show http://www.youtube.com/embed/Oic22dQMRXQ)</h1>
+</script><h4 style="text-align: center" onclick="showVideo(this);">(show http://www.youtube.com/embed/Oic22dQMRXQ)</h4>
 <p>One good thing about appcache is that, like the browser's http cache, it works end-to-end. The web of documents was designed with caching of GET requests
   in mind. A lot of hosted web apps will cache the content produced by their webservers using something like <a href="http://www.squid-cache.org/">squid</a>
   or <a href="http://www.varnish-cache.org/">varnish</a>, behind an https offloading layer. Often, this will be outsourced to a
   <a href="https://en.wikipedia.org/wiki/Content_delivery_network">CDN</a>. After that, in theory researchers thought that multicasting would become big on the
   internet, but this didn't really happen, at least not for web content. Instead, content providers like youtube and CDNs like Akamai extended their tentacles
-  right onto inside the exchange hubs where they peer with ISPs. In a sense, we have the multicast backbone that academia tried to develop, but it's privately
+  right into the exchange hubs where they peer with ISPs. In a sense, we have the multicast backbone that academia tried to develop, but it's now privately
   owned by companies like the two I just mentioned.</p>
 <p>So once the content reaches the ISP, it will often be cached again by the ISP, before it is delivered to the Last Mile. None of this works when you use end-to-end
-  encryption, of course. Multicasting traffic is a lot like deduplicating content-addressable content (only harder because of the time constraints), and as one commenter
-  said about a company that claimed it could do that, there's a choice between end-to-end encryption, deduping, and making sense: you can only choose any two. :)</p>
+  encryption, though. Multicasting traffic is a lot like deduplicating content-addressable content, only harder because of the time constraints. And 
+  out of 1) end-to-end encryption, 2) multicast(/deduping), and 3) making sense, you can only pick two. :)</p>
 <p>This means that on https, any request that misses cache on your device, will have to go all the way to the app hoster. We will look at distributing "huge" apps
   (e.g., several Gigabytes) next week, but in general, the thing you will want to use is appcache.</p>
-<h3>the appcache discussion</h3>
+
+<h3>The appcache discussion</h3>
 <p>First of all, when you use appcache you should only cache the "shell" of your entire app, so all its layout and functionality,
-  but not any content it may include (this is also explained in the video above). For caching content that may be relevant this week, but already replaced next week,
+  but not any content it may include (this is also explained in the video above). For caching content that may be relevant this session, but already replaced next time
+  the user uses the app,
   you may want to implement your own custom caching system inside your app, using for instance <a href="http://westcoastlogic.com/lawnchair/">LawnChair</a> or
   <a href="http://pouchdb.com/">PouchDB</a>.</p>
 <p>As is also mentioned in the video, Mozilla and Google are cooperating to 'fix appcache'. There will probably be a more powerful API with less surprises.</p>
@@ -128,7 +131,11 @@ generate an appcache manifest for your app (more about this below), resize your 
   even if there is no wifi connection. And if there is a wifi connection, then they will load very fast, much faster of course than if you wouldn't cache them.</p>
 
 <h3>Conclusion</h3>
-<p>I think this covers most of the topics you have to keep in mind for app hosting. Next week, we will look at how app stores, packaging, and mirroring work
+<p>I think this covers most of the topics you have to keep in mind for app hosting. One of the nice things of unhosted web apps is that they are so easy to host,
+  you don't have to set up a backend with database servers etcetera. This also makes them very cheap to host, compared to hosted web apps
+  (in the sense of 'dynamic' web content as opposed to 'static' web content).</p>
+<p>But there are more advantages: unhosted web apps are also easier to mirror for kill-switch resilience, and they are very suitable as an alternative for smartphone
+  apps and tablet apps. So next week we will talk a bit about that, as we look at how app stores, packaging, and mirroring can work
   for unhosted web apps. See you then! :)</p>
 
 <p><a href="https://groups.google.com/forum/#!forum/unhosted">comments welcome!</a></p>
