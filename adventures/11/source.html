@@ -1,5 +1,109 @@
-<!-- app hosting: Hosting unhosted web apps -->
-<h3>Wait, isn't that a contradiction? :)</h3>
+<!-- app hosting: App hosting -->
+<h3>Hosting is a telecommunications transport through space and time.</h3>
+<p>This blogpost goes from me to you. I am writing this on a rainy saturday at the Bukit Bintang Starbucks in Kuala Lumpur.
+You are reading this at a later time, at a different place. Hosting is just a transport that makes this possible.</p>
+<p>We should not forget to design our internet applications with end-to-end principle in mind. If we want the internet to
+empower people, then we should model all communication as taking place between people. This may disrupt a few assumptions that
+you will have been fed during the age of hosted software.</p>
+
+<h3>TLS is not secure unless combined with on-premises hosting</h3>
+<p>TLS (formerly known as SSL, the technology behind <code>https://</code> URLs), stands for Transport Layer Security.
+  It establishes a secure tunnel between the client and the server. Third parties can see that this tunnel exists, and roughly
+  how much data travels through it, in which direction, and in which timing patterns, but it cannot see the unencrypted content
+  that is being sent back and forth.</p>
+<p>On top of TLS, the web uses a Public Key Infrastructure (PKI) of the  Certificate Authority (CA) type. This system is well-known
+to have its own problems, I'm not even talking about that. Purely the client-server security architecture in itself is an outdated
+approach to security. It makes the assumption that the server is under the physical control of the person or organization publishing
+the content. This was probably
+true for 90% of the first websites, 20 years ago, but this percentage is probably closer to 10% (or even less) nowadays. This means
+we should consider servers as intermediate hops, not end points, in the end-to-end communication model.</p>
+<p>The problem is reasonably limited with co-located servers, where the data center hosting your server does not have the root password
+to your server. In this case, any intrusion would at least be detectable, provided your co-located server has sensors for "case open"
+and similar alerts.</p>
+<p>But current-day Infrastructure-as-a-Service hosting provides virtualized servers, not physical ones. This is good because it allows
+the IaaS provider to move your server around for load-balancing and live resizing, but it also means that the host system has access to
+your private TLS key.</p>
+<p>At a good IaaS company, only systems administrators under <a href="https://www.usenix.org/lisa/system-administrators-code-ethics">sysadmin oath</a>
+and the management above them will have access to your server. Good managers at IaaS companies will only use their access to grant newly employed
+sysadmins the necessary access, and apart from that maybe "a few" nation state governments.</p>
+<p>You can tell a sysadmin because he or she will look away with a resolute gesture when you type your password in their presence. Even if it's the
+password that you just asked them to reset. It is in a sysadmin's professional genes to be very precise about security and privacy. Still, TLS-hosted
+websites
+can no longer be sensibly called end-to-end secure in the age of web 2.0 and "the cloud", since the communicating parties (Alice and Bob, as we
+often call them) do not have a secure channel between them.</p>
+<p>So where does that leave us? Let's look specifically at app hosting.</p>
+
+<h3>Wait, isn't hosting an unhosted web app a contradiction? :)</h3>
+<p>Yes, of course, to be very precise, we should have called unhosted web apps 'statics-only web apps', since that is what we mean. But that just didn't
+sound as intruiging. ;)</p>
+<p>The web has no way of signing web apps. When hosting an unhosted ('statics-only') web app, we just serve each of the files that make up the app on a website,
+and the only way to know whether you are seeing the web app that the developer wanted you to see, is if the server hosting it is under the physical control of
+the developer. This doesn't often happen, of course (especially with nomadic developers!), so in most cases we will have to compromise a little bit on security.</p>
+<p>In practice, security is always relative, and unless you mirror apps inside your LAN (more about that next week!),
+in almost all cases we will have to trust at least one intermediate party: the app hoster. There is just one
+exception to this: <a href="http://mailman.klaki.net/mailman/listinfo/revprotun">RevProTun</a> systems like Pagekite.</p>
+
+<h3>RevProTun and Pagekite</h3>
+<p>If you have a <a href="http://freedomboxfoundation.org/">FreedomBox</a> in your home, or you otherwise run a server that is always-on in a place that you physically
+control, then you can put the unhosted web apps you publish on there, hosted on a simple statics server with TLS. You can use a nodejs script for this like the one we
+described in <a href="/3/Setting-up-your-own-server.html">episode 3: setting up your own server</a>. Once have a TLS-enable website running on localhost, you can
+publish your localhost to the world using a RevProTun service. A good example, personal friends of mine and also the main drivers behind the development of RevProTun,
+are <a href="https://pagekite.net/">Pagekite</a>. You open a tunnel account with them, install their client app in a place where it can "see" the localhost service
+you want to publish, and it will start delivering traffic from the outside world to it, functioning as a reverse proxy tunnel from your publically accessible hosting
+origin to your locally ran TLS-secured statics hosting service.</p>
+<p>RevProTun is an important part of how we want to add Indie Web hosting to FreedomBox. These are still future plans for which we always struggle to find time, but we
+are determined to make a "freedom-compatible web hosting" solution like this available in a format that is also usable by end-users who may not want to know all the exact
+details of how reverse proxy tunnels work. If you do want to know more about them, a good place to start is Bjarni's
+<a href="https://pagekite.net/wiki/Floss/Video/">FOSDEM talk about Pagekite</a>.
+
+<h3>How origins work</h3>
+<p>Each unhosted web app should be hosted on its own "origin", meaning its own unique combination of scheme, host and port.</p>
+<p>The reason for this is that your browser will shield off apps from each other, putting them each in one sandbox for each app.
+If you would host two apps on the same origin, then your browser would allow these apps to access each other's data (for instance,
+the data they store in localStorage), and then things would generally just become a big mess. So when hosting apps, host each one
+on its own origin.</p>
+<p>This also means that you don't want to publish any unhosted web apps directly on
+<a href="https://tech.dropbox.com/2012/08/some-love-for-javascript-applications-2/">https://dl.dropbox.com/</a>, or host more than
+one app on each <a href="http://pages.github.com/">http://username.github.com/</a>, unless maybe if they are apps that will not handle
+any user data (for short-lived and self-contained html5 games for instance, this security consideration may be less important).</p>
+<p>So suppose you have your Indie Web domain name and you want to publish some unhosted web apps to the world.
+For http hosting this is not so difficult to do: the scheme of each app's origin will always be 'http', but you can point as many subdomain hosts
+to your IP address as you want; especially if you use a
+<a href="https://en.wikipedia.org/wiki/Wildcard_DNS_record">wild-card CNAME</a>. Then you can just use
+<code>http://app1.example.com/</code>, <code>http://app2.example.com/</code>, etcetera as origins for the apps you host.</p>
+<p>If you want to do this properly however, and get at least the amount of security we can despite your server probably being hosted on insecure
+IaaS infrastructure, then you should always host apps on https. This brings into play the limitations of which origins your TLS cert will work on.
+Unless you own a wild-card certificate, you will probably only have two hosts, probably "something.example.com" and its parent, "example.com".</p>
+<p>But luckily, origins are defined by scheme, host, <em>and port</em>. This means you can host tens of thousands of apps using the same cert; simply
+use origins like "https://apps.yourdomain.com:42001/", "https://apps.yourdomain.com:42002/", etcetera.</p>
+<h3>5apps</h3>
+<p>There is a very cool Berlin start-up, again, also personal friends of mine, called <a href="https://5apps.com/">5apps</a>. They specialize in app
+hosting for unhosted web apps. You may have seen them mentioned on our <a href="https://unhosted.org/tools/">tools</a> page, and most of our
+<a href="https://unhosted.org/apps/">featured apps</a> are hosted on 5apps. The will soon be launching https hosting (using a wildcard TLS cert for
+*.5apps.com), and deploying your app to their hosting gives you a number of advantages over home-backing your own app hosting. They will automatically
+generate an appcache manifest for your app (more about this below), resize your icon for the various favicon formats for browsers as well as for instance
+  iPad devices, and generate all the various file formats for submitting your app to various review sites and app stores (more about that next week).</p>
+<p>On top of that, they offer a number of things which "make your app nice", like browser compatibility detection, a user feedback widget, and JavaScript
+  minification. Statics hosting is a mature market; you can find various companies who specialize in it. But the advantage of 5apps over for instance
+  Amazon S3 is that 5apps specialize specifically in the hosting of your unhosted web apps. And like with Pagekite, I can personally confirm that
+  they are nice people, who care about re-decentralizing the web. :)</p>
+<h3>Caching and the end-to-end principle</h3>
+<p>Appcache is a way for a web app to tell a browser to pro-actively cache parts of it. It is still a relatively new technology, and if you want to know
+  how it got its nickname of 'appbag douchecache', you should definitely watch at least the first 10 minutes of this video:</p>
+<script>
+  function showVideo(that) {
+    that.innerHTML = '<iframe width="560" height="315" src="http://www.youtube.com/embed/Oic22dQMRXQ" frameborder="0" allowfullscreen></iframe>';
+  }
+</script><h1 onclick="showVideo(this);">(click me)</h1>
 <p></p>
+
+<h3>the appcache discussion</h3>
+<p></p>
+
+<h3>using node-static</h3>
+<p>http://nodejs.org/api/tls.html#tls_npn_and_sni
+http://en.wikipedia.org/wiki/Server_Name_Indication#Browsers_with_support_for_TLS_server_name_indication.5B5.5D
+even though STUN will still require a second IP address next month</p>
+
 
 <p><a href="https://groups.google.com/forum/#!forum/unhosted">comments welcome!</a></p>
