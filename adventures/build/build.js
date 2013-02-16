@@ -29,20 +29,25 @@ function getFilename(i) {
   return i+'/'+episodes[i].split(' ').join('-')+'.html';
 }
 function makeEpisodesDiv(current) {
-  var str = '\n<h4>Overview:</h4>\n'; 
+  var str = '\n<h4>Overview:</h4>\n', spaces;
   for(var i in overviewPages) {
+    spaces='';
+    //for(var j=3; j>i.length; j--) {
+    //  spaces += '&nbsp;';
+    //}
     if(i == current) {
-      str += '        <p><strong>'+ i +'. '+ overviewPages[i] +'</strong></p>\n';
+      str += '        <p>'+ spaces +'<strong>'+ i +'. '+ overviewPages[i] +'</strong></p>\n';
     } else {
-      str += '        <p> '+ i +'. <a href="'+ overviewPaths[i] +'">'+ overviewPages[i] +'</a></p>\n';
+      str += '        <p> '+ spaces + i +'. <a href="'+ overviewPaths[i] +'">'+ overviewPages[i] +'</a></p>\n';
     }
   }
   str += '\n<h4>Handbook:</h4>\n';
   for(var i in episodes) {
+    spaces = '';
     if(i == current) {
-      str += '        <p><strong>'+ i +'. '+ abbrev[i] +'</strong></p>\n';
+      str += '        <p><strong>'+ spaces + i +'. '+ abbrev[i] +'</strong></p>\n';
     } else {
-      str += '        <p> '+ i +'. <a href="/adventures/'+ getFilename(i) +'">'+ abbrev[i] +'</a></p>\n';
+      str += '        <p> '+ spaces + i +'. <a href="/adventures/'+ getFilename(i) +'">'+ abbrev[i] +'</a></p>\n';
     }
   }
   return str + '      </div>\n';

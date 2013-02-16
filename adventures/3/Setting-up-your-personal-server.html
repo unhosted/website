@@ -112,7 +112,9 @@ http.createServer(function(req, res) {
 }).listen(80);
 
 var file = new(static.Server)(config.contentDir, {
-  'Access-Control-Allow-Origin': '*'
+  headers: {
+    'Access-Control-Allow-Origin': '*'
+  }
 });
 
 https.createServer({
