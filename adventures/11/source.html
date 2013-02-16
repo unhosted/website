@@ -76,6 +76,16 @@ IaaS infrastructure, then you should always host apps on https. This brings into
 Unless you own a wild-card certificate, you will probably only have two hosts, probably "something.example.com" and its parent, "example.com".</p>
 <p>But luckily, origins are defined by scheme, host, <em>and port</em>. This means you can host tens of thousands of apps using the same cert; simply
 use origins like "https://apps.yourdomain.com:42001/", "https://apps.yourdomain.com:42002/", etcetera.</p>
+
+<h3>Using SNI to host multiple TLS cert</h3>
+<p>Five or ten years ago SNI didn't exist yet, and you had to get a dedicated IP address for every TLS cert you want to host on an IP address.
+  Until recently I thought this was still the case, but as Bjarni explained to me the other day, this is now a resolved problem.
+  <a href="http://nodejs.org/api/tls.html#tls_npn_and_sni">Using</a>
+  <a href="http://en.wikipedia.org/wiki/Server_Name_Indication#Browsers_with_support_for_TLS_server_name_indication.5B5.5D">SNI</a>, you can host as many TLS certs
+  on one virtual server as you like, without having to request extra IPv4 addresses and paying the extra fee for them. I haven't switched to this myself yet, since
+  I have so far published my unhosted web apps apps all through 5apps. I do have two IPv4 addresses on my server, one for nodejs and one for apache,
+  and your server will need two IP addresses to do STUN in a few episodes from now (yes! we're going to play with PeerConnection and WebRTC soon!).</p>
+
 <h3>5apps</h3>
 <p>There is a very cool Berlin start-up, again, also personal friends of mine, called <a href="https://5apps.com/">5apps</a>. They specialize in app
 hosting for unhosted web apps. You may have seen them mentioned on our <a href="https://unhosted.org/tools/">tools</a> page, and most of our
@@ -89,21 +99,35 @@ generate an appcache manifest for your app (more about this below), resize your 
   they are nice people, who care about re-decentralizing the web. :)</p>
 <h3>Caching and the end-to-end principle</h3>
 <p>Appcache is a way for a web app to tell a browser to pro-actively cache parts of it. It is still a relatively new technology, and if you want to know
-  how it got its nickname of 'appbag douchecache', you should definitely watch at least the first 10 minutes of this video:</p>
+  how it got its nickname of 'appdouche cachebag', you should definitely watch at least the first 10 minutes of this video:</p>
 <script>
   function showVideo(that) {
     that.innerHTML = '<iframe width="560" height="315" src="http://www.youtube.com/embed/Oic22dQMRXQ" frameborder="0" allowfullscreen></iframe>';
   }
-</script><h1 onclick="showVideo(this);">(click me)</h1>
-<p></p>
-
+</script><h1 onclick="showVideo(this);">(show http://www.youtube.com/embed/Oic22dQMRXQ)</h1>
+<p>One good thing about appcache is that, like the browser's http cache, it works end-to-end. The web of documents was designed with caching of GET requests
+  in mind. A lot of hosted web apps will cache the content produced by their webservers using something like <a href="http://www.squid-cache.org/">squid</a>
+  or <a href="http://www.varnish-cache.org/">varnish</a>, behind an https offloading layer. Often, this will be outsourced to a
+  <a href="https://en.wikipedia.org/wiki/Content_delivery_network">CDN</a>. After that, in theory researchers thought that multicasting would become big on the
+  internet, but this didn't really happen, at least not for web content. Instead, content providers like youtube and CDNs like Akamai extended their tentacles
+  right onto inside the exchange hubs where they peer with ISPs. In a sense, we have the multicast backbone that academia tried to develop, but it's privately
+  owned by companies like the two I just mentioned.</p>
+<p>So once the content reaches the ISP, it will often be cached again by the ISP, before it is delivered to the Last Mile. None of this works when you use end-to-end
+  encryption, of course. Multicasting traffic is a lot like deduplicating content-addressable content (only harder because of the time constraints), and as one commenter
+  said about a company that claimed it could do that, there's a choice between end-to-end encryption, deduping, and making sense: you can only choose any two. :)</p>
+<p>This means that on https, any request that misses cache on your device, will have to go all the way to the app hoster. We will look at distributing "huge" apps
+  (e.g., several Gigabytes) next week, but in general, the thing you will want to use is appcache.</p>
 <h3>the appcache discussion</h3>
-<p></p>
+<p>First of all, when you use appcache you should only cache the "shell" of your entire app, so all its layout and functionality,
+  but not any content it may include (this is also explained in the video above). For caching content that may be relevant this week, but already replaced next week,
+  you may want to implement your own custom caching system inside your app, using for instance <a href="http://westcoastlogic.com/lawnchair/">LawnChair</a> or
+  <a href="http://pouchdb.com/">PouchDB</a>.</p>
+<p>As is also mentioned in the video, Mozilla and Google are cooperating to 'fix appcache'. There will probably be a more powerful API with less surprises.</p>
+<p>The result of using appcache though, once you get used to refreshing the page 3 times after deploying changes to your app, is amazing. Your apps will Just Work,
+  even if there is no wifi connection. And if there is a wifi connection, then they will load very fast, much faster of course than if you wouldn't cache them.</p>
 
-<h3>using node-static</h3>
-<p>http://nodejs.org/api/tls.html#tls_npn_and_sni
-http://en.wikipedia.org/wiki/Server_Name_Indication#Browsers_with_support_for_TLS_server_name_indication.5B5.5D
-even though STUN will still require a second IP address next month</p>
-
+<h3>Conclusion</h3>
+<p>I think this covers most of the topics you have to keep in mind for app hosting. Next week, we will look at how app stores, packaging, and mirroring work
+  for unhosted web apps. See you then! :)</p>
 
 <p><a href="https://groups.google.com/forum/#!forum/unhosted">comments welcome!</a></p>
