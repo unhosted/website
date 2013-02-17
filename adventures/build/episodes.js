@@ -19,7 +19,7 @@ module.exports = {
         * caching, https offloading, reverse caching, proxies
         * using appcache
         * 5apps */
-    "distribution": "App distribution",
+    "app discovery": "App discovery and mirroring",
        /* web
         * Mozilla Marketplace
         * chrome app store
