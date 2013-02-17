@@ -19,14 +19,14 @@ module.exports = {
         * caching, https offloading, reverse caching, proxies
         * using appcache
         * 5apps */
-    "distribution": "",
+    "distribution": "App distribution",
        /* web
         * Mozilla Marketplace
         * chrome app store
         * 5apps store
         * apptorrent */
-    "GitHub": "",
-    "PeerConnection": "",
+    "GitHub": "GitHub",
+    "PeerConnection": "PeerConnection",
     "contacts": "Adding support for contacts to our platform"
        /* we can listen to music
         * we can edit text files
