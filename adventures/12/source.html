@@ -1,0 +1,92 @@
+<!-- app discovery: App discovery -->
+<h3>App discovery (was: App distribution).</h3>
+<p>So you developed an unhosted web app, and it's ready for your potential future customers 
+  to get your app onto all their nice and shiny mobile, portable, and transportable devices.
+  So to make that happen, you should "distribute" your app through an app store, or some other
+  kind of app distribution channel, right? No. Wrong.</p>
+<p>This is the web, it gets
+  it power from being slightly different from conventional software platforms. In the last two
+  episodes we talked about web linking and app hosting. And if you combine them, then you already
+  have all you need. But with a huge advantage: the web is open.</p>
+<p>The web is open-ended, in that it has no boundary that defines where it stops. It can go on and
+  on into virtual infinity.</p>
+<p>But it is also "open-beginninged", if there is such a thing. The web is a graph where most other systems are trees, as
+  Melvin likes to say.</p>
+<p>So what is needed for your potential future users to be able to launch your app? Exactly those two 
+  things: web linking and app hosting. They will need a hyperlink to the URL on which your app is hosted,
+  that's all. It's not a coincidence that I brought these topics up in this order. :)</p>
+<p>So in this episode we will not talk about how to distribute your product. We will talk about how to make
+  it discoverable, assuming that you are hosting it somewhere.</p>
+
+<h3>Hyperlink style guides (was: Manifest files).</h3>
+<p>In hypertext, a link is presented to the user as a (usually underlined) anchor text. The anchor text is
+  supposed to describe, in the context of the current document, what you will see when you click on the link.</p>
+<p>For linking to apps, we would like to do a bit more. Often, the link will be presented in a loose context
+  (for instance, an unstructured list like on our <a href="https://unhosted.org/apps/">examples page</a>), and as
+  the app publisher you will have some ideas on how you want your product to appear in such listings. That is why
+  app publishers often provide a sort of "hyperlink style guide", which describes "if you are going to publish a
+  link to my app, then please do it in this and this way".</p>
+<p>There are several formats for publishing such a hyperlink style guide; they are called manifest files in web app lingo.
+  The two prime examples are the <a href="...">Open Web App</a> format proposed by Mozilla, and the <a href="...">hosted Chrome app</a>
+  format proposed by Google.</p>
+<p>At the end of the day, these style guide formats are very simple: they basically define a few icons in various sizes,
+  the preferred name to display, in the right spelling and capitalization, and some other additional fields, like maybe a
+  short description of the app and of its author. And of course the URL of the app itself, which is what the hyperlink should link to.</p>
+<p>You might be a bit surprised that there are various proposals for this "hyperlink style guide" format that we call manifest
+  files, but once you realise how simple and basic these files are, it becomes obvious that it's trivial to just provide your style guide
+  in both formats. It's probably even possible to create one JSON document that will work as both. This topic was also briefly discussed
+  in the "Elevated Privileges" panel at EdgeConf (see minute ...):</p>
+  <script>
+  function showVideo(that) {
+    that.innerHTML = '<iframe width="560" height="315" src="http://www.youtube.com/embed/..." frameborder="0" allowfullscreen></iframe>';
+  }
+</script><h4 style="text-align: center" onclick="showVideo(this);">(show http://www.youtube.com/embed/...)</h4>
+<p>Also, when you host your apps on 5apps, you will have a tool there for generating manifest files in all the (rapidly changing) formats.</p>
+
+<h3>Review sites (was: App stores).</h3>
+<p>What, so that's it? What about the whole thing with the app stores? How can people use my app if I don't put it into all the major app stores?</p>
+<p>If you look at what app stores are and what they do, they are actually nothing more than review sites. Or maybe something in between a review
+  site, a directory, a portal, and a search engine.</p>
+<p>People go to an app store to find links to apps. Often, there will be a certain chain of trust at play there: the user trusts a certain review site
+  (app store), and the review site has reviewed a certain app and not found any obvious malware in it, so the user can be a bit more certain that the
+  app they launch is relatively trustworthy.</p>
+<p>On our Indie Web sites, we can also all present lists of apps that we recommend. It will give our friends some more information about which apps might
+  be worth trying out - a bit like a Retweet or a Like. All you need is a hyperlink.</p>
+<p>Given that we have these hyperlink style guides we talked about earlier, let's try to create a bit of javascript that generates nice styleguide-compliant
+  html on the fly. Here is one for Open Web App manifest files:</p>
+<code><pre><!DOCTYPE html>
+  <body>
+    <div class="openwebapp">{
+      icons: {
+        128: "editor.png"
+      }
+    }</div>
+  </body>
+  <script src="//unhosted.org/adventures/12/launchbutton.js"></script>
+</pre></code>
+<p>If you include this into your website (you might want to copy the .js file and host it yourself), it will look something like this on your site:</p>
+
+<div><img src="editor.png" /></div>
+<p>As you can see, there is nothing stopping you from being an app store yourself! :) If you do this, then you should consider one thing: the value of
+  a portal site is in the things that are not on it. The Apple platform is so popular <em>because</em> it is closed. The fact that "fart apps" are banned
+  from the iOS App Store is what sets the quality level. Building a strict and prestigious portal site is not evil, it is a good thing. What is regrettable
+  about the Apple platform is that it locks in hardware choice with software choice, and that it takes an extortionate profit margin, made possible
+  by this monopoly situation.</p>
+<p>But in itself, rejecting apps from your recommendation list, if it is done with the user's interests in mind, can lead to a sort of Michelin guide to
+  unhosted web apps. You just have to look at the value of Debian ("if it's in Debian, then you can be sure it's stable"), to see a precedent of this in the
+  free software world.</p>
+
+<h3>System apps (was: packaged web apps).</h3>
+<p>Last summer, Google decided to hardcode their Chrome Web Store into their Chrome Browser as the only allowed source of packaged web apps.</p>
+<p>A packaged web app is a zip file containing the static files that make up an unhosted web app. It is essentially the same as  browser extension, add-on,
+  or plugin in many ways. At first I was quite
+  <a href="https://groups.google.com/a/chromium.org/d/topic/chromium-apps/AZcMm413xww/discussion">upset about this</a>,
+  but after thinking a lot more about app discovery, and watching the
+  "elevated privileges" panel from EdgeConf recently, in my head I have assigned a different interpretation to this move.</p>
+<p>
+
+
+<h3>Apptorrent (was: Can you unhost wikipedia?).</h3>
+
+<h1>todo: write inline manifest interpreter</h1>
+<p><a href="https://groups.google.com/forum/#!forum/unhosted">comments welcome!</a></p>
