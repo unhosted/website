@@ -49,7 +49,8 @@ exception to this: <a href="http://mailman.klaki.net/mailman/listinfo/revprotun"
 <h3>RevProTun and Pagekite</h3>
 <p>If you have a <a href="http://freedomboxfoundation.org/">FreedomBox</a> in your home, or you otherwise run a server that is always-on in a place that you physically
 control, then you can put the unhosted web apps you publish on there, hosted on a simple statics server with TLS. You can use a nodejs script for this like the one we
-  described in <a href="/adventures/3/Setting-up-your-personal-server.html">episode 3: setting up your personal server</a>. Once you have a TLS-enable website running on localhost, you can
+  described in <a href="/adventures/3/Setting-up-your-personal-server.html">episode 3: setting up your personal server</a>. Once you have a TLS-enabled
+  website running on localhost, you can
 publish your localhost to the world using a RevProTun service. A good example, personal friends of mine and also the main drivers behind the development of RevProTun,
 are <a href="https://pagekite.net/">Pagekite</a>. You open a tunnel account with them, install their client app in a place where it can "see" the localhost service
 you want to publish, and it will start delivering traffic from the outside world to it, functioning as a reverse proxy tunnel from your publically accessible URL
@@ -65,12 +66,13 @@ details of how reverse proxy tunnels work. If you do want to know more about the
 If you would host two apps on the same origin, then your browser would allow these apps to access each other's data (for instance,
 the data they store in localStorage), and then things would generally just become a big mess. So don't ever try to do this. When hosting apps, host each one
 on its own origin.</p>
-<p>This also means that you don't want to publish any unhosted web apps directly on
+<p>This also means that, even though <a href="https://github.com/dropbox/dropbox-js#readme">dropbox.js</a> and
+GitHub are great tools for unhosted web app developers, you don't want to publish any unhosted web apps directly on
 <a href="https://tech.dropbox.com/2012/08/some-love-for-javascript-applications-2/">https://dl.dropbox.com/</a>, or host more than
 one app on each <a href="http://pages.github.com/">http://username.github.com/</a>, unless maybe if they are apps that will not handle
 any user data (for short-lived and self-contained html5 games for instance, this security consideration may be less important).</p>
 <p>So suppose you have your Indie Web domain name and you want to publish some unhosted web apps to the world.
-For http hosting this is not so difficult to do. Remember an origin is defined by scheme, host and port. The scheme of each app's origin will always
+For http hosting (without TLS), this is not so difficult to do. Remember an origin is defined by scheme, host and port. The scheme of each app's origin will always
   be 'http', but you can point as many subdomain hosts
 to your IP address as you want; especially if you use a
 <a href="https://en.wikipedia.org/wiki/Wildcard_DNS_record">wild-card CNAME</a>. Then you can just use
@@ -94,7 +96,8 @@ use origins like "https://apps.yourdomain.com:42001/", "https://apps.yourdomain.
 <h3>5apps</h3>
 <p>There is a very cool Berlin start-up, again, also personal friends of mine, called <a href="https://5apps.com/">5apps</a>. They specialize in app
 hosting for unhosted web apps. You may have seen them mentioned on our <a href="https://unhosted.org/tools/">tools</a> page, and most of our
-<a href="https://unhosted.org/apps/">featured apps</a> are hosted on 5apps. They will soon be launching https hosting (using their wildcard TLS cert for
+<a href="https://unhosted.org/apps/">featured apps</a> are hosted on 5apps. They have just launched support for https hosting last week
+  (using their wildcard TLS cert for
 *.5apps.com), and deploying your app to their hosting gives you a number of advantages over home-baking your own app hosting. They will automatically
 generate an appcache manifest for your app (more about this below), resize your icon for the various favicon formats for browsers as well as for instance
   iPad devices, and generate all the various file formats for submitting your app to various review sites and app stores (more about that next week).</p>
@@ -119,7 +122,7 @@ generate an appcache manifest for your app (more about this below), resize your 
   owned by companies like the two I just mentioned.</p>
 <p>So once the content reaches the ISP, it will often be cached again by the ISP, before it is delivered to the Last Mile. None of this works when you use end-to-end
   encryption, though. Multicasting traffic is a lot like deduplicating content-addressable content, only harder because of the time constraints. And 
-  out of 1) end-to-end encryption, 2) multicast(/deduping), and 3) making sense, you can only pick two. :)</p>
+  as the rule of thumb goes, out of 1) end-to-end encryption, 2) multicast(/deduplication), and 3) making sense, you can only pick two. :)</p>
 <p>This means that on https, any request that misses cache on your device, will have to go all the way to the app hoster. We will look at distributing "huge" apps
   (e.g., several Gigabytes) next week, but in general, the thing you will want to use is appcache.</p>
 
