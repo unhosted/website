@@ -30,7 +30,8 @@
   link to my app, then please do it in this and this way".</p>
 <p>There are several formats for publishing such a hyperlink style guide; they are called manifest files in web app lingo.
   The two prime examples are the <a href="https://marketplace.firefox.com/developers/docs/manifests">Open Web App</a> format
-  proposed by Mozilla, and the <a href="https://developers.google.com/chrome/apps/docs/developers_guide#live">hosted Chrome app</a>
+  <a href="https://dvcs.w3.org/hg/app-manifest/raw-file/tip/index.html">proposed</a>
+  by Mozilla, and the <a href="https://developers.google.com/chrome/apps/docs/developers_guide#live">hosted Chrome app</a>
   format proposed by Google.</p>
 <p>At the end of the day, these style guide formats are very simple: they basically define a few icons in various sizes,
   the preferred name to display, in the right spelling and capitalization, and some other additional fields, like maybe a
@@ -94,20 +95,31 @@
 
 <h3>System apps (was: packaged web apps).</h3>
 <p>Last summer, Google decided to hardcode their Chrome Web Store into their Chrome Browser as the only allowed source of packaged web apps.</p>
-<p>A packaged web app is a zip file containing the static files that make up an unhosted web app. It is essentially the same as  browser extension, add-on,
+<p>A packaged web app is a zip file containing the static files that make up an unhosted web app. It is essentially the same as a browser extension, add-on,
   or plugin in many ways. At first I was quite
   <a href="https://groups.google.com/a/chromium.org/d/topic/chromium-apps/AZcMm413xww/discussion">upset about this</a>,
   but after thinking a lot more about app discovery, and watching the
-  "elevated privileges" panel from EdgeConf recently, in my head I have assigned a different interpretation to this move.</p>
+  "elevated privileges" panel from EdgeConf embedded above, in my head I have assigned a different interpretation to this move.</p>
 <p>Chrome packaged apps should be regarded as "System apps". Through the elevated priviliges they can get at install-time, they form a part of the actual Chrome
   operating system, not of the content you visit with it.</p>
 
-TODO: fit this in somewhere:
-<p>Both manifest formats we saw earlier also provide ways to describe some elevated permissions the app would like to request upfront, if opened from a hyperlink
-  styled according to that manifest. If you put it that way, then this system suddenly sounds very weird. :)</p>
+<p>Both manifest formats we saw earlier provide ways to describe <em>as part of</em> the hyperlink that the manifest provides styling for,
+  some elevated permissions the app would like to request upfront, if opened from that specific hyperlink. This would then presumably not change the behavior for
+  when you visit the web app directly by typing its URL in the address bar.</p>
+<p>In general, when you visit a website, you want to interact with that website irrespective of which link lead you there. The website
+  should not suddenly be able to turn on your webcam just because you arrived at that website through a link with a high PageRank. ;)</p>
+<p>The mechanism for asking you to allow geolocation or webcam access
+  should be something that's equal for all websites you visit, and should not be influenced
+  by any sort of nepotism from the device or browser manufacturer.
+  Remember "launch buttons" are still just hyperlinks that lead you to web pages in an open-minded way. We are still talking about content on the web, and the web is an
+  <em>open</em> space where every DNS domain name is in principle equal in its ability to host content, even if nobody important links to it.</p>
 
-<p>Firefox OS has a similar concept of System Apps, like the Dialer, and the Configuration Dialogs (TODO: look this up). They have to be distributed through the
-  same channel as the operating system itself, since they are on the "system" side of the operating system's application sandbox barrier.
+<p>But as web technology makes it deeper into our operating systems, we encounter a need for web apps that are more a part of our actual devices, rather than being part of
+  the content of the web. Firefox OS has the concept of
+  <a href="https://developer.mozilla.org/en-US/docs/Mozilla/Firefox_OS/Security/Installing_and_updating_applications">Core Applications</a>, like the
+  <a href="https://github.com/mozilla-b2g/gaia/blob/master/apps/communications/manifest.webapp">Dialer</a>, and the
+  <a herf="https://github.com/mozilla-b2g/gaia/blob/master/apps/settings/manifest.webapp">Settings</a> dialogs. They have to be distributed through the
+  same channel as the operating system itself of course, since they are on the "system" side of the operating system's application sandbox barrier.
   Otherwise you can't design a stable device operating system.</p>
 <p>Apart from the fact that they use the same technology, system apps are an entirely different game from the unhosted web apps that you run as applications. It makes
   sense for system apps to be packaged rather than hosted, because you ship them as pluggable parts of a device operating system, and not as generic
@@ -116,7 +128,7 @@ TODO: fit this in somewhere:
   and users can use all the standard web tricks to, for instance, view their source code, or refer to the app, or to some of the content inside the app, with a
   normal hyperlink as we've always done.</p>
 
-<h3>Apptorrent, mirroring, and unhosting Wikipedia.</h3>
+<h3>Mirroring and Wikix.</h3>
 <p>There is a fascinating aspect in the concept of packaged web apps though: they are robust against attacks on our DNS system.</p>
 <p>Sometimes, governments block websites.
   Probably in almost all cases this is done by people who think they are doing the right thing: they really honestly think that Facebook is bad for Vietnam, or that
