@@ -40,16 +40,16 @@ often call them) do not have a secure channel between them.</p>
 <p>Yes, of course, to be very precise, we should have called unhosted web apps 'statics-only web apps', since that is what we mean. But that just didn't
 sound as intriguing. ;)</p>
 <p>The web has no way of signing web apps. When hosting an unhosted ('statics-only') web app, we just serve each of the files that make up the app on a website,
-and the only way to know whether you are seeing the web app that the developer wanted you to see, is if the server hosting it is under the physical control of
+and the only way to know whether you are seeing the web app that the developer wanted you to see, is if the webserver is under the physical control of
 the developer. This doesn't often happen, of course (especially with nomadic developers!), so in most cases we will have to compromise a little bit on security.</p>
-<p>In practice, security is always relative, and unless you mirror apps inside your LAN (more about that next week!),
+<p>In practice, security is always relative, and unless you mirror the apps you use, and host them yourself inside your LAN,
 in almost all cases we will have to trust at least one intermediate party: the app hoster. There is just one
 exception to this: <a href="http://mailman.klaki.net/mailman/listinfo/revprotun">RevProTun</a> systems like Pagekite.</p>
 
 <h3>RevProTun and Pagekite</h3>
 <p>If you have a <a href="http://freedomboxfoundation.org/">FreedomBox</a> in your home, or you otherwise run a server that is always-on in a place that you physically
 control, then you can put the unhosted web apps you publish on there, hosted on a simple statics server with TLS. You can use a nodejs script for this like the one we
-  described in <a href="/adventures/3/Setting-up-your-own-server.html">episode 3: setting up your own server</a>. Once you have a TLS-enable website running on localhost, you can
+  described in <a href="/adventures/3/Setting-up-your-personal-server.html">episode 3: setting up your personal server</a>. Once you have a TLS-enable website running on localhost, you can
 publish your localhost to the world using a RevProTun service. A good example, personal friends of mine and also the main drivers behind the development of RevProTun,
 are <a href="https://pagekite.net/">Pagekite</a>. You open a tunnel account with them, install their client app in a place where it can "see" the localhost service
 you want to publish, and it will start delivering traffic from the outside world to it, functioning as a reverse proxy tunnel from your publically accessible URL
