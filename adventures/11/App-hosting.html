@@ -149,21 +149,22 @@ generate an appcache manifest for your app (more about this below), resize your 
 <p>So once the content reaches the ISP, it will often be cached again by the ISP, before it is delivered to the Last Mile. None of this works when you use end-to-end
   encryption, though. Multicasting traffic is a lot like deduplicating content-addressable content, only harder because of the time constraints. And 
   as the rule of thumb goes, out of 1) end-to-end encryption, 2) multicast(/deduplication), and 3) making sense, you can only pick two. :)</p>
-<p>This means that on https, any request that misses cache on your device, will have to go all the way to the app hoster. We will look at distributing "huge" apps
+<p>This means that on https, any request that misses cache on your device, will have to make the round trip
+  all the way to the app hoster. We will look at distributing "huge" apps
   (e.g., several Gigabytes) next week, but in general, the thing you will want to use is appcache.</p>
 
 <h3>The appcache discussion</h3>
 <p>First of all, when you use appcache you should only cache the "shell" of your entire app, so all its layout and functionality,
   but not any content it may include (this is also explained in the video above). For caching content that may be relevant this session, but already replaced next time
   the user uses the app,
-  you may want to implement your own custom caching system inside your app, using for instance <a href="http://brian.io/lawnchair/">LawnChair</a> or
-  <a href="http://pouchdb.com/">PouchDB</a>.</p>
+  you may want to implement your own custom caching system inside your app, using for instance
+  <a href="http://pouchdb.com/">PouchDB</a>  or <a href="http://brian.io/lawnchair/">LawnChair</a>.</p>
 <p>As is also mentioned in the video, Mozilla and Google are cooperating to 'fix appcache'. There will probably be a more powerful API with less surprises.</p>
 <p>The result of using appcache though, once you get used to refreshing the page 3 times after deploying changes to your app, is amazing. Your apps will Just Work,
   even if there is no wifi connection. And if there is a wifi connection, then they will load very fast, much faster of course than if you wouldn't cache them.</p>
 
 <h3>Conclusion</h3>
-<p>I think this covers most of the topics you have to keep in mind for app hosting. One of the nice things of unhosted web apps is that they are so easy to host,
+<p>I think this covers most of the topics you have to keep in mind about app hosting. One of the nice things of unhosted web apps is that they are so easy to host,
   you don't have to set up a backend with database servers etcetera. This also makes them very cheap to host, compared to hosted web apps
   (in the sense of 'dynamic' web content as opposed to 'static' web content).</p>
 <p>But there are more advantages: unhosted web apps are also easier to mirror for kill-switch resilience, and they are very suitable as an alternative for smartphone
