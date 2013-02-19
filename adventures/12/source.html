@@ -29,7 +29,8 @@
   app publishers often provide a sort of "hyperlink style guide", which describes "if you are going to publish a
   link to my app, then please do it in this and this way".</p>
 <p>There are several formats for publishing such a hyperlink style guide; they are called manifest files in web app lingo.
-  The two prime examples are the <a href="...">Open Web App</a> format proposed by Mozilla, and the <a href="...">hosted Chrome app</a>
+  The two prime examples are the <a href="https://marketplace.firefox.com/developers/docs/manifests">Open Web App</a> format
+  proposed by Mozilla, and the <a href="https://developers.google.com/chrome/apps/docs/developers_guide#live">hosted Chrome app</a>
   format proposed by Google.</p>
 <p>At the end of the day, these style guide formats are very simple: they basically define a few icons in various sizes,
   the preferred name to display, in the right spelling and capitalization, and some other additional fields, like maybe a
@@ -89,6 +90,11 @@
   "elevated privileges" panel from EdgeConf recently, in my head I have assigned a different interpretation to this move.</p>
 <p>Chrome packaged apps should be regarded as "System apps". Through the elevated priviliges they can get at install-time, they form a part of the actual Chrome
   operating system, not of the content you visit with it.</p>
+
+TODO: fit this in somewhere:
+<p>Both manifest formats we saw earlier also provide ways to describe some elevated permissions the app would like to request upfront, if opened from a hyperlink
+  styled according to that manifest. If you put it that way, then this system suddenly sounds very weird. :)</p>
+
 <p>Firefox OS has a similar concept of System Apps, like the Dialer, and the Configuration Dialogs (TODO: look this up). They have to be distributed through the
   same channel as the operating system itself, since they are on the "system" side of the operating system's application sandbox barrier.
   Otherwise you can't design a stable device operating system.</p>
