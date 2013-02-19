@@ -90,20 +90,24 @@
   be worth trying out - a bit like a Retweet or a Like. All you need is a hyperlink.</p>
 <p>Given that we have these hyperlink style guides we talked about earlier, let's try to create a bit of javascript that generates nice styleguide-compliant
   html on the fly. Here is one for Open Web App manifest files:</p>
-<code><pre><!DOCTYPE html>
-  <body>
-    <div class="openwebapp">{
-      icons: {
-        128: "editor.png"
-      }
-    }</div>
-  </body>
-  <script src="//unhosted.org/adventures/12/launchbutton.js"></script>
+<code><pre>&lt;!DOCTYPE html>
+&lt;html lang="en">
+  &lt;body>
+    &lt;a data-hyperlinkstyleguide=
+        "https://editor-michiel.5apps.com/michiel_editor.webapp"
+      href="https://editor-michiel.5apps.com/">editor&lt;/a>
+  &lt;/body>
+  &lt;script src="//unhosted.org/adventures/12/launchbutton.js">
+  &lt;/script>
+&lt;/html>
 </pre></code>
-<p>If you include this into your website (you might want to copy the .js file and host it yourself), it will look something like this on your site:</p>
+<p>If you include this into your website (you might want to copy the .js file and host it yourself), that script will detect the <code>data-hyperlinkstyleguide</code>
+  attribute on that <code>a</code> element, and make what would have been a normal
+  "<a href="https://editor-michiel.5apps.com/">editor</a>" link look more like this instead:</p>
 
-<div><img src="editor.png" /></div>
-<h1>todo: write inline manifest interpreter</h1>
+<div style="text-align:center"><a href="https://editor-michiel.5apps.com/"><img src="https://editor-michiel.5apps.com/icon_x128.png" /><p>editor</p></a></div>
+
+[todo: write inline manifest interpreter]
 
 <p>As you can see, there is nothing stopping you from being an app store yourself! :) If you do this, then you should consider one thing: the value of
   a portal site is in the things that are not on it. The Apple platform is so popular <em>because</em> it is closed. The fact that "fart apps" are banned
