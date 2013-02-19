@@ -60,12 +60,12 @@
 <p>There is no way for the user to easily extract the URLs of data that your app fetches in the background. The developers of other
   apps will have to either study your app to reverse-engineer it, or read your app's API documentation. To make this job easier, it
   is good practice to include documentation links in your data. Many good data formats actually contain this requirement. For instance,
-  many of the data formats that our remoteStorage modules use contain an '@type' field that points to a documentation URL. Other
+  many of the data formats that our remoteStorage modules use contain an '@context' field that points to a documentation URL. Other
   developers can find those links when looking at the data, and that way they stand a better chance of decyphering what your data means.</p>
 <p>There is a second advantage of including documentation URLs inside data: it makes data formats uniquely recognizable. A URL is a Universal
-  Resource Locator, but at the same time it can be a "URI": a Universal Resource Identifier that uniquely identifies a concept rather than
-  a document. In this case, a data format can require its instances to contain the URL of its documentation by means of a URI that represents the claim
-  that the object indeed complies with that format.</p>
+  Resource Locator, but at the same time it can act as a "URI": a Universal Resource Identifier that uniquely identifies a concept as well as pointing to
+  a document about it. In this case, a data format can require its instances to contain the URL of its documentation by means of a URI that represents the claim
+  that the object indeed complies with the format <em>identified</em> by that string.</p>
 <p>In practice, this is not working very well yet because there are a lot of equivalent data formats, each with their own URI, that overlap and
   that could be merged. For instance, Facebook publishes machine-readable data about users with the URI
   "<a href="http://graph.facebook.com/schema/user">http://graph.facebook.com/schema/user</a>" in there. This URI is Facebook-specific, so it doesn't 
