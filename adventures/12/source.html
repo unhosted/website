@@ -128,28 +128,6 @@
   and users can use all the standard web tricks to, for instance, view their source code, or refer to the app, or to some of the content inside the app, with a
   normal hyperlink as we've always done.</p>
 
-<h3>Mirroring and Wikix.</h3>
-<p>There is a fascinating aspect in the concept of packaged web apps though: they are robust against attacks on our DNS system.</p>
-<p>Sometimes, governments block websites.
-  Probably in almost all cases this is done by people who think they are doing the right thing: they really honestly think that Facebook is bad for Vietnam, or that
-  Wikileaks is bad for the USA, or that ThePirateBay is bad for the Netherlands, and that such censorship is eventually in the interest of the people who installed them as
-  government employees.</p>
-<p>Or maybe they honestly think the interests of Communism, or the interest of National Security, or the interest of Entertainment Industry are more
-  important than considerations about freedom of communication.</p>
-<p>Whatever the reasons of such actions, and whatever the moral judgement on whether Facebook, Wikileaks and ThePirateBay are evil websites, from a technological design
-  principle of "kill-switch resilience", it would be nice if we had a way to publish unhosted web apps in a decentralized way.</p>
-<p>It would also just be nice from a practical point of view to have a local copy of a lot of information which we often look up online. I am writing this right now in a place
-  without wifi, and so far I have made five notes of things I should look up on <a href="http://developer.mozilla.org/">MDN</a> later. If I had a local copy of MDN, that would
-  make me a lot less reliant on connectivity.</p>
-<p>As an example, let's take Wikipedia. A very big chunk of all human knowledge is on there. You can download a compressed xml file containing all the text (not the images)
-  of the English edition. It's about 9 Gigabytes. Massaging this a bit, and adding the necessary rendering code, we could make this into an unhosted web app that can be run
-  on localhost, using a simple statics hosting script like the ones we've seen in previous episodes.</p>
-<p>The obvious way to distribute such a multi-Gigabyte file would be bittorrent. So that sounds totally feasible: we put huge unhosted web apps into torrent files, and
-  everybody can cooperate in seeding them. We could do this for Wikipedia, MDN, Kahn Academy, Open Yale Courses, this year's EdgeConf panel discussions, anything you like.
-  Given how cheap a 1 Terabyte external hard drive is nowadays (about 80 USD), you could even unhost the entire Gutenberg project, and still have some disk space left.</p>
-<p>And of course, you could use this for small apps as well. Even if unhosted web apps cache themselves in your browser when you use them, it would be nice to have an
-  app server somewhere inside your LAN that just hosts thousands of unhosted web apps on local URLs, so that you can access them quickly without relying on connectivity.</p>
-<p>This is an idea that I started thinking about a couple of weeks ago, and I don't have any example code for it yet, but I will update this blogpost as soon as I do.</p>
 <p>In any case, try out the "launchbutton.js" file I showed above, and link to some apps from your website. App hosting and web linking should be all you need here.
   The web doesn't need a new "app distribution layer" like Apple's iOS App Store. The web <em>already is</em> one big, infinite app store.</p>
 <p><a href="https://groups.google.com/forum/#!forum/unhosted">comments welcome!</a></p>

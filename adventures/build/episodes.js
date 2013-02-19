@@ -18,13 +18,13 @@ module.exports = {
         * gh-pages
         * caching, https offloading, reverse caching, proxies
         * using appcache
-        * 5apps */
-    "app discovery": "App discovery and mirroring",
+        * 5apps 
+        * Kiwix and mirroring */
+    "app discovery": "App discovery",
        /* web
         * Mozilla Marketplace
         * chrome app store
-        * 5apps store
-        * apptorrent */
+        * 5apps store*/
     "GitHub": "GitHub",
     "PeerConnection": "PeerConnection",
     "contacts": "Adding support for contacts to our platform"
