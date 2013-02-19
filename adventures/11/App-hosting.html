@@ -38,8 +38,10 @@ you will have been fed during the age of hosted software.</p>
   It establishes a secure tunnel between the client and the server. Third parties can see that this tunnel exists, and roughly
   how much data travels through it, in which direction, and in which timing patterns, but it cannot see the unencrypted content
   that is being sent back and forth.</p>
-<p>On top of TLS, the web uses a Public Key Infrastructure (PKI) of the  Certificate Authority (CA) type. This system is well-known
-to have its own problems, I'm not even talking about that. Purely the client-server security architecture in itself is an outdated
+<p>On top of TLS, the web uses a Public Key Infrastructure (PKI) based on Certificate Authorities (CAs). This system has
+its own problems because it centralizes power,
+I'm not even talking about that.</p>
+<p>Purely the client-server security architecture in itself is an outdated
 approach to security. It makes the assumption that the server is under the physical control of the person or organization publishing
 the content. This was probably
 true for 90% of the first websites, 20 years ago, but this percentage is probably closer to 10% (or even less) nowadays. This means
