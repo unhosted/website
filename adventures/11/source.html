@@ -61,7 +61,7 @@ details of how reverse proxy tunnels work. If you do want to know more about the
 <a href="https://pagekite.net/wiki/Floss/Video/">FOSDEM talk about Pagekite</a>.
 
 <h3>How origins work</h3>
-<p>Each unhosted web app should be hosted on its own "origin", meaning its own unique combination of scheme, host and port.</p>
+<p>Each web app should be hosted on its own "origin", meaning its own unique combination of scheme, host and port.</p>
 <p>The reason for this is that your browser will shield off apps from each other, putting them each in their own limited sandbox.
 If you would host two apps on the same origin, then your browser would allow these apps to access each other's data (for instance,
 the data they store in localStorage), and then things would generally just become a big mess. So don't ever try to do this. When hosting apps, host each one
@@ -96,7 +96,8 @@ use origins like "https://apps.yourdomain.com:42001/", "https://apps.yourdomain.
 <h3>5apps</h3>
 <p>There is a very cool Berlin start-up, again, also personal friends of mine, called <a href="https://5apps.com/">5apps</a>. They specialize in app
 hosting for unhosted web apps. You may have seen them mentioned on our <a href="https://unhosted.org/tools/">tools</a> page, and most of our
-<a href="https://unhosted.org/apps/">featured apps</a> are hosted on 5apps. They have just launched support for https hosting last week
+<a href="https://unhosted.org/apps/">featured apps</a> are hosted on 5apps. They have just
+  <a href="https://blog.5apps.com/2013/02/18/new-subdomains-and-ssl-for-everybody.html">launched</a> support for https hosting last week
   (using their wildcard TLS cert for
 *.5apps.com), and deploying your app to their hosting gives you a number of advantages over home-baking your own app hosting. They will automatically
 generate an appcache manifest for your app (more about this below), resize your icon for the various favicon formats for browsers as well as for instance
@@ -107,7 +108,8 @@ generate an appcache manifest for your app (more about this below), resize your 
   they are nice people, who care about re-decentralizing the web. :)</p>
 
 <h3>Mirroring and packaging.</h3>
-<p>Since the early days of the web, important websites, especially if they contain big downloadable files, have been mirrored. An unhosted web app can be serialized
+<p>Since the early days of the web, important websites, especially if they contain big downloadable files, have been mirrored. An unhosted web app
+  is statics only, so it can be serialized
   as a folder tree
   containing files. This folder tree can be packaged as an FTP directory, a git repo, a zip file, a zip file with a '.crx' extension (as used by Chrome extensions),
   or a bittorrent for example. If you transport it over one or more of those media, then it can easily be mirrored by more than one app hoster.</p>
@@ -128,7 +130,11 @@ generate an appcache manifest for your app (more about this below), resize your 
   of the English edition. It's about 9 Gigabytes. Massaging this a bit, and adding the necessary rendering code, we could make this into an unhosted web app that can be run
   on localhost, using a simple statics hosting script like the ones we've seen in previous episodes.</p>
 <p>The obvious way to distribute such a multi-Gigabyte file would be bittorrent. So that sounds totally feasible: we put huge unhosted web apps into torrent files, and
-  everybody can cooperate in seeding them. We could do this for Wikipedia, MDN, Kahn Academy, Open Yale Courses, this year's EdgeConf panel discussions, anything you like.
+  everybody can cooperate in seeding them. We could do this for Wikipedia, MDN,
+  <a href="https://www.khanacademy.org/">Kahn Academy</a>,
+  <a href="http://oyc.yale.edu/">Open Yale Courses</a>, this year's
+  <a href="https://youtube.com/results?search_query=%22Edge+Conference+-+Panel%22">EdgeConf panel</a> discussions, any knowledge you would like all humans to have
+  <a href="https://en.wikipedia.org/wiki/Hacker_ethic">access</a> to.
   Given how cheap a 1 Terabyte external hard drive is nowadays (about 80 USD), you could even unhost the entire Gutenberg project, and still have some disk space left.</p>
 <p>And of course, you could use this for small apps as well. Even if unhosted web apps cache themselves in your browser when you use them, it would be nice to have an
   app server somewhere inside your LAN that just hosts thousands of unhosted web apps on local URLs, so that you can access them quickly without relying on connectivity.</p>
