@@ -105,40 +105,15 @@ generate an appcache manifest for your app (more about this below), resize your 
   minification. Statics hosting is a mature market; you can find various companies who specialize in it. But the advantage of 5apps over for instance
   Amazon S3 is that 5apps specialize specifically in the hosting of your unhosted web apps. And like with Pagekite, I can personally confirm that
   they are nice people, who care about re-decentralizing the web. :)</p>
-<h3>Caching and the end-to-end principle</h3>
-<p>Appcache is a way for a web app to tell a browser to pro-actively cache parts of it. It is still a relatively new technology, and if you want to know
-  how it got its nickname of 'appdouche cachebag', you should definitely watch at least the first 10 minutes of this video:</p>
-<script>
-  function showVideo(that) {
-    that.innerHTML = '<iframe width="560" height="315" src="http://www.youtube.com/embed/Oic22dQMRXQ" frameborder="0" allowfullscreen></iframe>';
-  }
-</script><h4 style="text-align: center" onclick="showVideo(this);">(show http://www.youtube.com/embed/Oic22dQMRXQ)</h4>
-<p>One good thing about appcache is that, like the browser's http cache, it works end-to-end. The web of documents was designed with caching of GET requests
-  in mind. A lot of hosted web apps will cache the content produced by their webservers using something like <a href="http://www.squid-cache.org/">squid</a>
-  or <a href="http://www.varnish-cache.org/">varnish</a>, behind an https offloading layer. Often, this will be outsourced to a
-  <a href="https://en.wikipedia.org/wiki/Content_delivery_network">CDN</a>. After that, in theory researchers thought that multicasting would become big on the
-  internet, but this didn't really happen, at least not for web content. Instead, content providers like youtube and CDNs like Akamai extended their tentacles
-  right into the exchange hubs where they peer with ISPs. In a sense, we have the multicast backbone that academia tried to develop, but it's now privately
-  owned by companies like the two I just mentioned.</p>
-<p>So once the content reaches the ISP, it will often be cached again by the ISP, before it is delivered to the Last Mile. None of this works when you use end-to-end
-  encryption, though. Multicasting traffic is a lot like deduplicating content-addressable content, only harder because of the time constraints. And 
-  as the rule of thumb goes, out of 1) end-to-end encryption, 2) multicast(/deduplication), and 3) making sense, you can only pick two. :)</p>
-<p>This means that on https, any request that misses cache on your device, will have to make the round trip
-  all the way to the app hoster. We will look at distributing "huge" apps
-  (e.g., several Gigabytes) next week, but in general, the thing you will want to use is appcache.</p>
 
-<h3>The appcache discussion</h3>
-<p>First of all, when you use appcache you should only cache the "shell" of your entire app, so all its layout and functionality,
-  but not any content it may include (this is also explained in the video above). For caching content that may be relevant this session, but already replaced next time
-  the user uses the app,
-  you may want to implement your own custom caching system inside your app, using for instance
-  <a href="http://pouchdb.com/">PouchDB</a>  or <a href="http://brian.io/lawnchair/">LawnChair</a>.</p>
-<p>As is also mentioned in the video, Mozilla and Google are cooperating to 'fix appcache'. There will probably be a more powerful API with less surprises.</p>
-<p>The result of using appcache though, once you get used to refreshing the page 3 times after deploying changes to your app, is amazing. Your apps will Just Work,
-  even if there is no wifi connection. And if there is a wifi connection, then they will load very fast, much faster of course than if you wouldn't cache them.</p>
 
-<h3>Mirroring and Kiwix.</h3>
-<h1>TODO: write this section</h1><!--<p>There is a fascinating aspect in the concept of packaged web apps though: they are robust against attacks on our DNS system.</p>
+<h3>Mirroring and packaging.</h3>
+<p>Since the early days of the web, important websites, especially if they contain big downloadable files, have been mirrored. An unhosted web app can be serialized
+  as a folder tree
+  containing files. This folder tree can be packaged as an FTP directory, a git repo, a zip file, a zip file with a '.crx' extension (as used by Chrome extensions),
+  or a bittorrent. If you transport it over one or more of those media, then it can easily be mirrored by more than one app hoster.</p>
+<p>We call a statics-only web app that is underway from one mirror to another in such a way a "packaged web app".</p>
+<p>There is a fascinating aspect in the concept of such packaged web apps: they are robust against attacks on our DNS system.</p>
 <p>Sometimes, governments block websites.
   Probably in almost all cases this is done by people who think they are doing the right thing: they really honestly think that Facebook is bad for Vietnam, or that
   Wikileaks is bad for the USA, or that ThePirateBay is bad for the Netherlands, and that such censorship is eventually in the interest of the people who installed them as
@@ -158,7 +133,74 @@ generate an appcache manifest for your app (more about this below), resize your 
   Given how cheap a 1 Terabyte external hard drive is nowadays (about 80 USD), you could even unhost the entire Gutenberg project, and still have some disk space left.</p>
 <p>And of course, you could use this for small apps as well. Even if unhosted web apps cache themselves in your browser when you use them, it would be nice to have an
   app server somewhere inside your LAN that just hosts thousands of unhosted web apps on local URLs, so that you can access them quickly without relying on connectivity.</p>
-<p>This is an idea that I started thinking about a couple of weeks ago, and I don't have any example code for it yet, but I will update this blogpost as soon as I do.</p>-->
+<p>This is an idea that I started thinking about a couple of weeks ago, and thanks to Nick who pointed me to it, I found out that there is a project that does exactly this!
+  :)
+  It's called <a href="http://www.kiwix.org/wiki/Main_Page">Kiwix</a>. They use the <a href="https://en.wikipedia.org/wiki/ZIM_%28file_format%29">ZIM</a> file format, which
+  is optimized for wiki content. They also provide an application that discovers and retrieves ZIM files, and serves them up on port 8000, so you can open a mirrored version
+  of for instance a packaged website about Venezuela on a URL like
+  <a href="http://127.13.37.123:8000/wikipedia_es_venezuela_11_2012/">http://127.13.37.123:8000/wikipedia_es_venezuela_11_2012/</a>.</p>
+
+<h3>Packaged app hosting conventions</h3>
+<p>There are a few conventions that you should keep in mind when writing a webserver that hosts static content. Most of those are well known in web engineer folklore, and
+  if you use software like Apache or node-static, then this will all just work automatically by default.</p>
+<p>A packaged web app, regardless of whether it is packaged into a torrent file or a zip file or git repository, is a list of items, called a folder, and
+  each of the items in a folder can be either a
+  a document or again a folder.
+  No two items in one same folder can have the same name. Names are case-sensitive, and although in theory all UTF-8 characters should be
+  allowed in them, you should be aware of the escape sequences
+  required by the format in which you are packing it up. Nesting depth and
+  string length of each name are limited by the maximum total length of a URL (was it 1024 characters?), because of course the documents in this folder structure
+  map onto documents that should be made available over http, splitting the URL path along the forward slashes, and mapping that onto the folder structure.</p>
+<p>The file extension (the document name's shortest suffix that starts with a '.') determines which 'Content-Type' header should be sent. A few examples:</p>
+<ul>
+  <li><code>.html</code> -> <code>text/html</code></li>
+  <li><code>.js</code> -> <code>application/javascript</code></li>
+  <li><code>.css</code> -> <code>text/css</code></li>
+  <li><code>.png</code> -> <code>image/png</code></li>
+  <li><code>.svg</code> -> <code>image/svg</code></li>
+  <li><code>.jpg</code>, <code>.jpeg</code> or even <code>.JPG</code> -> <code>image/jpeg</code></li>
+  <li>etcetera</li>
+</ul>
+<p>The server should also set a character set header, usually UTF-8, and then make sure you serve the contents of each document in the correct character set.</p>
+<p>To allow the browser to cache the files you serve, and then retrieve them conditionally, you should implement support for ETag and If-None-Match headers.</p>
+<p>Whenever a URL maps to a folder (either with or without a forward slash at the end) instead of to a document,
+  if an index.html document exists in that folder, you should serve that.</p>
+<p>Apart from that, if a URL maps to no existing item, or it maps to a folder that contains no 'index.html' document, serve either the '404.html' document from the
+  root folder if it exists, or some standard 404 page, and in this case of course send a 404 status instead of a 200 status.</p>
+<p>Additionally implementing support for Byte-ranges is nice-to-have, but not essential.</p>
+
+<h3>Caching and the end-to-end principle</h3>
+<p>Appcache is a way for a web app to tell a browser to pro-actively cache parts of it. It is still a relatively new technology, and if you want to know
+  how it got its nickname of 'appdouche cachebag', you should definitely watch at least the first 10 minutes of this video:</p>
+<script>
+  function showVideo(that) {
+    that.innerHTML = '<iframe width="560" height="315" src="http://www.youtube.com/embed/Oic22dQMRXQ" frameborder="0" allowfullscreen></iframe>';
+  }
+</script><h4 style="text-align: center" onclick="showVideo(this);">(show http://www.youtube.com/embed/Oic22dQMRXQ)</h4>
+<p>One good thing about appcache is that, like the browser's http cache, it works end-to-end. The web of documents was designed with caching of GET requests
+  in mind. A lot of hosted web apps will cache the content produced by their webservers using something like <a href="http://www.squid-cache.org/">squid</a>
+  or <a href="http://www.varnish-cache.org/">varnish</a>, behind an https offloading layer. Often, this will be outsourced to a
+  <a href="https://en.wikipedia.org/wiki/Content_delivery_network">CDN</a>. After that, in theory researchers thought that multicasting would become big on the
+  internet, but this didn't really happen, at least not for web content. Instead, content providers like youtube and CDNs like Akamai extended their tentacles
+  right into the exchange hubs where they peer with ISPs. In a sense, we have the multicast backbone that academia tried to develop, but it's now privately
+  owned by companies like the two I just mentioned.</p>
+<p>So once the content reaches the ISP, it will often be cached again by the ISP, before it is delivered to the Last Mile. None of this works when you use end-to-end
+  encryption, though. Multicasting traffic is a lot like deduplicating content-addressable content, only harder because of the time constraints. And 
+  as the rule of thumb goes, out of 1) end-to-end encryption, 2) multicast(/deduplication), and 3) making sense, you can only pick two. :)</p>
+<p>This means that on https, any request that misses cache on your device, will have to make the round trip
+    all the way to the app hoster. Mirroring can decrease the distance between the app hoster and the user, but whenever that distance causes page load times to be
+    noticable (say, multiple tenths of a second), the thing you will want to use is appcache.</p>
+
+<h3>The appcache discussion</h3>
+<p>First of all, when you use appcache you should only cache the "shell" of your entire app, so all its layout and functionality,
+  but not any content it may include (this is also explained in the video above). For caching content that may be relevant this session, but already replaced next time
+  the user uses the app,
+  you may want to implement your own custom caching system inside your app, using for instance
+  <a href="http://pouchdb.com/">PouchDB</a>  or <a href="http://brian.io/lawnchair/">LawnChair</a>.</p>
+<p>As is also mentioned in the video, Mozilla and Google are cooperating to 'fix appcache'. There will probably be a more powerful API with less surprises.</p>
+<p>The result of using appcache though, once you get used to refreshing the page 3 times after deploying changes to your app, is amazing. Your apps will Just Work,
+  even if there is no wifi connection. And if there is a wifi connection, then they will load very fast, much faster of course than if you wouldn't cache them.</p>
+
 <h3>Conclusion</h3>
 <p>I think this covers most of the topics you have to keep in mind about app hosting. One of the nice things of unhosted web apps is that they are so easy to host,
   you don't have to set up a backend with database servers etcetera. This also makes them very cheap to host, compared to hosted web apps
