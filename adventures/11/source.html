@@ -179,7 +179,7 @@ generate an appcache manifest for your app (more about this below), resize your 
   if an index.html document exists in that folder, you should serve that.</p>
 <p>If the requested document does not exist, but one exists whose full path differs only in case (e.g. <code>foo/bar.html</code> was requested,
   but only <code>Foo/Bar.html</code> exists), then redirect to that.</p>
-<p>Apart from that, if a URL maps to no existing item, or it maps to a folder that contains no 'index.html' document, serve either the '404.html' document from the
+<p>Apart from that, if a URL maps to no existing item, serve either the '404.html' document from the
   root folder if it exists, or some standard 404 page, and in this case of course send a 404 status instead of a 200 status.</p>
 <p>Additionally implementing support for Byte-ranges is nice-to-have, but not essential.</p>
 
@@ -216,7 +216,8 @@ generate an appcache manifest for your app (more about this below), resize your 
   even if there is no wifi connection. And if there is a wifi connection, then they will load very fast, much faster of course than if you wouldn't cache them.</p>
 
 <h3>Conclusion</h3>
-<p>I think this covers most of the topics you have to keep in mind about app hosting. One of the nice things of unhosted web apps is that they are so easy to host,
+<p>Sorry if this episode was a bit long, but
+  I think this covers most of the topics you have to keep in mind about app hosting. One of the nice things of unhosted web apps is that they are so easy to host,
   you don't have to set up a backend with database servers etcetera. This also makes them very cheap to host, compared to hosted web apps
   (in the sense of 'dynamic' web content as opposed to 'static' web content).</p>
 <p>Unhosted web apps are also easier to mirror for kill-switch resilience, and they are very suitable as a cross-platform alternative for native smartphone
