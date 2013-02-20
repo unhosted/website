@@ -69,7 +69,7 @@
 &lt;!DOCTYPE html>
 &lt;html lang="en">
   &lt;body>
-    &lt;a data-hyperlinkstyleguide=
+    &lt;a class="launchbutton" data-hyperlinkstyleguide=
         "https://editor-michiel.5apps.com/michiel_editor.webapp"
       href="https://editor-michiel.5apps.com/">editor&lt;/a>
   &lt;/body>
@@ -77,13 +77,18 @@
   &lt;/script>
 &lt;/html>
 </code></pre>
-<p>If you include this into your website (you might want to copy the .js file and host it yourself), that script will detect the <code>data-hyperlinkstyleguide</code>
-  attribute on that <code>a</code> element, and make what would have been a normal
+<p>If you include this into your website (you might want to copy the .js file and host it yourself), that script will look for the <code>data-hyperlinkstyleguide</code>
+  attribute on any element that has the "launchbutton" class, and make what would have been a normal
   "<a href="https://editor-michiel.5apps.com/">editor</a>" link look more like this instead:</p>
 
-<div style="text-align:center"><a href="https://editor-michiel.5apps.com/"><img src="https://editor-michiel.5apps.com/icon_x128.png" /><p>editor</p></a></div>
-
-[todo: write inline manifest interpreter]
+  <div style="text-align:center">
+    <a
+        class="launchbutton"
+        data-hyperlinkstyleguide="https://editor-michiel.5apps.com/michiel_editor.webapp"
+        href="https://editor-michiel.5apps.com/"
+    >(if you see this then wait a little bit or check the console...)</a>
+    <script src="/adventures/12/launchbutton.js"></script>
+  </div>
 
 <p>As you can see, there is nothing stopping you from being an app store yourself! :) If you do this, then you should consider one thing: the value of
   a portal site is in the things that are not on it. The Apple platform is so popular <em>because</em> it is closed. The fact that "fart apps" are banned
@@ -100,7 +105,7 @@
   or plugin in many ways. At first I was quite
   <a href="https://groups.google.com/a/chromium.org/d/topic/chromium-apps/AZcMm413xww/discussion">upset about this</a>,
   but after thinking a lot more about app discovery, and watching the
-  "elevated privileges" panel from EdgeConf embedded above, in my head I have assigned a different interpretation to this move.</p>
+  "Privileged Access" panel from EdgeConf embedded above, in my head I have assigned a different interpretation to this move.</p>
 <p>Chrome packaged apps should be regarded as "System apps". Through the elevated priviliges they can get at install-time, they form a part of the actual Chrome
   operating system, not of the content you visit with it.</p>
 
