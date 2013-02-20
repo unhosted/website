@@ -163,31 +163,36 @@ generate an appcache manifest for your app (more about this below), resize your 
   It's called <a href="http://www.kiwix.org/wiki/Main_Page">Kiwix</a>. They use the <a href="https://en.wikipedia.org/wiki/ZIM_%28file_format%29">ZIM</a> file format, which
   is optimized for wiki content. They also provide an application that discovers and retrieves ZIM files, and serves them up on port 8000, so you can open a mirrored version
   of for instance a packaged website about Venezuela on one of your many localhost origins, for instance
-  <a href="http://127.13.37.123:8000/wikipedia_es_venezuela_11_2012/">http://127.13.37.123:8000/wikipedia_es_venezuela_11_2012/</a> (remember the localhost IP space is a /8 as they say
+  <a href="http://127.13.37.123:8000/wikipedia_es_venezuela_11_2012/">http://127.13.37.123:8000/wikipedia_es_venezuela_11_2012/</a> (remember the localhost IP space is a 
+  "/8" as they say,
   it covers any IP address that starts with "127.").</p>
 
 <h3>Packaged app hosting conventions</h3>
 <p>There are a few conventions that you should keep in mind when writing a webserver that hosts static content. Most of those are well known in web engineer folklore, and
   if you use software like Apache or node-static, then this will all just work automatically by default.</p>
 <p>A packaged web app, regardless of whether it is packaged into a torrent file or a zip file or git repository, is a list of items, called a folder, and
-  each of the items in a folder can be either a
+  each of the items in a folder can be either be
   a document or again a folder.
   No two items in one same folder can have the same name. Names are case-sensitive, and although in theory all UTF-8 characters should be
   allowed in them, you should be aware of the escape sequences
-  required by the format in which you are packing it up. Nesting depth and
-  string length of each name are limited by the maximum total length of a URL (was it 1024 characters?), because of course the documents in this folder structure
-  map onto documents that should be made available over http, splitting the URL path along the forward slashes, and mapping that onto the folder structure.</p>
-<p>The file extension (the document name's shortest suffix that starts with a '.') determines which 'Content-Type' header should be sent. A few examples:</p>
+  required by the format in which you are packing it up.
+  <!-- Nesting depth and
+  string length of each name are in theory unlimited, but in practice the maximum total length of the resulting concatenation should not exceed 2000 characters.
+  -->
+  Of course the documents in this folder structure
+  map onto documents that should be made available over http, splitting the URL path along the forward slashes, and mapping that onto the folder structure, taking
+  into account again the escape sequences defined for URIs and IRIs.</p>
+<p>The file extension<!--(the document name's shortest suffix that starts with a '.')--> determines which 'Content-Type' header should be sent. A few examples:</p>
 <ul>
   <li><code>.html</code> -> <code>text/html</code></li>
   <li><code>.js</code> -> <code>application/javascript</code></li>
   <li><code>.css</code> -> <code>text/css</code></li>
   <li><code>.png</code> -> <code>image/png</code></li>
-  <li><code>.svg</code> -> <code>image/svg</code></li>
+  <li><code>.svg</code> -> <code>image/svg+xml</code></li>
   <li><code>.jpg</code>, <code>.jpeg</code> or even <code>.JPG</code> -> <code>image/jpeg</code></li>
-  <li>etcetera</li>
+  <li><a href="https://www.iana.org/assignments/media-types">etcetera</a></li>
 </ul>
-<p>The server should also set a character set header, usually UTF-8, and then make sure you serve the contents of each document in the correct character set.</p>
+<p>The server should also set a character set header, usually UTF-8, and then make sure it also serves the contents of each document in that character set.</p>
 <p>To allow the browser to cache the files you serve, and then retrieve them conditionally, you should implement support for ETag and If-None-Match headers.</p>
 <p>Whenever a URL maps to a folder (either with or without a forward slash at the end) instead of to a document,
   if an index.html document exists in that folder, you should serve that.</p>
@@ -231,9 +236,10 @@ generate an appcache manifest for your app (more about this below), resize your 
 <p>I think this covers most of the topics you have to keep in mind about app hosting. One of the nice things of unhosted web apps is that they are so easy to host,
   you don't have to set up a backend with database servers etcetera. This also makes them very cheap to host, compared to hosted web apps
   (in the sense of 'dynamic' web content as opposed to 'static' web content).</p>
-<p>But there are more advantages: unhosted web apps are also easier to mirror for kill-switch resilience, and they are very suitable as an alternative for smartphone
-  apps and tablet apps. So next week we will talk a bit about that, as we look at how app stores, packaging, and mirroring can work
-  for unhosted web apps. See you then! :)</p>
+<p>Unhosted web apps are also easier to mirror for kill-switch resilience, and they are very suitable as a cross-platform alternative for native smartphone
+  apps and native tablet apps.</p>
+<p>Next week we will put together what we discussed about linking and hosting, and talk about how with unhosted web apps, the web itself becomes an app store.
+  See you then! :)</p>
 
 <p><a href="https://groups.google.com/forum/#!forum/unhosted">comments welcome!</a></p>
 
