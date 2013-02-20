@@ -151,10 +151,9 @@ generate an appcache manifest for your app (more about this below), resize your 
 <h3>Packaged app hosting conventions</h3>
 <p>There are a few conventions that you should keep in mind when writing a webserver that hosts static content. Most of those are well known in web engineer folklore, and
   if you use software like Apache or node-static, then this will all just work automatically by default.</p>
-<p>A packaged web app, regardless of whether it is packaged into a torrent file or a zip file or git repository, is a list of items, called a folder, and
-  each of the items in a folder can be either
-  a document or again a folder.
-  No two items in one same folder can have the same name. Names are case-sensitive, and although in theory all UTF-8 characters should be
+<p>A packaged web app, regardless of whether it is packaged into a torrent file or a zip file or git repository, is a folder 
+  with documents and/or subfolders. Each subfolder can again contain more documents and subfolders.
+  No two items in one same folder can have the same name, names are case-sensitive, and although in theory all UTF-8 characters should be
   allowed in them, you should be aware of the escape sequences
   required by the format in which you are packing it up.
   <!-- Nesting depth and
@@ -178,6 +177,8 @@ generate an appcache manifest for your app (more about this below), resize your 
 <p>To allow the browser to cache the files you serve, and then retrieve them conditionally, you should implement support for ETag and If-None-Match headers.</p>
 <p>Whenever a URL maps to a folder (either with or without a forward slash at the end) instead of to a document,
   if an index.html document exists in that folder, you should serve that.</p>
+<p>If the requested document does not exist, but one exists whose full path differs only in case (e.g. <code>foo/bar.html</code> was requested,
+  but only <code>Foo/Bar.html</code> exists), then redirect to that.</p>
 <p>Apart from that, if a URL maps to no existing item, or it maps to a folder that contains no 'index.html' document, serve either the '404.html' document from the
   root folder if it exists, or some standard 404 page, and in this case of course send a 404 status instead of a 200 status.</p>
 <p>Additionally implementing support for Byte-ranges is nice-to-have, but not essential.</p>
