@@ -132,19 +132,18 @@ generate an appcache manifest for your app (more about this below), resize your 
   Amazon S3 is that 5apps specialize specifically in the hosting of your unhosted web apps. And like with Pagekite, I can personally confirm that
   they are nice people, who care about re-decentralizing the web. :)</p>
 
-
 <h3>Mirroring and packaging.</h3>
 <p>Since the early days of the web, important websites, especially if they contain big downloadable files, have been mirrored. An unhosted web app can be serialized
   as a folder tree
   containing files. This folder tree can be packaged as an FTP directory, a git repo, a zip file, a zip file with a '.crx' extension (as used by Chrome extensions),
-  or a bittorrent. If you transport it over one or more of those media, then it can easily be mirrored by more than one app hoster.</p>
+  or a bittorrent for example. If you transport it over one or more of those media, then it can easily be mirrored by more than one app hoster.</p>
 <p>We call a statics-only web app that is underway from one mirror to another in such a way a "packaged web app".</p>
 <p>There is a fascinating aspect in the concept of such packaged web apps: they are robust against attacks on our DNS system.</p>
 <p>Sometimes, governments block websites.
   Probably in almost all cases this is done by people who think they are doing the right thing: they really honestly think that Facebook is bad for Vietnam, or that
   Wikileaks is bad for the USA, or that ThePirateBay is bad for the Netherlands, and that such censorship is eventually in the interest of the people who installed them as
   government employees.</p>
-<p>Or maybe they honestly think the interests of Communism, or the interest of National Security, or the interest of Entertainment Industry are more
+<p>Or maybe they honestly think the interests of Communism, or the interests of National Security, or the interests of Entertainment Industry are more
   important than considerations about freedom of communication.</p>
 <p>Whatever the reasons of such actions, and whatever the moral judgement on whether Facebook, Wikileaks and ThePirateBay are evil websites, from a technological design
   principle of "kill-switch resilience", it would be nice if we had a way to publish unhosted web apps in a decentralized way.</p>
@@ -159,12 +158,13 @@ generate an appcache manifest for your app (more about this below), resize your 
   Given how cheap a 1 Terabyte external hard drive is nowadays (about 80 USD), you could even unhost the entire Gutenberg project, and still have some disk space left.</p>
 <p>And of course, you could use this for small apps as well. Even if unhosted web apps cache themselves in your browser when you use them, it would be nice to have an
   app server somewhere inside your LAN that just hosts thousands of unhosted web apps on local URLs, so that you can access them quickly without relying on connectivity.</p>
-<p>This is an idea that I started thinking about a couple of weeks ago, and thanks to Nick who pointed me to it, I found out that there is a project that does exactly this!
+<p>This is an idea that I started thinking about a couple of weeks ago, and then Nick found out that there is a project that does exactly this!
   :)
   It's called <a href="http://www.kiwix.org/wiki/Main_Page">Kiwix</a>. They use the <a href="https://en.wikipedia.org/wiki/ZIM_%28file_format%29">ZIM</a> file format, which
   is optimized for wiki content. They also provide an application that discovers and retrieves ZIM files, and serves them up on port 8000, so you can open a mirrored version
-  of for instance a packaged website about Venezuela on a URL like
-  <a href="http://127.13.37.123:8000/wikipedia_es_venezuela_11_2012/">http://127.13.37.123:8000/wikipedia_es_venezuela_11_2012/</a>.</p>
+  of for instance a packaged website about Venezuela on one of your many localhost origins, for instance
+  <a href="http://127.13.37.123:8000/wikipedia_es_venezuela_11_2012/">http://127.13.37.123:8000/wikipedia_es_venezuela_11_2012/</a> (remember the localhost IP space is a /8 as they say
+  it covers any IP address that starts with "127.").</p>
 
 <h3>Packaged app hosting conventions</h3>
 <p>There are a few conventions that you should keep in mind when writing a webserver that hosts static content. Most of those are well known in web engineer folklore, and
