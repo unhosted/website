@@ -145,7 +145,7 @@ generate an appcache manifest for your app (more about this below), resize your 
 <p>There are a few conventions that you should keep in mind when writing a webserver that hosts static content. Most of those are well known in web engineer folklore, and
   if you use software like Apache or node-static, then this will all just work automatically by default.</p>
 <p>A packaged web app, regardless of whether it is packaged into a torrent file or a zip file or git repository, is a list of items, called a folder, and
-  each of the items in a folder can be either be
+  each of the items in a folder can be either
   a document or again a folder.
   No two items in one same folder can have the same name. Names are case-sensitive, and although in theory all UTF-8 characters should be
   allowed in them, you should be aware of the escape sequences
@@ -166,7 +166,8 @@ generate an appcache manifest for your app (more about this below), resize your 
   <li><code>.jpg</code>, <code>.jpeg</code> or even <code>.JPG</code> -> <code>image/jpeg</code></li>
   <li><a href="https://www.iana.org/assignments/media-types">etcetera</a></li>
 </ul>
-<p>The server should also set a character set header, usually UTF-8, and then make sure it also serves the contents of each document in that character set.</p>
+<p>The server should also set a character set header (<a href="http://www.openwebdevice.com/partners/pages/hosting.html">usually UTF-8</a>),
+  and then make sure it also serves the contents of each document in that character set.</p>
 <p>To allow the browser to cache the files you serve, and then retrieve them conditionally, you should implement support for ETag and If-None-Match headers.</p>
 <p>Whenever a URL maps to a folder (either with or without a forward slash at the end) instead of to a document,
   if an index.html document exists in that folder, you should serve that.</p>
