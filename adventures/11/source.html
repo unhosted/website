@@ -37,8 +37,7 @@ often call them) do not have a secure channel between them.</p>
 <p>So where does that leave us? Let's look specifically at app hosting.</p>
 
 <h3>Wait, isn't hosting an unhosted web app a contradiction? :)</h3>
-<p>Yes, of course, to be very precise, we should have called unhosted web apps 'statics-only web apps', since that is what we mean. But that just didn't
-sound as intriguing. ;)</p>
+<p>Yes, of course, to be very precise, we should have called unhosted web apps 'statics-only web apps', since what we mean is 'web apps whose functionality is not produced by code that <em>runs</em> server-side, even though the <em>source files</em> of the app are still hosted as static content'. But that just didn't sound as intriguing. ;)</p>
 <p>The web has no way of signing web apps. When hosting an unhosted ('statics-only') web app, we just serve each of the files that make up the app on a website,
 and the only way to know whether you are seeing the web app that the developer wanted you to see, is if the webserver is under the physical control of
 the developer. This doesn't often happen, of course (especially with nomadic developers!), so in most cases we will have to compromise a little bit on security.</p>
@@ -108,7 +107,7 @@ generate an appcache manifest for your app (more about this below), resize your 
   they are nice people, who care about re-decentralizing the web. :)</p>
 <p>For completeness, let me mention that <a href="https://appcloudy.com/">AppCloudy</a> provide a similar product to 5apps, and there are probably some others.
   StackMob and Tiggzy also offer html5 app hosting as a sideline to their backend service for native mobile app. I will update this section as the market
-  evolve (tips welcome!).</p>
+  evolves (tips welcome!).</p>
 
 <h3>Mirroring and packaging.</h3>
 <p>Since the early days of the web, important websites, especially if they contain big downloadable files, have been mirrored. An unhosted web app
