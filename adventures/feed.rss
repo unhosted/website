@@ -13,6 +13,14 @@
     <language>en-us</language>
     <ttl>40</ttl>
     <item>
+      <title>11. App hosting</title>
+      <description>Episode 11 of Unhosted Adventures</description>
+      <pubDate>2013-02-26T12:00:00.000Z</pubDate>
+      <guid>https://unhosted.org/adventures/11/App-hosting.html</guid>
+      <link>https://unhosted.org/adventures/11/App-hosting.html</link>
+      <georss:point>10.2 104.0</georss:point>
+    </item>
+    <item>
       <title>10. Linking things together on the world wide web</title>
       <description>Episode 10 of Unhosted Adventures</description>
       <pubDate>2013-02-19T12:00:00.000Z</pubDate>
