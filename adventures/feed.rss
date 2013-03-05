@@ -13,6 +13,14 @@
     <language>en-us</language>
     <ttl>40</ttl>
     <item>
+      <title>12. App discovery</title>
+      <description>Episode 12 of Unhosted Adventures</description>
+      <pubDate>2013-03-05T12:00:00.000Z</pubDate>
+      <guid>https://unhosted.org/adventures/12/App-discovery.html</guid>
+      <link>https://unhosted.org/adventures/12/App-discovery.html</link>
+      <georss:point>10.2 104.0</georss:point>
+    </item>
+    <item>
       <title>11. App hosting</title>
       <description>Episode 11 of Unhosted Adventures</description>
       <pubDate>2013-02-26T12:00:00.000Z</pubDate>
