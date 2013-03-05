@@ -79,15 +79,22 @@
 </code></pre>
 <p>If you include this into your website (you might want to copy the
   <a href="launchbutton.js">launchbutton.js</a> file and host it yourself), that script will look for the <code>data-hyperlinkstyleguide</code>
-  attribute on any element that has the "launchbutton" class, and make what would have been a normal
-  "<a href="https://editor-michiel.5apps.com/">editor</a>" link look more like this instead:</p>
+  attribute on any element that has the "launchbutton" class, and make what would have been a normal link:</p>
+  <div style="text-align:center">
+    &hellip;
+    <a href="https://editor-michiel.5apps.com/">editor</a>
+    &hellip;
+  </div>
+<p>look more like this instead:</p>
 
   <div style="text-align:center">
+    &hellip;
     <a
         class="launchbutton"
         data-hyperlinkstyleguide="https://editor-michiel.5apps.com/michiel_editor.webapp"
         href="https://editor-michiel.5apps.com/"
     >(if you see this then wait a little bit or check the console...)</a>
+    &hellip;
     <script src="/adventures/12/launchbutton.js"></script>
   </div>
 
