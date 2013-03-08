@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="description" content="weekly handbook about unhosted web apps" />
+    <title>unhosted web apps 13: users</title>
+    <link rel="stylesheet" href="/adventures/hljs/default.min.css" />
+    <link rel="hub" href="http://pubsubhubbub.appspot.com/"/>
+    <link rel="updates alternate" type="application/atom+xml" href="/adventures/feed.atom" />
+    <link rel="author" type="text/html" href="https://michielbdejong.com/"/>
+
+    <script src="/adventures/hljs/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <link rel="stylesheet" href="/adventures/adventures.css" />
+  </head>
+
+  <body>
+    <article>
+      <header>
+        <h1>unhosted web apps</h1>
+        <h2>freedom from web 2.0's monopoly platforms</h2>
+      </header>
+      
+      <h2>13. Dealing with users in unhosted web apps</h2>
+
+<!-- users: Dealing with users in unhosted web apps -->
+<h3>Database sharding.</h3>
+<p>When you design a hosted web app, all data about all users goes into your database. You probably have a <code>users</code> table that contains the password
+  hashes for all valid usernames on your website, and probably maybe some profile information about each user, like email address and full name, as
+  supplied when the user signed up. If you allow users to sign in with Persona, Facebook, Twitter, Google, or github, then your 'users' table would have
+  columns to linking to the user's identifier at their identity provider.</p>
+<p>Depending on the type of application, there will be various other tables with other kinds of data, some of which will be keyed per user, and some of
+  which will not. For instance, you may have a 'photo albums' table, where each photo album is owned by exactly one user, so that the <code>owner_id</code>
+  field in the <code>photo_albums</code> table refers to the <code>user_id</code> of the owning user in the <code>users</code> table.</p>
+<p>Other tables maybe unrelated to specific users, for instance you may have a <code>cities</code> table with information about cities where some sort of
+  events can take place in your app, but you would not have an <code>owner_id</code> field on that table like on the <code>photo_albums</code> table.</p>
+<p>Tables where each row is clearly owned by, or related to, a specific user-id can be <em>shared</em> by user-id. This means you split up the table into, say,
+  100 smaller tables, and store photo albums owned by a user-id ending in, say '37' in the table named <code>photo_albums37</code>. For small websites this is
+  not necessary, but as soon as you start having about a million rows per table, you need to shard your application's database tables in this way.</p>
+<p>If you use Oracle as your database software, then it will do this transparently for you. But most hosted web applications use a database like for instance MySQL,
+  for which you have to do the sharding in your backend code. Once a table is sharded, you can no longer do full-table searches or JOINs. Each query to a sharded table will have to have a 'WHERE owner_id=...' clause. I learned
+  this while working as a scalability engineer at <a href="http://corporate.tuenti.com/en/corporate">Tuenti</a>, before starting to think about unhosted web apps.</p>
+
+<h3>Per-user data</h3>
+<p>In a big hosted web app, data is generally stored and accessed per-user, with no possibility to take advantage of the fact that you have all the data of all users
+  in one centralized place. Only generic information (like the <code>cities</code> database), and search indexes will usually be designed in a way that does not shard
+  the database architecture per-user.</p>
+<p>It was this realization that made me think that per-user data storage could be possible, and through conversations with Kenny
+  (the original programmer of Tuenti's first version), lead to the plan to start this website, unhosted.org. Since that day, I have dedicated myself to trying to save
+  the web from web 2.0's platform monopolies, whose business model is based on putting the data of as many users as possible in one centralized place that they
+  control.</p>
+<p>With Jan and Niklas and many other contributors, we then developed <a href="http://remotestorage.io">remoteStorage</a>
+  as a way for unhosted web apps to store data of the <em>current</em> user in a place that
+  this user decides at run-time. This does not, however, say anything about how the app can refer to other users, and to data owned by those others.</p>
+
+<h3>Webfinger</h3>
+<p>To let the user connect their remoteStorage account at run-time, we rely on Webfinger. This is a simple protocol that allows the app to discover the configuration
+  parameters of the current user's remoteStorage server, based on a <code>user@host</code> identifier. It also allows any app to directly discover public profile data
+  about any user, like for instance their full name, public PGP key, or avatar URL.</p>
+<p>There is some controversy, and a lot of bikeshedding, about how to use Webfinger records to refer to a user on the web. One option is to consider
+  <code>acct:user@host</code> as a URL (the Webfinger spec, at least in some of its versions, registers <code>acct:</code> as a new URI scheme). Another option is
+  to use the <code>user@host</code> syntax only in user-facing contexts, and use to the actual document location (with either <code>https:</code> or <code>http:</code> as
+  the scheme) when constructing linked data documents.</p>
+<p>In order for Webfinger to work well, the data offered in a Webfinger record should be user-editable. For instance, if a user wants to publish a new PGP key, they should
+  have an easy way to do that at their identity provider. Currently, the easiest way, if not the only way, to have full control over your Webfinger record, is to host it
+  yourself, on your Indie Web domain.</p>
+<p>It is quite easy to add a Webfinger record to your domain, simply follow the instructions in <a href="http://tools.ietf.org/html/draft-ietf-appsawg-webfinger">the
+  Webfinger spec</a>.</p>
+
+<h3>Contacts</h3>
+<p>Many apps will give users a way to connect and interact with each other. For this we defined the
+  <a href="https://github.com/remotestorage/modules/blob/master/contacts.js">remoteStorage.contacts</a> module. It acts as an addressbook, in that it allows an app to store
+  basic contact information about other users.</p>
+<p>Storing the current user's contacts in <code>remoteStorage.contacts</code> has two big advantages: it keeps this personal and possibly sensitive data under the user's
+  control, rather than under the control of the app developer, and it allows multiple apps to reuse one same addressbook.</p>
+<p>We updated the <a href="https://social.5apps.com/">unhosted social demo app</a> so that it now allows you to retrieve your friends list from Facebook (via the
+  <a href="https://github.com/michielbdejong/sockethub">adventures fork</a> of Sockethub), and store them on your remoteStorage. You can then set a contact from your
+  addressbook as a target for something you post (provided it's a Facebook contact).</p>
+<p>From here, we will be building out this functionality. Your contributions to this project are very welcome, if you would like to help! We want to make the app into a
+  generic messaging app, from where you can contact any of your friends from one addressbook, seamlessly across the borders of Facebook, Twitter and email.</p>
+
+<h3>User search</h3>
+<p>Another goal is to create an unhosted web app that contains index data for the public profiles of millions of people, again, seamlessly spanning across various platforms.
+  I created a prototype for this last year, and called it <a href="http://useraddress.net">useraddress</a>. At the time, we were thinking about making this a centralized
+  service, but I think it's better to package this index into a bittorrent file, and distribute it to anybody who wants to
+  <a href="https://unhosted.org/adventures/11/App-hosting.html">mirror</a> it.</p>
+<p>All this is still in a very early stage of development, and currently for most unhosted web apps we still have to type user addresses (like email addresses or Twitter
+  handles) from memory. But we are very determined to get this part working well, because it is often lack of searchability that limits the usefulness of federated social
+  servers. And liberating the social graph is a big part of liberating users from the grip of platform monopolies.</p>
+
+<h3>Contacting other users</h3>
+<p>The web does not have a way to contact people. It has a way to see other people's profile pages, and to follow updates from them through rss/atom and maybe pubsubhubbub.
+  And on a profile page there may be a human-readable contact form, but this is not currently something that is standardized in any way. The closest thing we have to a
+  standardized "contact me" link is the <code>mailto:</code> URI scheme, but even this is usually handled by some application outside the web browser.</p>
+<p>We could propose a link-relation for this, for instance 'post-me-anything', and thus someone's Webfinger record could have a machine-readable link to a URL to which an
+  app can post messages using http POST (it would need CORS headers). But proposing this in itself doesn't help us either, this would only be valuable if a significant number
+  of people would also actually implement it on their Indie Web domains.</p>
+<p>I am still thinking about what we can do about this situation, and I'm very curious what other people think about this. If you have any ideas about this, or about any other
+  topic touched upon in this episode, or you would like to help build unhosted web apps around remoteStorage.contacts, then please reply to the
+  <a href="https://groups.google.com/forum/#!forum/unhosted">mailing list</a>!</p>
+      <p>The next episode will appear on Tuesday 19 March, 2013.</p>    </article>      
+	
+    <div class="logo">
+      <img src="../../img/island-color.png" />
+    </div>
+    
+    <nav>
+      <div>
+
+<h4>Overview:</h4>
+        <p> i. <a href="/">definition</a></p>
+        <p> ii. <a href="/apps/">examples</a></p>
+        <p> iii. <a href="/people/">people</a></p>
+        <p> iv. <a href="/events/">events</a></p>
+        <p> v. <a href="/tools/">tools</a></p>
+        <p> vi. <a href="https://groups.google.com/forum/#!forum/unhosted">forum</a></p>
+
+<h4>Handbook:</h4>
+        <p> 1. <a href="/adventures/1/Personal-servers-and-unhosted-web-apps.html">intro</a></p>
+        <p> 2. <a href="/adventures/2/An-unhosted-editor.html">editor</a></p>
+        <p> 3. <a href="/adventures/3/Setting-up-your-personal-server.html">server</a></p>
+        <p> 4. <a href="/adventures/4/WebSockets.html">WebSockets</a></p>
+        <p> 5. <a href="/adventures/5/Facebook-and-Twitter-from-nodejs.html">social</a></p>
+        <p> 6. <a href="/adventures/6/Controlling-your-server-over-a-WebSocket.html">webshell</a></p>
+        <p> 7. <a href="/adventures/7/Adding-remote-storage-to-unhosted-web-apps.html">remoteStorage</a></p>
+        <p> 8. <a href="/adventures/8/Collecting-and-organizing-your-data.html">your data</a></p>
+        <p> 9. <a href="/adventures/9/Sending-and-receiving-email-from-unhosted-web-apps.html">email</a></p>
+        <p> 10. <a href="/adventures/10/Linking-things-together-on-the-world-wide-web.html">web linking</a></p>
+        <p> 11. <a href="/adventures/11/App-hosting.html">app hosting</a></p>
+        <p> 12. <a href="/adventures/12/App-discovery.html">app discovery</a></p>
+        <p><strong>13. users</strong></p>
+      </div>
+      
+      <div>
+        <h4>Follow:</h4> 
+        <ul>
+          <li style="list-style-image: url('../../img/atom.gif')"><a target="_blank" href="../feed.atom">atom</a></li>
+          <li style="list-style-image: url('../../img/rss2.gif')"><a target="_blank" href="../feed.rss">rss</a></li>
+          <li style="list-style-image: url('../../img/facebook.gif')"><a target="_blank" href="https://www.facebook.com/unhostedwebapps">facebook</a></li>
+          <li style="list-style-image: url('../../img/twitter.png')"><a target="_blank" href="https://twitter.com/unhosted">twitter</a></li>
+          <li style="list-style-image: url('../../img/statusnet.png')"><a target="_blank" href="https://identi.ca/unhosted">identica</a></li>
+          <li style="list-style-image: url('../../img/diaspora.png')"><a target="_blank" href="https://joindiaspora.com/u/unhosted">diaspora</a></li>
+          <li style="list-style-image: url('../../img/mailinglist.jpg')"><a target="_blank" href="https://groups.google.com/forum/#!forum/unhosted">mailing list</a></li>
+          <li style="list-style-image: url('../../img/irc.png')"><a target="_blank" href="http://webchat.freenode.net/?channels=#unhosted">irc channel</a></li>
+        </ul>
+      </div>
+            
+      <div>
+        <h4>Author:</h4>
+        <div class="logo">
+          <img rel="author avatar" src="../../img/michiel.jpg" />
+        </div>
+        <p>
+          <a rel="author" href="https://michielbdejong.com/">Michiel B. de Jong</a>
+        </p>
+      </div>
+      
+      <div>
+        <h4>Supporters:</h4>
+        <p>
+          <a class="logo" href="http://nlnet.nl/">
+            <img src="../../img/nlnet.gif" />
+          </a>
+          &nbsp;
+        </p>
+
+        <p>
+          <a class="logo" href="http://wauland.de/">
+            <img src="../../img/wau.png" />
+          </a>
+          &nbsp;
+        </p>
+
+        <p>
+          <a class="logo" href="http://www.gabrielweinberg.com/blog/2012/03/duckduckgo-foss-donations-2011.html">
+            <img src="../../img/duckduckgo.jpg" />
+          </a>
+          &nbsp;
+        </p>
+
+        <p>
+          and <a href="../../thankyou.html">many more</a>&hellip;
+        </p>
+      </div>
+    </nav>
+    
+    <footer>
+      <strong>You can follow</strong>
+      <img src="../../img/twitter.png" /><a target="_blank" href="https://twitter.com/unhosted">@unhosted</a>
+      <strong>on twitter and in</strong>
+      <a href="#">many other ways</a><strong>. So stay tuned! :)</strong>
+      </strong>
+    </footer>
+  </body>
+</html>

@@ -11,23 +11,10 @@ module.exports = {
     "email": "Sending and receiving email from unhosted web apps",
     "web linking": "Linking things together on the world wide web",
     "app hosting": "App hosting",
-       /* packaged vs hosted
-        * origins
-        * port42000.js
-        * Powered by Dropbox
-        * gh-pages
-        * caching, https offloading, reverse caching, proxies
-        * using appcache
-        * 5apps 
-        * Kiwix and mirroring */
     "app discovery": "App discovery",
-       /* web
-        * Mozilla Marketplace
-        * chrome app store
-        * 5apps store*/
-    "GitHub": "GitHub",
+    "users": "Dealing with users in unhosted web apps",
     "PeerConnection": "PeerConnection",
-    "contacts": "Adding support for contacts to our platform"
+    "conclusion": "GitHub",
        /* we can listen to music
         * we can edit text files
         * we can communicate via email, twitter, github, and facebook
