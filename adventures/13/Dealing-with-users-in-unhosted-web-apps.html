@@ -27,16 +27,16 @@
 <!-- users: Dealing with users in unhosted web apps -->
 <h3>Database sharding.</h3>
 <p>When you design a hosted web app, all data about all users goes into your database. You probably have a <code>users</code> table that contains the password
-  hashes for all valid usernames on your website, and probably maybe some profile information about each user, like email address and full name, as
+  hashes for all valid usernames on your website, and maybe some profile information about each user, like email address and full name, as
   supplied when the user signed up. If you allow users to sign in with Persona, Facebook, Twitter, Google, or github, then your 'users' table would have
   columns to linking to the user's identifier at their identity provider.</p>
 <p>Depending on the type of application, there will be various other tables with other kinds of data, some of which will be keyed per user, and some of
-  which will not. For instance, you may have a 'photo albums' table, where each photo album is owned by exactly one user, so that the <code>owner_id</code>
+  which will not. For instance, you may have a <code>photo_albums</code> table, where each photo album is owned by exactly one user, so that the <code>owner_id</code>
   field in the <code>photo_albums</code> table refers to the <code>user_id</code> of the owning user in the <code>users</code> table.</p>
-<p>Other tables maybe unrelated to specific users, for instance you may have a <code>cities</code> table with information about cities where some sort of
+<p>Other tables may be unrelated to specific users, for instance you may have a <code>cities</code> table with information about cities where some sort of
   events can take place in your app, but you would not have an <code>owner_id</code> field on that table like on the <code>photo_albums</code> table.</p>
-<p>Tables where each row is clearly owned by, or related to, a specific user-id can be <em>shared</em> by user-id. This means you split up the table into, say,
-  100 smaller tables, and store photo albums owned by a user-id ending in, say '37' in the table named <code>photo_albums37</code>. For small websites this is
+<p>Tables where each row is clearly owned by, or related to, a specific user-id can be <em>sharded</em> by user-id. This means you split up the table into, say,
+  100 smaller tables, and store photo albums owned by a user-id ending in, say, '37' in the table named <code>photo_albums37</code>. For small websites this is
   not necessary, but as soon as you start having about a million rows per table, you need to shard your application's database tables in this way.</p>
 <p>If you use Oracle as your database software, then it will do this transparently for you. But most hosted web applications use a database like for instance MySQL,
   for which you have to do the sharding in your backend code. Once a table is sharded, you can no longer do full-table searches or JOINs. Each query to a sharded table will have to have a 'WHERE owner_id=...' clause. I learned
