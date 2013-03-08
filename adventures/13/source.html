@@ -21,7 +21,7 @@
   in one centralized place. Only generic information (like the <code>cities</code> database), and search indexes will usually be designed in a way that does not shard
   the database architecture per-user.</p>
 <p>It was this realization that made me think that per-user data storage could be possible, and through conversations with Kenny
-  (the original programmer of Tuenti's first version), lead to the plan to start this website, unhosted.org. Since that day, I have dedicated myself to trying to save
+  (the original programmer of Tuenti's first version), got the idea to start this website, unhosted.org. Since that day, I have dedicated myself to trying to save
   the web from web 2.0's platform monopolies, whose business model is based on putting the data of as many users as possible in one centralized place that they
   control.</p>
 <p>With Jan and Niklas and many other contributors, we then developed <a href="http://remotestorage.io">remoteStorage</a>
@@ -34,7 +34,7 @@
   about any user, like for instance their full name, public PGP key, or avatar URL.</p>
 <p>There is some controversy, and a lot of bikeshedding, about how to use Webfinger records to refer to a user on the web. One option is to consider
   <code>acct:user@host</code> as a URL (the Webfinger spec, at least in some of its versions, registers <code>acct:</code> as a new URI scheme). Another option is
-  to use the <code>user@host</code> syntax only in user-facing contexts, and use to the actual document location (with either <code>https:</code> or <code>http:</code> as
+  to use the <code>user@host</code> syntax only in user-facing contexts, and use the actual document location (with either <code>https:</code> or <code>http:</code> as
   the scheme) when constructing linked data documents.</p>
 <p>In order for Webfinger to work well, the data offered in a Webfinger record should be user-editable. For instance, if a user wants to publish a new PGP key, they should
   have an easy way to do that at their identity provider. Currently, the easiest way, if not the only way, to have full control over your Webfinger record, is to host it
