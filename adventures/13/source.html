@@ -25,12 +25,13 @@
   (the original programmer of Tuenti's website), got the idea to start this research project. Since that day, I have dedicated myself to trying to save
   the web from web 2.0's platform monopolies, whose business model is based on putting the data of as many users as possible in one centralized place that they
   control.</p>
-<p>With Jan and Niklas and many other contributors, we then developed <a href="http://remotestorage.io">remoteStorage</a>
+<p>With many <a href="https://unhosted.org/people/">people</a> who joined the movement since, we then developed <a href="http://remotestorage.io">remoteStorage</a>
   as a way for unhosted web apps to store data of the <em>current</em> user in a place that
   this user decides at run-time. This does not, however, say anything about how the app can refer to other users, and to data owned by those others.</p>
 
 <h3>Webfinger</h3>
-<p>To let the user connect their remoteStorage account at run-time, we rely on Webfinger. This is a simple protocol that allows the app to discover the configuration
+<p>To let the user connect their remoteStorage account at run-time, we rely on
+<a href="http://en.wikipedia.org/wiki/Webfinger">Webfinger</a>. This is a simple protocol that allows the app to discover the configuration
   parameters of the current user's remoteStorage server, based on a <code>user@host</code> identifier. It also allows any app to directly discover public profile data
   about any user, like for instance their full name, public PGP key, or avatar URL.</p>
 <p>There is some controversy, and a lot of bikeshedding, about how to use Webfinger records to refer to a user on the web. One option is to consider
