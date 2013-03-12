@@ -2,14 +2,15 @@
 <h3>Database sharding.</h3>
 <p>When you design a hosted web app, all data about all users goes into your database. You probably have a <code>users</code> table that contains the password
   hashes for all valid usernames on your website, and maybe some profile information about each user, like email address and full name, as
-  supplied when the user signed up. If you allow users to sign in with Persona, Facebook, Twitter, Google, or github, then your 'users' table would have
-  columns to linking to the user's identifier at their identity provider.</p>
+  supplied when the user signed up. If you allow users to sign in with Persona, Facebook, Twitter, Google, or github, then your <code>users</code> table would have
+  columns linking to the user's identifier at their identity provider.</p>
 <p>Depending on the type of application, there will be various other tables with other kinds of data, some of which will be keyed per user, and some of
   which will not. For instance, you may have a <code>photo_albums</code> table, where each photo album is owned by exactly one user, so that the <code>owner_id</code>
   field in the <code>photo_albums</code> table refers to the <code>user_id</code> of the owning user in the <code>users</code> table.</p>
 <p>Other tables may be unrelated to specific users, for instance you may have a <code>cities</code> table with information about cities where some sort of
   events can take place in your app, but you would not have an <code>owner_id</code> field on that table like on the <code>photo_albums</code> table.</p>
-<p>Tables where each row is clearly owned by, or related to, a specific user-id can be <em>sharded</em> by user-id. This means you split up the table into, say,
+<p>Tables where each row is clearly owned by, or related to, a specific user-id can be
+  <a href="http://en.wikipedia.org/wiki/Shard_%28database_architecture%29">sharded</a> by user-id. This means you split up the table into, say,
   100 smaller tables, and store photo albums owned by a user-id ending in, say, '37' in the table named <code>photo_albums37</code>. For small websites this is
   not necessary, but as soon as you start having about a million rows per table, you need to shard your application's database tables in this way.</p>
 <p>If you use Oracle as your database software, then it will do this transparently for you. But most hosted web applications use a database like for instance MySQL,
@@ -21,7 +22,7 @@
   in one centralized place. Only generic information (like the <code>cities</code> database), and search indexes will usually be designed in a way that does not shard
   the database architecture per-user.</p>
 <p>It was this realization that made me think that per-user data storage could be possible, and through conversations with Kenny
-  (the original programmer of Tuenti's first version), got the idea to start this website, unhosted.org. Since that day, I have dedicated myself to trying to save
+  (the original programmer of Tuenti's website), got the idea to start this research project. Since that day, I have dedicated myself to trying to save
   the web from web 2.0's platform monopolies, whose business model is based on putting the data of as many users as possible in one centralized place that they
   control.</p>
 <p>With Jan and Niklas and many other contributors, we then developed <a href="http://remotestorage.io">remoteStorage</a>
@@ -50,8 +51,9 @@
   control, rather than under the control of the app developer, and it allows multiple apps to reuse one same addressbook.</p>
 <p>We updated the <a href="https://social.5apps.com/">unhosted social demo app</a> so that it now allows you to retrieve your friends list from Facebook (via the
   <a href="https://github.com/michielbdejong/sockethub">adventures fork</a> of Sockethub), and store them on your remoteStorage. You can then set a contact from your
-  addressbook as a target for something you post (provided it's a Facebook contact).</p>
-<p>From here, we will be building out this functionality. Your contributions to this project are very welcome, if you would like to help! We want to make the app into a
+  addressbook as a target for something you post (currently only works if it's a Facebook contact).</p>
+<p>From here, we will be building out this functionality. Your contributions to this project are
+  <a href="https://groups.google.com/forum/#!topic/unhosted/0L715T0sEoU">very welcome</a>, if you would like to help! We want to make the app into a
   generic messaging app, from where you can contact any of your friends from one addressbook, seamlessly across the borders of Facebook, Twitter and email.</p>
 
 <h3>User search</h3>
@@ -60,7 +62,8 @@
   service, but I think it's better to package this index into a bittorrent file, and distribute it to anybody who wants to
   <a href="https://unhosted.org/adventures/11/App-hosting.html">mirror</a> it.</p>
 <p>All this is still in a very early stage of development, and currently for most unhosted web apps we still have to type user addresses (like email addresses or Twitter
-  handles) from memory. But we are very determined to get this part working well, because it is often lack of searchability that limits the usefulness of federated social
+  handles) from memory each time.
+  But we are very determined to get this part working well, because it is often lack of searchability that limits the usefulness of federated social
   servers. And liberating the social graph is a big part of liberating users from the grip of platform monopolies.</p>
 
 <h3>Contacting other users</h3>
