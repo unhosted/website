@@ -13,6 +13,14 @@
     <language>en-us</language>
     <ttl>40</ttl>
     <item>
+      <title>13. Dealing with users in unhosted web apps</title>
+      <description>Episode 13 of Unhosted Adventures</description>
+      <pubDate>2013-03-12T12:00:00.000Z</pubDate>
+      <guid>https://unhosted.org/adventures/13/Dealing-with-users-in-unhosted-web-apps.html</guid>
+      <link>https://unhosted.org/adventures/13/Dealing-with-users-in-unhosted-web-apps.html</link>
+      <georss:point>10.2 104.0</georss:point>
+    </item>
+    <item>
       <title>12. App discovery</title>
       <description>Episode 12 of Unhosted Adventures</description>
       <pubDate>2013-03-05T12:00:00.000Z</pubDate>
