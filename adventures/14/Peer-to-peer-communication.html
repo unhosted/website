@@ -49,10 +49,12 @@ you are online and willing to take incoming calls, and also to check if a certai
 <p>So this simple demo app uses webfinger and sockethub to implement a simple text chat. It's still not very usable, since sockethub was not designed to listen on ports;
 this means you can have only one chat conversation at a time. But we'll work on that to get it working as a proper chat app, with an addressbook and everything.</p>
 <p>Right now there is also no way to claim an identity in this chat; every caller appears as an anonymous peer. You would have to tell the callee with words who you are,
-and also convince them with words that actually you are who you say you are. Both these things could be automated, for instance the sockethub server could accept
+and also convince them with words that you actually are who you say you are. Both these things could be automated, for instance the sockethub server could accept
 <a href="http://tools.ietf.org/id/draft-prodromou-dialback-00.txt">DialBack</a> authentication.  Dialback is a work-in-progress and currently in expired state,
 but it's a very simple way
-to find out if a request is from the person it claims to be from, without needing to implement any cryptography.</p>
+to find out if a request is from the person it claims to be from, without the need to implement any cryptography, neither on the identity provider side, nor on the
+relying party side.</p>
+
 <h3>Using PeerConnection</h3>
 <p>In a sense, this chat app is not really peer-to-peer, since all traffic goes through the sockethub server of the callee. But that's at the same time an important point
 to make in general: unless you use a distributed hash table, a peer-to-peer call always starts with a request to a publically addressable server. However, using the new
@@ -66,7 +68,7 @@ use of end-to-end encryption between the two peers. So it's really quite valuabl
 a look at one last piece in the puzzle to complete what I think of as the first part of this handbook for the No Cookie Crew:
 after having dumped GMail, Dropbox, Google Docs, Spotify, Facebook,
 Twitter, Flickr, and with this episode also having opened the way for dumping Skype,
-the last cookied platform we will need in order to cover "the basics" is github.</p>
+the last cookied platform we will need to replace in order to cover "the basics" is github.</p>
 <p><a href="https://groups.google.com/forum/#!forum/unhosted">comments welcome</a>!</p>
 
       <p>The next episode will appear on Tuesday 26 March, 2013.</p>    </article>      
