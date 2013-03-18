@@ -13,7 +13,7 @@ module.exports = {
     "app hosting": "App hosting",
     "app discovery": "App discovery",
     "users": "Dealing with users in unhosted web apps",
-    "PeerConnection": "PeerConnection",
+    "p2p": "Peer-to-peer communication",
     "conclusion": "GitHub",
        /* we can listen to music
         * we can edit text files
