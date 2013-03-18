@@ -26,6 +26,47 @@
 
 <!-- p2p: Peer-to-peer communication -->
 <h3>Routability</h3>
+<p>To establish communication between two devices, one of them generally has to have a way to find the other. In a client/server situation,
+it is generally the client who finds the server starting from a domain name, through a DNS lookup, and then establishes a tcp connection going
+out from the client, routed over IP, and into a port on which the server is listening. This requires the server to be listening on a port which
+was agreed beforehand (probably a default port for a certain protocol, or one included alongside the server's domain name in a URL), and requires
+the server to be online at the time the client initiates the communication, on the IP address advertised in DNS.</p>
+<p>If we were to use this system for peer-to-peer communication (the situation in which the caller and the callee have a similar device setup),
+then the callee would have to use dynamic DNS to keep their IP address up to date, and would need to be able to open a public port on their device.
+While the first is often possible, the second is often not; especially when you're on the move.</p>
+<p>An easy solution for this is to route all incoming traffic to an unhosted web app through sockethub.</p>
+
+<h3>Setting up a simple chat app</h3>
+<p>We already used Webfinger to announce the location of a user's remoteStorage server. We can easily add an additional line to the user's webfinger record,
+announcing a URL on which the user may be contacted. This would probably be an end-point on your personal server, not directly on your device, since your
+device is usually not publically addressable. But using the webrtc platform of the <a href="https://github.com/michielbdejong/sockethub">adventures fork</a>
+of sockethub, an unhosted web app can instruct sockethub to open a public WebSocket on a pre-configured port.</p>
+<p>Any traffic coming into this WebSocket will then
+transparently be forwarded to the unhosted web app, and reversely the unhosted web app can send commands to sockethub that will be forwarded back to the contacting
+peer. In that sense it's very much like Pagekite - a sort of reverse proxy tunnel.</p>
+<p>I wrote a demo of this setup in <a href="http://social.unhosted.5apps.com/chat.html">chat.html</a>, a small example script that allows you to tell sockethub that
+you are online and willing to take incoming calls, and also to check if a certain webfinger user (currently hardcoded to me) is online, and chat with them if they are.</p>
+<p>So this simple demo app uses webfinger and sockethub to implement a simple text chat. It's still not very usable, since sockethub was not designed to listen on ports;
+this means you can have only one chat conversation at a time. But we'll work on that to get it working as a proper chat app, with an addressbook and everything.</p>
+<p>Right now there is also no way to claim an identity in this chat; every caller appears as an anonymous peer. You would have to tell the callee with words who you are,
+and also convince them with words that actually you are who you say you are. Both these things could be automated, for instance the sockethub server could accept
+<a href="http://tools.ietf.org/id/draft-prodromou-dialback-00.txt">DialBack</a> authentication.  Dialback is a work-in-progress and currently in expired state,
+but it's a very simple way
+to find out if a request is from the person it claims to be from, without needing to implement any cryptography.</p>
+<h3>Using PeerConnection</h3>
+<p>In a sense, this chat app is not really peer-to-peer, since all traffic goes through the sockethub server of the callee. But that's at the same time an important point
+to make in general: unless you use a distributed hash table, a peer-to-peer call always starts with a request to a publically addressable server. However, using the new
+PeerConnection technology, it is possible to upgrade to a shortcut route, once first contact has been made. I attempted to write a
+<a href="http://social.unhosted.5apps.com/friends.html">caller</a> and <a href="http://social.unhosted.5apps.com/me.html">callee</a> script to demo this, but ran into some
+problems where the both Firefox Nightly and Chrome give an error which I wasn't expecting from the documentation.</p>
+<p>I will update this episode as soon as I get this working. This is all still quite new ground to explore. The main point I want to make and repeat is that PeerConnection
+is a way to establish a shortcut route between two peers, once first contact has <em>already</em> been established. This will lead to lower latency, and will enable the
+use of end-to-end encryption between the two peers. So it's really quite valuable. But it is not a serverless protocol.</p>
+<p>Eventually, when we get this working, we will be able to replace Skype, and use an unhosted web app (with a little help from sockethub) instead. Next week we will have
+a look at one last piece in the puzzle to complete what I think of as the first part of this handbook for the No Cookie Crew:
+after having dumped GMail, Dropbox, Google Docs, Spotify, Facebook,
+Twitter, Flickr, and with this episode also having opened the way for dumping Skype,
+the last cookied platform we will need in order to cover "the basics" is github.</p>
 <p><a href="https://groups.google.com/forum/#!forum/unhosted">comments welcome</a>!</p>
 
       <p>The next episode will appear on Tuesday 26 March, 2013.</p>    </article>      
