@@ -4,7 +4,7 @@
  <title>Unhosted Adventures</title>
  <subtitle>Official Handbook of the No Cookie Crew</subtitle>
   <logo>https://unhosted.org/adventures/img/island-color.jpg</logo>
- <updated>2013-03-12T12:00:00.000Z</updated>
+ <updated>2013-03-19T12:00:00.000Z</updated>
 <author>
  <activity:object-type>http://activitystrea.ms/schema/1.0/person</activity:object-type>
   <uri>https://michielbdejong.com/</uri>
@@ -24,6 +24,16 @@
  </poco:urls>
 </author>
 <link href="https://unhosted.org/adventures/feed.atom" rel="self" type="application/atom+xml"/>
+<entry>
+ <activity:object-type>http://activitystrea.ms/schema/1.0/comment</activity:object-type>
+ <id>https://unhosted.org/adventures/14/Peer-to-peer-communication.html</id>
+ <title>14. Peer-to-peer communication</title>
+ <link rel="alternate" type="text/html" href="https://unhosted.org/adventures/14/Peer-to-peer-communication.html"/>
+ <activity:verb>http://activitystrea.ms/schema/1.0/post</activity:verb>
+ <published>2013-03-19T12:00:00.000Z</published>
+ <updated>2013-03-19T12:00:00.000Z</updated>
+ <georss:point>10.20 104.0</georss:point>
+</entry>
 <entry>
  <activity:object-type>http://activitystrea.ms/schema/1.0/comment</activity:object-type>
  <id>https://unhosted.org/adventures/13/Dealing-with-users-in-unhosted-web-apps.html</id>
