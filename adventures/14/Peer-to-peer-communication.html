@@ -28,7 +28,7 @@
 <h3>Routability</h3>
 <p>To establish communication between two devices, one of them generally has to have a way to find the other. In a client/server situation,
 it is generally the client who finds the server starting from a domain name, through a DNS lookup, and then establishes a tcp connection going
-out from the client, routed over IP, and into a port on which the server is listening. This requires the server to be listening on a port which
+out from the client, routed over IP, and into a TCP port on which the server is listening. This requires the server to be listening on a port which
 was agreed beforehand (probably a default port for a certain protocol, or one included alongside the server's domain name in a URL), and requires
 the server to be online at the time the client initiates the communication, on the IP address advertised in DNS.</p>
 <p>If we were to use this system for peer-to-peer communication (the situation in which the caller and the callee have a similar device setup),
@@ -37,8 +37,12 @@ While the first is often possible, the second is often not; especially when you'
 <p>An easy solution for this is to route all incoming traffic to an unhosted web app through sockethub.</p>
 
 <h3>Send me anything</h3>
-<p>We already used Webfinger to announce the location of a user's remoteStorage server. We can easily add an additional line to the user's webfinger record,
-announcing a URL on which the user may be contacted:</p>
+<p>We already used Webfinger in <a href="../7/Adding-remote-storage-to-unhosted-web-apps.html">episode 7</a>
+to announce the location of a user's remoteStorage server. We can easily add an additional line to the user's webfinger record,
+announcing a URL on which the user may be contacted. If the goal is to send a message to the user (a string of bytes), then we can use http post for that, or
+a websocket. The benefit of using a websocket is that a two-way channel stays open, over which real-time communication ('webrtc') can be established, if it is
+upgraded from a WebSocket to a PeerConnection. Here is an example webfinger record that announces a 'post-me-anything' link for http posts, and a 'webrtc' link
+for establishing a webrtc control channel:</p>
 <pre><code>
 {
   "subject": "acct:anything@michielbdejong.com",
@@ -51,28 +55,69 @@ announcing a URL on which the user may be contacted:</p>
   ]
 }
 </code></pre>
-<p>This would probably be an end-point on your personal server, not directly on your device, since your
-device is usually not publically addressable. But using the webrtc platform of the <a href="https://github.com/michielbdejong/sockethub">adventures fork</a>
+<p>Both would probably be an end-point on your personal server, not directly on your device, since your
+device is usually not publically addressable. But using the 'webrtc' platform of the <a href="https://github.com/michielbdejong/sockethub">adventures fork</a>
 of sockethub, an unhosted web app can instruct sockethub to open a public WebSocket on a pre-configured port.</p>
 <p>Any traffic coming into this WebSocket will then
 transparently be forwarded to the unhosted web app, and reversely the unhosted web app can send commands to sockethub that will be forwarded back to the contacting
-peer. In that sense it's very much like Pagekite - a sort of reverse proxy tunnel.</p>
-<p>I wrote a demo of this setup in <a href="http://social.unhosted.5apps.com/chat.html">chat.html</a>, a small example script that allows you to tell sockethub that
-you are online and willing to take incoming calls, and also to check if a certain webfinger user (currently hardcoded to me) is online, and chat with them if they are.</p>
-<p>So this simple demo app uses webfinger and sockethub to implement a simple text chat. It's still not very usable, since sockethub was not designed to listen on ports;
-this means you can have only one chat conversation at a time. But we'll work on that to get it working as a proper chat app, with an addressbook and everything.</p>
+peer. In that sense it's very much like Pagekite - a sort of reverse proxy tunnel. For the post-me-anything handler you could use
+a variation on the post handler we set up in <a href="../3/Setting-up-your-personal-server.html">episode 3</a>, when we discussed file sharing.</p>
+<p>A <a href="http://social.unhosted.5apps.com/chat.html">small example script</a> allows you to tell sockethub that
+you are online and willing to take incoming calls, and also to check if a certain webfinger user is online, and chat with them if they are.</p>
+<p>So this simple demo app uses webfinger and sockethub to implement a simple text chat. It's still not very usable, since sockethub was
+not really designed to listen on ports;
+this means you can have only one chat conversation at a time. But we'll
+<a href="https://github.com/sockethub/sockethub/issues/60">work on that</a> and will eventually get it working as a proper chat app,
+with an addressbook and everything.</p>
 
 <h3>Caller ID</h3>
-<p>Right now there is also no way to claim an identity in this chat; every caller appears as an anonymous peer. You would have to tell the callee with words who you are,
-and also convince them with words that you actually are who you say you are. Both these things could be automated, for instance the sockethub server could accept
-<a href="http://tools.ietf.org/id/draft-prodromou-dialback-00.txt">DialBack</a> authentication.  Dialback is a work-in-progress and currently in expired state,
+<p>So using webfinger and websockets we can now send byte strings to each other. Anybody can send any byte string to anybody, just like in email. But unlike email,
+right now there is no way to claim or prove a sender identity; every caller appears as an anonymous peer. The receiver will be able to reply to the real sender
+in the http response, or for as long as the caller keeps the websocket open. But other than that, you would have to tell the callee with words who you are,
+and also convince them with words that you actually are who you say you are. Both these things could be automated, for instance, the sockethub server could accept
+<a href="http://tools.ietf.org/id/draft-prodromou-dialback-00.txt">DialBack</a> authentication. Dialback is a work-in-progress and currently in expired state,
 but it's a very simple way
 to find out if a request is from the person it claims to be from, without the need to implement any cryptography, neither on the identity provider side, nor on the
 relying party side.</p>
+<p>Other options would be using PGP signatures inside the message, or WebID client certificates at the transport level, but both would probably require the help of
+the sender's personal server, or the sender's browser would have to be improved to better support such features.</p>
+<p>Also, all caller ID systems would break down if the caller's device has been compromised. That problems is usually left out-of-scope in technical solutions to this
+problem.</p>
+<p>In general though, what we see on the PGP-less email platform is that being able to receive a message from any stranger is a feature, and if that stranger claims
+to be 'ebay-central-support.com' then the user could still be tricked in thinking they are from ebay, even with a secure "caller ID" system in place.</p>
+<p>Likewise, on irc we usually assume that nobody is going to supplant other people's identities in a public real-time chat, and we often take the things said in the
+content of the message as effectively sufficient proof of the sender's identity.</p>
+
+<h3>The universal language problem and the polyglot solution</h3>
+<p>If a message arrives as a finite byte string in your inbox, then how do you know how to interpret it? If it came in over http, then there might have been
+a <code>Content-Type</code> header included in the requests, that will definitely help in most cases, and usually inspecting the first few bytes, or the filename extension
+can give some hints as to what the format of the message might be, but that does not take away the fact that these are hints and tricks derived from common practice.</p>
+<p>It is, in a way, only an extension to the collection of human languages which are common knowledge between sender and receiver. Take for instance a file you find
+on a <a href="http://wiki.opencaching.us/index.php/Dead_Drop_Caches">dead drop cache</a>. These are USB drives in public spaces where anyone can leave or retrieve
+files for whoever finds them. Each file on there is just a string of bytes, and there is no out-of-band channel between the sender and the receiver to give context,
+other than the knowledge that the sender is probably human and from planet Earth. The filename extension, and other markers (you could see such metadata as just part
+of the byte string making up the message) are conventions which are common knowledge among human app developers on this planet, so an app can often make sense of many
+types of files, or at least detect their format and display a meaningful error message.</p>
+<p>The problem becomes even more interesting if you look at the ultimate dead drop cache, the
+<a href="https://en.wikipedia.org/wiki/Voyager_Golden_Record">Voyager Golden Records</a> which Carl Sagan et al. sent into outer space.
+Hofstaedter explains this wonderfully in the book "G&ouml;del Escher Bach", alongside many other fundamental concepts of information and intelligence,
+as the fundamental impossibility of a "universal language". If there is no common knowledge between sender and receiver, then the receiver doesn't even have a way
+to extract the byte string out of the physical object, or even to understand that the physical object was intended to convey a message.</p>
+<p>In practice, even though we created a way here for the receiver to know that someone wanted them to receive a certain string of bytes. From there on, it's up to the
+app developer to implement heuristics, based on common practice, so that messages in plain utf8 human languages, html, various image, audio and video formats, and maybe
+formats like pdf and odf, can all be displayed meaningfully to the user.</p>
+<p>There are many such well-defined document formats that are independent of messaging network, data transport, and to some extent even display medium
+(e.g. print vs screen). But I cannot think of any that's not based on the habit of transporting and storing documents as byte strings. And many of these document formats
+have been designed to be easy to recognize and hard to confuse, often with some unique markers in the first few bytes of the file.</p>
+<p>So an app that receives "any message" that is sent to the user should take a polyglot approach when trying to display or interpret the message. That way we can
+separate the document format from the messaging platform.</p>
 
 <h3>Using PeerConnection</h3>
-<p>In a sense, this chat app is not really peer-to-peer, since all traffic goes through the sockethub server of the callee. But that's at the same time an important point
-to make in general: unless you use a distributed hash table, a peer-to-peer call always starts with a request to a publically addressable server. However, using the new
+<p>One thing you may want to send to another user over a WebSocket, might be an offer for a WebRTC PeerConnection.
+Because making all traffic go through the sockethub server of the callee is not really peer-to-peer. But that's at the same time an important point
+to make in general: unless you use a distributed hash table to establish a peer-to-peer messaging session,
+the first handshake for such a session always starts with a request to a publically addressable server.</p>
+<p>However, using the new
 PeerConnection technology, it is possible to upgrade to a shortcut route, once first contact has been made. I attempted to write a
 <a href="http://social.unhosted.5apps.com/friends.html">caller</a> and <a href="http://social.unhosted.5apps.com/me.html">callee</a> script to demo this, but ran into some
 problems where the both Firefox Nightly and Chrome give an error which I wasn't expecting from the documentation.</p>
