@@ -73,10 +73,12 @@ with an addressbook and everything.</p>
 <h3>Caller ID</h3>
 <p>So combining websockets with webfinger, participating users can now send byte strings to each other.
 Anybody can send any byte string to anybody, just like in email. But unlike email,
-right now there is no way to claim or prove a sender identity; every caller appears as an anonymous peer. The receiver will be able to reply to the real sender
+right now there is no way to claim or prove a sender identity; every caller appears as an anonymous peer.</p>
+<p>The receiver will be able to reply to the real sender
 in the http response, or for as long as the caller keeps the websocket open. But other than that, you would have to tell the callee with words who you are,
 and also convince them with words that you actually are who you say you are. Both these things could be automated, for instance, the sockethub server could accept
-<a href="http://tools.ietf.org/id/draft-prodromou-dialback-00.txt">DialBack</a> authentication. Dialback is a work-in-progress and currently in expired state,
+<a href="http://tools.ietf.org/id/draft-prodromou-dialback-00.txt">DialBack</a> authentication.</p>
+<p>Dialback is a work-in-progress and currently in expired state,
 but it's a very simple way
 to find out if a request is from the person it claims to be from, without the need to implement any cryptography, neither on the identity provider side, nor on the
 relying party side.</p>
@@ -84,8 +86,8 @@ relying party side.</p>
 the sender's personal server, or the sender's browser would have to be improved to better support such features.</p>
 <p>Also, all caller ID systems would break down if the caller's device has been compromised. That problems is usually left out-of-scope in technical solutions to this
 problem.</p>
-<p>In general though, what we see on the PGP-less email platform is that being able to receive a message from any stranger is a feature, and if that stranger claims
-to be 'ebay-central-support.com' then the user could still be tricked in thinking they are from ebay, even with a secure "caller ID" system in place.</p>
+<p>But in general, what we see on the PGP-less email platform is that being able to receive a message from any stranger is a feature, and if that stranger claims
+to be 'ebay-central-support.com' then the user could still be tricked in thinking they are from ebay, even with a "secure" caller ID system in place.</p>
 <p>Likewise, on irc we usually assume that nobody is going to supplant other people's identities in a public real-time chat, and we often take the things said in the
 content of the message as effectively sufficient proof of the sender's identity.</p>
 
@@ -104,13 +106,15 @@ types of files, or at least detect their format and display a meaningful error m
 Hofstaedter explains this wonderfully in the book "G&ouml;del Escher Bach", alongside many other fundamental concepts of information and intelligence,
 as the fundamental impossibility of a "universal language". If there is no common knowledge between sender and receiver, then the receiver doesn't even have a way
 to extract the byte string out of the physical object, or even to understand that the physical object was intended to convey a message.</p>
-<p>In practice, even though we created a way here for the receiver to know that someone wanted them to receive a certain string of bytes. From there on, it's up to the
+<p>In practice, even though we created a way here for the receiver to know that someone wanted them to receive a certain string of bytes, it is
+from there on up to the
 app developer to implement heuristics, based on common practice, so that messages in plain utf8 human languages, html, various image, audio and video formats, and maybe
 formats like pdf and odf, can all be displayed meaningfully to the user.</p>
 <p>There are many such well-defined document formats that are independent of messaging network, data transport, and to some extent even display medium
 (e.g. print vs screen). But I cannot think of any that's not based on the habit of transporting and storing documents as byte strings. And many of these document formats
 have been designed to be easy to recognize and hard to confuse, often with some unique markers in the first few bytes of the file.</p>
-<p>So an app that receives "any message" that is sent to the user should take a polyglot approach when trying to display or interpret the message. That way we can
+<p>So an app that receives "any message" that is sent to the user should take a polyglot approach when trying to display or interpret the message: try to accept as many
+languages as possible, rather than trying to push for one "winner" language. That way we can
 separate the document format from the messaging platform.</p>
 
 <h3>Using PeerConnection</h3>
@@ -121,15 +125,16 @@ the first handshake for such a session always starts with a request to a publica
 <p>However, using the new
 PeerConnection technology, it is possible to upgrade to a shortcut route, once first contact has been made. I attempted to write a
 <a href="http://social.unhosted.5apps.com/friends.html">caller</a> and <a href="http://social.unhosted.5apps.com/me.html">callee</a> script to demo this, but ran into some
-problems where the both Firefox Nightly and Chrome give an error which I wasn't expecting from the documentation.</p>
-<p>I will update this episode as soon as I get this working. This is all still quite new ground to explore. The main point I want to make and repeat is that PeerConnection
+problems where both Firefox Nightly and Chrome give an error which I wasn't expecting from the documentation.</p>
+<p>I'm sure I just made some silly mistake somewhere though,
+so I will update this episode as soon as I get this working. This is all still quite new ground to explore. The main point I want to make and repeat is that PeerConnection
 is a way to establish a shortcut route between two peers, once first contact has <em>already</em> been established. This will lead to lower latency, and will enable the
 use of end-to-end encryption between the two peers. So it's really quite valuable. But it is not a serverless protocol.</p>
 <p>Eventually, when we get this working, we will be able to replace Skype, and use an unhosted web app (with a little help from sockethub) instead. Next week we will have
 a look at one last piece in the puzzle to complete what I think of as the first part of this handbook for the No Cookie Crew:
 after having dumped GMail, Dropbox, Google Docs, Spotify, Facebook,
 Twitter, Flickr, and with this episode also having opened the way for dumping Skype,
-the last cookied platform we will need to replace in order to cover "the basics" is github.</p>
+the last cookied platform we will need to replace in order to cover "the basics" is github. I'm already looking forward to that one, hope you are too.</p>
 <p><a href="https://groups.google.com/forum/#!forum/unhosted">comments welcome</a>!</p>
 
       <p>The next episode will appear on Tuesday 26 March, 2013.</p>    </article>      
