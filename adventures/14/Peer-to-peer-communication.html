@@ -36,9 +36,23 @@ then the callee would have to use dynamic DNS to keep their IP address up to dat
 While the first is often possible, the second is often not; especially when you're on the move.</p>
 <p>An easy solution for this is to route all incoming traffic to an unhosted web app through sockethub.</p>
 
-<h3>Setting up a simple chat app</h3>
+<h3>Send me anything</h3>
 <p>We already used Webfinger to announce the location of a user's remoteStorage server. We can easily add an additional line to the user's webfinger record,
-announcing a URL on which the user may be contacted. This would probably be an end-point on your personal server, not directly on your device, since your
+announcing a URL on which the user may be contacted:</p>
+<pre><code>
+{
+  "subject": "acct:anything@michielbdejong.com",
+  "aliases": [ "https://michielbdejong.com/" ],
+  "links": [
+    { "rel": "same-as", "href": "https://twitter.com/michielbdejong" },
+    { "rel": "same-as", "href": "https://facebook.com/michielbdejong" },
+    { "rel": "same-as", "href":"mailto:michiel@unhosted.org" },
+    { "rel": "post-me-anything", "href": "https://michielbdejong.com:11547/" },
+    { "rel": "webrtc", "href":"wss://michielbdejong.com:11548/" }
+  ]
+}
+</code></pre>
+<p>This would probably be an end-point on your personal server, not directly on your device, since your
 device is usually not publically addressable. But using the webrtc platform of the <a href="https://github.com/michielbdejong/sockethub">adventures fork</a>
 of sockethub, an unhosted web app can instruct sockethub to open a public WebSocket on a pre-configured port.</p>
 <p>Any traffic coming into this WebSocket will then
@@ -48,6 +62,8 @@ peer. In that sense it's very much like Pagekite - a sort of reverse proxy tunne
 you are online and willing to take incoming calls, and also to check if a certain webfinger user (currently hardcoded to me) is online, and chat with them if they are.</p>
 <p>So this simple demo app uses webfinger and sockethub to implement a simple text chat. It's still not very usable, since sockethub was not designed to listen on ports;
 this means you can have only one chat conversation at a time. But we'll work on that to get it working as a proper chat app, with an addressbook and everything.</p>
+
+<h3>Caller ID</h3>
 <p>Right now there is also no way to claim an identity in this chat; every caller appears as an anonymous peer. You would have to tell the callee with words who you are,
 and also convince them with words that you actually are who you say you are. Both these things could be automated, for instance the sockethub server could accept
 <a href="http://tools.ietf.org/id/draft-prodromou-dialback-00.txt">DialBack</a> authentication.  Dialback is a work-in-progress and currently in expired state,
