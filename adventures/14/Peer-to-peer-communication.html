@@ -26,7 +26,7 @@
 
 <!-- p2p: Peer-to-peer communication -->
 <h3>Routability</h3>
-<p>To establish communication between two devices, one of them generally has to have a way to find the other. In a client/server situation,
+<p>To establish communication between two people, one of them generally has to have a way to find the other. In a client/server situation,
 it is generally the client who finds the server starting from a domain name, through a DNS lookup, and then establishes a tcp connection going
 out from the client, routed over IP, and into a TCP port on which the server is listening. This requires the server to be listening on a port which
 was agreed beforehand (probably a default port for a certain protocol, or one included alongside the server's domain name in a URL), and requires
@@ -56,7 +56,7 @@ for establishing a webrtc control channel:</p>
 }
 </code></pre>
 <p>Both would probably be an end-point on your personal server, not directly on your device, since your
-device is usually not publically addressable. But using the 'webrtc' platform of the <a href="https://github.com/michielbdejong/sockethub">adventures fork</a>
+device is usually not publically addressable. But using the 'webrtc' platform module of the <a href="https://github.com/michielbdejong/sockethub">adventures fork</a>
 of sockethub, an unhosted web app can instruct sockethub to open a public WebSocket on a pre-configured port.</p>
 <p>Any traffic coming into this WebSocket will then
 transparently be forwarded to the unhosted web app, and reversely the unhosted web app can send commands to sockethub that will be forwarded back to the contacting
@@ -71,7 +71,8 @@ this means you can have only one chat conversation at a time. But we'll
 with an addressbook and everything.</p>
 
 <h3>Caller ID</h3>
-<p>So using webfinger and websockets we can now send byte strings to each other. Anybody can send any byte string to anybody, just like in email. But unlike email,
+<p>So combining websockets with webfinger, participating users can now send byte strings to each other.
+Anybody can send any byte string to anybody, just like in email. But unlike email,
 right now there is no way to claim or prove a sender identity; every caller appears as an anonymous peer. The receiver will be able to reply to the real sender
 in the http response, or for as long as the caller keeps the websocket open. But other than that, you would have to tell the callee with words who you are,
 and also convince them with words that you actually are who you say you are. Both these things could be automated, for instance, the sockethub server could accept
