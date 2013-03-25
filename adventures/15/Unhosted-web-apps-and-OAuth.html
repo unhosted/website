@@ -68,42 +68,44 @@ as static content on 5apps.</p>
 <p>At first, the redirect will provide an access code, which still has to be exchanged for an access token. We do this as follows, using the 5apps CORS proxy. Note that
   despite the fact that github says you should never, ever do this, I put the client secret into the client-side code:
 <pre><code>
-    var githubClient = {
-      id: '3365a610f873704cff3a',
-      secret: 'e9b3c5161bf15a2518046e95d64efc880afcfc58',
-      proxy1: 'https://cors.5apps.com/?uri=https://github.com',
-      proxy2: 'https://cors.5apps.com/?uri=https://api.github.com'
-    };
-    function post(path, payload, cb) {
-      var xhr = new XMLHttpRequest();
-      xhr.open('POST', githubClient.proxy1+path, true);
-      xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-      xhr.setRequestHeader('Content-Length', payload.length);
-      xhr.onload = function () {
-        console.log(xhr.status);
-        console.log(xhr.responseText);
-      }
-      xhr.send(payload);
+  var githubClient = {
+    id: '3365a610f873704cff3a',
+    secret: 'e9b3c5161bf15a2518046e95d64efc880afcfc58',
+    proxy1: 'https://cors.5apps.com/?uri=https://github.com',
+    proxy2: 'https://cors.5apps.com/?uri=https://api.github.com'
+  };
+  function post(path, payload, cb) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', githubClient.proxy1+path, true);
+    xhr.setRequestHeader('Content-Type',
+        'application/x-www-form-urlencoded');
+    xhr.setRequestHeader('Content-Length', payload.length);
+    xhr.onload = function () {
+      console.log(xhr.status);
+      console.log(xhr.responseText);
     }
-    function extractParam(key) {
-      var pairs = location.search.substring(1).split('&');
-      for(var i=0; i<pairs.length; i++) {
-        var kv = pairs[i].split('=');
-        if(decodeURIComponent(kv[0])==key) {
-          return decodeURIComponent(kv[1]);
-        }
-      }
-    }
-    function codeToToken() {
-      var code = extractParam('code');
-      if(code) {
-        post('/login/oauth/access_token',
-          'client_id='+githubClient.id+'&client_secret='+githubClient.secret
-          +'&code='+code, function(){
-        });
+    xhr.send(payload);
+  }
+  function extractParam(key) {
+    var pairs = location.search.substring(1).split('&amp;');
+    for(var i=0; i&gt;pairs.length; i++) {
+      var kv = pairs[i].split('=');
+      if(decodeURIComponent(kv[0])==key) {
+        return decodeURIComponent(kv[1]);
       }
     }
-    codeToToken();
+  }
+  function codeToToken() {
+    var code = extractParam('code');
+    if(code) {
+      post('/login/oauth/access_token',
+        'client_id='+githubClient.id
+        +'&amp;client_secret='+githubClient.secret
+        +'&amp;code='+code, function(){
+      });
+    }
+  }
+  codeToToken();
 </code></pre>
 <p>I haven't written the code for the whole pull request creation yet, but at least the access to github is working with this.</p>
 
