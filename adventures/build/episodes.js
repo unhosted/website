@@ -14,7 +14,7 @@ module.exports = {
     "app discovery": "App discovery",
     "users": "Dealing with users in unhosted web apps",
     "p2p": "Peer-to-peer communication",
-    "conclusion": "GitHub",
+    "unhosted oauth": "Unhosted web apps and OAuth"
        /* we can listen to music
         * we can edit text files
         * we can communicate via email, twitter, github, and facebook
