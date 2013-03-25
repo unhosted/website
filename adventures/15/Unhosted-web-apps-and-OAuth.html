@@ -24,13 +24,89 @@
       
       <h2>15. Unhosted web apps and OAuth</h2>
 
-<!-- unhosted oauth: github, Terms of Service; Didn't Read, "unhosted oauth", and the future. -->
+<!-- unhosted oauth: Unhosted web apps and OAuth. -->
 <h3>The unhosted approach to OAuth</h3>
-<p></p>
-<h3>github</h3>
-<p></p>
+<p>OAuth is a very important recent development on the open web, and maybe partially because of that, also a
+  <a href="http://tech.slashdot.org/story/13/03/22/1439235/a-truckload-of-oauth-issues-that-would-make-any-author-quit">troubled</a> one.</p>
+<p>Making hosted applications interact with each other in such a way that the user understands the security model is not easy. Many casual users of the web don't
+  understand what a server is, so it's not easy to explain to them that two instead of one servers will now have access to their data, and what that means.</p>
+<p>In this episode of the handbook, we're going to help make the confusion even worse. :) We're going to use unhosted applications to interact with the APIs of hosted ones.</p>
+
 <h3>Terms of Service</h3>
-<p></p>
+<p>One of the reasons that hosted software presents a fundamental violation of software freedom is that the user needs to agree to terms of service which are often
+unreasonable. Even
+though we are creating unhosted software that can replace most hosted software, hosted applications will likely still exists for some time to come, so
+we set up a project where we review the terms of service of all the big hosted applications, and rate them for how well they respect consumer rights. It's called
+  <a href="http://tosdr.org/">Terms of Service; Didn't Read</a>, and is now an independent project with its own donations budget, run by community of volunteers, and a team
+  lead by Hugo.</p>
+<p>To make the reviewing process easier, we decided we want to build a web form that directly creates pull requests on the github repo of the website. The tosdr.org website
+is made up of html, generated from json files using a build script. Previously, it was an unhosted web app, but since this was slow to load in most browsers, and the prominent
+use case for the website is to access the reviews as read-only documents, we moved the scripts into the build script. The site is still entirely client-side; it is hosted
+as static content on 5apps.</p>
+<p>This means it's not currently possible to edit the website without using a git client. In fact, since the other contributors to the project are not members of the No Cookie
+  Crew, contributing to ToS;DR (both editing the website and participating in comment threads) requires me to log in to github. So far in the preceding episodes we have 
+  discussed how to give up hosted applications like GMail, Facebook, Flickr and Twitter, and how to give up native applications like Skype and Spotify, but github is still
+  a platform we rely on every day in the life of an unhosted web app developer.</p>
+
+<h3>Cross-origin access to github</h3>
+<p>Github exposes an API with which you can do, by the looks of it, everything you can do via its web and git interfaces. For instance, you can create a blog, create a commit,
+  and create a pull request to suggest a change to the code in a github repo. This is exactly what we need for tosdr.org.</p>
+<p>At first I started adding github as a platform to sockethub, but later I realised that if we use a non-branded OAuth client, plus the 
+  <a href="https://blog.5apps.com/2013/03/02/new-service-cors-ssl-proxy.html">5apps cors proxy</a>, then we don't need anything else. It is possible to access github from an
+  unhosted web app, without using sockethub. Let me explain how it works.</p>
+<p>In order to access the github API, you need to register an app. This gives you a client_id and a client_secret. The
+  <a href="http://developer.github.com/guides/basics-of-authentication/">documentation</a> says you should never, ever, publish your client secret. The name 'client secret'
+  also obviously implies this. :) However, this is part of a security model where a hosted application gets access to github. The word 'client' here refers to the second
+  hosted application being a client when connecting to the github API.</p>
+<p>Some APIs, like for instance the <a href="http://developers.flattr.net/api/">Flattr API</a>, offer cross-origin access, using the same technique as remoteStorage:
+  OAuth implicit grant flow to obtain a bearer token, and then CORS headers on the API responses to allow cross-origin ajax from the client-side.</p>
+<p>Whereas Flattr supports the implicit grant flow like intended by the authors of the OAuth spec, Dropbox offers OAuth 1.0, and suggests you publish your client secret.
+  Github tells you not to expose your client secret, but does not provide a reason (as Jan suggested, I asked them about this, I'll update this as soon as they reply.</p>
+<p>In order to stop a third party from pretending to be us, I used an anonymous app registration, in a github account that I created specifically for this purpose
+  naming the app '(unknown)' and pointing it to http://example.com/. The only thing I filled in correctly in the app registration is the redirect location, so that the user
+  is redirected to our web form on tosdr.org when they authorize the app.</p>
+<p>At first, the redirect will provide an access code, which still has to be exchanged for an access token. We do this as follows, using the 5apps CORS proxy. Note that
+  despite the fact that github says you should never, ever do this, I put the client secret into the client-side code:
+<pre><code>
+    var githubClient = {
+      id: '3365a610f873704cff3a',
+      secret: 'e9b3c5161bf15a2518046e95d64efc880afcfc58',
+      proxy1: 'https://cors.5apps.com/?uri=https://github.com',
+      proxy2: 'https://cors.5apps.com/?uri=https://api.github.com'
+    };
+    function post(path, payload, cb) {
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', githubClient.proxy1+path, true);
+      xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+      xhr.setRequestHeader('Content-Length', payload.length);
+      xhr.onload = function () {
+        console.log(xhr.status);
+        console.log(xhr.responseText);
+      }
+      xhr.send(payload);
+    }
+    function extractParam(key) {
+      var pairs = location.search.substring(1).split('&');
+      for(var i=0; i<pairs.length; i++) {
+        var kv = pairs[i].split('=');
+        if(decodeURIComponent(kv[0])==key) {
+          return decodeURIComponent(kv[1]);
+        }
+      }
+    }
+    function codeToToken() {
+      var code = extractParam('code');
+      if(code) {
+        post('/login/oauth/access_token',
+          'client_id='+githubClient.id+'&client_secret='+githubClient.secret
+          +'&code='+code, function(){
+        });
+      }
+    }
+    codeToToken();
+</code></pre>
+<p>I haven't written the code for the whole pull request creation yet, but at least the access to github is working with this.</p>
+
 <h3>The future.</h3>
 <p></p>
 <p><a href="https://groups.google.com/forum/#!forum/unhosted">comments welcome</a>!</p>
