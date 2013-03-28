@@ -16,16 +16,18 @@ we set up a project where we review the terms of service of all the big hosted a
   <a href="http://tosdr.org/">Terms of Service; Didn't Read</a>, and is now an independent project with its own donations budget, run by community of volunteers, and a team
   lead by Hugo.</p>
 <p>To make the reviewing process easier, we decided we want to build a web form that directly creates pull requests on the github repo of the website. The tosdr.org website
-is made up of html, generated from json files using a build script. Previously, it was an unhosted web app, but since this was slow to load in most browsers, and the prominent
-use case for the website is to access the reviews as read-only documents, we moved the scripts into the build script. The site is still entirely client-side; it is hosted
-as static content on 5apps.</p>
-<p>This means it's not currently possible to edit the website without using a git client. In fact, since the other contributors to the project are not members of the No Cookie
-  Crew, contributing to ToS;DR (both editing the website and participating in comment threads) requires me to log in to github. So far in the preceding episodes we have 
+is made up of html, generated from json files using a build script. Previously, it was an unhosted web app that dynamically rendered the views from JSON data,
+  but since this was slow to load in most browsers, and the prominent
+use case for the website is to access the reviews as read-only documents, we moved the scripts into the build script. The site is now almost entirely static; it is hosted
+as static content on 5apps, and you just click through the content without any much javascript getting executed.</p>
+<p>This means it's not currently possible to edit the website without using a git client. In fact,
+  contributing to ToS;DR (both editing the website and participating in comment threads) requires me to log in to github, where both the code and the issue tracker are
+  hosted. So far in the preceding episodes we have 
   discussed how to give up hosted applications like GMail, Facebook, Flickr and Twitter, and how to give up native applications like Skype and Spotify, but github is still
   a platform we rely on every day in the life of an unhosted web app developer.</p>
 
 <h3>Cross-origin access to github</h3>
-<p>Github exposes an API with which you can do, by the looks of it, everything you can do via its web and git interfaces. For instance, you can create a blog, create a commit,
+<p>Github exposes an API with which you can do, by the looks of it, everything you can do via its web and git interfaces. For instance, you can create a blob, create a commit,
   and create a pull request to suggest a change to the code in a github repo. This is exactly what we need for tosdr.org.</p>
 <p>At first I started adding github as a platform to sockethub, but later I realised that if we use a non-branded OAuth client, plus the 
   <a href="https://blog.5apps.com/2013/03/02/new-service-cors-ssl-proxy.html">5apps cors proxy</a>, then we don't need anything else. It is possible to access github from an
@@ -87,4 +89,6 @@ as static content on 5apps.</p>
   codeToToken();
 </code></pre>
 <p>I haven't written the code for the whole pull request creation yet, but at least the access to github is working with this.
-  <a href="https://groups.google.com/forum/#!forum/unhosted">Comments very welcome!</a></p>
+  It might be a bit of a hack, and in general you should of course never expose secrets, but in this case it is empowering unhosted web apps,
+  and resolves a dependency on hosted server-side software, so I think it's justified. But please
+  <a href="https://groups.google.com/forum/#!forum/unhosted">comment</a> if you think this type of hack is harmful in any way.</p>
