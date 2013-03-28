@@ -63,10 +63,13 @@ as static content on 5apps, and you just click through the content without any m
   also obviously implies this. :) However, this is part of a security model where a hosted application gets access to github. The word 'client' here refers to the second
   hosted application being a client when connecting to the github API.</p>
 <p>Some APIs, like for instance the <a href="http://developers.flattr.net/api/">Flattr API</a>, offer cross-origin access, using the same technique as remoteStorage:
-  OAuth implicit grant flow to obtain a bearer token, and then CORS headers on the API responses to allow cross-origin ajax from the client-side.</p>
-<p>Whereas Flattr supports the implicit grant flow like intended by the authors of the OAuth spec, Dropbox offers OAuth 1.0, and suggests you publish your client secret.
-  Github tells you not to expose your client secret, but does not provide a reason. I asked them about this, and they replied that this enables them to rate limit and
-  block malicious traffic on a per-app basis.</p>
+  OAuth 
+  <a href="http://tools.ietf.org/html/rfc6749#section-4.2">implicit grant</a> flow to obtain a bearer token, and then CORS headers on the API responses to allow cross-origin ajax from the client-side.</p>
+<p>Whereas Flattr supports the implicit grant flow like intended by the authors of the OAuth spec, Dropbox offers OAuth 1.0, and 
+  <a href="https://tech.dropbox.com/2012/08/some-love-for-javascript-applications-2/">suggests</a> you publish your client secret.
+  Github tells you not to expose your client secret, but does not provide a reason for that.
+  I asked them about this, and they replied that this enables them to rate limit and
+  block malicious traffic on a per-app basis. It basically turns hosted apps into gatekeepers that stand in between the user and the API.</p>
 <p>In order to stop a third party from pretending to be us, I used an anonymous app registration, in a github account that I created specifically for this purpose
   naming the app after its redirect URL. The user
   is redirected to our web form on tosdr.org when they authorize the app, so I think most attack vectors will be pretty unrealistic, but at least by not using the
@@ -116,10 +119,11 @@ as static content on 5apps, and you just click through the content without any m
 </code></pre>
 <p>I haven't written the code for the whole pull request creation yet, but at least the access to github is working with this.
   It might be a bit of a hack, and in general you should of course never expose secrets, but in this case it is empowering unhosted web apps,
-  and resolves a dependency on hosted server-side software, so I think it's justified. But please
+  and resolves a dependency on hosted server-side software, so I think it's justified whenever the preferable
+  <a href="http://tools.ietf.org/html/rfc6749#section-4.2">implicit grant</a> flow is not being offered. But please
   <a href="https://groups.google.com/forum/#!forum/unhosted">comment</a> if you think this type of hack is harmful in any way.</p>
 
-      <p>Next: <a href="../16/the-future.html">the future</a></p>    </article>      
+      <p>The next episode will appear on Tuesday 2 April, 2013.</p>    </article>      
 	
     <div class="logo">
       <img src="../../img/island-color.png" />
@@ -152,7 +156,6 @@ as static content on 5apps, and you just click through the content without any m
         <p> 13. <a href="/adventures/13/Dealing-with-users-in-unhosted-web-apps.html">users</a></p>
         <p> 14. <a href="/adventures/14/Peer-to-peer-communication.html">p2p</a></p>
         <p><strong>15. unhosted oauth</strong></p>
-        <p> 16. <a href="/adventures/16/the-future.html">marketing</a></p>
       </div>
       
       <div>
