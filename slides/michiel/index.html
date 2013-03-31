@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="description" content="weekly handbook about unhosted web apps" />
+    <title>unhosted web apps: definition</title>
+    <link rel="stylesheet" href="/adventures/hljs/default.min.css" />
+    <link rel="hub" href="http://pubsubhubbub.appspot.com/"/>
+    <link rel="updates alternate" type="application/atom+xml" href="/adventures/feed.atom" />
+    <link rel="author" type="text/html" href="https://michielbdejong.com/"/>
+
+    <script src="/adventures/hljs/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <link rel="stylesheet" href="/adventures/adventures.css" />
+  </head>
+
+  <body>
+    <article>
+      <header>
+        <h1>unhosted web apps</h1>
+        <h2>freedom from web 2.0's monopoly platforms</h2>
+      </header>
+      
+      <h2 style="font-size: 164px;margin-top:150px;margin-left:-250px;text-align=center" id="banner"></h2>
+    </article>      
+	
+    <div class="logo">
+      <img src="../../img/island-color.png" />
+    </div>
+    
+  </body>
+  <script>
+    slides = [
+      'web 1.0',
+      'web 2.0',
+      'web 3.0',
+      
+      'software freedom',
+      
+      'platforms',
+      'microsoft',
+      'apple',
+      'google',
+      'facebook',
+      
+      'java',
+      'javascript',
+      'unhosted web apps',
+      
+      'firefox os',
+      'remoteStorage',
+      'sockethub',
+      
+      'ToS;DR',
+      'thank you!'];
+    var slide = 0;
+    document.body.onkeydown = function(e) {
+      console.log(e.keyCode);
+      if(e.keyCode==32) {
+        slide++;
+      } else {
+        slide --;
+      }
+      document.getElementById('banner').innerHTML = slides[slide];
+    }
+  </script>
+</html>
