@@ -57,7 +57,9 @@ as static content on 5apps, and you just click through the content without much 
   and create a pull request to suggest a change to the code in a github repo. This is exactly what we need for tosdr.org.</p>
 <p>At first I started adding github as a platform to sockethub, but later I realised that if we use a non-branded OAuth client, plus the 
   <a href="https://blog.5apps.com/2013/03/02/new-service-cors-ssl-proxy.html">5apps cors proxy</a>, then we don't need anything else. It is possible to access github from an
-  unhosted web app, without using sockethub. Let me explain how it works.</p>
+  unhosted web app, without using sockethub. If you mirror the app, you would use your own cors proxy of course, and we should probably allow users to configure a cors proxy
+  of their choice at runtime, but for now, we are trusting 5apps, who already host tosdr.org's source code anyway, to also host the cors proxy for it.
+  Let me explain how it works.</p>
 <p>In order to access the github API, you need to register an app. This gives you a client_id and a client_secret. The
   <a href="http://developer.github.com/guides/basics-of-authentication/">documentation</a> says you should never, ever, publish your client secret. The name 'client secret'
   also obviously implies this. :) However, this is part of a security model where a hosted application gets access to github. The word 'client' here refers to the second
