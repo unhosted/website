@@ -25,6 +25,7 @@
       <h2>16. Our platform to save the web</h2>
 
 <!-- our platform: Our platform to save the web. -->
+<h3>End of part I</h3>
 <p>In the last 15 episodes we layed the basis for our software platform, based in unhosted html5 apps.
   So with this episode, we will complete the first part of our handbook. None of it is finished, but it should give a first direction for all the topics
 we covered. I'll keep writing weekly blog posts here, doing a more in-depth review of all kinds of background knowledge, like a sort of
@@ -38,8 +39,49 @@ only on a few specific apps. I talked a lot about this with Nick, Basti, Niklas,
 approach of the No Cookie Crew to the background a little bit, in favor of the more pragmatic dogfooding of apps like Litewrite and Dogtalk, but I think there is a place
 for both approaches.</p>
 
+<h3>What should run on your freedombox?</h3>
+<p>In order to redecentralize the web, we need people to run some kind of own server. This can be their normal PC or other client device, or a pod/seed/node/account run by
+  a trusted and replaceable party, or a purpose-built device like a freedombox on a plugserver. But the big question is: what should run on there?</p>
+<p>You can run ownCloud to have a lot of web 2.0's functions like sharing photos, listening to music, and administering your personal calendar, in one extensible php-based
+  application. This is definitely a good option, and Fran&#283;ois and I are also advising the European university networks to do this. It is an appealing and understandable
+  product that solves real "cloud" needs in a decentralized way.</p>
+<p>Another option, if you're mainly thinking of data storage, is tahoe-lafs. The good thing about tahoe-lafs is that it's encrypted, resilient, and decentralized. It is
+  basically a way to create a very good clustered database server out of semi-untrusted nodes. But as I said, its main focus is on data storage.</p>
+<p>CouchDB is a lot more "webby" in its approach than the previous two, but at the same time it's more a backend technology that a developer would build upon, than a
+  consumer-facing product. However, with Garden20, an app paradigm based on CouchDB (this idea is also sometimes called "Couch apps"), an end-user could interchange
+  apps with other users, and that way have web apps running on their own node.</p>
+  <p>OpenPhoto and MediaGoblin are similar to ownCloud, but more specialized; in photo hosting and video hosting, respectively.</p>
+<p>There are many options if you want to run a node in a specific decentralized social network: StatusNet, Diaspora, BuddyCloud, Friendica, etcetera. But as we discussed
+  in episode 3, if you run a node of platform X, then you will generally <em>mainly</em> interact with other people on that same platform. There is some interoperability,
+  but this is not complete, and is often no more than a bridge between what are still separate islands.</p>
+<p>And then there's the Locker Project, which by the looks of it is now only maintained as the hosted service called Singly, and a few more projects like
+  camlistore  and <a href="http://themineproject.org/about/">the Mine! project</a>, all of which are valid options, and some of which are used in production by their
+  creators and other pioneers.</p>
+<p>Or you can go old school, and run a roundcube-enabled mailserver, plus an ejabberd instance and a wordpress blog. It mainly depends on which part of the problem you want
+  to solve first.</p>
+
+<h3>Indie Web + remoteStorage + sockethub</h3>
+<p>In all of these options, you can install a software application on a server under your physical control, or you can let a trusted provider do that on your behalf, and you
+  will then be able to put your data into that software application, and use it in a meaningful way, so that your data stays on the server you trust.</p>
+<p>With some of the options (this mainly applies to ownCloud and Garden20 as far as I can see), the user is expected to go scout out third-party apps, and install them.
+  That already provides some software freedom.</p>
+<p>There are also unhosted web apps that do <em>not</em> require the user to run their own server; instead, they connect to the user's account on a proprietary cloud platform
+  like Dropbox, Google Drive, Facebook or as we saw in the previous episode, github.</p>
+<p>All of this is great, don't get me wrong, I love all projects that decentralize data hosting, and I also love all projects that separate apps from data hosting.
+  When I point out things that are still missing from the status quo, it often gets interpreted like I'm saying the work of other people is incomplete. On the contrary,
+  I think all these projects contribute little building blocks to the public domain of technology, and the real progress is in the sum of these building blocks.</p>
+<p>But this is exactly why I think we need both: decentralization of data hosting, and separation between application and data hosting. Putting those two ideas together,
+  we can save the web from the platform monopolies that have been taking control over it more and more for the last 5 years or so.</p>
+<p>I think everybody should have their own Indie Web domain name to start with, with a TLS certificate, a web page with an rss feed, and an email address with PGP.
+  Call me old-fashioned. :)</p>
+<p>Your website should run on a server under your control, or under the control of a trusted hosting provider; the good thing is, since you own your DNS domain name,
+  this hosting provider will be 100% replaceable.</p>
+<p>This is the web platform we have. And the things I would add to those would be simple data storage, and simple messaging.
+  That is why we are developing remoteStorage and sockethub, as minimal services that allow unhosted web apps to function. And at the same time we are developing unhosted
+  web apps that use remoteStorage and sockethub, and we encourage you to do the same.</p>
+
 <h3>Marketing</h3>
-<p>In terms of marketing, this means unhosted web apps have basically five markets, from small to big:
+<p>In terms of marketing, unhosted web apps have basically five markets, from small to big:
 <ul>
   <li><strong>prototype</strong> the strict No Cookie Crew market, a bit like Richard Stallman on free desktop software, or vegans on food, users in this market use only unhosted web apps for all their
 computing needs, unless there is an explicit and identifiable need to break that principle.</li>
