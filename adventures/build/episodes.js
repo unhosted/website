@@ -15,7 +15,7 @@ module.exports = {
     "users": "Dealing with users in unhosted web apps",
     "p2p": "Peer-to-peer communication",
     "unhosted oauth": "Unhosted web apps and OAuth",
-    "our platform": "Our platform to save the web"
+    "save the web": "Our plan to save the web"
        /* we can listen to music
         * we can edit text files
         * we can communicate via email, twitter, github, and facebook
