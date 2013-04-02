@@ -85,8 +85,8 @@ on your own website, and also helps you to receive updates from your friends.</p
   on a proprietary cloud platform
   like Dropbox, Google Drive, Facebook or as we saw in the previous episode, github.</p>
 <p>All of this is great, don't get me wrong, I love all projects that decentralize data hosting, and I also love all projects that separate apps from data hosting.
-  When I point out things that are still missing from the state of the art, please don't interpret it like I'm saying the work
-  of other people is incomplete. On the contrary,
+  When I point out things that are still missing from the state of the art, please don't interpret it like I'm saying something negative about the parts that we
+  <em>do</em> have. On the contrary,
   I think all these projects contribute little building blocks to the public domain of technology, and the real progress is in the sum of these building blocks.</p>
 <p>But to save the web from becoming centralized into a small number of proprietary platforms,
   I think we need both: decentralization of data hosting, and separation between application and data hosting. Putting those two ideas together,
@@ -98,9 +98,13 @@ solution to replace them.</p>
 <p>Your website should run on a server under your control, or under the control of a trusted hosting provider; the good thing is, since you own your DNS domain name,
   this hosting provider will be 100% replaceable. If your server has no static public IP address, you will need a dynamic DNS service,
   or a RevProTun service like Pagekite to make it publically visible.</p>
-<p>This is the web platform we have. And the things I would add to those would be simple data storage, and simple messaging - running on your own server, but accessible
-  cross-origin.
-  That is why we are developing remoteStorage and sockethub, as minimal services that allow unhosted web apps to function. And at the same time we are developing unhosted
+<p>Once you have these things, then, by all means, add free software applications like ownCloud, tahoe-lafs, OpenPhoto, Mediagoblin and Diaspora
+  to your server, and use them.</p>
+<p>But this is the web platform we have, and I'm trying to look at the things we don't have - the pieces in the puzzle that are still missing, to make the decentralized
+  web as good as other app platforms like iOS, Android, and Facebook/Flash.</p>
+<p>And the things I would add to those would be simple data storage, and simple messaging - running on your own server, but accessible
+  cross-origin, so I can connect it with unhosted web apps at runtime, wherever I see the corresponding icons on a page.</p>
+<p>That is why we are developing remoteStorage and sockethub, as minimal services that allow unhosted web apps to function. And at the same time we are developing unhosted
   web apps that use remoteStorage and sockethub, and we encourage you to do the same.</p>
 
 <h3>Marketing</h3>
@@ -128,7 +132,7 @@ unlike the other major browsers, Firefox is published by a non-profit organizati
 <p>We have been talking about unhosted web apps for about two years now, and have been trying to build some useful remoteStorage-based apps for about one year.
 We are still only at the beginning of unhosted web apps actually being used in production in any of these five markets. But the future looks bright. I think our movement
 will keep growing both in number of developers involved, and in market reach of the unhosted web apps we develop. If you're interested in joining, then let us know!</p>
-<p>We are always <strong>looking for</strong> more talented <strong>javascript developers</strong>. If you develop an unhosted web app, then you can add it to the
+<p><strong>We are always looking for more talented javascript developers.</strong> If you develop an unhosted web app, then you can add it to the
 <a href="https://unhosted.org/apps/">examples page</a>; most of the apps mentioned on there have issue trackers on github, so you can submit bug reports there if you
 have any problems using any of the apps, and if you have any questions or remarks in general, then just send them to the
 <a href="https://groups.google.com/forum/#!forum/unhosted">forum</a>. Comments very welcome!</p>
