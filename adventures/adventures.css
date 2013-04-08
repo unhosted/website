@@ -16,7 +16,7 @@ article .icons li a { margin: 16px; color: #666 }
 article .icons li p a { margin: 0px }
 article .icons li a img { color: #E0E0E0; margin: 1px auto; border-style: solid; border-radius: 8px; box-shadow: 0 0 1em #D0D0D0 }
 
-nav { float:right; width:250px; margin:30px 50px 50px 50px; background-color:#EEE; color:#002; border-radius:5px }
+nav { float:right; width:250px; margin:30px 50px 50px 50px; line-height:0.6em; background-color:#EEE; color:#002; border-radius:5px }
 nav p { margin-left:1em }
 nav a:hover,active { color:#006 }
 nav div { text-align:left; margin:10px }

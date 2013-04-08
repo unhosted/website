@@ -18,7 +18,7 @@ module.exports = {
     "save the web": "Our plan to save the web"
   },
   "Decentralize" : {
-    "cryptograhpy": "Cryptography"
+    "cryptography": "Cryptography"
 /*- adventures 17: DHTs
 - adventures 18: IP, DNS, HTTP, TLS, and NAT
 - adventures 19: Persona, OpenID, SAML and WebID
