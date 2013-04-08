@@ -11,18 +11,20 @@ var fs = require('fs'),
   episodesDict = require('./episodes'),
   overviewPages = {
     i: 'definition',
-    ii: 'example apps',
-    iii: 'people',
-    iv: 'events',
-    v: 'dev tools',
-    vi: 'forum'
+    ii: 'getting started',
+    iii: 'example apps',
+    iv: 'people',
+    v: 'events',
+    vi: 'dev tools',
+    vii: 'forum'
   }, overviewPaths = {
     i: '/',
-    ii: '/apps/',
-    iii: '/people/',
-    iv: '/events/',
-    v: '/tools/',
-    vi: 'https://groups.google.com/forum/#!forum/unhosted'
+    ii: 'http://remotestorage.io/integrate',
+    iii: '/apps/',
+    iv: '/people/',
+    v: '/events/',
+    vi: '/tools/',
+    vii: 'https://groups.google.com/forum/#!forum/unhosted'
   },
   episodes = [], abbrev = [];
 
@@ -187,6 +189,6 @@ latestEpisode -= buildAhead;
 console.log('now building up to '+latestEpisode);
 processTitles();
 writeEpisodes();
-writeOverviewPage('i'); writeOverviewPage('ii'); writeOverviewPage('iii'); writeOverviewPage('iv'); writeOverviewPage('v');
+writeOverviewPage('i'); writeOverviewPage('iii'); writeOverviewPage('iv'); writeOverviewPage('v'); writeOverviewPage('vi');
 writeRss();
 writeAtom();
