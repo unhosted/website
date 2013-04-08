@@ -25,11 +25,43 @@
       <h2>17. Cryptography</h2>
 
 <!-- cryptography: Cryptography -->
-<h3>Why we dropped cryptography from our charter</h3>
-<p><strong>We are always looking for more talented javascript developers.</strong> If you develop an unhosted web app, then you can add it to the
-<a href="https://unhosted.org/apps/">examples page</a>; most of the apps mentioned on there have issue trackers on github, so you can submit bug reports there if you
-have any problems using any of the apps, and if you have any questions or remarks in general, then just send them to the
-<a href="https://groups.google.com/forum/#!forum/unhosted">forum</a>. Comments very welcome!</p>
+<h3>Key pair management</h3>
+<p>Asymmetric cryptography requires you to publish a public key, and to keep a private key private. If your communication partner knows your domain name,
+  then publishing your public key "only" requires a trusted https server with a TLS certificate on your domain name.</p>
+<p>If this web server is not under your physical control (i.e. either in your house, in your bag, or in your pocket), then
+  the rest of the story all depends partially on trusting your hosting provider, as well as (nowadays) their IaaS provider.</p>
+<p>The party hosting your public key can fool your peers, pretending to be you when sending a message. It would be a bit harder for them to read your incoming
+  messages without you noticing, but at least if you don't have control over the webserver where you publish your public key, then security is compromised.</p>
+<p>But given that your hosting provider would be subject to being found out if they published a different public key for you, this is still a relatively solvable
+  problem. People could keep an eye on each other's public key for instance, to prevent this. I proposed a system for this once, called StarSign, but it never really
+  got past the draft status. Anyway, you can imagine several ways for setting up such a "neighborhood watch".</p>
+<p>The real problem is in keeping the private key private. Because once an attacker has access to it, they can use it at will, and will only be detected through the
+  damage they cause with it. They will be able to send outgoing messages with your signature, and decrypt any incoming messages they intercept.</p>
+
+<h3>How to keep a secret</h3>
+<p>If you have a storage device under your control,
+  to which only you have access, and to which you always have access when you want to send a message, then this can be used
+  to store your private key. Examples may be a usb stick on a (physical) key ring, a chip card in your wallet, or your smart phone.</p>
+<p>A plug server or a laptop is already probably not good enough. Especially when travelling,
+  it is easy to get into a situation where you need to access your messages, but would
+  not have such a device with you.</p>
+<p>If you lose the storage device that holds your private key then you will lose all the data that was encrypted with that key pair, so it's important to make good
+  backups, for instance you can store a copy of your private key in a safe place inside your house, or just store an unencrypted copy of your important data there.</p>
+<p>It gets interesting if (like most normal users) you do not want to walk around with a usb stick. Many people will be able to remember "a log in", that's to say,
+  a domain name, a user name, and a weak password.</p>
+<h3>Weak passwords</h3>
+<p>A weak password is a string, memorized by the user,
+  with an entropy that is high enough to practically stop it from being guessable in, say, 10 attempts, but not high enough to
+  stop it from being guessable using, say, 1 year of computing power on a standard PC.</p>
+<p>A 4-digit PIN code is a good example of a weak password: the chance you can guess it in 10 attempts is one in a thousand, and usually an ATM will block the card
+  after the third attempt. It has an entropy of just over 13 bits. With a bit of effort, it is possible to remember a password that would be strong enough to withstand
+  a brute-force attack.</p>
+<p>For instance, a sequence of five words from a dictionary, could still be memorized with a bit of effort, but if the dictionary would contain
+  say 2^16 (about 65,000) words, then you could still achieve 72 bits of entropy with it, which would keep you safe from most attackers, depending on their
+  persistence and resources.</p>
+<p>But the reality is that most people don't want to have to remember such strong passwords, and they also want their passwords to be recoverable.
+
+<p><a href="https://groups.google.com/forum/#!forum/unhosted">Comments very welcome!</a></p>
 
       <p>The next episode will appear on Tuesday 16 April, 2013.</p>    </article>      
 	
