@@ -1,5 +1,5 @@
 module.exports = {
-  "The Basics": {
+  "Adventures": {
     "intro": "Personal servers and unhosted web apps",
     "editor": "An unhosted editor",
     "server": "Setting up your personal server",
@@ -16,18 +16,10 @@ module.exports = {
     "p2p": "Peer-to-peer communication",
     "unhosted oauth": "Unhosted web apps and OAuth",
     "save the web": "Our plan to save the web"
-       /* we can listen to music
-        * we can edit text files
-        * we can communicate via email, twitter, github, and facebook
-        * we can manage our pictures, contacts, and calendar
-        * we can publish apps and run server-side code
-        * we can download apps and run them locally
-        * this concludes the basis of unhosted web apps as a software platform
-        * part two of this handbook will be a showcase of specific technologies you should know about */
   },
-  "Technologies You Should Know About" : {
-/*- adventures 16: Cryptography
-- adventures 17: DHTs
+  "Decentralize" : {
+    "cryptograhpy": "Cryptography"
+/*- adventures 17: DHTs
 - adventures 18: IP, DNS, HTTP, TLS, and NAT
 - adventures 19: Persona, OpenID, SAML and WebID
 - adventures 20: Webfinger, OAuth, CORS and REST
@@ -37,7 +29,7 @@ module.exports = {
 - adventures 24: CouchDB
 - adventures 25: Decentralized reputation systems*/
   },
-  "Platforms and Modules": {
+  "Domains": {
 /*- adventures 26: xmpp
 - adventures 27: ActivityStreams and PuSH: pump.io
 - adventures 28: Twitter
@@ -49,7 +41,7 @@ module.exports = {
 - adventures 34: code
 - adventures 35: documents*/
   },
-  "Building Apps": {
+  "Build-essential": {
 /*- adventures 36: remoteStorage.js
 - adventures 38: sockethub.js
 - adventures 39: dropbox
@@ -63,7 +55,7 @@ module.exports = {
 - adventures 44: audio, video
 - adventures 45: svg*/
   },
-  "Related topics": {
+  "Related": {
 /*- adventures 46: Firefox OS
 - adventures 47: useraddress
 - adventures 48: tosdr

@@ -1,5 +1,5 @@
 var latestEpisode = 16,
-  buildAhead = 0,
+  buildAhead = 1,
   zeroDate = 1355227200000;
 
 var fs = require('fs'),
@@ -11,10 +11,10 @@ var fs = require('fs'),
   episodesDict = require('./episodes'),
   overviewPages = {
     i: 'definition',
-    ii: 'examples',
+    ii: 'example apps',
     iii: 'people',
     iv: 'events',
-    v: 'tools',
+    v: 'dev tools',
     vi: 'forum'
   }, overviewPaths = {
     i: '/',
@@ -25,6 +25,13 @@ var fs = require('fs'),
     vi: 'https://groups.google.com/forum/#!forum/unhosted'
   },
   episodes = [], abbrev = [];
+
+function getPart(i) {
+  if(i<=16) {
+    return 'adventures';
+  }
+  return 'decentralize';
+}
 
 function getFilename(i) {
   return i+'/'+episodes[i].split(' ').join('-')+'.html';
@@ -42,13 +49,16 @@ function makeEpisodesDiv(current) {
       str += '        <p> '+ spaces + i +'. <a href="'+ overviewPaths[i] +'">'+ overviewPages[i] +'</a></p>\n';
     }
   }
-  str += '\n<h4>Handbook:</h4>\n';
+  str += '\n<h4>Adventures:</h4>\n';
   for(var i in episodes) {
+    if(i==17) {
+      str += '\n<h4>Decentralize:</h4>\n';
+    }
     spaces = '';
     if(i == current) {
       str += '        <p><strong>'+ spaces + i +'. '+ abbrev[i] +'</strong></p>\n';
     } else {
-      str += '        <p> '+ spaces + i +'. <a href="/adventures/'+ getFilename(i) +'">'+ abbrev[i] +'</a></p>\n';
+      str += '        <p> '+ spaces + i +'. <a href="/'+getPart(i)+'/'+ getFilename(i) +'">'+ abbrev[i] +'</a></p>\n';
     }
   }
   return str + '      </div>\n';
@@ -58,23 +68,25 @@ function processTitles() {
   episodes = [];
   abbrev = [];
   var i = 1;
-  for(var j in episodesDict["The Basics"]) {
-    episodes[i] = episodesDict["The Basics"][j];
-    abbrev[i] = j;
-    i++;
-    if(i > latestEpisode) {
-      return;
+  for(var part in {Adventures: true, Decentralize: true}) {
+   for(var j in episodesDict[part]) {
+      episodes[i] = episodesDict[part][j];
+      abbrev[i] = j;
+      i++;
+      if(i > latestEpisode) {
+        return;
+      }
     }
   }
 }
 
 function writeEpisodes() {
   for(var i=1; i<=latestEpisode; i++) {
-    var source = fs.readFileSync(i+'/source.html'),
+    var source = fs.readFileSync('../'+getPart(i)+'/'+i+'/source.html'),
       title = '    <title>unhosted web apps '+ i +': '+ abbrev[i] +'</title>\n',
       header = '      <h2>'+ i +'. '+ episodes[i] +'</h2>\n\n',
       next = (i==latestEpisode?'\n      <p>The next episode will appear on Tuesday '+getNextTuesday()+'.</p>':'\n      <p>Next: <a href="../'+getFilename(i+1) + '">'+ episodes[i+1] +'</a></p>');
-    fs.writeFileSync(getFilename(i), part0 + title + part1 + header + source + next + part2 + makeEpisodesDiv(i)
+    fs.writeFileSync('../'+getPart(i)+'/'+getFilename(i), part0 + title + part1 + header + source + next + part2 + makeEpisodesDiv(i)
         + part3 + part4);
   }
 }
