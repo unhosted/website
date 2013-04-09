@@ -13,6 +13,14 @@
     <language>en-us</language>
     <ttl>40</ttl>
     <item>
+      <title>17. Cryptography</title>
+      <description>Episode 17 of Unhosted Adventures</description>
+      <pubDate>2013-04-09T12:00:00.000Z</pubDate>
+      <guid>https://unhosted.org/adventures/17/Cryptography.html</guid>
+      <link>https://unhosted.org/adventures/17/Cryptography.html</link>
+      <georss:point>10.2 104.0</georss:point>
+    </item>
+    <item>
       <title>16. Our plan to save the web</title>
       <description>Episode 16 of Unhosted Adventures</description>
       <pubDate>2013-04-02T12:00:00.000Z</pubDate>
