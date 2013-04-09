@@ -59,16 +59,21 @@
 <p>For instance, a sequence of five words from a dictionary, could still be memorized with a bit of effort, but if the dictionary would contain
   say 2^16 (about 65,000) words, then you could still achieve 72 bits of entropy with it, which would keep you safe from most attackers, depending on their
   persistence and resources.</p>
-<p>But the reality is that most people don't want to have to remember such strong passwords, and they also want their passwords to be recoverable.
-
+<p>But the reality is that most people don't want to have to remember such strong passwords, and they also want their passwords to be recoverable in some way. We need to present users with a place where they can store their private key under their control, while still being able to access it from any location using any standard trusted computer, plus their domain name, user name, and (weak) password.</p>
   
-  - freedombox
-  - e2ee+starsign -> complicated, + requires passphrase or usbstick; usbstick might almost as well be freedombox
-  - also, we would have to do it behind the modules
-  - even if not all anti-js-crypto arguments apply to our situation, browser tech is not up to it
-  - conclusion: TLS is enough; if you want to use untrusted cloud drives, use something like tahoe-lafs behind the remoteStorage api
-  
-<p><a href="https://groups.google.com/forum/#!forum/unhosted">Comments very welcome!</a></p>
+<h3>Conclusion</h3>
+<p>You can use some sort of a freedombox to store both your private key and your public key. The private key would only be accessible over TLS and behind
+a password, where multiple wrong guesses would result in captchas and time delays showing up, to stop brute-force attacks against the weak password.</p>
+<p>The public key would be publically available, but also only over TLS.</p>
+<p>It is a bit strange that TLS is not part of DNS, but as long as you type all domain names carefully and don't click any
+malicious "look-alike" phishing links (like, say, https://goog1e.com/ pretending to be https://google.com/), and you trust all the certificate authorities that your browser includes,
+then this should be a safe way to communicate.</p>
+<p>There is one more thing you may want to do: if you have a small trusted server and a large semi-trusted server, then you may want to let
+the small server encrypt blobs to store on the large semi-trusted server. This would, however, work best server-side, behind the TLS connection, rather than inside the browser's javascript execution environment.</p>
+<p>The situation where you have only a semi-trusted server and not a small trusted one is irrelevant, because there you would also not be able to host your keypair.</p>
+<p>The proof of concept that originally appeared on this website back in 2010 when we launched it centered heavily on implementing end-to-end encryption between browser environments. But we learned a lot since then, and hopefully this episode explains the reason why we now advise you to use TLS to a freedombox instead.</p>
+<p>Security stands and falls with correcting people when they get it wrong. And even though we're discussing the topic in this episode, this is mainly to make sure our handbook covers this important topic, and "IANASE", that's to say: I am <strong>not</strong> a security expert! :)</p>
+<p>This time especially, even more than other times, <a href="https://groups.google.com/forum/#!forum/unhosted">comments are very welcome</a>, especially if you see an error in the security arguments.</p> 
 
       <p>The next episode will appear on Tuesday 16 April, 2013.</p>    </article>      
 	
