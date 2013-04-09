@@ -129,8 +129,8 @@ function writeRss() {
       +'      <title>'+i+'. '+episodes[i]+'</title>\n'
       +'      <description>Episode '+i+' of Unhosted Adventures</description>\n'
       +'      <pubDate>'+getDate(i)+'</pubDate>\n'
-      +'      <guid>https://unhosted.org/adventures/'+getFilename(i)+'</guid>\n'
-      +'      <link>https://unhosted.org/adventures/'+getFilename(i)+'</link>\n'
+      +'      <guid>https://unhosted.org/'+getPart(i)+'/'+getFilename(i)+'</guid>\n'
+      +'      <link>https://unhosted.org/'+getPart(i)+'/'+getFilename(i)+'</link>\n'
       +'      <georss:point>10.2 104.0</georss:point>\n'
       +'    </item>\n';
   }
@@ -167,9 +167,9 @@ function writeAtom() {
   for(var i=latestEpisode; i>=1; i--) {
     str += '<entry>\n'
       +' <activity:object-type>http://activitystrea.ms/schema/1.0/comment</activity:object-type>\n'
-      +' <id>https://unhosted.org/adventures/'+getFilename(i)+'</id>\n'
+      +' <id>https://unhosted.org/'+getPart(i)+'/'+getFilename(i)+'</id>\n'
       +' <title>'+i+'. '+episodes[i]+'</title>\n'
-      +' <link rel="alternate" type="text/html" href="https://unhosted.org/adventures/'+getFilename(i)+'"/>\n'
+      +' <link rel="alternate" type="text/html" href="https://unhosted.org/'+getPart(i)+'/'+getFilename(i)+'"/>\n'
       +' <activity:verb>http://activitystrea.ms/schema/1.0/post</activity:verb>\n'
       +' <published>'+getDate(i)+'</published>\n'
       +' <updated>'+getDate(i)+'</updated>\n'

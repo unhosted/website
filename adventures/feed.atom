@@ -26,9 +26,9 @@
 <link href="https://unhosted.org/adventures/feed.atom" rel="self" type="application/atom+xml"/>
 <entry>
  <activity:object-type>http://activitystrea.ms/schema/1.0/comment</activity:object-type>
- <id>https://unhosted.org/adventures/17/Cryptography.html</id>
+ <id>https://unhosted.org/decentralize/17/Cryptography.html</id>
  <title>17. Cryptography</title>
- <link rel="alternate" type="text/html" href="https://unhosted.org/adventures/17/Cryptography.html"/>
+ <link rel="alternate" type="text/html" href="https://unhosted.org/decentralize/17/Cryptography.html"/>
  <activity:verb>http://activitystrea.ms/schema/1.0/post</activity:verb>
  <published>2013-04-09T12:00:00.000Z</published>
  <updated>2013-04-09T12:00:00.000Z</updated>
