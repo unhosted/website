@@ -16,12 +16,12 @@
 <p>If you have a storage device under your control,
   to which only you have access, and to which you always have access when you want to send a message, then this can be used
   to store your private key. Examples may be a usb stick on a (physical) key ring, a chip card in your wallet, or your smart phone.</p>
-<p>A plug server or a laptop is already probably not good enough. Especially when travelling,
+<p>A plug server or a laptop without a reverse proxy tunnel providing access into it, is already probably not good enough. Especially when travelling,
   it is easy to get into a situation where you need to access your messages, but would
-  not have such a device with you.</p>
+  not have such a device with you. You need to be able to access your keys from any trusted device, anywhere in the world.</p>
 <p>If you lose the storage device that holds your private key then you will lose all the data that was encrypted with that key pair, so it's important to make good
   backups, for instance you can store a copy of your private key in a safe place inside your house, or just store an unencrypted copy of your important data there.</p>
-<p>It gets interesting if (like most normal users) you do not want to walk around with a usb stick. Many people will be able to remember "a log in", that's to say,
+<p>It gets interesting if (like most normal users) you do not want to walk around with a usb stick. Many people will be unwilling to walk around with an extra physical object, but they will be able to remember "a log in", that's to say,
   a domain name, a user name, and a weak password.</p>
 <h3>Weak passwords</h3>
 <p>A weak password is a string, memorized by the user,
@@ -31,9 +31,9 @@
   after the third attempt. It has an entropy of just over 13 bits. With a bit of effort, it is possible to remember a password that would be strong enough to withstand
   a brute-force attack.</p>
 <p>For instance, a sequence of five words from a dictionary, could still be memorized with a bit of effort, but if the dictionary would contain
-  say 2^16 (about 65,000) words, then you could still achieve 72 bits of entropy with it, which would keep you safe from most attackers, depending on their
+  say 2^16 (about 65,000) words, then you could still achieve 80 bits of entropy with it, which would keep you safe from most attackers, depending on their
   persistence and resources.</p>
-<p>But the reality is that most people don't want to have to remember such strong passwords, and they also want their passwords to be recoverable in some way. We need to present users with a place where they can store their private key under their control, while still being able to access it from any location using any standard trusted computer, plus their domain name, user name, and (weak) password.</p>
+<p>But the reality is that most people don't want to have to remember such strong passwords, and they also want their passwords to be recoverable in some way. We need to present users with a place where they can store their private key under their control, while still being able to access it from any location, using any standard trusted computer, plus their domain name, user name, and (weak) password.</p>
   
 <h3>Conclusion</h3>
 <p>You can use some sort of a freedombox to store both your private key and your public key. The private key would only be accessible over TLS and behind
@@ -41,10 +41,10 @@ a password, where multiple wrong guesses would result in captchas and time delay
 <p>The public key would be publically available, but also only over TLS.</p>
 <p>It is a bit strange that TLS is not part of DNS, but as long as you type all domain names carefully and don't click any
 malicious "look-alike" phishing links (like, say, https://goog1e.com/ pretending to be https://google.com/), and you trust all the certificate authorities that your browser includes,
-then this should be a safe way to communicate.</p>
+then I think this should be a safe way to communicate.</p>
 <p>There is one more thing you may want to do: if you have a small trusted server and a large semi-trusted server, then you may want to let
-the small server encrypt blobs to store on the large semi-trusted server. This would, however, work best server-side, behind the TLS connection, rather than inside the browser's javascript execution environment.</p>
+the small server encrypt blobs, to store on the large semi-trusted server. This would, however, work best server-side, behind the TLS connection, rather than inside the browser's javascript execution environment.</p>
 <p>The situation where you have only a semi-trusted server and not a small trusted one is irrelevant, because there you would also not be able to host your keypair.</p>
-<p>The proof of concept that originally appeared on this website back in 2010 when we launched it centered heavily on implementing end-to-end encryption between browser environments. But we learned a lot since then, and hopefully this episode explains the reason why we now advise you to use TLS to a freedombox instead.</p>
+<p>The proof of concept that originally appeared on this website back in 2010 when we launched it, centered heavily on implementing end-to-end encryption between browser environments. But we learned a lot since then, and hopefully this episode explains the reason why we now advise you to use TLS to a freedombox instead of that.</p>
 <p>Security stands and falls with correcting people when they get it wrong. And even though we're discussing the topic in this episode, this is mainly to make sure our handbook covers this important topic, and "IANASE", that's to say: I am <strong>not</strong> a security expert! :)</p>
-<p>This time especially, even more than other times, <a href="https://groups.google.com/forum/#!forum/unhosted">comments are very welcome</a>, especially if you see an error in the security arguments.</p> 
+<p>So this time especially, even more than other times, <a href="https://groups.google.com/forum/#!forum/unhosted">comments are very welcome</a>, especially if you see an error in the security arguments.</p> 
