@@ -25,6 +25,22 @@
       <h2>17. Cryptography</h2>
 
 <!-- cryptography: Cryptography -->
+<h3>Papa got a brand new bag</h3>
+<p>When I first published this episode, Justin correctly <a href="https://groups.google.com/d/msg/unhosted/b1irZwo4HC4/jlSt5KudJyQJ">pointed out</a> that it should start with a security model, describing the assumptions we are making about which devices/persons are trusted, and which ones are untrusted.</p>
+<p>So let me have a stab at that: in good tradition, let's suppose Alice wants to send a message to Bob, through The Cloud. :)</p>
+<p>Unfortunately for her, but making it more interesting for us, she had their bag stolen last week. The bastards! ;) Anyway, not to worry, because she just bought a brand new bag and a new commodity laptop, and just finished installing Ubuntu on it.</p>
+<p>Alice has been following part I of this handbook and runs her own Indie Web website on a hosted VPS. She doesn't remember the root password of the server, but she remembers the login (username and weak password) for the control panel at her IaaS provider, and is able to gain access to her server again.</p>
+<p>She generates a new PGP key, revokes the old one, and now she's ready to message Bob. Luckily she remembers his user address by heart.</p>
+<p>Bob also just lost his bag and got a brand new one. And he had no good backups, so he has lost all his data, because the bag contained the Raspberry Pi from which he was running his website. But he has managed to get a new one, and get his reverse proxy tunnel configured again. On top of that, remembers and recognizes Alice's user address by heart when the message comes in.</p>
+<p>Now suppose Charlie is up to no good and wants to intercept and alter the message. Which attack angles would he have?</p>
+<h3>Some attack angles</h3>
+<p>Charlie could put eavesdropping hardware or firmware into the devices Alice and Bob buy. Bob bought his device with the operating system already on it, but for Alice could try to make her download a compromised version of Ubuntu.</p>
+<p>Another weak point is of course Alice's VPS hosting. So Charlie could get a job at her IaaS provider, or at a government or police force whose jurisdiction is recognized by this provider. That way he could change the public key Alice publishes there, upload his own one, and replace the message with a different one without Bob noticing.</p>
+<p>But let's assume Charlie fails at that, and all employees of Alice's IaaS provider and related law enforcement organizations do their job without attacking Alice's data. Then we have a situation where Alice and Bob now both have trusted devices with no malware on them, and Alice additionally has a server at an IaaS provider which she trusts.</p>
+<p>Since Alice and Bob both remember their own exact DNS domain name, as well as each other's, they can use the DNS+TLS system to bootstrap trust. Using asymmetric cryptography, Alice can encrypt her message with Bob's public key, and sign it with her own keypair.</p>
+<p>Charlie will not be able to read the content of the message, because he doesn't have access to Bob's private key, which is safely on Bob's Raspberry Pi.</p>
+<p>He will also not be able to tamper with the message, because Bob can get Alice's public key from her website, and validate the signature.</p>
+
 <h3>Key pair management</h3>
 <p>Asymmetric cryptography requires you to publish a public key, and to keep a private key private. If your communication partner knows your domain name,
   then publishing your public key "only" requires a trusted https server with a TLS certificate on your domain name.</p>
@@ -35,6 +51,7 @@
 <p>But given that your hosting provider would be subject to being found out if they published a different public key for you, this is still a relatively solvable
   problem. People could keep an eye on each other's public key for instance, to prevent this. I proposed a system for this once, called StarSign, but it never really
   got past the draft status. Anyway, you can imagine several ways for setting up such a "neighborhood watch".</p>
+<p>In fact, something I didn't know, but which Bryce pointed out in the <a href="https://groups.google.com/d/msg/unhosted/b1irZwo4HC4/UOszCJYzbSQJ">discussion</a> of this chapter, PGP keyservers are networked for synchrony, so if Alice and Bob have both uploaded their public key to one of the keyservers connected to this network, then it would be pretty much impossible for Charlie to convincingly publish a competing public key for either one of them.</p>
 <p>The real problem is in keeping the private key private. Because once an attacker has access to it, they can use it at will, and will only be detected through the
   damage they cause with it. They will be able to send outgoing messages with your signature, and decrypt any incoming messages they intercept.</p>
 
