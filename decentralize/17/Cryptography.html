@@ -25,21 +25,27 @@
       <h2>17. Cryptography</h2>
 
 <!-- cryptography: Cryptography -->
-<h3>Papa got a brand new bag</h3>
+<h3>Papa's got a brand new bag</h3>
 <p>When I first published this episode, Justin correctly <a href="https://groups.google.com/d/msg/unhosted/b1irZwo4HC4/jlSt5KudJyQJ">pointed out</a> that it should start with a security model, describing the assumptions we are making about which devices/persons are trusted, and which ones are untrusted.</p>
 <p>So let me have a stab at that: in good tradition, let's suppose Alice wants to send a message to Bob, through The Cloud. :)</p>
-<p>Unfortunately for her, but making it more interesting for us, she had their bag stolen last week. The bastards! ;) Anyway, not to worry, because she just bought a brand new bag and a new commodity laptop, and just finished installing Ubuntu on it.</p>
-<p>Alice has been following part I of this handbook and runs her own Indie Web website on a hosted VPS. She doesn't remember the root password of the server, but she remembers the login (username and weak password) for the control panel at her IaaS provider, and is able to gain access to her server again.</p>
-<p>She generates a new PGP key, revokes the old one, and now she's ready to message Bob. Luckily she remembers his user address by heart.</p>
-<p>Bob also just lost his bag and got a brand new one. And he has lost all his data, because the bag contained the Raspberry Pi from which he was running his website, and he had no good backups. But he has managed to get a new one, and get his reverse proxy tunnel configured again. On top of that, he remembers and recognizes Alice's user address by heart when the message comes in.</p>
+<p>Unfortunately for her, but making it more interesting for us, she had her bag stolen last week, with her laptop in it... :( Anyway, not to worry, because she just bought a brand new bag and a new commodity laptop, and just finished installing Ubuntu on it.</p>
+<p>Alice has been following part I of this handbook and runs her own Indie Web website, on a (virtual) server which she rents from an IaaS provider. She doesn't remember the root password of the server, and she only had the ssh key for it on the laptop that was stolen. But she remembers the login (username and weak password) for the control panel at her IaaS provider, and is able to gain access to her server again.</p>
+<p>She generates a new PGP key, revokes the old one, publishes her new public key to a PGP key server, as well as on her own website. Now she's ready to message Bob. Luckily she remembers his user address by heart.</p>
+<p>Bob also just lost his bag and got a brand new one. And he has lost all his data, because the bag contained the Raspberry Pi from which he was running his website (using a <a href="http://mailman.klaki.net/mailman/listinfo/revprotun">reverse proxy tunnel</a>), and he had no good backups.</p>
+<p>But he has managed to get a new Raspberry Pi, get his reverse proxy tunnel configured again, and obtained a new private TLS key for his website from his CA. On top of that, he knows Alice's user address by heart, and recognizes it when the message comes in.</p>
+<p>Charlie also has to generate a new PGP keypair and publish his public key b oth on his website and to a PGP keyserver. Since all main PGP keyservers are synchorized with each other thanks to Bryce for
+<a href="https://groups.google.com/d/msg/unhosted/b1irZwo4HC4/UOszCJYzbSQJ">
+pointing this out</a>), publishing your public PGP key once is enough to claim your own PGP identity globally. Other people can then sign your key to help you to strengthen your claim.</p>
 <p>Now suppose Charlie is up to no good and wants to intercept and/or alter the message. Which attack angles would he have?</p>
 <h3>Some attack angles</h3>
 <p>Charlie could put eavesdropping hardware or firmware into the devices Alice and Bob buy. Bob bought his device with the operating system already on it, but for Alice he could try to somehow make her download a compromised version of Ubuntu.</p>
 <p>Another weak point is of course Alice's VPS hosting. So Charlie could get a job at her IaaS provider, or at a government or police force whose jurisdiction is recognized by this provider. That way he could change the public key Alice publishes there, upload his own one, and replace the message with a different one without Bob noticing.</p>
 <p>But let's assume Charlie fails at that, and all employees of Alice's IaaS provider and related law enforcement organizations do their job without attacking Alice's data. Then we have a situation where Alice and Bob now both have trusted devices with no malware on them, and Alice additionally has a server at an IaaS provider which she trusts.</p>
 <p>Since Alice and Bob both remember their own exact DNS domain name, as well as each other's, they can use the DNS+TLS system to bootstrap trust. Using asymmetric cryptography, Alice can encrypt her message with Bob's public key, and sign it with her own keypair.</p>
-<p>Charlie will not be able to read the content of the message, because he doesn't have access to Bob's private key, which is safely on Bob's new Raspberry Pi.</p>
-<p>He will also not be able to replace the message with a malicious one, because Bob can get Alice's public key from her website, and validate the signature.</p>
+<p>Charlie could upload a competing public PGP key for Bob, hoping to make Alice encrypt her message with that key instead of with Bob's real one. This would mean Charlie, and not Bob, would be able to decrypt the message, provided he is able to intercept it.</p>
+<p>This would be quite hard for Charlie to pull off, though, because the conflict with Bob's real new key would immediately be visible, and Alice or someone else could easily check Bob's website to see which one of the two really comes from Bob.</p>
+<p>So as long as Alice successfully encrypts her message with Bob's correct new public PGP key, then Charlie will not be able to read the content of the message, because he doesn't have access to Bob's (new) private key, which is safely on Bob's new Raspberry Pi.</p>
+<p>He will also not be able to replace the message with a malicious one, because Bob can get Alice's public key from her website, and validate the PGP signature on the message.</p>
 
 <h3>Key pair management</h3>
 <p>Asymmetric cryptography requires you to publish a public key, and to keep a private key private. If your communication partner knows your domain name,
@@ -49,22 +55,28 @@
 <p>The party hosting your public key can fool your peers, pretending to be you when sending a message. It would be a bit harder for them to read your incoming
   messages without you noticing, but at least if you don't have control over the webserver where you publish your public key, then security is compromised.</p>
 <p>But given that your hosting provider would be subject to being found out if they published a different public key for you, this is still a relatively solvable
-  problem. People could keep an eye on each other's public key for instance, to prevent this. I proposed a system for this once, called StarSign, but it never really
-  got past the draft status. Anyway, you can imagine several ways for setting up such a "neighborhood watch".</p>
-<p>In fact, something I didn't know, but which Bryce pointed out in the <a href="https://groups.google.com/d/msg/unhosted/b1irZwo4HC4/UOszCJYzbSQJ">discussion</a> of this chapter, PGP keyservers are networked for synchrony, so if Alice and Bob have both uploaded their public key to one of the keyservers connected to this network, then it would be pretty much impossible for Charlie to convincingly publish a competing public key for either one of them.</p>
-<p>The real problem is in keeping the private key private. Because once an attacker has access to it, they can use it at will, and will only be detected through the
-  damage they cause with it. They will be able to send outgoing messages with your signature, and decrypt any incoming messages they intercept.</p>
+  problem. You should publish your public PGP key as far and wide as you can, sot that a sort of "neighborhood watch" can detect any attempt of your hosting provider to put a different one on your website.</p>
+<p>PGP keyservers are built for this. They are networked for synchrony, so if Alice and Bob have both uploaded their public key to one of the keyservers connected to this network, then it would be pretty much impossible for Charlie to convincingly publish a competing public key for either one of them.</p>
+<p>Using PGP keyservers, it would even be possible to use an identity on a domaoin you do not own. You could for instance publish a public PGP key for your gmail account, and use a mail client to send PGP-signed message out through it.</p>
+<p>But this is of course not advisable, since it ties your identity to a domain name you don't control. You could use an identity at a domain you don't control if this domain provides a context for that identity.</p>
+<p>For instance, you may have a context-specific identity at your club, like for instance your "@fsfe.org" if you are an
+<a href="https://fellowship.fsfe.org/">FSFE fellow</a>, and you may publish a PGP key for such an acccount to a key server, without necessarily having a way to publish it on the domain's website. So this may lead to PGP keys existing that can only be checked through keyservers and their Web of Trust, and not through DNS+TLS. But you should ideally only use such extra identities in the context which they pertain to.
+You should ideally always your own DNS domain name for your "root" identity on the web.</p>
 
 <h3>How to keep a secret</h3>
+<p>The real problem is in keeping the private key private. Because once an attacker has access to it, they can use it at will, and will only be detected through the
+  damage they cause with it. They will be able to send outgoing messages with your signature, and decrypt any incoming messages they intercept.</p>
 <p>If you have a storage device under your control,
   to which only you have access, and to which you always have access when you want to send a message, then this can be used
   to store your private key. Examples may be a usb stick on a (physical) key ring, a chip card in your wallet, or your smart phone.</p>
-<p>A plug server or a laptop without a reverse proxy tunnel providing access into it, is already probably not good enough. Especially when travelling,
+<p>A device without a reverse proxy tunnel providing access into it, is already probably not good enough, unless maybe it is your smartphone, which you have on you whenever you are outside the shower, 24/7. Especially when travelling,
   it is easy to get into a situation where you need to access your messages, but would
   not have such a device with you. You need to be able to access your keys from any trusted device, anywhere in the world.</p>
 <p>If you lose the storage device that holds your private key then you will lose all the data that was encrypted with that key pair, so it's important to make good
-  backups, for instance you can store a copy of your private key in a safe place inside your house, or just store an unencrypted copy of your important data there.</p>
-<p>It gets interesting if (like most normal users) you do not want to walk around with a usb stick. Many people will be unwilling to walk around with an extra physical object, but they will be able to remember "a log in", that's to say,
+  backups, for instance you can store a copy of your private key in a safe place inside your house, or just store an unencrypted copy of your important data there. It would have to be a very safe place though. :)</p>
+<p>It gets interesting if (like most normal users) you do not want to walk around with a usb stick. Many people will be unwilling to walk around with an extra 
+<a href="https://www.crypto-stick.com/">physical</a>
+<a href="https://www.yubico.com/products/yubikey-hardware/yubikey/">object</a>, but they will be able to remember "a log in", that's to say,
   a domain name, a user name, and a weak password.</p>
 <h3>Weak passwords</h3>
 <p>A weak password is a string, memorized by the user,
@@ -82,12 +94,15 @@
 <p>You can use some sort of a freedombox to store both your private key and your public key. The private key would only be accessible over TLS and behind
 a password, where multiple wrong guesses would result in captchas and time delays showing up, to stop brute-force attacks against the weak password.</p>
 <p>The public key would be publically available, but also only over TLS.</p>
-<p>It is a bit strange that TLS is not part of DNS, but as long as you type all domain names carefully and don't click any
+<p>The DNS+TLS system has a slightly strange architecture, something with <a href="">DNSSEC</a> is trying to fix, although even with those improvements, the system will in practice still be controlled by the "capitalist trinity" of US government, UN army/FBI, and Big Money/Silicon Valley, as we saw for instance with the hostile takeover of the Wikileaks website.</p>
+<p>Additionally, even if your website is available on the internet in general, in many geographical regions there may be local bans by other governments, armies, and industry powers. For instance, www.facebook.com is being blocked at the DNS level by several Asian governments.</p>
+<p>But as long as your personal Indie Web domain is up, you type all domain names carefully, you don't click any
 malicious "look-alike" phishing links (like, say, https://goog1e.com/ pretending to be https://google.com/), and you trust all the certificate authorities that your browser includes,
-then I think this should be a safe way to communicate.</p>
+then I think DNS+TLS+PGP should be a safe way to communicate.</p>
 <p>There is one more thing you may want to do: if you have a small trusted server and a large semi-trusted server, then you may want to let
-the small server encrypt blobs, to store on the large semi-trusted server. This would, however, work best server-side, behind the TLS connection, rather than inside the browser's javascript execution environment.</p>
-<p>The situation where you have only a semi-trusted server and not a small trusted one is irrelevant, because there you would also not be able to host your keypair.</p>
+the small server encrypt blobs, to store on the large semi-trusted server. This would, however, work best server-side, behind the TLS connection, rather than inside the browser's javascript execution environment. A good piece of software that does this is
+<a href="https://tahoe-lafs.org/trac/tahoe-lafs">tahoe-lafs</a>.</p>
+<p>The situation where you have only a semi-trusted server and not a small trusted one is irrelevant, because there you would also not be able to host your keypair (unless you rely on keyservers for the public one, and a physical device for the private one).</p>
 <p>The proof of concept that originally appeared on this website back in 2010 when we launched it, centered heavily on implementing end-to-end encryption between browser environments. But we learned a lot since then, and hopefully this episode explains the reason why we now advise you to use TLS to a freedombox instead of that.</p>
 <p>Security stands and falls with correcting people when they get it wrong. And even though we're discussing the topic in this episode, this is mainly to make sure our handbook covers this important topic, and "IANASE", that's to say: I am <strong>not</strong> a security expert! :)</p>
 <p>So this time especially, even more than other times, <a href="https://groups.google.com/d/msg/unhosted/b1irZwo4HC4/_tPnu8_iMpgJ">comments are very welcome</a>, especially if you see an error in the security arguments.</p> 
