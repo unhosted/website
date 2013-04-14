@@ -24,9 +24,36 @@
       
       <h2>18. Distributed hash tables</h2>
 
-<!-- DHTs: Distributed Hash Tables -->
+<!-- DHTs: Distributed hash tables -->
 <h3>Content-addressable data</h3>
-<p>...</p> 
+<p>If for a key-value store, the key of each item is uniquely determined by the value, we say the data item is content-addressable: if you know the content, you know the address.</p>
+
+<h3>A ring of hashes</h3>
+<p>You can build a distributed database by partitioning per key. One way to do this is to imagine the keys as distributed around a circle, and to assign one server node to each section of that circle.</p>
+<p>This works especially well if the keys are evenly distributed around that circle, which would generally be the case if the keys are a hash of the value of the corresponding item.</p>
+<p>You may introduce redundancy by making the sections overlap. Then, if a node fails, you can move the nodes gradually to elastically adapt. Likewise if you want to add more servers, you can insert them and gradually let the new set of servers settle to their optimal distribution.</p>
+
+<h3>Erasure coding</h3>
+<p>Taking this concept to a more generic level, leads to erasure coding, a strategy implemented by for instance tahoe-lafs.</p>
+
+<h3>Encryption</h3>
+<p>Encrypted blobs can easily be stored as content-addressable data. Thus, you can send a short string which would then translate to a potentially very long string.</p>
+<p>To set this up you need a trusted server that does the encryption, and a set of semi-trusted servers that do the actual blob storage.</p>
+
+<h3>Indexes to the data</h3>
+<p>Content-addressable data by itself is in a way useless by definition. Nobody wants to use hashes as variable names. You need an extra layer that translates ultimately human-memorable, or at least human-intelligible labels to the machine-generated hashes that allow looking up the actual full data items in the DHT.</p>
+
+<h3>Zooko's triangle</h3>
+<p>When naming data, you cannot have security, memorability, and decentralization at the same time. You have to choose at most two out of three.</p>
+
+<h3>Uniqueness through domination</h3>
+<p>There is in practice a way out of the dilemma introduced by Zooko's triangle: since our planet has a finite size, and a finite population, it is possible to populate all instances of something with the same data, thus in practice (though not in theory) removing the need to choose one authorative instance.</p>
+<p>DNS, TLS, PGP keyservers, and Mainline DHT all use this approach.</p>
+
+<h3>Conclusion</h3>
+<p>When storing small items of data, you need an actual key-value store. When the items are big, though, you can combine a first-level key-value store with a second-level content-addressable store, such that the first forms an index to the latter.</p>
+<p>Doing this opens up opportunities to use semi-trusted servers on the second level.</p>
+<p>Truly decentralized storage of key-value data is impossible, but it can be simulated by dominating the finite set of Earthly instances of a certain service.</p>
 
       <p>The next episode will appear on Tuesday 23 April, 2013.</p>    </article>      
 	
