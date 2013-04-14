@@ -30,11 +30,10 @@ pointing this out</a>), publishing your public PGP key once is enough to claim y
 <p>The party hosting your public key can fool your peers, pretending to be you when sending a message. It would be a bit harder for them to read your incoming
   messages without you noticing, but at least if you don't have control over the webserver where you publish your public key, then security is compromised.</p>
 <p>But given that your hosting provider would be subject to being found out if they published a different public key for you, this is still a relatively solvable
-  problem. You should publish your public PGP key as far and wide as you can, sot that a sort of "neighborhood watch" can detect any attempt of your hosting provider to put a different one on your website.</p>
+  problem. You should publish your public PGP key as far and wide as you can, so that a sort of "neighborhood watch" can detect any attempt of your hosting provider to put a different one on your website.</p>
 <p>PGP keyservers are built for this. They are networked for synchrony, so if Alice and Bob have both uploaded their public key to one of the keyservers connected to this network, then it would be pretty much impossible for Charlie to convincingly publish a competing public key for either one of them.</p>
-<p>Using PGP keyservers, it would even be possible to use an identity on a domaoin you do not own. You could for instance publish a public PGP key for your gmail account, and use a mail client to send PGP-signed message out through it.</p>
-<p>But this is of course not advisable, since it ties your identity to a domain name you don't control. You could use an identity at a domain you don't control if this domain provides a context for that identity.</p>
-<p>For instance, you may have a context-specific identity at your club, like for instance your "@fsfe.org" if you are an
+<p>Using PGP keyservers, it would even be possible to use an identity on a domain you do not own. You could for instance publish a public PGP key for your gmail account, and use a mail client to send PGP-signed message out through it. But this is of course not advisable, since it ties your identity to a domain name you don't control.</p>
+<p>You could use an identity at a domain you don't control if this domain provides a context for that identity. For instance, you may have a context-specific identity at your club, like for instance your "@fsfe.org" if you are an
 <a href="https://fellowship.fsfe.org/">FSFE fellow</a>, and you may publish a PGP key for such an acccount to a key server, without necessarily having a way to publish it on the domain's website. So this may lead to PGP keys existing that can only be checked through keyservers and their Web of Trust, and not through DNS+TLS. But you should ideally only use such extra identities in the context which they pertain to.
 You should ideally always your own DNS domain name for your "root" identity on the web.</p>
 
