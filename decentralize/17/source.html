@@ -34,8 +34,9 @@ pointing this out</a>), publishing your public PGP key once is enough to claim y
 <p>PGP keyservers are built for this. They are networked for synchrony, so if Alice and Bob have both uploaded their public key to one of the keyservers connected to this network, then it would be pretty much impossible for Charlie to convincingly publish a competing public key for either one of them.</p>
 <p>Using PGP keyservers, it would even be possible to use an identity on a domain you do not own. You could for instance publish a public PGP key for your gmail account, and use a mail client to send PGP-signed message out through it. But this is of course not advisable, since it ties your identity to a domain name you don't control.</p>
 <p>You could use an identity at a domain you don't control if this domain provides a context for that identity. For instance, you may have a context-specific identity at your club, like for instance your "@fsfe.org" if you are an
-<a href="https://fellowship.fsfe.org/">FSFE fellow</a>, and you may publish a PGP key for such an acccount to a key server, without necessarily having a way to publish it on the domain's website. So this may lead to PGP keys existing that can only be checked through keyservers and their Web of Trust, and not through DNS+TLS. But you should ideally only use such extra identities in the context which they pertain to.
-You should ideally always your own DNS domain name for your "root" identity on the web.</p>
+<a href="https://fellowship.fsfe.org/">FSFE fellow</a>, and you may publish a PGP key for such an acccount to a key server, without necessarily having a way to publish it on the domain's website.</p>
+<p>So this may lead to PGP keys existing that can only be checked through keyservers and their Web of Trust, and not through DNS+TLS. But you should ideally only use such extra identities in the context which they pertain to.
+You should ideally always have your own DNS domain name for your "root" identity on the web.</p>
 
 <h3>How to keep a secret</h3>
 <p>The real problem is in keeping the private key private. Because once an attacker has access to it, they can use it at will, and will only be detected through the
