@@ -59,7 +59,6 @@ human-meaningful, and secure, all at the same time.</p>
 <p>If the data is additionally verifiable, like DHT data is, then you can in practice make data blobs globally available in a way that becomes independent of the original publisher.</p>
 
 <h3>Conclusion</h3>
-<p>When storing small items of data, you need an actual key-value store. When the items are big, though, you can combine a first-level key-value store with a second-level content-addressable store, such that the first forms an index to the latter.</p>
-<p>Doing this opens up opportunities to use semi-trusted servers on the second level.</p>
-<p>Truly decentralized storage of generic key-value data (with human-memorable item names) is impossible, but decentralized storage of content-addressable data can be achieved "in practice", by dominating the finite set of Earthly instances of a certain service.</p>
+<p>When storing small items of data, you need an actual key-value store. When the items are big, though, you can combine a first-level key-value store with a second-level content-addressable store, such that the first forms an index to the latter. Doing this also opens up opportunities to use semi-trusted servers on the second level.</p>
+<p>Truly decentralized storage of generic key-value data (with human-memorable item names) is impossible, but decentralized storage of content-addressable data can be achieved "in practice", by dominating the finite set of Earthly servers that claim to participate in your DHT, and verifying that the value you obtained actually hashes to the item key you requested.</p>
 <p>As always, <a href="https://groups.google.com/forum#!forum/unhosted">comments welcome</a>!</p>
