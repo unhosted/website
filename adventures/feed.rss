@@ -13,6 +13,14 @@
     <language>en-us</language>
     <ttl>40</ttl>
     <item>
+      <title>18. Distributed hash tables</title>
+      <description>Episode 18 of Unhosted Adventures</description>
+      <pubDate>2013-04-16T12:00:00.000Z</pubDate>
+      <guid>https://unhosted.org/decentralize/18/Distributed-hash-tables.html</guid>
+      <link>https://unhosted.org/decentralize/18/Distributed-hash-tables.html</link>
+      <georss:point>10.2 104.0</georss:point>
+    </item>
+    <item>
       <title>17. Cryptography</title>
       <description>Episode 17 of Unhosted Adventures</description>
       <pubDate>2013-04-09T12:00:00.000Z</pubDate>
