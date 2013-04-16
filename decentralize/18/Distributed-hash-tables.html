@@ -51,7 +51,7 @@
 <p>Encrypted blobs can easily be stored as content-addressable data. Thus, you can send a short string which would then translate to a potentially very long string.</p>
 <p>To set this up you need a trusted server that does the encryption, and a set of semi-trusted servers that do the actual blob storage.</p>
 <p>Do keep in mind that if two people both encrypt the same file (say, a specific webm-file, or a popular linux install CD), then they will not generally result in the same blob, and thus the system will not be able to take advantage of de-duplication.</p>
-<p>Convergent encryption fixes this. It uses a different encryption key for each blobs, and derives that encryption key from the blob's entropy, such that it's not derivable from the address key (the blob's hash)</p>
+<p>Convergent encryption fixes this. It uses a different encryption key for each blobs, and derives that encryption key from the blob's entropy, such that it's not derivable from the item key (the blob's hash, which is used as the item's address)</p>
 <p>Bitcasa, the company that was the subject of the TechCrunch scandal a couple of years ago, claimed that it could
 do both encryption and de-duplication, using this
  <a href="http://techpinions.com/bitcasas-clever-encryption-trick/2677">clever trick</a>.
@@ -66,20 +66,28 @@ For instance, a copyright holder could upload their own movie to Mega.co.nz, and
 <p>As already stated earlier, content-addressable data by itself is in a way useless by definition. Nobody wants to use hashes as variable names. You need an extra layer that translates ultimately human-memorable, or at least human-intelligible labels to the machine-generated hashes that allow looking up the actual full data items in the DHT.</p>
 <p>A good example of this is git: it stores blobs, and then trees of commits that references these blobs. This is also how git does de-duplication, which can be quite important depending on how you branch and move files around in your version control repo.</p>
 
-<!--
 <h3>Zooko's triangle</h3>
-<p>When naming data, you cannot have security, memorability, and decentralization at the same time. You have to choose at most two out of three.</p>
-<p>For instance, the DNS system provides names that aer
+<p>A naming scheme can be (source: <a href="https://en.wikipedia.org/wiki/Zooko%27s_triangle">wikipedia</a>):
+<ul>
+<li>Decentralized and human-meaningful (this is true of nicknames people choose for themselves),
+<li>Secure and human-meaningful (this is the property that domain names and URLs aim for), or
+<li>Secure and decentralized (this is a property of OpenPGP key fingerprints)
+</ul>
+<p>However, Zooko's triangle states that is impossible to have all three at the same time. A naming scheme cannot be decentralized,
+human-meaningful, and secure, all at the same time.</p>
+<p>Don't confuse the word "distributed" in the abbreviation "DHT" with "decentralized". For instance, bittorrent.com publishes the Mainline DHT in which bittorrent peers can participate voluntarily, but this DHT is fundamentally centralized in the domain name of its publisher.</p>
+<p>The fact that DHTs derive item keys from item values means that the "secure" part of Zooko's triangle can at least be verified: if you arrive at the wrong item value for a given item key, then you can at least know that this happened.</p>
+<p>At the same time, it means that item keys in a DHT are not human-meaningful (unless the human in question is able to calculate hash functions in their head).</p>
 
 <h3>Uniqueness through domination</h3>
-<p>There is in practice a way out of the dilemma introduced by Zooko's triangle: since our planet has a finite size, and a finite population, it is possible to populate all instances of something with the same data, thus in practice (though not in theory) removing the need to choose one authorative instance.</p>
-<p>DNS, TLS, PGP keyservers, and Mainline DHT all use this approach.</p>
--->
+<p>There is in practice a way out of the dilemma introduced by Zooko's triangle: since our planet has a finite size, and a finite population, it is possible to populate a vast majority of all instances of a certain system with the same data, thus in practice (though not in theory) removing the need to choose one authorative instance.</p>
+<p>DNS, TLS, PGP keyservers, and Bittorrent's Mainline DHT all use this approach. Even if the authorative single point of failure of these systems goes down, the data still "floats around" in enough places.</p>
+<p>If the data is additionally verifiable, like DHT data is, then you can in practice make data blobs globally available in a way that becomes independent of the original publisher.</p>
 
 <h3>Conclusion</h3>
 <p>When storing small items of data, you need an actual key-value store. When the items are big, though, you can combine a first-level key-value store with a second-level content-addressable store, such that the first forms an index to the latter.</p>
 <p>Doing this opens up opportunities to use semi-trusted servers on the second level.</p>
-<!--<p>Truly decentralized storage of key-value data is impossible, but it can be simulated by dominating the finite set of Earthly instances of a certain service.</p>-->
+<p>Truly decentralized storage of generic key-value data (with human-memorable item names) is impossible, but decentralized storage of content-addressable data can be achieved "in practice", by dominating the finite set of Earthly instances of a certain service.</p>
 <p>As always, <a href="https://groups.google.com/forum#!forum/unhosted">comments welcome</a>!</p>
 
       <p>The next episode will appear on Tuesday 23 April, 2013.</p>    </article>      
