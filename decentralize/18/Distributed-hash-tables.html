@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="description" content="weekly handbook about unhosted web apps" />
-    <title>unhosted web apps 18: DHTs</title>
+    <title>unhosted web apps 18: dht</title>
     <link rel="stylesheet" href="/adventures/hljs/default.min.css" />
     <link rel="hub" href="http://pubsubhubbub.appspot.com/"/>
     <link rel="updates alternate" type="application/atom+xml" href="/adventures/feed.atom" />
@@ -86,7 +86,7 @@ human-meaningful, and secure, all at the same time.</p>
 
 <h3>Conclusion</h3>
 <p>When storing small items of data, you need an actual key-value store. When the items are big, though, you can combine a first-level key-value store with a second-level content-addressable store, such that the first forms an index to the latter. Doing this also opens up opportunities to use semi-trusted servers on the second level.</p>
-<p>Truly decentralized storage of generic key-value data (with human-memorable item names) is impossible, but decentralized storage of content-addressable data can be achieved "in practice", by dominating the finite set of Earthly servers that claim to participate in your DHT, and verifying that the value you obtained actually hashes to the item key you requested.</p>
+<p>Truly decentralized storage of generic key-value data (with human-memorable item names) is impossible, but decentralized storage of content-addressable data can be achieved "in practice", by dominating the finite set of Earthly servers that claim to participate in your DHT, and if clients verify that the values they obtain actually hash back to the item keys they requested.</p>
 <p>As always, <a href="https://groups.google.com/forum#!forum/unhosted">comments welcome</a>!</p>
 
       <p>The next episode will appear on Tuesday 23 April, 2013.</p>    </article>      
@@ -127,7 +127,7 @@ human-meaningful, and secure, all at the same time.</p>
 
 <h4>Decentralize:</h4>
         <p> 17. <a href="/decentralize/17/Cryptography.html">cryptography</a></p>
-        <p><strong>18. DHTs</strong></p>
+        <p><strong>18. dht</strong></p>
       </div>
       
       <div>
