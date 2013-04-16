@@ -9,29 +9,29 @@
 <p>When storing content-addressable data redundantly on a cluster of servers, you probably want to be able to add and remove servers without taking the cluster down. If you generate the keys from the values using a hashing function that more or less randomly spreads the resulting keys over their namespace, then you can use that property to easily and fairly determine which servers should store which item.</p>
 <p>Imagine the namespace of hashes as a circle, where each point on the circle corresponds to a certain item key. Then you can deploy the servers you have available to each serve an overlapping section of that circle.</p>
 <p>You may introduce redundancy by making the sections overlap. Then, if a node fails, you can redistribute the nodes by moving them gradually, so that they elastically adapt. Likewise, if you want to add more servers, you can insert them at a random position on the circle, and gradually let the new set of servers settle to their optimal distribution.</p>
-<p>Moving a server clockwise or anti-clockwise on the server mean forgetting items on one end of its circle section, while at the same time obtaining new ones at the other end. If you make sure that each item is always stored at least twice (by overlapping each section 50% with each of its neighbors), then if one node fails, the nodes that neighbored it can immediately start moving towards each other to get full duplicated coverage of the section again.</p>
+<p>Moving a server clockwise or anti-clockwise on the ring means forgetting items on one end of its circle section, while at the same time obtaining new ones at the other end. If you make sure that each item is always stored at least twice (by overlapping each section 50% with each of its neighbors), then if one node fails, the nodes that neighbored it can immediately start moving towards each other to get full duplicated coverage of the section again.</p>
 <p>This doesn't help of course when two adjacent nodes fail, and if you lose a server, then the load on the remaining servers of course becomes proportionally bigger. But running a cluster like this can be a lot easier for a sysadmin then running, say, a master-slave cluster of database servers.</p>
 
 <h3>Erasure coding</h3>
 <p>Taking this concept to a more generic level, leads to erasure coding, a strategy implemented by for instance tahoe-lafs. Here, each blob is stored <code>n</code> times instead of necessarily exactly two times. Advantages of storing data multiple times include:</p>
 <ul>
-<li>disaster recovery, include easy organization of maintenance windows,</li>
+<li>disaster recovery, including easy organization of maintenance windows,</li>
 <li>easy expansion and reduction of the cluster size in response to throughput and storage size demand,</li>
 <li>increased throughput when the traffic is not uniform (for instance, if only one item is being retrieved at a given time, you can use all servers that store it to serve a part of the item's value),</li>
-<li>possibility of using commodity, semi-trusted servers, thanks to the inherent robustness of the architecture.</li>
+<li>possibility of using low-quality servers, or when encryption is used even semi-trusted servers, thanks to the inherent robustness of the architecture.</li>
 </ul>
 
 <h3>Convergent encryption</h3>
-<p>Encrypted blobs can easily be stored as content-addressable data. Thus, you can send a short string which would then translate to a potentially very long string.</p>
+<p>Encrypted blobs can easily be stored as content-addressable data. Thus, you can send a short string to the recipient of your message, which would then translate to a potentially very long string on the DHT to which both sender and receiver have access.</p>
 <p>To set this up you need a trusted server that does the encryption, and a set of semi-trusted servers that do the actual blob storage.</p>
 <p>Do keep in mind that if two people both encrypt the same file (say, a specific webm-file, or a popular linux install CD), then they will not generally result in the same blob, and thus the system will not be able to take advantage of de-duplication.</p>
 <p>Convergent encryption fixes this. It uses a different encryption key for each blobs, and derives that encryption key from the blob's entropy, such that it's not derivable from the item key (the blob's hash, which is used as the item's address)</p>
 <p>Bitcasa, the company that was the subject of the TechCrunch scandal a couple of years ago, claimed that it could
-do both encryption and de-duplication, using this
+do both encryption and de-duplication, using convergent encryption as their
  <a href="http://techpinions.com/bitcasas-clever-encryption-trick/2677">clever trick</a>.
 For Mega.co.nz it is
 <a href="http://arstechnica.com/business/2013/01/megabad-a-quick-look-at-the-state-of-megas-encryption/">believed</a>
-that they may also be using convergent encryption, although this has not been confirmed by the company itself.</p>
+that they may also be using convergent encryption, although this has apparently not been confirmed by the company itself.</p>
 <p>It is important to note, as this last link also explains, that de-duplication exposes some information about the data people are storing.
 For instance, a copyright holder could upload their own movie to Mega.co.nz, and ask Mega to report which users own a file that deduplicates against that.</p>
 <p>So depending on the reasons you had to encrypt data in the first place, convergent encryption may not be what you are looking for. You may need to use an encryption technique that makes de-duplication impossible.</p>
