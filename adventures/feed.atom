@@ -4,7 +4,7 @@
  <title>Unhosted Adventures</title>
  <subtitle>Official Handbook of the No Cookie Crew</subtitle>
   <logo>https://unhosted.org/adventures/img/island-color.jpg</logo>
- <updated>2013-04-16T12:00:00.000Z</updated>
+ <updated>2013-04-23T12:00:00.000Z</updated>
 <author>
  <activity:object-type>http://activitystrea.ms/schema/1.0/person</activity:object-type>
   <uri>https://michielbdejong.com/</uri>
@@ -24,6 +24,16 @@
  </poco:urls>
 </author>
 <link href="https://unhosted.org/adventures/feed.atom" rel="self" type="application/atom+xml"/>
+<entry>
+ <activity:object-type>http://activitystrea.ms/schema/1.0/comment</activity:object-type>
+ <id>https://unhosted.org/decentralize/19/BGP,-IP,-DNS,-HTTP,-TLS,-and-NAT.html</id>
+ <title>19. BGP, IP, DNS, HTTP, TLS, and NAT</title>
+ <link rel="alternate" type="text/html" href="https://unhosted.org/decentralize/19/BGP,-IP,-DNS,-HTTP,-TLS,-and-NAT.html"/>
+ <activity:verb>http://activitystrea.ms/schema/1.0/post</activity:verb>
+ <published>2013-04-23T12:00:00.000Z</published>
+ <updated>2013-04-23T12:00:00.000Z</updated>
+ <georss:point>10.20 104.0</georss:point>
+</entry>
 <entry>
  <activity:object-type>http://activitystrea.ms/schema/1.0/comment</activity:object-type>
  <id>https://unhosted.org/decentralize/18/Distributed-hash-tables.html</id>
