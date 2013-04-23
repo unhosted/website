@@ -25,17 +25,51 @@
       <h2>19. Networking with IP, BGP, DNS, HTTP, TLS, and NAT</h2>
 
 <!-- networking: Networking with BGP, IP, DNS, HTTP, TLS, and NAT -->
-<h3>The internet</h3>
-<p>If you have a new computer which you would like to connect to the internet, then the first thing you need is an Autonomous System Number
+<h3>Connecting your computer to the internet</h3>
+<p>If you have a new computer which you would like to properly connect to the decentralized internet, then the first thing you need is an Autonomous System Number
 (<a href="https://en.wikipedia.org/wiki/Autonomous_system_%28Internet%29">ASN</a>), at least one
 <a href="https://en.wikipedia.org/wiki/Border_Gateway_Protocol">BGP</a> peer, a network connection (probably
 <a href="https://en.wikipedia.org/wiki/Fiber-optic_communication">fiber</a>) between you and that peer, and at least one block of internet IP addresses. You can then announce your block to your peer, and start sending and receiving traffic.</p>
-<p>Of course in practice you would probably leave the task of setting this up to an established internet service provider (ISP), but the fact that you could
+<p>Of course in practice you would probably leave the task of setting this up to an established internet service provider (ISP), hence the popular practice of connecting a computer to the internet with a wifi password instead. :) But the fact that you could in theory become an autonomous system, is important.</p>
+<p>Since connectivity is its own reward, there is a strong drive for all smaller networks to become part of "the" Earthly internet. This means that although (modulo the assignment of ASN numbers) the internet is a decentralized and non-unique system, there is one "winner" internet, which is not unique in theory, but is unique in practice through dominance.</p>
+<p>If ASNs were longer (not human-memorable), then you would not need to obtain them from the centralized IANA registry, and the system would be even more decentralized. In practice this is not a big issue however, since the threshold in hardware investment, and cost of the specialized sysadmins required to run an AS are is still so high that there are only about 42,000 autonomous systems on Earth, and there don't seem to have been any hostile take-down attempts yet.</p>
 
-On the internet, there are four major routing schemes:
-<a href="http://blog.cloudflare.com/cloudflares-architecture-eliminating-single-p">Unicast, Multicast, Broadcast, and Anycast</a>.
+<h3>Routing traffic</h3>
+<p>Once you peer with other autonomous systems on the internet, you can make your computers addressable via IPv4, IPv6, or both. It is hardly an exaggeration to say that all computers that are connected to the internet at all, will be able to connect to your computer over IPv4.</p>
+<p>On the internet, there are four major routing schemes:
+<a href="http://blog.cloudflare.com/cloudflares-architecture-eliminating-single-p">Unicast, Multicast, Broadcast, and Anycast</a>. Using BGP-level anycast, if Bob knows Alice's IP address, she could publish a message at several autonomous systems, each of which would announce Alice's IP address, and as long as Bob has a route to at least one of them, he would be able to retrieve the message. This would be properly hard to shut down.</p>
+<p>IPv6 connectivity is less ubiquitous, and if Bob is behind an ISP then it is not necessarily possible for him to reach Alice's content on an IPv6 IP address. In fact, Bob would pretty much
+<a href="http://www.google.com/ipv6/statistics.html#tab=per-country-ipv6-adoption">have to be in France</a>, and even then he would only have about a 1 in 20 chance to be able to reach Alice's message on its IPv6 address.</p>
+<p>IPv4 famously ran out of addresses last year, but for the moment it seems ISPs are simply assigning each IP address to a bigger group of people instead of being in a hurry to introduce IPv6.</p>
+<p>Also, IaaS providers nowadays often seem to put their entire infrastructure behind a single IPv4 address instead of worrying too much about giving each customer their own address.</p>
 
-<p><a href="https://groups.google.com/forum#!forum/unhosted">comments welcome</a>!</p>
+<h3>TCP, HTTP, and Transport-layer Security</h3>
+<p>If your computer has its own (IPv4) internet address, then it can accept incoming TCP conversations. On top of IP, which is a best-effort end-to-end packet routing protocol, TCP offers fault tolerance and abstraction from dropped packets. On top of TCP, Transport Layer Security
+(<a href="https://en.wikipedia.org/wiki/Transport_Layer_Security">TLS</a>) implements protection against eavesdropping and tampering through asymmetric encryption.</p>
+<p>With Server Name Indication (<a href="http://en.wikipedia.org/wiki/Server_Name_Indication">SNI</a>), it is possible to host several DNS domain names on the same IP address, and still use TLS. Since SNI happens
+<a href="http://journal.paul.querna.org/articles/2005/04/24/tls-server-name-indication/">as part of</a> the TLS negotiation, it seems to me that it should be possible to get end-to-end TLS with several servers behind the same IP address, as long as the server that handles the negotiation knows which vhost lives where.</p>
+<p>But in practice that is probably a bit of an academic issue, since the party who gives you the shared IPv4 address is probably an IaaS provider who has physical access to your server anyway. </p>
+
+<h3>Naming and trust</h3>
+<p>If Alice has access to several autonomous systems, she can announce her IP address several times. But not many people have this. In fact, as we just saw, having even one entire IP address is becoming rare. So another approach to make routing more robust, would be if Alice gave Bob several alternative IP addresses for the same content, which can for instance be done at the DNS level, with round-robin DNS.</p>
+<p>Alice can register a domain name, get DNS hosting somewhere, and announce one or more IP addresses there, for the content she wants to send to Bob. Apart from the added level of indirection which gives Alice more ways of adapting to adversity, it makes the identifier for her message human-memorable.</p>
+<p>The DNS system is centralized and often controlled by political powers, so it's not a very robust part of the architecture of the internet. Even with the DNSSEC improvements, governments have the power to selectively take down certain domain names, and many nation state governments around the globe have already shown they are willing to use this power.</p>
+<p>TLS is also centrally controlled, but at least it offers Bob a way to actually know whether he is talking to Alice. Everything before that point is only best-effort, and based on assumptions.</p>
+<p>In practice, people often find each other at yet a higher level of routing: search. Instead of Alice giving her IP address or domain name to Bob via an out-of-band channel, Bob will in practice often simply search for the string "Alice Alison" on Facebook or Google, check whether some of the content found matches some out-of-band reference knowledge he has about Alice (for instance, the avatar roughly matches what she looks like in real life), and then follow the link to find Alice's home page with the message.</p>
+<p>This search need not be centralized; it can in theory go through friend-of-a-friend networks like
+<a href="https://en.wikipedia.org/wiki/FOAF_(software)">FOAF</a>, which would again create a system that is more decentralized than DNS and than Facebook/Google search.</p>
+<p>Some friends and I are also planning on scraping (once we have some time to work on this) a large part of the internet's social graph, as far as it's public, and leak all this information into the public domain in the form of for instance a CouchDB database or a torrent, in a project we called <a href="https://github.com/unhosted/useraddress">useraddress</a>.</p>
+<p>But for now, since DNS is vulnerable to government attacks, and IPv4 addresses are owned by specific ISPs, it is actually pretty hard to reliably send a message over the internet. Neither IP addresses nor domain names can really be trusted. Unless one of them has an ASN, the best way would probably to encrypt your message into a torrent. :)</p>
+
+<h3>Network Address Translation</h3>
+<p>So will IPv6, if it ever comes, be any better than IPv4? One thing its proponents like about IPv6 is that it allows a LAN administrator to let individual devices go out on their own address. Historically, it doesn't seem like this is something LAN administrators <em>want</em> to do, though.</p>
+<p>Through Network Address Translation
+(<a href="https://en.wikipedia.org/wiki/Network_address_translation">NAT</a>), the identity of each device can be pooled with that of all other devices on a LAN, thus making it harder to attack them from outside that LAN. This means treating those devices basically as internet clients, rather than as internet participants.</p>
+<p>A device that is behind a NAT is not accessible from the outside. WebRTC will try to use
+<a href="https://en.wikipedia.org/wiki/STUN">STUN</a> to "traverse" the NAT, and at the same time provides a way into the javascript runtime from the outside.</p>
+<p>In general, the view of each device being a neutral player in the network is incorrect. In practice, the internet is (now) made up of addressable servers in the center, and many subordinate clients in the periphery. More about this soon, in the episode about Network Neutrality.</p>
+
+<p>I hope all the links to wikipedia articles give enough ways into further reading about this vast and important area of engineering. At least when thinking about unhosted web apps, it's important to understand a little bit about routing and addressability, and to know that the internet is actually not much more than a stack of hacks, and each layer has its flaws, but we make it work. And as always, <a href="https://groups.google.com/forum#!forum/unhosted">comments welcome</a>!</p>
 
       <p>The next episode will appear on Tuesday 30 April, 2013.</p>    </article>      
 	
