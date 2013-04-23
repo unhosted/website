@@ -20,7 +20,7 @@ module.exports = {
   "Decentralize" : {
     "cryptography": "Cryptography",
     "dht": "Distributed hash tables",
-    "networking": "Networking with IP, BGP, DNS, HTTP, TLS, and NAT"
+    "internet": "BGP, IP, DNS, HTTP, TLS, and NAT"
 /* - adventures 19: Persona, OpenID, SAML and WebID
 - adventures 20: Webfinger, OAuth, CORS and REST
 - adventures 21: WebIntents
