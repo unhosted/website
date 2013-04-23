@@ -27,7 +27,8 @@ module.exports = {
 - adventures 22: freedombox
 - adventures 23: apptorrent
 - adventures 24: CouchDB
-- adventures 25: Decentralized reputation systems*/
+- adventures xx: Network neutrality
+- adventures 25: Decentralized reputation systems */
   },
   "Domains": {
 /*- adventures 26: xmpp
