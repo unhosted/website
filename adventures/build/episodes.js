@@ -20,15 +20,15 @@ module.exports = {
   "Decentralize" : {
     "cryptography": "Cryptography",
     "dht": "Distributed hash tables",
-    "internet": "BGP, IP, DNS, HTTP, TLS, and NAT"
-/* - adventures 19: Persona, OpenID, SAML and WebID
-- adventures 20: Webfinger, OAuth, CORS and REST
-- adventures 21: WebIntents
-- adventures 22: freedombox
-- adventures 23: apptorrent
-- adventures 24: CouchDB
-- adventures xx: Network neutrality
-- adventures 25: Decentralized reputation systems */
+    "internet": "BGP, IP, DNS, HTTP, TLS, and NAT",
+    "sso": "Persona, OpenID, SAML and WebID",
+    "remotestorage-01": "Webfinger, OAuth, CORS and REST",
+    "webintents": "WebIntents",
+    "freedombox": "freedombox",
+    "apptorrent": "apptorrent",
+    "couchdb": "CouchDB",
+    "network neutrality": "Network neutrality",
+    "reputation": "Decentralized reputation systems"
   },
   "Domains": {
 /*- adventures 26: xmpp
