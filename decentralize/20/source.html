@@ -17,7 +17,7 @@ First, we need to log in to many different servers, and managing all those crede
 <h3>Client-side master sessions</h3>
 <p>A simple solution for this is to store a "master session" on the client device, which can give access to an unlimited number of remote server sessions.</p>
 <p><a href="http://www.w3.org/wiki/WebID">WebID</a> is based on this idea: you create an asymmetric key pair inside your browser profile on your favorite
-client device, and use that to establish remote sessions at the servers where you that support WebID. The same setup is often used for ssh, git, and other
+client device, and use that to establish remote sessions at servers that support WebID. The same setup is often used for ssh, git, and other
 protocols that support asymmetric cryptography.</p>
 <p>But this also brings us to the second problem: we increasingly want to log in <em>from</em> many different clients. You can link your account on a
 client device to your remote accounts on thirty different services, but then you can access your remote accounts only from that one client device.</p>
@@ -27,10 +27,12 @@ allow you to synchronize your laptop's master session between for
 instance your laptop and your smartphone. I'm not sure whether any of them also sync your client-side SSL certificates, but let's imagine they do.
 For some people this is a great solution, because you can use multiple client devices, and always have seamless access to all your server-side accounts
 and sessions. Also, having your master session synchronized over multiple client devices, automatically acts as a backup of all these credentials.</p>
-<p>But whether or not this is a good enough way to organize your decentralized user accounts, depends heavily on your usage patterns.
-A lot of people (for instance the kids in Bali) don't own their own client device. They just use a random computer at an internet cafe. Also, many people
+<p>But whether or not this is a good enough way to organize your decentralized user accounts, heavily depends on your usage patterns.
+A lot of people (for instance the kids at village internet cafes
+  in rural Bali) don't own their own client device. They just use a random public computer when they need to access any of their server-side accounts.
+  Also, many people
 want to be able to use a random client device to access their stuff under special circumstances, for instance, when travelling. This is where the client-side
-master sessions breaks down as a viable solution.</p>
+master session breaks down as a viable solution.</p>
 
 <h3>Federated login</h3>
 <p>If you want to have less different credentials for many servers where you have accounts, but you don't want to rely on any particular client device or
