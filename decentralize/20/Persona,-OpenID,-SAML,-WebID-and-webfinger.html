@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="description" content="weekly handbook about unhosted web apps" />
+    <title>unhosted web apps 20: identity</title>
+    <link rel="stylesheet" href="/adventures/hljs/default.min.css" />
+    <link rel="hub" href="http://pubsubhubbub.appspot.com/"/>
+    <link rel="updates alternate" type="application/atom+xml" href="/adventures/feed.atom" />
+    <link rel="author" type="text/html" href="https://michielbdejong.com/"/>
+
+    <script src="/adventures/hljs/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <link rel="stylesheet" href="/adventures/adventures.css" />
+  </head>
+
+  <body>
+    <article>
+      <header>
+        <h1>unhosted web apps</h1>
+        <h2>freedom from web 2.0's monopoly platforms</h2>
+      </header>
+      
+      <h2>20. Persona, OpenID, SAML, WebID and webfinger</h2>
+
+<!-- identity: Webfinger, Persona, WebID, OpenID, SAML -->
+<h3>Virtualization of sessions</h3>
+<p>A sound system can usually be operated by whoever has physical access to it. This is a very simple system which humans understand well. If you
+want only the DJ to play music, then you just construct a physical DJ booth, and people naturally sense that they're not allowed to enter it, or to
+lean over the table from the other side. For gaming consoles and PCs this can also still work. Laptops usually have a password-protected lock screen,
+which means a thief of the physical object can't access the data on there. And shared computers will have multiple user accounts, with or without
+admin (root) access to the device's configuration.</p>
+<p>This means that a single device often already provides a concept of accounts and sessions: a session is one user currently using the device, and
+during such a session, the user has unemcumbered access both to the device's capabilities, and to that user's own data. A session is started by providing
+some sort of account credentials, and exists for a finite contiguous timespan.</p>
+<p>When you connect computers with each other into a network, all of this becomes immensely more complicated. First of all, physical access is no longer
+needed to open a session on a device, and largely because of this, there can be multiple sessions active simultaneously on the same device.</p>
+<p>Most networking protocols provide a way to establish such remote sessions. This is sufficient if a user habitually uses the same client device to log
+in to the same server device. But the virtualization and decentralization of applications and services we use in everyday life introduces two problems.
+First, we need to log in to many different servers, and managing all those credentials becomes a complicated task.</p>
+
+<h3>Client-side master sessions</h3>
+<p>A simple solution for this is to store a "master session" on the client device, which can give access to an unlimited number of remote server sessions.</p>
+<p><a href="http://www.w3.org/wiki/WebID">WebID</a> is based on this idea: you create an asymmetric key pair inside your browser profile on your favorite
+client device, and use that to establish remote sessions at the servers where you that support WebID. The same setup is often used for ssh, git, and other
+protocols that support asymmetric cryptography.</p>
+<p>But this also brings us to the second problem: we increasingly want to log in <em>from</em> many different clients. You can link your account on a
+client device to your remote accounts on thirty different services, but then you can access your remote accounts only from that one client device.</p>
+<p>A first step to solving this is to "sync" devices with each other.
+<a href="https://en.wikipedia.org/wiki/Comparison_of_browser_synchronizers">Browser synchronizers</a> like Firefox Sync
+allow you to synchronize your laptop's master session between for
+instance your laptop and your smartphone. I'm not sure whether any of them also sync your client-side SSL certificates, but let's imagine they do.
+For some people this is a great solution, because you can use multiple client devices, and always have seamless access to all your server-side accounts
+and sessions. Also, having your master session synchronized over multiple client devices, automatically acts as a backup of all these credentials.</p>
+<p>But whether or not this is a good enough way to organize your decentralized user accounts, depends heavily on your usage patterns.
+A lot of people (for instance the kids in Bali) don't own their own client device. They just use a random computer at an internet cafe. Also, many people
+want to be able to use a random client device to access their stuff under special circumstances, for instance, when travelling. This is where the client-side
+master sessions breaks down as a viable solution.</p>
+
+<h3>Federated login</h3>
+<p>If you want to have less different credentials for many servers where you have accounts, but you don't want to rely on any particular client device or
+  set of client devices, then federated login is another possible solution. For instance, if you have your own server, then you can create your master
+  session on there, and use it as a
+  <a hrer="http://blog.industrialdefender.com/?p=612">jump box</a>, so that you can reach your jump box from any client device, and from there jump to 
+  any other server you may need.</p>
+<p>Application providers could provide free jump box functionality to all their users, and that way they would effectively
+  be "federated": you promote one your remote accounts to become the master account from which all your other accounts are reachable.</p>
+<p>The server that is in the middle, in the jump box role, is then seen to provide "identity": you log in to control an imaginary puppet on that server,
+  and that puppet (your online identity) then logs into the eventual session you want to use. Through clever tricks it's even possible to use the intermediate
+  server only during the establishment of trust between the client and the application server, and not throughout the duration of the remote session.
+  This is why such a federated jump box service is also known as an identity provider.</p>
+<p>If all servers where you want to establish remote sessions support
+  <a href="https://en.wikipedia.org/wiki/OpenID">OpenID</a>, then you can promote one of these servers to your identity provider, and use the trust between
+  these servers to log in with that identity.</p>
+<p>Unfortunately many servers do not provide OpenID, when they do they often only accept a certain whitelist of identity providers, and the process of using
+  OpenID to log in on a website is confusing and cumbersome, which in turn has hindered adoption.</p>
+<p>Native <a href="https://duckduckgo.com/Mozilla_Persona">Persona</a> with a primary identity provider is better than OpenID in its user interface, because it
+  uses the browser chrome to transport trust between two open browser tabs. In case none of your remote accounts are Persona primaries, there is also a
+  centralized secondary identity provider which allows you to create an identity account, bootstrapped from your email account.</p>
+<p>In fact, the way Persona is presented to the user, the assumption is that you will your main email address as your online identity. This makes sense because
+  a lot of online services provide email-based password resets, which already turns your primary email adress into your de facto identity provider.</p>
+<p>Within enterprise intranets, services are often linked together using <a href="https://en.wikipedia.org/wiki/Security_Assertion_Markup_Language">SAML</a>,
+  which is a well-established framework for federated login, but which was designed for closed ecosystems instead of open ones, so that makes it more suitable
+  for use on intranets than for use on the internet as a whole.</p>
+
+<h3>Own your identity</h3>
+<p>In practice, at the time of writing, Facebook Connect is probably the most popular remote login scheme. It is proprietary and centralized, and together with
+  the Facebook Like button, it gives Facebook incredible amounts of power over the web as a whole. Some other application providers provide comparable niche
+  schemes, like logging in with Twitter and logigng in with Github. Many relying parties seem to have replaced their "log in with OpenID" button with a
+  "log in with Google" button.</p>
+<p>This is a big problem, of course. As I already emphasized in previous episodes, your identity should rely directly on a DNS domain name that you own.</p>
+<p>This also allows you to host your own public profile, with some basic public information about yourself, as a web page.
+  At the same time you can then use <a href="https://en.wikipedia.org/wiki/Webfinger">Webfinger</a> to provide a machine-readable version of that same
+  public profile page. And of course, you should add email hosting to your domain name, and become your own OpenID provider, as well as your own Persona provider,
+  on your own DNS domain name.</p>
+<p>That is the only proper way to deal with identity on the web: don't outsource your identity to Facebook or Google, own it yourself!</p>
+
+<h3>And the ultimate solution...: don't log in!</h3>
+<p>All this talk about logging in to hosted sessions! Disgusting! ;) Our goal with remoteStorage, Sockethub, unhosted web apps, and the
+  <a href="http://nobackend.org/">noBackend</a> movement in general, is of course to decentralize applications away from specific application servers, meaning
+  you don't have to log in to them at all.</p>
+<p>When you use an unhosted web app, you do not log in to the application. Instead you <em>connect</em> the application, which runs client-side, to your
+  own <em>per-user server</em>. This completely eradicates hosted applications, and with it the problem of logging in to many different hosted applications.</p>
+<p>Identity is not a problem in unhosted applications: there are no per-application sessions, only per-user session. Still, I wanted to dedicate an episode
+  to it, since it's an important background topic, and we often get the question "how do unhosted web apps interact with Persona". So now you know.
+  The answer is: they don't have the problem that Persona solves. :)</p>
+<p><a href="https://groups.google.com/forum#!forum/unhosted">comments welcome!</a></p>
+      <p>The next episode will appear on Tuesday 7 May, 2013.</p>    </article>      
+	
+    <div class="logo">
+      <img src="../../img/island-color.png" />
+    </div>
+    
+    <nav>
+      <div>
+
+<h4>Overview:</h4>
+        <p> i. <a href="/">definition</a></p>
+        <p> ii. <a href="http://remotestorage.io/integrate">getting started</a></p>
+        <p> iii. <a href="/apps/">example apps</a></p>
+        <p> iv. <a href="/people/">people</a></p>
+        <p> v. <a href="/events/">events</a></p>
+        <p> vi. <a href="/tools/">dev tools</a></p>
+        <p> vii. <a href="https://groups.google.com/forum/#!forum/unhosted">forum</a></p>
+
+<h4>Adventures:</h4>
+        <p> 1. <a href="/adventures/1/Personal-servers-and-unhosted-web-apps.html">intro</a></p>
+        <p> 2. <a href="/adventures/2/An-unhosted-editor.html">editor</a></p>
+        <p> 3. <a href="/adventures/3/Setting-up-your-personal-server.html">server</a></p>
+        <p> 4. <a href="/adventures/4/WebSockets.html">WebSockets</a></p>
+        <p> 5. <a href="/adventures/5/Facebook-and-Twitter-from-nodejs.html">social</a></p>
+        <p> 6. <a href="/adventures/6/Controlling-your-server-over-a-WebSocket.html">webshell</a></p>
+        <p> 7. <a href="/adventures/7/Adding-remote-storage-to-unhosted-web-apps.html">remoteStorage</a></p>
+        <p> 8. <a href="/adventures/8/Collecting-and-organizing-your-data.html">your data</a></p>
+        <p> 9. <a href="/adventures/9/Sending-and-receiving-email-from-unhosted-web-apps.html">email</a></p>
+        <p> 10. <a href="/adventures/10/Linking-things-together-on-the-world-wide-web.html">web linking</a></p>
+        <p> 11. <a href="/adventures/11/App-hosting.html">app hosting</a></p>
+        <p> 12. <a href="/adventures/12/App-discovery.html">app discovery</a></p>
+        <p> 13. <a href="/adventures/13/Dealing-with-users-in-unhosted-web-apps.html">users</a></p>
+        <p> 14. <a href="/adventures/14/Peer-to-peer-communication.html">p2p</a></p>
+        <p> 15. <a href="/adventures/15/Unhosted-web-apps-and-OAuth.html">unhosted oauth</a></p>
+        <p> 16. <a href="/adventures/16/Our-plan-to-save-the-web.html">save the web</a></p>
+
+<h4>Decentralize:</h4>
+        <p> 17. <a href="/decentralize/17/Cryptography.html">cryptography</a></p>
+        <p> 18. <a href="/decentralize/18/Distributed-hash-tables.html">dht</a></p>
+        <p> 19. <a href="/decentralize/19/BGP,-IP,-DNS,-HTTP,-TLS,-and-NAT.html">internet</a></p>
+        <p><strong>20. identity</strong></p>
+      </div>
+      
+      <div>
+        <h4 id="follow">Follow:</h4> 
+        <ul>
+          <li style="list-style-image: url('../../img/atom.gif')"><a target="_blank" href="../feed.atom">atom</a></li>
+          <li style="list-style-image: url('../../img/rss2.gif')"><a target="_blank" href="../feed.rss">rss</a></li>
+          <li style="list-style-image: url('../../img/facebook.gif')"><a target="_blank" href="https://www.facebook.com/unhostedwebapps">facebook</a></li>
+          <li style="list-style-image: url('../../img/twitter.png')"><a target="_blank" href="https://twitter.com/unhosted">twitter</a></li>
+          <li style="list-style-image: url('../../img/statusnet.png')"><a target="_blank" href="https://identi.ca/unhosted">identica</a></li>
+          <li style="list-style-image: url('../../img/diaspora.png')"><a target="_blank" href="https://joindiaspora.com/u/unhosted">diaspora</a></li>
+          <li style="list-style-image: url('../../img/mailinglist.jpg')"><a target="_blank" href="https://groups.google.com/forum/#!forum/unhosted">mailing list</a></li>
+          <li style="list-style-image: url('../../img/irc.png')"><a target="_blank" href="http://webchat.freenode.net/?channels=#unhosted">irc channel</a></li>
+        </ul>
+      </div>
+            
+      <div>
+        <h4>Author:</h4>
+        <div class="logo">
+          <img rel="author avatar" src="../../img/michiel.jpg" />
+        </div>
+        <p>
+          <a rel="author" href="https://michielbdejong.com/">Michiel B. de Jong</a>
+        </p>
+      </div>
+      
+      <div>
+        <h4>Supporters:</h4>
+        <p>
+          <a class="logo" href="http://nlnet.nl/">
+            <img src="../../img/nlnet.png" />
+          </a>
+          &nbsp;
+        </p>
+
+        <p>
+          <a class="logo" href="http://wauland.de/">
+            <img src="../../img/wau.png" />
+          </a>
+          &nbsp;
+        </p>
+
+        <p>
+          <a class="logo" href="http://www.gabrielweinberg.com/blog/2012/03/duckduckgo-foss-donations-2011.html">
+            <img src="../../img/duckduckgo.jpg" />
+          </a>
+          &nbsp;
+        </p>
+
+        <p>
+          and <a href="../../thankyou.html">many more</a>&hellip;
+        </p>
+      </div>
+    </nav>
+    
+    <footer>
+      <strong>You can follow</strong>
+      <img src="../../img/twitter.png" /><a target="_blank" href="https://twitter.com/unhosted">@unhosted</a>
+      <strong>on twitter and in</strong>
+      <a href="/adventures/1/Personal-servers-and-unhosted-web-apps.html#follow">many other ways</a><strong>. So stay tuned! :)</strong>
+      </strong>
+    </footer>
+  </body>
+</html>
