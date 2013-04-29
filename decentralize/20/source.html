@@ -38,47 +38,51 @@ master session breaks down as a viable solution.</p>
 <p>If you want to have less different credentials for many servers where you have accounts, but you don't want to rely on any particular client device or
   set of client devices, then federated login is another possible solution. For instance, if you have your own server, then you can create your master
   session on there, and use it as a
-  <a hrer="http://blog.industrialdefender.com/?p=612">jump box</a>, so that you can reach your jump box from any client device, and from there jump to 
-  any other server you may need.</p>
+  <a href="http://blog.industrialdefender.com/?p=612">jump box</a>, a server you can reach from any client device, and from there have your access to 
+  all the other servers you may need to open sessions on.</p>
 <p>Application providers could provide free jump box functionality to all their users, and that way they would effectively
   be "federated": you promote one your remote accounts to become the master account from which all your other accounts are reachable.</p>
 <p>The server that is in the middle, in the jump box role, is then seen to provide "identity": you log in to control an imaginary puppet on that server,
   and that puppet (your online identity) then logs into the eventual session you want to use. Through clever tricks it's even possible to use the intermediate
-  server only during the establishment of trust between the client and the application server, and not throughout the duration of the remote session.
+  server only to establish trust during the <em>session setup</em>
+  between the client and the application server, and not throughout the duration of the remote session.
   This is why such a federated jump box service is also known as an identity provider.</p>
 <p>If all servers where you want to establish remote sessions support
-  <a href="https://en.wikipedia.org/wiki/OpenID">OpenID</a>, then you can promote one of these servers to your identity provider, and use the trust between
-  these servers to log in with that identity.</p>
+  <a href="https://en.wikipedia.org/wiki/OpenID">OpenID</a>, then you can promote one of these servers by making it your identity provider,
+  and use the trust between these servers to log in with that identity.</p>
 <p>Unfortunately many servers do not provide OpenID, when they do they often only accept a certain whitelist of identity providers, and the process of using
-  OpenID to log in on a website is confusing and cumbersome, which in turn has hindered adoption.</p>
+  OpenID to log in on a website is often confusing and cumbersome, which in turn has hindered adoption.</p>
 <p>Native <a href="https://duckduckgo.com/Mozilla_Persona">Persona</a> with a primary identity provider is better than OpenID in its user interface, because it
   uses the browser chrome to transport trust between two open browser tabs. In case none of your remote accounts are Persona primaries, there is also a
   centralized secondary identity provider which allows you to create an identity account, bootstrapped from your email account.</p>
-<p>In fact, the way Persona is presented to the user, the assumption is that you will your main email address as your online identity. This makes sense because
-  a lot of online services provide email-based password resets, which already turns your primary email adress into your de facto identity provider.</p>
+<p>In fact, the way Persona is presented to the user, the assumption is that you will use your main email address
+  as your online identity. This makes sense because
+  a lot of online services provide email-based password resets anyway, which already turns your primary email adress into your de facto identity provider.</p>
 <p>Within enterprise intranets, services are often linked together using <a href="https://en.wikipedia.org/wiki/Security_Assertion_Markup_Language">SAML</a>,
   which is a well-established framework for federated login, but which was designed for closed ecosystems instead of open ones, so that makes it more suitable
   for use on intranets than for use on the internet as a whole.</p>
 
 <h3>Own your identity</h3>
-<p>In practice, at the time of writing, Facebook Connect is probably the most popular remote login scheme. It is proprietary and centralized, and together with
-  the Facebook Like button, it gives Facebook incredible amounts of power over the web as a whole. Some other application providers provide comparable niche
-  schemes, like logging in with Twitter and logigng in with Github. Many relying parties seem to have replaced their "log in with OpenID" button with a
+<p>In practice, at the time of writing, Facebook Connect is probably the most popular cross-origin
+  login scheme. It is proprietary and centralized, and together with
+  the Facebook Like button, it gives Facebook mighty powers over the web as a whole. Some other application providers provide comparable niche
+  schemes, like logging in with Twitter and logging in with Github. Many relying parties seem to have replaced their "log in with OpenID" button with a
   "log in with Google" button.</p>
-<p>This is a big problem, of course. As I already emphasized in previous episodes, your identity should rely directly on a DNS domain name that you own.</p>
+<p>This is a big problem, of course. As I already emphasized in previous episodes, your online identity should derive
+  directly from a DNS domain name that you own.</p>
 <p>This also allows you to host your own public profile, with some basic public information about yourself, as a web page.
   At the same time you can then use <a href="https://en.wikipedia.org/wiki/Webfinger">Webfinger</a> to provide a machine-readable version of that same
-  public profile page. And of course, you should add email hosting to your domain name, and become your own OpenID provider, as well as your own Persona provider,
-  on your own DNS domain name.</p>
+  public profile page. And of course, you should add email hosting
+  to your domain name, and become your own OpenID provider, as well as your own Persona provider, on your own DNS domain name.</p>
 <p>That is the only proper way to deal with identity on the web: don't outsource your identity to Facebook or Google, own it yourself!</p>
 
 <h3>And the ultimate solution...: don't log in!</h3>
-<p>All this talk about logging in to hosted sessions! Disgusting! ;) Our goal with remoteStorage, Sockethub, unhosted web apps, and the
+<p>All this talk about logging in to hosted sessions, disgusting! ;) Our goal with remoteStorage, Sockethub, unhosted web apps, and the
   <a href="http://nobackend.org/">noBackend</a> movement in general, is of course to decentralize applications away from specific application servers, meaning
-  you don't have to log in to them at all.</p>
+  you don't have to log in to an application-specific server at all.</p>
 <p>When you use an unhosted web app, you do not log in to the application. Instead you <em>connect</em> the application, which runs client-side, to your
   own <em>per-user server</em>. This completely eradicates hosted applications, and with it the problem of logging in to many different hosted applications.</p>
-<p>Identity is not a problem in unhosted applications: there are no per-application sessions, only per-user session. Still, I wanted to dedicate an episode
+<p>Identity is not a problem in unhosted applications: there are no per-application sessions, only per-user sessions. Still, I wanted to dedicate an episode
   to it, since it's an important background topic, and we often get the question "how do unhosted web apps interact with Persona". So now you know.
   The answer is: they don't have the problem that Persona solves. :)</p>
 <p><a href="https://groups.google.com/forum#!forum/unhosted">comments welcome!</a></p>
