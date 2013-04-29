@@ -21,7 +21,7 @@ module.exports = {
     "cryptography": "Cryptography",
     "dht": "Distributed hash tables",
     "internet": "BGP, IP, DNS, HTTP, TLS, and NAT",
-    "identity": "Persona, OpenID, SAML, WebID and webfinger",
+    "identity": "Persona, OpenID, SAML, WebID, and Webfinger",
     "origins": "OAuth, CORS, WebIntents",
     "sessions": "REST",
     "freedombox": "freedombox",
