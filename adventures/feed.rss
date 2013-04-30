@@ -13,6 +13,14 @@
     <language>en-us</language>
     <ttl>40</ttl>
     <item>
+      <title>20. Persona, OpenID, SAML, WebID, and Webfinger</title>
+      <description>Episode 20 of Unhosted Adventures</description>
+      <pubDate>2013-04-30T12:00:00.000Z</pubDate>
+      <guid>https://unhosted.org/decentralize/20/Persona,-OpenID,-SAML,-WebID,-and-Webfinger.html</guid>
+      <link>https://unhosted.org/decentralize/20/Persona,-OpenID,-SAML,-WebID,-and-Webfinger.html</link>
+      <georss:point>10.2 104.0</georss:point>
+    </item>
+    <item>
       <title>19. BGP, IP, DNS, HTTP, TLS, and NAT</title>
       <description>Episode 19 of Unhosted Adventures</description>
       <pubDate>2013-04-23T12:00:00.000Z</pubDate>
