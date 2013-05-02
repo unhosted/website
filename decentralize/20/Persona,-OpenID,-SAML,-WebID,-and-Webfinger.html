@@ -42,8 +42,8 @@ First, we need to log in to many different servers, and managing all those crede
 
 <h3>Client-side master sessions</h3>
 <p>A simple solution for this is to store a "master session" on the client device, which can give access to an unlimited number of remote server sessions.</p>
-<p><a href="http://www.w3.org/wiki/WebID">WebID</a> is based on this idea: you create an asymmetric key pair inside your browser profile on your favorite
-client device, and use that to establish remote sessions at servers that support WebID. The same setup is often used for ssh, git, and other
+<p><a href="https://dvcs.w3.org/hg/WebID/raw-file/tip/spec/index-respec.html">WebID-TLS</a> is based on this idea: you create an asymmetric key pair inside your browser profile on your favorite
+client device, and use that to establish remote sessions at servers that support WebID-TLS. The same setup is often used for ssh, git, and other
 protocols that support asymmetric cryptography.</p>
 <p>But this also brings us to the second problem: we increasingly want to log in <em>from</em> many different clients. You can link your account on a
 client device to your remote accounts on thirty different services, but then you can access your remote accounts only from that one client device.</p>
