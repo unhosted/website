@@ -32,8 +32,10 @@ when the user on the client finishes the session. This way, you only have to est
 <p>This week we'll look a bit more closely into this concept, especially in relation to client-side applications. Because web browsers have a (sandboxed) way of retrieving
 source code from a remote server, and then running it client-side, it is possible to establish a session that stays within this sandbox, and does not exist on the server
 that served up the web app.</p>
-<p>This is, in my view, <em>the</em> core concept of unhosted web apps. Sorry we had to get to episode 21 before I bring it up. :)
-With client-side sessions, the server serves up the source code of an application, instead of serving up its user interface.
+<p>This is, in my view, <em>the</em> core concept of unhosted web apps, and the reason I keep nagging about the No Cookie Crew, disabling all cookies
+ by default, with the goal of pushing the web away from server-side sessions, and towards client-side sessions.
+  Sorry we had to get to episode 21 before I bring up its fundamental details. :)</p>
+<p>With client-side sessions, the server serves up the source code of an application, instead of serving up its user interface.
 This means no server-side session is established. The website is served up in a stateless, RESTful way, as static content. But once the web app's html, css, and javascript
 code have reached the client-side, it "comes to life", that is, it starts to behave dynamically.</p>
 <p>Behaving dynamically is of course again a vague term, but it definitely implies that the application's output cannot be mapped one-to-one to the user's latest action.
@@ -44,7 +46,9 @@ frameworks, and it was only in recent years that people started to make the para
 For instance, OAuth did not have a client-side flow before 2010, and the webfinger spec has only mentioned CORS headers since 2011. </p>
 
 <h3>Web app origins</h3>
-<p>Even if the code runs on the client-side, the trust model of the web stay based on origins: depending on the server that hosted the code that has been loaded into
+<p>Even if the code runs on the client-side, the trust model of the web keeps its basis in
+  <a href="https://en.wikipedia.org/wiki/Same_origin_policy#Origin_determination_rules">origins</a>:
+  depending on the server that hosted the code that has been loaded into
 the current browser tab (the 'host', or 'origin' of the web app), it may interact with other pieces of code in the same and other tabs.</p>
 <p>The <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Same_origin_policy_for_JavaScript">same-origin policy</a> describes the exact rules for
 this. For instance, a web app is often not allowed to include <a href="https://blog.mozilla.org/tanvi/2013/04/10/mixed-content-blocking-enabled-in-firefox-23/">mixed content</a>,
