@@ -3,7 +3,19 @@
 <p>Last week we looked at how you can manage your login-identity when you do your computing on multiple servers and/or multiple clients.
 Sessions turned out to play a significant role in this, because they can link the current user on a client to a current user on a server, and remove this link
 when the user on the client finishes the session. This way, you only have to establish trust once, and can then use the remote server without any further login prompts.</p>
-<p>This week we'll look a bit more closely into this concept, especially in relation to client-side applications. whe
+<p>This week we'll look a bit more closely into this concept, especially in relation to client-side applications. Because web browsers have a (sandboxed) way of retrieving
+source code from a remote server, and then running it client-side, it is possible to establish a session that stays within this sandbox, and does not exist on the server
+that served up the web app.</p>
+<p>This is, in my view, <em>the</em> core concept of unhosted web apps. Sorry we had to get to episode 21 before I bring it up. :)
+With client-side sessions, the server serves up the source code of an application, instead of serving up its user interface.
+This means no server-side session is established. The website is served up in a stateless, RESTful way, as static content. But once the web app's html, css, and javascript
+code has reached the client-side, it "comes to life", that is, it starts to behave dynamically.</p>
+<p>Behaving dynamically is of course again a vague term, but it definitely implies that the application's output cannot be mapped one-to-one to the user's latest action.
+A rudimentary form of client-side dynamic behavior is for instance a <code>textarea</code> element that builds up a text in response to consecutive keystrokes. Unless
+the app puts the entire current state into the URL, the app has "client-side state", and its behavior can be called dynamic.</p>
+<p>When there is no server-side session, a lot of things change. Most web developers have formed their brain by thinking in terms of the LAMP stack and similar server-side
+frameworks, and it was only in recent years that people started to make the paradigm shift to thinking about client-side sessions.
+For instance, OAuth did not have a client-side flow before 2010, and the webfinger spec has only mentioned CORS headers since 2011. </p>
 <h3>Web app origins</h3>
 <p></p>
 
