@@ -15,7 +15,7 @@
         var elts= document.getElementsByTagName('a');
         for(var i=0; i<elts.length; i++) {
           if(elts[i].getAttribute('data-href')) {
-            elts[i].href=elts[i].getAttribute('data-href')+'?remotestorage='+userAddress;
+            elts[i].href=elts[i].getAttribute('data-href')+'#remotestorage='+userAddress;
           }
         }
         //this will fail if cookies are disabled:
@@ -25,7 +25,7 @@
   </head>
   <body>
     <article>
-      <h3>* I have remoteStorage: <input id="rs" placeholder="user@provider" onchange="updateLinks();"/> (for instance 'joe27@5apps.com')</h3>
+      <h3>* I have remoteStorage: <input id="rs" placeholder="user@provider" onkeyup="updateLinks();"/> (for instance 'joe27@5apps.com')</h3>
       <h3>* I want remoteStorage from: <a href="https://5apps.com/users/sign_up" target="_blank">5apps.com</a></h3>
       <h3>* I want remoteStorage from: <a href="https://heahdk.net/users/new" target="_blank">heahdk.net</a></h3>
       <ul class="icons">
