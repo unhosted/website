@@ -22,7 +22,7 @@ module.exports = {
     "dht": "Distributed hash tables",
     "internet": "BGP, IP, DNS, HTTP, TLS, and NAT",
     "identity": "Persona, OpenID, SAML, WebID, and Webfinger",
-    "client-side sessions": "origins, OAuth, and WebIntents",
+    "sessions": "origins, OAuth, and WebIntents",
     "network neutrality": "Network neutrality",
     "freedombox": "freedombox, home-hosting, anonymity, freedom of expression",
     "data platforms": "CouchDB, tahoe-lafs, bittorrent, Tor, freenet, i2p, ownCloud, mediagoblin, etcetera",
