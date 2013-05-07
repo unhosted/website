@@ -12,13 +12,14 @@
     <script>
       function updateLinks() {
         var userAddress=document.getElementById('rs').value;
-        localStorage.setItem('userAddress', userAddress);
         var elts= document.getElementsByTagName('a');
         for(var i=0; i<elts.length; i++) {
           if(elts[i].getAttribute('data-href')) {
             elts[i].href=elts[i].getAttribute('data-href')+'?remotestorage='+userAddress;
           }
         }
+        //this will fail if cookies are disabled:
+        localStorage.setItem('userAddress', userAddress);
       }
     </script>
   </head>
@@ -87,6 +88,7 @@
   </body>
   <script>
     if(localStorage.getItem('userAddress')) {
+      //this will fail if cookies are disabled:
       document.getElementById('rs').value=localStorage.getItem('userAddress');
     }
   </script>
