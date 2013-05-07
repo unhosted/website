@@ -90,6 +90,7 @@
     if(localStorage.getItem('userAddress')) {
       //this will fail if cookies are disabled:
       document.getElementById('rs').value=localStorage.getItem('userAddress');
+      updateLinks();
     }
   </script>
 </html>
