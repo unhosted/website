@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf8" />
+    <title>Unhosted Home</title>
+    <style>
+      article .icons li { display: inline; float: left; text-align: center; color: #666; margin: 0px 0px 40px 0px }
+      article .icons li a { margin: 16px; color: #666 }
+      article .icons li p a { margin: 0px }
+      article .icons li a img { color: #E0E0E0; margin: 1px auto; border-style: solid; border-radius: 8px; box-shadow: 0 0 1em #D0D0D0 }
+    </style>
+    <script>
+      function updateLinks() {
+        var userAddress=document.getElementById('rs').value;
+        var elts= document.getElementsByTagName('a');
+        for(var i=0; i<elts.length; i++) {
+          if(elts[i].getAttribute('data-href')) {
+            elts[i].href=elts[i].getAttribute('data-href')+'?remotestorage='+userAddress;
+          }
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <article>
+      <h3>* I have remoteStorage: <input id="rs" placeholder="user@provider" onchange="updateLinks();"/> (for instance 'joe27@5apps.com')</h3>
+      <h3>* I want remoteStorage from: <a href="https://5apps.com/users/sign_up" target="_blank">5apps.com</a></h3>
+      <h3>* I want remoteStorage from: <a href="https://heahdk.net/users/new" target="_blank">heahdk.net</a></h3>
+      <ul class="icons">
+        <li> <a href="http://litewrite.net/" data-href="http://litewrite.net/"><img src="/apps/litewrite.png" /></a>
+          <p><a href="http://litewrite.net/" data-href="http://litewrite.net/">litewrite</a></p><p></p>
+          <p><a href="../tools/"><img src="/apps/uses-remotestorage.png" /><img src="/apps/uses-5apps.png" /></a></p> </li>
+        <li> <a href="https://ghost-vcuculo.5apps.com/" data-href="https://ghost-vcuculo.5apps.com/"><img src="/apps/ghost.png" /></a>
+          <p><a href="https://ghost-vcuculo.5apps.com/" data-href="https://ghost-vcuculo.5apps.com/">gHost</a></p>
+          <p><a href="../tools/"><img src="/apps/uses-remotestorage.png" /><img src="/apps/uses-5apps.png" /></a></p> </li>
+        <li> <a href="http://unhostedtunes.hellacoders.com/" data-href="http://unhostedtunes.hellacoders.com/"><img src="/apps/tunes.png" /></a>
+          <p><a href="http://unhostedtunes.hellacoders.com/" data-href="http://unhostedtunes.hellacoders.com/">tunes</a></p>
+          <p><a href="../tools/"><img src="/apps/uses-remotestorage.png" /></a></p> </li>
+        <li> <a href="https://unhosted-time-tracker-nilclass.5apps.com/" data-href="https://unhosted-time-tracker-nilclass.5apps.com/"><img src="/apps/time.png" /></a>
+          <p><a href="https://unhosted-time-tracker-nilclass.5apps.com/" data-href="https://unhosted-time-tracker-nilclass.5apps.com/">time</a></p><p></p>
+          <p><a href="../tools/"><img src="/apps/uses-remotestorage.png" /><img src="/apps/uses-5apps.png" /></a></p> </li>
+        <li> <a href="http://tantaman.github.com/Strut/" data-href="http://tantaman.github.com/Strut/"><img src="/apps/strut.png" /></a>
+          <p><a href="http://tantaman.github.com/Strut/" data-href="http://tantaman.github.com/Strut/">strut</a></p></li>
+        <li> <a href="https://grouptabs-xmartin.5apps.com/" data-href="https://grouptabs-xmartin.5apps.com/"><img src="/apps/grouptabs.png" /></a>
+          <p><a href="https://grouptabs-xmartin.5apps.com/" data-href="https://grouptabs-xmartin.5apps.com/">grouptabs</a></p>
+          <p><a href="../tools/"><img src="/apps/uses-remotestorage.png" /><img src="/apps/uses-5apps.png" /></a></p> </li>
+        <li> <a href="https://vidmarks.5apps.com/" data-href="https://vidmarks.5apps.com/"><img src="/apps/vidmarks.png" /></a>
+          <p><a href="https://vidmarks.5apps.com/" data-href="https://vidmarks.5apps.com/">vidmarks</a></p><p></p>
+          <p><a href="../tools/"><img src="/apps/uses-remotestorage.png" /><img src="/apps/uses-5apps.png" /></a></p> </li>
+        <li> <a href="http://svg-edit.googlecode.com/svn/branches/2.6/editor/svg-editor.html"><img src="/apps/svg-edit.png" /></a>
+          <p><a href="http://svg-edit.googlecode.com/svn/branches/2.6/editor/svg-editor.html">svg-edit</a></p></li>
+        <li> <a href="https://remotestorage-browser-nilclass.5apps.com/" data-href="https://remotestorage-browser-nilclass.5apps.com/"><img src="/apps/browser.png" /></a>
+          <p><a href="https://remotestorage-browser-nilclass.5apps.com/" data-href="https://remotestorage-browser-nilclass.5apps.com/">browser</a></p><p></p>
+          <p><a href="../tools/"><img src="/apps/uses-remotestorage.png" /><img src="/apps/uses-5apps.png" /></a></p> </li>
+        <li> <a href="https://music-michiel.5apps.com/" data-href="https://music-michiel.5apps.com/"><img src="/apps/music.png" /></a>
+          <p><a href="https://music-michiel.5apps.com/" data-href="https://music-michiel.5apps.com/">music</a></p><p></p>
+          <p><a href="../tools/"><img src="/apps/uses-remotestorage.png" /><img src="/apps/uses-5apps.png" /></a></p> </li>
+        <li> <a href="https://myfavoritedrinks.5apps.com/" data-href="https://myfavoritedrinks.5apps.com/"><img src="/apps/drinks.png" /></a>
+          <p><a href="https://myfavoritedrinks.5apps.com/" data-href="https://myfavoritedrinks.5apps.com/">drinks</a></p><p></p>
+          <p><a href="../tools/"><img src="/apps/uses-remotestorage.png" /><img src="/apps/uses-5apps.png" /></a></p> </li>
+        <li> <a href="https://todo-mvc-michiel.5apps.com/labs/architecture-examples/remotestorage/" data-href="https://todo-mvc-michiel.5apps.com/labs/architecture-examples/remotestorage/"><img src="/apps/todo.png" /></a>
+          <p><a href="https://todo-mvc-michiel.5apps.com/labs/architecture-examples/remotestorage/" data-href="https://todo-mvc-michiel.5apps.com/labs/architecture-examples/remotestorage/">todo</p></a>
+          <p><a href="../tools/"><img src="/apps/uses-remotestorage.png" /><img src="/apps/uses-5apps.png" /></a></p> </li>
+        <li> <a href="https://dspace-nilclass.5apps.com/" data-href="https://dspace-nilclass.5apps.com/"><img src="/apps/dspace.png" /></a>
+          <p><a href="https://dspace-nilclass.5apps.com/" data-href="https://dspace-nilclass.5apps.com/">dspace-client</a></p><p></p>
+          <p><a href="../tools/"><img src="/apps/uses-remotestorage.png" /><img src="/apps/uses-5apps.png" /></a></p> </li>
+        <li> <a href="http://www.tiddlywiki.com/"><img src="/apps/tiddlywiki.png" /></a>
+          <p><a href="http://www.tiddlywiki.com/">TiddlyWiki</a></p></li>
+      </ul>
+      <h3 style="clear:both">for geeks:</h3>
+      <ul class="icons">
+        <li> <a href="https://editor-michiel.5apps.com/" data-href="https://editor-michiel.5apps.com/"><img src="/apps/editor.png" /></a>
+          <p><a href="https://editor-michiel.5apps.com/" data-href="https://editor-michiel.5apps.com/">editor</a></p><p></p>
+          <p><a href="../tools/"><img src="/apps/uses-remotestorage.png" /><img src="/apps/uses-5apps.png" /></a></p> </li>
+        <li> <a href="http://social.michiel.5apps.com/" data-href="http://social.michiel.5apps.com/"><img src="/apps/social.png" /></a>
+          <p><a href="http://social.michiel.5apps.com/" data-href="http://social.michiel.5apps.com/">social</a></p><p></p>
+          <p><a href="../tools/"><img src="/apps/uses-sockethub.png" /><img src="/apps/uses-5apps.png" /></a></p> </li>
+        <li> <a href="http://email.michiel.5apps.com/" data-href="http://email.michiel.5apps.com/"><img src="/apps/email.png" /></a>
+          <p><a href="http://email.michiel.5apps.com/" data-href="http://email.michiel.5apps.com/">email</a></p><p></p>
+          <p><a href="../tools/"><img src="/apps/uses-sockethub.png" /><img src="/apps/uses-5apps.png" /></a></p> </li>
+        <li> <a href="https://smarker-nilclass.5apps.com/" data-href="https://smarker-nilclass.5apps.com/"><img src="/apps/smarkers.png" /></a>
+          <p><a href="https://smarker-nilclass.5apps.com/" data-href="https://smarker-nilclass.5apps.com/">smarkers</a></p><p></p>
+          <p><a href="../tools/"><img src="/apps/uses-remotestorage.png" /><img src="/apps/uses-5apps.png" /></a></p> </li>
+      </ul>
+    </article>
+  </body>
+</html>
