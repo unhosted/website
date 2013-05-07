@@ -24,7 +24,7 @@
       
       <h2>21. Client-side sessions, origins, browser tabs, and WebIntents</h2>
 
-<!-- sessions: origins, OAuth, and WebIntents -->
+<!-- sessions: client-side sessions, origins, browser tabs, and WebIntents -->
 <h3>Client-side sessions</h3>
 <p>Last week we looked at how you can manage your login-identity when you do your computing on multiple servers and/or multiple clients.
 Sessions turned out to play a significant role in this, because they can link the current user on a client to a current user on a server, and remove this link
@@ -57,9 +57,33 @@ the <a href="https://developer.mozilla.org/en-US/docs/HTTP/X-Frame-Options">X-Fr
   <a href="javascript:location='data:text/html,%3Cscript%3Ealert(location.host)%3B%3C%2Fscript%3E'">this one</a> will execute parent-less,
   with the empty string as its origin, because it was encapsulated into a redirection.</p>
 <p>Another way to reach the empty origin from a bookmarklet is to become a hyperlink and click yourself. :)
-  Don't try this at home though, I'm only mentioning this for entertainment value. In general, your unhosted web apps should always have a unique URL that starts with
+  Don't try these things at home though, I'm only mentioning this for entertainment value. In general, your unhosted web apps should always have a unique URL that starts with
   <code>https://</code>.</p>
 
+<h3>Browser tabs</h3>
+<p>As the browser starts to replace some of the roles of the operating system (mainly, the window manager), it becomes more and more likely that we want the app that runs
+in one tab to interact with an app that runs in another one. Or, an "in-tab dance" may be necessary: App 1 redirects to app 2, and app 2 redirects back to app 1.
+  OAuth is based on this concept, as we've already discussed in <a href="https://unhosted.org/adventures/15/Unhosted-web-apps-and-OAuth.html">episode 15</a>. We use OAuth's
+  in-tab dance in the <a href="http://remotestorage.io/integrate/">remoteStorage widget</a>, to connect an unhosted web app with the user's remote storage provider.
+  Another example is when opening an app from an apps launch screen, like for instance <a href="https://unhosted.org/apps/">https://unhosted.org/apps/</a>. Such a launch
+  screen eventually replaces the 'Start' menu of your window manager, or the home screen of your smart phone.</p>
+<p>The user experience of opening a new tab, and of performing
+  in-tab dances, is always a bit clumsy. Browser tabs are not as versatile on a
+  client device as native citizens of the windows manager, mainly because of how they are sandboxed. The barrier for opening a URL is lower than the barrier for installing
+a native application, and a lot of UX research is currently going into how to let a user decide and understand the difference between system apps that have elevated
+  privileges and sandboxed apps that should not be able to exert any significant lasting effects on your device.</p>
+<p>A prime example of this is native support for Mozilla Persona in browsers: the browser takes over the role of managing the single sign-on, which is the main point
+  where native Persona is fundamentally more powerful than OpenID.</p>
+
+<h3>WebIntents</h3>
+<p>Using redirects to implement interaction between browser tabs is not only clumsy because of how the result looks, but also because of the difficulties of apps
+  discovering each other. This can be resolved with <a href="http://webintents.org/">WebIntents</a>.
+  First, app 2 (the app that needs to be opened) tells the browser that it can handle a certain type of intents. Then, app 1 only needs to tell the browser that it wants
+  an intent of a certain type to be handled. The browser then takes on the task of tracking which app can handle what.</p>
+<p>Most of this is all still research in progress, and it brings up a lot of questions about what "installing a web app" means in terms of privileges. We may at some point
+  use WebIntents to improve the "connect your remote storage" experience of the remoteStorage widget, but for now this is definitely an area in which the web still
+  lags behind on "other" operating systems.</p>
+  
 <p><a href="https://groups.google.com/forum/#!forum/unhosted">comments welcome!</a></p>
 
       <p>The next episode will appear on Tuesday 14 May, 2013.</p>    </article>      
