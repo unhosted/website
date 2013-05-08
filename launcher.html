@@ -12,14 +12,17 @@
     <script>
       function updateLinks() {
         var userAddress=document.getElementById('rs').value;
-        var elts= document.getElementsByTagName('a');
+        var elts=document.getElementsByTagName('a');
+        var newtab=document.getElementById('newtab').checked;
         for(var i=0; i<elts.length; i++) {
           if(elts[i].getAttribute('data-href')) {
-            elts[i].href=elts[i].getAttribute('data-href')+'#remotestorage='+userAddress;
+            elts[i].href=elts[i].getAttribute('data-href')+(userAddress.length?'#remotestorage='+userAddress:'');
           }
+          elts[i].target= (newtab?'_blank':'');
         }
         //this will fail if cookies are disabled:
         localStorage.setItem('userAddress', userAddress);
+        localStorage.setItem('newtab', newtab);
       }
     </script>
   </head>
@@ -31,6 +34,7 @@
         In all other apps you will have to input your user address a second time, until this is fixed)</p>
       <h3>* I want remoteStorage from: <a href="https://5apps.com/users/sign_up" target="_blank">5apps.com</a></h3>
       <h3>* I want remoteStorage from: <a href="https://heahdk.net/users/new" target="_blank">heahdk.net</a></h3>
+      <p><input type="checkbox" onchange="updateLinks();" id="newtab"/> launch apps in a new tab</p>
       <ul class="icons">
         <li> <a href="http://litewrite.net/" data-href="http://litewrite.net/"><img src="/apps/litewrite.png" /></a>
           <p><a href="http://litewrite.net/" data-href="http://litewrite.net/">litewrite</a></p><p></p>
@@ -93,7 +97,8 @@
     if(localStorage.getItem('userAddress')) {
       //this will fail if cookies are disabled:
       document.getElementById('rs').value=localStorage.getItem('userAddress');
-      updateLinks();
     }
+    document.getElementById('newtab').checked=localStorage.getItem('newtab');
+    updateLinks();
   </script>
 </html>
