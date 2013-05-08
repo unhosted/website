@@ -98,7 +98,7 @@
       //this will fail if cookies are disabled:
       document.getElementById('rs').value=localStorage.getItem('userAddress');
     }
-    document.getElementById('newtab').checked=localStorage.getItem('newtab');
+    document.getElementById('newtab').checked=localStorage.getItem('newtab') === 'true';
     updateLinks();
   </script>
 </html>
