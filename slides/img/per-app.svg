@@ -1,0 +1,16 @@
+<svg width="640" height="480" xmlns="http://www.w3.org/2000/svg">
+ <!-- Created with SVG-edit - http://svg-edit.googlecode.com/ -->
+ <g>
+  <title>Layer 1</title>
+  <text xml:space="preserve" text-anchor="middle" font-family="serif" font-size="24" id="svg_1" y="47" x="128" stroke-width="0" stroke="#000000" fill="#000000">APP 1</text>
+  <text xml:space="preserve" text-anchor="middle" font-family="serif" font-size="24" id="svg_2" y="47" x="215" stroke-width="0" stroke="#000000" fill="#000000">APP 2</text>
+  <text xml:space="preserve" text-anchor="middle" font-family="serif" font-size="24" id="svg_3" y="49" x="312" stroke-width="0" stroke="#000000" fill="#000000">APP 3</text>
+  <text xml:space="preserve" text-anchor="middle" font-family="serif" font-size="24" id="svg_4" y="48" x="410" stroke-width="0" stroke="#000000" fill="#000000">APP 4</text>
+  <text xml:space="preserve" text-anchor="middle" font-family="serif" font-size="24" id="svg_5" y="48" x="503" stroke-width="0" stroke="#000000" fill="#000000">APP 5</text>
+  <rect id="svg_6" height="342" width="66" y="62" x="97" stroke-width="5" stroke="#000000" fill="#000000"/>
+  <rect id="svg_7" height="342" width="66" y="64" x="280" stroke-width="5" stroke="#000000" fill="#000000"/>
+  <rect id="svg_8" height="342" width="66" y="62" x="375" stroke-width="5" stroke="#000000" fill="#000000"/>
+  <rect id="svg_9" height="342" width="66" y="60" x="474" stroke-width="5" stroke="#000000" fill="#000000"/>
+  <rect id="svg_10" height="342" width="66" y="63" x="183" stroke-width="5" stroke="#000000" fill="#000000"/>
+ </g>
+</svg>
