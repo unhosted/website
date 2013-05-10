@@ -34,7 +34,7 @@
         In all other apps you will have to input your user address a second time, until this is fixed)</p>
       <h3>* I want remoteStorage from: <a href="https://5apps.com/users/sign_up" target="_blank">5apps.com</a></h3>
       <h3>* I want remoteStorage from: <a href="https://heahdk.net/users/new" target="_blank">heahdk.net</a></h3>
-      <p><input type="checkbox" onchange="updateLinks();" id="newtab"/> launch apps in a new tab</p>
+      <label><input type="checkbox" onchange="updateLinks();" id="newtab"/> launch apps in a new tab</label>
       <ul class="icons">
         <li> <a href="http://litewrite.net/" data-href="http://litewrite.net/"><img src="/apps/litewrite.png" /></a>
           <p><a href="http://litewrite.net/" data-href="http://litewrite.net/">litewrite</a></p><p></p>
@@ -98,7 +98,7 @@
       //this will fail if cookies are disabled:
       document.getElementById('rs').value=localStorage.getItem('userAddress');
     }
-    document.getElementById('newtab').checked=localStorage.getItem('newtab');
+    document.getElementById('newtab').checked=localStorage.getItem('newtab') === 'true';
     updateLinks();
   </script>
 </html>
