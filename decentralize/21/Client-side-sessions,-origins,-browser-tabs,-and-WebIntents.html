@@ -26,7 +26,8 @@
 
 <!-- sessions: client-side sessions, origins, browser tabs, and WebIntents -->
 <h3>Client-side sessions</h3>
-<p>Last week we looked at how you can manage your login-identity when you do your computing on multiple servers and/or multiple clients.
+<p><a href="../20/Persona,-OpenID,-SAML,-WebID,-and-Webfinger.html">Last week</a>
+  we looked at how you can manage your login-identity when you do your computing on multiple servers and/or multiple clients.
 Sessions turned out to play a significant role in this, because they can link the current user on a client to a current user on a server, and remove this link
 when the user on the client finishes the session. This way, you only have to establish trust once, and can then use the remote server without any further login prompts.</p>
 <p>This week we'll look a bit more closely into this concept, especially in relation to client-side applications. Because web browsers have a (sandboxed) way of retrieving
@@ -53,7 +54,7 @@ the current browser tab (the 'host', or 'origin' of the web app), it may interac
 <p>The <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Same_origin_policy_for_JavaScript">same-origin policy</a> describes the exact rules for
 this. For instance, a web app is often not allowed to include <a href="https://blog.mozilla.org/tanvi/2013/04/10/mixed-content-blocking-enabled-in-firefox-23/">mixed content</a>,
 the <a href="https://developer.mozilla.org/en-US/docs/HTTP/X-Frame-Options">X-Frame-Options</a> header can restrict iframing, and technologies like
-<a href="https://developer.mozilla.org/en-US/docs/DOM/window.postMessage">window.postMessage</a> and
+<a href="https://developer.mozilla.org/en-US/docs/DOM/window.postMessage">window.postMessage</a>,
 <a href="https://developer.mozilla.org/en-US/docs/DOM/Storage">DOM storage</a> and
 <a href="https://developer.mozilla.org/en-US/docs/DOM/Using_web_workers">Web workers</a> are also usually sandboxed by script origin.</p>
 <p>For data URIs, file: URLs and <a href="https://en.wikipedia.org/wiki/Bookmarklet">bookmarklets</a>, you can get into all sorts of edge-cases. For instance,
@@ -61,7 +62,8 @@ the <a href="https://developer.mozilla.org/en-US/docs/HTTP/X-Frame-Options">X-Fr
   <a href="javascript:location='data:text/html,%3Cscript%3Ealert(location.host)%3B%3C%2Fscript%3E'">this one</a> will execute parent-less,
   with the empty string as its origin, because it was encapsulated into a redirection.</p>
 <p>Another way to reach the empty origin from a bookmarklet is to become a hyperlink and click yourself. :)
-  Don't try these things at home though, I'm only mentioning this for entertainment value. In general, your unhosted web apps should always have a unique URL that starts with
+  Don't try these things at home though, I'm only mentioning this for entertainment value. In general, your unhosted web apps should always have a unique origin,
+  that starts with
   <code>https://</code>.</p>
 
 <h3>Browser tabs</h3>
