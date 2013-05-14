@@ -68,11 +68,54 @@ through the web of trust, and in collaborative indexes.</p>
   meat.</p>
 <p>The free technology movement is currently not really able to offer viable alternatives to Google and to Facebook. A lot of projects that try come and go, or don't hit
   the mark, and it sometimes feels like an uphill struggle. But I'm confident that we'll get on top of
-  this again, just like the free-tech alternatives to all parts of the Microsoft stack have eventually matured. Firefox default, DDG, Yaci, Seeks</p>
-
-<h3>Interactive search</h3>
+  this again, just like the free-tech alternatives to all parts of the Microsoft stack have eventually matured. Ironically, one of the main nails in the coffins of the
+  Microsoft monopoly, Firefox, was largely supported with money from the Google monopoly. Placing Google as the default search engine in the branded version of Firefox
+  generated so much revenue that it allowed the project to be as successful as it is today.</p>
+<p>I don't know which part of Google's revenue is caused purely by searchterm-related advertising, and which part is caused by Google tracking its users, but in any case
+  users of Firefox, and users of the web in general, have the option to use a different search engine. The leading non-tracking search engine seems to be
+  DuckDuckGo currently. Although its search results for rare specialist searches are not as good as those of market leader Google, I find that for 95% of the searches I do,
+  it gives me the results I was looking for, which for me is good enough to prefer it over Google. In occasions where you still want to check Google's results, you can add
+  a "!g " bang at the front of the search term, and it will still direct you to a Google results page.</p>
+<p>DuckDuckGo doesn't track you, and also does not currently display any advertising. Instead, it gets its revenue
+<a href="http://www.quora.com/Search-Engines/What-is-DuckDuckGos-business-model">from affiliate sales</a>, which seems to me like a good option for financing
+  freedom-respecting products. I would say it's basically comparable to how Mozilla finances Firefox.</p>
+<p>There are also decentralized search engine projects like <a href="http://www.yacy.net/en/">YaCy</a>, which I'm trying out now, but they have a barrier for use
+  in that you need to install them first.</p>
 
 <h3>Leaking the social graph into the public domain</h3>
-<p>useraddress</p>
-
+<p>Locating information on the web is one thing, but what about contacting other web users? When meeting people in real life, you can exchange phone numbers, email addresses,
+  or personal webpage URLs. Most people who have a personal webpage, have it on Facebook (their profile page). This has lead to a situation where instead of asking
+  "Are you on the web?", many people ask "Are you on Facebook?". There are two reasons for this.</p>
+<p>First of all, of course, the Facebook application allows me to send and receive messages and updates in a namespace-locked way: as a Facebook user, I can only communicate
+  with users whose web presence is on Facebook.</p>
+<p>The second reason is that Facebook's people search only indexes personal web pages within its own namespace, not outside it. This means that if I use Facebook as a
+  social web application, searching for you on the web will fail, unless your webpage is within the Facebook namespace.</p>
+<p>This is of course a shortcoming of the Facebook user search engine, with the effect that people whose personal webpage is outside Facebook are not only harder to
+  communicate with, they are even harder to find.</p>
+<p>And Facebook is not the only namespace-locked user search engine. There's also LinkedIn, Twitter, Google+, and Skype. Searching for a user is a different game from
+  searching for content. The "social graph", that is, the list of all personal web pages, and their inter-relations, is not that big in terms of data size. Let's make a
+  quick calculation: say the full name of a user profile is about 20 characters long on average, with about 5 bits of entropy for each character, then that would require
+  100 bits.</p>
+<p>Let's estimate the same
+  for the profile URL and the avatar URL. If we want to accommodate 1 billion users, then a friend link would occupy about 30 bits, but that would be compressible again
+  because the bulk of a user's connections will be local to them in some way. So to store 150 connections for each
+  user, we would need about 3*100+150*30=4800 bits, less than 1 Kb. That means the Earth's social graph, including 150 friendships per human, plus
+  a full name, photo, and profile URL for each, would occupy about 1 billion Kilobyte, or one Terabyte. That easily fits on a
+  commodity hard disk nowadays.</p>
+<p>A search engine that indexes information on the web needs to be pretty huge in data size and crawler traffic in order to be useful. And the web's hypertext architecture
+  keeps it more or less open as far as findability of information is concerned. In a way, a search engine is just a website that links to other websites.</p>
+<p>But for user search, the situation is a bit different. If you are not findable on the web as a user, then you cannot play along. It's like you are not "on" the web.
+  The current situation is that you have to say which namespace your web presence falls under, in order to be findable. So instead of saying "Yes, I am on the web", we
+end up saying "Yes, I am on Facebook", so that people know that the html page that constitutes my web presence can be found using that specific namespace-locked user
+search engine.</p>
+<p>It is important of course to make sure only publically accessible web pages appear in this database. If you happen to know the private email address of someone, you
+  shouldn't submit it, because that would only lead to a breach of that person's privacy. They would probably start receiving spam pretty soon after as a result.</p>
+<p>Since a lot of websites now put even their public information behind a login page, it may be necessary to log in as a random "dummy user" to see a certain page. That
+  is then still a public page, though. Examples are <a href="https://facebook.com/michielbdejong">my Facebook page</a>, the Quora page I linked to earlier, and although
+  my <a href="https://twitter.com/michielbdejong">Twitter profile page</a> is accessible without login,
+  my <a href="https://twitter.com/michielbdejong/following">list of followees</a> is not. Such pages can however be accessed if you create a dummy account for the
+  occasion, so I still classify them as "public content on the web".</p>
+<p>I think it is our duty as defenders of free technology to build that one-Terabyte database which indexes all public user profiles on the web, independent of whether
+ they appear in one of the big namespaces, or on a user's own Indie Web domain name, and once we have this "dump" of the web's social graph, 
+  we can simply seed it as a bittorrent, and "leak" it into the public domain.</p>
 <p><a href="https://groups.google.com/forum#!forum/unhosted">comments welcome!</a></p>
