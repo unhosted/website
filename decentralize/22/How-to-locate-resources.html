@@ -25,11 +25,11 @@
       <h2>22. How to locate resources</h2>
 
 <!-- search: How to locate resources -->
-<p>Last week, Adrian reminded me that there should be an episode about search. So, here goes! :)</p>
+<p>Last week, Adrian suggested that this blog really needs an episode about search. I totally agree, so here it is! :)</p>
 
 <h3>URLs, DNS, and DNR</h3>
 <p>The DNS system is a distributed (but centralized) database that maps easy-to-remember domain names onto hard-to-remember IP addresses. In the process, it provides
-a level of indirection whereby the IP address of a given service may change while domain name stays the same.</p>
+a level of indirection whereby the IP address of a given service may change while the domain name stays the same.</p>
 <p>These two characteristics make DNS+HTTPS the perfect basis for weaving together hypertext documents. One downside of DNS is that it is subject to attacks from
   (especially) nation state governments. Another is that registering a domain name costs money. The money you pay for a domain name is not so much a contribution to
   the cost of running the world's DNS infrastructure, but more a
@@ -40,16 +40,16 @@ a level of indirection whereby the IP address of a given service may change whil
 <p>Domain names are sufficient for keeping track of the SMTP, FTP, SSH and other accounts you connect to, but to look up general information on the web, you often
   need to connect to servers whose domain name you don't know by heart, or might not even have heard of before starting a given lookup.
   Using just DNS to locate resources on the web was just not going to work. You will only be able to find information you have seen before.
-  So it soon became clear
-  that DNS was not enough for a satisfactory web surf experience, and portals were invented, effectively as an augmentation of DNS.</p>
+  So portals were invented, effectively as an augmentation of DNS.</p>
 <p>A portal effectively replaces the DNS system, because instead of remembering that the information you were looking for is hosted on
-  "http://http://www.myfriendtheplatypus.com/", you would have "http://dir.yahoo.com/" as your home page, and remember that you could get to it by clicking
+  <a href="http://www.myfriendtheplatypus.com/">www.myfriendtheplatypus.com</a>,
+  you typically would have <a href="http://dir.yahoo.com/">dir.yahoo.com</a> as your home page, and roughly remember that you could get to it by clicking
   Science -> Biology -> Zoology -> Animals, Insects, and Pets -> Mammals -> Monotremes -> Platypus.</p>
 <p>The big advantage of this was of course that you only have to remember these string receptively, not productively: you are presented with multiple-choice
   questions, not one open question. And apart from that, it is interactive: you take multiple smaller steps and can reach your target step-by-step.</p>
 <p>A big disadvantage is of course that it takes one or two minutes to traverse Yahoo's directory until you get to the page that contains the information you need.
   Also, you have to know that a platypus is a monotreme. In this case, while writing out this example, I actually used a search engine to look that up. ;)</p>
-<p>Then, search engines became better, and over the decades we arrived at a web where "being on the web" means you have not only done your
+<p>So, search engines then. They became better, and over the decades we arrived at a web where "being on the web" means you have not only done your
   Domain Name Registration (DNR), but also your Search Engine Optimization (SEO). The similarity between domain names and search terms is emphasized by the fact
   that several browsers now provide one input field as a combined address bar and search widget.</p>
 
@@ -62,7 +62,7 @@ a level of indirection whereby the IP address of a given service may change whil
 <p>It is also quite common for (power) users of the web to keep bookmarks as a sort of addressbook of content which you may want to find back in the future.</p>
 <p>All these "out of band" methods of propagating links to web resources constitute decentralized alternatives to the portals and search engines as augmentations of DNS.</p>
 
-<h3>Link quality, search bubbles, collaborative indexes and web-of-trust</h3>
+<h3>Link quality, filter bubbles, collaborative indexes and web-of-trust</h3>
 <p>Portals used to be edited largely by humans who somehow guarded the quality threshold for a web page to make it into the directory. Search engines are often filled on the
   basis of mechanical crawling, where algorithms like
   <a href="https://en.wikipedia.org/wiki/PageRank">PageRank</a> extract quality information out of the web's hyperlink graph. With
@@ -86,7 +86,7 @@ through the web of trust, and in collaborative indexes.</p>
   to protect people's privacy, it is important to anonymize the logs from their activity before adding it to the behavioral database. It is also questionable if such
   information should be allowed to be federated between unrelated services, since this leads to the build-up of very strong concentrations of power.</p>
 <p>Whereas Amazon's suggestion service mainly indexes products which Amazon sells to its users itself, Google and Facebook additionally track what their users do on unrelated
-  websites. When a website includes Google Ads or Google Statistics, information about that website's users is leaked to Google. And if a website displays a 'Like' button,
+  websites. When a website includes Google Ads or Google Analytics, information about that website's users is leaked to Google. And if a website displays a 'Like' button,
   it leaks information about its visitors to Facebook.</p>
 <p>This tracking information is then not only used to improve the search results, but also to improve the targetting of the advertising that appears on websites. If you read
   <a href="http://thegooglestory.com/">The Google Story</a>, it becomes clear how incredibly lucrative it is to spy on your users. In my opinion it is not inherently evil 
