@@ -61,12 +61,14 @@ through the web of trust, and in collaborative indexes.</p>
   information should be allowed to be federated between unrelated services, since this leads to the build-up of very strong concentrations of power.</p>
 <p>Whereas Amazon's suggestion service mainly indexes products which Amazon sells to its users itself, Google and Facebook additionally track what their users do on unrelated
   websites. When a website includes Google Ads or Google Analytics, information about that website's users is leaked to Google. If a website displays a 'Like' button,
-  it leaks information about its visitors to Facebook, and Microsoft even crawls hyperlinks which it obtains by
-  <a href="http://yro.slashdot.org/story/13/05/14/1516247/microsoft-reads-your-skype-chat-messages">spying on your Skype chat logs</a>.</p>
+  it leaks information about its visitors to Facebook.</p>
 <p>All this tracking information is not only used to improve the search results, but also to improve the targetting of the advertising that appears on websites. If you read
-  <a href="http://thegooglestory.com/">The Google Story</a>, it becomes clear how incredibly lucrative it is to spy on your users. In my opinion it is not inherently evil 
+  <a href="http://thegooglestory.com/">The Google Story</a>, it becomes clear how incredibly lucrative it is to spy on your users.
+  Microsoft even crawls hyperlinks which it obtains by
+  <a href="http://yro.slashdot.org/story/13/05/14/1516247/microsoft-reads-your-skype-chat-messages">spying on your Skype chat logs</a>.
+  In my opinion it is not inherently evil 
   for a service to spy on its users, as long as the user has the option to choose an alternative that doesn't. A restaurant that serves meat is not forcing anyone to eat
-  meat.</p>
+  meat, unless it sneaks the meat into your food without telling you.</p>
 <p>The free technology movement is currently not really able to offer viable alternatives to Google and to Facebook. A lot of projects that try come and go, or don't hit
   the mark, and it sometimes feels like an uphill struggle. But I'm confident that we'll get on top of
   this again, just like the free-tech alternatives to all parts of the Microsoft stack have eventually matured. Ironically, one of the main nails in the coffins of the
@@ -103,10 +105,10 @@ through the web of trust, and in collaborative indexes.</p>
   for the profile URL and the avatar URL. If we want to accommodate 1 billion users, then a friend link would occupy about 30 bits, but that would be compressible again
   because the bulk of a user's connections will be local to them in some way. So to store 150 connections for each
   user, we would need about 3*100+150*30=4800 bits, less than 1 Kb. That means the Earth's social graph, including 150 friendships per human, plus
-  a full name, photo, and profile URL for each, would occupy about 1 billion Kilobyte, or one Terabyte. That easily fits on a
+  a full name, photo, and profile URL for each, would occupy about 1 billion Kilobytes, or one Terabyte. That easily fits on a
   commodity hard disk nowadays.</p>
 <p>A search engine that indexes information on the web needs to be pretty huge in data size and crawler traffic in order to be useful. And the web's hypertext architecture
-  keeps it more or less open as far as findability of information is concerned. In a way, a search engine is just a website that links to other websites.</p>
+  keeps it more or less open anyway, as far as findability of information is concerned. In a way, a search engine is just a website that links to other websites.</p>
 <p>But for user search, the situation is a bit different. If you are not findable on the web as a user, then you cannot play along. It's like you are not "on" the web.
   The current situation is that you have to say which namespace your web presence falls under, in order to be findable. So instead of saying "Yes, I am on the web", we
 end up saying "Yes, I am on Facebook", so that people know that the html page that constitutes my web presence can be found using that specific namespace-locked user
@@ -118,7 +120,10 @@ search engine.</p>
   my <a href="https://twitter.com/michielbdejong">Twitter profile page</a> is accessible without login,
   my <a href="https://twitter.com/michielbdejong/following">list of followees</a> is not. Such pages can however be accessed if you create a dummy account for the
   occasion, so I still classify them as "public content on the web".</p>
-<p>I think it is our duty as defenders of free technology to build that one-Terabyte database which indexes all public user profiles on the web, independent of whether
- they appear in one of the big namespaces, or on a user's own Indie Web domain name, and once we have this "dump" of the web's social graph, 
+<p>I think it is our duty as defenders of free technology to build that one-Terabyte database which indexes all public user profiles on the web.
+  <p>Independent of whether
+ people's user profiles appear in one of the big namespaces, or on a user's own Indie Web domain name, we should add them to our database. Constructing this may technically
+    breach the terms of service of some social network companies, but I don't think that they can claim ownership over user content if that went to court.
+    So once we have this "dump" of the web's social graph, 
   we can simply seed it as a bittorrent, and "leak" it into the public domain.</p>
 <p><a href="https://groups.google.com/forum#!forum/unhosted">comments welcome!</a></p>
