@@ -24,10 +24,11 @@ module.exports = {
     "identity": "Persona, OpenID, SAML, WebID, and Webfinger",
     "browser sessions": "Client-side sessions, origins, browser tabs, and WebIntents",
     "search": "How to locate resources",
-    "net neutrality": "Network neutrality",
-    "freedombox": "freedombox, home-hosting, anonymity, freedom of expression",
-    "data platforms": "CouchDB, tahoe-lafs, bittorrent, Tor, freenet, i2p, ownCloud, mediagoblin, etcetera",
-    "reputation": "Decentralized reputation systems"
+    "neutrality": "Network neutrality",
+    "federation": "Decentralizing the web by making it federated",
+    "anonymity": "Tor, freenet, i2p, anonymity, freedom of expression",
+    "reputation": "Decentralized reputation systems",
+    //"data platforms": "CouchDB, tahoe-lafs, bittorrent, ownCloud, mediagoblin, etcetera",
   },
   "Domains": {
 /*- adventures 26: xmpp
@@ -42,6 +43,7 @@ module.exports = {
 - adventures 35: documents*/
   },
   "Build-essential": {
+    "noBackend": "The noBackend approach to web development",
 /*- adventures 36: remoteStorage.js
 - adventures 38: sockethub.js
 - adventures 39: dropbox
@@ -57,6 +59,7 @@ module.exports = {
   },
   "Related": {
 /*- adventures 46: Firefox OS
+    "freedombox": "freedombox, home-hosting",
 - adventures 47: useraddress
 - adventures 48: tosdr
 - adventures 49: opentabs
