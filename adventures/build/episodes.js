@@ -24,7 +24,7 @@ module.exports = {
     "identity": "Persona, OpenID, SAML, WebID, and Webfinger",
     "browser sessions": "Client-side sessions, origins, browser tabs, and WebIntents",
     "search": "How to locate resources",
-    "neutrality": "Network neutrality",
+    "neutrality": "Network neutrality, ubiquitous wifi, and DRM",
     "federation": "Decentralizing the web by making it federated",
     "anonymity": "Tor, freenet, i2p, anonymity, freedom of expression",
     "reputation": "Decentralized reputation systems",
