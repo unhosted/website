@@ -1,17 +1,27 @@
 <!-- federation: Decentralizing the web by making it federated -->
-<h3></h3>
+<h3>Clients and servers</h3>
+<p>The end-to-end principle that underlies the basic design of the internet treats all devices in the same neutral way. But in practice, that is not what the internet does. There is quite a strict distinction between client devices in one role, and (clusters of) servers in the other.</p>
+<p>Generally speaking, a server is addressable, and a client is not. A server usually has a domain name pointing to it, and a client device usually doesn't. A big chunk of internet traffic is communication between one client device and one server. When two client devices communicate with each other, we call that peer-to-peer communication. And the third category is server-to-server traffic, where two or more servers communicate with each other.</p>
+
+<h3>Server-to-server traffic</h3>
+<p>The actual consumption of the usefulness of the internet, happens on the client devices. The servers only ever play an intermediate role in this. This role can be to execute a certain data processing task, to store data for future use, or to be an addressable intermediate destination where data can be routed to.</p>
+<p>The ability to store and process data is pretty generic and replacable. It is the addressibility of servers, and restrictions placed on that addressability, that can give them an irreplacable role in certain communication sessions.</p>
+<p>As an example, let's have a look at XMPP. This protocol is used a lot for text chat and other real-time communication. The standard describes a client-to-server protocol and a server-to-server protocol. If alice@alice.com wants to contact bob@bob.com, then she tells her client device to connect to her alice.com server. Bob also tells his client device to connect to the bob.com server. After that the alice.com server can contact the bob.com server to successfully deliver a message to Bob. So the message travels from Alice's client, to Alice's server, to Bob's server, to Bob's client.</p>
+<p>It is obvious why the message cannot travel directly from Alice's client device to Bob's client device: even if Bob is online (his client device is connected to the internet), client devices are not (practically) addressable, so at least one server is needed as an intermediate hop that can bounce the message on to Bob's current network location.</p>
+<p>What is maybe not so obvious is why the client-server-server-client trapezium is needed, instead of a client-server-client triangle. The reason for this is that it makes it easier to check sender identity.</p>
+<p>When the bob.com server receives a message from somewhere, this message might be spam. It needs some way to check that the message really came from Alice. The alice.com server can in this case guard and guarantee Alice's sender identity. The XMPP protocol
+<a href="http://xmpp.org/rfcs/rfc3920.html#stanzas">uses SASL</a> to allow the bob.com server to know that it is the alice.com server that is contacting it.</p>
+<p>It would be possible to do something like that in a client-server-client triangle route, but that would require the client to provide a proof of identity, for instance if the sending client creates a message signature from the private part of an asymmetric key pair, like PGP does. Even then, people usually relay outgoing email through their mailserver because email from domestic IP addresses is often blocked, both by the actual ISP, as by many recipient mailservers.</p>
+<p>Web hosting is a prime example where the client-server-client triangle route is used, but in this case it is the sender's server that is used, since the recipient of the content of a web page does not need to be addressable. But many messaging protocols use the client-server-server-client trapezium route where server-to-server traffic forms the central part.</p>
+
+<h3>The internet as a federation of servers</h3>
+<p>For internet traffic that follows a trapezium-shaped client-server-server-client route, both the sending and the receiving user connect their client device to their own server. So clients are grouped around servers like moons around planets, and server-to-server connections form the actual federated network, where any server that has a domain name pointing to it and that speaks the right protocols, can participate.</p>
+
+<h3>Alas, not really</h3>
+<p>Unfortunately, this picture is only how the federated internet was designed. It doesn't truthfully reflect the actual situation in practice. First of all, the vast majority of users don't run their own server, and don't even have their own domain name; not even a subdomain. In fact, only a handful of DNS domainnames are used to create user identities, "*@facebook.com" currently being the most important one.</p>
+<p>Furthermore, a lot of the interconnections between servers are missing. This means that a client device needs to establish a client-to-server connection to the Google XMPP interface <em>as well as</em> the Facebook XMPP interface, in order to successfully chat with all their friends.</p>
 <p></p>
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-<h3></h3>
-<h3></h3>
+
 <h3></h3>
 <h3></h3>
 <h3></h3>
