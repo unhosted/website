@@ -88,6 +88,9 @@ function writeEpisodes() {
       title = '    <title>unhosted web apps '+ i +': '+ abbrev[i] +'</title>\n',
       header = '      <h2>'+ i +'. '+ episodes[i] +'</h2>\n\n',
       next = (i==latestEpisode?'\n      <p>The next episode will appear on Tuesday '+getNextTuesday()+'.</p>':'\n      <p>Next: <a href="../'+getFilename(i+1) + '">'+ episodes[i+1] +'</a></p>');
+    if(i==24) {
+      next = '<p>To be continued at <a href="http://2013.unhosted.org/">Unho&#353;&#357;13</a>.</p>';
+    }
     fs.writeFileSync('../'+getPart(i)+'/'+getFilename(i), part0 + title + part1 + header + source + next + part2 + makeEpisodesDiv(i)
         + part3 + part4);
   }
