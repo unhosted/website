@@ -1,0 +1,68 @@
+The Problem
+===========
+Humanity has achieved an almost complete level of software freedom through decades of hard struggle. Yet this freedom is under a very serious threat again.
+Software providers increasingly offer their applications on platforms that lock apps to one specific personal data hosting provider. Examples are iOS apps (user data on iCloud), Android apps/Chrome apps (user data on GoogleDrive), Facebook Apps (user data on Facebook), and the recently launched Dropbox Platform (user data on Dropbox).
+Locking people's data into a specific data hosting platform restricts them in their free choice of software. Likewise, publishing software on specific app platforms restricts people's free choice of data storage provider. Additionally, once a user has her data on one of the platforms, she is more likely to look for software on that same problem.
+
+The Solution
+============
+Unhosted web apps are html5 applications that do not 'phone home' to pass the user's data to the application provider. Instead, the user connects their own remote storage at runtime. The application provider would typically provide a default sockethub instance, but always allow the user to choose their own sockethub instance through a settings menu.
+The remoteStorage spec is now an IETF internet draft, and was discussed with a group of senior internet technologists in a Bar BoF at the recent IETF meeting. The related noBackend movement is also gaining a lot of popularity among front-end developers, and is about to get its own track at QConf this year. Remotestorage.js has reached version 0.8, in which the syncing and caching has been optimized greatly. About 20 independent unhosted web apps are currently being developed by various developers and are continuously improving in quality. The yearly Unhosted retreat is promising to be an even bigger success this year, given the number of people who are planning to come.
+All in all, the Unhosted project is really in full swing now, and prolonged support from NLnet for another 6 months would be vital for our ability to have a big impact on securing people's user data freedom for the future of internet and software usage.
+
+The Plan
+========
+
+1. (Sep-Feb) Steps towards RFC status
+-------------------------------------
+The remoteStorage spec is currently an IETF internet draft. At the IETF in Berlin, there was a dedicated BoF which raised industry interest. Mark Nottingham (Chair of the IETF HTTPbis Working Group), Paul Hoffman and other senior internet technologists stated that an upgrade from Internet Draft status to Request For Comments status would not only be possible, but even desirable. They also indicated that market parties such as Akamai, Cisco and Rackspace would be potentially interested. We want to improve the specification based on the comments given to us. We need to test the interoperability of the various implementations of the remoteStorage spec, and make sure we resolve any issues that come up. It is obviously hard to predict whether we can reach this goal within the 6 month renewal requested here, but we will definitely be able to take the most important first steps on the path to RFC status.
+
+2. (Sep/Oct) Adding extensible support for "legacy" and hosted accounts to remotestorage.js
+-------------------------------------------------------------------------------------------
+Users need to work with both existing data, and with data from other people and data stored in resources they do not fully control themselves. Therefore it make sense for Unhosted users to be able to access popular services such as Dropbox and GoogleDrive through Unhosted, utilising the (provider-specific) javascript API's. We want to make sure that the Unhosted framework is made extensible so that users and developers can add any resource that can be accessed cross-origin (with CORS headers). Given that a lot of users may have their personal data currently hosted on a Dropbox or  GoogleDrive account, some developers may want to publish their unhosted  web apps in such a way that it offers an alternative for people who do  not (yet) have a remoteStorage account. For instance, the option could  be given: "Connect to your remoteStorage" / "Connect to your Dropbox".  Even if our goal is to have everybody on remoteStorage, providing an  alternative Dropbox option may make the library more useful to application developers. Also, the option to register for a remoteStorage account from the application provider can make a lot of sense. Users could sign up for a hosted account at the app they use first, and then reuse that account at another app provider later if they wish. This is feedback we have received from app developers, and we are listening to their request.
+
+3. (Nov/Dec) Shared notification mechanism
+------------------------------------------
+In order to make users switch to unhosted applications these should be able to give the same level of platform integration across separate applications that 'bundled' applications from monolithic origin can and do provide. Currently there is no canonical way for unhosted applications to 'talk' to the user unless they are opened in their own window and the user is actively logged in to the application. Adding this feature will greatly improve the integrated user experience of Unhosted web apps.
+
+4. (Jan/Feb) Portability Von Munchausen-style
+---------------------------------------------
+If the license of an Unhosted app allows it, the user might want to pick up code he or she likes and store that code with his or her remoteStorage provider and/or his local storage in the browser. That way he or she no longer is exposed to changes at the source, and no longer 'burdens' the original source of the code using expensive bandwidth. The user is free to run the application directly from the localStorage (for offline use) or remoteStorage location (with possible advantages like lower latency, availability of TLS).
+There are advanced use cases for running apps from remoteStorage like sharing/provisioning the application and/or its helper scripts with other users, cloning applications and their configurations across different unhosted accounts from the same user (similar to what dotfiles do for unix applications), automated scanning for known malicious scripts by the Unhosted provider etc. In general, it would help to prevent unnecessary dependencies as well as privacy and security risks. Self stored apps also mean the user doesn't have to remember all the unique locations of his or her favorite unhosted apps -- logging into a single instance would be enough to gain a path to access all of them.
+5. (Sep-Feb) App debugging
+--------------------------
+The last 20% of a software development often takes 80% of the time. In order to make sure the 20 or so currently existing unhosted web apps work flawlessly, we need to constantly test, debug and fix them for 6 months, until all bugs are gone.
+
+6. (Sep-Feb) Library debugging
+------------------------------
+The same for the remotestorage.js library, and (during January/February 2014, once Sockethub's own funding ends), also the Sockethub debugging work.
+
+7. (Sep-Feb) Core remoteStorage modules
+---------------------------------------
+The remoteStorage modules form a common layer inbetween the actual app and the core library. Remotestorage modules like contacts, calendar, pictures, etcetera, are still not where we had hoped they would be by now, and need additional work.
+
+8. (Nov/Dec) Hoodie integration
+-------------------------------
+The "NoBackend" movement is rapidly gaining popularity among web developers, with Hoodie currently being the most popular implementation of a so-called app-agnostic backend server. We will combine the power of unhosted web apps and Hoodie servers by defining a discovery and authentication procedure that allows the user of a Hoodie-based web app to connect to their *own* Hoodie instance instead of the default one.
+
+9. (Jan/Feb) Sockethub integration
+----------------------------------
+In order for Sockethub and Unhosted apps to integrate easily, Sockethub integration with the core Unhosted platform needs to be investigated. Sockethub platforms are already good in quality, but their scope is still not complete. There are still a number of platforms we need to add, and verbs we need to add to existing platforms.
+
+10. (Sep-Feb) Marketing remoteStorage and unhosted web apps
+-----------------------------------------------------------
+The remoteStorage spec is reaching an ever higher level of maturity. Many "bugs" have been fixed in it over the last 2 years, and it is now on its way to its 6th improved version. Incorporating the corrections from Mark Nottingham (the current chief editor of HTTP) will boost both its  quality and its credibility when talking to personal data storage providers like Rackspace, Cisco, Dropbox, Google, Microsoft, as well as to players who are interesting in disrupting the current market power. Orange, Huawei and PhoneGap have already approached us, but we will also pro-actively contact other prospective supporters and implementers of our spec. We will also contact key industry players directly in November, and offer to give a presentation at their respective offices in Silicon Valley.
+
+End users do not want to scourge code repositories like github. We want to make it easy for end users to start using unhosted apps, an so we aim to create a 'store' for web apps where people can find out which applications have been deployed on 5apps. We will encourage authors of unhosted web apps to make their apps available there as well as in other ways that end users can easily find them.
+
+The Budget
+==========
+The proposal is for the consolidation of three independent projects previously funded by NLnet: unhosted (Michiel de Jong), remoteStorage (Niklas Cathor) and sockethub (Nick Jennings). In order to create more flexibility and guaranteed continuity, we are switching to the model that we have been using at the "Terms of Service; Didn't Read" project, where contributors are financially compensated for tasks, depending on how many hours they spend working on it.
+The (flexible) people planning is as follows:
+Michiel de Jong: 160 hours/month for September, October, November, December 2013, and January, February 2014. Then his Shuttleworth fellowship, if granted, would start 1 March 2014.
+Nicklas Cathor: 160 hours/month for September, October, November, December 2013 (of which 32 hours/month funded by Wau Holland Stiftung). After that, he is planning to take some time off from the project.
+Adrian Kizlauskas: 100 hours/month for September, October, November, December 2013, and January, February 2014.
+Nick Jennings: 100 hours/month for January, February 2014 (already funded under the Sockethub project until December 2013).
+total: 6*160 + 4*(160-32) + 6*100 + 2*100 = 2272 hours
+budget: 2272 hours * 12,50 euros/hour = 28,400 euros
+
