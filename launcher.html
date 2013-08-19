@@ -29,19 +29,34 @@
   <body>
     <article>
       <h3>* I have remoteStorage: <input id="rs" placeholder="user@provider" onkeyup="updateLinks();"/> (for instance 'joe27@5apps.com')</h3>
-      <p>(note: connecting at launch currently only works with a few apps, due to
-        <a href="https://github.com/remotestorage/remotestorage.js/issues/318">issue #318</a> of remotestorage.js.
-        In all other apps you will have to input your user address a second time, until this is fixed)</p>
       <h3>* I want remoteStorage from: <a href="https://5apps.com/users/sign_up" target="_blank">5apps.com</a></h3>
       <h3>* I want remoteStorage from: <a href="https://heahdk.net/users/new" target="_blank">heahdk.net</a></h3>
       <label><input type="checkbox" onchange="updateLinks();" id="newtab"/> launch apps in a new tab</label>
       <ul class="icons">
+        <!-- on 0.8: -->
         <li> <a href="http://litewrite.net/" data-href="http://litewrite.net/"><img src="/apps/litewrite.png" /></a>
           <p><a href="http://litewrite.net/" data-href="http://litewrite.net/">litewrite</a></p><p></p>
           <p><a href="../tools/"><img src="/apps/uses-remotestorage.png" /><img src="/apps/uses-5apps.png" /></a></p> </li>
         <li> <a href="https://ghost-vcuculo.5apps.com/" data-href="https://ghost-vcuculo.5apps.com/"><img src="/apps/ghost.png" /></a>
           <p><a href="https://ghost-vcuculo.5apps.com/" data-href="https://ghost-vcuculo.5apps.com/">gHost</a></p>
           <p><a href="../tools/"><img src="/apps/uses-remotestorage.png" /><img src="/apps/uses-5apps.png" /></a></p> </li>
+        <li> <a href="https://drinks-unhosted.5apps.com/" data-href="https://drinks-unhosted.5apps.com/"><img src="/apps/drinks.png" /></a>
+          <p><a href="https://drinks-unhosted.5apps.com/" data-href="https://drinks-unhosted.5apps.com/">drinks</a></p><p></p>
+          <p><a href="../tools/"><img src="/apps/uses-remotestorage.png" /><img src="/apps/uses-5apps.png" /></a></p> </li>
+        <li> <a href="https://todomvc.5apps.com/labs/architecture-examples/remotestorage/" data-href="https://todomvc.5apps.com/labs/architecture-examples/remotestorage/"><img src="/apps/todo.png" /></a>
+          <p><a href="https://todomvc.5apps.com/labs/architecture-examples/remotestorage/" data-href="https://todomvc.5apps.com/labs/architecture-examples/remotestorage/">todo</p></a>
+          <p><a href="../tools/"><img src="/apps/uses-remotestorage.png" /><img src="/apps/uses-5apps.png" /></a></p> </li>
+        <li> <a href="http://svg-edit-michiel.5apps.com/editor/svg-editor.html"><img src="/apps/svg-edit.png" /></a>
+          <p><a href="http://svg-edit-michiel.5apps.com/editor/svg-editor.html">svg-edit</a></p>
+          <p><a href="../tools/"><img src="/apps/uses-remotestorage.png" /><img src="/apps/uses-5apps.png" /></a></p> </li>
+        <li> <a href="https://music-unhosted.5apps.com/" data-href="https://music-unhosted.5apps.com/"><img src="/apps/music.png" /></a>
+          <p><a href="https://music-unhosted.5apps.com/" data-href="https://music-unhosted.5apps.com/">music</a></p><p></p>
+          <p><a href="../tools/"><img src="/apps/uses-remotestorage.png" /><img src="/apps/uses-5apps.png" /></a></p> </li>
+        <li> <a href="https://microblogging.5apps.com/" data-href="https://microblogging.5apps.com/"><img src="/apps/music.png" /></a>
+          <p><a href="https://microblogging.5apps.com/" data-href="https://microblogging.5apps.com/">music</a></p><p></p>
+          <p><a href="../tools/"><img src="/apps/uses-remotestorage.png" /><img src="/apps/uses-5apps.png" /></a></p> </li>
+
+        <!-- on 0.7: -->
         <li> <a href="http://unhostedtunes.hellacoders.com/" data-href="http://unhostedtunes.hellacoders.com/"><img src="/apps/tunes.png" /></a>
           <p><a href="http://unhostedtunes.hellacoders.com/" data-href="http://unhostedtunes.hellacoders.com/">tunes</a></p>
           <p><a href="../tools/"><img src="/apps/uses-remotestorage.png" /></a></p> </li>
@@ -56,19 +71,8 @@
         <li> <a href="https://vidmarks.5apps.com/" data-href="https://vidmarks.5apps.com/"><img src="/apps/vidmarks.png" /></a>
           <p><a href="https://vidmarks.5apps.com/" data-href="https://vidmarks.5apps.com/">vidmarks</a></p><p></p>
           <p><a href="../tools/"><img src="/apps/uses-remotestorage.png" /><img src="/apps/uses-5apps.png" /></a></p> </li>
-        <li> <a href="http://svg-edit.googlecode.com/svn/branches/2.6/editor/svg-editor.html"><img src="/apps/svg-edit.png" /></a>
-          <p><a href="http://svg-edit.googlecode.com/svn/branches/2.6/editor/svg-editor.html">svg-edit</a></p></li>
         <li> <a href="https://remotestorage-browser.5apps.com/" data-href="https://remotestorage-browser.5apps.com/"><img src="/apps/browser.png" /></a>
           <p><a href="https://remotestorage-browser.5apps.com/" data-href="https://remotestorage-browser.5apps.com/">browser</a></p><p></p>
-          <p><a href="../tools/"><img src="/apps/uses-remotestorage.png" /><img src="/apps/uses-5apps.png" /></a></p> </li>
-        <li> <a href="https://music-michiel.5apps.com/" data-href="https://music-michiel.5apps.com/"><img src="/apps/music.png" /></a>
-          <p><a href="https://music-michiel.5apps.com/" data-href="https://music-michiel.5apps.com/">music</a></p><p></p>
-          <p><a href="../tools/"><img src="/apps/uses-remotestorage.png" /><img src="/apps/uses-5apps.png" /></a></p> </li>
-        <li> <a href="https://myfavoritedrinks.5apps.com/" data-href="https://myfavoritedrinks.5apps.com/"><img src="/apps/drinks.png" /></a>
-          <p><a href="https://myfavoritedrinks.5apps.com/" data-href="https://myfavoritedrinks.5apps.com/">drinks</a></p><p></p>
-          <p><a href="../tools/"><img src="/apps/uses-remotestorage.png" /><img src="/apps/uses-5apps.png" /></a></p> </li>
-        <li> <a href="https://todo-mvc-michiel.5apps.com/labs/architecture-examples/remotestorage/" data-href="https://todo-mvc-michiel.5apps.com/labs/architecture-examples/remotestorage/"><img src="/apps/todo.png" /></a>
-          <p><a href="https://todo-mvc-michiel.5apps.com/labs/architecture-examples/remotestorage/" data-href="https://todo-mvc-michiel.5apps.com/labs/architecture-examples/remotestorage/">todo</p></a>
           <p><a href="../tools/"><img src="/apps/uses-remotestorage.png" /><img src="/apps/uses-5apps.png" /></a></p> </li>
         <li> <a href="https://dspace-nilclass.5apps.com/" data-href="https://dspace-nilclass.5apps.com/"><img src="/apps/dspace.png" /></a>
           <p><a href="https://dspace-nilclass.5apps.com/" data-href="https://dspace-nilclass.5apps.com/">dspace-client</a></p><p></p>
