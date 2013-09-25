@@ -89,7 +89,7 @@ function writeEpisodes() {
       header = '      <h2>'+ i +'. '+ episodes[i] +'</h2>\n\n',
       next = (i==latestEpisode?'\n      <p>The next episode will appear on Tuesday '+getNextTuesday()+'.</p>':'\n      <p>Next: <a href="../'+getFilename(i+1) + '">'+ episodes[i+1] +'</a></p>');
     if(i==24) {
-      next = '<p>To be continued at <a href="http://2013.unhosted.org/">Unho&#353;&#357;13</a>.</p>';
+      next = '<p><strong>UPDATE 25 September 2013:</strong> Niklas, Adrian and I got an office in Berlin and worked on this plan during the summer, but decided we don\'t have enough solid ground right now to actually launch it just yet. I will apply for the Shuttleworth fellowship grant again in November, and if that succeeds we hope to start in March 2014.</p><p>Until then, I will continue my extreme dogfood experiment, and writing this blog. I\'m currently building up a small headstart, and will start pushing out episodes again soon. Until then, if you have any questions, please post them on <a href="https://groups.google.com/forum#!forum/unhosted">the "Unhosted Web Apps" mailing list</a>!</p>';
     }
     fs.writeFileSync('../'+getPart(i)+'/'+getFilename(i), part0 + title + part1 + header + source + next + part2 + makeEpisodesDiv(i)
         + part3 + part4);
