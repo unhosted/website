@@ -19,7 +19,7 @@ var fs = require('fs'),
     vii: 'forum'
   }, overviewPaths = {
     i: '/',
-    ii: 'http://remotestorage.io/integrate',
+    ii: '/getting-started/',
     iii: '/apps/',
     iv: '/people/',
     v: '/events/',
