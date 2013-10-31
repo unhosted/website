@@ -1,1 +1,5 @@
-This is the source control repository of http://unhosted.org
+This is the source control repository of https://unhosted.org/
+To build the `index.html` files from the `source.html` files, run:
+
+    cd adventures/
+    node build/build.js
