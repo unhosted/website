@@ -5,9 +5,9 @@
     <link>https://unhosted.org/adventures/</link>
     <atom:link type="application/rss+xml" href="https://unhosted.org/adventures/feed.rss" rel="self"></atom:link>
     <image>
-      <link>https://unhosted.org/adventures/img/island-color.jpg</link>
+      <link>https://unhosted.org/img/island-color.png</link>
       <title>Unhosted Adventures</title>
-      <url>https://unhosted.org/adventures/img/island-color.jpg</url>
+      <url>https://unhosted.org/img/island-color.png</url>
     </image>
     <description>Official handbook of the No Cookie Crew</description>
     <language>en-us</language>
