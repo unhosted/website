@@ -24,5 +24,6 @@ nav div img { border-radius:5px }
 .logo { float:right; width:350px; text-align:center }
 nav .logo { float:right; width:250px; text-align:center }
 .logo img { margin:0 auto }
+nav ul { line-height: 1.2em }
 
 footer { clear:right; text-align:center; background-color:#EEE }
