@@ -91,7 +91,7 @@ function writeEpisodes() {
           +(i+1 === 17 ? '../decentralize/' : '')
           +getFilename(i+1) + '">'+ episodes[i+1] +'</a></p>');
     if(i==24) {
-      next = '<p><strong>UPDATE 10 October 2013:</strong> Niklas, Adrian and I got an office in Berlin and worked on this plan during the summer, but decided we don\'t have enough solid ground right now to actually launch it just yet. I will apply for the Shuttleworth fellowship grant again in May, and if that succeeds we hope to start in September 2014.</p><p>Until then, I will first work on remoteStorage and Meute before continuing this blog. Until then, if you have any questions, please post them on <a href="https://groups.google.com/forum#!forum/unhosted">the "Unhosted Web Apps" mailing list</a>!</p>';
+      next = '<p><strong>UPDATE 29 March 2014:</strong> Niklas, Adrian and I got an office in Berlin and worked on this plan during the summer, but after that decided we didn\'t have enough solid ground to actually launch it just yet. I will try to gather some partners and apply for the Shuttleworth fellowship grant again in November, and if that succeeds we hope to start in March 2015.</p><p>I will first work on remoteStorage and Meute some more before finishing this blog series. Until then, if you have any questions, please post them on <a href="https://groups.google.com/forum#!forum/unhosted">the "Unhosted Web Apps" mailing list</a>!</p>';
     }
     fs.writeFileSync('../'+getPart(i)+'/'+getFilename(i), part0 + title + part1 + header + source + next + part2 + makeEpisodesDiv(i)
         + part3 + part4);
