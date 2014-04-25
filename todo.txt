@@ -1,0 +1,11 @@
+*1: make "Friendica" a hyperlink
+* click all links and check for 404s and unintended default pages
+*2: code style localLoad function
+*2: apply the update about the download attribute
+*3: remove '(sort of clumsily)'
+*3: check if rackspace still works without cookies
+*3: from https -> over https
+*3: check if truncating the forever log doesn't break it
+*3: add there -> add to the data directory
+*3: eavesdropping -> intercepting (man-in-the-middle is necessary)
+*4: check if sockjs is still the best option
