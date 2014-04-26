@@ -9,3 +9,12 @@
 *3: add there -> add to the data directory
 *3: eavesdropping -> intercepting (man-in-the-middle is necessary)
 *4: check if sockjs is still the best option
+*4: repeat the websocket graph experiment with laptop and phone over 3G and adsl
+*5: redo fb/twitter dialog screen captures and check whole procedure is still the same
+*5: http.request -> https.request
+*5: check if it's still the case that long-lived tokens live 60 days
+*5: fix comma-first syntax in twitter code example
+*5: check bug in ntwitter
+*5: try out social dashboard data-url app
+*5: "we will come back to..." -> as of now, not true :)
+* read comments to each episode on the mailing list
