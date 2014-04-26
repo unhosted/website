@@ -42,7 +42,7 @@ conflicts say e.g. "I used X at the time, nowadays you may also use Y".
 *8: check ogg / avconv instructions
 *8: mention playing music from IndexedDB
 *8: "some make some" -> "make some"
-*8: "a your" -> "your"
+*8: "a your" -> "your" 0
 *9: mention how to use sockethub email example
 *9: mention meute as "wasn't implemented at the time, but is now"
 *9: anything -> webmaster
@@ -53,3 +53,14 @@ conflicts say e.g. "I used X at the time, nowadays you may also use Y".
 *10: a asynchronous -> asynchronous
 *10: closures -> closures and callbacks
 *10: write out SNS abbrev
+*11: but it cannot -> but they cannot
+*11: probably cause -> it is obvious that this episode was written pre-Snowden :) - mention Snowden's smiley slide
+*11: update on RevProTun -> does it still exist? is anyone using it or working on it?
+*11: host multiple TLS cert -> host multiple TLS certs
+*11: don't use SNI -> didn't use it then, but now this site, unhosted.org, is hosted on SNI next to 3pp.io
+*11: native mobile app -> native mobile apps
+*11: update section about updating sabout the market
+*11: mention fizno.com and librarybox
+*11: mention http spec and SPDY in packaged app hosting conventions
+*11: correct statement about deduplication
+*11: update on "fix appcache" effort
