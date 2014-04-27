@@ -35,22 +35,14 @@ module.exports = {
     //tree-based sync
     //IndexedDB and the commit cache
     //caching strategies, PrefixTree
-    //offline-first: local data is authorative; asynchronous synchronization
+    //offline-first: render local data; asynchronous synchronization
     //the offline-first page load & the offline-first button click
     //sync libs (dropbox.js, nimbusbase, pouchdb, remotestorage.js)
   },//34
-  "Build-essential": {
-    //html5: css, fonts, canvas, WebGL, audio, video, svg
-    //testing and profiling
-    //routing
-    //data binding
-    //(what else do frameworks do?)
-    //dream code
-    //OPA frameworks (backbone, ember, angular)
-  },//40
-  "Related": {
-     //- adventures 48: tosdr
-     //- adventures 49: opentabs
-     //- adventures 50: solar nomad
-  }//43
+  "Further-Reading": {
+    //html5: css, fonts, canvas, WebGL, audio, video, svg, emscripten, webrtc
+    //testing, profiling, versioning, release management
+    //routing, data binding, (what else do frameworks do?), OPA frameworks (backbone, ember, angular)
+    //conclusion (& downloadable version)
+  }//38
 }
