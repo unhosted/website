@@ -16,7 +16,7 @@ module.exports = {
     "p2p": "Peer-to-peer communication",
     "unhosted oauth": "Unhosted web apps and OAuth",
     "save the web": "Our plan to save the web"
-  },
+  },//16
   "Decentralize" : {
     "cryptography": "Cryptography",
     "dht": "Distributed hash tables",
@@ -28,43 +28,29 @@ module.exports = {
     "federation": "Decentralizing the web by making it federated",
     "anonymity": "Tor, freenet, i2p, anonymity, freedom of expression",
     "reputation": "Decentralized reputation systems",
-    //"data platforms": "CouchDB, tahoe-lafs, bittorrent, ownCloud, mediagoblin, etcetera",
-  },
-  "Domains": {
-/*- adventures 26: xmpp
-- adventures 27: ActivityStreams and PuSH: pump.io
-- adventures 28: Twitter
-- adventures 29: Facebook
-- adventures 30: Github
-- adventures 31: contacts
-- adventures 32: music, pictures, ...
-- adventures 33: calendar
-- adventures 34: code
-- adventures 35: documents*/
-  },
+    //Indie Web + useraddress
+    //free technology + crowd funding (+ Firefox OS + build-or-buy freedombox + 3pp + IETF/W3C/redecentralize.org/conferences)
+  },//28
+  "Sync": {
+    //tree-based sync
+    //IndexedDB and the commit cache
+    //caching strategies, PrefixTree
+    //offline-first: local data is authorative; asynchronous synchronization
+    //the offline-first page load & the offline-first button click
+    //sync libs (dropbox.js, nimbusbase, pouchdb, remotestorage.js)
+  },//34
   "Build-essential": {
-    "noBackend": "The noBackend approach to web development",
-/*- adventures 36: remoteStorage.js
-- adventures 38: sockethub.js
-- adventures 39: dropbox
-  * dropbox.js
-  * NimbusBase
-  * remoteStorage-dropbox
-- adventures 40: GoogleDrive
-- adventures 41: Backbone
-- adventures 42: testing
-- adventures 43: css, fonts, canvas, WebGL
-- adventures 44: audio, video
-- adventures 45: svg*/
-  },
+    //html5: css, fonts, canvas, WebGL, audio, video, svg
+    //testing and profiling
+    //routing
+    //data binding
+    //(what else do frameworks do?)
+    //dream code
+    //OPA frameworks (backbone, ember, angular)
+  },//40
   "Related": {
-/*- adventures 46: Firefox OS
-    "freedombox": "freedombox, home-hosting",
-- adventures 47: useraddress
-- adventures 48: tosdr
-- adventures 49: opentabs
-- adventures 50: solar nomad
-- adventures 51: crowd funding
-- adventures 52: free technology*/
-  }
+     //- adventures 48: tosdr
+     //- adventures 49: opentabs
+     //- adventures 50: solar nomad
+  }//43
 }
