@@ -87,9 +87,11 @@ function writeEpisodes() {
     var source = fs.readFileSync('../'+getPart(i)+'/'+i+'/source.html'),
       title = '    <title>unhosted web apps '+ i +': '+ abbrev[i] +'</title>\n',
       header = '      <h2>'+ i +'. '+ episodes[i] +'</h2>\n\n',
-      next = (i==latestEpisode?'\n      <p>The next episode will appear on Tuesday '+getNextTuesday()+'.</p>':'\n      <p>Next: <a href="../'+getFilename(i+1) + '">'+ episodes[i+1] +'</a></p>');
+      next = (i==latestEpisode?'\n      <p>The next episode will appear on Tuesday '+getNextTuesday()+'.</p>':'\n      <p>Next: <a href="../'
+          +(i+1 === 17 ? '../decentralize/' : '')
+          +getFilename(i+1) + '">'+ episodes[i+1] +'</a></p>');
     if(i==24) {
-      next = '<p><strong>UPDATE 10 October 2013:</strong> Niklas, Adrian and I got an office in Berlin and worked on this plan during the summer, but decided we don\'t have enough solid ground right now to actually launch it just yet. I will apply for the Shuttleworth fellowship grant again in May, and if that succeeds we hope to start in September 2014.</p><p>Until then, I will first work on remoteStorage and Meute before continuing this blog. Until then, if you have any questions, please post them on <a href="https://groups.google.com/forum#!forum/unhosted">the "Unhosted Web Apps" mailing list</a>!</p>';
+      next = '<p><strong>UPDATE 29 March 2014:</strong> Niklas, Adrian and I got an office in Berlin and worked on this plan during the summer, but after that decided we didn\'t have enough solid ground to actually launch it just yet. I will try to gather some partners and apply for the Shuttleworth fellowship grant again in November, and if that succeeds we hope to start in March 2015.</p><p>I will first work on <a href="http://remotestorage.io/">remoteStorage</a> and <a href="https://meute.5apps.com/">Meute</a> some more before finishing this blog series. Until then, check out my <a href="http://redecentralize.org/interviews/2014/03/26/12-michiel-unhosted.html">Redecentralize</a> interview, and if you have any questions, please post them on <a href="https://groups.google.com/forum#!forum/unhosted">the "Unhosted Web Apps" mailing list</a>!</p>';
     }
     fs.writeFileSync('../'+getPart(i)+'/'+getFilename(i), part0 + title + part1 + header + source + next + part2 + makeEpisodesDiv(i)
         + part3 + part4);
@@ -120,9 +122,9 @@ function writeRss() {
     +'    <link>https://unhosted.org/adventures/</link>\n'
     +'    <atom:link type="application/rss+xml" href="https://unhosted.org/adventures/feed.rss" rel="self"></atom:link>\n'
     +'    <image>\n'
-    +'      <link>https://unhosted.org/adventures/img/island-color.jpg</link>\n'
+    +'      <link>https://unhosted.org/img/island-color.png</link>\n'
     +'      <title>Unhosted Adventures</title>\n'
-    +'      <url>https://unhosted.org/adventures/img/island-color.jpg</url>\n'
+    +'      <url>https://unhosted.org/img/island-color.png</url>\n'
     +'    </image>\n'
     +'    <description>Official handbook of the No Cookie Crew</description>\n'
     +'    <language>en-us</language>\n'
@@ -144,15 +146,15 @@ function writeAtom() {
   var str = '<?xml version="1.0" encoding="UTF-8"?>\n'
     +'<feed xml:lang="en-US" xmlns="http://www.w3.org/2005/Atom" xmlns:thr="http://purl.org/syndication/thread/1.0" xmlns:georss="http://www.georss.org/georss" xmlns:activity="http://activitystrea.ms/spec/1.0/" xmlns:media="http://purl.org/syndication/atommedia" xmlns:poco="http://portablecontacts.net/spec/1.0" xmlns:ostatus="http://ostatus.org/schema/1.0">\n'
     +'  <id>https://unhosted.org/adventures/feed.atom</id>\n'
-    +' <title>Unhosted Adventures</title>\n'
-    +' <subtitle>Official Handbook of the No Cookie Crew</subtitle>\n'
-    +'  <logo>https://unhosted.org/adventures/img/island-color.jpg</logo>\n'
+    +'  <title>Unhosted Adventures</title>\n'
+    +'  <subtitle>Official Handbook of the No Cookie Crew</subtitle>\n'
+    +'  <logo>https://unhosted.org/img/island-color.png</logo>\n'
     +' <updated>'+getDate(latestEpisode)+'</updated>\n'
     +'<author>\n'
     +' <activity:object-type>http://activitystrea.ms/schema/1.0/person</activity:object-type>\n'
     +'  <uri>https://michielbdejong.com/</uri>\n'
     +' <name>Michiel B. de Jong</name>\n'
-    +' <link rel="avatar" type="image/jpeg" media:width="96" media:height="96" href="https://unhosted.org/adventures/img/michiel.jpg"/>\n'
+    +' <link rel="avatar" type="image/jpeg" media:width="96" media:height="96" href="https://unhosted.org/img/authors/michiel.jpg"/>\n'
     +' <georss:point>10.20 104.0</georss:point>\n'
     +' <poco:preferredUsername>michielbdejong</poco:preferredUsername>\n'
     +' <poco:displayName>Michiel B. de Jong</poco:displayName>\n'
