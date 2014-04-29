@@ -94,3 +94,12 @@ conflicts say e.g. "I used X at the time, nowadays you may also use Y".
 *18: hash back argument in last sentence holds no water - only covers second level, not the first.
 *19: anonymity next week -> and in episode 25
 *19: with +each+of+ several
+*19: the best way would .-> probably be to consider DNS and IP untrusted and use an extra security layer like PGP on top of them.
+*20: to the device configuration -> to shield users from each other and from the device configuration
+*20: check WebID-TLS name+link
+*22: these string +s
+*23: "tradable" misspelled?
+*23: recall Hugo's corrections about the term intellectual property
+*23: iPhone does not really stop you from visiting certain parts of the web, it only limits the source of *native* apps
+*24: client-server-server-client also helps against spam by acting as a proof-of-work on part of the sender
+*24: specs -> link to -02
