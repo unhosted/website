@@ -97,6 +97,7 @@ conflicts say e.g. "I used X at the time, nowadays you may also use Y".
 *19: the best way would .-> probably be to consider DNS and IP untrusted and use an extra security layer like PGP on top of them.
 *20: to the device configuration -> to shield users from each other and from the device configuration
 *20: check WebID-TLS name+link
+*20: add paragraph about IndieAuth
 *22: these string +s
 *23: "tradable" misspelled?
 *23: recall Hugo's corrections about the term intellectual property

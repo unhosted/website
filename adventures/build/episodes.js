@@ -26,23 +26,19 @@ module.exports = {
     "search": "How to locate resources",
     "neutrality": "Network neutrality, ubiquitous wifi, and DRM",
     "federation": "Decentralizing the web by making it federated",
-    "anonymity": "Tor, freenet, i2p, anonymity, freedom of expression",
-    "reputation": "Decentralized reputation systems",
-    //Indie Web + useraddress
-    //free technology + crowd funding (+ Firefox OS + build-or-buy freedombox + 3pp + IETF/W3C/redecentralize.org/conferences)
-  },//28
-  "Sync": {
-    //tree-based sync
-    //IndexedDB and the commit cache
-    //caching strategies, PrefixTree
-    //offline-first: render local data; asynchronous synchronization
-    //the offline-first page load & the offline-first button click
-    //sync libs (dropbox.js, nimbusbase, pouchdb, remotestorage.js)
-  },//34
-  "Further-Reading": {
+    "anonymity": "even since before Snowden, people often assume unhosted is about privacy/anonymity; it's not. short-lived identities vs pseudonymity, Tor/freenet/i2p, freedom of expression (internet & politics)",
+    "reputation": "Decentralized reputation systems",//decentralized (pseudo-)identities only work along pre-existing out-of-band friendships. stackoverflow/hackernews, twitter/linkedin, peer education, gnunet. bootstrap reputation from web2.0 identities
+  },//26
+  "Practice": {
     //html5: css, fonts, canvas, WebGL, audio, video, svg, emscripten, webrtc
+    //IndexedDB and the commit cache
     //testing, profiling, versioning, release management
     //routing, data binding, (what else do frameworks do?), OPA frameworks (backbone, ember, angular)
+    //offline-first: render local data; asynchronous synchronization
+    //caching strategies, PrefixTree
+    //tree-based sync
+    //the offline-first page load & the offline-first button click
+    //sync libs (dropbox.js, nimbusbase, pouchdb, remotestorage.js)
     //conclusion (& downloadable version)
-  }//38
+  }//36
 }
