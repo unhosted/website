@@ -1,0 +1,55 @@
+<!-- reputation: Decentralized reputation systems -->
+<h3>Decentralized reputation systems</h3>
+
+<p>When communicating with pre-existing contacts, trust is simply established by making sure the other person is who they say they are.
+As discussed in <a href="../17/Cryptography.html">episode 17</a>, this can be done using a combination of DNS, PGP, and checking whether
+the other person sounds like themselves in how they interact with you. But when interacting with strangers, trust can be based on reputation.</p>
+
+<p>Basing trust on reputation is fundamentally unreliable, since a person's past behavior is no guarantee for their future behavior. But a certain
+game theoretical assurance can be achieved when people not only prove that they have a certain reputation from past behavior, but also risk this
+reputation. Assuming the other person is a rational agent, they will not destroy a valuable reputation in order to trick you once in a relatively
+small interaction. A seller on ebay or airbnb is unlikely to treat you unfairly if they risk getting a negative review from you.</p>
+
+<p>This means the person being reviewed, in turn, assumes the reviewer will be fair. It is not always clear what the game theoretical advantage is
+of reviewing people fairly, but there is also no advantage in reviewing people unfairly, and I guess people are just fundamentally nice to each other
+when they have nothing to lose by it. In any case, in most reputation systems, reviewing is a voluntary act of altruism, both (in case of a
+positive review) towards the person you are reviewing, and towards the other future users of the system or website to which you are adding the review.
+Examples of such systems are <a href="https://news.ycombinator.com/">Hacker News</a>, <a href="https://stackoverflow.com/">Stack Overflow</a>,
+<a href="https://twitter.com/">Twitter</a>, <a href="https://linkedin.com/">Linked In</a>,
+<a href="https://ebay.com/">eBay</a>, <a href="https://amazon.com/">Amazon</a> (reviewing books rather than humans),
+and <a href="https://airbnb.com/">AirBnB</a>.</p>
+
+<p>On your Indie Web site, you will probably link to some of your &quot;claims to fame&quot;, so that people who look you up online can see how many
+Twitter followers and Github projects you have. This way, you can bootstrap your reputation from your reputation inside these centralized web2.0 walled
+gardens. You could also post PGP-signed recommendations from other people on your website, for instance a few customer reviews of products you offer.</p>
+
+<p>Reputation is not a scalar. You can be a good JavaScript programmer on Stack Overflow, but a poor host on AirBnB. If we are to automate
+decentralized reputation
+on the web then we would have to take this into account.</p>
+
+<p>The most reliable way to let people review each other would seem to be if reviewers take a certain risk when inaccurately reviewing someone -
+for instance their own reputation. Humans dedicate a considerable part of their brain activity to reputation of themselves and others in a group,
+and a lot of human activity is dedicated solely to establishing a good reputation, status and fame. Even people who don't have enough money to buy
+proper food, health, and education for themselves, often spend a lot of money on jewellery and flashy cars which basically act as proof-of-work to
+increase their social status within the village or group.</p>
+
+<p>We have only just started the era in which people tout their prosperity online instead of in the material world, and I think a lot will change
+in how the economy works when people care ever more about their number of Twitter followers, and ever less about the brand of their car.</p>
+
+<h2>Reputation spam</h2>
+<p>A very interesting system implementing reputation on top of pseudonymity is <a href="https://gnunet.org/">gnunet</a>. It uses the principle that
+a newly created user account should have a value of zero, otherwise an adversary can simply destroy their reputation and then create a new user account.</p>
+
+<p>Reputation in gnunet is built up using a pessimistic tit-for-tat scheme: don't trust your neighbours until they invest in their relationship with you
+by doing you a favor [to do: check].</p>
+
+<h2>Peer education</h2>
+<p>Universities have an often centuries-old reputation, giving them the power to judge which students pass and which students fail their tests, even though
+there is a big monetary incentive to give out false diplomas. If we want online peer education to become bigger, we need a system like that, where a teacher
+can gain reputation, and a student can become a teacher. Good teachers could charge money for their classes, while teaching material can be (and already is)
+available in the public domain.</p>
+
+<p>Likewise, a student can get a &quot;diploma&quot; from a renowned teacher when they pass a test. This test can even be highly automated as an online service
+to improve efficiency, but the value of the diploma would come from the reputation of the teacher who (digitally) signed it.</p>
+
+<p>A lot of space for future research is open in this area, and I expect a lot of exciting developments over the coming years. <a href="https://groups.google.com/forum#!forum/unhosted">Comments welcome!</a></p>
