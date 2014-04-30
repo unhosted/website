@@ -1,3 +1,83 @@
 <!-- Anonymity -->
+<h3>Freedom of Expression, Privacy, and Anonymity</h3>
+<p>I'm resuming this blog after a one-year break. When reading back the first 24 episodes, which were
+written &quot;pre-Snowden&quot;, it struck me
+how much the topic of government surveillance was already present in our conversations about internet freedom.
+But even more so now that we live in a &quot;post-Snowden&quot; world, it seems to be a default assumption
+that internet freedom projects are about protection from government spying.</p>
+
+<p>Even when you explicitly say your
+aim is to break the web 2.0 monopolies, many people assume that the ultimate goal of this is to get everyday
+communication away from the reach of NSA spying. This is also confirmed as Francis
+<a href="http://redecentralize.org/blog/2014/01/10/four-motivations.html">summarizes</a>
+common motivations for redecentralization
+with privacy as the most important one, before resilience, competition and fun.</p>
+
+<p>The first pre-requisites for freedom of expression are access and know-how: you need access to a device through which you
+can send your message towards its destination, and you need to know how to use this device to do this. When a government
+blocks Twitter, it becomes harder for its citizens to express their political views, because they may not be aware of
+other channels and how to use them. A big task for the hacker community is to provide access and know-how to citizens whose
+freedom of expression is under attack.</p>
+
+<p>The third pre-requisite is freedom from prosecution after expressing your opinion. This is where anonymity
+can play a role, and contribute to freedom of expression. When you express your political views under an ad-hoc identity
+or a pseudonym, successfully erase all traces back to you as a physical person, and for the rest of your life keep it a
+secret that it was you who published this opinion under this pseudonym, then the politicians who want to shut you up will
+not find you. Alternatively, you can move your life outside the jurisdiction of these politicians, as Edward Snowden did
+by moving from Hawaii to Moscow Airport.</p>
+
+<p>Another reason to want privacy is that eavesdropping is immoral and annoying. We want to be able to have a conversation
+with the audience of our choice, without having to think about who else is able to follow what is being said. Keeping the
+content of a conversation private is technologically trivial. As an engineering problem, it is solved by for instance PGP.
+In practice, however, it requires quite a lot of extra effort and know-how, so that hardly anyone bothers.</p>
+
 <h3>Ad-hoc Identities vs. Pseudonyms</h3>
-<p>...</p>
+
+<p>Hiding the fact itself that you are having a conversation with someone, is quite a bit harder. For your pre-existing contacts
+and real-world contacts, you could create a set of one-time-use identities, and give these out inside encrypted conversations. You
+can then shut down your public identity, and only communicate through these unrecognizable identities. As long as you hide the last
+mile where you retrieve the incoming messages onto a device at your physical location, an outsider will have a hard time finding out
+when you communicated with which of your friends.</p>
+
+<p>There are also situations when you want to publish a message to an open-ended audience, without exposing your real-world identity.
+For this, you can use a pseudonym. The Bitcoin software was published this way, for instance, and it is to this day unknown who is the
+real person or group of persons behind the <a href="https://en.wikipedia.org/wiki/Satoshi_Nakamoto">Satoshi Nakamoto</a> pseudonym.</p>
+
+<p>It's important not to use a pseudonym where what you need is ad-hoc identities. Many people use an online nickname which is unrelated
+to their birthname. In some situations, this will give some limited anonymity in interactions with other online identities, but in the end
+it's practically impossible to have normal everyday interactions under such a nickname without the link to your real-world identity becoming
+known.</p>
+
+<p>In both real-world and conversations, someone is bound to use your pseudonym and your real name in a careless combination and expose
+their relation sooner or later. Examples are <a href="https://en.wikipedia.org/wiki/Batman">Bruce Wayne</a> and
+<a href="https://en.wikipedia.org/wiki/Why_the_lucky_stiff">Jonathan Gilette</a>.
+
+<h3>Tor, freenet, and i2p</h3>
+<p>An important tool for anonymously accessing the internet is <a href="http://torproject.org/">Tor</a>. It mixes up your internet traffic
+by adding a few extra random hops to the route of each request. It is popular with political activists who need to worry about who is watching
+their actions. Do make sure though that your device is not backdoored, and that you don't reveal your identity by logging in to any of your
+email or other accounts when using Tor. Tor can anonymize your client traffic, but it is also possible to expose a server via Tor, such that
+other people can access your server without finding out where this server is physically located.</p>
+
+<p>When publishing important content anonymously, an alternative to running your own server as a Tor hidden service is to publish it on Freenet, or
+through Wikileaks or a journalist you trust. It may seem paradoxical that in such a case, encrypting and signing your messages with your PGP
+identity can form an important part of establishing the trust between you and the journalist, so you end up using verifiable identities to ultimately
+achieve anonymity.</p>
+
+<p>In practice, it is hard to keep multiple identities separate, and not many people use anonymity to protect their privacy on a day-to-day basis.
+A small group of people use PGP to hide the content of their personal communication from third-party eavesdropping, but this involves publishing your
+PGP identity, and unless you use ad-hoc identities, this probably actually hurts rather than helps your anonymity. Using a pseudonymous PGP identity
+may work to some extent, but in practice only one leak will be enough to link all communication under that pseudonym to your other pseudonyms and your
+real-world identity as a physical person.</p>
+
+<p>So in practice, I think we can achieve two things with online privacy and anonymity: first of all,
+freedom of speech for important messages, where it matters enough to go through extra trouble. This can be achieve using off-the-shelf technology.
+The main difficulty here is not technical, but human: you need a good poker face when people keep asking you "Are you [Batman/Nakamoto/...]?".</p>
+
+<p>The other thing we can achieve is an internet where conversations stay between the participants unless these participants choose to leak what
+was said. For the content of the conversation, this is already achieved by using an encrypted protocol like for instance WebRTC. I am not aware
+of any software application or protocol that automatically generates and uses ad-hoc identities between contacts, but you could do this manually:
+Whenever you send an email, use a randomly generated from and reply-to address which you will use only once, and include your signature inside the encrypted
+payload, so that only the intended recipient of your message will discover that this message was actually from you.</p>
+
+<p><a href="https://groups.google.com/forum#!forum/unhosted">Comments welcome!</a></p>
