@@ -86,11 +86,13 @@ conflicts say e.g. "I used X at the time, nowadays you may also use Y".
 *17: hard to follow and whole argument line feels a bit messy - label/number Charlie's options and add diagrams?
 *17: your "@fsfe.org" +address
 *17: bit of effort sentence to next paragraph
+*17: mention perfect forward secrecy
 *18: each blobs -s
 *18: check mega.co.nz claim again
 *18: that references -s
 *18: domination -> dominance
 *18: ask Zooko to respond to "uniqueness through domination (dominance)"
+*18: mention proof-of-work vs. proof-of-stake in context of uniqueness-through-dominance
 *18: hash back argument in last sentence holds no water - only covers second level, not the first.
 *19: anonymity next week -> and in episode 25
 *19: with +each+of+ several
