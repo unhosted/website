@@ -13,6 +13,14 @@
     <language>en-us</language>
     <ttl>40</ttl>
     <item>
+      <title>25. Anonymity</title>
+      <description>Episode 25 of Unhosted Adventures</description>
+      <pubDate>2014-07-08T12:00:00.000Z</pubDate>
+      <guid>https://unhosted.org/decentralize/25/Anonymity.html</guid>
+      <link>https://unhosted.org/decentralize/25/Anonymity.html</link>
+      <georss:point>10.2 104.0</georss:point>
+    </item>
+    <item>
       <title>24. Decentralizing the web by making it federated</title>
       <description>Episode 24 of Unhosted Adventures</description>
       <pubDate>2013-05-28T12:00:00.000Z</pubDate>
