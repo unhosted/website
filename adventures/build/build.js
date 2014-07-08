@@ -105,7 +105,7 @@ function writeOverviewPage(i) {
       + part4);
 }
 function getDate(i) {
-  var week = (i >= 24 ? i+58 : i);
+  var week = (i >= 25 ? i+57 : i);
   return new Date(zeroDate+week*7*86400*1000).toISOString();
 }
 function getNextTuesday() {
