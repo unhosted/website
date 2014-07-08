@@ -91,7 +91,7 @@ function writeEpisodes() {
           +(i+1 === 17 ? '../decentralize/' : '')
           +getFilename(i+1) + '">'+ episodes[i+1] +'</a></p>');
     if(i==24) {
-      next = '<p><strong>UPDATE 29 March 2014:</strong> Niklas, Adrian and I got an office in Berlin and worked on this plan during the summer, but after that decided we didn\'t have enough solid ground to actually launch it just yet. I will try to gather some partners and apply for the Shuttleworth fellowship grant again in November, and if that succeeds we hope to start in March 2015.</p><p>I will first work on <a href="http://remotestorage.io/">remoteStorage</a> and <a href="https://meute.5apps.com/">Meute</a> some more before finishing this blog series. Until then, check out my <a href="http://redecentralize.org/interviews/2014/03/26/12-michiel-unhosted.html">Redecentralize</a> interview, and if you have any questions, please post them on <a href="https://groups.google.com/forum#!forum/unhosted">the "Unhosted Web Apps" mailing list</a>!</p>';
+      next = '<p><strong>UPDATE 8 July 2014:</strong> Niklas, Adrian and I got an office in Berlin and worked on this plan during the summer, but after that decided we didn\'t have enough solid ground to actually launch it just yet. I will try to gather some partners and we currently plan to launch a closed beta in October 2014. The working title for this project is <a href="https://3pp.io/">Third Party People</a>. This year, I worked on <a href="http://remotestorage.io/">remoteStorage</a> and <a href="https://meute.5apps.com/">Meute</a>, and the third part of this blog series will contain things I learned while working on that. But first, this week and next I\'ll complete the "Decentralize" part, by discussing how anonymity and reputation can work on the decentralized internet.</p>'+next;
     }
     fs.writeFileSync('../'+getPart(i)+'/'+getFilename(i), part0 + title + part1 + header + source + next + part2 + makeEpisodesDiv(i)
         + part3 + part4);
@@ -109,7 +109,7 @@ function getDate(i) {
   return new Date(zeroDate+week*7*86400*1000).toISOString();
 }
 function getNextTuesday() {
-  var d = new Date(zeroDate+(latestEpisode+1+(latestEpisode>=25?57:0))*7*86400*1000),
+  var d = new Date(zeroDate+(latestEpisode+1+(latestEpisode>=24?57:0))*7*86400*1000),
     months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   return d.getUTCDate()
     +' '+months[d.getUTCMonth()]
