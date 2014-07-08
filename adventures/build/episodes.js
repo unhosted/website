@@ -26,7 +26,7 @@ module.exports = {
     "search": "How to locate resources",
     "neutrality": "Network neutrality, ubiquitous wifi, and DRM",
     "federation": "Decentralizing the web by making it federated",
-    "anonymity": "even since before Snowden, people often assume unhosted is about privacy/anonymity; it's not. short-lived identities vs pseudonymity, Tor/freenet/i2p, freedom of expression (internet & politics)",
+    "anonymity": "Anonymity",//even since before Snowden, people often assume unhosted is about privacy/anonymity; it's not. short-lived identities vs pseudonymity, Tor/freenet/i2p, freedom of expression (internet & politics)
     "reputation": "Decentralized reputation systems",//decentralized (pseudo-)identities only work along pre-existing out-of-band friendships. stackoverflow/hackernews, twitter/linkedin, peer education, gnunet. bootstrap reputation from web2.0 identities
   },//26
   "Practice": {
