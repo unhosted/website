@@ -105,10 +105,11 @@ function writeOverviewPage(i) {
       + part4);
 }
 function getDate(i) {
-  return new Date(zeroDate+i*7*86400*1000).toISOString();
+  var week = (i >= 24 ? i+58 : i);
+  return new Date(zeroDate+week*7*86400*1000).toISOString();
 }
 function getNextTuesday() {
-  var d = new Date(zeroDate+(latestEpisode+1)*7*86400*1000),
+  var d = new Date(zeroDate+(latestEpisode+1+(latestEpisode>=25?57:0))*7*86400*1000),
     months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   return d.getUTCDate()
     +' '+months[d.getUTCMonth()]
