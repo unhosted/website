@@ -1,4 +1,4 @@
-var latestEpisode = 25,
+var latestEpisode = 26,
   buildAhead = 0,
   zeroDate = 1355227200000;
 
