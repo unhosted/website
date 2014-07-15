@@ -40,8 +40,8 @@ in how the economy works when people care ever more about their number of Twitte
 <p>A very interesting system implementing reputation on top of pseudonymity is <a href="https://gnunet.org/">gnunet</a>. It uses the principle that
 a newly created user account should have a value of zero, otherwise an adversary can simply destroy their reputation and then create a new user account.</p>
 
-<p>Reputation in gnunet is built up using a pessimistic tit-for-tat scheme: don't trust your neighbours until they invest in their relationship with you
-by doing you a favor [to do: check].</p>
+<p>Reputation in gnunet is built up using a sort of tit-for-tat scheme, which they call an <a href="https://gnunet.org/ebe">excess-based economic model</a>, since newcomers can only use the network's excess capacity. This boils down to: don't trust your neighbours a priori; at first, you will only answer their requests when you're idle. Over time, allow them to invest in their relationship with you
+by answering <em>your</em> queries, while not sending too many queries themselves. As their score increases, you will eventually allow them to send requests at higher effective priorities as well.</p>
 
 <h2>Peer education</h2>
 <p>Universities have an often centuries-old reputation, giving them the power to judge which students pass and which students fail their tests, even though
