@@ -26,57 +26,57 @@
 
 <!-- Storing data locally -->
 
-Today we'll look at storing and caching data. An unhosted web app does not store data on the server from which its source code was served.
-It stores data either locally inside the browser, or at the user's own server.
+<p>Today we'll look at storing and caching data. An unhosted web app does not store data on the server from which its source code was served.
+It stores data either locally inside the browser, or at the user's own server.</p>
 
-While using an unhosted web app, if the user refreshes the page, all JavaScript variables are removed from memory.
+<p>While using an unhosted web app, if the user refreshes the page, all JavaScript variables are removed from memory.
 This does not happen when pressing the &quot;back&quot; or &quot;forward&quot; button, although pressing &quot;back&quot;,
-&quot;refresh&quot;, &quot;forward&quot; does flush the memory, also for the forward page.
+&quot;refresh&quot;, &quot;forward&quot; does flush the memory, also for the forward page.</p>
 
-It's possible to warn the user when they are about to leave the page, using the
+<p>It's possible to warn the user when they are about to leave the page, using the
 <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window.onbeforeunload">beforeunload event</a>.
 However, in-memory data will still be lost when the user shuts down their computer, so for any app that
-manages important data, it's necessary to save the data in something more persistent than JavaScript memory.
+manages important data, it's necessary to save the data in something more persistent than JavaScript memory.</p>
 
 <h3>Places that cache remote data</h3>
 
-Another reason to store data locally, is to cache a copy of remote data, so that it's available faster, more reliably,
+<p>Another reason to store data locally, is to cache a copy of remote data, so that it's available faster, more reliably,
 and more efficiently. Http is built to allow transparent caching at any point. Your ISP is probably caching popular
 web pages to avoid retrieving them all the time. When your browser sees a "304 Not Modified" response to a conditional
-GET request, this may come from the cache at the ISP level, or at any other point along the way.
+GET request, this may come from the cache at the ISP level, or at any other point along the way.</p>
 
-However, when syncing user data over http, you would usually be using https for end-to-end encryption, so between the
+<p>However, when syncing user data over http, you would usually be using https for end-to-end encryption, so between the
 point where the data leaves the server or server-farm, and the point where the browser receives it, the data is
-encrypted, and no caching is possible.
+encrypted, and no caching is possible.</p>
 
-Your browser also caches the pages and documents it retrieves, so it's even possible that an XHR request looks like it
-got a 304 reponse code, but really the request didn't even take place. The browser just gave you the document from cache.
+<p>Your browser also caches the pages and documents it retrieves, so it's even possible that an XHR request looks like it
+got a 304 reponse code, but really the request didn't even take place. The browser just gave you the document from cache.</p>
 
-Then there are ServiceWorkers and its pre-decessor, appCache, which allow for yet another layer of client-side caching.
+<p>Then there are ServiceWorkers and its pre-decessor, appCache, which allow for yet another layer of client-side caching.</p>
 
-In your application code, you probably also cache this data in memory as JavaScript objects, which you then may also
-save to IndexedDB or another in-browser data store.
+<p>In your application code, you probably also cache this data in memory as JavaScript objects, which you then may also
+save to IndexedDB or another in-browser data store.</p>
 
-And finally, the data you see on the screen is stored in the DOM, so when your app needs to re-access data it retrieved
-and displayed earlier, it could also just query the DOM to see what is there.
+<p>And finally, the data you see on the screen is stored in the DOM, so when your app needs to re-access data it retrieved
+and displayed earlier, it could also just query the DOM to see what is there.</p>
 
-So if all these layers are active, then one piece of data may be stored (1) on-disk server-side, (2) in memcache server-side,
+<p>So if all these layers are active, then one piece of data may be stored (1) on-disk server-side, (2) in memcache server-side,
 (3) in process memory server-side, (4) at a reverse proxy server-side, (5) in the browser's http cache, (6) in appcache,
 (7) in a ServiceWorker cache, (8) in xhr.response, (9) in memory client-side, (10) in the DOM. For bigger amounts of data it
-can obviously be inefficient to store the same piece of data so many times, but for smaller pieces, caching can lead to a bit speedup.
+can obviously be inefficient to store the same piece of data so many times, but for smaller pieces, caching can lead to a bit speedup.</p>
 
 <h3>Persisting client-side data</h3>
 
-Whether you're caching remote data or storing data only locally, you'll soon end up using one of the browser's persistent stores.
-Do not use localStorage, because it unnecessarily blocks the browser's execution thread. Use localForage instead.
+<p>Whether you're caching remote data or storing data only locally, you'll soon end up using one of the browser's persistent stores.
+Do not use localStorage, because it unnecessarily blocks the browser's execution thread. Use localForage instead.</p>
 
-There's also a file system API for the web, but it requires elevated privileges so that's not so practical.
+<p>There's also a file system API for the web, but it requires elevated privileges so that's not so practical.</p>
 
-When working directly with IndexedDB, the performance may not be what you had hoped for, especially when storing thousands of small items.
+<p>When working directly with IndexedDB, the performance may not be what you had hoped for, especially when storing thousands of small items.</p>
 
 
 
-* IndexedDB - commitcache, AbortErrors and how to predict them, UnknownErrors
+<p>* IndexedDB - commitcache, AbortErrors and how to predict them, UnknownErrors</p>
 
       <p>The next episode will appear on Tuesday 29 July, 2014.</p>    </article>      
 	
