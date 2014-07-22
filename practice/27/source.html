@@ -31,8 +31,8 @@ GET request, this may come from the cache at the ISP level, or at any other poin
 
 <p>However, when syncing user data over the web, you would usually be using a protocol that is end-to-end encrypted at the transport
 layer, like https, spdy or wss, so between the
-point where the data leaves the server or server-farm, and the point where the browser receives it, the data is
-unrecognizable, and no caching is possible.</p>
+point where the data leaves the server or server farm, and the point where the browser receives it, the data is
+unrecognizable and no caching is possible.</p>
 
 <p>Your browser also caches the pages and documents it retrieves, so it's even possible that an XHR request looks like it
 got a 304 reponse code, but really the request didn't even take place. The browser just fulfilled the XHR request with
@@ -53,7 +53,8 @@ and displayed earlier, it could also just query the DOM to see what is there.</p
 <p>So even with transport layer encryption, if all these caching layers are active, then one piece of data may be stored
 (1) on-disk server-side, (2) in database server memory or memcache server-side,
 (3) possibly in process memory server-side, (4) at a reverse proxy server-side, (5) in the browser's http cache, (6) in appcache,
-(7) maybe in a ServiceWorker cache, (8) in xhr.response, (9) in memory client-side, (10) in the DOM. For bigger amounts of data it
+(7) maybe in a ServiceWorker cache, (8) in <code>xhr.response</code>,
+(9) in memory client-side, (10) in the DOM. For bigger amounts of data it
 can obviously be inefficient to store the same piece of data so many times, but for smaller pieces, caching can lead to a big speedup.
 It's definitely advisable to use one or two layers of client-side caching - for instance IndexedDB, combined with DOM.</p>
 
@@ -64,7 +65,7 @@ It's definitely advisable to use one or two layers of client-side caching - for 
 If you're looking for an easy way to store a tiny bit of data, then use
 <a href="https://hacks.mozilla.org/2014/02/localforage-offline-storage-improved/">localForage</a> instead.</p>
 
-<p>There's also a <a href="https://developer.mozilla.org/en-US/docs/Web/API/FileSystem">FileSystem</a> API, but it was never adopted by any browser other than Chrome, so that's not (yet) practical.</p>
+<p>There's also a <a href="https://developer.mozilla.org/en-US/docs/Web/API/FileSystem">FileSystem</a> API, but it was never adopted by any browser other than Chrome, so that's not (yet) practical. That brings us to <a href="https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API">IndexedDB</a>.</p>
 
 <p>When working directly with IndexedDB, the performance may not be what you had hoped for, especially when storing thousands of small items. The performance of IndexedDB relies heavily on batching writes and reads into transactions that get committed at once. IndexedDB transactions get committed automatically when the last callback from an operation has finished.</p>
 
@@ -74,32 +75,35 @@ If you're looking for an easy way to store a tiny bit of data, then use
 
 <h3>Fixing IndexedDB by adding a commit cache</h3>
 
-<p>In my case, I found this out when I decided to store all 20,000 messages from my email inbox. The data representation I had chosen
-stores each message by messageID in a tree structure, and additionally maintains an linked list index for messages from a each sender,
+<p>In my case, I found this out when I decided to store all 20,000 messages from my email inbox in an unhosted web app.
+The data representation I had chosen
+stores each message by messageID in a tree structure, and additionally maintains a linked-list index for messages from each sender,
 and a chronological tree index, meaning there are about 80,000 items in my IndexedDB database (probably about 100Mb).</p>
 
 <p>Storing a thousand items one-by-one in IndexedDB takes about 60 seconds, depending on your browser and system. It is clear that this makes IndexedDB unusable, unless you batch your writes together. In version 0.10 of <a href="http://remotestorage.io/integrate/">remotestorage.js</a>
 we implemented a &quot;commit cache&quot;, which works as follows:</p>
-<ol>
+<ul>
 <li>If no other write request is running, we pass the new write request straight to IndexedDB.</li>
 <li>If another write request is still running, then we don't make the request to IndexedDB yet. Instead, we queue it up.</li>
 <li>Whenever a write request finishes, we check if any other requests are queued, and if so, we batch them up into one new request.</li>
-<li>There is always at most one IndexedDB request running at a time.</li>
-</ol>
+<li>There is always at most one IndexedDB write request running at a time.</li>
+<li>Read requests are checked against the commit cache first, and the new value from a pending write is served if present.</li>
+<li>Read requests that don't match any of the pending writes, are passed straight to IndexedDB, without any queueing or batching.</li>
+</ul>
 
 <h3>Other problems when working with IndexedDB</h3>
 
-<p>With the commit cache in place, IndexedDB works pretty well. Just make sure you prevent page refreshes if an IndexedDB request is running, otherwise you will see an AbortError after the page refresh. Before we were using commit cache, I often saw thousands of AbortErrors happening after a page refresh. This would sometimes take 10 or 15 minutes before the page was usable again.</p>
+<p>With the commit cache in place, IndexedDB works pretty well. Just make sure you prevent page refreshes if an IndexedDB request is running, otherwise you will see an AbortError after the page refresh. Before I was using this commit cache, I often saw thousands of AbortErrors happening after a page refresh. This would sometimes take 10 or 15 minutes before the page was usable again.</p>
 
 <p>If the user runs out of disk space, you'll get an UnknownError which you can't catch from your JavaScript code. In general, it's good to
 keep track of which request you have sent to IndexedDB, and whether it is still running. I would advice against sending a new write request to
-IndexedDB if the previous one is still running.</p>
+IndexedDB if the previous one is still running, to prevent the browser from becoming unresponsive.</p>
 
-<p>It's also worth that <a href="http://caniuse.com/indexeddb">Safari 7 lacks IndexedDB support</a>, so you probably want to use a fallback
+<p>It's also worth noting that <a href="http://caniuse.com/indexeddb">Safari 7 lacks IndexedDB support</a>, so you probably want to use a fallback
 or polyfill for that. In the case of remotestorage.js we use a fallback to localStorage, but since localStorage blocks the JavaScript execution
 thread, it's better to use a
 <a href="http://nparashuram.com/IndexedDBShim/">polyfill over WebSQL</a> so that you can serve Safari 7 users.</p>
 
-<p>But in general, IndexedDB is one of the biggest friends of the unhosted web app developer! Depending on your application, you'll probably have to store data in there. This can be data that will never leave the browser, data that is on its way to the user's server or to some third-party server, or data that you retrieved from somewhere, and that you want to cache.</p>
+<p>But in general, depending on your application, you'll probably have to store data in IndexedDB. This can be data that will never leave the browser, data that is on its way to the user's server or to some third-party server, or data that you retrieved from somewhere, and that you want to cache. IndexedDB is one of the biggest friends of the unhosted web app developer!</p>
 
 <p>Next week we'll look at sync. Comments welcome!</p>
