@@ -30,15 +30,13 @@ module.exports = {
     "reputation": "Decentralized reputation systems",//decentralized (pseudo-)identities only work along pre-existing out-of-band friendships. stackoverflow/hackernews, twitter/linkedin, peer education, gnunet. bootstrap reputation from web2.0 identities
   },//26
   "Practice": {
-    //html5: css, fonts, canvas, WebGL, audio, video, svg, emscripten, webrtc
-    //IndexedDB and the commit cache
-    //testing, profiling, versioning, release management
-    //routing, data binding, (what else do frameworks do?), OPA frameworks (backbone, ember, angular)
-    //offline-first: render local data; asynchronous synchronization
-    //caching strategies, PrefixTree
-    //tree-based sync
-    //the offline-first page load & the offline-first button click
-    //sync libs (dropbox.js, nimbusbase, pouchdb, remotestorage.js)
-    //conclusion (& downloadable version)
-  }//36
+    "browser storage": "Persisting data in browser storage",
+    "sync": "Synchronizing browser storage with server storage",//journal vs tree, nodes and versions, caching strategies, keep/revert events
+    "offline first": "Offline-first web app design",//async sync, widget states, anonymous mode, expiring tokens
+    "baas": "Backend-as-a-Service platforms",//open source ones = noBackend frameworks
+    "per-user backend": "Allowing the user to choose the backend server",//prop./open source/open protocol
+    "per-user clients": "Client-side libraries for per-user backend",//dropbox.js, nimbusbase, remotestorage.js, hoodie.js
+    "client-side frontend": "Client-side frontend development",//mvc, routing, templating, responsive, progr. enh., testing
+    "conclusions": "Conclusions"//the web for apps, minimal per-user servers, the road ahead (towards DHT-based?), thanks again, everyone!
+  }//34
 }

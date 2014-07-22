@@ -32,7 +32,10 @@ function getPart(i) {
   if(i<=16) {
     return 'adventures';
   }
-  return 'decentralize';
+  if(i<=26) {
+    return 'decentralize';
+  }
+  return 'practice';
 }
 
 function getFilename(i) {
@@ -56,6 +59,9 @@ function makeEpisodesDiv(current) {
     if(i==17) {
       str += '\n<h4>Decentralize:</h4>\n';
     }
+    if(i==27) {
+      str += '\n<h4>Practice:</h4>\n';
+    }
     spaces = '';
     if(i == current) {
       str += '        <p><strong>'+ spaces + i +'. '+ abbrev[i] +'</strong></p>\n';
@@ -70,7 +76,7 @@ function processTitles() {
   episodes = [];
   abbrev = [];
   var i = 1;
-  for(var part in {Adventures: true, Decentralize: true}) {
+  for(var part in {Adventures: true, Decentralize: true, Practice: true}) {
    for(var j in episodesDict[part]) {
       episodes[i] = episodesDict[part][j];
       abbrev[i] = j;
@@ -89,6 +95,7 @@ function writeEpisodes() {
       header = '      <h2>'+ i +'. '+ episodes[i] +'</h2>\n\n',
       next = (i==latestEpisode?'\n      <p>The next episode will appear on Tuesday '+getNextTuesday()+'.</p>':'\n      <p>Next: <a href="../'
           +(i+1 === 17 ? '../decentralize/' : '')
+          +(i+1 === 27 ? '../practice/' : '')
           +getFilename(i+1) + '">'+ episodes[i+1] +'</a></p>');
     if(i==24) {
       next = '<p><strong>UPDATE 8 July 2014:</strong> Niklas, Adrian and I got an office in Berlin and worked on this plan during the summer, but after that decided we didn\'t have enough solid ground to actually launch it just yet. I will try to gather some partners and we currently plan to launch a closed beta in October 2014. The working title for this project is <a href="https://3pp.io/">Third Party People</a>. This year, I worked on <a href="http://remotestorage.io/">remoteStorage</a> and <a href="https://meute.5apps.com/">Meute</a>, and the third part of this blog series will contain things I learned while working on that. But first, this week and next I\'ll complete the "Decentralize" part, by discussing how anonymity and reputation can work on the decentralized internet.</p>'+next;
