@@ -26,57 +26,109 @@
 
 <!-- Storing data locally -->
 
-<p>Today we'll look at storing and caching data. An unhosted web app does not store data on the server from which its source code was served.
+<p>Today we'll look at storing and caching data. As we said in the <a href="/">definition of an unhosted web app</a>, it does not send the user's data to its server (the one from which its source code was served).
 It stores data either locally inside the browser, or at the user's own server.</p>
 
-<p>While using an unhosted web app, if the user refreshes the page, all JavaScript variables are removed from memory.
+<p>The easiest way to store data in an unhosted web app is in the DOM, or in JavaScript variables. However, this technique has one big
+dangerous enemy: the page refresh.</p>
+
+<p>Refreshing a page in a hosted web app usually means the data that is displayed on the page, is retrieved again from the server.
+But while using an unhosted web app,
+No user data is stored on the server, so unless the app takes care to store it locally or at the user's server,
+if the user refreshes the page, all data that is stored in JavaScript variables, is removed from memory.
 This does not happen when pressing the &quot;back&quot; or &quot;forward&quot; button, although pressing &quot;back&quot;,
 &quot;refresh&quot;, &quot;forward&quot; does flush the memory, also for the forward page.</p>
 
 <p>It's possible to warn the user when they are about to leave the page, using the
 <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window.onbeforeunload">beforeunload event</a>.
-However, in-memory data will still be lost when the user shuts down their computer, so for any app that
-manages important data, it's necessary to save the data in something more persistent than JavaScript memory.</p>
+Also, the current URL can be used as a tiny data storage which is page refresh resistant,
+and it is often used for storing the current state of menu and dialog navigation.
+However, in-memory data as well as the current URL will still be lost when the user shuts down their computer, so for any app that
+manages important data, it's necessary to save the data in something more persistent than DOM or JavaScript memory.</p>
 
 <h3>Places that cache remote data</h3>
 
-<p>Another reason to store data locally, is to cache a copy of remote data, so that it's available faster, more reliably,
+<p>Apart from surviving the page refresh, and the device reboot, another reason to store data locally,
+is to cache,
+so that a copy of remote data is available faster, more reliably,
 and more efficiently. Http is built to allow transparent caching at any point. Your ISP is probably caching popular
 web pages to avoid retrieving them all the time. When your browser sees a "304 Not Modified" response to a conditional
 GET request, this may come from the cache at the ISP level, or at any other point along the way.</p>
 
-<p>However, when syncing user data over http, you would usually be using https for end-to-end encryption, so between the
+<p>However, when syncing user data over the web, you would usually be using a protocol that is end-to-end encrypted at the transport
+layer, like https, spdy or wss, so between the
 point where the data leaves the server or server-farm, and the point where the browser receives it, the data is
-encrypted, and no caching is possible.</p>
+unrecognizable, and no caching is possible.</p>
 
 <p>Your browser also caches the pages and documents it retrieves, so it's even possible that an XHR request looks like it
-got a 304 reponse code, but really the request didn't even take place. The browser just gave you the document from cache.</p>
+got a 304 reponse code, but really the request didn't even take place. The browser just fulfilled the XHR request with
+a document from cache.</p>
 
-<p>Then there are ServiceWorkers and its pre-decessor, appCache, which allow for yet another layer of client-side caching.</p>
+<p>Then there are
+<a href="https://developer.mozilla.org/en-US/docs/Mozilla/Projects/Social_API/Service_worker_API_reference">ServiceWorkers</a>
+and their predecessor,
+<a href="https://developer.mozilla.org/de/docs/Web/HTML/Using_the_application_cache">AppCache</a>, which allow for yet another
+layer of client-side caching.</p>
 
-<p>In your application code, you probably also cache this data in memory as JavaScript objects, which you then may also
-save to IndexedDB or another in-browser data store.</p>
+<p>In your application code, you probably also cache data that comes from XHR requests in memory as JavaScript objects,
+which you then may also save to IndexedDB or another in-browser data store.</p>
 
 <p>And finally, the data you see on the screen is stored in the DOM, so when your app needs to re-access data it retrieved
 and displayed earlier, it could also just query the DOM to see what is there.</p>
 
-<p>So if all these layers are active, then one piece of data may be stored (1) on-disk server-side, (2) in memcache server-side,
-(3) in process memory server-side, (4) at a reverse proxy server-side, (5) in the browser's http cache, (6) in appcache,
-(7) in a ServiceWorker cache, (8) in xhr.response, (9) in memory client-side, (10) in the DOM. For bigger amounts of data it
-can obviously be inefficient to store the same piece of data so many times, but for smaller pieces, caching can lead to a bit speedup.</p>
+<p>So even with transport layer encryption, if all these caching layers are active, then one piece of data may be stored
+(1) on-disk server-side, (2) in database server memory or memcache server-side,
+(3) possibly in process memory server-side, (4) at a reverse proxy server-side, (5) in the browser's http cache, (6) in appcache,
+(7) maybe in a ServiceWorker cache, (8) in xhr.response, (9) in memory client-side, (10) in the DOM. For bigger amounts of data it
+can obviously be inefficient to store the same piece of data so many times, but for smaller pieces, caching can lead to a big speedup.
+It's definitely advisable to use one or two layers of client-side caching - for instance IndexedDB, combined with DOM.</p>
 
 <h3>Persisting client-side data</h3>
 
 <p>Whether you're caching remote data or storing data only locally, you'll soon end up using one of the browser's persistent stores.
-Do not use localStorage, because it unnecessarily blocks the browser's execution thread. Use localForage instead.</p>
+<strong>Do not ever use localStorage</strong>, because it unnecessarily blocks the browser's execution thread.
+If you're looking for an easy way to store a tiny bit of data, then use
+<a href="https://hacks.mozilla.org/2014/02/localforage-offline-storage-improved/">localForage</a> instead.</p>
 
-<p>There's also a file system API for the web, but it requires elevated privileges so that's not so practical.</p>
+<p>There's also a <a href="https://developer.mozilla.org/en-US/docs/Web/API/FileSystem">FileSystem</a> API, but it was never adopted by any browser other than Chrome, so that's not (yet) practical.</p>
 
-<p>When working directly with IndexedDB, the performance may not be what you had hoped for, especially when storing thousands of small items.</p>
+<p>When working directly with IndexedDB, the performance may not be what you had hoped for, especially when storing thousands of small items. The performance of IndexedDB relies heavily on batching writes and reads into transactions that get committed at once. IndexedDB transactions get committed automatically when the last callback from an operation has finished.</p>
 
+<p>When you don't care about performance, because maybe you only store one item every 10 seconds, then this works fine. It's also useless in this case; transactions only matter when you update multiple pieces of data together. Typically, you would edit an item from a collection, and then also update the index of this collection, or for instance a counter of how many items the collection contains. In old-fashioned computer science, data in a database is assumed to be consistent with itself, so transactions are necessary.</p>
 
+<p>This way of designing databases was largely abandoned in the <a href="http://en.wikipedia.org/wiki/NoSQL">NoSQL</a> revolution, about 5 years ago, but IndexedDB still uses it. To minimize the impact on the brain of the web developer, transactions are committed magically, and largely invisibly to the developer. As soon as you start storing more than a thousand items in IndexedDB, and reading and writing them often, this goes horribly wrong.</p>
 
-<p>* IndexedDB - commitcache, AbortErrors and how to predict them, UnknownErrors</p>
+<h3>Fixing IndexedDB by adding a commit cache</h3>
+
+<p>In my case, I found this out when I decided to store all 20,000 messages from my email inbox. The data representation I had chosen
+stores each message by messageID in a tree structure, and additionally maintains an linked list index for messages from a each sender,
+and a chronological tree index, meaning there are about 80,000 items in my IndexedDB database (probably about 100Mb).</p>
+
+<p>Storing a thousand items one-by-one in IndexedDB takes about 60 seconds, depending on your browser and system. It is clear that this makes IndexedDB unusable, unless you batch your writes together. In version 0.10 of <a href="http://remotestorage.io/integrate/">remotestorage.js</a>
+we implemented a &quot;commit cache&quot;, which works as follows:</p>
+<ol>
+<li>If no other write request is running, we pass the new write request straight to IndexedDB.</li>
+<li>If another write request is still running, then we don't make the request to IndexedDB yet. Instead, we queue it up.</li>
+<li>Whenever a write request finishes, we check if any other requests are queued, and if so, we batch them up into one new request.</li>
+<li>There is always at most one IndexedDB request running at a time.</li>
+</ol>
+
+<h3>Other problems when working with IndexedDB</h3>
+
+<p>With the commit cache in place, IndexedDB works pretty well. Just make sure you prevent page refreshes if an IndexedDB request is running, otherwise you will see an AbortError after the page refresh. Before we were using commit cache, I often saw thousands of AbortErrors happening after a page refresh. This would sometimes take 10 or 15 minutes before the page was usable again.</p>
+
+<p>If the user runs out of disk space, you'll get an UnknownError which you can't catch from your JavaScript code. In general, it's good to
+keep track of which request you have sent to IndexedDB, and whether it is still running. I would advice against sending a new write request to
+IndexedDB if the previous one is still running.</p>
+
+<p>It's also worth that <a href="http://caniuse.com/indexeddb">Safari 7 lacks IndexedDB support</a>, so you probably want to use a fallback
+or polyfill for that. In the case of remotestorage.js we use a fallback to localStorage, but since localStorage blocks the JavaScript execution
+thread, it's better to use a
+<a href="http://nparashuram.com/IndexedDBShim/">polyfill over WebSQL</a> so that you can serve Safari 7 users.</p>
+
+<p>But in general, IndexedDB is one of the biggest friends of the unhosted web app developer! Depending on your application, you'll probably have to store data in there. This can be data that will never leave the browser, data that is on its way to the user's server or to some third-party server, or data that you retrieved from somewhere, and that you want to cache.</p>
+
+<p>Next week we'll look at sync. Comments welcome!</p>
 
       <p>The next episode will appear on Tuesday 29 July, 2014.</p>    </article>      
 	
