@@ -40,7 +40,7 @@ This does not happen when pressing the &quot;back&quot; or &quot;forward&quot; b
 &quot;refresh&quot;, &quot;forward&quot; does flush the memory, also for the forward page.</p>
 
 <p>It's possible to warn the user when they are about to leave the page, using the
-<a href="https://developer.mozilla.org/en-US/docs/Web/API/Window.onbeforeunload">beforeunload event</a>.
+<a href="https://developer.mozilla.org/en-US/docs/Web/Events/beforeunload">beforeunload event</a>.
 Also, the current URL can be used as a tiny data storage which is page refresh resistant,
 and it is often used for storing the current state of menu and dialog navigation.
 However, in-memory data as well as the current URL will still be lost when the user shuts down their computer, so for any app that
