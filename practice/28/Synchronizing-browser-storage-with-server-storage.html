@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="description" content="weekly handbook about unhosted web apps" />
+    <title>unhosted web apps 28: sync</title>
+    <link rel="stylesheet" href="/adventures/hljs/default.min.css" />
+    <link rel="hub" href="http://pubsubhubbub.appspot.com/"/>
+    <link rel="updates alternate" type="application/atom+xml" href="/adventures/feed.atom" />
+    <link rel="author" type="text/html" href="https://michielbdejong.com/"/>
+
+    <script src="/adventures/hljs/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <link rel="stylesheet" href="/adventures/adventures.css" />
+  </head>
+
+  <body>
+    <article>
+      <header>
+        <h1>unhosted web apps</h1>
+        <h2>freedom from web 2.0's monopoly platforms</h2>
+      </header>
+      
+      <h2>28. Synchronizing browser storage with server storage</h2>
+
+<p>When you use multiple devices, it's practical to have your data automatically copied from one device to another. Also, when you want to publish data on your web site to share it with other people, it's necessary to copy it from your device to your server.</p>
+
+<p>Going one step further, you can use a setup in which the server, as well as each device, is considered to contain a version of essentially one and the same data set, instead of each holding their own independent one. In this case, copying data from device to server or from server to device always amounts to bringing the data set version at the target location up to date with the data set version at the source location.</p>
+
+<p>When this happens continuously in both directions, the locations stay up-to-date with each other; the version of the data set each contains is always either the same, or in the process of becoming the same; the timing at which the data changes to a new version is almost the same at both locations. This is where the term &quot;synchronization&quot; (meaning timed together) comes from.</p>
+
+<p>In practice, there can be significant delays in updating the data version in all locations, especially if some of the synchronized devices are switched off or offline. Also, there can be temporary forks which get merged again in later, meaning the data set doesn't even necessarily go through the same linear sequence of versions on each location. We still call this coordination &quot;sync&quot; then, even though what we mean by it is more the coordination of the eventual version than of the timing at which the version transitions take place.</p>
+
+<h3>Star-shaped versus mesh-shaped sync</h3>
+<p>In the remoteStorage protocol there is only one server, and an unlimited number of clients. Versions in the form of ETags are generated on the server, and the server also takes care of preventing read-then-write glitches by deciding on conditional writes.</p>
+<p>This means a client keeps track of which version it thinks is on the server, and sends a conditional request to update it whenever its own data set has been changed. The client can also use conditional GETs that make sure it receives newer versions from the server whenever they exist.</p>
+<p>Essentially, the server is playing a passive role in the sense that it never initiates a data transfer. It is always the client that takes the initiative. The server always keeps only the latest version of the data, and this is the authoritive &quot;current&quot; version of the data set. It is up to each client to stay in sync with the server. The client can be said to keep two-dimensional
+<a href="http://en.wikipedia.org/wiki/Vector_clock">vector clock</a>, with one dimension being its local version, and the other one being the latest server version that this client is aware of.</p>
+<p>In mesh-shaped sync, each node plays an equivalent role, and no particular node is the server or master copy. Each node will typically keep a vector clock representing which versions it thinks various other nodes are at. See
+Dominic Tarr's <a href="https://github.com/dominictarr/scuttlebutt">ScuttleButt</a> for an example.</p>
+
+<h3>Tree-based versus Journal-based sync</h3>
+<p>In <a href="http://couchdb.apache.org/">CouchDB</a>, each node keeps a log (journal) of which changes the data set went through as a whole, and other nodes can subscribe to this stream. The destination node can poll the source node for new changes periodically, or the source node can pro-actively contact the destination node to report a new entry in the journal. This works particularly well for master-slave replication, where the source node is authorative, and where both nodes keep a copy of the whole data set.</p>
+<p>When some parts of the data set are more important than others, it can help to use tree-based sync: give the data set a tree structure, and you can sync any subtree without worrying about other parts of the tree at that time.</p>
+<p>It's also possible to simultaneously copy one part of the tree from node A to node B, while copying a different part from B to A. Tree-based sync is also more efficient when a long chain of changes has only a small effect - for instance because one value gets changed back and forth many times. Tree-based sync only compares subtrees between the two nodes, and narrows down efficiently where the two data sets currently differ, regardless of how both datasets got into that state historically.</p>
+
+<h3>Asynchronous Synchronization and Keep/Revert events</h3>
+<p>When all nodes are constantly online, it's possible to synchronize all changes in real-time. This avoids the possibility of forks and conflicts occurring. But often, the network is slow or unreliable, and it's better for a node to get on with what it's doing, even though not all changes have been pushed out or received yet. I call this <a href="https://github.com/offlinefirst/research/issues/9">asynchronous synchronization</a>, because the synchronization process is not synchronized with the local process that is interacting with the data set.</p>
+<p>When remote changes happen while local changes are pending to be pushed out, conflicts may occur. When this happens in the remoteStorage protocol, the pre-condition of the PUT or DELETE request will fail, and the client is informed of what the ETag of the current remote version is. The client saves this in its vector clock representation, and schedules a GET for the retrieval of the remote version.</p>
+<p>Since the app will already have moved on, taking its local version (with the unpushed changes) as its truth, the app code needs to be informed that a change happened remotely. The way we signal this in the 0.10 API of remotestorage.js is as an incoming change event with origin <code>'conflict'</code>.</p>
+<p>The app code may treat all incoming changes the same, simply updating the view to represent the new situation. In this case, it will look to the user like they first successfully changed the data set from version 1 to version 2, and then from another device, it was changed from version 2 to version 3.</p>
+<p>The app may give extra information to the user, saying &quot;watch out! Your version 2 was overwritten, click here to revert, or here to keep the change to version 3&quot;. This is why I call these events &quot;keep/revert&quot; events, you simply keep the change to let the server version win, or revert it (with a new outgoing change, going from version 3 to version 2) to let the client version win.</p>
+<p>Of course, from the server's point of view, the sequence of events is different: it went from version 1 to version 3, and then a failed attempt came from the client to change to version 2.</p>
+
+<h3>Caching Strategies</h3>
+<p>Since the remoteStorage protocol was designed to support tree-based sync, whenever a change happens in a subtree, the ETag of the root of that subtree also changes. The folder description which a client receives when doing a GET to a folder URL also conveniently contains all the ETags of subfolders and documents in the folder. That way, a client only needs to poll the root of a subtree to find out if any of potentially thousands of documents in that subtree have changed or not.</p>
+<p>In remotestorage.js we support three caching strategies: FLUSH, SEEN, and ALL. FLUSH means a node is forgotten (deleted from local storage) as soon as it is in sync with the server. Only nodes with unpushed outgoing changes are stored locally.</p>
+<p>In the SEEN strategy (the default), all nodes that have passed through will be cached locally, and the library will keep that copy up-to-date until the user disconnects their remote storage.</p>
+<p>In the ALL strategy, remotestorage.js will pro-actively retrieve all nodes, and keep them in sync. Caching strategies can be set per subtree, and the strategy set on the smallest containing subtree of a node is the one that counts.</p>
+
+      <p>The next episode will appear on Tuesday 5 August, 2014.</p>    </article>      
+	
+    <div class="logo">
+      <img src="../../img/island-color.png" />
+    </div>
+    
+    <nav>
+      <div>
+
+<h4>Overview:</h4>
+        <p> i. <a href="/">definition</a></p>
+        <p> ii. <a href="/getting-started/">getting started</a></p>
+        <p> iii. <a href="/apps/">example apps</a></p>
+        <p> iv. <a href="/people/">people</a></p>
+        <p> v. <a href="/events/">events</a></p>
+        <p> vi. <a href="/tools/">dev tools</a></p>
+        <p> vii. <a href="https://groups.google.com/forum/#!forum/unhosted">forum</a></p>
+
+<h4>Adventures:</h4>
+        <p> 1. <a href="/adventures/1/Personal-servers-and-unhosted-web-apps.html">intro</a></p>
+        <p> 2. <a href="/adventures/2/An-unhosted-editor.html">editor</a></p>
+        <p> 3. <a href="/adventures/3/Setting-up-your-personal-server.html">server</a></p>
+        <p> 4. <a href="/adventures/4/WebSockets.html">WebSockets</a></p>
+        <p> 5. <a href="/adventures/5/Facebook-and-Twitter-from-nodejs.html">social</a></p>
+        <p> 6. <a href="/adventures/6/Controlling-your-server-over-a-WebSocket.html">webshell</a></p>
+        <p> 7. <a href="/adventures/7/Adding-remote-storage-to-unhosted-web-apps.html">remoteStorage</a></p>
+        <p> 8. <a href="/adventures/8/Collecting-and-organizing-your-data.html">your data</a></p>
+        <p> 9. <a href="/adventures/9/Sending-and-receiving-email-from-unhosted-web-apps.html">email</a></p>
+        <p> 10. <a href="/adventures/10/Linking-things-together-on-the-world-wide-web.html">web linking</a></p>
+        <p> 11. <a href="/adventures/11/App-hosting.html">app hosting</a></p>
+        <p> 12. <a href="/adventures/12/App-discovery.html">app discovery</a></p>
+        <p> 13. <a href="/adventures/13/Dealing-with-users-in-unhosted-web-apps.html">users</a></p>
+        <p> 14. <a href="/adventures/14/Peer-to-peer-communication.html">p2p</a></p>
+        <p> 15. <a href="/adventures/15/Unhosted-web-apps-and-OAuth.html">unhosted oauth</a></p>
+        <p> 16. <a href="/adventures/16/Our-plan-to-save-the-web.html">save the web</a></p>
+
+<h4>Decentralize:</h4>
+        <p> 17. <a href="/decentralize/17/Cryptography.html">cryptography</a></p>
+        <p> 18. <a href="/decentralize/18/Distributed-hash-tables.html">dht</a></p>
+        <p> 19. <a href="/decentralize/19/BGP,-IP,-DNS,-HTTP,-TLS,-and-NAT.html">internet</a></p>
+        <p> 20. <a href="/decentralize/20/Persona,-OpenID,-SAML,-WebID,-and-Webfinger.html">identity</a></p>
+        <p> 21. <a href="/decentralize/21/Client-side-sessions,-origins,-browser-tabs,-and-WebIntents.html">browser sessions</a></p>
+        <p> 22. <a href="/decentralize/22/How-to-locate-resources.html">search</a></p>
+        <p> 23. <a href="/decentralize/23/Network-neutrality,-ubiquitous-wifi,-and-DRM.html">neutrality</a></p>
+        <p> 24. <a href="/decentralize/24/Decentralizing-the-web-by-making-it-federated.html">federation</a></p>
+        <p> 25. <a href="/decentralize/25/Anonymity.html">anonymity</a></p>
+        <p> 26. <a href="/decentralize/26/Decentralized-reputation-systems.html">reputation</a></p>
+
+<h4>Practice:</h4>
+        <p> 27. <a href="/practice/27/Persisting-data-in-browser-storage.html">browser storage</a></p>
+        <p><strong>28. sync</strong></p>
+      </div>
+      
+      <div>
+        <h4 id="follow">Follow:</h4> 
+        <ul>
+          <li style="list-style-image: url('../../img/atom.gif')"><a target="_blank" href="../feed.atom">atom</a></li>
+          <li style="list-style-image: url('../../img/rss2.gif')"><a target="_blank" href="../feed.rss">rss</a></li>
+          <li style="list-style-image: url('../../img/facebook.gif')"><a target="_blank" href="https://www.facebook.com/unhostedwebapps">facebook</a></li>
+          <li style="list-style-image: url('../../img/twitter.png')"><a target="_blank" href="https://twitter.com/unhosted">twitter</a></li>
+          <li style="list-style-image: url('../../img/statusnet.png')"><a target="_blank" href="https://identi.ca/unhosted">identica</a></li>
+          <li style="list-style-image: url('../../img/diaspora.png')"><a target="_blank" href="https://joindiaspora.com/u/unhosted">diaspora</a></li>
+          <li style="list-style-image: url('../../img/mailinglist.jpg')"><a target="_blank" href="https://groups.google.com/forum/#!forum/unhosted">mailing list</a></li>
+          <li style="list-style-image: url('../../img/irc.png')"><a target="_blank" href="http://webchat.freenode.net/?channels=#unhosted">irc channel</a></li>
+        </ul>
+      </div>
+            
+      <div>
+        <h4>Author:</h4>
+        <div class="logo">
+          <img rel="author avatar" src="../../img/michiel.jpg" />
+        </div>
+        <p>
+          <a rel="author" href="https://michielbdejong.com/">Michiel B. de Jong</a>
+        </p>
+      </div>
+      
+      <div>
+        <h4>Supporters:</h4>
+        <p>
+          <a class="logo" href="http://nlnet.nl/">
+            <img src="../../img/nlnet.png" />
+          </a>
+          &nbsp;
+        </p>
+
+        <p>
+          <a class="logo" href="http://wauland.de/">
+            <img src="../../img/wau.png" />
+          </a>
+          &nbsp;
+        </p>
+
+        <p>
+          <a class="logo" href="http://www.gabrielweinberg.com/blog/2012/03/duckduckgo-foss-donations-2011.html">
+            <img src="../../img/duckduckgo.jpg" />
+          </a>
+          &nbsp;
+        </p>
+
+        <p>
+          and <a href="../../thankyou.html">many more</a>&hellip;
+        </p>
+      </div>
+    </nav>
+    
+    <footer>
+      <strong>You can follow</strong>
+      <img src="../../img/twitter.png" /><a target="_blank" href="https://twitter.com/unhosted">@unhosted</a>
+      <strong>on twitter and in</strong>
+      <a href="/adventures/1/Personal-servers-and-unhosted-web-apps.html#follow">many other ways</a><strong>. So stay tuned! :)</strong>
+      </strong>
+    </footer>
+  </body>
+</html>
