@@ -13,6 +13,14 @@
     <language>en-us</language>
     <ttl>40</ttl>
     <item>
+      <title>28. Synchronizing browser storage with server storage</title>
+      <description>Episode 28 of Unhosted Adventures</description>
+      <pubDate>2014-07-29T12:00:00.000Z</pubDate>
+      <guid>https://unhosted.org/practice/28/Synchronizing-browser-storage-with-server-storage.html</guid>
+      <link>https://unhosted.org/practice/28/Synchronizing-browser-storage-with-server-storage.html</link>
+      <georss:point>10.2 104.0</georss:point>
+    </item>
+    <item>
       <title>27. Persisting data in browser storage</title>
       <description>Episode 27 of Unhosted Adventures</description>
       <pubDate>2014-07-22T12:00:00.000Z</pubDate>
