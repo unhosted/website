@@ -108,6 +108,9 @@ function writeOverviewPage(i) {
   var title = '    <title>unhosted web apps: '+ overviewPages[i] +'</title>\n',
     header = '      <h2>'+ overviewPages[i] +'</h2>\n\n',
     source = fs.readFileSync('..'+overviewPaths[i]+'source.html');
+  if (i=== 'i') {
+    title = '    <title>unhosted web apps</title>\n';
+  }
   fs.writeFileSync('..'+overviewPaths[i]+'index.html', part0 + title + part1 + header + source + part2 + makeEpisodesDiv(i)
       + part4);
 }
