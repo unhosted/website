@@ -1,9 +1,31 @@
-    "per-user backend": "Allowing the user to choose the backend server",//prop./open source/open protocol
- We will compare proprietary per-user solutions like
+<!--  "per-user backend": "Allowing the user to choose the backend server",//prop./open source/open protocol -->
+
+<h3>Users who own their backend</h3>
+<p>The architecture of the web originally focused on allowing independent publishers to have their own web site on which they publish public ontent. In the web 2.0 architecture, bigger web sites started hosting user content - public as well as limited-audience and private. In the meantime, desktop and mobile operating systems did allow users to own their data storage - at least the local data storage on a hard disk or memory card.</p>
+
+<p>What we're trying to do with unhosted web apps and per-user backends, is to change the web to a software platform on which owning your data is possible. Unhosted web apps by themselves allow you to use the local on-device data storage, but to add device-to-device sync and cloud backup, it is necessary for the user to own some place where this data can be stored: a per-user backend.</p>
+
+<h3>Per-user storage</h3>
+<p>The first and most important requirement for per-user backend is storage. There are a number of providers of proprietary per-user cloud storage:
 Google's <a href="https://drive.google.com/">GoogleDrive</a>,
 Microsoft's <a href="https://onedrive.live.com/about/en-us/">OneDrive</a>,
 Apple's <a href=""https://www.icloud.com/>iCloud</a>,
-Dropbox <a href="https://www.dropbox.com/developers/datastore">Dropbox Platform</a> and
+Dropbox <a href="https://www.dropbox.com/developers/datastore">Dropbox Platform</a>. Of these, Google and Microsoft offer cloud storage as an addition to their offering of cloud services; Microsoft and Apple offer cloud storage sign up from the operating systems that are pre-installed on Windows and iOS/OSX devices respectively, and Dropbox is the only one in this list who offer proprietary per-user cloud storage.</p>
+<p>Google and Dropbox offer cross-origin APIs, which are accessible from unhosted web apps like <a href="https://export.5apps.com/">export.5apps.com</a>. Other smaller-scale providers of per-user cloud storage include <a href="https://www.box.com/">box.com</a>, <a href="https://mega.co.nz/">megaSYNC</a>, <a href="https://www.powerfolder.com/">powerfiolder<a href="https://www.wuala.com/">Wuala</a>, <a href="http://www.bittorrent.com/">BitTorrent</a>
+<a href="http://tools.ietf.org/html/draft-dejong-remotestorage-03">remoteStorage</a>per-user backend protocol
+Firefox Sync
+<a href="http://couchdb.apache.org/">CouchDB</a> distributed document database?
+Hoodie?
+
+platform APIs for proprietary single-instance systems that have their own users:
+
+<h3>Per-user backend other than storage</h3>
+Not as important
+Firefox Loop
+Sockethub? Hoodie?
+proprietary:
 Facebook's <a href="https://developers.facebook.com/docs/payments">Facebook Platform</a>:
-platform APIs for single-instance systems that have their own users, and of course the open alternatives to them, like the <a href="http://tools.ietf.org/html/draft-dejong-remotestorage-03">remoteStorage</a> per-user backend protocol and the <a href="http://couchdb.apache.org/">CouchDB</a> distributed document database, as well as client-side libraries <a href="http://remotestorage.io/integrate/">remotestorage.js</a>, <a href="http://pouchdb.com/">PouchDB</a>, and <a href="http://nimbusbase.com/">NimbusBase</a>.
-Stay tuned!</p>
+
+<h3>Conclusion</h3>
+
+<p>Next week we look at client-side libraries.</p>
