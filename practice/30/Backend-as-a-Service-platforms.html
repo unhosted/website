@@ -26,10 +26,10 @@
 
 <!-- "baas": "Backend-as-a-Service platforms",//open source ones = noBackend frameworks -->
 <p>Unhosted web apps have no own server-side part, by definition. The same is true for native mobile apps: although a lot of native mobile apps communicate with a server-side API of the same vendor, the native app itself is only what is downloaded from the app store onto the user's device.</p>
-<p>In both cases, it can make sense for an application provider to use a <a href="http://en.wikipedia.org/wiki/Backend_as_a_service">Backend-as-a-Service</a> system; BaaS, for short.</p>
+<p>In both cases, it can make sense for an application provider to use a <a href="http://en.wikipedia.org/wiki/Backend_as_a_service">Backend-as-a-Service</a> system, or &quot;BaaS&quot;, for short.</p>
 
 <h3>Single-provider BaaS systems</h3>
-<p>A lot of BaaS providers offer a backend system of which they host the only instance. This means that there is only one (usually commercial) party providing that system, and if at any point you're unhappy with them, you have nowhere to migrate to without switching to an different system with a different API. Examples which have not yet shut down are
+<p>A lot of BaaS providers offer a backend system of which they host the only instance. This means that there is only one (usually commercial) party providing that system, and if at any point you're unhappy with them, you have nowhere to migrate to without switching to a different system with a different API. Examples which have not yet shut down are
 <a href="http://www.kinvey.com/">Kinvey</a>,
 <a href="http://apigee.com/about/products/apis/edge-api-baas">Apigee</a>,
 <a href="http://backendless.com/">Backendless</a>,
@@ -43,30 +43,29 @@
 <a href="http://www.feedhenry.com/mobile-application-platform/mbaas/">FeedHenry</a>,
 <a href="http://www.syncano.com/">Syncano</a>,
 <a href="http://www.apstrata.com/">Apstrata</a>, <!-- <a href="http://downforeveryoneorjustme.com/manage.sencha.io">sencha.io</a> --> <!-- CloudyRec [link?] -->
-<a href="http://www.applicasa.com/">Applicasa</a> (especially for in-app purchases), <!-- <a href="">ScottyApp</a> [link?], -->
 <a href="http://fanignite.com/">FanIgnite</a>,
 <a href="https://cloudmine.me/">CloudMine</a>,
 <a href="http://iknode.com/">iKnode</a>,
 <a href="http://fatfractal.com/">FatFractal</a>,
 <a href="http://www.kumulos.com/">Kumulos</a>,
 <a href="http://www.netmera.com/">Netmera</a>,
-<a href="http://appglu.com/">AppGlu</a> (especially for product catalogs),
-<a href="http://www.flurry.com/">Flurry</a> (especially for advertising and analytics), <!-- <a href="">Stackmob</a>, R.I.P. -->
 <a href="http://buddy.com/">Buddy</a>, 
 <a href="http://www.apiomat.com/">apiOmat</a>,
+<a href="http://www.applicasa.com/">Applicasa</a> (especially for in-app purchases), <!-- <a href="">ScottyApp</a> [link?], -->
+<a href="http://appglu.com/">AppGlu</a> (especially for product catalogs),
+<a href="http://www.flurry.com/">Flurry</a> (especially for advertising and analytics), <!-- <a href="">Stackmob</a>, R.I.P. -->
 Facebook's <a href="https://parse.com/">Parse</a>,
 Appcelerator's <a href="https://www.singly.com/">singly</a>,
 Apple's <a href="https://developer.apple.com/icloud/documentation/cloudkit-storage/">CloudKit</a>,
 and Amazon's <a href="http://aws.amazon.com/mobile/">AWS Mobile Services</a>
 and <a href="http://aws.amazon.com/cognito/">Cognito</a>.</p>
 
-<p>They typically offer things like data storage, real-time sync, push notification, media streaming, geo location, user management, analytics,
- etcetera. Kinley created a <a href="http://www.kinvey.com/blog/121/the-backend-as-a-service-ecosystem-map-update-amp-new-trends-migration-toward-the-middle">map of the BaaS ecosystem</a> which lists all these many BaaS startups, including pacman symbols to show who is being acquired who.</p>
+<p>They typically offer things like data storage, real-time sync, push notification, media streaming, geo location, user management, analytics, payment processing, etcetera. Kinley created a <a href="http://www.kinvey.com/blog/121/the-backend-as-a-service-ecosystem-map-update-amp-new-trends-migration-toward-the-middle">map of the BaaS ecosystem</a> which lists all these many BaaS startups, including pacman symbols to show who is being acquired who.</p>
 
-<p>For examples that seem to have existed previously, but no longer do, are Kidozen, Sencha.io, ScottyApp, Stackmob, yorAPI and CloudyRec. Given that Backend-as-a-Service is only about three years old, and already 6 out of 35 providers I found links to no longer seem to be live, it seems reasonable to assume the provider of your choice may also shut down at any time. It is therefore probably wiser to choose an open source BaaS system, which you can host in-house, or at any third party, should the original provider go out of business.</p>
+<p>Examples that seem to have existed previously, but no longer do, are Kidozen, Sencha.io, ScottyApp, Stackmob, yorAPI and CloudyRec. Given that Backend-as-a-Service is only about three years old, and already 6 out of 35 providers I found links to no longer seem to be live, it seems reasonable to assume the provider of your choice may also shut down at any time. It is therefore probably wiser to choose an open source BaaS system, which you can host in-house, or at any third party, should the original provider go out of business.</p>
 
 <h3>Open-source Backend Systems</h3>
-<p>An open source backend system has the big advantage that in theory it doesn't depend on the startup behind it surviving for you to keep using it. In practice, of course, if there are not a lot of apps using a certain platform anymore, then new features will no longer be added, and there is a risk of <a href="http://en.wikipedia.org/wiki/Software_rot">bit rot</a>, but at least your app will not stop working abruptly due to a provider bankruptcy or takeover. Examples of open source backend systems are
+<p>An open source backend system has the big advantage that in theory it doesn't depend on the startup behind it surviving, for you to keep using it. In practice, of course, if there are not a lot of apps using a certain platform anymore, then new features may no longer be added, your pull requests may be ignored by the core developers, and there is a risk of <a href="http://en.wikipedia.org/wiki/Software_rot">bit rot</a>, but at least you always have the option to <a href="http://en.wikipedia.org/wiki/Fork_%28software_development%29">fork</a>, and your app will not stop working abruptly due to a provider bankruptcy or takeover. Examples of open source backend systems are
 <a href="http://usergrid.incubator.apache.org/">usergrid_</a>,
 <a href="http://www.baasbox.com/">BaasBox</a>,
 <a href="https://www.dreamfactory.com/">DreamFactory</a>,
@@ -81,7 +80,7 @@ Microsoft's <a href="https://onedrive.live.com/about/en-us/">OneDrive</a>,
 Apple's <a href=""https://www.icloud.com/>iCloud</a>,
 Dropbox <a href="https://www.dropbox.com/developers/datastore">Dropbox Platform</a> and
 Facebook's <a href="https://developers.facebook.com/docs/payments">Facebook Platform</a>:
-platform APIs for single-instance systems that have their own users.
+platform APIs for single-instance systems that have their own users, and of course the open alternative to them, the <a href="http://remotestorage.io/">remoteStorage</a> per-user backend protocol.
 Stay tuned!</p>
 
       <p>The next episode will appear on Tuesday 19 August, 2014.</p>    </article>      
