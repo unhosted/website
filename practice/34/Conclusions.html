@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="description" content="weekly handbook about unhosted web apps" />
-    <title>unhosted web apps 26: reputation</title>
+    <title>unhosted web apps 34: conclusions</title>
     <link rel="stylesheet" href="/adventures/hljs/default.min.css" />
     <link rel="hub" href="http://pubsubhubbub.appspot.com/"/>
     <link rel="updates alternate" type="application/atom+xml" href="/adventures/feed.atom" />
@@ -22,68 +22,29 @@
         <h2>freedom from web 2.0's monopoly platforms</h2>
       </header>
       
-      <h2>26. Decentralized reputation systems</h2>
+      <h2>34. Conclusions</h2>
 
-<!-- reputation: Decentralized reputation systems -->
-<h3>Decentralized reputation systems</h3>
+<!-- "conclusions": "Conclusions"//the web for apps, minimal per-user servers, the road ahead (towards DHT-based?), thanks again, everyone! -->
+<h3>The Web for Apps</h3>
+<p>The web was originally a platform for hypertext documents. Then it became a user interface platform, where the browser can be used to interact with software that runs on a server somewhere. Now, it's in itself a software platform, which can run apps on the client side. This called for a lot of new technology.</p>
+<p>A lot of the technology that needed to be added was pushed by Google and html5. A lot of the missing parts were then added by the Firefox OS project, which makes sure everything a modern hardware device offers up to the software stack, is also made available to web apps through the Web API.</p>
+<p>In four years of the Unhosted project and movement, we studied a lot of issues related to unhosted web apps, and came up with a lot of ideas. I tried to summarize the conclusions of this research in this blog series.</p>
 
-<p>When communicating with pre-existing contacts, trust is simply established by making sure the other person is who they say they are.
-As discussed in <a href="../17/Cryptography.html">episode 17</a>, this can be done using a combination of DNS, PGP, and checking whether
-the other person sounds like themselves in how they interact with you. But when interacting with strangers, trust can be based on reputation.</p>
+<h3>Minimal per-user servers</h3>
+<p>One central conclusion is that unhosted web apps need per-user servers. The more minimal such servers are, the more generic they are. We theerefore made the remoteStorage protocol as basic as possible.</p>
+<p>However, aiming just for universal standardization of per-user servers does not look feasible. Instead, it's probably better to create polyglot clients, that abstract differences between incompatible server APIs into one client-side API.</p>
+<p>Such client-side libraries, that provide access to per-user servers, including discovery, auth, and client-side caching, could maybe one day also be made part of the browser, below the Web API.</p>
+<p>Apart from plain data storage, other more transient services like messaging could also be organized per-user, but the most pressing features of a per-user server would still be storage and addressability (identity), because they, by their nature, have to span multiple sessions and stay in place also when none of the user's devices is online.</p>
 
-<p>Basing trust on reputation is fundamentally unreliable, since a person's past behavior is no guarantee for their future behavior. But a certain
-game theoretical assurance can be achieved when people not only prove that they have a certain reputation from past behavior, but also risk this
-reputation. Assuming the other person is a rational agent, they will not destroy a valuable reputation in order to trick you once in a relatively
-small interaction. A seller on ebay or airbnb is unlikely to treat you unfairly if they risk getting a negative review from you.</p>
+<h3>The road ahead</h3>
+<p>Looking at things that are brewing in the <a href="http://redecentralize.org/">redecentralize</a> movement, the road ahead will probably steer in the direction of more end-to-end encryption, peer-to-peer communication, and distributed hash tables. However, for now these three topics are still not really off-the-shelf technology, especially when it comes to addressability and password recovery.</p>
+<p>This is why the &quot;per-user servers&quot; architecture will probably still be important for at least another 10 years. After that, maybe we will have a real working peer-to-peer web, who knows!</p>
+<p>Since per-user servers are currently important, I will from now on dedicate myself to the <a href="https://3pp.io/">ThirdPartyPeople</a> project: a guild of system administrators who will run your own server for you, based on all the open source personal server applications available.</p>
+<p>I will, however, also still maintain the remoteStorage protocol, stay part of the remotestorage.js core team, as well as continuing to develop the <a href="http://tosdr.org/">Terms of Service; Didn't Read</a> crowd-reading site.</p>
 
-<p>This means the person being reviewed, in turn, assumes the reviewer will be fair. It is not always clear what the game theoretical advantage is
-of reviewing people fairly, but there is also no advantage in reviewing people unfairly, and I guess people are just fundamentally nice to each other
-when they have nothing to lose by it. In any case, in most reputation systems, reviewing is a voluntary act of altruism, both (in case of a
-positive review) towards the person you are reviewing, and towards the other future users of the system or website to which you are adding the review.
-Examples of such systems are <a href="https://news.ycombinator.com/">Hacker News</a>, <a href="https://stackoverflow.com/">Stack Overflow</a>,
-<a href="https://twitter.com/">Twitter</a>, <a href="https://linkedin.com/">Linked In</a>,
-<a href="http://www.ebay.com/">eBay</a>, <a href="https://amazon.com/">Amazon</a> (reviewing books rather than humans),
-and <a href="https://airbnb.com/">AirBnB</a>.</p>
-
-<p>On your Indie Web site, you will probably link to some of your &quot;claims to fame&quot;, so that people who look you up online can see how many
-Twitter followers and Github projects you have. This way, you can bootstrap your reputation from your reputation inside these centralized web2.0 walled
-gardens. You could also post PGP-signed recommendations from other people on your website, for instance a few customer reviews of products you offer.</p>
-
-<p>Reputation is not a scalar. You can be a good JavaScript programmer on Stack Overflow, but a poor host on AirBnB. If we are to automate
-decentralized reputation
-on the web then we would have to take this into account.</p>
-
-<p>The most reliable way to let people review each other would seem to be if reviewers take a certain risk when inaccurately reviewing someone -
-for instance their own reputation. Humans dedicate a considerable part of their brain activity to reputation of themselves and others in a group,
-and a lot of human activity is dedicated solely to establishing a good reputation, status and fame. Even people who don't have enough money to buy
-proper food, health, and education for themselves, often spend a lot of money on jewellery and flashy cars which basically act as proof-of-work to
-increase their social status within the village or group.</p>
-
-<p>We have only just started the era in which people tout their prosperity online instead of in the material world, and I think a lot will change
-in how the economy works when people care ever more about their number of Twitter followers, and ever less about the brand of their car.</p>
-
-<h3>Reputation spam</h3>
-<p>A very interesting system implementing reputation on top of pseudonymity is <a href="https://gnunet.org/">gnunet</a>. It uses the principle that
-a newly created user account should have a value of zero, otherwise an adversary can simply destroy their reputation and then create a new user account.</p>
-
-<p>Reputation in gnunet is built up using a sort of tit-for-tat scheme, which they call an <a href="https://gnunet.org/ebe">excess-based economic model</a>, since newcomers can only use the network's excess capacity. This boils down to: don't trust your neighbours a priori; at first, you will only answer their requests when you're idle. Over time, allow them to invest in their relationship with you
-by answering <em>your</em> queries, while not sending too many queries themselves. As their score increases, you will eventually allow them to send requests at higher effective priorities as well.</p>
-
-<h3>Peer education</h3>
-<p>Universities have an often centuries-old reputation, giving them the power to judge which students pass and which students fail their tests, even though
-there is a big monetary incentive to give out false diplomas. If we want online peer education to become bigger, we need a system like that, where a teacher
-can gain reputation, and a student can become a teacher. Good teachers could charge money for their classes, while teaching material can be (and already is)
-available in the public domain.</p>
-
-<p>Likewise, a student can get a &quot;diploma&quot; from a renowned teacher when they pass a test. This test can even be highly automated as an online service
-to improve efficiency, but the value of the diploma would come from the reputation of the teacher who (digitally) signed it.</p>
-
-<p>A lot of space for future research is open in this area, and I expect a lot of exciting developments over the coming years. This episode concludes the second
-part of this blog series, about theoretical foundations for building freedom from web2.0's platform monopolies. In the third and last part, we will look at
-practical issues related to building unhosted web apps.
-<a href="https://groups.google.com/forum/#!topic/unhosted/O0LTSqga9RA">Comments welcome!</a></p>
-
-      <p>Next: <a href="../../practice/27/Persisting-data-in-browser-storage.html">Persisting data in browser storage</a></p>    </article>      
+<h3>Thanks for an amazing four years!</h3>
+<p>Although the future of unhosted web apps has just begun, this first research phase of four years is now completed. As a product of all the work we've done together, I will packaged this blog as an html book, and <a href="http://remotestorage.io/">the remoteStorage project</a> as well as <a href="http://sockethub.org/">the Sockethub project</a> will continue to evolve, as open source projects. We've come this far since the initial crowd-funding campaign (thanks again to all the donators!), and the continued support from <a href="http://nlnet.nl/">NLnet</a> and <a href="http://wauland.de/">Wau Holland Stiftung</a>.</p>
+    </article>      
 	
     <div class="logo">
       <img src="../../img/island-color.png" />
@@ -129,13 +90,17 @@ practical issues related to building unhosted web apps.
         <p> 23. <a href="/decentralize/23/Network-neutrality,-ubiquitous-wifi,-and-DRM.html">neutrality</a></p>
         <p> 24. <a href="/decentralize/24/Decentralizing-the-web-by-making-it-federated.html">federation</a></p>
         <p> 25. <a href="/decentralize/25/Anonymity.html">anonymity</a></p>
-        <p><strong>26. reputation</strong></p>
+        <p> 26. <a href="/decentralize/26/Decentralized-reputation-systems.html">reputation</a></p>
 
 <h4>Practice:</h4>
         <p> 27. <a href="/practice/27/Persisting-data-in-browser-storage.html">browser storage</a></p>
         <p> 28. <a href="/practice/28/Synchronizing-browser-storage-with-server-storage.html">sync</a></p>
         <p> 29. <a href="/practice/29/Offline-first-web-app-design.html">offline first</a></p>
         <p> 30. <a href="/practice/30/Backend-as-a-Service-platforms.html">baas</a></p>
+        <p> 31. <a href="/practice/31/Allowing-the-user-to-choose-the-backend-server.html">per-user backend</a></p>
+        <p> 32. <a href="/practice/32/Client-side-libraries-for-per-user-backend.html">per-user clients</a></p>
+        <p> 33. <a href="/practice/33/Client-side-frontend-development.html">client-side frontend</a></p>
+        <p><strong>34. conclusions</strong></p>
       </div>
       
       <div>

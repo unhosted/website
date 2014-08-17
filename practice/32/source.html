@@ -1,1 +1,17 @@
-    "per-user clients": "Client-side libraries for per-user backend",//dropbox.js, nimbusbase, remotestorage.js, hoodie.js
+<!-- "per-user clients": "Client-side libraries for per-user backend",//dropbox.js, nimbusbase, remotestorage.js, hoodie.js -->
+<p>In order to make it easier to let your unhosted web app talk with the user's backend, you would typically use a client-side library.</p>
+<h3>Single-API clients</h3>
+<p>For talking to the user's Dropbox account, you can use <a href="">Dropbox.js</a>, and there is a similar <a href="https://developers.google.com/drive/web/quickstart/quickstart-js">client-side library</a> for GoogleDrive.</p>
+<p><a href="http://pouchdb.com/">PouchDB</a> acts both as an in-browser database engine, and client for replicating data from and to a remote CouchDB instance with CORS enabled, which may be the user's own CouchDB server.
+Likewise, <a href="https://github.com/sockethub/sockethub-client">sockethub-client</a> makes it easier to communicate with a Sockethub API which may be on the user's own server, and <a href="https://github.com/hoodiehq/hoodie.js">hoodie.js</a> does the same for Hoodie's API.</p>
+
+<h3>Polyglot per-user backend clients</h3>
+<p>At this point, I'm aware of two polyglot per-user backend clients:
+<a href="http://nimbusbase.com/">NimbusBase</a> (supporting GoogleDrive and Dropbox), and 
+ <a href="http://remotestorage.io/integrate/">remotestorage.js</a> (supporting remoteStorage, GoogleDrive, and Dropbox). It would be nice if in the future there are more such libraries, and if they will support more cross-origin backends. In the future we may add other backends to remotestorage.js, like for instance Hoodie, tahoe-lafs, or ownCloud.</p>
+
+<h3>Native support</h3>
+<p>At Decentralize Paris we talked about the possibility of integrating parts of remotestorage.js into Firefox OS. This would help in making per-user storage a more integrated part of the web as a software platform, in the way it's also part of other software platforms like iOS with iCloud.</p>
+
+<h3>Conclusion</h3>
+<p>Unfortunately, there's not a whole lot to say about client-side libraries for per-user backends yet. Maybe this will change in the future, and maybe such libraries will become part of browsers and devices at some point. The last three episodes have been about backend for unhosted web apps. Next week, we'll talk about the frontend side. <a href="https://groups.google.com/forum#!forum/unhosted">Stay tuned</a>!</p>

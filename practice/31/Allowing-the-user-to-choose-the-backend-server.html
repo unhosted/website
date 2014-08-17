@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="description" content="weekly handbook about unhosted web apps" />
+    <title>unhosted web apps 31: per-user backend</title>
+    <link rel="stylesheet" href="/adventures/hljs/default.min.css" />
+    <link rel="hub" href="http://pubsubhubbub.appspot.com/"/>
+    <link rel="updates alternate" type="application/atom+xml" href="/adventures/feed.atom" />
+    <link rel="author" type="text/html" href="https://michielbdejong.com/"/>
+
+    <script src="/adventures/hljs/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <link rel="stylesheet" href="/adventures/adventures.css" />
+  </head>
+
+  <body>
+    <article>
+      <header>
+        <h1>unhosted web apps</h1>
+        <h2>freedom from web 2.0's monopoly platforms</h2>
+      </header>
+      
+      <h2>31. Allowing the user to choose the backend server</h2>
+
+<!--  "per-user backend": "Allowing the user to choose the backend server",//prop./open source/open protocol -->
+
+<h3>Users who own their backend</h3>
+<p>The architecture of the web originally focused on allowing independent publishers to have their own web site on which they publish public ontent. In the web 2.0 architecture, bigger web sites started hosting user content - public as well as limited-audience and private. In the meantime, desktop and mobile operating systems did allow users to own their data storage - at least the local data storage on a hard disk or memory card.</p>
+
+<p>What we're trying to do with unhosted web apps and per-user backends, is to change the web to a software platform on which owning your data is possible. Unhosted web apps by themselves allow you to use the local on-device data storage, but to add device-to-device sync and cloud backup, it is necessary for the user to own some place where this data can be stored: a per-user backend.</p>
+
+<h3>Per-user storage</h3>
+<p>The first and most important requirement for per-user backend is storage. There are a number of providers of proprietary per-user cloud storage:
+Google's <a href="https://drive.google.com/">GoogleDrive</a>,
+Microsoft's <a href="https://onedrive.live.com/about/en-us/">OneDrive</a>,
+Apple's <a href=""https://www.icloud.com/>iCloud</a>,
+Dropbox <a href="https://www.dropbox.com/developers/datastore">Dropbox Platform</a>. Of these, Google and Microsoft offer cloud storage as an addition to their offering of cloud services; Microsoft and Apple offer cloud storage sign up from the operating systems that are pre-installed on Windows and iOS/OSX devices respectively, and Dropbox is the only one in this list who just offers proprietary per-user cloud storage as their main product.</p>
+<p>Other smaller-scale providers of per-user cloud storage include <a href="https://www.box.com/">box.com</a>, <a href="https://www.powerfolder.com/">powerfolder</a>, <a href="http://www.sparkleshare.org/">SparkeShare</a>, <a href="http://www.mesh.com/">LiveMesh</a>, <a href="http://www.sugarsync.com/">SugarSync</a>, several <a href="https://owncloud.org/providers/">ownCloud providers</a>, and for instance the startup behind tahoe-lafs, <a href="https://leastauthority.com/product_s4/">LeastAuthority</a>.</p>
+<p><a href="https://mega.co.nz/">megaSYNC</a> resells storage space from their own network of independent hosters, <a href="https://www.wuala.com/">Wuala</a> invites users to share some of their own storage space, and <a href="http://www.bittorrent.com/">BitTorrent</a> uses only storage space at connected clients.</p>
+<p>In the context of unhosted web apps like <a href="https://export.5apps.com/">export.5apps.com</a>, we are mainly interested in the ones that offer a cross-origin API. That limits the choice to Google, Dropbox, and all providers of 
+<a href="http://tools.ietf.org/html/draft-dejong-remotestorage-03">remoteStorage</a> (currently only <a href="https://5apps.com/storage/beta">5apps</a>).
+
+<h3>Per-user backend protocols</h3>
+<p>The only non-proprietary protocol we are aware of that allows unhosted web apps to communicate with per-user backends, is our own remoteStorage protocol. It could make sense to define more such protocols, for other functionalities than just storage, but in practice most projects publish one specific software application which users can run on their own server, and retrospectively declare the API of that software application to be an open protocol which other software applications may choose to mimick. Also, the UX flow of the end-point discovery is often left undefined.</p>
+<p>Examples are
+Firefox Sync (at the browser level, Firefox only),
+<a href="http://couchdb.apache.org/">CouchDB</a> (if you enable CORS headers on it),
+<a href="http://owncloud.org/">ownCloud</a> (CORS headers are now available in its middleware layer),
+and <a href="http://sockethub.org/">Sockethub</a>.
+Often, the user would have to paste the exact URL of their server's API into a text field somewhere in the settings of an application, to connect one of these per-user backends.</p>
+<p>For Hoodie, use as a per-user backend has always been part of the plan, and there is an <a href="https://github.com/hoodiehq/hoodie-server/pull/288">open pull request</a> for this, but it's not currently supported yet.</p>
+
+
+<h3>Per-user backend other than storage</h3>
+<p>Server-side functionality that you need to keep between sessions revolves mainly around addressability (in other words, hosting the user's online identity), data storage, and push notifications. Other server-side services, like message relaying, payment processing, generating map tiles, etcetera, are arguably less urgent to keep under the user's control, since their role is transient.</p>
+<p>If one day I use one tiles server, I can easily use a different one the next day. As soon as my usage session ends, my relationship with that server has ended. This means that per-user backend functionalities other than storage are actually not as important. It may still make sense to allow the user a free choice of Sockethub server, but unlike with remoteStorage accounts, not each user needs to run their own Sockethub server.</p>
+<p>Apart from Sockethub, Firefox Loop, and soon Hoodie, will provide per-user backend functionality beyond just storage. Arguably,
+Facebook's <a href="https://developers.facebook.com/docs/payments">Facebook Platform</a> is also a per-user backend, providing identity, storage, messaging and payment processing, albeit a proprietary one which allows for only one instance of it to exist.</p>
+<p>Facebook's API (as well as the APIs of Twitter and other identity providers) are still to be considered per-user backends, even though their protocols are tied to one specific instance. The point is that end users, and not application publishers, directly have a customer relationship with these service providers.</p>
+
+<h3>Conclusion</h3>
+<p>Apart from the remoteStorage protocol, there is not a lot of standardization going on in the space of per-user online services. If per-user online services offer a cross-origin web API at all, then it's often one that is specific to one implementation (couchdb, sockethub), or even to one specific instance (GoogleDrive, Dropbox).</p>
+<p>Talking about this topic over the years, I have slowly shifted my hope away from universal standardization of per-user backends, and more towards the idea of polyglot clients. One client-side library can be compatible with more than one server-side API, thus removing the need for all these APIs to converge.</p>
+<p>Next week we look at such client-side libraries. <a href="https://groups.google.com/forum#!forum/unhosted">Stay tuned</a>!</p>
+
+      <p>Next: <a href="../32/Client-side-libraries-for-per-user-backend.html">Client-side libraries for per-user backend</a></p>    </article>      
+	
+    <div class="logo">
+      <img src="../../img/island-color.png" />
+    </div>
+    
+    <nav>
+      <div>
+
+<h4>Overview:</h4>
+        <p> i. <a href="/">definition</a></p>
+        <p> ii. <a href="/getting-started/">getting started</a></p>
+        <p> iii. <a href="/apps/">example apps</a></p>
+        <p> iv. <a href="/people/">people</a></p>
+        <p> v. <a href="/events/">events</a></p>
+        <p> vi. <a href="/tools/">dev tools</a></p>
+        <p> vii. <a href="https://groups.google.com/forum/#!forum/unhosted">forum</a></p>
+
+<h4>Adventures:</h4>
+        <p> 1. <a href="/adventures/1/Personal-servers-and-unhosted-web-apps.html">intro</a></p>
+        <p> 2. <a href="/adventures/2/An-unhosted-editor.html">editor</a></p>
+        <p> 3. <a href="/adventures/3/Setting-up-your-personal-server.html">server</a></p>
+        <p> 4. <a href="/adventures/4/WebSockets.html">WebSockets</a></p>
+        <p> 5. <a href="/adventures/5/Facebook-and-Twitter-from-nodejs.html">social</a></p>
+        <p> 6. <a href="/adventures/6/Controlling-your-server-over-a-WebSocket.html">webshell</a></p>
+        <p> 7. <a href="/adventures/7/Adding-remote-storage-to-unhosted-web-apps.html">remoteStorage</a></p>
+        <p> 8. <a href="/adventures/8/Collecting-and-organizing-your-data.html">your data</a></p>
+        <p> 9. <a href="/adventures/9/Sending-and-receiving-email-from-unhosted-web-apps.html">email</a></p>
+        <p> 10. <a href="/adventures/10/Linking-things-together-on-the-world-wide-web.html">web linking</a></p>
+        <p> 11. <a href="/adventures/11/App-hosting.html">app hosting</a></p>
+        <p> 12. <a href="/adventures/12/App-discovery.html">app discovery</a></p>
+        <p> 13. <a href="/adventures/13/Dealing-with-users-in-unhosted-web-apps.html">users</a></p>
+        <p> 14. <a href="/adventures/14/Peer-to-peer-communication.html">p2p</a></p>
+        <p> 15. <a href="/adventures/15/Unhosted-web-apps-and-OAuth.html">unhosted oauth</a></p>
+        <p> 16. <a href="/adventures/16/Our-plan-to-save-the-web.html">save the web</a></p>
+
+<h4>Decentralize:</h4>
+        <p> 17. <a href="/decentralize/17/Cryptography.html">cryptography</a></p>
+        <p> 18. <a href="/decentralize/18/Distributed-hash-tables.html">dht</a></p>
+        <p> 19. <a href="/decentralize/19/BGP,-IP,-DNS,-HTTP,-TLS,-and-NAT.html">internet</a></p>
+        <p> 20. <a href="/decentralize/20/Persona,-OpenID,-SAML,-WebID,-and-Webfinger.html">identity</a></p>
+        <p> 21. <a href="/decentralize/21/Client-side-sessions,-origins,-browser-tabs,-and-WebIntents.html">browser sessions</a></p>
+        <p> 22. <a href="/decentralize/22/How-to-locate-resources.html">search</a></p>
+        <p> 23. <a href="/decentralize/23/Network-neutrality,-ubiquitous-wifi,-and-DRM.html">neutrality</a></p>
+        <p> 24. <a href="/decentralize/24/Decentralizing-the-web-by-making-it-federated.html">federation</a></p>
+        <p> 25. <a href="/decentralize/25/Anonymity.html">anonymity</a></p>
+        <p> 26. <a href="/decentralize/26/Decentralized-reputation-systems.html">reputation</a></p>
+
+<h4>Practice:</h4>
+        <p> 27. <a href="/practice/27/Persisting-data-in-browser-storage.html">browser storage</a></p>
+        <p> 28. <a href="/practice/28/Synchronizing-browser-storage-with-server-storage.html">sync</a></p>
+        <p> 29. <a href="/practice/29/Offline-first-web-app-design.html">offline first</a></p>
+        <p> 30. <a href="/practice/30/Backend-as-a-Service-platforms.html">baas</a></p>
+        <p><strong>31. per-user backend</strong></p>
+        <p> 32. <a href="/practice/32/Client-side-libraries-for-per-user-backend.html">per-user clients</a></p>
+        <p> 33. <a href="/practice/33/Client-side-frontend-development.html">client-side frontend</a></p>
+        <p> 34. <a href="/practice/34/Conclusions.html">conclusions</a></p>
+      </div>
+      
+      <div>
+        <h4 id="follow">Follow:</h4> 
+        <ul>
+          <li style="list-style-image: url('../../img/atom.gif')"><a target="_blank" href="../feed.atom">atom</a></li>
+          <li style="list-style-image: url('../../img/rss2.gif')"><a target="_blank" href="../feed.rss">rss</a></li>
+          <li style="list-style-image: url('../../img/facebook.gif')"><a target="_blank" href="https://www.facebook.com/unhostedwebapps">facebook</a></li>
+          <li style="list-style-image: url('../../img/twitter.png')"><a target="_blank" href="https://twitter.com/unhosted">twitter</a></li>
+          <li style="list-style-image: url('../../img/statusnet.png')"><a target="_blank" href="https://identi.ca/unhosted">identica</a></li>
+          <li style="list-style-image: url('../../img/diaspora.png')"><a target="_blank" href="https://joindiaspora.com/u/unhosted">diaspora</a></li>
+          <li style="list-style-image: url('../../img/mailinglist.jpg')"><a target="_blank" href="https://groups.google.com/forum/#!forum/unhosted">mailing list</a></li>
+          <li style="list-style-image: url('../../img/irc.png')"><a target="_blank" href="http://webchat.freenode.net/?channels=#unhosted">irc channel</a></li>
+        </ul>
+      </div>
+            
+      <div>
+        <h4>Author:</h4>
+        <div class="logo">
+          <img rel="author avatar" src="../../img/michiel.jpg" />
+        </div>
+        <p>
+          <a rel="author" href="https://michielbdejong.com/">Michiel B. de Jong</a>
+        </p>
+      </div>
+      
+      <div>
+        <h4>Supporters:</h4>
+        <p>
+          <a class="logo" href="http://nlnet.nl/">
+            <img src="../../img/nlnet.png" />
+          </a>
+          &nbsp;
+        </p>
+
+        <p>
+          <a class="logo" href="http://wauland.de/">
+            <img src="../../img/wau.png" />
+          </a>
+          &nbsp;
+        </p>
+
+        <p>
+          <a class="logo" href="http://www.gabrielweinberg.com/blog/2012/03/duckduckgo-foss-donations-2011.html">
+            <img src="../../img/duckduckgo.jpg" />
+          </a>
+          &nbsp;
+        </p>
+
+        <p>
+          and <a href="../../thankyou.html">many more</a>&hellip;
+        </p>
+      </div>
+    </nav>
+    
+    <footer>
+      <strong>You can follow</strong>
+      <img src="../../img/twitter.png" /><a target="_blank" href="https://twitter.com/unhosted">@unhosted</a>
+      <strong>on twitter and in</strong>
+      <a href="/adventures/1/Personal-servers-and-unhosted-web-apps.html#follow">many other ways</a><strong>. So stay tuned! :)</strong>
+      </strong>
+    </footer>
+  </body>
+</html>

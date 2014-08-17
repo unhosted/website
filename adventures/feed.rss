@@ -13,6 +13,22 @@
     <language>en-us</language>
     <ttl>40</ttl>
     <item>
+      <title>30. Backend-as-a-Service platforms</title>
+      <description>Episode 30 of Unhosted Adventures</description>
+      <pubDate>2014-08-12T12:00:00.000Z</pubDate>
+      <guid>https://unhosted.org/practice/30/Backend-as-a-Service-platforms.html</guid>
+      <link>https://unhosted.org/practice/30/Backend-as-a-Service-platforms.html</link>
+      <georss:point>10.2 104.0</georss:point>
+    </item>
+    <item>
+      <title>29. Offline-first web app design</title>
+      <description>Episode 29 of Unhosted Adventures</description>
+      <pubDate>2014-08-05T12:00:00.000Z</pubDate>
+      <guid>https://unhosted.org/practice/29/Offline-first-web-app-design.html</guid>
+      <link>https://unhosted.org/practice/29/Offline-first-web-app-design.html</link>
+      <georss:point>10.2 104.0</georss:point>
+    </item>
+    <item>
       <title>28. Synchronizing browser storage with server storage</title>
       <description>Episode 28 of Unhosted Adventures</description>
       <pubDate>2014-07-29T12:00:00.000Z</pubDate>

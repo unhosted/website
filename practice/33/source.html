@@ -1,1 +1,31 @@
-    "client-side frontend": "Client-side frontend development",//mvc, routing, templating, responsive, progr. enh., testing
+<!-- "client-side frontend": "Client-side frontend development",//mvc, routing, templating, responsive, progr. enh., testing -->
+<p>I personally never write a lot of frontend code. I usually write apps with very minimal user interfaces, which I manually program directly into the page. But if you want to create an unhosted web app with a significant user interaction surface, you're probably going to need some of the standard frontend development techniques.</p>
+
+<h3>MVC</h3>
+<p>To keep track of how dialogs and panes in your app interact with data, you can use the Model-View-Controller approach.
+Models describe the data format for different types of items in your data set.
+Views describe how items are selected for display, from collections they belong to, and connect these data formats to on-screen shapes.
+Controllers describe what each button or input element in such a view does to the data.</p>
+<p>You can use a framework like Backbone, Ember or Angular to help you set up the MVC structure in your application's source code.</p>
+
+<h3>Routing</h3>
+<p>An unhosted web app can have many different screens and dialogs, and it's a good idea to give each such &quot;place&quot; in your application's navigation a URL. Keeping track of these URLs and how they relate to which views should be on the screen, is called routing. Most JavaScript frameworks like Ember and Angular help you to define and manage routes in your app's source code.</p>
+
+<h3>Templating</h3>
+<p>When building the html code of a view, some parts will be hardcoded, and other parts of the page content will be pulled from the data. Even the hardcoded parts may be available in multiple languages or locales. By creating templates, with placeholders at the points where data should be filled in, you can separate this hardcoded content from the active code of your app, which is a useful separation of concern.</p>
+<p>You can use a JavaScript framework for this, a templating engine like for instance Moustache or Handlebars, or you can write a simple string-replace function yourself.</p>
+
+<h3>Responsiveness</h3>
+<p>Web pages can be viewed on many different screen sizes, which means that it's a good idea to test your app's graphical user interface (GUI)
+for bigger as well as smaller screens. On many devices, the user may also switch between landscape and portrait orientation, so it's a good idea to make your GUI react to this, and optimize which parts are on the screen and at which size.</p>
+<p>Changing the layout of your app in response to screen size and orientation is known as responsive design. Twitter Bootstrap gives a bit of guidance with this, and for instance Firefox developer tools will help you emulate smaller screen sizes for testing it out.</p>
+
+<h3>Progressive Enhancement</h3>
+<p>Progressive enhancement is basically the same as graceful degradation, but it's often used as a term to apply specifically to browser compatibility. HTML is well suited for creating web apps in such a way that they are still usable, even if for instance JavaScript is disabled, or the page is displayed via a text-only medium instead of being shown on a graphical screen.</p>
+
+<h3>Testing</h3>
+<p>Any software project of, say, 500 lines or more, is more easily maintainable, and less likely to contain bugs, if it has tests. Thanks to server-side JavaScript engines like NodeJS, it's now easy to write automated tests for the data processing code of your app.</p>
+<p>To test the graphical parts of your app, you probably want to use a headless browser like PhantomJS, so that you can define tests that click on buttons and test if certain DOM elements appear or not as a result of the interaction.</p>
+
+<h3>Conclusion</h3>
+<p>This is obviously just a short list of things you will want to read more about if you start to develop unhosted web apps professionally. Next week we'll look back on this whole blog series, and at what the future of unhosted web apps may hold. <a href="https://groups.google.com/forum#!forum/unhosted">Stay tuned</a>!</p>
