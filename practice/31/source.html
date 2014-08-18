@@ -1,16 +1,17 @@
 <!--  "per-user backend": "Allowing the user to choose the backend server",//prop./open source/open protocol -->
 
 <h3>Users who own their backend</h3>
-<p>The architecture of the web originally focused on allowing independent publishers to have their own web site on which they publish public ontent. In the web 2.0 architecture, bigger web sites started hosting user content - public as well as limited-audience and private. In the meantime, desktop and mobile operating systems did allow users to own their data storage - at least the local data storage on a hard disk or memory card.</p>
+<p>The architecture of the web originally focused on allowing independent publishers to have their own web site on which they publish public content. In the web 2.0 architecture, bigger web sites started hosting user content - public as well as limited-audience and private. In the meantime, desktop and mobile operating systems did allow users to own their data storage - at least the local data storage on a hard disk or memory card.</p>
 
 <p>What we're trying to do with unhosted web apps and per-user backends, is to change the web to a software platform on which owning your data is possible. Unhosted web apps by themselves allow you to use the local on-device data storage, but to add device-to-device sync and cloud backup, it is necessary for the user to own some place where this data can be stored: a per-user backend.</p>
 
 <h3>Per-user storage</h3>
-<p>The first and most important requirement for per-user backend is storage. There are a number of providers of proprietary per-user cloud storage:
+<p>The first and most important requirement for per-user backend is storage. If you're willing to rely on proprietary technology, there are a number of providers of per-user cloud storage available to you:
 Google's <a href="https://drive.google.com/">GoogleDrive</a>,
 Microsoft's <a href="https://onedrive.live.com/about/en-us/">OneDrive</a>,
-Apple's <a href=""https://www.icloud.com/>iCloud</a>,
-Dropbox <a href="https://www.dropbox.com/developers/datastore">Dropbox Platform</a>. Of these, Google and Microsoft offer cloud storage as an addition to their offering of cloud services; Microsoft and Apple offer cloud storage sign up from the operating systems that are pre-installed on Windows and iOS/OSX devices respectively, and Dropbox is the only one in this list who just offers proprietary per-user cloud storage as their main product.</p>
+Apple's <a href=""https://www.icloud.com/>iCloud</a>, and
+Dropbox <a href="https://www.dropbox.com/developers/datastore">Dropbox Platform</a>, for instance.
+Of these, Google and Microsoft offer cloud storage as an addition to their offering of cloud services; Microsoft and Apple offer cloud storage sign up from the operating systems that are pre-installed on Windows and iOS/OSX devices respectively, and Dropbox is the only one in this list who just offers per-user cloud storage as their main proprietary product.</p>
 <p>Other smaller-scale providers of per-user cloud storage include <a href="https://www.box.com/">box.com</a>, <a href="https://www.powerfolder.com/">powerfolder</a>, <a href="http://www.sparkleshare.org/">SparkeShare</a>, <a href="http://www.mesh.com/">LiveMesh</a>, <a href="http://www.sugarsync.com/">SugarSync</a>, several <a href="https://owncloud.org/providers/">ownCloud providers</a>, and for instance the startup behind tahoe-lafs, <a href="https://leastauthority.com/product_s4/">LeastAuthority</a>.</p>
 <p><a href="https://mega.co.nz/">megaSYNC</a> resells storage space from their own network of independent hosters, <a href="https://www.wuala.com/">Wuala</a> invites users to share some of their own storage space, and <a href="http://www.bittorrent.com/">BitTorrent</a> uses only storage space at connected clients.</p>
 <p>In the context of unhosted web apps like <a href="https://export.5apps.com/">export.5apps.com</a>, we are mainly interested in the ones that offer a cross-origin API. That limits the choice to Google, Dropbox, and all providers of 
@@ -21,20 +22,19 @@ Dropbox <a href="https://www.dropbox.com/developers/datastore">Dropbox Platform<
 <p>Examples are
 Firefox Sync (at the browser level, Firefox only),
 <a href="http://couchdb.apache.org/">CouchDB</a> (if you enable CORS headers on it),
-<a href="http://owncloud.org/">ownCloud</a> (CORS headers are now available in its middleware layer),
+<a href="http://owncloud.org/">ownCloud</a> (CORS headers are now <a href="https://github.com/owncloud/core/issues/10415">available</a> in its middleware layer),
 and <a href="http://sockethub.org/">Sockethub</a>.
-Often, the user would have to paste the exact URL of their server's API into a text field somewhere in the settings of an application, to connect one of these per-user backends.</p>
+Often, the user would have to paste the exact base URL of their server's API into a text field somewhere in the settings of an application, to connect one of these per-user backends.</p>
 <p>For Hoodie, use as a per-user backend has always been part of the plan, and there is an <a href="https://github.com/hoodiehq/hoodie-server/pull/288">open pull request</a> for this, but it's not currently supported yet.</p>
 
-
 <h3>Per-user backend other than storage</h3>
-<p>Server-side functionality that you need to keep between sessions revolves mainly around addressability (in other words, hosting the user's online identity), data storage, and push notifications. Other server-side services, like message relaying, payment processing, generating map tiles, etcetera, are arguably less urgent to keep under the user's control, since their role is transient.</p>
+<p>Server-side functionality that you need to keep between sessions revolves mainly around addressability (in other words, hosting the user's online identity), data storage, and push notifications. Other server-side services, like message relaying, payment processing, generating map tiles, etcetera, are arguably less urgent to keep under the user's control, since their role is more transient.</p>
 <p>If one day I use one tiles server, I can easily use a different one the next day. As soon as my usage session ends, my relationship with that server has ended. This means that per-user backend functionalities other than storage are actually not as important. It may still make sense to allow the user a free choice of Sockethub server, but unlike with remoteStorage accounts, not each user needs to run their own Sockethub server.</p>
-<p>Apart from Sockethub, Firefox Loop, and soon Hoodie, will provide per-user backend functionality beyond just storage. Arguably,
+<p>Sockethub, Firefox Loop, and soon Hoodie, all provide per-user backend functionality beyond just storage. Arguably,
 Facebook's <a href="https://developers.facebook.com/docs/payments">Facebook Platform</a> is also a per-user backend, providing identity, storage, messaging and payment processing, albeit a proprietary one which allows for only one instance of it to exist.</p>
 <p>Facebook's API (as well as the APIs of Twitter and other identity providers) are still to be considered per-user backends, even though their protocols are tied to one specific instance. The point is that end users, and not application publishers, directly have a customer relationship with these service providers.</p>
 
 <h3>Conclusion</h3>
 <p>Apart from the remoteStorage protocol, there is not a lot of standardization going on in the space of per-user online services. If per-user online services offer a cross-origin web API at all, then it's often one that is specific to one implementation (couchdb, sockethub), or even to one specific instance (GoogleDrive, Dropbox).</p>
-<p>Talking about this topic over the years, I have slowly shifted my hope away from universal standardization of per-user backends, and more towards the idea of polyglot clients. One client-side library can be compatible with more than one server-side API, thus removing the need for all these APIs to converge.</p>
+<p>Talking about this topic over the course of the past four years, I have slowly shifted my hope away from universal standardization of per-user backends, and more towards the idea of polyglot clients. One client-side library can be compatible with more than one server-side API, thus removing the need for all these APIs to converge.</p>
 <p>Next week we look at such client-side libraries. <a href="https://groups.google.com/forum#!forum/unhosted">Stay tuned</a>!</p>
