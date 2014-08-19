@@ -27,7 +27,7 @@
       <p>(<a href="http://unhosted.bencharp.com/page/3-serveur,3.html">en Fran&#231;ais</a>)</p>
       <h3>Why you need a server</h3>
       <p>Last week we created an unhosted javascript/html/markdown editor that can run on a data URL, create other apps as data URLs,
-        load files from the local file system, and (sort of clumsily) also save them again. This doesn't however allow us to
+        load files from the local file system, and also save them again. This doesn't however allow us to
         communicate with other devices, nor with other users, let alone people in other "web 2.0 worlds". At some point we
         will want to send and receive emails and chat messages, so to do those thing with an unhosted web app, we need a sort
         of proxy server.</p>
@@ -70,7 +70,7 @@
       <p><em><strong>No Cookie Crew - Warning #1:</strong>
         Last week's tutorial could be followed entirely with cookies disabled. I am probably still the only person in the world who has all cookies
         disabled, but in case readers of this blog want to join the "No Cookie Crew", I will start indicating clearly where violations are required.
-        Although Rackspace works without cookies (with URL-based sessions over https), StartCom uses client-side certificates in their wizard and
+        Although Rackspace worked without cookies at the time of writing (they used URL-based sessions over https at the time, not anymore), StartCom uses client-side certificates in their wizard and
         other services are also likely to require you to white-list their cookies. In any case, you need to acquire three actual products here, which means you
         will need to white-list cookies from second-party e-commerce applications, and also corresponding control-panel applications which are hosted by each vendor.
         So that in itself is not a violation, but you will also probably need to use some desktop or hosted application to confirm your email address
@@ -91,7 +91,7 @@ apt-get upgrade
       <h3>Your webserver</h3>
       <p>Once you have node working, you can use the example from the
         <a href="http://docs.nodejitsu.com/articles/HTTP/servers/how-to-serve-static-files">nodejitsu docs</a>
-        to set up your website; adapted here to make it serve your website from https:</p><pre><code>
+        to set up your website; adapted here to make it serve your website over https:</p><pre><code>
 var static = require('node-static'),
     http = require('http'),
     https = require('https'),
@@ -140,7 +140,7 @@ forever list
 </pre></code>
       <p>If all went well, you will now have a new log file in ~/.forever/. Whenever it gets too long, you can issue 'echo > ~/.forever/abcd.log'
         to truncate the log of forever process 'abcd'.</p>
-      <p>You can test that your http server redirects to your https website, and you can add some basic placeholder information there, or copy and paste
+      <p>You can test that your http server redirects to your https website, and you can add some basic placeholder information to the data directory, or copy and paste
         your profile page from one of your existing web 2.0 identities onto there.</p>
 
       <h3>File sharing</h3>
@@ -148,7 +148,7 @@ forever list
         not provide a way to find the file without knowing its URL, only people who know or guess a file's link, and people who have access to your server,
         will be able to retrieve the file. This includes employees of your VPS providers, as well as employees of any governments who exert power over that
         provider.</p>
-      <p>In theory, employees of your TLS certificate provider can also get access if they have access to eavesdropping on your TCP traffic or
+      <p>In theory, employees of your TLS certificate provider can also get access if they have man-in-the-middle access to your TCP traffic or
         on that of the person retrieving the file, or if they manage to poison DNS for your domain name, but that seem very remote possibilities,
         so if you trust your VPS provider and its government, or you host your server under your own physical control, and you have a good way to generate
         a URL that nobody will guess, then this is a pretty feasible way to

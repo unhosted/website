@@ -97,8 +97,8 @@ function localSave() {
 }
     
 function localLoad(files) {
-  if(files.length == 1) {
-    document.title=escape(files[0].name);
+  if (files.length === 1) {
+    document.title = escape(files[0].name);
     var reader = new FileReader();
     reader.onload = function(e) {
       myCodeMirror.setValue(e.target.result);
