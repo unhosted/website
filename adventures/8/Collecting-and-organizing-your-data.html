@@ -102,7 +102,8 @@ server. At some point we will probably want to build publishing apps that connec
 To make your data available through a remoteStorage API, install one of the remoteStorage-compatible personal data servers listed under 'host your own storage'
   on <a href="http://remotestorage.io/get/">remotestorage.io/get/</a>. I went for the ownCloud one here, because (like the php-remoteStorage one) it maps data
   directly onto the filesystem (it
-uses extended attributes to store the Content-Types). This means you can just import data onto your remoteStorage account by copying it onto your
+uses extended attributes to store the Content-Types). Nowadays you would probably go for
+<a href="https://github.com/jcoglan/restore">reStore</a> instead, because it's easier to get working. If you just want to get started quickly with remoteStorage, try the <a href="https://github.com/remotestorage/starter-kit">starter-kit</a>. This means you can just import data onto your remoteStorage account by copying it onto your
   remoteStorage-stick. Do make sure your remoteStorage-stick is formatted with a filesystem that supports extended file attributes.</p>
 
 <h3>Export your data from Google, Facebook and Twitter</h3>
@@ -133,7 +134,7 @@ uses extended attributes to store the Content-Types). This means you can just im
   alert(screenNames);
 </code></pre>
 <p>Do make sure you scroll down first to get all the accounts in view.
-  You could also go through the api of course (see <a href="../5/Facebook-and-Twitter-from-nodejs.html">episode 5</a>).</p>
+  You could also go through the api of course (see <a href="../5/Facebook-and-Twitter-from-nodejs.html">episode 5</a>), and nowadays Twitter also lets you download a zip file from the <a href="https://twitter.com/settings/account">account settings</a>.</p>
 
   <h3>Converting your data to web-ready format</h3>
   <p>Although you probably want to keep the originals as well, it makes sense to convert all your photos to a 50Kb "web size". If
@@ -162,7 +163,8 @@ uses extended attributes to store the Content-Types). This means you can just im
   
   <h3>Playing your music through your browser</h3>
   <p>If you're setting up your remoteStorage server to serve your music files, then make sure you put them under <code>/public/music/</code> on your
-    remoteStorage, so you can use François' <a href="https://music-unhosted.5apps.com/">Unhosted Music Player</a>. Otherwise, you can also use <code>file:///</code>
+    remoteStorage, so you can use François' <a href="https://music-unhosted.5apps.com/">Unhosted Music Player</a>. Otherwise,
+you can also store your music in IndexedDB using Mozilla's <a href="http://mozilla.github.io/localForage/#setitem">localForage</a> library, or use <code>file:///</code>
     URLs to play your music. In the folder containing the files, simply add an html file that acts as a playlist app for them:
 <pre><code>
 &lt;!DOCTYPE html>
@@ -214,7 +216,7 @@ uses extended attributes to store the Content-Types). This means you can just im
   photo album designs. You can create photo albums that mix videos in them, using the html5 <code>&lt;video></code> tag,
   and even add css animations, svg graphics, 3D effects, and interactive navigation features to your photo albums and 
   souvenir scrapbooks. Maybe 
-  even some make some sound recordings when you are on holiday, and add them into a your next
+  even make some sound recordings when you are on holiday, and add them into your next
   "photo album".</p>
 <p>I also found that so far, it has been far more important to me to have all my imported contacts in <em>some</em> format
   on my remoteStorage, even if it is just a text file that I search through with Ctrl-F, than to necessarily have a polished

@@ -50,7 +50,7 @@
         the request. That way, it's easy to write modules for Sockethub almost like writing a plugin for something. And finally, the <code>verb</code> determines which
         other fields are required or optional. Some verbs may only exist for one specific platform, but others, like 'post', make sense for multiple platforms, so 
         their format is defined only once, in a platform-independent way wherever possible.</p>
-      <p>For executing shell commands, we will define a 'shell' platform that exposes an 'execute' verb. The way to do this in Sockethub is by adding a file called
+      <p>For executing shell commands, we will define a 'shell' platform that exposes an 'execute' verb. The way to do this in Sockethub is described in the <a href="https://github.com/sockethub/sockethub/blob/master/doc/adding_a_platform.md">instructions for adding a platform</a>. The API has changed a little bit now, but at the time of writing, this meant adding a file called
         <code>shell.js</code> into the <code>lib/protocols/sockethub/platforms/</code> folder of the Sockethub source tree, with the following content:</p>
 <pre><code>
 var https = require('https'),
@@ -87,7 +87,7 @@ module.exports = {
   ...
 </code></pre>
       <h3>Conclusion</h3>
-      <p>Sockethub is still only a week old as a project, but it promises to be a very useful basis for many of the gateway functionalities we want to open up to
+      <p>Sockethub was still only a week old when I wrote this episode in January 2013, but it promises to be a very useful basis for many of the gateway functionalities we want to open up to
         unhosted web apps, such as access to email, social network platforms, news feeds, bittorrent, and any other platforms that expose server-to-server APIs, but 
         are not directly accessible for unhosted web apps via a public cross-origin interface.</p>
       <p>Especially the combination of Sockethub with <a href="http://remotestorage.io/">remoteStorage</a> and a web runtime like for instance Firefox OS looks

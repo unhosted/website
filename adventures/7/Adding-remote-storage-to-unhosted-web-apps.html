@@ -33,15 +33,16 @@
         <a href="http://remotestorage.io/">remoteStorage</a>, a protocol for allowing unhosted web apps to use
         your personal server as cloud storage.</p>
       <p>The protocol by which a client interacts with a remoteStorage server is described in
-        <a href="https://tools.ietf.org/id/draft-dejong-remotestorage-01.txt">draft-dejong-remotestorage-01</a>,
-        an IETF Internet-Draft that is currently in version -01. At its core are the http protocol, TLS, and
+        <a href="https://tools.ietf.org/id/draft-dejong-remotestorage-03.txt">draft-dejong-remotestorage-03</a>,
+        an IETF Internet-Draft that is currently in version -03. At its core are the http protocol, TLS, and
         <a href="https://en.wikipedia.org/wiki/Cross-origin_resource_sharing">CORS headers</a>.</p>
       <p>A remoteStorage server allows you to store, retrieve, and remove documents in a directory structure,
         using http PUT, GET, and DELETE verbs, respectively. It will respond with
         CORS headers in the http response, so
         that your browser will not forbid your web app from making requests to the storage origin.</p>
       <p>As an app developer, you will not have to write these http requests yourself. You can use the
-        <a href="http://remotestorage.io/integrate/">remotestorage.js</a> library.</p>
+        <a href="http://remotestorage.io/integrate/">remotestorage.js</a> library (which now also has
+        experimental support for cross-origin Dropbox and GoogleDrive storage).</p>
       
       <h3>Reusing reusable user data</h3>
       <p>The remotestorage.js library is divided up into modules (documents, music, pictures, ...),
@@ -56,7 +57,8 @@
         so the part after the '#' sign. That means that the token is not even sent to the statics-server that happens to serve up the
         unhosted web app. Of course the app could contain code that does post the data there, but at least such token leaking would be
         detectable.</p>
-      <p>By default, OAuth requires each relying party to register with each service provider, and the remoteStorage spec states that
+      <p>By default, OAuth requires each relying party to register with each service provider, and the remoteStorage spec
+        <a href="http://tools.ietf.org/html/draft-dejong-remotestorage-03#page-10">states</a> that
         servers "MAY require the user to register applications as OAuth clients
         before first use", but in practice most remoteStorage servers allow their users full freedom in their choice of which apps to 
         connect with.</p>
@@ -83,10 +85,11 @@
         is then effectuated by calling a method in one of the remoteStorage modules. So far, nothing still has changed on the screen.</p>
       <p>If we were to completely follow the V-model, then the change would first move further down to the storage server, and then ripple
         all the way back up (in the shape of a letter V), until it reaches the actual DOM elements again, and updates their visual state.</p>
-      <p>But we want our apps to be responsive, even under bad network connections. In any case, waiting an entire http round-trip time before
+      <p>But we want our apps to be fast, even under bad network connections. In any case, waiting an entire http round-trip time before
         giving the user feedback about an action would generally take too long, even when the network conditions are good.</p>
       <p>This is why remoteStorage modules receive change events about outgoing changes at the moment the change travels out over the wire,
-        and not after the http request completes. We jokingly call this concept Asynchronous Synchronization: the app does not have to wait
+        and not after the http request completes. We jokingly call this concept
+        <a href="https://github.com/offlinefirst/research/issues/9">Asynchronous Synchronization</a>: the app does not have to wait
         for synchronization to finish; synchronization with the server happens asynchronously, in the background.</p>
       
       <h3>Two easy ways to connect at runtime</h3>
@@ -122,7 +125,7 @@
         <a href="https://github.com/michielbdejong/owncloud-owa">ownCloud</a>):</p>
       <img src="storage-first.png" />
       <h3>Featured apps</h3>
-      <p>The remotestorage.js library reached its first beta version (labeled 0.7.0) last week, and we have collected a number of
+      <p>The remotestorage.js library had just reached its first beta version (labeled 0.7.0) at the time of writing (it is now at version 0.10), and we have collected a number of
         <a href="https://unhosted.org/apps/">featured apps</a> that use this version of the library. So far, I am using the
         <a href="https://music-unhosted.5apps.com/">music</a>, <a href="https://editor-michiel.5apps.com/">editor</a> and
         <a href="https://grouptabs-xmartin.5apps.com/">grouptabs</a> apps for my real music-listening, text-editing, and peer-to-peer bookkeeping
@@ -133,7 +136,7 @@
         <a href="https://social-unhosted.5apps.com/">number</a> of
         <a href="https://todo-unhosted.5apps.com/">demo</a>
         <a href="http://myfavoritedrinks.5apps.com/">apps</a>. If you don't have a remoteStorage account yet, you can get one at
-        <a href="https://5apps.com/">5apps</a> or at <a href="https://heahdk.net/">heahdk</a>. For more options and more info
+        <a href="https://5apps.com/">5apps</a>. For more options and more info
         about remoteStorage in general, see <a href="http://remotestorage.io/">remotestorage.io</a>.</p>
       <p>After you have used the <a href="https://todo-unhosted.5apps.com">todo app</a> to add some tasks to your remote storage, try out the 
         <a href="http://shybyte.github.io/unhosted-time-tracker/">unhosted time tracker</a> app. You will see it retrieve your task list from
