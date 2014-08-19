@@ -13,6 +13,14 @@
     <language>en-us</language>
     <ttl>40</ttl>
     <item>
+      <title>31. Allowing the user to choose the backend server</title>
+      <description>Episode 31 of Unhosted Adventures</description>
+      <pubDate>2014-08-19T12:00:00.000Z</pubDate>
+      <guid>https://unhosted.org/practice/31/Allowing-the-user-to-choose-the-backend-server.html</guid>
+      <link>https://unhosted.org/practice/31/Allowing-the-user-to-choose-the-backend-server.html</link>
+      <georss:point>10.2 104.0</georss:point>
+    </item>
+    <item>
       <title>30. Backend-as-a-Service platforms</title>
       <description>Episode 30 of Unhosted Adventures</description>
       <pubDate>2014-08-12T12:00:00.000Z</pubDate>

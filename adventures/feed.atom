@@ -4,7 +4,7 @@
   <title>Unhosted Adventures</title>
   <subtitle>Official Handbook of the No Cookie Crew</subtitle>
   <logo>https://unhosted.org/img/island-color.png</logo>
- <updated>2014-08-12T12:00:00.000Z</updated>
+ <updated>2014-08-19T12:00:00.000Z</updated>
 <author>
  <activity:object-type>http://activitystrea.ms/schema/1.0/person</activity:object-type>
   <uri>https://michielbdejong.com/</uri>
@@ -24,6 +24,16 @@
  </poco:urls>
 </author>
 <link href="https://unhosted.org/adventures/feed.atom" rel="self" type="application/atom+xml"/>
+<entry>
+ <activity:object-type>http://activitystrea.ms/schema/1.0/comment</activity:object-type>
+ <id>https://unhosted.org/practice/31/Allowing-the-user-to-choose-the-backend-server.html</id>
+ <title>31. Allowing the user to choose the backend server</title>
+ <link rel="alternate" type="text/html" href="https://unhosted.org/practice/31/Allowing-the-user-to-choose-the-backend-server.html"/>
+ <activity:verb>http://activitystrea.ms/schema/1.0/post</activity:verb>
+ <published>2014-08-19T12:00:00.000Z</published>
+ <updated>2014-08-19T12:00:00.000Z</updated>
+ <georss:point>10.20 104.0</georss:point>
+</entry>
 <entry>
  <activity:object-type>http://activitystrea.ms/schema/1.0/comment</activity:object-type>
  <id>https://unhosted.org/practice/30/Backend-as-a-Service-platforms.html</id>
