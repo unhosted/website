@@ -3,46 +3,6 @@ but change or complete all advice so that it's up-to-date. Where this
 conflicts say e.g. "I used X at the time, nowadays you may also use Y".
 
 
-*1: make "Friendica" a hyperlink
-* click all links and check for 404s and unintended default pages
-*2: code style localLoad function
-*2: apply the update about the download attribute
-*3: remove '(sort of clumsily)'
-*3: check if rackspace still works without cookies
-*3: from https -> over https
-*3: check if truncating the forever log doesn't break it
-*3: add there -> add to the data directory
-*3: eavesdropping -> intercepting (man-in-the-middle is necessary)
-*4: check if sockjs is still the best option
-*4: repeat the websocket graph experiment with laptop and phone over 3G and adsl
-*5: redo fb/twitter dialog screen captures and check whole procedure is still the same
-*5: http.request -> https.request
-*5: check if it's still the case that long-lived tokens live 60 days
-*5: fix comma-first syntax in twitter code example
-*5: check bug in ntwitter
-*5: try out social dashboard data-url app
-*5: "we will come back to..." -> as of now, not true :)
-* read comments to each episode on the mailing list
-*6: check GateOne/dtach install
-*6: update shell.js example to current sockethub api
-* "sockethub is still only a week old" -> "sockethub was still only a week old when I wrote this episode in January 2013"
-*7: "currently in version 01" -> "currently in version 03"
-*7: update widget screenshot
-*7: rs.js also supports GD and Dropbox as experimental
-*7: check and link "MAY require" rS spec quote
-*7: "apps to be responsive" -> "apps to be fast"
-*7: Asynchronous Synchronization -> link to offlinefirst thread
-*7: update list of apps examples
-*7: remove link to heahdk
-*7: check todo app / unhosted time tracker example
-*7: "0.7 released last week" -> "was at 0.7, now at 0.10"
-*8: mention reStore as an alternative to ownCloud for the freedombox/remoteStorage-stick implementation
-*8: mention Twitter zip file
-*8: check Twitter scrape script
-*8: check ogg / avconv instructions
-*8: mention playing music from IndexedDB
-*8: "some make some" -> "make some"
-*8: "a your" -> "your" 0
 *9: mention how to use sockethub email example
 *9: mention meute as "wasn't implemented at the time, but is now"
 *9: anything -> webmaster
