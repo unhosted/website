@@ -13,6 +13,14 @@
     <language>en-us</language>
     <ttl>40</ttl>
     <item>
+      <title>32. Client-side libraries for per-user backend</title>
+      <description>Episode 32 of Unhosted Adventures</description>
+      <pubDate>2014-08-26T12:00:00.000Z</pubDate>
+      <guid>https://unhosted.org/practice/32/Client-side-libraries-for-per-user-backend.html</guid>
+      <link>https://unhosted.org/practice/32/Client-side-libraries-for-per-user-backend.html</link>
+      <georss:point>10.2 104.0</georss:point>
+    </item>
+    <item>
       <title>31. Allowing the user to choose the backend server</title>
       <description>Episode 31 of Unhosted Adventures</description>
       <pubDate>2014-08-19T12:00:00.000Z</pubDate>

@@ -1,5 +1,5 @@
-var latestEpisode = 31,
-  buildAhead = 3,
+var latestEpisode = 32,
+  buildAhead = 2,
   zeroDate = 1355227200000;
 
 var fs = require('fs'),

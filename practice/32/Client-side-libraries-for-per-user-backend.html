@@ -26,23 +26,27 @@
 
 <!-- "per-user clients": "Client-side libraries for per-user backend",//dropbox.js, nimbusbase, remotestorage.js, hoodie.js -->
 <p>In order to make it easier to let your unhosted web app talk with the user's backend, you would typically use a client-side library.</p>
+
 <h3>Single-API clients</h3>
-<p>For talking to the user's Dropbox account, you can use <a href="">Dropbox.js</a>, and there is a similar <a href="https://developers.google.com/drive/web/quickstart/quickstart-js">client-side library</a> for GoogleDrive.</p>
-<p><a href="http://pouchdb.com/">PouchDB</a> acts both as an in-browser database engine, and client for replicating data from and to a remote CouchDB instance with CORS enabled, which may be the user's own CouchDB server.
+<p>For talking to the user's Dropbox account, you can use <a href="https://github.com/dropbox/dropbox-js">Dropbox.js</a>, and there is a similar <a href="https://developers.google.com/drive/web/quickstart/quickstart-js">client-side library</a> for GoogleDrive.</p>
+<p><a href="http://pouchdb.com/">PouchDB</a> acts both as an in-browser database engine, and a client for replicating data from and to a remote CouchDB instance with CORS enabled, which may be the user's own CouchDB server.
 Likewise, <a href="https://github.com/sockethub/sockethub-client">sockethub-client</a> makes it easier to communicate with a Sockethub API which may be on the user's own server, and <a href="https://github.com/hoodiehq/hoodie.js">hoodie.js</a> does the same for Hoodie's API.</p>
+<p>All these libraries have a one-to-one relationship with a specific backend API. For PouchDB this is not such a limiting restriction, because there are <a href="http://pouchdb.com/faq.html#what_can_pouchdb_sync_with">quite a few</a> software products that expose a CouchDB-compatible API. But as far as I know, only Sockethub itself exposes a sockethub-compatible API, and only Hoodie itself exposes a Hoodie-compatible API. That means that basing your app on them may allow the user where they want their backend hosted, but in practice they do not have a free choice out of more than one backend software implementation.</p>
+<p>Of course, Dropbox-js and the GoogleDrive JS library are even worse in that sense, because they only allow you to sync with per-user backend storage at one specific storage <em>provider</em>, so that's even more restrictive. That's why it is interesting to look at client-side libraries that try to be as generous as possible in the per-user backend they are compatible with.</p>
 
 <h3>Polyglot per-user backend clients</h3>
-<p>At this point, I'm aware of two polyglot per-user backend clients:
+<p>A polyglot per-user backend client allows several, rather than one specific API specification with which the user's backend server may be compatible. At this point, I'm aware of only two polyglot per-user backend clients:
 <a href="http://nimbusbase.com/">NimbusBase</a> (supporting GoogleDrive and Dropbox), and 
  <a href="http://remotestorage.io/integrate/">remotestorage.js</a> (supporting remoteStorage, GoogleDrive, and Dropbox). It would be nice if in the future there are more such libraries, and if they will support more cross-origin backends. In the future we may add other backends to remotestorage.js, like for instance Hoodie, tahoe-lafs, or ownCloud.</p>
 
 <h3>Native support</h3>
-<p>At Decentralize Paris we talked about the possibility of integrating parts of remotestorage.js into Firefox OS. This would help in making per-user storage a more integrated part of the web as a software platform, in the way it's also part of other software platforms like iOS with iCloud.</p>
+<p>At <a href="http://www.meetup.com/Paris-Meetup-pour-la-decentralisation-dInternet/events/193618842/">Decentralize Paris</a> we talked about the possibility of integrating parts of remotestorage.js into Firefox OS. If successful, and if this would also get picked up by other browser and phone platforms, this could help in making per-user storage a more integrated part of the web as a software platform, in the way it's also part of other software platforms like iOS with iCloud. But for now, it seems we have to accept the situation that per-user data is not natively supported on the web in the same integrated way as it is on for instance Apple's iOS software platform.</p>
 
 <h3>Conclusion</h3>
-<p>Unfortunately, there's not a whole lot to say about client-side libraries for per-user backends yet. Maybe this will change in the future, and maybe such libraries will become part of browsers and devices at some point. The last three episodes have been about backend for unhosted web apps. Next week, we'll talk about the frontend side. <a href="https://groups.google.com/forum#!forum/unhosted">Stay tuned</a>!</p>
+<p>Unfortunately, there's not a whole lot to say yet about client-side libraries for per-user backends. Maybe this will change in the future, and maybe such libraries will become part of browsers and devices at some point. But I wanted to dedicate an entire episode to the topic nonetheless, because I think it's one of the most important future directions for the unhosted web apps movement.</p>
+<p>The last three episodes have been in a way about &quot;backend functionality for unhosted web apps&quot;. Next week, we'll talk about the frontend functionality, and the week after that will be the conclusion of this blog series. <a href="https://groups.google.com/forum#!forum/unhosted">Stay tuned</a>!</p>
 
-      <p>Next: <a href="../33/Client-side-frontend-development.html">Client-side frontend development</a></p>    </article>      
+      <p>The next episode will appear on Tuesday 2 September, 2014.</p>    </article>      
 	
     <div class="logo">
       <img src="../../img/island-color.png" />
@@ -97,8 +101,6 @@ Likewise, <a href="https://github.com/sockethub/sockethub-client">sockethub-clie
         <p> 30. <a href="/practice/30/Backend-as-a-Service-platforms.html">baas</a></p>
         <p> 31. <a href="/practice/31/Allowing-the-user-to-choose-the-backend-server.html">per-user backend</a></p>
         <p><strong>32. per-user clients</strong></p>
-        <p> 33. <a href="/practice/33/Client-side-frontend-development.html">client-side frontend</a></p>
-        <p> 34. <a href="/practice/34/Conclusions.html">conclusions</a></p>
       </div>
       
       <div>
