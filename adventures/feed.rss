@@ -13,6 +13,14 @@
     <language>en-us</language>
     <ttl>40</ttl>
     <item>
+      <title>33. Client-side frontend development</title>
+      <description>Episode 33 of Unhosted Adventures</description>
+      <pubDate>2014-09-02T12:00:00.000Z</pubDate>
+      <guid>https://unhosted.org/practice/33/Client-side-frontend-development.html</guid>
+      <link>https://unhosted.org/practice/33/Client-side-frontend-development.html</link>
+      <georss:point>10.2 104.0</georss:point>
+    </item>
+    <item>
       <title>32. Client-side libraries for per-user backend</title>
       <description>Episode 32 of Unhosted Adventures</description>
       <pubDate>2014-08-26T12:00:00.000Z</pubDate>
