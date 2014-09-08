@@ -26,7 +26,7 @@ var fs = require('fs'),
     vi: '/tools/',
     vii: 'https://groups.google.com/forum/#!forum/unhosted'
   },
-  episodes = [], abbrev = [];
+  episodes = [], abbrev = [], book = '';
 
 function getPart(i) {
   if(i<=16) {
@@ -105,7 +105,13 @@ function writeEpisodes() {
     }
     fs.writeFileSync('../'+getPart(i)+'/'+getFilename(i), part0 + title + part1 + header + source + next + part2 + makeEpisodesDiv(i)
         + part3 + part4);
+    book += '      <h2>'
+        +'<a name="episode-'+i+'" "id="#episode-' + i + '" href="#episode-' + i + '">'+i+'.</a>'
+        +' '+ episodes[i] +'</h2>\n\n'
+        + source; 
   }
+  fs.writeFileSync('../book/index.html', fs.readFileSync('bookPrefix.html')+book+fs.readFileSync('bookPostfix.html'));
+  //fs.writeFileSync('../book/index.html', book);
 }
 function writeOverviewPage(i) {
   var title = '    <title>unhosted web apps: '+ overviewPages[i] +'</title>\n',
