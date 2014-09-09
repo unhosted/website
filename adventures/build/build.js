@@ -103,8 +103,8 @@ function writeEpisodes() {
     if(i==24) {
       next = '<p><strong>UPDATE 8 July 2014:</strong> Niklas, Adrian and I got an office in Berlin and worked on this plan during the summer, but after that decided we didn\'t have enough solid ground to actually launch it just yet. I will try to gather some partners and we currently plan to launch a closed beta in October 2014. The working title for this project is <a href="https://3pp.io/">Third Party People</a>. This year, I worked on <a href="http://remotestorage.io/">remoteStorage</a> and <a href="https://meute.5apps.com/">Meute</a>, and the third part of this blog series will contain things I learned while working on that. But first, this week and next I\'ll complete the "Decentralize" part, by discussing how anonymity and reputation can work on the decentralized internet.</p>'+next;
     }
-    fs.writeFileSync('../'+getPart(i)+'/'+getFilename(i), part0 + title + part1 + header + source + next + part2 + makeEpisodesDiv(i)
-        + part3 + part4);
+    //fs.writeFileSync('../'+getPart(i)+'/'+getFilename(i), part0 + title + part1 + header + source + next + part2 + makeEpisodesDiv(i)
+    //    + part3 + part4);
     book += '      <h2>'
         +'<a name="episode-'+i+'" "id="#episode-' + i + '" href="#episode-' + i + '">'+i+'.</a>'
         +' '+ episodes[i] +'</h2>\n\n'
@@ -214,6 +214,6 @@ latestEpisode -= buildAhead;
 console.log('now building up to '+latestEpisode);
 processTitles();
 writeEpisodes();
-writeOverviewPage('i'); writeOverviewPage('iii'); writeOverviewPage('iv'); writeOverviewPage('v'); writeOverviewPage('vi');
-writeRss();
-writeAtom();
+//writeOverviewPage('i'); writeOverviewPage('iii'); writeOverviewPage('iv'); writeOverviewPage('v'); writeOverviewPage('vi');
+//writeRss();
+//writeAtom();
