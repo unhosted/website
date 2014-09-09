@@ -7075,6 +7075,28 @@ if certain DOM elements appear or change as a result of the interaction.</p>
 <p>This is obviously just a short list of topics you will want to read more about if you start to develop unhosted web apps professionally. Consider it the &quot;what to read next?&quot; section at the end of this blog series. I am not a frontend developer myself, but from what I've heard, these topics are the most important
 <a href="http://rmurphey.com/blog/2012/04/12/a-baseline-for-front-end-developers/">stuff you want to learn</a> for a successful professional carreer as an unhosted web app developer.</p>
 <p>Next week will be the last episode! :) We'll look back on this whole blog series, and at what the future of unhosted web apps may hold. <a href="https://groups.google.com/forum#!forum/unhosted">Stay tuned</a>!</p>
+      <h2><a name="episode-34" "id="#episode-34" href="#episode-34">34.</a> Conclusions</h2>
+
+<!-- "conclusions": "Conclusions"//the web for apps, minimal per-user servers, the road ahead (towards DHT-based?), thanks again, everyone! -->
+<h3>The Web for Apps</h3>
+<p>The web was originally a platform for hypertext documents. Then it became a user interface platform, where the browser can be used to interact with software that runs on a server somewhere. Now, it's in itself a software platform, which can run apps on the client side. This called for a lot of new technology.</p>
+<p>A lot of the technology that needed to be added was pushed by Google and html5. A lot of the missing parts were then added by the Firefox OS project, which makes sure everything a modern hardware device offers up to the software stack, is also made available to web apps through the Web API.</p>
+<p>In four years of the Unhosted project and movement, we studied a lot of issues related to unhosted web apps, and came up with a lot of ideas. I tried to summarize the conclusions of this research in this blog series.</p>
+
+<h3>Minimal per-user servers</h3>
+<p>One central conclusion is that unhosted web apps need per-user servers. The more minimal such servers are, the more generic they are. We theerefore made the remoteStorage protocol as basic as possible.</p>
+<p>However, aiming just for universal standardization of per-user servers does not look feasible. Instead, it's probably better to create polyglot clients, that abstract differences between incompatible server APIs into one client-side API.</p>
+<p>Such client-side libraries, that provide access to per-user servers, including discovery, auth, and client-side caching, could maybe one day also be made part of the browser, below the Web API.</p>
+<p>Apart from plain data storage, other more transient services like messaging could also be organized per-user, but the most pressing features of a per-user server would still be storage and addressability (identity), because they, by their nature, have to span multiple sessions and stay in place also when none of the user's devices are online.</p>
+
+<h3>The road ahead</h3>
+<p>Looking at things that are brewing in the <a href="http://redecentralize.org/">redecentralize</a> movement, the road ahead will probably steer in the direction of more end-to-end encryption, peer-to-peer communication, and distributed hash tables. However, for now these three topics are still not really off-the-shelf technology, especially when it comes to addressability and password recovery.</p>
+<p>This is why the &quot;per-user servers&quot; architecture will probably still be important for at least another 10 years. After that, maybe we will have a real working peer-to-peer web, who knows!</p>
+<p>Since per-user servers are currently important, I will from now on dedicate myself predominantly to the <a href="https://indiehosters.net/">IndieHosters</a> project: a guild of system administrators who will run your own server for you, based on all the open source personal server and <a href="http://indiewebcamp.com/">IndieWeb</a> applications available.</p>
+<p>I will, however, also still maintain the remoteStorage protocol, stay part of the remotestorage.js core team, as well as continuing to develop the <a href="http://tosdr.org/">Terms of Service; Didn't Read</a> crowd-reading site.</p>
+
+<h3>Thanks for an amazing four years!</h3>
+<p>Although the future of unhosted web apps <strong>has only just begun</strong>, this first research phase of four years is now completed. As a product of all the work we've done together, I have packaged this blog as an <a href="https://unhosted.org/book/">html book</a>, and <a href="http://remotestorage.io/">the remoteStorage project</a> as well as <a href="http://sockethub.org/">the Sockethub project</a> will continue to evolve, as open source projects. We've come this far since the initial crowd-funding campaign (thanks again to <a href="https://unhosted.org/thankyou.html">all the donators</a>!), and the continued support from <a href="http://nlnet.nl/">NLnet</a> and <a href="http://wauland.de/">Wau Holland Stiftung</a>. I will present these conclusions tonight at <a href="http://lanyrd.com/2014/decentralizejs/">Decentralize.js</a>. As always, also for this last episode, <a href="https://groups.google.com/forum#!forum/unhosted">comments welcome</a>!</p>
     </article>      
 	
     <div class="logo">
