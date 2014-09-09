@@ -2,17 +2,6 @@ in general: leave historical context of original publish date in place,
 but change or complete all advice so that it's up-to-date. Where this
 conflicts say e.g. "I used X at the time, nowadays you may also use Y".
 
-
-*9: mention how to use sockethub email example
-*9: mention meute as "wasn't implemented at the time, but is now"
-*9: anything -> webmaster
-*9: "I use a separate app" -> "used" ... "Now use meute.email for this."
-*9: messages/inbox module -> we now use email, inbox, contacts
-*9: pgp clearsigning in sockethub -> (this was since removed)
-*9: make this also true -> also make this true
-*10: a asynchronous -> asynchronous
-*10: closures -> closures and callbacks
-*10: write out SNS abbrev
 *11: but it cannot -> but they cannot
 *11: probably cause -> it is obvious that this episode was written pre-Snowden :) - mention Snowden's smiley slide
 *11: update on RevProTun -> does it still exist? is anyone using it or working on it?

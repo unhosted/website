@@ -10,7 +10,7 @@ you will have been fed during the age of hosted software.</p>
 <h3>TLS is not secure unless combined with on-premises hosting</h3>
 <p>TLS (formerly known as SSL, the technology behind <code>https://</code> URLs), stands for Transport Layer Security.
   It establishes a secure tunnel between the client and the server. Third parties can see that this tunnel exists, and roughly
-  how much data travels through it, in which direction, and in which timing patterns, but it cannot see the unencrypted content
+  how much data travels through it, in which direction, and in which timing patterns, but they cannot see the unencrypted content
   that is being sent back and forth.</p>
 <p>On top of TLS, the web uses a Public Key Infrastructure (PKI) based on Certificate Authorities (CAs). This system has
 its own problems because it centralizes power,
@@ -28,7 +28,7 @@ the IaaS provider to move your server around for load-balancing and live resizin
 your private TLS key.</p>
 <p>At a good IaaS company, only systems administrators under <a href="https://www.usenix.org/lisa/system-administrators-code-ethics">sysadmin oath</a>
 and the management above them will have access to your server. Good managers at IaaS companies will only use their access to grant newly employed
-sysadmins the necessary access, and apart from that maybe a few nation state governments, presumably only if they present probable cause.</p>
+sysadmins the necessary access, and maybe a few nation state governments, in whom society trusts to spy on everybody to help them identify dangerous terrorists.</p>
 <p>You can always recognize sysadmins because they will look away with a resolute gesture when you type your password in their presence. Even if it's the
 password that you just asked them to reset. It is in a sysadmin's professional genes to be very precise about security and privacy. Still, TLS-hosted
 websites
@@ -57,7 +57,7 @@ you want to publish, and it will start delivering traffic from the outside world
 <p>RevProTun is an important part of how we want to add Indie Web hosting to FreedomBox. These are still future plans for which we always struggle to find time, but we
 are determined to make a "freedom-compatible home hosting" solution like this available in a format that is also usable by end-users who may not want to know all the exact
 details of how reverse proxy tunnels work. If you do want to know more about them, a good place to start is Bjarni's
-<a href="https://pagekite.net/wiki/Floss/Video/">FOSDEM talk about Pagekite</a>.
+<a href="https://pagekite.net/wiki/Floss/Video/">FOSDEM talk about Pagekite</a>. Unfortunately, it seems there has not been a lot of progress on the RevProTun standard since it was proposed in 2012.
 
 <h3>How origins work</h3>
 <p>Each web app should be hosted on its own "origin", meaning its own unique combination of scheme, host and port.</p>
@@ -82,13 +82,13 @@ Unless you own a wild-card certificate, you will probably only have two hosts, p
 <p>But luckily, origins are defined by scheme, host, <em>and port</em>. This means you can host tens of thousands of apps using the same cert; simply
 use origins like "https://apps.yourdomain.com:42001/", "https://apps.yourdomain.com:42002/", etcetera.</p>
 
-<h3>Using SNI to host multiple TLS cert</h3>
+<h3>Using SNI to host multiple TLS certs</h3>
 <p>Five or ten years ago SNI didn't exist yet, and you had to get one dedicated IPv4 address for each and every TLS cert.
   Until recently I thought this was still the case, but as Bjarni explained to me the other day, this is now a resolved problem.
   <a href="http://nodejs.org/api/tls.html#tls_npn_and_sni">Using</a>
   <a href="http://en.wikipedia.org/wiki/Server_Name_Indication#Browsers_with_support_for_TLS_server_name_indication.5B5.5D">SNI</a>, you can host as many TLS certs
-  on one virtual server as you like, without having to request extra IPv4 addresses and paying the extra fee for them. I haven't switched to this myself yet, since
-  I have so far published my unhosted web apps apps all through 5apps. I do have two IPv4 addresses on my server, one for nodejs and one for apache,
+  on one virtual server as you like, without having to request extra IPv4 addresses and paying the extra fee for them. I hadn't switched to this myself yet, since
+  I have published my unhosted web apps apps all through 5apps, but nowadays <a href="https://groups.google.com/d/msg/unhosted/OwyPm1AV47A/T9ObILeq2gsJ">unhosted.org is SNI-hosted together with 3pp.io</a>. I did have two IPv4 addresses on my server, one for nodejs and one for apache,
   and your server will need two IP addresses to do <a href="https://en.wikipedia.org/wiki/STUN">STUN</a> in a few episodes from now (yes! we're going to play with 
   PeerConnections soon), but in general, SNI is a good thing to know about when you're hosting apps.</p>
 
@@ -106,7 +106,7 @@ generate an appcache manifest for your app (more about this below), resize your 
   Amazon S3 is that 5apps specialize specifically in the hosting of your unhosted web apps. And like with Pagekite, I can personally confirm that
   they are nice people, who care about re-decentralizing the web. :)</p>
 <p>For completeness, let me mention that <a href="https://appcloudy.com/">AppCloudy</a> provide a similar product to 5apps, and there are probably some others.
-  StackMob and Tiggzy also offer html5 app hosting as a sideline to their backend service for native mobile app. I will update this section as the market
+  StackMob and Tiggzy also offer html5 app hosting as a sideline to their backend service for native mobile apps. As of September 2014, 5apps are the top hit for &quot;html5 app hosting&quot; on both DuckDuckGo and Google, but I will update this section as the market
   evolves (tips welcome!).</p>
 
 <h3>Mirroring and packaging.</h3>
@@ -149,6 +149,7 @@ generate an appcache manifest for your app (more about this below), resize your 
   <code>http://127.13.37.123:8000/wikipedia_es_venezuela_11_2012/</code> (remember the localhost IP space is a 
   "/8" as they say,
   it covers any IP address that starts with "127.", so there are enough origins there to host many apps on).</p>
+<p>Since then, Rahul Kondi and I did <a href="http://fizno.com/">Fizno</a> as a Torrent-based &quot;physical node&quot; at a hackathon in Bangalore, and later I discovered the existence of the excellent <a href="http://librarybox.us/">LibraryBox</a> build-or-buy project.</p>
 
 <h3>Packaged app hosting conventions</h3>
 <p>There are a few conventions that you should keep in mind when writing a webserver that hosts static content. Most of those are well known in web engineer folklore, and
@@ -162,7 +163,7 @@ generate an appcache manifest for your app (more about this below), resize your 
   string length of each name are in theory unlimited, but in practice the maximum total length of the resulting concatenation should not exceed 2000 characters.
   -->
   Of course the documents in this folder structure
-  map onto documents that should be made available over http, splitting the URL path along the forward slashes, and mapping that onto the folder structure, taking
+  map onto documents that should be made available over http 1.1, https, http 2.0 and/or SPDY, splitting the URL path along the forward slashes, and mapping that onto the folder structure, taking
   into account again the escape sequences defined for URIs and IRIs.</p>
 <p>The file extension<!--(the document name's shortest suffix that starts with a '.')--> determines which 'Content-Type' header should be sent. A few examples:</p>
 <ul>
@@ -193,6 +194,7 @@ generate an appcache manifest for your app (more about this below), resize your 
     that.innerHTML = '<iframe width="560" height="315" src="http://www.youtube.com/embed/Oic22dQMRXQ" frameborder="0" allowfullscreen></iframe>';
   }
 </script><h4 style="text-align: center" onclick="showVideo(this);">(show http://www.youtube.com/embed/Oic22dQMRXQ)</h4>
+<p>An improved successor to Appcache is being prepared with <a href="https://github.com/slightlyoff/ServiceWorker">ServiceWorkers</a>, but these are not yet usable in mainstream browsers.</p>
 <p>One good thing about appcache is that, like the browser's http cache, it works end-to-end. The web of documents was designed with caching of GET requests
   in mind. A lot of hosted web apps will cache the content produced by their webservers using something like <a href="http://www.squid-cache.org/">squid</a>
   or <a href="http://www.varnish-cache.org/">varnish</a>, behind an https offloading layer. Often, this will be outsourced to a
@@ -203,6 +205,8 @@ generate an appcache manifest for your app (more about this below), resize your 
 <p>So once the content reaches the ISP, it will often be cached again by the ISP, before it is delivered to the Last Mile. None of this works when you use end-to-end
   encryption, though. Multicasting traffic is a lot like deduplicating content-addressable content, only harder because of the time constraints. And 
   as the rule of thumb goes, out of 1) end-to-end encryption, 2) multicast(/deduplication), and 3) making sense, you can only pick two. :)</p>
+<p>Using <a href="https://en.wikipedia.org/wiki/Convergent_encryption">convergent encryption</a>, a form of encrypted multicast would be possible if you only care about protecting the contents of secret document, but this would still allow eavesdroppers on the same multicast tree to discover which documents you are streaming, so such a setup wouldn't be as private as a https connection.</p>
+
 <p>This means that on https, any request that misses cache on your device, will have to make the round trip
     all the way to the app hoster. Mirroring can decrease the distance between the app hoster and the user, but whenever that distance causes page load times to be
     noticable (say, multiple tenths of a second), the thing you will want to use is <a href="http://appcachefacts.info/">appcache</a>.</p>
