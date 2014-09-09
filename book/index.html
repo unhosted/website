@@ -2638,7 +2638,7 @@ prices for doing this <a href="https://groups.google.com/d/msg/unhosted/hIVOKI_p
 <p>Since connectivity is its own reward, there is a strong drive for all smaller networks to become part of "the" Earthly internet. This means that although (modulo the assignment of ASN numbers) the internet is a decentralized and non-unique system, there is one "winner" internet, which is not unique in theory, but is unique in practice through dominance.</p>
 <p>If ASNs were longer (not human-memorable), then you would not need to obtain them from the centralized IANA registry, and the system would be even more decentralized. In practice this is not a big issue however, since the threshold in hardware investment, and cost of the specialized sysadmins required to run an AS are still so high that there are only about 45,000 autonomous systems on Earth, and there don't seem to have been any hostile take-down attempts against any of them yet.</p>
 <p>As Leen <a href="https://groups.google.com/d/msg/unhosted/hIVOKI_pNQI/duaAK4x3lGEJ">remarks</a>, you cannot run an autonomous system and be anonymous. The registry (and your peers as well, probably), will want to know your real-world identity.
-More about anonymity next week, when we discuss the concept of online identities and single sign-on.</p>
+More about anonymity next week, when we discuss the concept of online identities and single sign-on, as well as in episode 25.</p>
 
 <h3>Routing traffic</h3>
 <p>Once you peer with other autonomous systems on the internet, you can make your computers addressable via IPv4, IPv6, or both. It is hardly an exaggeration to say that all computers that are connected to the internet at all, will be able to connect to your computer over IPv4.</p>
@@ -2653,7 +2653,7 @@ More about anonymity next week, when we discuss the concept of online identities
 <p>If your computer has its own (IPv4) internet address, then it can accept incoming TCP conversations. On top of IP, which is a best-effort end-to-end packet routing protocol, TCP offers fault tolerance and abstraction from dropped packets. On top of TCP, Transport Layer Security
 (<a href="https://en.wikipedia.org/wiki/Transport_Layer_Security">TLS</a>) implements protection against eavesdropping and tampering through asymmetric encryption.</p>
 <p>With Server Name Indication (<a href="http://en.wikipedia.org/wiki/Server_Name_Indication">SNI</a>), it is possible to host several DNS domain names on the same IP address, and still use TLS. Since SNI happens
-<a href="http://journal.paul.querna.org/articles/2005/04/24/tls-server-name-indication/">as part of</a> the TLS negotiation, it seems to me that it should be possible to get end-to-end TLS with several servers behind the same IP address, as long as the server that handles the negotiation knows which vhost lives where.</p>
+<a href="http://journal.paul.querna.org/articles/2005/04/24/tls-server-name-indication/">as part of</a> the TLS negotiation, it seems to me that it should be possible to get end-to-end TLS with each of several servers behind the same IP address, as long as the server that handles the negotiation knows which vhost lives where.</p>
 <p>But in practice that is probably a bit of an academic issue, since the party who gives you the shared IPv4 address is probably an IaaS provider who has physical access to your server anyway. </p>
 
 <h3>Naming and trust</h3>
@@ -2665,7 +2665,7 @@ More about anonymity next week, when we discuss the concept of online identities
 <p>This search need not be centralized; it can in theory go through friend-of-a-friend networks like
 <a href="https://en.wikipedia.org/wiki/FOAF_(software)">FOAF</a>, which would again create a system that is more decentralized than DNS and than Facebook/Google search.</p>
 <p>Some friends and I are also planning on scraping (once we have some time to work on this) a large part of the internet's social graph, as far as it's public, and leak all this information into the public domain in the form of for instance a CouchDB database or a torrent, in a project we called <a href="https://github.com/unhosted/useraddress">useraddress</a>.</p>
-<p>But for now, since DNS is vulnerable to government attacks, and IPv4 addresses are owned by specific ISPs, it is actually pretty hard to reliably send a message over the internet. Neither IP addresses nor domain names can really be trusted. Unless one of the parties has their own ASN, the best way would probably to encrypt your message into a torrent. :)</p>
+<p>But for now, since DNS is vulnerable to government attacks, and IPv4 addresses are owned by specific ISPs, it is actually pretty hard to reliably send a message over the internet. Neither IP addresses nor domain names can really be trusted. Unless one of the parties has their own ASN, the best way would probably be to consider DNS and IP untrusted and use an extra security layer like PGP on top of them.</p>
 
 <h3>Network Address Translation</h3>
 <p>So will IPv6, if it ever comes, be any better than IPv4? One thing its proponents like about IPv6 is that it allows a LAN administrator to let individual devices go out on their own address. Historically, it doesn't seem like this is something LAN administrators <em>want</em> to do, though.</p>
@@ -2683,7 +2683,8 @@ More about anonymity next week, when we discuss the concept of online identities
 <p>A sound system can usually be operated by whoever has physical access to it. This is a very simple system which humans understand well. If you
 want only the DJ to play music, then you just construct a physical DJ booth, and people naturally sense that they're not allowed to enter it, or to
 lean over the table from the other side. For gaming consoles and PCs this can also still work. Laptops usually have a password-protected lock screen,
-which means a thief of the physical object can't access the data on there. And shared computers will have multiple user accounts, with or without
+which means a thief of the physical object can't access the data on there. And shared computers will have multiple user accounts,
+to shield users from each other, and restrict
 admin (root) access to the device's configuration.</p>
 <p>This means that a single device often already provides a concept of accounts and sessions: a session is one user currently using the device, and
 during such a session, the user has unemcumbered access both to the device's capabilities, and to that user's own data. A session is started by providing
@@ -2696,7 +2697,7 @@ First, we need to log in to many different servers, and managing all those crede
 
 <h3>Client-side master sessions</h3>
 <p>A simple solution for this is to store a "master session" on the client device, which can give access to an unlimited number of remote server sessions.</p>
-<p><a href="https://dvcs.w3.org/hg/WebID/raw-file/tip/spec/index-respec.html">WebID-TLS</a> is based on this idea: you create an asymmetric key pair inside your browser profile on your favorite
+<p><a href="https://dvcs.w3.org/hg/WebID/raw-file/tip/spec/tls-respec.html">WebID-TLS</a> is based on this idea: you create an asymmetric key pair inside your browser profile on your favorite
 client device, and use that to establish remote sessions at servers that support WebID-TLS. The same setup is often used for ssh, git, and other
 protocols that support asymmetric cryptography.</p>
 <p>But this also brings us to the second problem: we increasingly want to log in <em>from</em> many different clients. You can link your account on a
@@ -2741,6 +2742,7 @@ master session breaks down as a viable solution.</p>
 <p>Within enterprise intranets, services are often linked together using <a href="https://en.wikipedia.org/wiki/Security_Assertion_Markup_Language">SAML</a>,
   which is a well-established framework for federated login, but which was designed for closed ecosystems instead of open ones, so that makes it more suitable
   for use on intranets than for use on the internet as a whole.</p>
+<p>In the <a href="http://indiewebcamp.com/">IndieWeb community</a>, <a href="https://indieauth.com/">IndieAuth</a> is a popular way to allow polyglot federated login, using various social network sites for the identity plumbing.</p>
 
 <h3>Own your identity</h3>
 <p>In practice, at the time of writing, Facebook Connect is probably the most popular cross-origin
@@ -2860,7 +2862,7 @@ a level of indirection whereby the IP address of a given service may change whil
   <a href="http://www.myfriendtheplatypus.com/">www.myfriendtheplatypus.com</a>,
   you would typically have <a href="http://dir.yahoo.com/">dir.yahoo.com</a> as your home page, and roughly remember that you could get to it by clicking
   Science -> Biology -> Zoology -> Animals, Insects, and Pets -> Mammals -> Monotremes -> Platypus.</p>
-<p>The big advantage of this was of course that you only have to remember these string receptively, not productively: you are presented with multiple-choice
+<p>The big advantage of this was of course that you only have to remember these strings receptively, not productively: you are presented with multiple-choice
   questions, not one open question. And apart from that, it is interactive: you take multiple smaller steps and can reach your target step-by-step.</p>
 <p>A big disadvantage is of course that it takes one or two minutes to traverse Yahoo's directory until you get to the page that contains the information you need.
   Also, you have to know that a platypus is a monotreme. In this case, while writing out this example, I actually used a search engine to look that up. ;)</p>
@@ -6173,7 +6175,7 @@ prices for doing this <a href="https://groups.google.com/d/msg/unhosted/hIVOKI_p
 <p>Since connectivity is its own reward, there is a strong drive for all smaller networks to become part of "the" Earthly internet. This means that although (modulo the assignment of ASN numbers) the internet is a decentralized and non-unique system, there is one "winner" internet, which is not unique in theory, but is unique in practice through dominance.</p>
 <p>If ASNs were longer (not human-memorable), then you would not need to obtain them from the centralized IANA registry, and the system would be even more decentralized. In practice this is not a big issue however, since the threshold in hardware investment, and cost of the specialized sysadmins required to run an AS are still so high that there are only about 45,000 autonomous systems on Earth, and there don't seem to have been any hostile take-down attempts against any of them yet.</p>
 <p>As Leen <a href="https://groups.google.com/d/msg/unhosted/hIVOKI_pNQI/duaAK4x3lGEJ">remarks</a>, you cannot run an autonomous system and be anonymous. The registry (and your peers as well, probably), will want to know your real-world identity.
-More about anonymity next week, when we discuss the concept of online identities and single sign-on.</p>
+More about anonymity next week, when we discuss the concept of online identities and single sign-on, as well as in episode 25.</p>
 
 <h3>Routing traffic</h3>
 <p>Once you peer with other autonomous systems on the internet, you can make your computers addressable via IPv4, IPv6, or both. It is hardly an exaggeration to say that all computers that are connected to the internet at all, will be able to connect to your computer over IPv4.</p>
@@ -6188,7 +6190,7 @@ More about anonymity next week, when we discuss the concept of online identities
 <p>If your computer has its own (IPv4) internet address, then it can accept incoming TCP conversations. On top of IP, which is a best-effort end-to-end packet routing protocol, TCP offers fault tolerance and abstraction from dropped packets. On top of TCP, Transport Layer Security
 (<a href="https://en.wikipedia.org/wiki/Transport_Layer_Security">TLS</a>) implements protection against eavesdropping and tampering through asymmetric encryption.</p>
 <p>With Server Name Indication (<a href="http://en.wikipedia.org/wiki/Server_Name_Indication">SNI</a>), it is possible to host several DNS domain names on the same IP address, and still use TLS. Since SNI happens
-<a href="http://journal.paul.querna.org/articles/2005/04/24/tls-server-name-indication/">as part of</a> the TLS negotiation, it seems to me that it should be possible to get end-to-end TLS with several servers behind the same IP address, as long as the server that handles the negotiation knows which vhost lives where.</p>
+<a href="http://journal.paul.querna.org/articles/2005/04/24/tls-server-name-indication/">as part of</a> the TLS negotiation, it seems to me that it should be possible to get end-to-end TLS with each of several servers behind the same IP address, as long as the server that handles the negotiation knows which vhost lives where.</p>
 <p>But in practice that is probably a bit of an academic issue, since the party who gives you the shared IPv4 address is probably an IaaS provider who has physical access to your server anyway. </p>
 
 <h3>Naming and trust</h3>
@@ -6200,7 +6202,7 @@ More about anonymity next week, when we discuss the concept of online identities
 <p>This search need not be centralized; it can in theory go through friend-of-a-friend networks like
 <a href="https://en.wikipedia.org/wiki/FOAF_(software)">FOAF</a>, which would again create a system that is more decentralized than DNS and than Facebook/Google search.</p>
 <p>Some friends and I are also planning on scraping (once we have some time to work on this) a large part of the internet's social graph, as far as it's public, and leak all this information into the public domain in the form of for instance a CouchDB database or a torrent, in a project we called <a href="https://github.com/unhosted/useraddress">useraddress</a>.</p>
-<p>But for now, since DNS is vulnerable to government attacks, and IPv4 addresses are owned by specific ISPs, it is actually pretty hard to reliably send a message over the internet. Neither IP addresses nor domain names can really be trusted. Unless one of the parties has their own ASN, the best way would probably to encrypt your message into a torrent. :)</p>
+<p>But for now, since DNS is vulnerable to government attacks, and IPv4 addresses are owned by specific ISPs, it is actually pretty hard to reliably send a message over the internet. Neither IP addresses nor domain names can really be trusted. Unless one of the parties has their own ASN, the best way would probably be to consider DNS and IP untrusted and use an extra security layer like PGP on top of them.</p>
 
 <h3>Network Address Translation</h3>
 <p>So will IPv6, if it ever comes, be any better than IPv4? One thing its proponents like about IPv6 is that it allows a LAN administrator to let individual devices go out on their own address. Historically, it doesn't seem like this is something LAN administrators <em>want</em> to do, though.</p>
@@ -6218,7 +6220,8 @@ More about anonymity next week, when we discuss the concept of online identities
 <p>A sound system can usually be operated by whoever has physical access to it. This is a very simple system which humans understand well. If you
 want only the DJ to play music, then you just construct a physical DJ booth, and people naturally sense that they're not allowed to enter it, or to
 lean over the table from the other side. For gaming consoles and PCs this can also still work. Laptops usually have a password-protected lock screen,
-which means a thief of the physical object can't access the data on there. And shared computers will have multiple user accounts, with or without
+which means a thief of the physical object can't access the data on there. And shared computers will have multiple user accounts,
+to shield users from each other, and restrict
 admin (root) access to the device's configuration.</p>
 <p>This means that a single device often already provides a concept of accounts and sessions: a session is one user currently using the device, and
 during such a session, the user has unemcumbered access both to the device's capabilities, and to that user's own data. A session is started by providing
@@ -6231,7 +6234,7 @@ First, we need to log in to many different servers, and managing all those crede
 
 <h3>Client-side master sessions</h3>
 <p>A simple solution for this is to store a "master session" on the client device, which can give access to an unlimited number of remote server sessions.</p>
-<p><a href="https://dvcs.w3.org/hg/WebID/raw-file/tip/spec/index-respec.html">WebID-TLS</a> is based on this idea: you create an asymmetric key pair inside your browser profile on your favorite
+<p><a href="https://dvcs.w3.org/hg/WebID/raw-file/tip/spec/tls-respec.html">WebID-TLS</a> is based on this idea: you create an asymmetric key pair inside your browser profile on your favorite
 client device, and use that to establish remote sessions at servers that support WebID-TLS. The same setup is often used for ssh, git, and other
 protocols that support asymmetric cryptography.</p>
 <p>But this also brings us to the second problem: we increasingly want to log in <em>from</em> many different clients. You can link your account on a
@@ -6276,6 +6279,7 @@ master session breaks down as a viable solution.</p>
 <p>Within enterprise intranets, services are often linked together using <a href="https://en.wikipedia.org/wiki/Security_Assertion_Markup_Language">SAML</a>,
   which is a well-established framework for federated login, but which was designed for closed ecosystems instead of open ones, so that makes it more suitable
   for use on intranets than for use on the internet as a whole.</p>
+<p>In the <a href="http://indiewebcamp.com/">IndieWeb community</a>, <a href="https://indieauth.com/">IndieAuth</a> is a popular way to allow polyglot federated login, using various social network sites for the identity plumbing.</p>
 
 <h3>Own your identity</h3>
 <p>In practice, at the time of writing, Facebook Connect is probably the most popular cross-origin
@@ -6395,7 +6399,7 @@ a level of indirection whereby the IP address of a given service may change whil
   <a href="http://www.myfriendtheplatypus.com/">www.myfriendtheplatypus.com</a>,
   you would typically have <a href="http://dir.yahoo.com/">dir.yahoo.com</a> as your home page, and roughly remember that you could get to it by clicking
   Science -> Biology -> Zoology -> Animals, Insects, and Pets -> Mammals -> Monotremes -> Platypus.</p>
-<p>The big advantage of this was of course that you only have to remember these string receptively, not productively: you are presented with multiple-choice
+<p>The big advantage of this was of course that you only have to remember these strings receptively, not productively: you are presented with multiple-choice
   questions, not one open question. And apart from that, it is interactive: you take multiple smaller steps and can reach your target step-by-step.</p>
 <p>A big disadvantage is of course that it takes one or two minutes to traverse Yahoo's directory until you get to the page that contains the information you need.
   Also, you have to know that a platypus is a monotreme. In this case, while writing out this example, I actually used a search engine to look that up. ;)</p>
