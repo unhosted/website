@@ -1450,6 +1450,7 @@ you can also store your music in IndexedDB using Mozilla's <a href="http://mozil
   obligations, and to queue the message in case the receiving mailserver is temporarily down or unreachable.</p>
 <p>For incoming email, you tell Sockethub to retrieve email from your mailserver, and put it into your remoteStorage account. At the
   time of writing, that part is not implemented yet: I am still using a separate script that handles this part.</p>  
+<p>The <a href="https://github.com/sockethub/sockethub#setup">Sockethub setup instructions</a> include an example page for sending email. You can also check out <a href="https://meute.5apps.com/">meute.5apps.com</a> for inspiration.</p>
 
 <h3>Main features of an email message</h3>
 <p>The email system is super old, at least on the scale of internet history, and has many different partial options and features. At
@@ -1462,8 +1463,8 @@ you can also store your music in IndexedDB using Mozilla's <a href="http://mozil
   for recipient addresses.</p>
 <p>The latest feature I added to my email sending app is support for multiple To: addresses as well as multiple Cc: addresses. It seem SendGrid does not
   implement Bcc:, and I also never use this feature, so I left that out, at least for outgoing emails.</p>
-<p>For incoming emails, I use a separate app. This is a bit of a nuisance because I have to cut-and-paste each message I reply to, but as a work-in-progress,
-  I manage with it. I store incoming emails on my remoteStorage in the 'messages' modules (we might rename this to 'inbox' or something else at some point),
+<p>For incoming emails, I used a separate app at the time of writing (later, I switched to using <a href="https://meute.5apps.com/">Meute</a>). This is a bit of a nuisance because I have to cut-and-paste each message I reply to, but as a work-in-progress,
+  I manage with it. I store incoming emails on my remoteStorage in the 'messages' modules,
   and the way I keep the synchronization overload under control is by having two layers of folders: one layer for the Megasecond, and one layer for the
   Kilosecond.</p>
 <p>This means that at one click of a button I can retrieve all email from the current Kilosecond (about 17 minutes), which is rarely more than two or three
@@ -1498,7 +1499,7 @@ you can also store your music in IndexedDB using Mozilla's <a href="http://mozil
   <p>But with sockethub, provided you run your sockethub server inside your home, or at least inside your trusted local network, we have
     an opportunity to implement end-to-end encryption in a way that is entirely transparent to the unhosted web apps that send and receive
     the emails.</p>
-  <p>So far, I have added PGP clearsigning to Sockethub, using the '<a href="https://github.com/drudge/node-gpg">gpg</a>' nodejs package.
+  <p>So far, I have added PGP clearsigning to Sockethub (this has now been removed again), using the '<a href="https://github.com/drudge/node-gpg">gpg</a>' nodejs package.
     This is still an early proof-of-concept, and
     especially generating and storing the keys still needs a lot of work, but I think we should include this as a basic part of our platform.</p>
   <p>When not all recipients of an email message have a PGP key, the message needs to be sent in cleartext, and PGP can only be used to sign the
@@ -1520,7 +1521,7 @@ you can also store your music in IndexedDB using Mozilla's <a href="http://mozil
   <p>But email and PGP are an essential part of decentralized online freedom, and it is important that a few of us live through these growing pains
     so that, as Eben said in the FOSDEM <a href="https://fosdem.org/2013/interviews/2013-bdale-garbee-and-eben-moglen/">interview</a>,
     "by the time you know you need a FreedomBox, we will have it ready for you." The No Cookie Crew is looking for brave pioneer members, to make this
-    also true for unhosted web apps. :)</p>
+    true also for unhosted web apps. :)</p>
   <p><a href="https://groups.google.com/forum/#!topic/unhosted/DkaJornuhnk">comments welcome!</a></p>
       <h2><a name="episode-10" "id="#episode-10" href="#episode-10">10.</a> Linking things together on the world wide web</h2>
 
@@ -4985,6 +4986,7 @@ you can also store your music in IndexedDB using Mozilla's <a href="http://mozil
   obligations, and to queue the message in case the receiving mailserver is temporarily down or unreachable.</p>
 <p>For incoming email, you tell Sockethub to retrieve email from your mailserver, and put it into your remoteStorage account. At the
   time of writing, that part is not implemented yet: I am still using a separate script that handles this part.</p>  
+<p>The <a href="https://github.com/sockethub/sockethub#setup">Sockethub setup instructions</a> include an example page for sending email. You can also check out <a href="https://meute.5apps.com/">meute.5apps.com</a> for inspiration.</p>
 
 <h3>Main features of an email message</h3>
 <p>The email system is super old, at least on the scale of internet history, and has many different partial options and features. At
@@ -4997,8 +4999,8 @@ you can also store your music in IndexedDB using Mozilla's <a href="http://mozil
   for recipient addresses.</p>
 <p>The latest feature I added to my email sending app is support for multiple To: addresses as well as multiple Cc: addresses. It seem SendGrid does not
   implement Bcc:, and I also never use this feature, so I left that out, at least for outgoing emails.</p>
-<p>For incoming emails, I use a separate app. This is a bit of a nuisance because I have to cut-and-paste each message I reply to, but as a work-in-progress,
-  I manage with it. I store incoming emails on my remoteStorage in the 'messages' modules (we might rename this to 'inbox' or something else at some point),
+<p>For incoming emails, I used a separate app at the time of writing (later, I switched to using <a href="https://meute.5apps.com/">Meute</a>). This is a bit of a nuisance because I have to cut-and-paste each message I reply to, but as a work-in-progress,
+  I manage with it. I store incoming emails on my remoteStorage in the 'messages' modules,
   and the way I keep the synchronization overload under control is by having two layers of folders: one layer for the Megasecond, and one layer for the
   Kilosecond.</p>
 <p>This means that at one click of a button I can retrieve all email from the current Kilosecond (about 17 minutes), which is rarely more than two or three
@@ -5033,7 +5035,7 @@ you can also store your music in IndexedDB using Mozilla's <a href="http://mozil
   <p>But with sockethub, provided you run your sockethub server inside your home, or at least inside your trusted local network, we have
     an opportunity to implement end-to-end encryption in a way that is entirely transparent to the unhosted web apps that send and receive
     the emails.</p>
-  <p>So far, I have added PGP clearsigning to Sockethub, using the '<a href="https://github.com/drudge/node-gpg">gpg</a>' nodejs package.
+  <p>So far, I have added PGP clearsigning to Sockethub (this has now been removed again), using the '<a href="https://github.com/drudge/node-gpg">gpg</a>' nodejs package.
     This is still an early proof-of-concept, and
     especially generating and storing the keys still needs a lot of work, but I think we should include this as a basic part of our platform.</p>
   <p>When not all recipients of an email message have a PGP key, the message needs to be sent in cleartext, and PGP can only be used to sign the
@@ -5055,7 +5057,7 @@ you can also store your music in IndexedDB using Mozilla's <a href="http://mozil
   <p>But email and PGP are an essential part of decentralized online freedom, and it is important that a few of us live through these growing pains
     so that, as Eben said in the FOSDEM <a href="https://fosdem.org/2013/interviews/2013-bdale-garbee-and-eben-moglen/">interview</a>,
     "by the time you know you need a FreedomBox, we will have it ready for you." The No Cookie Crew is looking for brave pioneer members, to make this
-    also true for unhosted web apps. :)</p>
+    true also for unhosted web apps. :)</p>
   <p><a href="https://groups.google.com/forum/#!topic/unhosted/DkaJornuhnk">comments welcome!</a></p>
       <h2><a name="episode-10" "id="#episode-10" href="#episode-10">10.</a> Linking things together on the world wide web</h2>
 
