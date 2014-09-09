@@ -31,10 +31,10 @@ it is generally the client who finds the server starting from a domain name, thr
 out from the client, routed over IP, and into a TCP port on which the server is listening. This requires the server to be listening on a port which
 was agreed beforehand (probably a default port for a certain protocol, or one included alongside the server's domain name in a URL), and requires
 the server to be online at the time the client initiates the communication, on the IP address advertised in DNS.</p>
-<p>If we were to use this system for peer-to-peer communication (the situation in which the caller and the callee have a similar device setup),
-then the callee would have to use dynamic DNS to keep their IP address up to date, and would need to be able to open a public port on their device.
-While the first is often possible, the second is often not; especially when you're on the move.</p>
-<p>An easy solution for this is to route all incoming traffic to an unhosted web app through sockethub.</p>
+<p>Suppose we were to use this system for peer-to-peer communication, where the caller and the callee have a similar device setup.
+Unless the callee stays on one static IPv4 address, they would then have to use dynamic DNS to keep their IP address up to date, and would also need to be able to open a public port on their device.</p>
+<p>While the first is often possible, the second is often not; especially when you're on the move.
+An easy solution for this is to route all incoming traffic to an unhosted web app through sockethub.</p>
 
 <h3>Send me anything</h3>
 <p>We already used Webfinger in <a href="../7/Adding-remote-storage-to-unhosted-web-apps.html">episode 7</a>
@@ -67,7 +67,7 @@ you are online and willing to take incoming calls, and also to check if a certai
 <p>So this simple demo app uses webfinger and sockethub to implement a simple text chat. It's still not very usable, since sockethub was
 not really designed to listen on ports;
 this means you can have only one chat conversation at a time. But we'll
-<a href="https://github.com/sockethub/sockethub/issues/60">work on that</a> and will eventually get it working as a proper chat app,
+<a href="https://github.com/sockethub/sockethub/issues/63">work on that</a> and will eventually get it working as a proper chat app,
 with an addressbook and everything.</p>
 
 <h3>Caller ID</h3>
@@ -127,7 +127,7 @@ PeerConnection technology, it is possible to upgrade to a shortcut route, once f
 <a href="http://social.unhosted.5apps.com/friend.html">caller</a> and <a href="http://social.unhosted.5apps.com/me.html">callee</a> script to demo this, but ran into some
 problems where both Firefox Nightly and Chrome give an error which I wasn't expecting from the documentation.</p>
 <p>I'm sure I just made some silly mistake somewhere though,
-so I will update this episode as soon as I get this working. This is all still quite new ground to explore. The main point I want to make and repeat is that PeerConnection
+. This is all still quite new ground to explore - you will probably find some interesting up-to-date demo projects when searching the web. The main point I want to make and repeat is that PeerConnection
 is a way to establish a shortcut route between two peers, once first contact has <em>already</em> been established. This will lead to lower latency, and will enable the
 use of end-to-end encryption between the two peers. So it's really quite valuable. But it is not a serverless protocol.</p>
 <p>Eventually, when we get this working, we will be able to replace Skype, and use an unhosted web app (with a little help from sockethub) instead. Next week we will have
