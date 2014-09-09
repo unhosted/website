@@ -5,20 +5,18 @@
     <meta charset="utf-8" />
     <meta name="description" content="weekly handbook about unhosted web apps" />
     <title>unhosted web apps</title>
-    <link rel="stylesheet" href="/adventures/hljs/default.min.css" />
-    <link rel="hub" href="http://pubsubhubbub.appspot.com/"/>
-    <link rel="updates alternate" type="application/atom+xml" href="/adventures/feed.atom" />
+    <link rel="stylesheet" href="./hljs/default.min.css" />
     <link rel="author" type="text/html" href="https://michielbdejong.com/"/>
 
-    <script src="/adventures/hljs/highlight.min.js"></script>
+    <script src="./hljs/highlight.min.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <link rel="stylesheet" href="/book/book.css" />
+    <link rel="stylesheet" href="./book.css" />
   </head>
 
   <body>
     <article>
     <div class="logo">
-      <img src="../../img/island-color.png" />
+      <img src="./island-color.png" />
     </div>
     
       <header>
@@ -71,32 +69,32 @@
         <h4>Supporters:</h4>
         <p>
           <a class="logo" href="http://nlnet.nl/">
-            <img src="../../img/nlnet.png" />
+            <img src="./nlnet.png" />
           </a>
           &nbsp;
         </p>
 
         <p>
           <a class="logo" href="http://wauland.de/">
-            <img src="../../img/wau.png" />
+            <img src="./wau.png" />
           </a>
           &nbsp;
         </p>
 
         <p>
           <a class="logo" href="http://www.gabrielweinberg.com/blog/2012/03/duckduckgo-foss-donations-2011.html">
-            <img src="../../img/duckduckgo.jpg" />
+            <img src="./duckduckgo.jpg" />
           </a>
           &nbsp;
         </p>
 
         <p>
-          and <a href="../../thankyou.html">many more</a>&hellip;
+          and <a href="https://unhosted.org/thankyou.html">many more</a>&hellip;
         </p>
       </div>
     </nav>
     <div style="clear:right"></div>
-      <h2><a name="episode-1" "id="#episode-1" href="#episode-1">1.</a> Personal servers and unhosted web apps</h2>
+<div class="episode">      <h2><a name="episode-1" "id="#episode-1" href="#episode-1">1.</a> Personal servers and unhosted web apps</h2>
 
       <p>(<a href="http://unhosted.bencharp.com/">en Fran&#231;ais</a>)</p>
       <h3>Hosted software threatens software freedom</h3>
@@ -227,7 +225,7 @@
           and generous people</a>, as well as several companies and foundations. This blog series is a write-up of all the
         tricks and insights we discovered so far.</p>
 <p><a href="https://groups.google.com/d/topic/unhosted/L1GqArQzmSY/discussion">Comments welcome!</a></p>
-      <h2><a name="episode-2" "id="#episode-2" href="#episode-2">2.</a> An unhosted editor</h2>
+</div><div class="episode">      <h2><a name="episode-2" "id="#episode-2" href="#episode-2">2.</a> An unhosted editor</h2>
 
       <p>(<a href="http://unhosted.bencharp.com/page/2-editeur,2.html">en Fran&#231;ais</a>)</p>
       <p>Welcome to the second episode of Unhosted Adventures! If you log out of all websites, and close all desktop applications, putting
@@ -366,7 +364,7 @@ F%22%3A%20%22replace%22%2C%20%22Shift-Cmd-Alt-F%22%3A%20%22replaceAll%22%2C%0A%2
         all other apps, as well as all server-side scripts in the coming episodes. I hope you liked it. If you did, then please share it with your
         friends and followers. Next week we'll  discuss how to set up your own personal server.</p>
 <p><a href="https://groups.google.com/d/topic/unhosted/ANz3ofSyfmc/discussion">Comments welcome!</a></p>
-      <h2><a name="episode-3" "id="#episode-3" href="#episode-3">3.</a> Setting up your personal server</h2>
+</div><div class="episode">      <h2><a name="episode-3" "id="#episode-3" href="#episode-3">3.</a> Setting up your personal server</h2>
 
       <p>(<a href="http://unhosted.bencharp.com/page/3-serveur,3.html">en Fran&#231;ais</a>)</p>
       <h3>Why you need a server</h3>
@@ -546,7 +544,7 @@ https.createServer({
         <a href="https://twitter.com/unhosted">twitter</a>,
         <a href="https://facebook.com/unhostedwebapps">facebook</a></p>
 <p><a href="https://groups.google.com/d/topic/unhosted/xUDoVNa21og/discussion">Comments welcome!</a></p>
-      <h2><a name="episode-4" "id="#episode-4" href="#episode-4">4.</a> WebSockets</h2>
+</div><div class="episode">      <h2><a name="episode-4" "id="#episode-4" href="#episode-4">4.</a> WebSockets</h2>
 
       <p>(<a href="http://unhosted.bencharp.com/page/4-websockets,4.html">en Fran&#231;ais</a>)</p>
       <p><em><strong>No Cookie Crew  - Warning #2:</strong> For this tutorial you will need to update your personal server using an ssh/scp client.</em></p>
@@ -712,7 +710,7 @@ exports.config = {
       <p>All in all, WebSockets are a good, reliable way to connect your unhosted web app to your personal server. Next week, as promised, we will
         use a WebSocket for a Facebook and Twitter gateway running in nodejs. So stay tuned!</p>
 <p><a href="https://groups.google.com/d/topic/unhosted/R_xyap_efWA/discussion">Comments welcome!</a></p>
-      <h2><a name="episode-5" "id="#episode-5" href="#episode-5">5.</a> Facebook and Twitter from nodejs</h2>
+</div><div class="episode">      <h2><a name="episode-5" "id="#episode-5" href="#episode-5">5.</a> Facebook and Twitter from nodejs</h2>
 
       <p>(<a href="http://unhosted.bencharp.com/page/5-social,5.html">en Fran&#231;ais</a>)</p>
       <p><em><strong>No Cookie Crew  - Warning #3:</strong> This tutorial still requires you to update your personal server using an
@@ -1027,7 +1025,7 @@ console.log('up');
         as well as doing any other server maintenance which you may now be doing via ssh. This will be another important step forward for the
         No Cookie Crew. See you next week: same time, same place!</p>
 <p><a href="https://groups.google.com/d/topic/unhosted/0AaK1KHi0o0/discussion">Comments welcome!</a></p>
-      <h2><a name="episode-6" "id="#episode-6" href="#episode-6">6.</a> Controlling your server over a WebSocket</h2>
+</div><div class="episode">      <h2><a name="episode-6" "id="#episode-6" href="#episode-6">6.</a> Controlling your server over a WebSocket</h2>
 
       <p>(<a href="http://unhosted.bencharp.com/page/6-webshell,6.html">en Fran&#231;ais</a>)</p>
       <p><em><strong>No Cookie Crew  - Warning #4:</strong> This tutorial is the last time you still need to update your personal server using an
@@ -1124,7 +1122,7 @@ module.exports = {
       <p>Especially the combination of Sockethub with <a href="http://remotestorage.io/">remoteStorage</a> and a web runtime like for instance Firefox OS looks
         like a promising all-round app platform. More next week!</p>
 <p><a href="https://groups.google.com/d/topic/unhosted/smrr28JTQu8/discussion">Comments welcome!</a></p>
-      <h2><a name="episode-7" "id="#episode-7" href="#episode-7">7.</a> Adding remote storage to unhosted web apps</h2>
+</div><div class="episode">      <h2><a name="episode-7" "id="#episode-7" href="#episode-7">7.</a> Adding remote storage to unhosted web apps</h2>
 
       <p>(<a href="http://unhosted.bencharp.com/page/7-remotestorage,7.html">en Fran&#231;ais</a>)</p>
       <h3>Apps storing user data on your personal server</h3>
@@ -1249,7 +1247,7 @@ module.exports = {
         remotestorage.js library are something many of us have been working on really hard for years, and since last week, finally, we are able to
         use it for a few real apps. So we are really enthusiastic about this recent release, and hope you enjoy it as much as we do! :)</p>
 <p><a href="https://groups.google.com/d/topic/unhosted/BLx6IGK_5EU/discussion">Comments welcome!</a></p>
-      <h2><a name="episode-8" "id="#episode-8" href="#episode-8">8.</a> Collecting and organizing your data</h2>
+</div><div class="episode">      <h2><a name="episode-8" "id="#episode-8" href="#episode-8">8.</a> Collecting and organizing your data</h2>
 
       <p>(<a href="http://unhosted.bencharp.com/page/8-vos-donnees,8.html">en Fran&#231;ais</a>)</p>
 <p>As a member of the No Cookie Crew you will be using unhosted web apps for everything you currently use hosted web apps for.
@@ -1454,7 +1452,7 @@ you can also store your music in IndexedDB using Mozilla's <a href="http://mozil
   tied to what software providers give you, also gives a satisfying feeling of freedom and opportunity. And it makes being a
   member of the No Cookie Crew so much more fun! :)</p>
 <p><a href="https://groups.google.com/d/topic/unhosted/WBJBToqMvwk/discussion">Comments welcome!</a></p>
-      <h2><a name="episode-9" "id="#episode-9" href="#episode-9">9.</a> Sending and receiving email from unhosted web apps</h2>
+</div><div class="episode">      <h2><a name="episode-9" "id="#episode-9" href="#episode-9">9.</a> Sending and receiving email from unhosted web apps</h2>
 
 <!-- title: Sending and receiving email from unhosted web apps -->
       <p>(<a href="http://unhosted.bencharp.com/page/9-email,9.html">en Fran&#231;ais</a>)</p>
@@ -1598,7 +1596,7 @@ you can also store your music in IndexedDB using Mozilla's <a href="http://mozil
     "by the time you know you need a FreedomBox, we will have it ready for you." The No Cookie Crew is looking for brave pioneer members, to make this
     true also for unhosted web apps. :)</p>
   <p><a href="https://groups.google.com/forum/#!topic/unhosted/DkaJornuhnk">comments welcome!</a></p>
-      <h2><a name="episode-10" "id="#episode-10" href="#episode-10">10.</a> Linking things together on the world wide web</h2>
+</div><div class="episode">      <h2><a name="episode-10" "id="#episode-10" href="#episode-10">10.</a> Linking things together on the world wide web</h2>
 
 <!-- linking: Linking things together on the world wide web -->
       <p>(<a href="http://unhosted.bencharp.com//page/10-web-linking,10.html">en Fran&#231;ais</a>)</p>
@@ -1756,7 +1754,7 @@ you can also store your music in IndexedDB using Mozilla's <a href="http://mozil
   to convince other people with the same problem to join in. It is a truly open system.</p>
 
 <p><a href="https://groups.google.com/forum/#!topic/unhosted/fHxfGOwqtd0">comments welcome!</a></p>
-      <h2><a name="episode-11" "id="#episode-11" href="#episode-11">11.</a> App hosting</h2>
+</div><div class="episode">      <h2><a name="episode-11" "id="#episode-11" href="#episode-11">11.</a> App hosting</h2>
 
 <!-- app hosting: App hosting -->
 <h3>Hosting is a telecommunications transport through space and time.</h3>
@@ -1992,7 +1990,7 @@ generate an appcache manifest for your app (more about this below), resize your 
   See you then! :)</p>
 
 <p><a href="https://groups.google.com/forum/#!topic/unhosted/l3lbe0RP4o8">comments welcome!</a></p>
-      <h2><a name="episode-12" "id="#episode-12" href="#episode-12">12.</a> App discovery</h2>
+</div><div class="episode">      <h2><a name="episode-12" "id="#episode-12" href="#episode-12">12.</a> App discovery</h2>
 
 <!-- app discovery: App discovery -->
 <h3>App discovery (was: App distribution).</h3>
@@ -2140,7 +2138,7 @@ generate an appcache manifest for your app (more about this below), resize your 
 <p>In any case, try out the "launchbutton.js" file I showed above, and link to some apps from your website. App hosting and web linking should be all you need here.
   The web doesn't need a new "app distribution layer" like Apple's iOS App Store. The web <em>already is</em> one big, infinite app store.</p>
 <p>I hope this episode was not too opinionated or too confusing, so <a href="https://groups.google.com/forum/#!topic/unhosted/GuAkJxTRsf0">comments welcome!</a></p>
-      <h2><a name="episode-13" "id="#episode-13" href="#episode-13">13.</a> Dealing with users in unhosted web apps</h2>
+</div><div class="episode">      <h2><a name="episode-13" "id="#episode-13" href="#episode-13">13.</a> Dealing with users in unhosted web apps</h2>
 
 <!-- users: Dealing with users in unhosted web apps -->
 <h3>Database sharding.</h3>
@@ -2220,7 +2218,7 @@ generate an appcache manifest for your app (more about this below), resize your 
 <p>I am still thinking about what we can do about this situation, and I'm very curious what other people think about this. If you have any ideas about this, or about any other
   topic touched upon in this episode, or you would like to help build unhosted web apps around remoteStorage.contacts, then please reply to the
   <a href="https://groups.google.com/forum/#!topic/unhosted/V6-XKdHbBtU">mailing list</a>!</p>
-      <h2><a name="episode-14" "id="#episode-14" href="#episode-14">14.</a> Peer-to-peer communication</h2>
+</div><div class="episode">      <h2><a name="episode-14" "id="#episode-14" href="#episode-14">14.</a> Peer-to-peer communication</h2>
 
 <!-- p2p: Peer-to-peer communication -->
 <h3>Routability</h3>
@@ -2334,7 +2332,7 @@ after having dumped GMail, Dropbox, Google Docs, Spotify, Facebook,
 Twitter, Flickr, and with this episode also having opened the way for dumping Skype,
 the last cookied platform we will need to replace in order to cover "the basics" is github. I'm already looking forward to that one, hope you are too.</p>
 <p><a href="https://groups.google.com/forum/#!topic/unhosted/1YlbDM57_kU">comments welcome</a>!</p>
-      <h2><a name="episode-15" "id="#episode-15" href="#episode-15">15.</a> Unhosted web apps and OAuth</h2>
+</div><div class="episode">      <h2><a name="episode-15" "id="#episode-15" href="#episode-15">15.</a> Unhosted web apps and OAuth</h2>
 
 <!-- unhosted oauth: Unhosted web apps and OAuth. -->
 <h3>The unhosted approach to OAuth</h3>
@@ -2436,7 +2434,7 @@ as static content on 5apps, and you just click through the content without much 
   and resolves a dependency on hosted server-side software, so I think it's justified whenever the preferable
   <a href="http://tools.ietf.org/html/rfc6749#section-4.2">implicit grant</a> flow is not being offered. But please
   <a href="https://groups.google.com/forum/#!topic/unhosted/j3QAL4msUyo">comment</a> if you think this type of hack is harmful in any way.</p>
-      <h2><a name="episode-16" "id="#episode-16" href="#episode-16">16.</a> Our plan to save the web</h2>
+</div><div class="episode">      <h2><a name="episode-16" "id="#episode-16" href="#episode-16">16.</a> Our plan to save the web</h2>
 
 <!-- our platform: Our plan to save the web. -->
 <h3>End of part one</h3>
@@ -2547,7 +2545,7 @@ will keep growing both in number of developers involved, and in market reach of 
 <a href="https://unhosted.org/apps/">examples page</a>; most of the apps mentioned on there have issue trackers on github, so you can submit bug reports there if you
 have any problems using any of the apps, and if you have any questions or remarks in general, then just send them to the
 <a href="https://groups.google.com/forum/#!forum/unhosted">forum</a>. Comments very welcome!</p>
-      <h2><a name="episode-17" "id="#episode-17" href="#episode-17">17.</a> Cryptography</h2>
+</div><div class="episode">      <h2><a name="episode-17" "id="#episode-17" href="#episode-17">17.</a> Cryptography</h2>
 
 <!-- cryptography: Cryptography -->
 <h3>Alice got a brand new bag</h3>
@@ -2633,7 +2631,7 @@ the small server encrypt blobs, to store on the large semi-trusted server. This 
 <p>The proof of concept that originally appeared on this website back in 2010 when we launched it, centered heavily on implementing end-to-end encryption between browser environments. But we learned a lot since then, and hopefully this episode explains the reason why we now advise you to use TLS to a freedombox instead of that.</p>
 <p>Security stands and falls with correcting people when they get it wrong. And even though we're discussing the topic in this episode, this is mainly to make sure our handbook covers this important topic, and "IANASE", that's to say: I am <strong>not</strong> a security expert! :)</p>
 <p>So this time especially, even more than other times, <a href="https://groups.google.com/d/msg/unhosted/b1irZwo4HC4/_tPnu8_iMpgJ">comments are very welcome</a>, especially if you see an error in the security arguments.</p> 
-      <h2><a name="episode-18" "id="#episode-18" href="#episode-18">18.</a> Distributed hash tables</h2>
+</div><div class="episode">      <h2><a name="episode-18" "id="#episode-18" href="#episode-18">18.</a> Distributed hash tables</h2>
 
 <!-- DHTs: Distributed hash tables -->
 <h3>Content-addressable data</h3>
@@ -2699,7 +2697,7 @@ human-meaningful, and secure, all at the same time.</p>
 <p>When storing small items of data, you need an actual key-value store. When the items are big, though, you can combine a first-level key-value store with a second-level content-addressable store, such that the first forms an index to the latter. Doing this also opens up opportunities to use semi-trusted servers on the second level. The first-level index can also be stored as a blob on the second level, meaning your client will only need to remember one hash string - the hash of the index.</p>
 <p>Truly decentralized storage of generic key-value data (with human-memorable item names) is impossible, but decentralized storage of content-addressable data can be achieved "in practice", by dominating the finite set of Earthly servers that claim to participate in your DHT, and if clients verify that the values they obtain actually hash back to the item keys they requested.</p>
 <p>As always, <a href="https://groups.google.com/d/msg/unhosted/o-M2ejb_Cc8/ak--jrLrLzoJ">comments welcome</a>!</p>
-      <h2><a name="episode-19" "id="#episode-19" href="#episode-19">19.</a> BGP, IP, DNS, HTTP, TLS, and NAT</h2>
+</div><div class="episode">      <h2><a name="episode-19" "id="#episode-19" href="#episode-19">19.</a> BGP, IP, DNS, HTTP, TLS, and NAT</h2>
 
 <!-- internet: BGP, IP, DNS, HTTP, TLS, and NAT -->
 <h3>Connecting your computer to the internet</h3>
@@ -2751,7 +2749,7 @@ More about anonymity next week, when we discuss the concept of online identities
 <p>In general, the view of each device being a neutral player in the network is incorrect. In practice, the internet is (now) made up of addressable servers in the center, and many subordinate clients in the periphery. More about this soon, in the episode about Network Neutrality.</p>
 
 <p>So quite a short and dense episode this week, but I hope all the links to wikipedia articles give enough ways into further reading about this vast and important area of engineering. At least when thinking about unhosted web apps, it's important to understand a little bit about routing and addressability, and to know that the internet is actually not much more than a stack of hacks, and each layer has its flaws, but we make it work. And as always, <a href="https://groups.google.com/d/msg/unhosted/hIVOKI_pNQI/5DPch8V6EKkJ">comments welcome</a>!</p>
-      <h2><a name="episode-20" "id="#episode-20" href="#episode-20">20.</a> Persona, OpenID, SAML, WebID, and Webfinger</h2>
+</div><div class="episode">      <h2><a name="episode-20" "id="#episode-20" href="#episode-20">20.</a> Persona, OpenID, SAML, WebID, and Webfinger</h2>
 
 <!-- identity: Webfinger, Persona, WebID, OpenID, SAML -->
 <h3>Virtualization of sessions</h3>
@@ -2844,7 +2842,7 @@ is of course to decentralize applications away from specific application servers
   to it, since it's an important background topic, and we often get the question "how do unhosted web apps interact with Persona". So now you know.
   The answer is: they don't have the problem that Persona solves. :)</p>
 <p><a href="https://groups.google.com/d/msg/unhosted/tMPYfxwF2O8/VZ4v4XsbzsgJ">comments welcome!</a></p>
-      <h2><a name="episode-21" "id="#episode-21" href="#episode-21">21.</a> Client-side sessions, origins, browser tabs, and WebIntents</h2>
+</div><div class="episode">      <h2><a name="episode-21" "id="#episode-21" href="#episode-21">21.</a> Client-side sessions, origins, browser tabs, and WebIntents</h2>
 
 <!-- sessions: client-side sessions, origins, browser tabs, and WebIntents -->
 <h3>Client-side sessions</h3>
@@ -2914,7 +2912,7 @@ a native application, and a lot of UX research is currently going into how to le
   lags behind on "other" device operating systems. :)</p>
   
 <p><a href="https://groups.google.com/d/msg/unhosted/1Mm3fRPuvIg/016QHDEfzCwJ">comments welcome!</a></p>
-      <h2><a name="episode-22" "id="#episode-22" href="#episode-22">22.</a> How to locate resources</h2>
+</div><div class="episode">      <h2><a name="episode-22" "id="#episode-22" href="#episode-22">22.</a> How to locate resources</h2>
 
 <!-- search: How to locate resources -->
 <p>Last week, Adrian suggested that this blog really needs an episode about search. I totally agree, so here it is! :)</p>
@@ -3046,7 +3044,7 @@ search engine.</p>
   we can simply seed it on bittorrent, and "leak" it into the public domain.</p>
 <p>This is an irreversible project though, so <a href="https://groups.google.com/d/msg/unhosted/DnxSdQ8xU0E/FioTHzT01soJ">please comment</a>
 if you think it's a bad idea, or have any other reactions to this episode.</p>
-      <h2><a name="episode-23" "id="#episode-23" href="#episode-23">23.</a> Network neutrality, ubiquitous wifi, and DRM</h2>
+</div><div class="episode">      <h2><a name="episode-23" "id="#episode-23" href="#episode-23">23.</a> Network neutrality, ubiquitous wifi, and DRM</h2>
 
 <!-- neutrality: Network Neutrality -->
 <h3>Technology as a tradable asset</h3>
@@ -3084,7 +3082,7 @@ internet service providers (ISPs) should offer connectivity as a <a href="http:/
 <p>It is not bad that closed technology exists, but an organization like W3C supporting it sends the wrong signal and is of course detrimental to its mission. It is hard to understand how it has been possible for the W3C to make this mistake, and we can only hope they will give their own mission statement another good read, discover their folly, and revert it.</p>
 <p>To be fair though, the W3C's recent behavior is not nearly as disappointing as Google's and Twitter's abandonment of rss and xmpp, as we'll discuss in next week's episode, which will be about <em>federation</em>! :)
 Until then, if anyone would like to comment on this episode, <a href="https://groups.google.com/d/msg/unhosted/4smSXyEfTVs/kRGo8nG_DuIJ">please do!</a></p>
-      <h2><a name="episode-24" "id="#episode-24" href="#episode-24">24.</a> Decentralizing the web by making it federated</h2>
+</div><div class="episode">      <h2><a name="episode-24" "id="#episode-24" href="#episode-24">24.</a> Decentralizing the web by making it federated</h2>
 
 <!-- federation: Decentralizing the web by making it federated -->
 <h3>Clients and servers</h3>
@@ -3130,7 +3128,7 @@ data hosting, or both.</p>
 <a href="http://remotestorage.io/">software</a> <a href="http://sockethub.org/">libraries</a>, <a href="https://unhosted.org/apps/">apps</a>,
 and <a href="http://tosdr.org/">campaigns</a>. We can use unhosted web apps ourselves, but for most end-users the entry threshold is still too high. We can convince sysadmins (like for instance those at European universities) to offer remoteStorage accounts to their users, and we can convince app developers to accept unhosted accounts, but we're not reaching any end-users directly with that. Using remoteStorage and Sockethub as the basis for a "Mozilla-style Facebook" would be a much more tangible result.</p>
 <p>Also as Laurent remarked, it would simply be very funny if Unhosted becomes a Hosting provider. :) So I'll take a short break from writing this blog, and look into setting something like that up during the summer months. If anyone would like to comment on this plan, or on anything else mentioned in this episode, <a href="https://groups.google.com/d/msg/unhosted/34ZEm3VcL1U/VauLNerMFPEJ">please do!</a>. In any case, I'll let you know when I have something ready for alpha testing, and hope to see you all in <a href="http://2013.unhosted.org/">Unho&#353;&#357;</a>!</p>
-      <h2><a name="episode-25" "id="#episode-25" href="#episode-25">25.</a> Anonymity</h2>
+</div><div class="episode">      <h2><a name="episode-25" "id="#episode-25" href="#episode-25">25.</a> Anonymity</h2>
 
 <!-- Anonymity -->
 <h3>Freedom of Expression, Privacy, and Anonymity</h3>
@@ -3215,7 +3213,7 @@ Whenever you send an email, use a randomly generated from and reply-to address w
 payload, so that only the intended recipient of your message will discover that this message was actually from you.</p>
 
 <p><a href="https://groups.google.com/d/msg/unhosted/4PB9y2iNgB8/dDQLsq8kH6kJ">Comments welcome!</a></p>
-      <h2><a name="episode-26" "id="#episode-26" href="#episode-26">26.</a> Decentralized reputation systems</h2>
+</div><div class="episode">      <h2><a name="episode-26" "id="#episode-26" href="#episode-26">26.</a> Decentralized reputation systems</h2>
 
 <!-- reputation: Decentralized reputation systems -->
 <h3>Decentralized reputation systems</h3>
@@ -3275,7 +3273,7 @@ to improve efficiency, but the value of the diploma would come from the reputati
 part of this blog series, about theoretical foundations for building freedom from web2.0's platform monopolies. In the third and last part, we will look at
 practical issues related to building unhosted web apps.
 <a href="https://groups.google.com/forum/#!topic/unhosted/O0LTSqga9RA">Comments welcome!</a></p>
-      <h2><a name="episode-27" "id="#episode-27" href="#episode-27">27.</a> Persisting data in browser storage</h2>
+</div><div class="episode">      <h2><a name="episode-27" "id="#episode-27" href="#episode-27">27.</a> Persisting data in browser storage</h2>
 
 <!-- Storing data locally -->
 
@@ -3386,7 +3384,7 @@ thread, it's better to use a
 <p>But in general, depending on your application, you'll probably have to store data in IndexedDB. This can be data that will never leave the browser, data that is on its way to the user's server or to some third-party server, or data that you retrieved from somewhere, and that you want to cache. IndexedDB is one of the biggest friends of the unhosted web app developer!</p>
 
 <p>Next week we'll look at sync. Comments welcome!</p>
-      <h2><a name="episode-28" "id="#episode-28" href="#episode-28">28.</a> Synchronizing browser storage with server storage</h2>
+</div><div class="episode">      <h2><a name="episode-28" "id="#episode-28" href="#episode-28">28.</a> Synchronizing browser storage with server storage</h2>
 
 <p>When you use multiple devices, it's practical to have your data automatically copied from one device to another. Also, when you want to publish data on your web site to share it with other people, it's necessary to copy it from your device to your server.</p>
 
@@ -3426,7 +3424,7 @@ Dominic Tarr's <a href="https://github.com/dominictarr/scuttlebutt">ScuttleButt<
 <p>In the ALL strategy, remotestorage.js will pro-actively retrieve all nodes, and keep them in sync. Caching strategies can be set per subtree, and the strategy set on the smallest containing subtree of a node is the one that counts.</p>
 <p>I realize this episode was pretty dense, with lots of complicated information in a short text! Sync and caching are complex problems, about which many books have been written. If you plan to write offline-first apps professionally, then it's a good idea to read and learn more about how sync works, and how conflict resolution affects your application. Next week we'll talk about other aspects of <a href="http://offlinefirst.org/">offline first</a> web apps. So stay tuned for that!</p>
 <p>As always, comments are very welcome, either in person tomorrow at <a href="http://www.meetup.com/Paris-Meetup-pour-la-decentralisation-dInternet/events/193618842/">Decentralize Paris</a>, or through the <a href="https://groups.google.com/forum/#!topic/unhosted/T_-p-wGFo-g">Unhosted Web Apps</a> mailing list.</p>
-      <h2><a name="episode-29" "id="#episode-29" href="#episode-29">29.</a> Offline-first web app design</h2>
+</div><div class="episode">      <h2><a name="episode-29" "id="#episode-29" href="#episode-29">29.</a> Offline-first web app design</h2>
 
 <!-- "offline first": "Offline-first web app design" -->
 <p>Last week we already talked about asynchronous synchronization,
@@ -3450,7 +3448,7 @@ the tactic of synchronizing the client-side data set with the server-side data s
 <h3>Conclusion</h3>
 <p>This sort of logic is often a bit different in offline-first apps than in online-first apps, and the JavaScript developer community is collectively learning how to do this, through talks at <a href="http://berlinjs.org/apps">user groups</a>, <a href="http://alistapart.com/article/offline-first">blog posts</a>, and <a href="https://github.com/offlinefirst/research/issues">discussions</a>.</p>
 <p>The important thing here is probably to realize that offline-first design is an important &quot;mind switch&quot; you will have to make when starting to develop unhosted web apps, or even just mobile web apps in general. Next week we'll talk about Backend-as-a-Service, <a href="https://groups.google.com/forum#!forum/unhosted">stay tuned</a>!</p>
-      <h2><a name="episode-30" "id="#episode-30" href="#episode-30">30.</a> Backend-as-a-Service platforms</h2>
+</div><div class="episode">      <h2><a name="episode-30" "id="#episode-30" href="#episode-30">30.</a> Backend-as-a-Service platforms</h2>
 
 <!-- "baas": "Backend-as-a-Service platforms",//open source ones = noBackend frameworks -->
 <p>Unhosted web apps have no own server-side part, by definition. The same is true for native mobile apps: although a lot of native mobile apps communicate with a server-side API of the same vendor, the native app itself is only what is downloaded from the app store onto the user's device.</p>
@@ -3505,7 +3503,7 @@ and Apple's <a href="https://developer.apple.com/icloud/documentation/cloudkit-s
 <h3>Comparison to per-user backend</h3>
 <p>Next week we'll look at per-user backend, a fundamentally different concept, in that your app's users, rather than (just) you as an app developer, have their own account at a provider of such a backend service. A per-user backend system is a service provided directly to the end user, instead of a business-to-business service provided to an app developer.</p>
 <p>I think the concept of per-user backend is the most important concept discussed in this whole blog series. If you are just going to read or link to only one episode, make it next week's one!</p>
-      <h2><a name="episode-31" "id="#episode-31" href="#episode-31">31.</a> Allowing the user to choose the backend server</h2>
+</div><div class="episode">      <h2><a name="episode-31" "id="#episode-31" href="#episode-31">31.</a> Allowing the user to choose the backend server</h2>
 
 <!--  "per-user backend": "Allowing the user to choose the backend server",//prop./open source/open protocol -->
 
@@ -3547,7 +3545,7 @@ Facebook's <a href="https://developers.facebook.com/docs/payments">Facebook Plat
 <p>Apart from the remoteStorage protocol, there is not a lot of standardization going on in the space of per-user online services. If per-user online services offer a cross-origin web API at all, then it's often one that is specific to one implementation (couchdb, sockethub), or even to one specific instance (GoogleDrive, Dropbox).</p>
 <p>Talking about this topic over the course of the past four years, I have slowly shifted my hope away from universal standardization of per-user backends, and more towards the idea of polyglot clients. One client-side library can be compatible with more than one server-side API, thus removing the need for all these APIs to converge.</p>
 <p>Next week we look at such client-side libraries. <a href="https://groups.google.com/forum#!forum/unhosted">Stay tuned</a>!</p>
-      <h2><a name="episode-32" "id="#episode-32" href="#episode-32">32.</a> Client-side libraries for per-user backend</h2>
+</div><div class="episode">      <h2><a name="episode-32" "id="#episode-32" href="#episode-32">32.</a> Client-side libraries for per-user backend</h2>
 
 <!-- "per-user clients": "Client-side libraries for per-user backend",//dropbox.js, nimbusbase, remotestorage.js, hoodie.js -->
 <p>In order to make it easier to let your unhosted web app talk with the user's backend, you would typically use a client-side library.</p>
@@ -3570,7 +3568,7 @@ Likewise, <a href="https://github.com/sockethub/sockethub-client">sockethub-clie
 <h3>Conclusion</h3>
 <p>Unfortunately, there's not a whole lot to say yet about client-side libraries for per-user backends. Maybe this will change in the future, and maybe such libraries will become part of browsers and devices at some point. But I wanted to dedicate an entire episode to the topic nonetheless, because I think it's one of the most important future directions for the unhosted web apps movement.</p>
 <p>The last three episodes have been in a way about &quot;backend functionality for unhosted web apps&quot;. Next week, we'll talk about the frontend functionality, and the week after that will be the conclusion of this blog series. <a href="https://groups.google.com/forum#!forum/unhosted">Stay tuned</a>!</p>
-      <h2><a name="episode-33" "id="#episode-33" href="#episode-33">33.</a> Client-side frontend development</h2>
+</div><div class="episode">      <h2><a name="episode-33" "id="#episode-33" href="#episode-33">33.</a> Client-side frontend development</h2>
 
 <!-- "client-side frontend": "Client-side frontend development",//mvc, routing, templating, responsive, progr. enh., testing -->
 <p>I personally never write a lot of frontend code. I usually write apps with very minimal user interfaces, which I manually program directly into the page. But if you want to create an unhosted web app with a significant user interaction surface, you're probably going to need some of the standard frontend development techniques.</p>
@@ -3612,7 +3610,7 @@ if certain DOM elements appear or change as a result of the interaction.</p>
 <p>This is obviously just a short list of topics you will want to read more about if you start to develop unhosted web apps professionally. Consider it the &quot;what to read next?&quot; section at the end of this blog series. I am not a frontend developer myself, but from what I've heard, these topics are the most important
 <a href="http://rmurphey.com/blog/2012/04/12/a-baseline-for-front-end-developers/">stuff you want to learn</a> for a successful professional carreer as an unhosted web app developer.</p>
 <p>Next week will be the last episode! :) We'll look back on this whole blog series, and at what the future of unhosted web apps may hold. <a href="https://groups.google.com/forum#!forum/unhosted">Stay tuned</a>!</p>
-      <h2><a name="episode-34" "id="#episode-34" href="#episode-34">34.</a> Conclusions</h2>
+</div><div class="episode">      <h2><a name="episode-34" "id="#episode-34" href="#episode-34">34.</a> Conclusions</h2>
 
 <!-- "conclusions": "Conclusions"//the web for apps, minimal per-user servers, the road ahead (towards DHT-based?), thanks again, everyone! -->
 <h3>The Web for Apps</h3>
@@ -3634,7 +3632,7 @@ if certain DOM elements appear or change as a result of the interaction.</p>
 
 <h3>Thanks for an amazing four years!</h3>
 <p>Although the future of unhosted web apps <strong>has only just begun</strong>, this first research phase of four years is now completed. As a product of all the work we've done together, I have packaged this blog as an <a href="https://unhosted.org/book/">html book</a>, and <a href="http://remotestorage.io/">the remoteStorage project</a> as well as <a href="http://sockethub.org/">the Sockethub project</a> will continue to evolve, as open source projects. We've come this far since the initial crowd-funding campaign (thanks again to <a href="https://unhosted.org/thankyou.html">all the donators</a>!), and the continued support from <a href="http://nlnet.nl/">NLnet</a> and <a href="http://wauland.de/">Wau Holland Stiftung</a>. I will present these conclusions tonight at <a href="http://lanyrd.com/2014/decentralizejs/">Decentralize.js</a>. As always, also for this last episode, <a href="https://groups.google.com/forum#!forum/unhosted">comments welcome</a>!</p>
-      <h2><a name="episode-1" "id="#episode-1" href="#episode-1">1.</a> Personal servers and unhosted web apps</h2>
+</div><div class="episode">      <h2><a name="episode-1" "id="#episode-1" href="#episode-1">1.</a> Personal servers and unhosted web apps</h2>
 
       <p>(<a href="http://unhosted.bencharp.com/">en Fran&#231;ais</a>)</p>
       <h3>Hosted software threatens software freedom</h3>
@@ -3765,7 +3763,7 @@ if certain DOM elements appear or change as a result of the interaction.</p>
           and generous people</a>, as well as several companies and foundations. This blog series is a write-up of all the
         tricks and insights we discovered so far.</p>
 <p><a href="https://groups.google.com/d/topic/unhosted/L1GqArQzmSY/discussion">Comments welcome!</a></p>
-      <h2><a name="episode-2" "id="#episode-2" href="#episode-2">2.</a> An unhosted editor</h2>
+</div><div class="episode">      <h2><a name="episode-2" "id="#episode-2" href="#episode-2">2.</a> An unhosted editor</h2>
 
       <p>(<a href="http://unhosted.bencharp.com/page/2-editeur,2.html">en Fran&#231;ais</a>)</p>
       <p>Welcome to the second episode of Unhosted Adventures! If you log out of all websites, and close all desktop applications, putting
@@ -3904,7 +3902,7 @@ F%22%3A%20%22replace%22%2C%20%22Shift-Cmd-Alt-F%22%3A%20%22replaceAll%22%2C%0A%2
         all other apps, as well as all server-side scripts in the coming episodes. I hope you liked it. If you did, then please share it with your
         friends and followers. Next week we'll  discuss how to set up your own personal server.</p>
 <p><a href="https://groups.google.com/d/topic/unhosted/ANz3ofSyfmc/discussion">Comments welcome!</a></p>
-      <h2><a name="episode-3" "id="#episode-3" href="#episode-3">3.</a> Setting up your personal server</h2>
+</div><div class="episode">      <h2><a name="episode-3" "id="#episode-3" href="#episode-3">3.</a> Setting up your personal server</h2>
 
       <p>(<a href="http://unhosted.bencharp.com/page/3-serveur,3.html">en Fran&#231;ais</a>)</p>
       <h3>Why you need a server</h3>
@@ -4084,7 +4082,7 @@ https.createServer({
         <a href="https://twitter.com/unhosted">twitter</a>,
         <a href="https://facebook.com/unhostedwebapps">facebook</a></p>
 <p><a href="https://groups.google.com/d/topic/unhosted/xUDoVNa21og/discussion">Comments welcome!</a></p>
-      <h2><a name="episode-4" "id="#episode-4" href="#episode-4">4.</a> WebSockets</h2>
+</div><div class="episode">      <h2><a name="episode-4" "id="#episode-4" href="#episode-4">4.</a> WebSockets</h2>
 
       <p>(<a href="http://unhosted.bencharp.com/page/4-websockets,4.html">en Fran&#231;ais</a>)</p>
       <p><em><strong>No Cookie Crew  - Warning #2:</strong> For this tutorial you will need to update your personal server using an ssh/scp client.</em></p>
@@ -4250,7 +4248,7 @@ exports.config = {
       <p>All in all, WebSockets are a good, reliable way to connect your unhosted web app to your personal server. Next week, as promised, we will
         use a WebSocket for a Facebook and Twitter gateway running in nodejs. So stay tuned!</p>
 <p><a href="https://groups.google.com/d/topic/unhosted/R_xyap_efWA/discussion">Comments welcome!</a></p>
-      <h2><a name="episode-5" "id="#episode-5" href="#episode-5">5.</a> Facebook and Twitter from nodejs</h2>
+</div><div class="episode">      <h2><a name="episode-5" "id="#episode-5" href="#episode-5">5.</a> Facebook and Twitter from nodejs</h2>
 
       <p>(<a href="http://unhosted.bencharp.com/page/5-social,5.html">en Fran&#231;ais</a>)</p>
       <p><em><strong>No Cookie Crew  - Warning #3:</strong> This tutorial still requires you to update your personal server using an
@@ -4565,7 +4563,7 @@ console.log('up');
         as well as doing any other server maintenance which you may now be doing via ssh. This will be another important step forward for the
         No Cookie Crew. See you next week: same time, same place!</p>
 <p><a href="https://groups.google.com/d/topic/unhosted/0AaK1KHi0o0/discussion">Comments welcome!</a></p>
-      <h2><a name="episode-6" "id="#episode-6" href="#episode-6">6.</a> Controlling your server over a WebSocket</h2>
+</div><div class="episode">      <h2><a name="episode-6" "id="#episode-6" href="#episode-6">6.</a> Controlling your server over a WebSocket</h2>
 
       <p>(<a href="http://unhosted.bencharp.com/page/6-webshell,6.html">en Fran&#231;ais</a>)</p>
       <p><em><strong>No Cookie Crew  - Warning #4:</strong> This tutorial is the last time you still need to update your personal server using an
@@ -4662,7 +4660,7 @@ module.exports = {
       <p>Especially the combination of Sockethub with <a href="http://remotestorage.io/">remoteStorage</a> and a web runtime like for instance Firefox OS looks
         like a promising all-round app platform. More next week!</p>
 <p><a href="https://groups.google.com/d/topic/unhosted/smrr28JTQu8/discussion">Comments welcome!</a></p>
-      <h2><a name="episode-7" "id="#episode-7" href="#episode-7">7.</a> Adding remote storage to unhosted web apps</h2>
+</div><div class="episode">      <h2><a name="episode-7" "id="#episode-7" href="#episode-7">7.</a> Adding remote storage to unhosted web apps</h2>
 
       <p>(<a href="http://unhosted.bencharp.com/page/7-remotestorage,7.html">en Fran&#231;ais</a>)</p>
       <h3>Apps storing user data on your personal server</h3>
@@ -4787,7 +4785,7 @@ module.exports = {
         remotestorage.js library are something many of us have been working on really hard for years, and since last week, finally, we are able to
         use it for a few real apps. So we are really enthusiastic about this recent release, and hope you enjoy it as much as we do! :)</p>
 <p><a href="https://groups.google.com/d/topic/unhosted/BLx6IGK_5EU/discussion">Comments welcome!</a></p>
-      <h2><a name="episode-8" "id="#episode-8" href="#episode-8">8.</a> Collecting and organizing your data</h2>
+</div><div class="episode">      <h2><a name="episode-8" "id="#episode-8" href="#episode-8">8.</a> Collecting and organizing your data</h2>
 
       <p>(<a href="http://unhosted.bencharp.com/page/8-vos-donnees,8.html">en Fran&#231;ais</a>)</p>
 <p>As a member of the No Cookie Crew you will be using unhosted web apps for everything you currently use hosted web apps for.
@@ -4992,7 +4990,7 @@ you can also store your music in IndexedDB using Mozilla's <a href="http://mozil
   tied to what software providers give you, also gives a satisfying feeling of freedom and opportunity. And it makes being a
   member of the No Cookie Crew so much more fun! :)</p>
 <p><a href="https://groups.google.com/d/topic/unhosted/WBJBToqMvwk/discussion">Comments welcome!</a></p>
-      <h2><a name="episode-9" "id="#episode-9" href="#episode-9">9.</a> Sending and receiving email from unhosted web apps</h2>
+</div><div class="episode">      <h2><a name="episode-9" "id="#episode-9" href="#episode-9">9.</a> Sending and receiving email from unhosted web apps</h2>
 
 <!-- title: Sending and receiving email from unhosted web apps -->
       <p>(<a href="http://unhosted.bencharp.com/page/9-email,9.html">en Fran&#231;ais</a>)</p>
@@ -5136,7 +5134,7 @@ you can also store your music in IndexedDB using Mozilla's <a href="http://mozil
     "by the time you know you need a FreedomBox, we will have it ready for you." The No Cookie Crew is looking for brave pioneer members, to make this
     true also for unhosted web apps. :)</p>
   <p><a href="https://groups.google.com/forum/#!topic/unhosted/DkaJornuhnk">comments welcome!</a></p>
-      <h2><a name="episode-10" "id="#episode-10" href="#episode-10">10.</a> Linking things together on the world wide web</h2>
+</div><div class="episode">      <h2><a name="episode-10" "id="#episode-10" href="#episode-10">10.</a> Linking things together on the world wide web</h2>
 
 <!-- linking: Linking things together on the world wide web -->
       <p>(<a href="http://unhosted.bencharp.com//page/10-web-linking,10.html">en Fran&#231;ais</a>)</p>
@@ -5294,7 +5292,7 @@ you can also store your music in IndexedDB using Mozilla's <a href="http://mozil
   to convince other people with the same problem to join in. It is a truly open system.</p>
 
 <p><a href="https://groups.google.com/forum/#!topic/unhosted/fHxfGOwqtd0">comments welcome!</a></p>
-      <h2><a name="episode-11" "id="#episode-11" href="#episode-11">11.</a> App hosting</h2>
+</div><div class="episode">      <h2><a name="episode-11" "id="#episode-11" href="#episode-11">11.</a> App hosting</h2>
 
 <!-- app hosting: App hosting -->
 <h3>Hosting is a telecommunications transport through space and time.</h3>
@@ -5530,7 +5528,7 @@ generate an appcache manifest for your app (more about this below), resize your 
   See you then! :)</p>
 
 <p><a href="https://groups.google.com/forum/#!topic/unhosted/l3lbe0RP4o8">comments welcome!</a></p>
-      <h2><a name="episode-12" "id="#episode-12" href="#episode-12">12.</a> App discovery</h2>
+</div><div class="episode">      <h2><a name="episode-12" "id="#episode-12" href="#episode-12">12.</a> App discovery</h2>
 
 <!-- app discovery: App discovery -->
 <h3>App discovery (was: App distribution).</h3>
@@ -5678,7 +5676,7 @@ generate an appcache manifest for your app (more about this below), resize your 
 <p>In any case, try out the "launchbutton.js" file I showed above, and link to some apps from your website. App hosting and web linking should be all you need here.
   The web doesn't need a new "app distribution layer" like Apple's iOS App Store. The web <em>already is</em> one big, infinite app store.</p>
 <p>I hope this episode was not too opinionated or too confusing, so <a href="https://groups.google.com/forum/#!topic/unhosted/GuAkJxTRsf0">comments welcome!</a></p>
-      <h2><a name="episode-13" "id="#episode-13" href="#episode-13">13.</a> Dealing with users in unhosted web apps</h2>
+</div><div class="episode">      <h2><a name="episode-13" "id="#episode-13" href="#episode-13">13.</a> Dealing with users in unhosted web apps</h2>
 
 <!-- users: Dealing with users in unhosted web apps -->
 <h3>Database sharding.</h3>
@@ -5758,7 +5756,7 @@ generate an appcache manifest for your app (more about this below), resize your 
 <p>I am still thinking about what we can do about this situation, and I'm very curious what other people think about this. If you have any ideas about this, or about any other
   topic touched upon in this episode, or you would like to help build unhosted web apps around remoteStorage.contacts, then please reply to the
   <a href="https://groups.google.com/forum/#!topic/unhosted/V6-XKdHbBtU">mailing list</a>!</p>
-      <h2><a name="episode-14" "id="#episode-14" href="#episode-14">14.</a> Peer-to-peer communication</h2>
+</div><div class="episode">      <h2><a name="episode-14" "id="#episode-14" href="#episode-14">14.</a> Peer-to-peer communication</h2>
 
 <!-- p2p: Peer-to-peer communication -->
 <h3>Routability</h3>
@@ -5872,7 +5870,7 @@ after having dumped GMail, Dropbox, Google Docs, Spotify, Facebook,
 Twitter, Flickr, and with this episode also having opened the way for dumping Skype,
 the last cookied platform we will need to replace in order to cover "the basics" is github. I'm already looking forward to that one, hope you are too.</p>
 <p><a href="https://groups.google.com/forum/#!topic/unhosted/1YlbDM57_kU">comments welcome</a>!</p>
-      <h2><a name="episode-15" "id="#episode-15" href="#episode-15">15.</a> Unhosted web apps and OAuth</h2>
+</div><div class="episode">      <h2><a name="episode-15" "id="#episode-15" href="#episode-15">15.</a> Unhosted web apps and OAuth</h2>
 
 <!-- unhosted oauth: Unhosted web apps and OAuth. -->
 <h3>The unhosted approach to OAuth</h3>
@@ -5974,7 +5972,7 @@ as static content on 5apps, and you just click through the content without much 
   and resolves a dependency on hosted server-side software, so I think it's justified whenever the preferable
   <a href="http://tools.ietf.org/html/rfc6749#section-4.2">implicit grant</a> flow is not being offered. But please
   <a href="https://groups.google.com/forum/#!topic/unhosted/j3QAL4msUyo">comment</a> if you think this type of hack is harmful in any way.</p>
-      <h2><a name="episode-16" "id="#episode-16" href="#episode-16">16.</a> Our plan to save the web</h2>
+</div><div class="episode">      <h2><a name="episode-16" "id="#episode-16" href="#episode-16">16.</a> Our plan to save the web</h2>
 
 <!-- our platform: Our plan to save the web. -->
 <h3>End of part one</h3>
@@ -6085,7 +6083,7 @@ will keep growing both in number of developers involved, and in market reach of 
 <a href="https://unhosted.org/apps/">examples page</a>; most of the apps mentioned on there have issue trackers on github, so you can submit bug reports there if you
 have any problems using any of the apps, and if you have any questions or remarks in general, then just send them to the
 <a href="https://groups.google.com/forum/#!forum/unhosted">forum</a>. Comments very welcome!</p>
-      <h2><a name="episode-17" "id="#episode-17" href="#episode-17">17.</a> Cryptography</h2>
+</div><div class="episode">      <h2><a name="episode-17" "id="#episode-17" href="#episode-17">17.</a> Cryptography</h2>
 
 <!-- cryptography: Cryptography -->
 <h3>Alice got a brand new bag</h3>
@@ -6171,7 +6169,7 @@ the small server encrypt blobs, to store on the large semi-trusted server. This 
 <p>The proof of concept that originally appeared on this website back in 2010 when we launched it, centered heavily on implementing end-to-end encryption between browser environments. But we learned a lot since then, and hopefully this episode explains the reason why we now advise you to use TLS to a freedombox instead of that.</p>
 <p>Security stands and falls with correcting people when they get it wrong. And even though we're discussing the topic in this episode, this is mainly to make sure our handbook covers this important topic, and "IANASE", that's to say: I am <strong>not</strong> a security expert! :)</p>
 <p>So this time especially, even more than other times, <a href="https://groups.google.com/d/msg/unhosted/b1irZwo4HC4/_tPnu8_iMpgJ">comments are very welcome</a>, especially if you see an error in the security arguments.</p> 
-      <h2><a name="episode-18" "id="#episode-18" href="#episode-18">18.</a> Distributed hash tables</h2>
+</div><div class="episode">      <h2><a name="episode-18" "id="#episode-18" href="#episode-18">18.</a> Distributed hash tables</h2>
 
 <!-- DHTs: Distributed hash tables -->
 <h3>Content-addressable data</h3>
@@ -6237,7 +6235,7 @@ human-meaningful, and secure, all at the same time.</p>
 <p>When storing small items of data, you need an actual key-value store. When the items are big, though, you can combine a first-level key-value store with a second-level content-addressable store, such that the first forms an index to the latter. Doing this also opens up opportunities to use semi-trusted servers on the second level. The first-level index can also be stored as a blob on the second level, meaning your client will only need to remember one hash string - the hash of the index.</p>
 <p>Truly decentralized storage of generic key-value data (with human-memorable item names) is impossible, but decentralized storage of content-addressable data can be achieved "in practice", by dominating the finite set of Earthly servers that claim to participate in your DHT, and if clients verify that the values they obtain actually hash back to the item keys they requested.</p>
 <p>As always, <a href="https://groups.google.com/d/msg/unhosted/o-M2ejb_Cc8/ak--jrLrLzoJ">comments welcome</a>!</p>
-      <h2><a name="episode-19" "id="#episode-19" href="#episode-19">19.</a> BGP, IP, DNS, HTTP, TLS, and NAT</h2>
+</div><div class="episode">      <h2><a name="episode-19" "id="#episode-19" href="#episode-19">19.</a> BGP, IP, DNS, HTTP, TLS, and NAT</h2>
 
 <!-- internet: BGP, IP, DNS, HTTP, TLS, and NAT -->
 <h3>Connecting your computer to the internet</h3>
@@ -6289,7 +6287,7 @@ More about anonymity next week, when we discuss the concept of online identities
 <p>In general, the view of each device being a neutral player in the network is incorrect. In practice, the internet is (now) made up of addressable servers in the center, and many subordinate clients in the periphery. More about this soon, in the episode about Network Neutrality.</p>
 
 <p>So quite a short and dense episode this week, but I hope all the links to wikipedia articles give enough ways into further reading about this vast and important area of engineering. At least when thinking about unhosted web apps, it's important to understand a little bit about routing and addressability, and to know that the internet is actually not much more than a stack of hacks, and each layer has its flaws, but we make it work. And as always, <a href="https://groups.google.com/d/msg/unhosted/hIVOKI_pNQI/5DPch8V6EKkJ">comments welcome</a>!</p>
-      <h2><a name="episode-20" "id="#episode-20" href="#episode-20">20.</a> Persona, OpenID, SAML, WebID, and Webfinger</h2>
+</div><div class="episode">      <h2><a name="episode-20" "id="#episode-20" href="#episode-20">20.</a> Persona, OpenID, SAML, WebID, and Webfinger</h2>
 
 <!-- identity: Webfinger, Persona, WebID, OpenID, SAML -->
 <h3>Virtualization of sessions</h3>
@@ -6382,7 +6380,7 @@ is of course to decentralize applications away from specific application servers
   to it, since it's an important background topic, and we often get the question "how do unhosted web apps interact with Persona". So now you know.
   The answer is: they don't have the problem that Persona solves. :)</p>
 <p><a href="https://groups.google.com/d/msg/unhosted/tMPYfxwF2O8/VZ4v4XsbzsgJ">comments welcome!</a></p>
-      <h2><a name="episode-21" "id="#episode-21" href="#episode-21">21.</a> Client-side sessions, origins, browser tabs, and WebIntents</h2>
+</div><div class="episode">      <h2><a name="episode-21" "id="#episode-21" href="#episode-21">21.</a> Client-side sessions, origins, browser tabs, and WebIntents</h2>
 
 <!-- sessions: client-side sessions, origins, browser tabs, and WebIntents -->
 <h3>Client-side sessions</h3>
@@ -6452,7 +6450,7 @@ a native application, and a lot of UX research is currently going into how to le
   lags behind on "other" device operating systems. :)</p>
   
 <p><a href="https://groups.google.com/d/msg/unhosted/1Mm3fRPuvIg/016QHDEfzCwJ">comments welcome!</a></p>
-      <h2><a name="episode-22" "id="#episode-22" href="#episode-22">22.</a> How to locate resources</h2>
+</div><div class="episode">      <h2><a name="episode-22" "id="#episode-22" href="#episode-22">22.</a> How to locate resources</h2>
 
 <!-- search: How to locate resources -->
 <p>Last week, Adrian suggested that this blog really needs an episode about search. I totally agree, so here it is! :)</p>
@@ -6584,7 +6582,7 @@ search engine.</p>
   we can simply seed it on bittorrent, and "leak" it into the public domain.</p>
 <p>This is an irreversible project though, so <a href="https://groups.google.com/d/msg/unhosted/DnxSdQ8xU0E/FioTHzT01soJ">please comment</a>
 if you think it's a bad idea, or have any other reactions to this episode.</p>
-      <h2><a name="episode-23" "id="#episode-23" href="#episode-23">23.</a> Network neutrality, ubiquitous wifi, and DRM</h2>
+</div><div class="episode">      <h2><a name="episode-23" "id="#episode-23" href="#episode-23">23.</a> Network neutrality, ubiquitous wifi, and DRM</h2>
 
 <!-- neutrality: Network Neutrality -->
 <h3>Technology as a tradable asset</h3>
@@ -6622,7 +6620,7 @@ internet service providers (ISPs) should offer connectivity as a <a href="http:/
 <p>It is not bad that closed technology exists, but an organization like W3C supporting it sends the wrong signal and is of course detrimental to its mission. It is hard to understand how it has been possible for the W3C to make this mistake, and we can only hope they will give their own mission statement another good read, discover their folly, and revert it.</p>
 <p>To be fair though, the W3C's recent behavior is not nearly as disappointing as Google's and Twitter's abandonment of rss and xmpp, as we'll discuss in next week's episode, which will be about <em>federation</em>! :)
 Until then, if anyone would like to comment on this episode, <a href="https://groups.google.com/d/msg/unhosted/4smSXyEfTVs/kRGo8nG_DuIJ">please do!</a></p>
-      <h2><a name="episode-24" "id="#episode-24" href="#episode-24">24.</a> Decentralizing the web by making it federated</h2>
+</div><div class="episode">      <h2><a name="episode-24" "id="#episode-24" href="#episode-24">24.</a> Decentralizing the web by making it federated</h2>
 
 <!-- federation: Decentralizing the web by making it federated -->
 <h3>Clients and servers</h3>
@@ -6668,7 +6666,7 @@ data hosting, or both.</p>
 <a href="http://remotestorage.io/">software</a> <a href="http://sockethub.org/">libraries</a>, <a href="https://unhosted.org/apps/">apps</a>,
 and <a href="http://tosdr.org/">campaigns</a>. We can use unhosted web apps ourselves, but for most end-users the entry threshold is still too high. We can convince sysadmins (like for instance those at European universities) to offer remoteStorage accounts to their users, and we can convince app developers to accept unhosted accounts, but we're not reaching any end-users directly with that. Using remoteStorage and Sockethub as the basis for a "Mozilla-style Facebook" would be a much more tangible result.</p>
 <p>Also as Laurent remarked, it would simply be very funny if Unhosted becomes a Hosting provider. :) So I'll take a short break from writing this blog, and look into setting something like that up during the summer months. If anyone would like to comment on this plan, or on anything else mentioned in this episode, <a href="https://groups.google.com/d/msg/unhosted/34ZEm3VcL1U/VauLNerMFPEJ">please do!</a>. In any case, I'll let you know when I have something ready for alpha testing, and hope to see you all in <a href="http://2013.unhosted.org/">Unho&#353;&#357;</a>!</p>
-      <h2><a name="episode-25" "id="#episode-25" href="#episode-25">25.</a> Anonymity</h2>
+</div><div class="episode">      <h2><a name="episode-25" "id="#episode-25" href="#episode-25">25.</a> Anonymity</h2>
 
 <!-- Anonymity -->
 <h3>Freedom of Expression, Privacy, and Anonymity</h3>
@@ -6753,7 +6751,7 @@ Whenever you send an email, use a randomly generated from and reply-to address w
 payload, so that only the intended recipient of your message will discover that this message was actually from you.</p>
 
 <p><a href="https://groups.google.com/d/msg/unhosted/4PB9y2iNgB8/dDQLsq8kH6kJ">Comments welcome!</a></p>
-      <h2><a name="episode-26" "id="#episode-26" href="#episode-26">26.</a> Decentralized reputation systems</h2>
+</div><div class="episode">      <h2><a name="episode-26" "id="#episode-26" href="#episode-26">26.</a> Decentralized reputation systems</h2>
 
 <!-- reputation: Decentralized reputation systems -->
 <h3>Decentralized reputation systems</h3>
@@ -6813,7 +6811,7 @@ to improve efficiency, but the value of the diploma would come from the reputati
 part of this blog series, about theoretical foundations for building freedom from web2.0's platform monopolies. In the third and last part, we will look at
 practical issues related to building unhosted web apps.
 <a href="https://groups.google.com/forum/#!topic/unhosted/O0LTSqga9RA">Comments welcome!</a></p>
-      <h2><a name="episode-27" "id="#episode-27" href="#episode-27">27.</a> Persisting data in browser storage</h2>
+</div><div class="episode">      <h2><a name="episode-27" "id="#episode-27" href="#episode-27">27.</a> Persisting data in browser storage</h2>
 
 <!-- Storing data locally -->
 
@@ -6924,7 +6922,7 @@ thread, it's better to use a
 <p>But in general, depending on your application, you'll probably have to store data in IndexedDB. This can be data that will never leave the browser, data that is on its way to the user's server or to some third-party server, or data that you retrieved from somewhere, and that you want to cache. IndexedDB is one of the biggest friends of the unhosted web app developer!</p>
 
 <p>Next week we'll look at sync. Comments welcome!</p>
-      <h2><a name="episode-28" "id="#episode-28" href="#episode-28">28.</a> Synchronizing browser storage with server storage</h2>
+</div><div class="episode">      <h2><a name="episode-28" "id="#episode-28" href="#episode-28">28.</a> Synchronizing browser storage with server storage</h2>
 
 <p>When you use multiple devices, it's practical to have your data automatically copied from one device to another. Also, when you want to publish data on your web site to share it with other people, it's necessary to copy it from your device to your server.</p>
 
@@ -6964,7 +6962,7 @@ Dominic Tarr's <a href="https://github.com/dominictarr/scuttlebutt">ScuttleButt<
 <p>In the ALL strategy, remotestorage.js will pro-actively retrieve all nodes, and keep them in sync. Caching strategies can be set per subtree, and the strategy set on the smallest containing subtree of a node is the one that counts.</p>
 <p>I realize this episode was pretty dense, with lots of complicated information in a short text! Sync and caching are complex problems, about which many books have been written. If you plan to write offline-first apps professionally, then it's a good idea to read and learn more about how sync works, and how conflict resolution affects your application. Next week we'll talk about other aspects of <a href="http://offlinefirst.org/">offline first</a> web apps. So stay tuned for that!</p>
 <p>As always, comments are very welcome, either in person tomorrow at <a href="http://www.meetup.com/Paris-Meetup-pour-la-decentralisation-dInternet/events/193618842/">Decentralize Paris</a>, or through the <a href="https://groups.google.com/forum/#!topic/unhosted/T_-p-wGFo-g">Unhosted Web Apps</a> mailing list.</p>
-      <h2><a name="episode-29" "id="#episode-29" href="#episode-29">29.</a> Offline-first web app design</h2>
+</div><div class="episode">      <h2><a name="episode-29" "id="#episode-29" href="#episode-29">29.</a> Offline-first web app design</h2>
 
 <!-- "offline first": "Offline-first web app design" -->
 <p>Last week we already talked about asynchronous synchronization,
@@ -6988,7 +6986,7 @@ the tactic of synchronizing the client-side data set with the server-side data s
 <h3>Conclusion</h3>
 <p>This sort of logic is often a bit different in offline-first apps than in online-first apps, and the JavaScript developer community is collectively learning how to do this, through talks at <a href="http://berlinjs.org/apps">user groups</a>, <a href="http://alistapart.com/article/offline-first">blog posts</a>, and <a href="https://github.com/offlinefirst/research/issues">discussions</a>.</p>
 <p>The important thing here is probably to realize that offline-first design is an important &quot;mind switch&quot; you will have to make when starting to develop unhosted web apps, or even just mobile web apps in general. Next week we'll talk about Backend-as-a-Service, <a href="https://groups.google.com/forum#!forum/unhosted">stay tuned</a>!</p>
-      <h2><a name="episode-30" "id="#episode-30" href="#episode-30">30.</a> Backend-as-a-Service platforms</h2>
+</div><div class="episode">      <h2><a name="episode-30" "id="#episode-30" href="#episode-30">30.</a> Backend-as-a-Service platforms</h2>
 
 <!-- "baas": "Backend-as-a-Service platforms",//open source ones = noBackend frameworks -->
 <p>Unhosted web apps have no own server-side part, by definition. The same is true for native mobile apps: although a lot of native mobile apps communicate with a server-side API of the same vendor, the native app itself is only what is downloaded from the app store onto the user's device.</p>
@@ -7043,7 +7041,7 @@ and Apple's <a href="https://developer.apple.com/icloud/documentation/cloudkit-s
 <h3>Comparison to per-user backend</h3>
 <p>Next week we'll look at per-user backend, a fundamentally different concept, in that your app's users, rather than (just) you as an app developer, have their own account at a provider of such a backend service. A per-user backend system is a service provided directly to the end user, instead of a business-to-business service provided to an app developer.</p>
 <p>I think the concept of per-user backend is the most important concept discussed in this whole blog series. If you are just going to read or link to only one episode, make it next week's one!</p>
-      <h2><a name="episode-31" "id="#episode-31" href="#episode-31">31.</a> Allowing the user to choose the backend server</h2>
+</div><div class="episode">      <h2><a name="episode-31" "id="#episode-31" href="#episode-31">31.</a> Allowing the user to choose the backend server</h2>
 
 <!--  "per-user backend": "Allowing the user to choose the backend server",//prop./open source/open protocol -->
 
@@ -7085,7 +7083,7 @@ Facebook's <a href="https://developers.facebook.com/docs/payments">Facebook Plat
 <p>Apart from the remoteStorage protocol, there is not a lot of standardization going on in the space of per-user online services. If per-user online services offer a cross-origin web API at all, then it's often one that is specific to one implementation (couchdb, sockethub), or even to one specific instance (GoogleDrive, Dropbox).</p>
 <p>Talking about this topic over the course of the past four years, I have slowly shifted my hope away from universal standardization of per-user backends, and more towards the idea of polyglot clients. One client-side library can be compatible with more than one server-side API, thus removing the need for all these APIs to converge.</p>
 <p>Next week we look at such client-side libraries. <a href="https://groups.google.com/forum#!forum/unhosted">Stay tuned</a>!</p>
-      <h2><a name="episode-32" "id="#episode-32" href="#episode-32">32.</a> Client-side libraries for per-user backend</h2>
+</div><div class="episode">      <h2><a name="episode-32" "id="#episode-32" href="#episode-32">32.</a> Client-side libraries for per-user backend</h2>
 
 <!-- "per-user clients": "Client-side libraries for per-user backend",//dropbox.js, nimbusbase, remotestorage.js, hoodie.js -->
 <p>In order to make it easier to let your unhosted web app talk with the user's backend, you would typically use a client-side library.</p>
@@ -7108,7 +7106,7 @@ Likewise, <a href="https://github.com/sockethub/sockethub-client">sockethub-clie
 <h3>Conclusion</h3>
 <p>Unfortunately, there's not a whole lot to say yet about client-side libraries for per-user backends. Maybe this will change in the future, and maybe such libraries will become part of browsers and devices at some point. But I wanted to dedicate an entire episode to the topic nonetheless, because I think it's one of the most important future directions for the unhosted web apps movement.</p>
 <p>The last three episodes have been in a way about &quot;backend functionality for unhosted web apps&quot;. Next week, we'll talk about the frontend functionality, and the week after that will be the conclusion of this blog series. <a href="https://groups.google.com/forum#!forum/unhosted">Stay tuned</a>!</p>
-      <h2><a name="episode-33" "id="#episode-33" href="#episode-33">33.</a> Client-side frontend development</h2>
+</div><div class="episode">      <h2><a name="episode-33" "id="#episode-33" href="#episode-33">33.</a> Client-side frontend development</h2>
 
 <!-- "client-side frontend": "Client-side frontend development",//mvc, routing, templating, responsive, progr. enh., testing -->
 <p>I personally never write a lot of frontend code. I usually write apps with very minimal user interfaces, which I manually program directly into the page. But if you want to create an unhosted web app with a significant user interaction surface, you're probably going to need some of the standard frontend development techniques.</p>
@@ -7150,7 +7148,7 @@ if certain DOM elements appear or change as a result of the interaction.</p>
 <p>This is obviously just a short list of topics you will want to read more about if you start to develop unhosted web apps professionally. Consider it the &quot;what to read next?&quot; section at the end of this blog series. I am not a frontend developer myself, but from what I've heard, these topics are the most important
 <a href="http://rmurphey.com/blog/2012/04/12/a-baseline-for-front-end-developers/">stuff you want to learn</a> for a successful professional carreer as an unhosted web app developer.</p>
 <p>Next week will be the last episode! :) We'll look back on this whole blog series, and at what the future of unhosted web apps may hold. <a href="https://groups.google.com/forum#!forum/unhosted">Stay tuned</a>!</p>
-      <h2><a name="episode-34" "id="#episode-34" href="#episode-34">34.</a> Conclusions</h2>
+</div><div class="episode">      <h2><a name="episode-34" "id="#episode-34" href="#episode-34">34.</a> Conclusions</h2>
 
 <!-- "conclusions": "Conclusions"//the web for apps, minimal per-user servers, the road ahead (towards DHT-based?), thanks again, everyone! -->
 <h3>The Web for Apps</h3>
@@ -7172,6 +7170,6 @@ if certain DOM elements appear or change as a result of the interaction.</p>
 
 <h3>Thanks for an amazing four years!</h3>
 <p>Although the future of unhosted web apps <strong>has only just begun</strong>, this first research phase of four years is now completed. As a product of all the work we've done together, I have packaged this blog as an <a href="https://unhosted.org/book/">html book</a>, and <a href="http://remotestorage.io/">the remoteStorage project</a> as well as <a href="http://sockethub.org/">the Sockethub project</a> will continue to evolve, as open source projects. We've come this far since the initial crowd-funding campaign (thanks again to <a href="https://unhosted.org/thankyou.html">all the donators</a>!), and the continued support from <a href="http://nlnet.nl/">NLnet</a> and <a href="http://wauland.de/">Wau Holland Stiftung</a>. I will present these conclusions tonight at <a href="http://lanyrd.com/2014/decentralizejs/">Decentralize.js</a>. As always, also for this last episode, <a href="https://groups.google.com/forum#!forum/unhosted">comments welcome</a>!</p>
-    </article>	
+</div>    </article>	
   </body>
 </html>
