@@ -4,7 +4,14 @@
   <meta charset="utf-8">
   <link rel="stylesheet" href="core.css"><link rel="stylesheet" href="custom.css"><script src="core.js"></script>
   <link rel="icon" href="../../../img/favicon.png">
-  <style>.speakernotes { visibility:hidden; }</style>
+  <style>
+    @keyframes blink {
+      25% { opacity: 0 }
+      50% { opacity: 100 }
+      50% { color: red }
+      75% { opacity: 0 }
+    }
+  </style>
   <title>Unhosted</title>
 </head>
 <body>
@@ -47,8 +54,8 @@
     <ul>
     <li>Well-known in Web Tech!</li>
     <li>Reverse people's thinking</li>
-    <li>NoBackend, Offline-First, Redecentralize, ...</li>
-    <li>Quite a lot of apps were written already</li>
+    <li>NoBackend, Offline-First, Redecentralize, more!</li>
+    <li>https://unhosted.org/apps</li>
     </ul>
 </section>
 
@@ -83,6 +90,7 @@
 
 <section>
     <h3 style="background:0;">https://unhosted.org/book</h3>
+    <h3 style="animation: blink 1s step-end infinite">(launching...)</h3>
     <img src="img/island-light.png" style="width:360px; height:300px; top:5.5em; left:4.5em;" alt="">
 </section>
 
