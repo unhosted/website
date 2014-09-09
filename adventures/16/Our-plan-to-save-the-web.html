@@ -36,18 +36,15 @@ textbook, but highlighting for each topic how it is relevant to unhosted web app
   <p>The posts will probably be a bit shorter, and with lots of links, because
   it's more useful to point readers to the actual expert sources about all such topics than to try to rewrite it - other than insofar this makes sense, to highlight the
   specific relevance to unhosted web apps.</p>
-  <p>After that, the third part would be about application domains, so basically all the remoteStorage
-modules and all the sockethub platforms. Then, a part about building apps (discussing things like MVC), and some assorted topics to round off with. I've made a rough
-    <a href="https://github.com/unhosted/website/blob/master/adventures/build/episodes.js">estimation</a>
-    that the total handbook will be about 52 episodes, so it will take exactly one year to fill it up week-by-week. :)</p>
+  <p>After that, the third and last part would be about building apps (discussing things like sync and MVC) - 34 episodes in total, and bundled into a <a href="https://unhosted.org/book/">HTML book</a>.</p>
 <p>In this last episode of part one we'll have a look at the redecentralized web, and try to figure out how we can make it into a successful software platform.</p>
 
 <h3>What should run on your freedombox?</h3>
-<p>In order to redecentralize the web, we need people to run some kind of own server. This can be their normal PC or other client device, or a pod/seed/node/account run by
+<p>In order to <a href="http://redecentralize.org/">redecentralize the web</a>, we need people to run some kind of own server. This can be their normal PC or other client device, or a pod/seed/node/account run by
   a trusted and replaceable party, or a purpose-built device like a freedombox on a plugserver. But the big question is: what should run on there?</p>
-<p>You can run <a href="https://owncloud.org/">ownCloud</a>
-  to have a lot of web 2.0's functions like sharing photos, listening to music, and administering your personal calendar, in one extensible php-based
-  application. This is definitely a good option, and François and I are also advising the European university networks to do this. It is an appealing and understandable
+<p>You can run a &quot;meta-software&quot; product like <a href="https://owncloud.org/">ownCloud</a>, <a href="https://cozy.io/">Cozy</a>, <a href="https://arkos.io/">ArkOS</a>, <a href="https://yunohost.org/">Y U No Host</a>, or <a href="https://sandstorm.io/">SandStorm</a>
+  to have an &quot;app dashboard&quot; with lot of web 2.0's functions like sharing photos, listening to music, and administering your personal calendar, in one extensible server install.
+This is definitely a good option, and François and I are also advising the European university networks to use ownCloud. It is an appealing and understandable
   product that solves real "cloud" needs in a decentralized way.</p>
 <p>Another option, if you're mainly thinking of data storage, is
   <a href="https://tahoe-lafs.org/trac/tahoe-lafs">tahoe-lafs</a>. The good thing about tahoe-lafs is that it's encrypted, resilient, and decentralized. It is
@@ -101,7 +98,7 @@ solution to replace them.</p>
 <p>Once you have these things, then, by all means, add free software applications like ownCloud, tahoe-lafs, OpenPhoto, Mediagoblin and Diaspora
   to your server, and use them.</p>
 <p>But this is the web platform we have, and I'm trying to look at the things we don't have - the pieces in the puzzle that are still missing, to make the decentralized
-  web as good as other app platforms like iOS, Android, and Facebook/Flash.</p>
+  web as good as other app platforms like iOS, Android, and Facebook Apps.</p>
 <p>And the things I would add to those would be simple data storage, and simple messaging - running on your own server, but accessible
   cross-origin, so I can connect it with unhosted web apps at runtime, wherever I see the corresponding icons on a web page somewhere.</p>
 <p>That is why we are developing remoteStorage and sockethub, as minimal services that allow unhosted web apps to function. And at the same time we are developing unhosted
@@ -117,7 +114,7 @@ for both approaches.</p>
   <li><strong>prototype</strong>
     the strict No Cookie Crew market, a bit like Richard Stallman on free desktop software,
     or vegans on food, users in this market use only unhosted web apps for all their
-computing needs, unless there is an explicit and identifiable need to break that principle.</li>
+computing needs, unless there is an explicit and identifiable need to break that principle. Currently just me. :)</li>
 <li><strong>dogfood</strong>
   the dogfooders market, people who are actively involved in developing unhosted web apps and their accompanying tools, and who will go through extra effort to use
 unhosted web apps where they exist, with the specific purpose of helping those apps to get some first milage.</li>
@@ -129,8 +126,8 @@ unlike the other major browsers, Firefox is published by a non-profit organizati
 <li><strong>enterprise</strong> business users are like consumers, except they have more money to spend, and have different requirements when it comes to integration
   with existing infrastructure.</li>
 </ul>
-<p>We have been talking about unhosted web apps for about two years now, and have been trying to build some useful remoteStorage-based apps for about one year.
-We are still only at the beginning of unhosted web apps actually being used in production in any of these five markets. But the future looks bright. I think our movement
+<p>We have been talking about unhosted web apps for four years now, and have been trying to build some useful remoteStorage-based apps.
+We have overcome a lot of hurdles, but are still only at the beginning of unhosted web apps actually being used in production in any of these five markets. But the future looks bright. I think our movement
 will keep growing both in number of developers involved, and in market reach of the unhosted web apps we develop. If you're interested in joining, then let us know!</p>
 <p><strong>We are always looking for more talented javascript developers.</strong> If you develop an unhosted web app, then you can add it to the
 <a href="https://unhosted.org/apps/">examples page</a>; most of the apps mentioned on there have issue trackers on github, so you can submit bug reports there if you

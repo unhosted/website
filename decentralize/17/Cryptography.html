@@ -25,7 +25,7 @@
       <h2>17. Cryptography</h2>
 
 <!-- cryptography: Cryptography -->
-<h3>Papa's got a brand new bag</h3>
+<h3>Alice got a brand new bag</h3>
 <p>When I first published this episode, Justin correctly <a href="https://groups.google.com/d/msg/unhosted/b1irZwo4HC4/jlSt5KudJyQJ">pointed out</a> that it should start with a security model, describing the assumptions we are making about which devices/persons are trusted, and which ones are untrusted.</p>
 <p>So let me have a stab at that: in good tradition, let's suppose Alice wants to send a message to Bob, through The Cloud. :)</p>
 <p>Unfortunately for her, but making it more interesting for us, she had her bag stolen last week, with her laptop in it... :( Anyway, not to worry, because she just bought a brand new bag and a new commodity laptop, and just finished installing Ubuntu on it.</p>
@@ -33,7 +33,7 @@
 <p>She generates a new PGP key, revokes the old one, and publishes her new public key to a PGP key server, as well as on her own website. Now she's ready to message Bob. Luckily she remembers his user address by heart.</p>
 <p>Bob also just lost his bag and got a brand new one. And he has lost all his data, because the bag contained the Raspberry Pi from which he was running his website (using a <a href="http://mailman.klaki.net/mailman/listinfo/revprotun">reverse proxy tunnel</a>), and he had no good backups.</p>
 <p>But he has managed to get a new Raspberry Pi, get his reverse proxy tunnel configured again, and obtained a new private TLS key for his website from his CA. On top of that, he knows Alice's user address by heart, and recognizes it when the message comes in.</p>
-<p>Bob also has to generate a new PGP keypair and publish his public key both on his website and to a PGP keyserver. Since all main PGP keyservers are synchorized with each other (thanks to Bryce for
+<p>Bob also has to generate a new PGP keypair and publish his public key both on his website and to a PGP keyserver. Since all main PGP keyservers are synchronized with each other (thanks to Bryce for
 <a href="https://groups.google.com/d/msg/unhosted/b1irZwo4HC4/UOszCJYzbSQJ">
 pointing this out</a>), publishing your public PGP key once is enough to claim your own PGP identity globally. Other people can then sign your key to help you to strengthen your claim.</p>
 <p>Now suppose Charlie is up to no good and wants to intercept and/or alter the message. Which attack angles would he have?</p>
@@ -59,7 +59,7 @@ pointing this out</a>), publishing your public PGP key once is enough to claim y
   problem. You should publish your public PGP key as far and wide as you can, so that a sort of "neighborhood watch" can detect any attempt of your hosting provider to put a different one on your website.</p>
 <p>PGP keyservers are built for this. They are networked for synchrony, so if Alice and Bob have both uploaded their public key to one of the keyservers connected to this network, then it would be pretty much impossible for Charlie to convincingly publish a competing public key for either one of them.</p>
 <p>Using PGP keyservers, it would even be possible to use an identity on a domain you do not own. You could for instance publish a public PGP key for your gmail account, and use a mail client to send PGP-signed message out through it. But this is of course not advisable, since it ties your identity to a domain name you don't control.</p>
-<p>You could use an identity at a domain you don't control if this domain provides a context for that identity. For instance, you may have a context-specific identity at your club, like for instance your "@fsfe.org" if you are an
+<p>You could use an identity at a domain you don't control if this domain provides a context for that identity. For instance, you may have a context-specific identity at your club, like for instance your "@fsfe.org" address if you are an
 <a href="https://fellowship.fsfe.org/">FSFE fellow</a>, and you may publish a PGP key for such an acccount to a key server, without necessarily having a way to publish it on the domain's website.</p>
 <p>So this may lead to PGP keys existing that can only be checked through keyservers and their Web of Trust, and not through DNS+TLS. But you should ideally only use such extra identities in the context which they pertain to.
 You should ideally always have your own DNS domain name for your "root" identity on the web.</p>
@@ -84,13 +84,14 @@ You should ideally always have your own DNS domain name for your "root" identity
   with an entropy that is high enough to practically stop it from being guessable in, say, 10 attempts, but not high enough to
   stop it from being guessable using, say, 1 year of computing power on a standard PC.</p>
 <p>A 4-digit PIN code is a good example of a weak password: the chance you can guess it in 10 attempts is one in a thousand, and usually an ATM will block the card
-  after the third attempt. It has an entropy of just over 13 bits. With a bit of effort, it is possible to remember a password that would be strong enough to withstand
-  a brute-force attack.</p>
-<p>For instance, a sequence of five words from a dictionary, could still be memorized with a bit of effort, but if the dictionary would contain
+  after the third attempt. It has an entropy of just over 13 bits.</p>
+<p>With a bit of effort, it is possible to remember a password that would be strong enough to withstand
+  a brute-force attack. For instance, a sequence of five words from a dictionary, could still be memorized with a bit of effort, but if the dictionary would contain
   say 2^16 (about 65,000) words, then you could still achieve 80 bits of entropy with it, which would keep you safe from most attackers, depending on their
   persistence and resources.</p>
 <p>But the reality is that most people don't want to have to remember such strong passwords, and they also want their passwords to be recoverable in some way. We need to present users with a place where they can store their private key under their control, while still being able to access it from any location, using any standard trusted computer, plus their domain name, user name, and (weak) password.</p>
-  
+<p>Encrypted communication sessions should subsequently use <a href="https://en.wikipedia.org/wiki/Forward_secrecy#Perfect_forward_secrecy">Perfect Forward Secrecy</a> for extra protection.</p>
+
 <h3>Conclusion</h3>
 <p>You can use some sort of a freedombox to store both your private key and your public key. The private key would only be accessible over TLS and behind
 a password, where multiple wrong guesses would result in captchas and time delays showing up, to stop brute-force attacks against the weak password.</p>

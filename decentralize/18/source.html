@@ -25,7 +25,7 @@
 <p>Encrypted blobs can easily be stored as content-addressable data. Thus, you can send a short string to the recipient of your message, which would then translate to a potentially very long string on the DHT to which both sender and receiver have access.</p>
 <p>To set this up you need a trusted server that does the encryption, and a set of semi-trusted servers that do the actual blob storage.</p>
 <p>Do keep in mind that if two people both encrypt the same file (say, a specific webm-file, or a popular linux install CD), then they will not generally result in the same blob, and thus the system will not be able to take advantage of de-duplication.</p>
-<p>Convergent encryption fixes this. It uses a different encryption key for each blobs, and derives that encryption key from the blob's entropy, such that it's not derivable from the item key (the blob's hash, which is used as the item's address)</p>
+<p>Convergent encryption fixes this. It uses a different encryption key for each blob, and derives that encryption key from the blob's entropy, such that it's not derivable from the item key (the blob's hash, which is used as the item's address)</p>
 <p>Bitcasa, the company that was the subject of the TechCrunch scandal a couple of years ago, claimed that it could
 do both encryption and de-duplication, using convergent encryption as their
  <a href="http://techpinions.com/bitcasas-clever-encryption-trick/2677">clever trick</a>.
@@ -38,7 +38,7 @@ For instance, a copyright holder could upload their own movie to Mega.co.nz, and
 
 <h3>Indexes to the data</h3>
 <p>As already stated earlier, content-addressable data by itself is in a way useless by definition. Nobody wants to use hashes as variable names. You need an extra layer that translates ultimately human-memorable, or at least human-intelligible labels to the machine-generated hashes that allow looking up the actual full data items in the DHT.</p>
-<p>A good example of this is git: it stores blobs, and then trees of commits that references these blobs. This is also how git does de-duplication, which can be quite important depending on how you branch and move files around in your version control repo.</p>
+<p>A good example of this is git: it stores blobs, and then trees of commits that reference these blobs. This is also how git does de-duplication, which can be quite important depending on how you branch and move files around in your version control repo.</p>
 
 <h3>Zooko's triangle</h3>
 <p>A naming scheme can be (source: <a href="https://en.wikipedia.org/wiki/Zooko%27s_triangle">wikipedia</a>):
@@ -53,12 +53,12 @@ human-meaningful, and secure, all at the same time.</p>
 <p>The fact that DHTs derive item keys from item values means that the "secure" part of Zooko's triangle can at least be verified: if you arrive at the wrong item value for a given item key, then you can at least know that this happened.</p>
 <p>At the same time, it means that item keys in a DHT are not human-meaningful (unless the human in question is able to calculate hash functions in their head).</p>
 
-<h3>Uniqueness through domination</h3>
+<h3>Uniqueness through dominance</h3>
 <p>There is in practice a way out of the dilemma introduced by Zooko's triangle: since our planet has a finite size, and a finite population, it is possible to populate a vast majority of all instances of a certain system with the same data, thus in practice (though not in theory) removing the need to choose one authorative instance.</p>
 <p>DNS, TLS, PGP keyservers, and Bittorrent's Mainline DHT all use this approach. Even if the authorative single point of failure of these systems goes down, the data still "floats around" in enough places.</p>
 <p>If the data is additionally verifiable, like DHT data is, then you can in practice make data blobs globally available in a way that becomes independent of the original publisher.</p>
 
 <h3>Conclusion</h3>
-<p>When storing small items of data, you need an actual key-value store. When the items are big, though, you can combine a first-level key-value store with a second-level content-addressable store, such that the first forms an index to the latter. Doing this also opens up opportunities to use semi-trusted servers on the second level.</p>
+<p>When storing small items of data, you need an actual key-value store. When the items are big, though, you can combine a first-level key-value store with a second-level content-addressable store, such that the first forms an index to the latter. Doing this also opens up opportunities to use semi-trusted servers on the second level. The first-level index can also be stored as a blob on the second level, meaning your client will only need to remember one hash string - the hash of the index.</p>
 <p>Truly decentralized storage of generic key-value data (with human-memorable item names) is impossible, but decentralized storage of content-addressable data can be achieved "in practice", by dominating the finite set of Earthly servers that claim to participate in your DHT, and if clients verify that the values they obtain actually hash back to the item keys they requested.</p>
 <p>As always, <a href="https://groups.google.com/d/msg/unhosted/o-M2ejb_Cc8/ak--jrLrLzoJ">comments welcome</a>!</p>
