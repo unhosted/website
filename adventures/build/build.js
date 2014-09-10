@@ -55,6 +55,7 @@ function makeEpisodesDiv(current) {
     }
   }
   str += '\n<h4><a href="https://unhosted.org/book/">(all episodes as a book)</a></h4>\n\n'
+      + '\n<h4>(<a href="https://unhosted.org/book.pdf">.pdf</a>)(<a href="https://unhosted.org/book.epub">.epub</a>)  (<a href="https://unhosted.org/book.mobi">.mobi</a>) </h4>\n\n'
       + '<h4>Adventures:</h4>\n';
   for(var i in episodes) {
     if(i==17) {
