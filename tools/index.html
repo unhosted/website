@@ -24,6 +24,49 @@
       
       <h2>dev tools</h2>
 
+      <h3>User-centric sync for the web</h3>
+      <p>Nowadays, users of mobile apps, but also of some desktop applications, expect their data to be synced
+      to the cloud, and to other their devices. The web has traditionally solved this by storing data at the
+      application provider's server. But with the new tools listed on this page, you can also allow users to
+      sync data from your app to their <em>own</em> storage server. Straight from any modern browser (using CORS), without passing
+      through your application server first.</p>
+
+      <h3>Choosing a client library for per-user storage</h3>
+      <p>You can build an unhosted web app in Vanilla JavaScript. But there are also client libraries
+        that can make your life easier if you want to support per-user storage. Depending on what
+        type of per-user storage account you expect your prospective users to have, you can use this
+        table to see which library you can use to support that:</p>
+        <table border="1">
+           <tr><td>Per-user backend:</td><td>Dropbox storage</td><td>GoogleDrive storage</td>
+             <td>remoteStorage (open protocol!)</td><td>Per-user Hoodie (new!)</td></tr>
+           <tr><td>NimbusBase</td><td>YES</td><td>YES</td><td></td><td></td></tr>
+           <tr><td>dropbox.js</td><td>YES</td><td></td><td></td><td></td></tr>
+           <tr><td>Google Drive JS</td><td></td><td>YES</td><td></td><td></td></tr>
+           <tr><td>remotestorage.js</td><td>(experimental)</td><td>(experimental)</td><td>YES</td><td>(planned)</td></tr>
+           <tr><td>Hoodie.js</td><td></td><td></td><td></td><td>YES</td></tr>
+        </table>
+
+      <p>The reason that none of these client libraries support for instance Apple iCloud or Microsoft OneDrive, is that those
+      services don't provide a cross-origin 'REST+CORS' API. Dropbox and GoogleDrive do, all remoteStorage providers do (this
+      is what the remoteStorage specification was designed for), and Hoodie does as of version 1.0 (still in beta as of October 2014).</p>
+
+      <h3>Instant Data Import</h3>
+      <p>Most of these libraries also have a domain-specific 'data modules' system that allow your app not only to store data, but also
+      to indicate that something is a photo, a contact, or a calendar event. That means that your app will be pre-filled with the user's
+      existing photos, contacts, and calendar events, even on first use. No need for cumbersome import wizards anymore!</p>
+
+      <h3>Offine-first</h3>
+      <p>remotestorage.js and hoodie.js were both developed with offline-first design principles in mind: if the network is flaky,
+      requests will be automatically queued for when connectivity comes back,
+      without throwing Exceptions that interrupt the flow of the user experience.</p>
+
+      <h3>Free your user's data</h3>
+      <p>As already explained on <a href="/">the first page</a>, storing data on the user's storage instead of on your server as an
+      app provider puts the user, not you as an app provider, in control of their data. You may also adopt a hybrid approach: host a
+      default remoteStorage or Hoodie server for users who sign up at your site, but allow free birds to override that default if they
+      want to specify their own storage server.</p>
+
+      <h3>Full listing of relevant tools</h3>
       <p style="margin-bottom:3em">
         <a href="https://github.com/unhosted/website"><strong>+ add yours</strong></a></p>
       </p>
