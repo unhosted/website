@@ -34,9 +34,10 @@ dangerous enemy: the page refresh.</p>
 
 <p>Refreshing a page in a hosted web app usually means the data that is displayed on the page, is retrieved again from the server.
 But while using an unhosted web app,
-No user data is stored on the server, so unless the app takes care to store it locally or at the user's server,
+no user data is stored on the server, so unless the app takes care to store it locally or at the user's server,
 if the user refreshes the page, all data that is stored in JavaScript variables, is removed from memory.
-This does not happen when pressing the &quot;back&quot; or &quot;forward&quot; button, although pressing &quot;back&quot;,
+This does not happen when pressing the &quot;back&quot; or &quot;forward&quot; button, although
+in Chrome (not in Firefox), pressing &quot;back&quot;,
 &quot;refresh&quot;, &quot;forward&quot; does flush the memory, also for the forward page.</p>
 
 <p>It's possible to warn the user when they are about to leave the page, using the
@@ -84,7 +85,7 @@ and displayed earlier, it could also just query the DOM to see what is there.</p
 can obviously be inefficient to store the same piece of data so many times, but for smaller pieces, caching can lead to a big speedup.
 It's definitely advisable to use one or two layers of client-side caching - for instance IndexedDB, combined with DOM.</p>
 
-<h3>Persisting client-side data</h3>
+<h3 id="persisting-client-side-data">Persisting client-side data</h3>
 
 <p>Whether you're caching remote data or storing data only locally, you'll soon end up using one of the browser's persistent stores.
 <strong>Do not ever use localStorage</strong>, because it unnecessarily blocks the browser's execution thread.
