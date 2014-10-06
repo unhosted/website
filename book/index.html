@@ -3369,6 +3369,7 @@ we implemented a &quot;commit cache&quot;, which works as follows:</p>
 <li>Read requests are checked against the commit cache first, and the new value from a pending write is served if present.</li>
 <li>Read requests that don't match any of the pending writes, are passed straight to IndexedDB, without any queueing or batching.</li>
 </ul>
+<p>This speeded up the process of storing lots of small items into IndexedDB by about an order of magnitude (your mileage may vary). You can see the actual implementation of our commit cache <a href="https://github.com/remotestorage/remotestorage.js/commit/395af3f8f80c8961b6bdf8c7d74fbb768a253dda">on github</a>.</p>
 
 <h3>Other problems when working with IndexedDB</h3>
 
