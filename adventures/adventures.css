@@ -11,7 +11,7 @@ article { float:right; max-width:600px; margin:10px 10px 40px 10px}
 article h2 { margin-top: 5em }
 article header h2 { margin-top: 0 }
 
-article .icons li { display: inline; float: left; text-align: center; color: #666; margin: 0px 0px 40px 0px }
+article .icons li {display: inline-block; vertical-align: top; text-align: center; color: #666; margin: 0px 0px 40px 0px }
 article .icons li a { margin: 16px; color: #666 }
 article .icons li p a { margin: 0px }
 article .icons li a img { color: #E0E0E0; margin: 1px auto; border-style: solid; border-radius: 8px; box-shadow: 0 0 1em #D0D0D0 }
