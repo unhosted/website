@@ -7,7 +7,7 @@
  <updated>2014-09-09T12:00:00.000Z</updated>
 <author>
  <activity:object-type>http://activitystrea.ms/schema/1.0/person</activity:object-type>
-  <uri>https://michielbdejong.com/</uri>
+  <uri>http://michielbdejong.com/</uri>
  <name>Michiel B. de Jong</name>
  <link rel="avatar" type="image/jpeg" media:width="96" media:height="96" href="https://unhosted.org/img/authors/michiel.jpg"/>
  <georss:point>10.20 104.0</georss:point>
@@ -19,7 +19,7 @@
  </poco:address>
  <poco:urls>
   <poco:type>homepage</poco:type>
-  <poco:value>https://michielbdejong.com/</poco:value>
+  <poco:value>http://michielbdejong.com/</poco:value>
   <poco:primary>true</poco:primary>
  </poco:urls>
 </author>
