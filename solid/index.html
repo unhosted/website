@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="description" content="Solid for unhosted web apps" />
+    <title>unhosted web apps: dev tools</title>
+    <link rel="stylesheet" href="/adventures/hljs/default.min.css" />
+    <link rel="author" type="text/html" href="https://michielbdejong.com/"/>
+
+    <script src="/adventures/hljs/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <link rel="stylesheet" href="/adventures/adventures.css" />
+  </head>
+
+  <body>
+    <article>
+      <header>
+        <h1>unhosted web apps</h1>
+        <h2>freedom from web 2.0's monopoly platforms</h2>
+      </header>
+      
+      <h2>Solid</h2>
+
+      <p>Solid is similar to remoteStorage in that it allows apps (including unhosted web apps)
+      to store the user's data under the user's control. Where it differs from remoteStorage
+      is in its focus on linked data and its ACL system.</p>
+      <p>This article describes how you can use Solid to develop an app that allows the user to
+      connect their Solid pod as the per-user data storage. In January 2020 the 'roughly 0.9'
+      version was tagged, so Solid server implementers should now aim to support that. Solid
+      app developers should still rely on the previous version ('roughly 0.8', which was tagged
+      in May 2019. This web page describes Solid 0.9, but indicates at each step if 0.8 differs.</p>
+
+      <h3>WebId-OIDC</h3>
+      <p>A WebId is a URL that uniquely identifies a user. Using WebId-OIDC, the app can obtain an
+        id token which proves that the user currently interacting with the app controls that WebId.
+        From this id token, a bearer token can be derived. The exact way in which this happens is
+        described in <a href="https://github.com/solid/webid-oidc-spec">the WebID-OIDC spec</a>.
+        As an app developer you can
+        <a href="https://solidproject.org/for-developers/apps/first-app/1-authentication">rely</a> on
+          <a href="https://github.com/solid/solid-auth-client">Solid Auth Client</a> to obtain the id token
+        for the currently interacting user, and to produce the bearer token.
+      </p>
+
+      <h3>Web of Personal Data</h3>
+      <p>The starting point for the web of data around the currently interacting user is their
+        profile document, which is always hosted at the user's WebID, and is always publically readable.
+        From there, you can discover links to the user's inbox, public and private type index, and other data.</p>
+        <p>The inbox is a folder to which anybody can POST, but only the user themselves can read. It is useful
+          for sending the user a message. Some domain-specific inboxes also exist in Solid, for instance for
+          playing Tic-Tac-Toe and for friend requests, messages can be sent either to the user's global inbox, or
+          to the domain-specific one if it exists.
+        </p>
+        <p>
+          The public and private type indexes list links to public and private documents that describe an instance
+          of a specific RDF type. For instance, the public type index might link to a user's public list of bookmarks.
+        </p>
+        <p>
+          A full overview of data that you might find on a user's pod, and how to discover it, is in the client-client spec
+          which is currently under construction, but a good draft so far can be found in the
+          <a href="https://github.com/solid/solid-panes/blob/master/Documentation/conventions.md">data conventions</a> of the
+          Solid databrowser.
+        </p>
+      <h3>Read-Write Web</h3>
+      <p>Reading and writing data is pretty similar to what you would expect if you know a bit about HTTP and you know how
+        it works for remoteStorage. To read, the usual HEAD and GET verbs can be used. Data is stored hierarchically with files
+        in folders, which are formally defined as LDP Resources and LDP BasicContainers. There are 4 types of resources: containers
+        (their URL ends in a forward slash), non-RDF resources, ACL documents, and other RDF sources. Container, ACL documents, and
+        other RDF sources are all RDF sources, non-RDF resources are not. The container representation is the one
+        from the LDP BasicContainer, so direct children are listed with (subject, predicate, object) triples, where the subject
+        is the container URL, and the predicate
+        is <tt>ldp:contains</tt>.</p>
+        <p>All operations on ACL documents act the same way as on other RDF resources, except that they always require Control access
+          over the resource to which the ACL applies, regardless of whether it's a reading, creating, appending, modifying, or deleting
+          operation. There is now way to know if a resource is an ACL document, except that the resource to which it applies will link
+          back to it with a Link response header (relation: 'acl').
+        </p>
+        <p></p>HEAD and GET on non-ACL documents both require Read access. The difference between other RDF sources and non-RDF resources
+        is that GET on RDF sources supports content negotiation to convert
+        from JSON-LD to Turtle or vice-versa.</p>
+        <p>There are two ways to create a new resouce: POST and PUT. POST adds a new resource inside a container, and although you
+          can specify a <tt>Slug</tt> header to influence the resulting location, the server decides the URL at which the resource
+          will be created. For PUT, the client can choose the location. In both cases, the server will create any ancestor containers on the 
+          path from the domain root to the URL of the request if they don't exist yet. If a container needs to be created then it
+          requires Write access on that container and Append or Write access on its parent. A POST request requires Append or Write access on the container 
+          the resource is being created in. A PUT does too, but additionally it requires Write access to the URL of the newly created resouce
+          itself. It's not possible to create an empty container, other than by creating a dummy resource inside it (and then deleting that again).
+          </p>
+          <p>
+            A DELETE of a resource requires Write access to the resource and Read+Write to the container it's in. A container can only be
+            deleted if it's empty.
+          </p>
+          <p>
+            A resource that contains valid JSON-LD or Turtle is known as an LDP-RS, and is officially a representation-independent RDF data
+            source; it is converted to either JSON-LD or Turtle only when you retrieve it. This means that a Solid serve may lose formatting
+            details and comments, even when you store a Turtle file and then retrieve it again as Turtle.</p>
+            <p>Such a Turtle or JSON-LD document can be edited using a PATCH request with a (restricted) sparql-update body.
+              The sparql-update body can include INSERT and DELETE instructions. If one of the DELETE instructions fails, the request fails as
+              a whole and is not executed. PATCH requests that contain only INSERTs require either Append or Write. PATCH requests that
+              also contain DELETEs require Write + Read. Like for POST and PUT, PATCH will cause all ancestor containers to be created if they
+            are missing, and the whole operation will fail if permissions are insufficient.</p>
+      <h3>ACL documents</h3>
+      <p>An ACL document on a non-container affects only that resource. An ACL document on a container affects that container plus all its
+        descendants as long as they don't have their own ACL document. So if there is an ACL document for / and for /a/b, then the ACL document
+        for / affects all resources that start with /, except /a/b.</p>
+    <p>If no Authorizations exist, then access is denied ("deny then allow" approach). Authorization can only appear in the ACL document
+      that apply. No other ACL documents are relevant (not even ones on parent or ancestor containers).
+      An ACL doc is a list of Authorizations.
+      An Authorization applies if it has RDF type `acl:Authorization`, and the WebID is allowed, and the origin is allowed.
+      The modes that are allowed are the union over all Authorizations that apply.
+      If a request has no Origin header, or if public access is allowed, then the origin is allowed.
+      The origin is also allowed if it is linked from the authorization with an `acl:origin` triple.
+      The WebId can be allowed in four ways:
+      - if `acl:AgentClass foaf:Agent` is linked from the authorization (regardless of whether a bearer token was even supplied at all)
+      - if `acl:agentClass solid:agent` is linked, and the request specifies some WebId through a WebID-OIDC bearer token
+      - if `acl:agentGroup` points to a `vcard:Group` which lists the WebID
+      - if the WebID is directly linked through an `acl:agent` triple.
+    </p>
+      <h3>Updates</h3>
+      <p>On each resource, you'll find an `Updates-Via` response header, pointing to a WebSocket server. Connect, and send
+        `auth [bearer_token]`, then `sub [url]`. You'll get `ack [url]` back, and then `pub [url]` each time the resource changes.
+        A change can be a creation, update, or deletion. If you subscribe to a container, you'll only see creation and deletion of the container
+        itself, and changes to its list of `ldp:contains`
+        triples, not any changes to the resources it contains.
+      </p>
+      <h3>Getting your app listed</h3>
+      <p>To get your app under the attention of Solid users, send pull requests to https://github.com/inrupt/launcher-exploration/blob/master/src/availableApps.ts
+        and to https://github.com/solid/solidproject.org/blob/staging/pages/use-solid/apps.md.
+      </p>
+
+    </article>      
+	
+    <div class="logo">
+      <img src="../../img/island-color.png" />
+    </div>
+    
+    <nav>
+      <div>
+
+<h4>Overview:</h4>
+        <p> i. <a href="/">definition</a></p>
+        <p> ii. <a href="/getting-started/">getting started</a></p>
+        <p> iii. <a href="/apps/">example apps</a></p>
+        <p> iv. <a href="/people/">people</a></p>
+        <p> v. <a href="/events/">events</a></p>
+        <p><strong>vi. dev tools</strong></p>
+        <p> vii. <a href="https://groups.google.com/forum/#!forum/unhosted">forum</a></p>
+
+<h4><a href="https://unhosted.org/book/">(all episodes as a book)</a></h4>
+
+
+<h4>(<a href="https://unhosted.org/book.pdf">.pdf</a>)(<a href="https://unhosted.org/book.epub">.epub</a>)  (<a href="https://unhosted.org/book.mobi">.mobi</a>) </h4>
+
+<h4>Adventures:</h4>
+        <p> 1. <a href="/adventures/1/Personal-servers-and-unhosted-web-apps.html">intro</a></p>
+        <p> 2. <a href="/adventures/2/An-unhosted-editor.html">editor</a></p>
+        <p> 3. <a href="/adventures/3/Setting-up-your-personal-server.html">server</a></p>
+        <p> 4. <a href="/adventures/4/WebSockets.html">WebSockets</a></p>
+        <p> 5. <a href="/adventures/5/Facebook-and-Twitter-from-nodejs.html">social</a></p>
+        <p> 6. <a href="/adventures/6/Controlling-your-server-over-a-WebSocket.html">webshell</a></p>
+        <p> 7. <a href="/adventures/7/Adding-remote-storage-to-unhosted-web-apps.html">remoteStorage</a></p>
+        <p> 8. <a href="/adventures/8/Collecting-and-organizing-your-data.html">your data</a></p>
+        <p> 9. <a href="/adventures/9/Sending-and-receiving-email-from-unhosted-web-apps.html">email</a></p>
+        <p> 10. <a href="/adventures/10/Linking-things-together-on-the-world-wide-web.html">web linking</a></p>
+        <p> 11. <a href="/adventures/11/App-hosting.html">app hosting</a></p>
+        <p> 12. <a href="/adventures/12/App-discovery.html">app discovery</a></p>
+        <p> 13. <a href="/adventures/13/Dealing-with-users-in-unhosted-web-apps.html">users</a></p>
+        <p> 14. <a href="/adventures/14/Peer-to-peer-communication.html">p2p</a></p>
+        <p> 15. <a href="/adventures/15/Unhosted-web-apps-and-OAuth.html">unhosted oauth</a></p>
+        <p> 16. <a href="/adventures/16/Our-plan-to-save-the-web.html">save the web</a></p>
+
+<h4>Decentralize:</h4>
+        <p> 17. <a href="/decentralize/17/Cryptography.html">cryptography</a></p>
+        <p> 18. <a href="/decentralize/18/Distributed-hash-tables.html">dht</a></p>
+        <p> 19. <a href="/decentralize/19/BGP,-IP,-DNS,-HTTP,-TLS,-and-NAT.html">internet</a></p>
+        <p> 20. <a href="/decentralize/20/Persona,-OpenID,-SAML,-WebID,-and-Webfinger.html">identity</a></p>
+        <p> 21. <a href="/decentralize/21/Client-side-sessions,-origins,-browser-tabs,-and-WebIntents.html">browser sessions</a></p>
+        <p> 22. <a href="/decentralize/22/How-to-locate-resources.html">search</a></p>
+        <p> 23. <a href="/decentralize/23/Network-neutrality,-ubiquitous-wifi,-and-DRM.html">neutrality</a></p>
+        <p> 24. <a href="/decentralize/24/Decentralizing-the-web-by-making-it-federated.html">federation</a></p>
+        <p> 25. <a href="/decentralize/25/Anonymity.html">anonymity</a></p>
+        <p> 26. <a href="/decentralize/26/Decentralized-reputation-systems.html">reputation</a></p>
+
+<h4>Practice:</h4>
+        <p> 27. <a href="/practice/27/Persisting-data-in-browser-storage.html">browser storage</a></p>
+        <p> 28. <a href="/practice/28/Synchronizing-browser-storage-with-server-storage.html">sync</a></p>
+        <p> 29. <a href="/practice/29/Offline-first-web-app-design.html">offline first</a></p>
+        <p> 30. <a href="/practice/30/Backend-as-a-Service-platforms.html">baas</a></p>
+        <p> 31. <a href="/practice/31/Allowing-the-user-to-choose-the-backend-server.html">per-user backend</a></p>
+        <p> 32. <a href="/practice/32/Client-side-libraries-for-per-user-backend.html">per-user clients</a></p>
+        <p> 33. <a href="/practice/33/Client-side-frontend-development.html">client-side frontend</a></p>
+        <p> 34. <a href="/practice/34/Conclusions.html">conclusions</a></p>
+      </div>
+      
+      <div>
+        <h4>Supporters:</h4>
+        <p>
+          <a class="logo" href="http://nlnet.nl/">
+            <img src="../../img/nlnet.png" />
+          </a>
+          &nbsp;
+        </p>
+
+        <p>
+          <a class="logo" href="http://wauland.de/">
+            <img src="../../img/wau.png" />
+          </a>
+          &nbsp;
+        </p>
+
+        <p>
+          <a class="logo" href="http://www.gabrielweinberg.com/blog/2012/03/duckduckgo-foss-donations-2011.html">
+            <img src="../../img/duckduckgo.jpg" />
+          </a>
+          &nbsp;
+        </p>
+
+        <p>
+          and <a href="../../thankyou.html">many more</a>&hellip;
+        </p>
+      </div>
+    </nav>
+    
+    <footer>
+      <strong>You can follow</strong>
+      <img src="../../img/twitter.png" /><a target="_blank" href="https://twitter.com/unhosted">@unhosted</a>
+      <strong>on twitter and in</strong>
+      <a href="/adventures/1/Personal-servers-and-unhosted-web-apps.html#follow">many other ways</a><strong>. So stay tuned! :)</strong>
+      </strong>
+    </footer>
+  </body>
+</html>
