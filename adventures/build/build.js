@@ -16,7 +16,8 @@ var fs = require('fs'),
     iv: 'people',
     v: 'events',
     vi: 'dev tools',
-    vii: 'forum'
+    vii: 'Solid explained',
+    viii: 'forum'
   }, overviewPaths = {
     i: '/',
     ii: '/getting-started/',
@@ -24,7 +25,8 @@ var fs = require('fs'),
     iv: '/people/',
     v: '/events/',
     vi: '/tools/',
-    vii: 'https://groups.google.com/forum/#!forum/unhosted'
+    vii: '/solid-explained/',
+    viii: 'https://groups.google.com/forum/#!forum/unhosted'
   },
   episodes = [], abbrev = [], book;
 
@@ -217,6 +219,6 @@ latestEpisode -= buildAhead;
 console.log('now building up to '+latestEpisode);
 processTitles();
 writeEpisodes();
-writeOverviewPage('i'); writeOverviewPage('iii'); writeOverviewPage('iv'); writeOverviewPage('v'); writeOverviewPage('vi');
+writeOverviewPage('i'); writeOverviewPage('iii'); writeOverviewPage('iv'); writeOverviewPage('v'); writeOverviewPage('vi'); writeOverviewPage('vii');
 writeRss();
 writeAtom();
