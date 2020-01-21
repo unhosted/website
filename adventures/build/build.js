@@ -16,7 +16,7 @@ var fs = require('fs'),
     iv: 'people',
     v: 'events',
     vi: 'dev tools',
-    vii: 'Solid explained',
+    vii: 'using Solid',
     viii: 'forum'
   }, overviewPaths = {
     i: '/',
@@ -25,7 +25,7 @@ var fs = require('fs'),
     iv: '/people/',
     v: '/events/',
     vi: '/tools/',
-    vii: '/solid-explained/',
+    vii: '/using-solid/',
     viii: 'https://groups.google.com/forum/#!forum/unhosted'
   },
   episodes = [], abbrev = [], book;
