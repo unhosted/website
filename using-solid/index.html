@@ -24,9 +24,9 @@
       
       <h2>using Solid</h2>
 
-<p><it>DISCLAIMER FROM THE AUTHOR: although I also work with Solid in my day job at inrupt, I wrote this guide in my spare time,
-from the perspective of how unhosted web apps might interact with Solid and provided as-is without guarantees of correctness;
-YMMV and opinions are my own.</it></p>
+<p><em>DISCLAIMER FROM THE AUTHOR: although I also work with Solid in my day job at inrupt, I wrote this guide in my spare time,
+from the perspective of how unhosted web apps might interact with Solid. It's provided as-is without guarantees of correctness;
+YMMV and opinions are my own.</em></p>
 
 <p>Solid is similar to remoteStorage in that it allows apps and services (including unhosted web apps)
 to store the user's data under the user's control. Where it differs from remoteStorage
@@ -66,8 +66,8 @@ is an abbreviation for 'https://www.w3.org/ns/ldp#'. So when you see 'ldp:inbox'
 
 You pretty much always
 want to start by fetching the profile document of the currently logged in user.
-From there, you can discover the <tt>ldp:inbox</tt> link to the user's inbox, <tt>solid:privateTypeIndex</tt>>,
-<tt>solid:publicTypeIndex</tt>>, and other data.
+From there, you can discover the <tt>ldp:inbox</tt> link to the user's inbox, <tt>solid:privateTypeIndex</tt>,
+<tt>solid:publicTypeIndex</tt>, and other data.
 </p>
 <p>The inbox is a folder to which anybody can POST, but only the user themselves can read. It is useful
 for sending the user a message. Some domain-specific inboxes also exist in Solid, for instance for
@@ -205,6 +205,26 @@ is allowed by default in the application dimension. All other origins are only a
 on the Authorization, using the `acl:origin` predicate.
 </p>
 
+<h4>Controlling which apps can access which data</h4>
+<p>A user can use an ACL editor or a launcher app to edit the ACL documents on their pod.
+Usually the user will want to have full access themselves to all subtrees of containers
+on the pod, but only at the same origin and at apps the user really trusts (for instance
+a launcher app or a command-line tool for power-users).</p>
+<p>Some public access will also often
+be allowed, for instance POSTing to an inbox, or reading documents from a public area on the
+pod. Public access does not require the user to identify themselves, and neither does it require
+the application to do so. When the pod owner themselves access data, they generally have Control
+access, which allows them to edit the access control lists, and grant the apps they
+want to use access. If other users use the same apps as you do, then you can also share resources
+with them <em>inside those apps</em>.
+</p>
+<p>But note that when Alice gives Bob acces to a resource
+on her pod, then Alice decides which apps Bob can use to access that resource. Bob does not
+get the ability to add or
+remove any apps from that list. This is a known issue for which Solid's app authorization panel
+is currently searching a solution.
+</p>
+
 <h3>Updates</h3>
 <p>On each resource, you'll find an `Updates-Via` response header, pointing to a WebSocket server. Connect, and send
   `auth [bearer_token]`, then `sub [url]`. You'll get `ack [url]` back, and then `pub [url]` each time the resource changes.
@@ -223,7 +243,11 @@ on the Authorization, using the `acl:origin` predicate.
   pod is probably coming soon, and then any launcher app can retrieve that machine-readable manifest - either from the app's origin
   or from some Solid app registry. Until then, we can also simply update the various launchers manually to add our apps to their lists.
 </p>
-
+<p>If your app uses data domains for which the data conventions have not yet been added
+  to the client-client spec then you get the right of first arrival, and can propose a format
+  to use for that data domain. Once the client-client spec has been created, I'll update this
+  paragraph to link to it.
+</p>
 <h3>Changelog</h3>
 <p>
 In mid-2019, and again at the end of 2019, the Solid spec was updated. The version described here is the December 2019 one.
