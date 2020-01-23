@@ -16,7 +16,7 @@ var fs = require('fs'),
     iv: 'people',
     v: 'events',
     vi: 'dev tools',
-    vii: 'using Solid',
+    vii: 'using solid',
     viii: 'forum'
   }, overviewPaths = {
     i: '/',

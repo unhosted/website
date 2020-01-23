@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="description" content="weekly handbook about unhosted web apps" />
-    <title>unhosted web apps: using Solid</title>
+    <title>unhosted web apps: using solid</title>
     <link rel="stylesheet" href="/adventures/hljs/default.min.css" />
     <link rel="hub" href="http://pubsubhubbub.appspot.com/"/>
     <link rel="updates alternate" type="application/atom+xml" href="/adventures/feed.atom" />
@@ -22,29 +22,43 @@
         <h2>freedom from web 2.0's monopoly platforms</h2>
       </header>
       
-      <h2>using Solid</h2>
+      <h2>using solid</h2>
 
-<p><em>DISCLAIMER FROM THE AUTHOR: although I also work with Solid in my day job at inrupt, I wrote this guide in my spare time,
-from the perspective of how unhosted web apps might interact with Solid. It's provided as-is without guarantees of correctness;
-YMMV and opinions are my own.</em></p>
-
+<table><tr><td>
+    <h4>Author:</h4>
+      <img rel="author avatar" src="../../img/michiel.jpg" />
+    <p>
+      <a rel="author" href="https://michielbdejong.com/">Michiel&nbsp;B.&nbsp;de&nbsp;Jong</a>
+    </p>
+</td><td>
+  <p style="padding:10%;width:80%"><em>DISCLAIMER:
+    Although I also work with solid in my day job
+    at inrupt, I
+    wrote this guide in my spare time. 
+    There are
+    several places where I simplified a complex unresolved discussion, from the perspective
+    of unhosted web apps.</em></p>
+</td></tr></table>
+    
+<h3>How unhosted web apps can interact with solid pods</h3>
 <p>Solid is similar to remoteStorage in that it allows apps and services (including unhosted web apps)
 to store the user's data under the user's control. Where it differs from remoteStorage
-is in its lack of strict consistency guarantees, its emphasis on linked data, and its ACL system.</p>
+is mainly in its smart use of linked data principles, the existence of a PATCH verb, and its versatile ACL system.</p>
 <p>This article describes how an app can interact with a user's Solid pod.</p>
 
 <h3>WebId-OIDC</h3>
 <p>A WebId is a URL that uniquely identifies a user. Using WebId-OIDC, the app can obtain an
 id token which proves that the user currently interacting with the app controls that WebId.
-From this id token, a bearer token can be derived. The exact way in which this happens is
-changing. The old way is
+From this id token, a bearer token can be derived. The exact way in which this happens will
+change in 2020. The old way is
 described in <a href="https://github.com/solid/webid-oidc-spec">the WebID-OIDC spec</a>, and the
-new way has not been fully described yet. Solid apps should support both old and now identity providers,
+new way has not been fully described yet. Solid apps should support both old and new identity providers,
 as well as old and new storage providers. But luckily,
-as an app developer you can follow for instance 
+as an app developer you have tools on your side. You can follow for instance 
 <a href="https://solidproject.org/for-developers/apps/first-app/1-authentication">this excellent tutorial</a>
 and rely on the
-<a href="https://github.com/solid/solid-auth-client">Solid Auth Client</a> library for all of that.
+<a href="https://github.com/solid/solid-auth-client">Solid Auth Client</a> library to handle the WebId discovery and
+authentication.
 </p>
 <p>Solid Auth Client will take care of opening a popup window where the user can find their identity provider
 from a list, or type in their WebId as a URL. When the token comes back to the app, Solid Auth Client will harvest
@@ -60,7 +74,9 @@ Solid pod. The starting point for the web of data around the currently interacti
 profile document, which is always hosted at the user's WebId, and is always publicly readable. A WebId usually
 contains a hash, for instance https://michielbdejong.inrupt.net/profile/card#me. The document will be an RDF data source,
 giving you (subject, predicate, object) triples in for instance <tt>text/turtle</tt> or <tt>json-ld</tt> representation.
-Turtle is pretty easy to read; at the top is usually a list of prefixes which end in <tt>:</tt>, so for instance <tt>ldp:</tt>
+Turtle is pretty easy to read (to see an example, click on the &lt;/&gt; icon on
+<a href="https://michielbdejong.inrupt.net/profile/card#me">my Solid profile</a>); at the top is usually a
+list of prefixes which end in <tt>:</tt>, so for instance <tt>ldp:</tt>
 is an abbreviation for 'https://www.w3.org/ns/ldp#'. So when you see 'ldp:inbox', it means
 'https://www.w3.org/ns/ldp#inbox'.
 
@@ -284,7 +300,7 @@ The following changes are expected in mid-2020:
         <p> iv. <a href="/people/">people</a></p>
         <p> v. <a href="/events/">events</a></p>
         <p> vi. <a href="/tools/">dev tools</a></p>
-        <p><strong>vii. using Solid</strong></p>
+        <p><strong>vii. using solid</strong></p>
         <p> viii. <a href="https://groups.google.com/forum/#!forum/unhosted">forum</a></p>
 
 <h4><a href="https://unhosted.org/book/">(all episodes as a book)</a></h4>
