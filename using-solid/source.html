@@ -5,13 +5,13 @@
       <a rel="author" href="https://michielbdejong.com/">Michiel&nbsp;B.&nbsp;de&nbsp;Jong</a>
     </p>
 </td><td>
-  <p style="padding:10%;width:80%"><em>DISCLAIMER:
+  <p style="padding:5%;width:90%"><em>DISCLAIMER:
     Although I also work with solid in my day job
     at inrupt, I
     wrote this guide in my spare time. 
     There are
-    several places where I simplified a complex unresolved discussion, from the perspective
-    of unhosted web apps.</em></p>
+    places where I chose one side of a complex unresolved discussion from an
+    unhosted web apps perspective, so subject to change!</em></p>
 </td></tr></table>
     
 <h3>How unhosted web apps can interact with solid pods</h3>
@@ -25,7 +25,7 @@ is mainly in its smart use of linked data principles, the existence of a PATCH v
 id token which proves that the user currently interacting with the app controls that WebId.
 From this id token, a bearer token can be derived. The exact way in which this happens will
 change in 2020. The old way is
-described in <a href="https://github.com/solid/webid-oidc-spec">the WebID-OIDC spec</a>, and the
+described in <a href="https://github.com/solid/webid-oidc-spec">the WebId-OIDC spec</a>, and the
 new way has not been fully described yet. Solid apps should support both old and new identity providers,
 as well as old and new storage providers. But luckily,
 as an app developer you have tools on your side. You can follow for instance 
@@ -39,7 +39,8 @@ from a list, or type in their WebId as a URL. When the token comes back to the a
 it from there, and use it to create a bearer token. You can then use <tt>SolidAuth.fetch</tt> instead of the browser's
 built-in
 <tt>fetch</tt> function, and it will behave just like the normal fetch, but adding the appropriate Authorization
-header to each request.
+header to each request. Popular data access libraries for Solid, like TripleDoc, Rdflib, and LDFlex,
+will automatically use <tt>SolidAuth.fetch</tt> as well.
 </p>
 
 <h3>Web of Personal Data</h3>
@@ -110,34 +111,53 @@ operation. There is now way to know if a resource is an ACL document, and if it 
 it applies, except that the resource to which it applies will link
 back to it with a Link response header (relation: 'acl').
 </p>
+<h4>Reading</h4>
 <p>HEAD and GET on non-ACL documents both require Read access.</p>
+<h4>Writing</h4>
 <p>There are two ways to create a new resource: POST and PUT. POST adds a new resource inside a container, and although you
 can specify a <tt>Slug</tt> header to influence the resulting location, the server decides the URL at which the resource
-will be created. For PUT, the client can choose the location. In both cases, the server will create any ancestor containers on the 
+will be created and report it to you in a <tt>Location</tt> response
+header. For PUT, the client can choose the location.
+</p>
+<p>
+A third way to create or update an RDF source is PATCH.
+Empty containers can only be created with PUT or PATCH, because it requires forcing the URL to end in a slash.
+Note that all containers also act as RDF sources, so you can add triples to them and edit those (as long as you don't try to
+directly add or edit the container's containment triples).
+</p>
+<p>In all three cases, the server will create any ancestor containers on the 
 path from the domain root to the URL of the request if they don't exist yet. If a container needs to be created then it
-requires Write access on that container and Append or Write access on its parent. A POST request requires Append or Write access on
+requires Write access on that container and Append or Write access on its parent.
+</p>
+<h4>POST</h4>
+<p>
+A POST request requires Append or Write access on
 the container in which
 the resource is being created. A PUT does too, but additionally it requires Write access to the URL of the newly created resource
 itself. It's not possible to create an empty container, other than by creating a dummy resource inside it (and then deleting that
 again).
 </p>
+<h4>PUT</h4>
 <p>
   PUT requests should always have either an <tt>If-None-Match: *</tt> header (to avoid overwriting anything) or an <tt>If-Match: "[etag]"</tt>
   header, to make sure the request will not write over any changes that may have happened since the app last read the resource.
+  When using PUT to create or update RDF sources, if what you want is "on conflict do update", consider using PATCH instead.
 </p>
 <h4>Eventual consistency</h4>
 <p>Servers are in theory allowed to be eventually consistent, although this is not recommended. This means that when you do a PUT
   and then immediately do a GET, if the PUT went to a master node in a master-slave cluster, and its effect did not propagate yet
-  to the slave that handles your GET request, the GET may be completed based on outdated information. Even worse, in a master-master
+  to the slave that handles your GET request, the GET may be completed based on outdated information. Likewise, in a master-master
   setup, two master nodes may each accept a write operation and report success (200 OK response), but the cluster may then later roll
   back one of them if the two writes are not reconcilable. It's probably easier for both the app developer and the end user to work
-  with a Solid pod server that is not only Solid spec compliant, but also strictly consistent.
+  with a solid pod that is not only solid spec compliant, but also strictly consistent.
 </p>
+<h4>DELETE</h4>
 <p>
 A DELETE of a resource requires Write access to the resource and Write to the container it's in. A container can
 only be
 deleted if it's empty.</p>
-<p>ACL documents and other non-container RDF sources can be edited using a PATCH request with a (restricted) sparql-update body.
+<h4>PATCH</h4>
+<p>Non-container RDF sources (including ACL documents) can be edited using a PATCH request with a (restricted) sparql-update body.
   The sparql-update body can include INSERT and DELETE instructions. If one of the DELETE instructions fails, the request fails as
   a whole and is not executed. PATCH requests that contain only INSERTs require either Append or Write. PATCH requests that
   also contain DELETEs require Write + Read. Like for POST and PUT, PATCH will cause all ancestor containers to be created if they
@@ -163,7 +183,7 @@ or if that ACL document doesn't exist and the first ancestor ACL document that d
 doesn't have any (matching) <tt>acl:default</tt> authorizations, then all access to that resource is denied ("deny then allow" approach).
 </p><p>
 Even for an authorization that does apply to the resource in question, there are still three dimensions in which it
-has to match before it can actually grant any access, as the following sections will explain.
+has to match before it can actually grant any access, as the following three sections will explain.
 </p>
 
 <h4>Access modes</h4>
@@ -177,22 +197,22 @@ then there is no additional effect in also including Append.
 <p>
 The second is agent. There are four ways to add agents:
 <ul>
-  <li>Using `acl:agent` with a specific WebID that should be granted access</li>
-  <li>Using `acl:agentGroup` with a `vcard:Group`, whose members should be granted access</li>
-  <li>Using `acl:agentClass` with `acl:AuthenticatedAgent`, meaning any correctly authenticated WebID</li>
-  <li>Using `acl:agentClass` with `foaf:Agent`, meaning anyone (public access, no authentication needed)</li>
+  <li>Using <tt>acl:agent</tt> with a specific WebId that should be granted access</li>
+  <li>Using <tt>acl:agentGroup</tt> with a <tt>vcard:Group</tt>, whose members should be granted access</li>
+  <li>Using <tt>acl:agentClass</tt> with <tt>acl:AuthenticatedAgent</tt>, meaning any correctly authenticated WebId</li>
+  <li>Using <tt>acl:agentClass</tt> with <tt>foaf:Agent</tt>, meaning anyone (public access, no authentication needed)</li>
 </ul>
 You can add any combination of these, although of course if you add the
 third or the last one, then there is no additional effect in also including any
-specific WebID's or VCard Groups.
+specific WebId's or VCard Groups, and if you include public access then explicitly adding authenticated agents has no effect.
 </p>
 <h4>Application identity</h4>
 <p>
 The third dimension is application; for authorizations that include public access
 in the agent dimension, all origins are allowed in the application dimension.
-If public access is not granted in the agent dimension, then no only the storage server's own (same) origin
+If public access is not granted in the agent dimension, then only the storage server's own (same) origin
 is allowed by default in the application dimension. All other origins are only allowed if they are listed
-on the Authorization, using the `acl:origin` predicate.
+on the Authorization, using the <tt>acl:origin</tt> predicate.
 </p>
 
 <h4>Controlling which apps can access which data</h4>
@@ -216,10 +236,10 @@ is currently searching a solution.
 </p>
 
 <h3>Updates</h3>
-<p>On each resource, you'll find an `Updates-Via` response header, pointing to a WebSocket server. Connect, and send
-  `auth [bearer_token]`, then `sub [url]`. You'll get `ack [url]` back, and then `pub [url]` each time the resource changes.
+<p>On each resource, you'll find an <tt>Updates-Via</tt> response header, pointing to a WebSocket server. Connect, and send
+  <tt>auth [bearer_token]</tt>, then <tt>sub [url]</tt>. You'll get <tt>ack [url]</tt> back, and then <tt>pub [url]</tt> each time the resource changes.
   A change can be a creation, update, or deletion. If you subscribe to a container, you'll only see creation and deletion of the container
-  itself, and changes to its list of `ldp:contains`
+  itself, and changes to its list of <tt>ldp:contains</tt>
   triples, not any changes to the resources it contains.
 </p>
 
@@ -234,7 +254,7 @@ is currently searching a solution.
   or from some Solid app registry. Until then, we can also simply update the various launchers manually to add our apps to their lists.
 </p>
 <p>If your app uses data domains for which the data conventions have not yet been added
-  to the client-client spec then you get the right of first arrival, and can propose a format
+  to the client-client spec then you can try to claim the right of first arrival, and propose a format
   to use for that data domain. Once the client-client spec has been created, I'll update this
   paragraph to link to it.
 </p>
@@ -243,19 +263,20 @@ is currently searching a solution.
 In mid-2019, and again at the end of 2019, the Solid spec was updated. The version described here is the December 2019 one.
 It differs from the mid-2019 one in the following ways:
 <ol>
-<li>globbing, sparql-on-get, and acl:trustedApp were removed.</li>
-<li>servers are in theory allowed to be eventually consistent, although this is not recommended.</li>
+<li>Globbing, sparql-on-get, and acl:trustedApp were removed.</li>
+<li>Servers are in theory allowed to be eventually consistent, although this is not recommended.</li>
 <li>WebSockets-pubsub clients SHOULD now send AUTH, but servers should not require it yet.</li>
 <li>Apps SHOULD support both webid-oidc flows, but IDPs and storage providers SHOULD
   still support the old one.</li>
-<li>IDPs are no longer required at the spec level to offer a WebID-TLS bridge (but it can still
-  cost them customers if they don't)</li>
+<li>IDPs are no longer required at the spec level to offer a WebId-TLS bridge (that's now a consideration
+  that's between them and what their own users want).</li>
 </ol>
 
-The following changes are expected in mid-2020:
+The following changes are expected in 2020:
 <ol>
-<li>auth command will become mandatory</li>
-<li>storage servers should switch to new WebID-OIDC bearer token format</li>
-</li>IDPs should switch to new WebID-OIDC flow</li>
+<li>The <tt>auth</tt> command in WebSockets-pubsub will become mandatory.</li>
+<li>Storage servers should switch to new WebId-OIDC bearer token format.</li>
+<li>IDPs should switch to new WebId-OIDC flow.</li>
+<li>Once all storage servers and IDPs had a chance to switch, apps should stop supporting the old format.</li>
 </ol>
 </p>
