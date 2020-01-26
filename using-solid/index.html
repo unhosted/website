@@ -43,7 +43,7 @@
 <h3>How unhosted web apps can interact with solid pods</h3>
 <p>Solid is similar to remoteStorage in that it allows apps and services (including unhosted web apps)
 to store the user's data under the user's control. Where it differs from remoteStorage
-is mainly in its smart use of linked data principles, the existence of a PATCH verb, and its versatile ACL system.</p>
+is mainly in its smart use of linked data principles, the existence of a PATCH verb, and its versatile Acces Control system.</p>
 <p>This article describes how an app can interact with a user's Solid pod.</p>
 
 <h3>WebId-OIDC</h3>
@@ -65,7 +65,7 @@ from a list, or type in their WebId as a URL. When the token comes back to the a
 it from there, and use it to create a bearer token. You can then use <tt>SolidAuth.fetch</tt> instead of the browser's
 built-in
 <tt>fetch</tt> function, and it will behave just like the normal fetch, but adding the appropriate Authorization
-header to each request. Popular data access libraries for Solid, like TripleDoc, Rdflib, and LDFlex,
+header to each request. Popular data access libraries for Solid, like Tripledoc, RDFLib, and LDflex,
 will automatically use <tt>SolidAuth.fetch</tt> as well.
 </p>
 
@@ -105,7 +105,7 @@ access to specific subtrees of the storage. This is generally done by a launcher
 in that it has full access itself, but edits the access control lists when you're about to use an app that is only
 trusted for a certain data domain. Using its root permissions, the launcher app can also create folders and documents
 if they're missing, and add links to them in for instance the private or public type index of the user - things a
-domain-specific is probably not allowed to do itself.
+domain-specific app is probably not allowed to do itself.
 </p>
 <p>
 A full overview of data that you might find on a user's pod, and how to discover it, is in the client-client spec
@@ -301,7 +301,7 @@ It differs from the mid-2019 one in the following ways:
 The following changes are expected in 2020:
 <ol>
 <li>The <tt>auth</tt> command in WebSockets-pubsub will become mandatory.</li>
-<li>Storage servers should switch to new WebId-OIDC bearer token format.</li>
+<li>Storage servers should switch to the new WebId-OIDC bearer token format.</li>
 <li>IDPs should switch to new WebId-OIDC flow.</li>
 <li>Once all storage servers and IDPs had a chance to switch, apps should stop supporting the old format.</li>
 </ol>
