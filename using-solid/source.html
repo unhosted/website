@@ -1,0 +1,282 @@
+<table><tr><td>
+    <h4>Author:</h4>
+      <img rel="author avatar" src="../../img/michiel.jpg" />
+    <p>
+      <a rel="author" href="https://michielbdejong.com/">Michiel&nbsp;B.&nbsp;de&nbsp;Jong</a>
+    </p>
+</td><td>
+  <p style="padding:5%;width:90%"><em>DISCLAIMER:
+    Although I also work with solid in my day job
+    at inrupt, I
+    wrote this guide in my spare time. 
+    There are
+    places where I chose one side of a complex unresolved discussion from an
+    unhosted web apps perspective, so subject to change!</em></p>
+</td></tr></table>
+    
+<h3>How unhosted web apps can interact with solid pods</h3>
+<p>Solid is similar to remoteStorage in that it allows apps and services (including unhosted web apps)
+to store the user's data under the user's control. Where it differs from remoteStorage
+is mainly in its smart use of linked data principles, the existence of a PATCH verb, and its versatile Acces Control system.</p>
+<p>This article describes how an app can interact with a user's Solid pod.</p>
+
+<h3>WebId-OIDC</h3>
+<p>A WebId is a URL that uniquely identifies a user. Using WebId-OIDC, the app can obtain an
+id token which proves that the user currently interacting with the app controls that WebId.
+From this id token, a bearer token can be derived. The exact way in which this happens will
+change in 2020. The old way is
+described in <a href="https://github.com/solid/webid-oidc-spec">the WebId-OIDC spec</a>, and the
+new way has not been fully described yet. Solid apps should support both old and new identity providers,
+as well as old and new storage providers. But luckily,
+as an app developer you have tools on your side. You can follow for instance 
+<a href="https://solidproject.org/for-developers/apps/first-app/1-authentication">this excellent tutorial</a>
+and rely on the
+<a href="https://github.com/solid/solid-auth-client">Solid Auth Client</a> library to handle the WebId discovery and
+authentication.
+</p>
+<p>Solid Auth Client will take care of opening a popup window where the user can find their identity provider
+from a list, or type in their WebId as a URL. When the token comes back to the app, Solid Auth Client will harvest
+it from there, and use it to create a bearer token. You can then use <tt>SolidAuth.fetch</tt> instead of the browser's
+built-in
+<tt>fetch</tt> function, and it will behave just like the normal fetch, but adding the appropriate Authorization
+header to each request. Popular data access libraries for Solid, like Tripledoc, RDFLib, and LDflex,
+will automatically use <tt>SolidAuth.fetch</tt> as well.
+</p>
+
+<h3>Web of Personal Data</h3>
+<p>Although you could store any data on the user's pod, by convention, personal data is organized in a particular way on a
+Solid pod. The starting point for the web of data around the currently interacting user is their
+profile document, which is always hosted at the user's WebId, and is always publicly readable. A WebId usually
+contains a hash, for instance https://michielbdejong.inrupt.net/profile/card#me. The document will be an RDF data source,
+giving you (subject, predicate, object) triples in for instance <tt>text/turtle</tt> or <tt>json-ld</tt> representation.
+Turtle is pretty easy to read (to see an example, click on the &lt;/&gt; icon on
+<a href="https://michielbdejong.inrupt.net/profile/card#me">my Solid profile</a>); at the top is usually a
+list of prefixes which end in <tt>:</tt>, so for instance <tt>ldp:</tt>
+is an abbreviation for 'https://www.w3.org/ns/ldp#'. So when you see 'ldp:inbox', it means
+'https://www.w3.org/ns/ldp#inbox'.
+
+You pretty much always
+want to start by fetching the profile document of the currently logged in user.
+From there, you can discover the <tt>ldp:inbox</tt> link to the user's inbox, <tt>solid:privateTypeIndex</tt>,
+<tt>solid:publicTypeIndex</tt>, and other data.
+</p>
+<p>The inbox is a folder to which anybody can POST, but only the user themselves can read. It is useful
+for sending the user a message. Some domain-specific inboxes also exist in Solid, for instance for
+playing Tic-Tac-Toe and for friend requests, messages can be sent either to the user's global inbox, or
+to the domain-specific one if it exists.
+</p>
+<p>
+The public and private type indexes lists zero or more <tt>solid:TypeRegistration</tt>s, with <tt>solid:forClass</tt> 
+triples pointing to public and private documents that describe an instance
+of a specific RDF type. For instance, the public type index might link to a user's public list of bookmarks.
+</p>
+<p>
+This systems makes Solid more flexible than for instance remoteStorage, where private bookmarks always need to be
+at <tt>/bookmarks</tt>, and public ones always need to be at <tt>/public/bookmarks</tt>. On the other hand, it makes it harder to
+do scoped access control. As we'll see in the 'ACL documents' chapter further on, it's possible to give an app
+read, append, write, and/or control
+access to specific subtrees of the storage. This is generally done by a launcher app, which acts as an auth server,
+in that it has full access itself, but edits the access control lists when you're about to use an app that is only
+trusted for a certain data domain. Using its root permissions, the launcher app can also create folders and documents
+if they're missing, and add links to them in for instance the private or public type index of the user - things a
+domain-specific app is probably not allowed to do itself.
+</p>
+<p>
+A full overview of data that you might find on a user's pod, and how to discover it, is in the client-client spec
+which is currently under construction, but a good draft so far can be found in the
+<a href="https://github.com/solid/solid-panes/blob/master/Documentation/conventions.md">data conventions</a> of the
+Solid databrowser.
+</p>
+<h3>Read-Write Web</h3>
+<p>Reading and writing data is pretty similar to what you would expect if you know a bit about HTTP and you know how
+it works for remoteStorage. To read, the usual HEAD and GET verbs can be used. Data is stored hierarchically with files
+in folders, which are formally defined as LDP Resources and LDP BasicContainers. There are 4 types of resources: containers
+(their URL ends in a forward slash), ACL documents, other RDF sources, and non-RDF resources.
+
+RDF sources (i.e. Containers, ACL documents, and other RDF sources)
+can be thought of as not really tied to a <tt>text/turtle</tt> or <tt>json-ld</tt> representation,
+since the server is required to convert between at least those two, through content negotiation. So when you retrieve it
+requesting a Turtle representation, it's unknown to you whether it was also uploaded in Turtle, or in one of RDF's other
+representations.
+In the line of this way of thinking about RDF sources separately from their representations, a Solid server may lose formatting
+details and comments, even when you store a Turtle file and then retrieve it again as Turtle.
+</p>
+<p>
+The container description used by Solid is
+the LDP BasicContainer, so direct children are listed with <tt>ldp:contains</tt> triples.
+</p>
+<p>All operations on ACL documents act the same way as on other RDF resources, except that they always require Control access
+over the resource to which the ACL applies, regardless of whether it's a reading, creating, appending, modifying, or deleting
+operation. There is now way to know if a resource is an ACL document, and if it is, there is no way to know to which resource
+it applies, except that the resource to which it applies will link
+back to it with a Link response header (relation: 'acl').
+</p>
+<h4>Reading</h4>
+<p>HEAD and GET on non-ACL documents both require Read access.</p>
+<h4>Writing</h4>
+<p>There are two ways to create a new resource: POST and PUT. POST adds a new resource inside a container, and although you
+can specify a <tt>Slug</tt> header to influence the resulting location, the server decides the URL at which the resource
+will be created and report it to you in a <tt>Location</tt> response
+header. For PUT, the client can choose the location.
+</p>
+<p>
+A third way to create or update an RDF source is PATCH.
+Empty containers can only be created with PUT or PATCH, because it requires forcing the URL to end in a slash.
+Note that all containers also act as RDF sources, so you can add triples to them and edit those (as long as you don't try to
+directly add or edit the container's containment triples).
+</p>
+<p>In all three cases, the server will create any ancestor containers on the 
+path from the domain root to the URL of the request if they don't exist yet. If a container needs to be created then it
+requires Write access on that container and Append or Write access on its parent.
+</p>
+<h4>POST</h4>
+<p>
+A POST request requires Append or Write access on
+the container in which
+the resource is being created. A PUT does too, but additionally it requires Write access to the URL of the newly created resource
+itself. It's not possible to create an empty container, other than by creating a dummy resource inside it (and then deleting that
+again).
+</p>
+<h4>PUT</h4>
+<p>
+  PUT requests should always have either an <tt>If-None-Match: *</tt> header (to avoid overwriting anything) or an <tt>If-Match: "[etag]"</tt>
+  header, to make sure the request will not write over any changes that may have happened since the app last read the resource.
+  When using PUT to create or update RDF sources, if what you want is "on conflict do update", consider using PATCH instead.
+</p>
+<h4>Eventual consistency</h4>
+<p>Servers are in theory allowed to be eventually consistent, although this is not recommended. This means that when you do a PUT
+  and then immediately do a GET, if the PUT went to a master node in a master-slave cluster, and its effect did not propagate yet
+  to the slave that handles your GET request, the GET may be completed based on outdated information. Likewise, in a master-master
+  setup, two master nodes may each accept a write operation and report success (200 OK response), but the cluster may then later roll
+  back one of them if the two writes are not reconcilable. It's probably easier for both the app developer and the end user to work
+  with a solid pod that is not only solid spec compliant, but also strictly consistent.
+</p>
+<h4>DELETE</h4>
+<p>
+A DELETE of a resource requires Write access to the resource and Write to the container it's in. A container can
+only be
+deleted if it's empty.</p>
+<h4>PATCH</h4>
+<p>Non-container RDF sources (including ACL documents) can be edited using a PATCH request with a (restricted) sparql-update body.
+  The sparql-update body can include INSERT and DELETE instructions. If one of the DELETE instructions fails, the request fails as
+  a whole and is not executed. PATCH requests that contain only INSERTs require either Append or Write. PATCH requests that
+  also contain DELETEs require Write + Read. Like for POST and PUT, PATCH will cause all ancestor containers to be created if they
+are missing, and the whole operation will fail if permissions are insufficient.</p>
+
+<h3>ACL documents</h3>
+<h4>Authorization type (<tt>acl:Authorization</tt>)</h4>
+<p>An ACL document can grant access to various patterns of requests, using a list of additive
+  Authorizations. Each authorization needs to have a URI that dereferences to a fragment within the ACL document itself,
+  and have RDF type <tt>acl:Authorization</tt>.
+</p>
+
+<h4>Authorization target (<tt>acl:accessTo</tt>, <tt>acl:default</tt>)</h4>
+<p>An ACL document on a non-container affects only that resource, through the <tt>acl:accessTo</tt> predicate. An ACL document on a container
+affects that container through the <tt>acl:accessTo</tt> predicate, but it also affects all its
+descendants through the <tt>acl:default</tt> predicate, as long as they don't have their own ACL document. So conversely, if a resource doesn't
+have its own ACL document with <tt>acl:accessTo</tt> authorizations,
+then the <tt>acl:default</tt> authorizations from the ACL document of the container it's in applies, unless that doesn't exist either,
+etcetera, until you reach an ancestor container
+that does have an ACL document. Only one ACL document ever applies, and rules from different ACL documents are never mixed together.</p>
+<p>If the ACL document that applies directly doesn't have any (matching) <tt>acl:accessTo</tt> authorizations,
+or if that ACL document doesn't exist and the first ancestor ACL document that does exist
+doesn't have any (matching) <tt>acl:default</tt> authorizations, then all access to that resource is denied ("deny then allow" approach).
+</p><p>
+Even for an authorization that does apply to the resource in question, there are still three dimensions in which it
+has to match before it can actually grant any access, as the following three sections will explain.
+</p>
+
+<h4>Access modes</h4>
+<p>
+The first is modes (Read, Append, Write, Control). The previous section mentions which access modes are required
+for each operation. Note that if you include Write
+then there is no additional effect in also including Append.
+</p>
+
+<h4>User identity</h4>
+<p>
+The second is agent. There are four ways to add agents:
+<ul>
+  <li>Using <tt>acl:agent</tt> with a specific WebId that should be granted access</li>
+  <li>Using <tt>acl:agentGroup</tt> with a <tt>vcard:Group</tt>, whose members should be granted access</li>
+  <li>Using <tt>acl:agentClass</tt> with <tt>acl:AuthenticatedAgent</tt>, meaning any correctly authenticated WebId</li>
+  <li>Using <tt>acl:agentClass</tt> with <tt>foaf:Agent</tt>, meaning anyone (public access, no authentication needed)</li>
+</ul>
+You can add any combination of these, although of course if you add the
+third or the last one, then there is no additional effect in also including any
+specific WebId's or VCard Groups, and if you include public access then explicitly adding authenticated agents has no effect.
+</p>
+<h4>Application identity</h4>
+<p>
+The third dimension is application; for authorizations that include public access
+in the agent dimension, all origins are allowed in the application dimension.
+If public access is not granted in the agent dimension, then only the storage server's own (same) origin
+is allowed by default in the application dimension. All other origins are only allowed if they are listed
+on the Authorization, using the <tt>acl:origin</tt> predicate.
+</p>
+
+<h4>Controlling which apps can access which data</h4>
+<p>A user can use an ACL editor or a launcher app to edit the ACL documents on their pod.
+Usually the user will want to have full access themselves to all subtrees of containers
+on the pod, but only at the same origin and at apps the user really trusts (for instance
+a launcher app or a command-line tool for power-users).</p>
+<p>Some public access will also often
+be allowed, for instance POSTing to an inbox, or reading documents from a public area on the
+pod. Public access does not require the user to identify themselves, and neither does it require
+the application to do so. When the pod owner themselves access data, they generally have Control
+access, which allows them to edit the access control lists, and grant the apps they
+want to use access. If other users use the same apps as you do, then you can also share resources
+with them <em>inside those apps</em>.
+</p>
+<p>But note that when Alice gives Bob acces to a resource
+on her pod, then Alice decides which apps Bob can use to access that resource. Bob does not
+get the ability to add or
+remove any apps from that list. This is a known issue for which Solid's app authorization panel
+is currently searching a solution.
+</p>
+
+<h3>Updates</h3>
+<p>On each resource, you'll find an <tt>Updates-Via</tt> response header, pointing to a WebSocket server. Connect, and send
+  <tt>auth [bearer_token]</tt>, then <tt>sub [url]</tt>. You'll get <tt>ack [url]</tt> back, and then <tt>pub [url]</tt> each time the resource changes.
+  A change can be a creation, update, or deletion. If you subscribe to a container, you'll only see creation and deletion of the container
+  itself, and changes to its list of <tt>ldp:contains</tt>
+  triples, not any changes to the resources it contains.
+</p>
+
+<h3>Getting your app listed</h3>
+<p>To get your app under the attention of Solid users, try to get it onto https://solidproject.org/use-solid/apps
+  by sending a pull request to
+  https://github.com/solid/solidproject.org/blob/staging/pages/use-solid/apps.md.
+  There is also a list of available apps in
+  <a href="https://github.com/inrupt/launcher-exploration/blob/master/src/availableApps.ts">inrupt's launcher exploration</a>,
+  although this is still experimental. A manifest format in which apps can self-announce which permissions they need on a user's
+  pod is probably coming soon, and then any launcher app can retrieve that machine-readable manifest - either from the app's origin
+  or from some Solid app registry. Until then, we can also simply update the various launchers manually to add our apps to their lists.
+</p>
+<p>If your app uses data domains for which the data conventions have not yet been added
+  to the client-client spec then you can try to claim the right of first arrival, and propose a format
+  to use for that data domain. Once the client-client spec has been created, I'll update this
+  paragraph to link to it.
+</p>
+<h3>Changelog</h3>
+<p>
+In mid-2019, and again at the end of 2019, the Solid spec was updated. The version described here is the December 2019 one.
+It differs from the mid-2019 one in the following ways:
+<ol>
+<li>Globbing, sparql-on-get, and acl:trustedApp were removed.</li>
+<li>Servers are in theory allowed to be eventually consistent, although this is not recommended.</li>
+<li>WebSockets-pubsub clients SHOULD now send AUTH, but servers should not require it yet.</li>
+<li>Apps SHOULD support both webid-oidc flows, but IDPs and storage providers SHOULD
+  still support the old one.</li>
+<li>IDPs are no longer required at the spec level to offer a WebId-TLS bridge (that's now a consideration
+  that's between them and what their own users want).</li>
+</ol>
+
+The following changes are expected in 2020:
+<ol>
+<li>The <tt>auth</tt> command in WebSockets-pubsub will become mandatory.</li>
+<li>Storage servers should switch to the new WebId-OIDC bearer token format.</li>
+<li>IDPs should switch to new WebId-OIDC flow.</li>
+<li>Once all storage servers and IDPs had a chance to switch, apps should stop supporting the old format.</li>
+</ol>
+</p>

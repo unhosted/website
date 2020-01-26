@@ -26,6 +26,8 @@ Firefox Sync (at the browser level, Firefox only),
 and <a href="http://sockethub.org/">Sockethub</a>.
 Often, the user would have to paste the exact base URL of their server's API into a text field somewhere in the settings of an application, to connect one of these per-user backends.</p>
 <p>For <a href="http://hood.ie/">Hoodie</a>, use as a per-user backend has always been part of the plan, and there is an <a href="https://github.com/hoodiehq/hoodie-server/pull/288">open pull request</a> for this, but it's not currently supported yet.</p>
+<p><em>EDIT: Also, in the years after I wrote this HTML book (2015-2020), Solid evolved quite a bit, and is another interesting option. See <a href="/using-solid/">using solid</a> for
+a rough overview of how an unhosted web app can interact with a user's Solid pod.</em></p>
 
 <h3>Per-user backend other than storage</h3>
 <p>Server-side functionality that you need to keep between sessions revolves mainly around addressability (in other words, hosting the user's online identity), data storage, and push notifications. Other server-side services, like message relaying, payment processing, generating map tiles, etcetera, are arguably less urgent to keep under the user's control, since their role is more transient.</p>
