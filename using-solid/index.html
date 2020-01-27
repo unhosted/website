@@ -97,7 +97,7 @@ triples pointing to public and private documents that describe an instance
 of a specific RDF type. For instance, the public type index might link to a user's public list of bookmarks.
 </p>
 <p>
-This systems makes Solid more flexible than for instance remoteStorage, where private bookmarks always need to be
+This system makes Solid more flexible than for instance remoteStorage, where private bookmarks always need to be
 at <tt>/bookmarks</tt>, and public ones always need to be at <tt>/public/bookmarks</tt>. On the other hand, it makes it harder to
 do scoped access control. As we'll see in the 'ACL documents' chapter further on, it's possible to give an app
 read, append, write, and/or control
@@ -140,16 +140,16 @@ back to it with a Link response header (relation: 'acl').
 <h4>Reading</h4>
 <p>HEAD and GET on non-ACL documents both require Read access.</p>
 <h4>Writing</h4>
-<p>There are two ways to create a new resource: POST and PUT. POST adds a new resource inside a container, and although you
-can specify a <tt>Slug</tt> header to influence the resulting location, the server decides the URL at which the resource
-will be created and report it to you in a <tt>Location</tt> response
-header. For PUT, the client can choose the location.
+<p>There are three ways to create a new resource: POST, PUT, and PATCH.
+  POST adds a new resource inside a container, and although you
+can specify a <tt>Slug</tt> header to influence the resulting location, the server decides the URL at
+which the resource will be created and report it to you in a <tt>Location</tt> response
+header. For PUT and PATCH, the client can choose the location.
 </p>
 <p>
-A third way to create or update an RDF source is PATCH.
-Empty containers can only be created with PUT or PATCH, because it requires forcing the URL to end in a slash.
-Note that all containers also act as RDF sources, so you can add triples to them and edit those (as long as you don't try to
-directly add or edit the container's containment triples).
+Empty containers can only be created with PUT or PATCH, because it requires forcing the URL to end in a
+slash. Note that all containers also act as RDF sources, so you can add triples to them and edit those
+(as long as you don't try to directly add or edit the container's containment triples).
 </p>
 <p>In all three cases, the server will create any ancestor containers on the 
 path from the domain root to the URL of the request if they don't exist yet. If a container needs to be created then it
@@ -163,12 +163,28 @@ the resource is being created. A PUT does too, but additionally it requires Writ
 itself. It's not possible to create an empty container, other than by creating a dummy resource inside it (and then deleting that
 again).
 </p>
+
 <h4>PUT</h4>
 <p>
   PUT requests should always have either an <tt>If-None-Match: *</tt> header (to avoid overwriting anything) or an <tt>If-Match: "[etag]"</tt>
   header, to make sure the request will not write over any changes that may have happened since the app last read the resource.
   When using PUT to create or update RDF sources, if what you want is "on conflict do update", consider using PATCH instead.
 </p>
+
+<h4>PATCH</h4>
+<p>Non-container RDF sources (including ACL documents) can be edited and created using a PATCH request
+  with a (restricted) sparql-update body.
+  The sparql-update body can include INSERT and DELETE instructions. If one of the DELETE instructions fails, the request fails as
+  a whole and is not executed. PATCH requests that contain only INSERTs require either Append or Write. PATCH requests that
+  also contain DELETEs require Write + Read. Like for POST and PUT, PATCH will cause all ancestor containers to be created if they
+are missing, and the whole operation will fail if permissions are insufficient.</p>
+
+<h4>DELETE</h4>
+<p>
+A DELETE of a resource requires Write access to the resource and Write to the container it's in. A container can
+only be
+deleted if it's empty.</p>
+
 <h4>Eventual consistency</h4>
 <p>Servers are in theory allowed to be eventually consistent, although this is not recommended. This means that when you do a PUT
   and then immediately do a GET, if the PUT went to a master node in a master-slave cluster, and its effect did not propagate yet
@@ -177,17 +193,6 @@ again).
   back one of them if the two writes are not reconcilable. It's probably easier for both the app developer and the end user to work
   with a solid pod that is not only solid spec compliant, but also strictly consistent.
 </p>
-<h4>DELETE</h4>
-<p>
-A DELETE of a resource requires Write access to the resource and Write to the container it's in. A container can
-only be
-deleted if it's empty.</p>
-<h4>PATCH</h4>
-<p>Non-container RDF sources (including ACL documents) can be edited using a PATCH request with a (restricted) sparql-update body.
-  The sparql-update body can include INSERT and DELETE instructions. If one of the DELETE instructions fails, the request fails as
-  a whole and is not executed. PATCH requests that contain only INSERTs require either Append or Write. PATCH requests that
-  also contain DELETEs require Write + Read. Like for POST and PUT, PATCH will cause all ancestor containers to be created if they
-are missing, and the whole operation will fail if permissions are insufficient.</p>
 
 <h3>ACL documents</h3>
 <h4>Authorization type (<tt>acl:Authorization</tt>)</h4>
