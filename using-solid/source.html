@@ -124,6 +124,9 @@ header. For PUT and PATCH, the client can choose the location.
 Empty containers can only be created with PUT or PATCH, because it requires forcing the URL to end in a
 slash. Note that all containers also act as RDF sources, so you can add triples to them and edit those
 (as long as you don't try to directly add or edit the container's containment triples).
+There is a
+<a href="https://github.com/solid/solid-spec/blob/master/api-rest.md#creating-containers-directories">special
+Link header</a> for creating containers.
 </p>
 <p>In all three cases, the server will create any ancestor containers on the 
 path from the domain root to the URL of the request if they don't exist yet. If a container needs to be created then it
